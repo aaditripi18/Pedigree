@@ -189,6 +189,10 @@ def build_speech(repo: str, scratch: bool):
     else:
         from transformers import Wav2Vec2ForCTC as M
     model = M(AutoConfig.from_pretrained(repo)) if scratch else M.from_pretrained(repo)
+    if "whisper" not in repo:
+        # a clip too short for its transcript makes CTC infinite; the standard fine-tuning
+        # setting drops those terms instead of turning the whole loss into NaN
+        model.config.ctc_zero_infinity = True
 
     def step():
         idx = rng.choice(len(audio), BATCH, replace=False)
