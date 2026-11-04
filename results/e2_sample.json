@@ -1,0 +1,4228 @@
+{
+ "snapshot": "2026-11-04T16:06:55Z",
+ "seed": 20261105,
+ "per_tier": 200,
+ "tiers": {
+  "top_1k": [
+   1,
+   1000
+  ],
+  "1k_10k": [
+   1001,
+   10000
+  ],
+  "10k_100k": [
+   10001,
+   100000
+  ]
+ },
+ "rule": "uniform random within each download tier; every sampled model is audited",
+ "sample": {
+  "top_1k": [
+   {
+    "rank": 5,
+    "id": "Comfy-Org/MiniMax-H3",
+    "downloads": 31913383,
+    "library": "diffusion-single-file",
+    "pipeline": null
+   },
+   {
+    "rank": 6,
+    "id": "BAAI/bge-m3",
+    "downloads": 30325601,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 8,
+    "id": "google-bert/bert-base-uncased",
+    "downloads": 29770382,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 10,
+    "id": "autogluon/chronos-2",
+    "downloads": 25217083,
+    "library": "chronos-forecasting",
+    "pipeline": "time-series-forecasting"
+   },
+   {
+    "rank": 18,
+    "id": "BAAI/bge-reranker-v2-m3",
+    "downloads": 14318635,
+    "library": "sentence-transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 20,
+    "id": "Qwen/Qwen3-14B",
+    "downloads": 12949368,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 21,
+    "id": "nomic-ai/nomic-embed-text-v1.5",
+    "downloads": 11776951,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 33,
+    "id": "FacebookAI/xlm-roberta-base",
+    "downloads": 8578357,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 40,
+    "id": "google/gemma-4-31B-it",
+    "downloads": 7827380,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 43,
+    "id": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+    "downloads": 7117770,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 44,
+    "id": "Qwen/Qwen3-VL-8B-Instruct",
+    "downloads": 6982285,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 51,
+    "id": "Qwen/Qwen3.5-9B",
+    "downloads": 6340626,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 55,
+    "id": "Qwen/Qwen2.5-7B-Instruct",
+    "downloads": 6120955,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 71,
+    "id": "SamLowe/roberta-base-go_emotions",
+    "downloads": 5350576,
+    "library": "transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 81,
+    "id": "facebook/opt-125m",
+    "downloads": 4610327,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 95,
+    "id": "Qwen/Qwen3-VL-4B-Instruct",
+    "downloads": 3865990,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 96,
+    "id": "jonatasgrosman/wav2vec2-large-xlsr-53-russian",
+    "downloads": 3842002,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 99,
+    "id": "datasocietyco/bge-base-en-v1.5-course-recommender-v5",
+    "downloads": 3769209,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 100,
+    "id": "nvidia/Qwen3.6-35B-A3B-NVFP4",
+    "downloads": 3754331,
+    "library": "Model Optimizer",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 115,
+    "id": "huihui-ai/Huihui-Qwen3.6-35B-A3B-abliterated-MTP-GGUF",
+    "downloads": 3421499,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 122,
+    "id": "lmstudio-community/Qwen3.8-27B-MLX-4bit",
+    "downloads": 3253739,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 127,
+    "id": "k2-fsa/OmniVoice",
+    "downloads": 3108686,
+    "library": "omnivoice",
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 148,
+    "id": "Qwen/Qwen3-4B-Instruct-2507",
+    "downloads": 2623739,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 149,
+    "id": "unsloth/MiniMax-H3-GGUF",
+    "downloads": 2617416,
+    "library": "gguf",
+    "pipeline": "image-text-to-video"
+   },
+   {
+    "rank": 153,
+    "id": "Qwen/Qwen3-Reranker-4B",
+    "downloads": 2575302,
+    "library": "transformers",
+    "pipeline": "text-ranking"
+   },
+   {
+    "rank": 154,
+    "id": "facebook/dinov2-small",
+    "downloads": 2567243,
+    "library": "transformers",
+    "pipeline": "image-feature-extraction"
+   },
+   {
+    "rank": 158,
+    "id": "Xenova/bge-base-en-v1.5",
+    "downloads": 2454279,
+    "library": "transformers.js",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 163,
+    "id": "sentence-transformers/all-MiniLM-L12-v2",
+    "downloads": 2408937,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 166,
+    "id": "HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF",
+    "downloads": 2370518,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 178,
+    "id": "NeoQuasar/Kronos-small",
+    "downloads": 2279839,
+    "library": null,
+    "pipeline": "time-series-forecasting"
+   },
+   {
+    "rank": 180,
+    "id": "mixedbread-ai/mxbai-embed-large-v1",
+    "downloads": 2270167,
+    "library": "sentence-transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 184,
+    "id": "jonatasgrosman/wav2vec2-large-xlsr-53-arabic",
+    "downloads": 2219873,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 185,
+    "id": "unsloth/gemma-4-12b-it-GGUF",
+    "downloads": 2197411,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 188,
+    "id": "autogluon/chronos-bolt-tiny",
+    "downloads": 2102958,
+    "library": null,
+    "pipeline": "time-series-forecasting"
+   },
+   {
+    "rank": 189,
+    "id": "meta-llama/Prompt-Guard-86M",
+    "downloads": 2097707,
+    "library": "transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 193,
+    "id": "byteshape/Qwen3.8-27B-GGUF",
+    "downloads": 2044852,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 194,
+    "id": "circlestone-labs/Anima",
+    "downloads": 2024420,
+    "library": "diffusion-single-file",
+    "pipeline": null
+   },
+   {
+    "rank": 198,
+    "id": "scragnog/MOSS-Music-8B-Instruct-GGUF",
+    "downloads": 2005109,
+    "library": null,
+    "pipeline": "audio-text-to-text"
+   },
+   {
+    "rank": 199,
+    "id": "BAAI/bge-reranker-large",
+    "downloads": 1996357,
+    "library": "transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 202,
+    "id": "facebook/musicgen-medium",
+    "downloads": 1963025,
+    "library": "transformers",
+    "pipeline": "text-to-audio"
+   },
+   {
+    "rank": 213,
+    "id": "Qdrant/bge-small-en-v1.5-onnx-Q",
+    "downloads": 1881131,
+    "library": "transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 214,
+    "id": "thenlper/gte-small",
+    "downloads": 1861370,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 215,
+    "id": "jonatasgrosman/wav2vec2-large-xlsr-53-chinese-zh-cn",
+    "downloads": 1847063,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 219,
+    "id": "comfyicu/LTX-2.5",
+    "downloads": 1816394,
+    "library": "diffusion-single-file",
+    "pipeline": "image-to-video"
+   },
+   {
+    "rank": 221,
+    "id": "laion/CLIP-convnext_base_w-laion2B-s13B-b82K-augreg",
+    "downloads": 1788543,
+    "library": "open_clip",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 246,
+    "id": "nvidia/bigvgan_v2_22khz_80band_256x",
+    "downloads": 1674377,
+    "library": "PyTorch",
+    "pipeline": "audio-to-audio"
+   },
+   {
+    "rank": 247,
+    "id": "unsloth/gemma-4-26B-A4B-it-GGUF",
+    "downloads": 1667463,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 249,
+    "id": "Qwen/Qwen3.5-35B-A3B",
+    "downloads": 1655936,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 259,
+    "id": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+    "downloads": 1627712,
+    "library": null,
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 270,
+    "id": "nvidia/Gemma-4-26B-A4B-NVFP4",
+    "downloads": 1563791,
+    "library": "Model Optimizer",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 280,
+    "id": "google/siglip2-base-patch16-224",
+    "downloads": 1501099,
+    "library": "transformers",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 294,
+    "id": "cambridgeltl/SapBERT-from-PubMedBERT-fulltext",
+    "downloads": 1413020,
+    "library": "transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 298,
+    "id": "Systran/faster-whisper-small.en",
+    "downloads": 1383228,
+    "library": "ctranslate2",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 302,
+    "id": "microsoft/table-transformer-structure-recognition",
+    "downloads": 1372386,
+    "library": "transformers",
+    "pipeline": "object-detection"
+   },
+   {
+    "rank": 304,
+    "id": "RedHatAI/gemma-4-26B-A4B-it-FP8-dynamic",
+    "downloads": 1370952,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 306,
+    "id": "ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF",
+    "downloads": 1353578,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 316,
+    "id": "distilbert/distilroberta-base",
+    "downloads": 1303002,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 319,
+    "id": "thinkingmachines/Inkling-Small",
+    "downloads": 1296591,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 320,
+    "id": "SWivid/F5-TTS",
+    "downloads": 1291187,
+    "library": "f5-tts",
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 325,
+    "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "downloads": 1280529,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 339,
+    "id": "tencent/Hy3",
+    "downloads": 1223825,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 340,
+    "id": "google/siglip2-base-patch16-naflex",
+    "downloads": 1223737,
+    "library": "transformers",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 345,
+    "id": "kindlingai/glm-5.3-exlr8-k2-k3-k4",
+    "downloads": 1199669,
+    "library": "trellis",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 346,
+    "id": "Qwen/Qwen2.5-14B-Instruct-AWQ",
+    "downloads": 1197633,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 350,
+    "id": "gigant/romanian-wav2vec2",
+    "downloads": 1185444,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 355,
+    "id": "jonatasgrosman/wav2vec2-large-xlsr-53-finnish",
+    "downloads": 1170485,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 358,
+    "id": "prithivida/parrot_paraphraser_on_T5",
+    "downloads": 1163152,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 361,
+    "id": "Lightricks/LTX-Video",
+    "downloads": 1146103,
+    "library": "diffusers",
+    "pipeline": "image-to-video"
+   },
+   {
+    "rank": 363,
+    "id": "Comfy-Org/Qwen3-VL",
+    "downloads": 1144572,
+    "library": "diffusion-single-file",
+    "pipeline": null
+   },
+   {
+    "rank": 376,
+    "id": "cross-encoder/ms-marco-MiniLM-L12-v2",
+    "downloads": 1101102,
+    "library": "sentence-transformers",
+    "pipeline": "text-ranking"
+   },
+   {
+    "rank": 381,
+    "id": "antirez/deepseek-v4-gguf",
+    "downloads": 1090137,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 388,
+    "id": "kingabzpro/wav2vec2-large-xls-r-300m-Urdu",
+    "downloads": 1079312,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 395,
+    "id": "openbmb/MiniCPM5-2B",
+    "downloads": 1062201,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 401,
+    "id": "handy-computer/parakeet-tdt-0.6b-v3-gguf",
+    "downloads": 1047483,
+    "library": "transcribe.cpp",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 403,
+    "id": "Qwen/Qwen2-VL-2B-Instruct",
+    "downloads": 1040007,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 409,
+    "id": "intfloat/e5-base-v2",
+    "downloads": 1012013,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 414,
+    "id": "unsloth/Z-Image-Turbo-GGUF",
+    "downloads": 991245,
+    "library": "ggml",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 415,
+    "id": "mpoyraz/wav2vec2-xls-r-300m-cv7-turkish",
+    "downloads": 989919,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 417,
+    "id": "cyankiwi/gemma-4-26B-A4B-it-AWQ-4bit",
+    "downloads": 987208,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 423,
+    "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-NVFP4",
+    "downloads": 982572,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 425,
+    "id": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+    "downloads": 976909,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 428,
+    "id": "meta-llama/Llama-3.2-3B-Instruct",
+    "downloads": 965977,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 432,
+    "id": "unslothai/1",
+    "downloads": 955002,
+    "library": "transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 433,
+    "id": "facebook/nllb-200-distilled-600M",
+    "downloads": 952186,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 438,
+    "id": "sentence-transformers/distiluse-base-multilingual-cased-v2",
+    "downloads": 944493,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 439,
+    "id": "NeuML/pubmedbert-base-embeddings",
+    "downloads": 943325,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 447,
+    "id": "PaddlePaddle/PP-DocLayoutV3_safetensors",
+    "downloads": 929360,
+    "library": "transformers",
+    "pipeline": "object-detection"
+   },
+   {
+    "rank": 452,
+    "id": "zai-org/GLM-5.1",
+    "downloads": 922572,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 453,
+    "id": "Qdrant/bm25",
+    "downloads": 921872,
+    "library": "transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 460,
+    "id": "agentionai/Qwen3.8-27B-AP-GGUF",
+    "downloads": 902152,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 470,
+    "id": "jonatasgrosman/wav2vec2-large-xlsr-53-persian",
+    "downloads": 876398,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 472,
+    "id": "poolside/Laguna-M.1",
+    "downloads": 871135,
+    "library": "vllm",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 473,
+    "id": "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
+    "downloads": 870132,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 479,
+    "id": "OpenGVLab/InternVL2-1B",
+    "downloads": 866890,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 484,
+    "id": "amunchet/rorshark-vit-base",
+    "downloads": 853637,
+    "library": "transformers",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 485,
+    "id": "sshleifer/tiny-gpt2",
+    "downloads": 850776,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 486,
+    "id": "unsloth/Qwen-Image-Edit-2511-GGUF",
+    "downloads": 849422,
+    "library": null,
+    "pipeline": "image-to-image"
+   },
+   {
+    "rank": 493,
+    "id": "google/siglip-base-patch16-224",
+    "downloads": 846457,
+    "library": "transformers",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 501,
+    "id": "lightonai/LightOnOCR-2-1B",
+    "downloads": 829623,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 502,
+    "id": "albert/albert-base-v2",
+    "downloads": 828734,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 518,
+    "id": "Accio-Lab/occamy-1.0-GGUF",
+    "downloads": 801623,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 524,
+    "id": "peft-internal-testing/tiny-clip-text-2",
+    "downloads": 790746,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 528,
+    "id": "Infomaniak-AI/vllm-translategemma-4b-it",
+    "downloads": 785113,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 529,
+    "id": "nomic-ai/nomic-embed-text-v2-moe",
+    "downloads": 784800,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 536,
+    "id": "gaunernst/gemma-3-27b-it-int4-awq",
+    "downloads": 768546,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 537,
+    "id": "ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+    "downloads": 767622,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 538,
+    "id": "Qwen/Qwen2.5-VL-32B-Instruct",
+    "downloads": 766808,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 543,
+    "id": "Comfy-Org/ACE-Step-1.5",
+    "downloads": 755526,
+    "library": "diffusion-single-file",
+    "pipeline": "text-to-audio"
+   },
+   {
+    "rank": 549,
+    "id": "dbmdz/bert-large-cased-finetuned-conll03-english",
+    "downloads": 746531,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 550,
+    "id": "onnx-community/Kokoro-82M-v1.0-ONNX",
+    "downloads": 742749,
+    "library": "transformers.js",
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 567,
+    "id": "Lightricks/LTX-2.3-fp8",
+    "downloads": 726693,
+    "library": "diffusers",
+    "pipeline": "image-to-video"
+   },
+   {
+    "rank": 569,
+    "id": "timm/resnet34.a1_in1k",
+    "downloads": 725811,
+    "library": "timm",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 570,
+    "id": "softcatala/wav2vec2-large-xlsr-catala",
+    "downloads": 725025,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 573,
+    "id": "Synaptics/yolo",
+    "downloads": 721840,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 581,
+    "id": "google/flan-t5-base",
+    "downloads": 712980,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 593,
+    "id": "Helsinki-NLP/opus-mt-zh-en",
+    "downloads": 690466,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 595,
+    "id": "hugging-quants/gemma-2-9b-it-AWQ-INT4",
+    "downloads": 689382,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 597,
+    "id": "amazon/chronos-t5-base",
+    "downloads": 686295,
+    "library": "chronos-forecasting",
+    "pipeline": "time-series-forecasting"
+   },
+   {
+    "rank": 603,
+    "id": "prism-ml/Ternary-Bonsai-2-2B-gguf",
+    "downloads": 674692,
+    "library": "llama.cpp",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 609,
+    "id": "mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF",
+    "downloads": 669375,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 612,
+    "id": "Marqo/nsfw-image-detection-384",
+    "downloads": 667089,
+    "library": "timm",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 620,
+    "id": "scragnog/YuE2-GGUF",
+    "downloads": 651359,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 626,
+    "id": "answerdotai/ModernBERT-large",
+    "downloads": 646684,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 627,
+    "id": "migtissera/Tess-4.5-27B-GGUF",
+    "downloads": 643014,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 630,
+    "id": "handy-computer/whisper-large-v3-turbo-gguf",
+    "downloads": 640866,
+    "library": "transcribe.cpp",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 633,
+    "id": "facebook/hubert-large-ls960-ft",
+    "downloads": 637615,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 638,
+    "id": "google/diffusiongemma-26B-A4B-it",
+    "downloads": 625049,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 640,
+    "id": "mudler/KAT-Coder-V2.5-Dev-APEX-GGUF",
+    "downloads": 617385,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 645,
+    "id": "Qwen/Qwen2-VL-7B-Instruct",
+    "downloads": 611123,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 653,
+    "id": "sentence-transformers/all-roberta-large-v1",
+    "downloads": 599781,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 660,
+    "id": "IDEA-Research/grounding-dino-tiny",
+    "downloads": 591879,
+    "library": "transformers",
+    "pipeline": "zero-shot-object-detection"
+   },
+   {
+    "rank": 672,
+    "id": "Qwen/Qwen3.5-4B-Base",
+    "downloads": 577837,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 686,
+    "id": "togatogah/jinen-v1-small.gguf",
+    "downloads": 558227,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 687,
+    "id": "lpiccinelli/unidepth-v2-vitl14",
+    "downloads": 557463,
+    "library": "UniDepth",
+    "pipeline": null
+   },
+   {
+    "rank": 688,
+    "id": "Salesforce/blip-vqa-base",
+    "downloads": 557119,
+    "library": "transformers",
+    "pipeline": "visual-question-answering"
+   },
+   {
+    "rank": 691,
+    "id": "Qwen/Qwen2.5-1.5B",
+    "downloads": 555153,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 693,
+    "id": "Qwen/Qwen2.5-Coder-32B-Instruct",
+    "downloads": 552938,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 696,
+    "id": "kha-white/manga-ocr-base",
+    "downloads": 549103,
+    "library": "transformers",
+    "pipeline": "image-to-text"
+   },
+   {
+    "rank": 700,
+    "id": "aubmindlab/bert-base-arabertv02",
+    "downloads": 545416,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 702,
+    "id": "Qwen/Qwen-Image-Edit-2509",
+    "downloads": 542317,
+    "library": "diffusers",
+    "pipeline": "image-to-image"
+   },
+   {
+    "rank": 716,
+    "id": "ibm-granite/granite-4.1-3b",
+    "downloads": 534357,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 718,
+    "id": "rhasspy/faster-whisper-base-int8",
+    "downloads": 534051,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 722,
+    "id": "datalab-to/surya-ocr-2-gguf",
+    "downloads": 531882,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 727,
+    "id": "google/siglip2-so400m-patch16-256",
+    "downloads": 527776,
+    "library": "transformers",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 729,
+    "id": "Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata",
+    "downloads": 526173,
+    "library": "strata",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 732,
+    "id": "gvs/wav2vec2-large-xlsr-malayalam",
+    "downloads": 523380,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 739,
+    "id": "laion/CLIP-ViT-H-14-laion2B-s32B-b79K",
+    "downloads": 515951,
+    "library": "open_clip",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 747,
+    "id": "cross-encoder/ms-marco-TinyBERT-L2-v2",
+    "downloads": 503886,
+    "library": "sentence-transformers",
+    "pipeline": "text-ranking"
+   },
+   {
+    "rank": 748,
+    "id": "facebook/dino-vitb16",
+    "downloads": 502816,
+    "library": "transformers",
+    "pipeline": "image-feature-extraction"
+   },
+   {
+    "rank": 750,
+    "id": "TencentBAC/Conan-embedding-v1",
+    "downloads": 501542,
+    "library": "sentence-transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 754,
+    "id": "ukisai/Swift-Qwen3.8-27B-GGUF",
+    "downloads": 498245,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 758,
+    "id": "unsloth/Inkling-Small-GGUF",
+    "downloads": 492303,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 760,
+    "id": "google/fnet-base",
+    "downloads": 490926,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 762,
+    "id": "emrecan/bert-base-turkish-cased-mean-nli-stsb-tr",
+    "downloads": 489900,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 770,
+    "id": "timm/efficientnet_b0.ra_in1k",
+    "downloads": 485181,
+    "library": "timm",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 772,
+    "id": "Qwen/Qwen3-ASR-0.6B-hf",
+    "downloads": 484213,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 777,
+    "id": "Intel/dpt-hybrid-midas",
+    "downloads": 480724,
+    "library": "transformers",
+    "pipeline": "depth-estimation"
+   },
+   {
+    "rank": 780,
+    "id": "ornith-ai/Ornith-1.5-9B",
+    "downloads": 477290,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 783,
+    "id": "segment-any-text/sat-3l-sm",
+    "downloads": 476048,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 806,
+    "id": "unsloth/Qwen-Image-2.1",
+    "downloads": 457106,
+    "library": "diffusers",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 812,
+    "id": "CompVis/stable-diffusion-safety-checker",
+    "downloads": 454922,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 823,
+    "id": "ml-resources/flux-3-image-klein-comfy",
+    "downloads": 449810,
+    "library": "diffusion-single-file",
+    "pipeline": "image-to-image"
+   },
+   {
+    "rank": 824,
+    "id": "autogluon/mitra-classifier",
+    "downloads": 448424,
+    "library": null,
+    "pipeline": "tabular-classification"
+   },
+   {
+    "rank": 828,
+    "id": "unsloth/llama-3-8b-Instruct-bnb-4bit",
+    "downloads": 446786,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 833,
+    "id": "Helsinki-NLP/opus-mt-en-ru",
+    "downloads": 445248,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 835,
+    "id": "dascim/juribert-base",
+    "downloads": 444423,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 842,
+    "id": "SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF",
+    "downloads": 438904,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 847,
+    "id": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+    "downloads": 436930,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 850,
+    "id": "QuantStack/Wan2.2-TI2V-5B-GGUF",
+    "downloads": 436441,
+    "library": "gguf",
+    "pipeline": "text-to-video"
+   },
+   {
+    "rank": 866,
+    "id": "unslothai/vram-16",
+    "downloads": 424942,
+    "library": "transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 872,
+    "id": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "downloads": 419706,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 877,
+    "id": "google/medgemma-4b-it",
+    "downloads": 418600,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 882,
+    "id": "sanskar003/Qwen3.5-4B-AWQ",
+    "downloads": 415479,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 884,
+    "id": "DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF",
+    "downloads": 414768,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 885,
+    "id": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+    "downloads": 414612,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 888,
+    "id": "JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF",
+    "downloads": 414000,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 890,
+    "id": "trl-internal-testing/tiny-Qwen2_5_VLForConditionalGeneration",
+    "downloads": 411097,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 893,
+    "id": "RedHatAI/gemma-4-31B-it-FP8-block",
+    "downloads": 410084,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 894,
+    "id": "IlyaGusev/saiga_llama3_8b",
+    "downloads": 409128,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 898,
+    "id": "unsloth/Ornith-1.5-122B-GGUF",
+    "downloads": 407339,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 903,
+    "id": "FINAL-Bench/POCKET-Darwin-180B-GGUF",
+    "downloads": 403459,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 916,
+    "id": "google/gemma-4-26B-A4B-it-assistant",
+    "downloads": 399212,
+    "library": "transformers",
+    "pipeline": "any-to-any"
+   },
+   {
+    "rank": 924,
+    "id": "sentence-transformers/paraphrase-albert-small-v2",
+    "downloads": 390936,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 925,
+    "id": "unsloth/Wan2.2-TI2V-5B-GGUF",
+    "downloads": 390863,
+    "library": "gguf",
+    "pipeline": "text-to-video"
+   },
+   {
+    "rank": 927,
+    "id": "Qwen/Qwen2.5-Coder-7B",
+    "downloads": 387730,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 928,
+    "id": "Freepik/nsfw_image_detector",
+    "downloads": 387328,
+    "library": "transformers",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 931,
+    "id": "deepseek-ai/DeepSeek-OCR-2",
+    "downloads": 385649,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 935,
+    "id": "Qwen/Qwen2.5-Coder-1.5B",
+    "downloads": 383886,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 950,
+    "id": "emilyalsentzer/Bio_Discharge_Summary_BERT",
+    "downloads": 375273,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 952,
+    "id": "unsloth/Qwen3.6-27B-NVFP4",
+    "downloads": 373708,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 954,
+    "id": "jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata",
+    "downloads": 372584,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 971,
+    "id": "incoai/Qwen3.8-27B-DFlash2",
+    "downloads": 361410,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 973,
+    "id": "google/gemma-3-27b-it",
+    "downloads": 361076,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 977,
+    "id": "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF",
+    "downloads": 358805,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 978,
+    "id": "failspy/Meta-Llama-3-8B-Instruct-abliterated-v3",
+    "downloads": 357799,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 983,
+    "id": "laion/larger_clap_general",
+    "downloads": 354945,
+    "library": "transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 984,
+    "id": "ByteDance/LatentSync-1.5",
+    "downloads": 354239,
+    "library": "torchgeo",
+    "pipeline": null
+   },
+   {
+    "rank": 985,
+    "id": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+    "downloads": 353637,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 991,
+    "id": "huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF",
+    "downloads": 350409,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 997,
+    "id": "LiquidAI/LFM2.5-Audio-1.5B-GGUF",
+    "downloads": 347718,
+    "library": null,
+    "pipeline": null
+   }
+  ],
+  "1k_10k": [
+   {
+    "rank": 1009,
+    "id": "ornith-ai/Ornith-1.5-35B-A3B-MLX",
+    "downloads": 344831,
+    "library": "mlx",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 1012,
+    "id": "peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF",
+    "downloads": 342209,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 1018,
+    "id": "sshleifer/distilbart-cnn-12-6",
+    "downloads": 339320,
+    "library": "transformers",
+    "pipeline": "summarization"
+   },
+   {
+    "rank": 1178,
+    "id": "autogluon/chronos-2-synth",
+    "downloads": 281823,
+    "library": "chronos-forecasting",
+    "pipeline": "time-series-forecasting"
+   },
+   {
+    "rank": 1202,
+    "id": "tiny-random/qwen3.5-moe",
+    "downloads": 273790,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 1294,
+    "id": "Qwen/Qwen2-0.5B-Instruct",
+    "downloads": 246749,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 1421,
+    "id": "lengyue233/content-vec-best",
+    "downloads": 217490,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 1456,
+    "id": "unsloth/Qwen3-VL-8B-Instruct-GGUF",
+    "downloads": 208384,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 1537,
+    "id": "RedHatAI/Qwen3.8-27B-INT4",
+    "downloads": 191055,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 1548,
+    "id": "gabor-hosu/e5-mistral-7b-instruct-bnb-4bit",
+    "downloads": 189641,
+    "library": "sentence-transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 1552,
+    "id": "xinsir/controlnet-union-sdxl-1.0",
+    "downloads": 189390,
+    "library": "diffusers",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 1559,
+    "id": "OpenMed/OpenMed-NER-OncologyDetect-BigMed-278M",
+    "downloads": 188625,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 1631,
+    "id": "handy-computer/parakeet-tdt-0.6b-v2-gguf",
+    "downloads": 175414,
+    "library": "transcribe.cpp",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 1632,
+    "id": "trl-internal-testing/tiny-Gemma2ForCausalLM",
+    "downloads": 174962,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 1646,
+    "id": "Qwen/Qwen2-7B",
+    "downloads": 172033,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 1722,
+    "id": "trl-internal-testing/tiny-Qwen3_5ForConditionalGeneration-NoThink",
+    "downloads": 157256,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 1810,
+    "id": "Qwen/Qwen3.8-Flash-Next-FP8",
+    "downloads": 147240,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 1821,
+    "id": "OpenMed/OpenMed-PII-SuperClinical-Small-44M-v1",
+    "downloads": 145334,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 1835,
+    "id": "nvidia/Kimi-K2.6-NVFP4",
+    "downloads": 143372,
+    "library": "Model Optimizer",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 1885,
+    "id": "bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF",
+    "downloads": 137977,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 1892,
+    "id": "lmstudio-community/gemma-4-26B-A4B-it-MLX-6bit",
+    "downloads": 137064,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 1928,
+    "id": "lmstudio-community/gemma-4-31B-it-MLX-4bit",
+    "downloads": 132698,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 1949,
+    "id": "OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF",
+    "downloads": 130268,
+    "library": "llama.cpp",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 2057,
+    "id": "Qwen/Qwen3.5-35B-A3B-Base",
+    "downloads": 119212,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 2066,
+    "id": "lmstudio-community/Qwen3-Coder-Next-MLX-4bit",
+    "downloads": 118368,
+    "library": "mlx",
+    "pipeline": null
+   },
+   {
+    "rank": 2074,
+    "id": "ibm-granite/granite-docling-258M",
+    "downloads": 117944,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 2108,
+    "id": "OpenMOSS-Team/MOSS-TTS-Nano-100M",
+    "downloads": 113799,
+    "library": null,
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 2195,
+    "id": "fal/MiniMax-H3-Realism-People-LoRA",
+    "downloads": 106724,
+    "library": "minimax-h3",
+    "pipeline": "image-text-to-video"
+   },
+   {
+    "rank": 2201,
+    "id": "Helsinki-NLP/opus-mt-ar-en",
+    "downloads": 106174,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 2226,
+    "id": "lightx2v/Wan2.2-Distill-Loras",
+    "downloads": 104575,
+    "library": "diffusers",
+    "pipeline": "image-to-video"
+   },
+   {
+    "rank": 2257,
+    "id": "facebook/convnextv2-tiny-22k-224",
+    "downloads": 102054,
+    "library": "transformers",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 2356,
+    "id": "biohub/ESMC-6B",
+    "downloads": 96615,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 2459,
+    "id": "OpenMed/OpenMed-NER-GenomicDetect-ElectraMed-560M",
+    "downloads": 93794,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 2513,
+    "id": "ggml-org/gemma-3-4b-it-GGUF",
+    "downloads": 92836,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 2580,
+    "id": "OpenMed/OpenMed-NER-GenomeDetect-SuperMedical-125M",
+    "downloads": 91908,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 2667,
+    "id": "PaddlePaddle/PaddleOCR-VL-1.6",
+    "downloads": 90374,
+    "library": "PaddleOCR",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 2688,
+    "id": "OpenMed/OpenMed-NER-GenomicDetect-TinyMed-135M",
+    "downloads": 89770,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 2701,
+    "id": "ScottzillaSystems/qwen-image-edit-plus-nsfw-lora",
+    "downloads": 89250,
+    "library": "diffusers",
+    "pipeline": "image-to-image"
+   },
+   {
+    "rank": 2759,
+    "id": "pottokao/Qwen-Image-2.1-Text-Encoder-Heretic-GGUF",
+    "downloads": 86656,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 2786,
+    "id": "microsoft/Phi-4-multimodal-instruct",
+    "downloads": 85233,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 2914,
+    "id": "unsloth/Qwen2.5-7B-Instruct-bnb-4bit",
+    "downloads": 78249,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 2923,
+    "id": "unitary/unbiased-toxic-roberta",
+    "downloads": 77674,
+    "library": "transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 2994,
+    "id": "JackFram/llama-68m",
+    "downloads": 73673,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 3054,
+    "id": "cointegrated/rubert-tiny-sentiment-balanced",
+    "downloads": 70829,
+    "library": "transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 3093,
+    "id": "kyuz0/deepseek-v4.1-flash-gguf",
+    "downloads": 68626,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 3094,
+    "id": "timm/inception_resnet_v2.tf_in1k",
+    "downloads": 68620,
+    "library": "timm",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 3109,
+    "id": "ornith-ai/Ornith-1.5-122B-MLX",
+    "downloads": 68119,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 3162,
+    "id": "Comfy-Org/Mage-Flow",
+    "downloads": 65925,
+    "library": "diffusion-single-file",
+    "pipeline": null
+   },
+   {
+    "rank": 3224,
+    "id": "trl-internal-testing/tiny-Gemma4ForConditionalGeneration",
+    "downloads": 63092,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 3257,
+    "id": "cstr/qwen3-tts-0.6b-customvoice-GGUF",
+    "downloads": 61457,
+    "library": "ggml",
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 3288,
+    "id": "vinai/bertweet-base",
+    "downloads": 60146,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 3341,
+    "id": "JusperLee/TIGER-DnR",
+    "downloads": 58513,
+    "library": null,
+    "pipeline": "audio-to-audio"
+   },
+   {
+    "rank": 3368,
+    "id": "antirez/glm-5.3-flash-gguf",
+    "downloads": 57799,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 3419,
+    "id": "nvidia/GLM-5.2-NVFP4",
+    "downloads": 56210,
+    "library": "Model Optimizer",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 3447,
+    "id": "lmstudio-community/Qwen3-VL-8B-Instruct-MLX-8bit",
+    "downloads": 55316,
+    "library": "mlx",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 3449,
+    "id": "IstroSec/ThinkingCap-Qwen3.8-27B-abliterated-NVFP4A16",
+    "downloads": 55189,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 3507,
+    "id": "zgpu-ai/zlm-v1-moderation-edge",
+    "downloads": 53366,
+    "library": "onnx",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 3525,
+    "id": "facebook/cotracker3",
+    "downloads": 52737,
+    "library": "cotracker",
+    "pipeline": null
+   },
+   {
+    "rank": 3565,
+    "id": "Helsinki-NLP/opus-mt-tc-big-en-tr",
+    "downloads": 51179,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 3609,
+    "id": "allenai/OLMoE-1B-7B-0924",
+    "downloads": 49865,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 3677,
+    "id": "handy-computer/Voxtral-Mini-3B-2507-gguf",
+    "downloads": 48263,
+    "library": "transcribe.cpp",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 3724,
+    "id": "timm/vit_base_patch16_clip_224.laion400m_e32",
+    "downloads": 47263,
+    "library": "open_clip",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 3737,
+    "id": "chimingw/Qwen3.8-27B-Uncensored-OrcaRouter-GGUF",
+    "downloads": 46957,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 3763,
+    "id": "nvidia/Audio2Face-3D-v3.0",
+    "downloads": 46425,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 3944,
+    "id": "Cloudflare/clef-flash",
+    "downloads": 42530,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 3987,
+    "id": "deepseek-ai/DeepSeek-V3.2-Exp",
+    "downloads": 41720,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4027,
+    "id": "NeuML/colbert-bert-tiny",
+    "downloads": 40932,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 4028,
+    "id": "NousResearch/Meta-Llama-3.1-8B",
+    "downloads": 40924,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4068,
+    "id": "VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct",
+    "downloads": 40288,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4070,
+    "id": "unsloth/Qwen2.5-3B-Instruct-bnb-4bit",
+    "downloads": 40225,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4287,
+    "id": "dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF",
+    "downloads": 36558,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4302,
+    "id": "MaziyarPanahi/sqlcoder-7b-2-GGUF",
+    "downloads": 36340,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4355,
+    "id": "ibm-granite/granite-4.2-3b",
+    "downloads": 35711,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4423,
+    "id": "bigcode/tiny_starcoder_py",
+    "downloads": 34562,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4452,
+    "id": "mdmachine/ACEStep-XL-Regrind-V1",
+    "downloads": 34246,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 4502,
+    "id": "cais/HarmBench-Llama-2-13b-cls",
+    "downloads": 33498,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4513,
+    "id": "zgpu-ai/zlm-v1-signal-extract",
+    "downloads": 33367,
+    "library": "onnx",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4538,
+    "id": "mixedbread-ai/mxbai-rerank-large-v2",
+    "downloads": 33112,
+    "library": "transformers",
+    "pipeline": "text-ranking"
+   },
+   {
+    "rank": 4575,
+    "id": "huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF",
+    "downloads": 32693,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 4579,
+    "id": "baidu/Qianfan-OCR",
+    "downloads": 32645,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 4597,
+    "id": "Manojb/stable-diffusion-2-1-base",
+    "downloads": 32344,
+    "library": "diffusers",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 4627,
+    "id": "MaziyarPanahi/gemma-3-1b-it-GGUF",
+    "downloads": 31998,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4629,
+    "id": "timteh673/Qwen3.5-122B-A10B-Opus-Reasoning-GGUF",
+    "downloads": 31971,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4651,
+    "id": "sentence-transformers/multi-qa-distilbert-cos-v1",
+    "downloads": 31611,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 4656,
+    "id": "google/siglip-large-patch16-384",
+    "downloads": 31572,
+    "library": "transformers",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 4668,
+    "id": "yujiepan/qwen2.5-tiny-random",
+    "downloads": 31377,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 4685,
+    "id": "nvidia/Qwen3.8-Flash-Next-FP4-Local",
+    "downloads": 31059,
+    "library": "Model Optimizer",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 4705,
+    "id": "LiquidAI/LFM2.5-VL-3B",
+    "downloads": 30861,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 4717,
+    "id": "zai-org/glm-4-9b-chat",
+    "downloads": 30636,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 4737,
+    "id": "amazon/chronos-t5-mini",
+    "downloads": 30323,
+    "library": "chronos-forecasting",
+    "pipeline": "time-series-forecasting"
+   },
+   {
+    "rank": 4940,
+    "id": "deepseek-ai/deepseek-llm-7b-base",
+    "downloads": 27694,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 5102,
+    "id": "orcarouter/GLM-5.3-Flash-Uncensored-FP8",
+    "downloads": 25967,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 5121,
+    "id": "Helsinki-NLP/opus-mt-tr-en",
+    "downloads": 25837,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 5144,
+    "id": "Mapika/decider-2b",
+    "downloads": 25633,
+    "library": null,
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 5162,
+    "id": "dangvantuan/sentence-camembert-base",
+    "downloads": 25411,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 5222,
+    "id": "OpenMed/OpenMed-ZeroShot-NER-Oncology-XLarge-770M",
+    "downloads": 24900,
+    "library": "gliner",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 5282,
+    "id": "rtr46/meiki.text.detect.v0",
+    "downloads": 24357,
+    "library": "tensorrt",
+    "pipeline": "image-to-text"
+   },
+   {
+    "rank": 5302,
+    "id": "timm/swinv2_base_window12to16_192to256.ms_in22k_ft_in1k",
+    "downloads": 24122,
+    "library": "timm",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 5326,
+    "id": "TheBloke/Llama-2-7B-GGUF",
+    "downloads": 23865,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 5397,
+    "id": "ESGBERT/SocRoBERTa-social",
+    "downloads": 23328,
+    "library": "transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 5432,
+    "id": "BennyDaBall/Qwen-Image-2.1-NVFP4",
+    "downloads": 22893,
+    "library": "diffusion-single-file",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 5433,
+    "id": "LiquidAI/LFM2.5-VL-450M-GGUF",
+    "downloads": 22874,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 5437,
+    "id": "unsloth/DeepSeek-V4-Flash-GGUF",
+    "downloads": 22851,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 5507,
+    "id": "incoai/GLM-5.3-Flash-DFlash2",
+    "downloads": 22326,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 5524,
+    "id": "MediaCatch/xls-r-300m-danish-mc-v2",
+    "downloads": 22163,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 5584,
+    "id": "timm/caformer_b36.sail_in22k_ft_in1k_384",
+    "downloads": 21655,
+    "library": "timm",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 5681,
+    "id": "unsloth/gemma-4-31B-it-unsloth-bnb-4bit",
+    "downloads": 20817,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 5768,
+    "id": "utrobinmv/t5_translate_en_ru_zh_small_1024",
+    "downloads": 20127,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 5817,
+    "id": "RedHatAI/Meta-Llama-3.1-8B-Instruct-quantized.w4a16",
+    "downloads": 19731,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 5956,
+    "id": "dbmdz/bert-base-german-cased",
+    "downloads": 18774,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 5986,
+    "id": "litert-community/embeddinggemma-2-text-270m-litert-lm",
+    "downloads": 18563,
+    "library": "litert-lm",
+    "pipeline": null
+   },
+   {
+    "rank": 5992,
+    "id": "huihui-ai/Huihui-Qwen3.5-4B-abliterated",
+    "downloads": 18528,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 6015,
+    "id": "VAGOsolutions/SauerkrautLM-ColQwen3-2b-v0.1",
+    "downloads": 18363,
+    "library": "sauerkrautlm-colpali",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 6080,
+    "id": "DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4",
+    "downloads": 17961,
+    "library": "ds4",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 6087,
+    "id": "fastino/gliner2.5-small-v1",
+    "downloads": 17911,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 6140,
+    "id": "yujiepan/gemma-3-tiny-random",
+    "downloads": 17622,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 6401,
+    "id": "IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF",
+    "downloads": 16488,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 6421,
+    "id": "openbmb/MiniCPM-V-4.6-gguf",
+    "downloads": 16390,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 6498,
+    "id": "timm/swin_tiny_patch4_window7_224.ms_in22k_ft_in1k",
+    "downloads": 16086,
+    "library": "timm",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 6589,
+    "id": "KoichiYasuoka/bert-base-thai-upos",
+    "downloads": 15678,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 6603,
+    "id": "bartowski/Qwen_Qwen3-VL-32B-Instruct-GGUF",
+    "downloads": 15626,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 6772,
+    "id": "OpenMed/OpenMed-ZeroShot-NER-Anatomy-Multi-209M",
+    "downloads": 14847,
+    "library": "gliner",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 6803,
+    "id": "egeorcun/lucida",
+    "downloads": 14696,
+    "library": "transformers",
+    "pipeline": "image-segmentation"
+   },
+   {
+    "rank": 6813,
+    "id": "z-lab/Qwen3.6-35B-A3B-DFlash",
+    "downloads": 14661,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 6901,
+    "id": "TheBloke/Llama-2-13B-chat-GGUF",
+    "downloads": 14343,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 6913,
+    "id": "LiquidAI/LFM2-24B-A2B-GGUF",
+    "downloads": 14283,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 6944,
+    "id": "mradermacher/Qwen2.5-VL-7B-Instruct-Unredacted-MAX-GGUF",
+    "downloads": 14170,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 6958,
+    "id": "patrickbdevaney/MiMo-V2.6-Flash-REAP50-GGUF",
+    "downloads": 14119,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 6972,
+    "id": "Voodisss/Qwen3-Reranker-4B-GGUF-llama_cpp",
+    "downloads": 14065,
+    "library": "gguf",
+    "pipeline": "text-ranking"
+   },
+   {
+    "rank": 7008,
+    "id": "tencent/WeMM-Embedding-2B",
+    "downloads": 13935,
+    "library": "transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 7020,
+    "id": "cyberdelia/CyberRealisticFlux",
+    "downloads": 13874,
+    "library": "diffusers",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 7025,
+    "id": "google/canine-s",
+    "downloads": 13856,
+    "library": "transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 7037,
+    "id": "yujiepan/mixtral-8xtiny-random",
+    "downloads": 13791,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 7073,
+    "id": "OpenMed/OpenMed-PII-French-BiomedBERT-Base-110M-v1",
+    "downloads": 13673,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 7175,
+    "id": "cardiffnlp/twitter-xlm-roberta-base",
+    "downloads": 13274,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 7332,
+    "id": "prism-ml/Bonsai-27B-unpacked",
+    "downloads": 12876,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 7336,
+    "id": "cisco-ai/SecureBERT2.0-cross_encoder",
+    "downloads": 12869,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 7348,
+    "id": "MoritzLaurer/ModernBERT-large-zeroshot-v2.0",
+    "downloads": 12821,
+    "library": "transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 7386,
+    "id": "OleehyO/TexTeller",
+    "downloads": 12701,
+    "library": "transformers",
+    "pipeline": "image-to-text"
+   },
+   {
+    "rank": 7421,
+    "id": "XiaomiMiMo/MiMo-V2.6-Flash-MOPD",
+    "downloads": 12567,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 7447,
+    "id": "lllyasviel/control_v11p_sd15_inpaint",
+    "downloads": 12431,
+    "library": "diffusers",
+    "pipeline": "image-to-image"
+   },
+   {
+    "rank": 7454,
+    "id": "OpenMed/OpenMed-PII-Italian-SnowflakeMed-Large-568M-v1",
+    "downloads": 12409,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 7473,
+    "id": "ibm-granite/granite-embedding-reranker-english-r2",
+    "downloads": 12367,
+    "library": "sentence-transformers",
+    "pipeline": "text-ranking"
+   },
+   {
+    "rank": 7483,
+    "id": "optimum-intel-internal-testing/tiny-mamba",
+    "downloads": 12338,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 7568,
+    "id": "AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF",
+    "downloads": 12047,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 7607,
+    "id": "microsoft/phi-4-gguf",
+    "downloads": 11920,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 7674,
+    "id": "garak-llm/roberta-large-snli_mnli_fever_anli_R1_R2_R3-nli",
+    "downloads": 11728,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 7712,
+    "id": "facebook/mbart-large-cc25",
+    "downloads": 11614,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 7769,
+    "id": "yujiepan/clip-vit-tiny-random-patch14-336",
+    "downloads": 11426,
+    "library": "transformers",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 7794,
+    "id": "deepvk/USER2-small",
+    "downloads": 11375,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 7841,
+    "id": "mradermacher/Qwen3-235B-A22B-abliterated-i1-GGUF",
+    "downloads": 11241,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 7888,
+    "id": "LunarOilRig/PaddleOCR-VL-1.6-GGUF-Q4",
+    "downloads": 11121,
+    "library": "gguf",
+    "pipeline": null
+   },
+   {
+    "rank": 7961,
+    "id": "optimum-intel-internal-testing/tiny-random-LevitModel",
+    "downloads": 10943,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 7982,
+    "id": "bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF",
+    "downloads": 10898,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 7983,
+    "id": "Hiveurban/multilingual-e5-base",
+    "downloads": 10890,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 8106,
+    "id": "mistralai/Ministral-3-14B-Reasoning-2512-GGUF",
+    "downloads": 10596,
+    "library": "vllm",
+    "pipeline": null
+   },
+   {
+    "rank": 8137,
+    "id": "EleniF/babylm_1_2_6k_ACLM",
+    "downloads": 10527,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 8206,
+    "id": "HorizonRobotics/HoloMotion_models",
+    "downloads": 10344,
+    "library": "holomotion",
+    "pipeline": null
+   },
+   {
+    "rank": 8208,
+    "id": "calcuis/hunyuanimage-gguf",
+    "downloads": 10340,
+    "library": null,
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 8273,
+    "id": "tencent/WeVisDoc-4B",
+    "downloads": 10193,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 8343,
+    "id": "calcuis/kontext-gguf",
+    "downloads": 9982,
+    "library": "diffusers",
+    "pipeline": "image-to-image"
+   },
+   {
+    "rank": 8350,
+    "id": "lynaNSFW/minimaxH3_Collection",
+    "downloads": 9959,
+    "library": "diffusers",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 8462,
+    "id": "kevinzhou21/Qwen3.5-9B-Distill-Deepseek-V4.1-Flash-20261004",
+    "downloads": 9688,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 8492,
+    "id": "Abiray/Qwen3.6-35B-A3B-Q4_K_M-GGUF",
+    "downloads": 9629,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 8504,
+    "id": "unsloth/orpheus-3b-0.1-ft-GGUF",
+    "downloads": 9585,
+    "library": "transformers",
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 8582,
+    "id": "ggml-org/gemma-3-4b-it-qat-GGUF",
+    "downloads": 9399,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 8648,
+    "id": "yandex/YandexGPT-5-Lite-8B-instruct",
+    "downloads": 9307,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 8666,
+    "id": "dphn/dolphin-2.9.1-llama-3-8b",
+    "downloads": 9285,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 8677,
+    "id": "FINAL-Bench/Darwin-35B-ZTC-Vision",
+    "downloads": 9258,
+    "library": "pytorch",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 8781,
+    "id": "mradermacher/Llama-3.2-1B-Instruct-Uncensored-GGUF",
+    "downloads": 9096,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 8908,
+    "id": "lightblue/suzume-llama-3-8B-multilingual-orpo-borda-full",
+    "downloads": 8972,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 9007,
+    "id": "unsloth/Qwen2.5-Coder-14B-Instruct-128K-GGUF",
+    "downloads": 8894,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 9019,
+    "id": "llm-jp/llm-jp-4.1-33b-thinking-gguf",
+    "downloads": 8884,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 9128,
+    "id": "unitary/multilingual-toxic-xlm-roberta",
+    "downloads": 8738,
+    "library": "transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 9154,
+    "id": "yonigozlan/EdgeTAM-hf",
+    "downloads": 8699,
+    "library": "transformers",
+    "pipeline": "mask-generation"
+   },
+   {
+    "rank": 9201,
+    "id": "timm/vit_tiny_patch16_dinov3_qkvb.eupe_lvd1689m",
+    "downloads": 8630,
+    "library": "timm",
+    "pipeline": "image-feature-extraction"
+   },
+   {
+    "rank": 9233,
+    "id": "Intel/Qwen3.8-Flash-Next-W4A16-AutoRound",
+    "downloads": 8568,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 9272,
+    "id": "flavour/CLIP-ViT-B-16-DataComp.XL-s13B-b90K",
+    "downloads": 8499,
+    "library": "open_clip",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 9296,
+    "id": "unsloth/Muse-Glimmer-30B-unsloth-bnb-4bit",
+    "downloads": 8451,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 9312,
+    "id": "Davlan/afro-xlmr-base",
+    "downloads": 8426,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 9348,
+    "id": "bartowski/EVA-Qwen2.5-14B-v0.2-GGUF",
+    "downloads": 8357,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 9388,
+    "id": "nvidia/domain-classifier",
+    "downloads": 8315,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 9406,
+    "id": "unsloth/Qwen3-4B-bnb-4bit",
+    "downloads": 8281,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 9426,
+    "id": "ibm-granite/granite-4.0-h-micro",
+    "downloads": 8234,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 9462,
+    "id": "HauhauCS/GPT-OSS-20B-Uncensored-HauhauCS-Aggressive",
+    "downloads": 8171,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 9463,
+    "id": "maya-research/maya1",
+    "downloads": 8170,
+    "library": "transformers",
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 9475,
+    "id": "KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2",
+    "downloads": 8144,
+    "library": "transformers",
+    "pipeline": "video-classification"
+   },
+   {
+    "rank": 9521,
+    "id": "mradermacher/DeepHat-V1-7B-GGUF",
+    "downloads": 8063,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 9524,
+    "id": "nvidia/stt_en_conformer_ctc_large",
+    "downloads": 8061,
+    "library": "nemo",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 9535,
+    "id": "Futurix-AI/FxAI-decision-model",
+    "downloads": 8040,
+    "library": "transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 9628,
+    "id": "hotchpotch/japanese-reranker-small-v2",
+    "downloads": 7910,
+    "library": "sentence-transformers",
+    "pipeline": "text-ranking"
+   },
+   {
+    "rank": 9688,
+    "id": "chfm/Qwen-Image-2.1-GGUF",
+    "downloads": 7806,
+    "library": null,
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 9694,
+    "id": "facebook/mask2former-swin-large-ade-panoptic",
+    "downloads": 7794,
+    "library": "transformers",
+    "pipeline": "image-segmentation"
+   },
+   {
+    "rank": 9753,
+    "id": "Lightricks/LTX-2.5-22b-IC-LoRA-Deblur",
+    "downloads": 7722,
+    "library": "diffusion-single-file",
+    "pipeline": "video-to-video"
+   },
+   {
+    "rank": 9758,
+    "id": "EleutherAI/pythia-12b",
+    "downloads": 7712,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 9826,
+    "id": "Gen-Verse/MMaDA-8B-MixCoT",
+    "downloads": 7602,
+    "library": "transformers",
+    "pipeline": "any-to-any"
+   },
+   {
+    "rank": 9855,
+    "id": "jockibaba/jockibaba8",
+    "downloads": 7533,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 9901,
+    "id": "mtheo/camembert-base-xnli",
+    "downloads": 7460,
+    "library": "transformers",
+    "pipeline": "zero-shot-classification"
+   },
+   {
+    "rank": 9903,
+    "id": "mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF",
+    "downloads": 7458,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 9965,
+    "id": "OpenMed/OpenMed-PII-German-ClinicDischarge-Base-110M-v1",
+    "downloads": 7372,
+    "library": "transformers",
+    "pipeline": "token-classification"
+   }
+  ],
+  "10k_100k": [
+   {
+    "rank": 10619,
+    "id": "nvidia/Kimodo-SOMA-RP-v1.1",
+    "downloads": 6496,
+    "library": "kimodo",
+    "pipeline": null
+   },
+   {
+    "rank": 10856,
+    "id": "onnx-community/Nemotron-3-Diarization-ONNX",
+    "downloads": 6213,
+    "library": "nemo",
+    "pipeline": "voice-activity-detection"
+   },
+   {
+    "rank": 11376,
+    "id": "mradermacher/Qwen3-Omni-30B-A3B-Captioner-GGUF",
+    "downloads": 5668,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 11732,
+    "id": "mradermacher/Qwen3.5-2B-Wolof-Instruct-v1-i1-GGUF",
+    "downloads": 5343,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 11942,
+    "id": "smp-hub/mit_b2.imagenet",
+    "downloads": 5173,
+    "library": "segmentation-models-pytorch",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 12685,
+    "id": "google/codegemma-7b-it",
+    "downloads": 4602,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 12949,
+    "id": "TheBloke/Yi-6B-200K-GGUF",
+    "downloads": 4450,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 13910,
+    "id": "EZForever/gemma-4-26B-A4B-it-qat-uncensored-heretic-UDmerge-GGUF",
+    "downloads": 3915,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 14180,
+    "id": "parler-tts/parler-tts-large-v1",
+    "downloads": 3777,
+    "library": "transformers",
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 14501,
+    "id": "kingabzpro/wav2vec2-large-xls-r-1b-Swedish",
+    "downloads": 3631,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 14747,
+    "id": "freakyskittle/apex-flash-1-abliterated-GGUF",
+    "downloads": 3528,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 15647,
+    "id": "abakanai/Minimax_h3_hybrid",
+    "downloads": 3220,
+    "library": "diffusion-single-file",
+    "pipeline": "image-to-video"
+   },
+   {
+    "rank": 15707,
+    "id": "microsoft/trocr-small-stage1",
+    "downloads": 3199,
+    "library": "transformers",
+    "pipeline": "image-to-text"
+   },
+   {
+    "rank": 15918,
+    "id": "boumehdi/wav2vec2-large-xlsr-moroccan-darija",
+    "downloads": 3133,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 16007,
+    "id": "hf-tiny-v2/tiny-random-Olmo2ForCausalLM",
+    "downloads": 3103,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 16104,
+    "id": "sainteye/ifoodie-classifier-v8",
+    "downloads": 3074,
+    "library": "transformers",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 16747,
+    "id": "urchade/gliner_base",
+    "downloads": 2889,
+    "library": "gliner",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 16933,
+    "id": "lemonyins/Qwen3.6-27B-uncensored-abliterated-i1-IQ4_XS-GGUF-Smaller",
+    "downloads": 2842,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 18101,
+    "id": "peft-internal-testing/tiny-random-gemma4-E2B",
+    "downloads": 2543,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 18121,
+    "id": "releaseworthy/dasiwa-minimax-h3-turbo-int8",
+    "downloads": 2540,
+    "library": "minimax-h3",
+    "pipeline": "image-to-video"
+   },
+   {
+    "rank": 18668,
+    "id": "boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF",
+    "downloads": 2419,
+    "library": "gguf",
+    "pipeline": null
+   },
+   {
+    "rank": 18695,
+    "id": "mohommed/LFM3-1.7B-Frontier-SmartAgent",
+    "downloads": 2415,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 19544,
+    "id": "bartowski/soob3123_amoral-gemma3-12B-v2-GGUF",
+    "downloads": 2254,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 19761,
+    "id": "aisingapore/Llama-SEA-Guard-8B-2602",
+    "downloads": 2216,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 19771,
+    "id": "BennyDaBall/Fibo-2.0-dev-NVFP4",
+    "downloads": 2215,
+    "library": "diffusion-single-file",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 20113,
+    "id": "PrunaAI/openai-community-gpt2-GGUF-smashed",
+    "downloads": 2158,
+    "library": "pruna-ai",
+    "pipeline": null
+   },
+   {
+    "rank": 21258,
+    "id": "Thox-ai/ThoxClip-Qwen3-0.6B",
+    "downloads": 1996,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 21812,
+    "id": "mradermacher/CAT-Translate-7b-i1-GGUF",
+    "downloads": 1921,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 22362,
+    "id": "mradermacher/llama-3-youko-8b-instruct-GGUF",
+    "downloads": 1851,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 23436,
+    "id": "Tumo505/SSL-ECG-Classification-model-card",
+    "downloads": 1737,
+    "library": "transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 23915,
+    "id": "mradermacher/dolphin-2.9.1-yi-1.5-34b-GGUF",
+    "downloads": 1691,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 24546,
+    "id": "mradermacher/granite-3.1-8b-Reasoning-i1-GGUF",
+    "downloads": 1631,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 24749,
+    "id": "habib-analyst/sonocnn",
+    "downloads": 1613,
+    "library": null,
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 25058,
+    "id": "mzoelfakar/Al-Khwarizmi-3B-GGUF",
+    "downloads": 1586,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 25863,
+    "id": "mradermacher/Mistral-Small-4-119B-2603-i1-GGUF",
+    "downloads": 1520,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 25901,
+    "id": "MaziyarPanahi/Mistral-7B-v0.3",
+    "downloads": 1517,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 26603,
+    "id": "NousResearch/Llama-2-70b-chat-hf",
+    "downloads": 1463,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 26742,
+    "id": "RAS-LAB/Qwen3.6-26B-A3B-KREAP-8bit-MLX",
+    "downloads": 1454,
+    "library": "mlx",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 26831,
+    "id": "allenai/unifiedqa-t5-large",
+    "downloads": 1447,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 27444,
+    "id": "Winnougan/MiniMax-H3-PTD-LoRAs-Quantized-ComfyUI",
+    "downloads": 1404,
+    "library": "minimax-h3",
+    "pipeline": null
+   },
+   {
+    "rank": 27599,
+    "id": "Geotrend/distilbert-base-en-nl-cased",
+    "downloads": 1393,
+    "library": "transformers",
+    "pipeline": "fill-mask"
+   },
+   {
+    "rank": 27693,
+    "id": "mondk/LFM3-1.7B-Claude-Code-GGUF",
+    "downloads": 1388,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 28478,
+    "id": "QuantFactory/Llama-3.1-8B-Stheno-v3.4-GGUF",
+    "downloads": 1340,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 29378,
+    "id": "mradermacher/Logics-SWE-Qwen3.6-27B-GGUF",
+    "downloads": 1286,
+    "library": "transformers",
+    "pipeline": "reinforcement-learning"
+   },
+   {
+    "rank": 29937,
+    "id": "ldiex/TACA",
+    "downloads": 1252,
+    "library": "diffusers",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 30875,
+    "id": "Synthyra/ESMFold2",
+    "downloads": 1200,
+    "library": "transformers",
+    "pipeline": "feature-extraction"
+   },
+   {
+    "rank": 31061,
+    "id": "baerquants/GLM-5.3-UD-Q4_K_XL-layers",
+    "downloads": 1189,
+    "library": "mesh-llm",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 31409,
+    "id": "AtomicChat/d1-2B-GGUF",
+    "downloads": 1172,
+    "library": "gguf",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 32706,
+    "id": "tensorblock/Qwen_Qwen3-1.7B-GGUF",
+    "downloads": 1109,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 32919,
+    "id": "vadimbelsky/arabic-emirati-female-piper",
+    "downloads": 1100,
+    "library": "piper",
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 33356,
+    "id": "legraphista/RoLlama2-7b-Chat-IMat-GGUF",
+    "downloads": 1081,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 33515,
+    "id": "Indexnusrefather/Erebus-RP-Mini-4B-Instruct-2608-v0.1",
+    "downloads": 1075,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 33828,
+    "id": "mradermacher/Qwen3.8-27B-Brainwaves-WFH-GGUF",
+    "downloads": 1062,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 34850,
+    "id": "RichardErkhov/m8than_-_mistral-7b-instruct-0.2-gguf",
+    "downloads": 1021,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 35452,
+    "id": "nikita-savelyev-cerebras/tiny-random-kimi-k2.7-code-int4",
+    "downloads": 1001,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 35798,
+    "id": "mradermacher/Qwen3.8-27B-TWIN-TURBO-Fable-Cold-Fusion-709-ULTRA-HERETIC-Uncensored-GGUF",
+    "downloads": 988,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 36844,
+    "id": "gen-robot/openvla-7b-rlvla-sft_16k",
+    "downloads": 952,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 36960,
+    "id": "mradermacher/eros-7B-BETA-GGUF",
+    "downloads": 948,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 37361,
+    "id": "mradermacher/deepseek-uncensored-lore-i1-GGUF",
+    "downloads": 936,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 38211,
+    "id": "mradermacher/Mero-Artemis-31B-v1-GGUF",
+    "downloads": 909,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 38322,
+    "id": "mradermacher/Solar-Decision-JEV-27B-V2-GGUF",
+    "downloads": 906,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 39120,
+    "id": "mradermacher/llmfan46-Qwen3.5-9B-ultra-heretic-i1-GGUF",
+    "downloads": 882,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 39173,
+    "id": "mradermacher/Llama-3-8B-Ultrachat-200K-i1-GGUF",
+    "downloads": 880,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 39978,
+    "id": "mradermacher/natural-functions-i1-GGUF",
+    "downloads": 858,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 39996,
+    "id": "miifanboy/Spark-X2.5-4B-i1-GGUF",
+    "downloads": 858,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 40053,
+    "id": "tencent/HunyuanVideo-I2V",
+    "downloads": 856,
+    "library": null,
+    "pipeline": "image-to-video"
+   },
+   {
+    "rank": 40161,
+    "id": "mradermacher/Chochmah-1B-Instruct-DPO-GGUF",
+    "downloads": 854,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 40234,
+    "id": "RichardErkhov/ricdomolm_-_lawma-8b-gguf",
+    "downloads": 851,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 40506,
+    "id": "ostris/flux2_berthe_morisot",
+    "downloads": 844,
+    "library": "diffusers",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 41948,
+    "id": "Helsinki-NLP/opus-mt-en-trk",
+    "downloads": 807,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 42321,
+    "id": "mradermacher/gemma-4-31B-it-heretic-z-i1-GGUF",
+    "downloads": 799,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 42836,
+    "id": "mradermacher/QiMing-Socratic-VL-8B-Instruct-i1-GGUF",
+    "downloads": 787,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 43506,
+    "id": "flair/chunk-english",
+    "downloads": 772,
+    "library": "flair",
+    "pipeline": "token-classification"
+   },
+   {
+    "rank": 43902,
+    "id": "pearl-ai/Qwen3-30B-A3B-Instruct-2507-pearl",
+    "downloads": 764,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 45015,
+    "id": "mobilint/Qwen2.5-0.5B-Instruct-Batch16",
+    "downloads": 741,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 45196,
+    "id": "RichardErkhov/mii-community_-_zefiro-7b-base-ITA-gguf",
+    "downloads": 737,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 46084,
+    "id": "mradermacher/Pathfinder-RP-12B-RU-i1-GGUF",
+    "downloads": 720,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 46317,
+    "id": "tao1000/hh3",
+    "downloads": 716,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 47056,
+    "id": "ToxicityPrompts/PolyGuard-Qwen",
+    "downloads": 703,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 48339,
+    "id": "Demonthos/candle-quantized-whisper-large-v3-turbo",
+    "downloads": 681,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 48374,
+    "id": "Anonymiserad/SweMedMCQ-EuroLLM-1.7B-Answer-EN-SV",
+    "downloads": 681,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 48474,
+    "id": "ishiki-emo/mojicast-fugumt-ja-en-ct2",
+    "downloads": 679,
+    "library": null,
+    "pipeline": "translation"
+   },
+   {
+    "rank": 49148,
+    "id": "flypg/DeepSeek-R1-Distill-Qwen-14B-Japanese-chat-quant",
+    "downloads": 668,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 49486,
+    "id": "mradermacher/Anubis-70B-v1.1-i1-GGUF",
+    "downloads": 663,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 49647,
+    "id": "Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0",
+    "downloads": 661,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 50008,
+    "id": "HiTZ/gpt2-eus-euscrawl",
+    "downloads": 654,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 50793,
+    "id": "facebook/metaclip-2-worldwide-l14",
+    "downloads": 642,
+    "library": "transformers",
+    "pipeline": "zero-shot-image-classification"
+   },
+   {
+    "rank": 51159,
+    "id": "mradermacher/Koa-express-31B-qat-GGUF",
+    "downloads": 637,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 52265,
+    "id": "obsxrver/wan2.2-i2v-scat",
+    "downloads": 621,
+    "library": "diffusers",
+    "pipeline": "image-to-video"
+   },
+   {
+    "rank": 52341,
+    "id": "mradermacher/Llama3.1-8B-Thinking-R1-GGUF",
+    "downloads": 620,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 52592,
+    "id": "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+    "downloads": 616,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 53267,
+    "id": "mradermacher/patricide-12B-Unslop-Mell-GGUF",
+    "downloads": 606,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 53584,
+    "id": "NobodyWho/LFM2.5-VL-1.6B-GGUF",
+    "downloads": 602,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 53914,
+    "id": "chkla/roberta-argument",
+    "downloads": 597,
+    "library": "transformers",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 54109,
+    "id": "mradermacher/llemma_34b-i1-GGUF",
+    "downloads": 595,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 54220,
+    "id": "tomaarsen/Qwen3-VL-Embedding-8B",
+    "downloads": 594,
+    "library": "sentence-transformers",
+    "pipeline": "sentence-similarity"
+   },
+   {
+    "rank": 54517,
+    "id": "brunogcp/supergemma4-26b-abliterated-multimodal-gguf-4bit",
+    "downloads": 590,
+    "library": null,
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 55040,
+    "id": "inclusionAI/Ling-2.5-1T",
+    "downloads": 583,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 55301,
+    "id": "mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF",
+    "downloads": 580,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 56575,
+    "id": "multimodal-vision-ai/mvai-video-action-compare-models",
+    "downloads": 564,
+    "library": "litert",
+    "pipeline": "video-classification"
+   },
+   {
+    "rank": 57215,
+    "id": "RichardErkhov/etri-xainlp_-_llama2-12.8b_lora-dpo_v1-gguf",
+    "downloads": 555,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 57304,
+    "id": "QuantFactory/Lama-DPOlphin-8B-GGUF",
+    "downloads": 554,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 57913,
+    "id": "mradermacher/Qwen3.5-0.8B-heretic-v3-i1-GGUF",
+    "downloads": 547,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 58066,
+    "id": "mradermacher/Glitch-v1.1-8B-i1-GGUF",
+    "downloads": 545,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 58232,
+    "id": "mradermacher/DeepHermes-3-Llama-3-8B-Preview-Heretic-i1-GGUF",
+    "downloads": 543,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 58281,
+    "id": "TalTechNLP/voxlingua107-epaca-tdnn",
+    "downloads": 542,
+    "library": "speechbrain",
+    "pipeline": "audio-classification"
+   },
+   {
+    "rank": 58328,
+    "id": "mradermacher/Gemma4-31B-IT-Abliterated-i1-GGUF",
+    "downloads": 542,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 60462,
+    "id": "chaoliangUNSW/Jev-Style-2B-Decision-v3-MLX",
+    "downloads": 518,
+    "library": "mlx",
+    "pipeline": "text-classification"
+   },
+   {
+    "rank": 61284,
+    "id": "francesca9805/urd-100mb-after-wc-uniform-newlex-before-ckpt500-packed-bfdiso_seed3407",
+    "downloads": 509,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 61545,
+    "id": "mlx-community/granite-4.1-8b-8bit",
+    "downloads": 506,
+    "library": "mlx",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 61669,
+    "id": "ekacare/parrotlet-a-2.5-pro",
+    "downloads": 505,
+    "library": "transformers",
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 62519,
+    "id": "mradermacher/chime-in-detector-gemma4-GGUF",
+    "downloads": 496,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 62776,
+    "id": "mradermacher/MistralBase-4x7B-MoE-ECE-PRYMMAL-Martial-i1-GGUF",
+    "downloads": 493,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 62786,
+    "id": "RichardErkhov/mlfoundations-dev_-_hp_ablations_llama3_epoch2_dcftv1.2-gguf",
+    "downloads": 493,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 62810,
+    "id": "mradermacher/Aura-4o-Rebirth-Gemma-4-31B-Merged-GGUF",
+    "downloads": 493,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 63462,
+    "id": "devpotatopotato/qwen3-14b-sft-261023-bigmath-gpt-oss-120b-fsdp-1-epoch-1",
+    "downloads": 487,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 63740,
+    "id": "SVECTOR-CORPORATION/SPTK-2",
+    "downloads": 484,
+    "library": null,
+    "pipeline": "automatic-speech-recognition"
+   },
+   {
+    "rank": 64364,
+    "id": "mradermacher/Qwen-2.5-base-7b-GGUF",
+    "downloads": 478,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 64500,
+    "id": "jinreiyu/Bonsai-REDUX2-GGUF-Q4_K_M-BLANK-PRIMED-V5-LeanV2-gguf",
+    "downloads": 477,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 65239,
+    "id": "kstathop/Casual-Snapshot-Realism",
+    "downloads": 470,
+    "library": "diffusers",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 65568,
+    "id": "qualcomm/DETR-ResNet101-DC5",
+    "downloads": 466,
+    "library": "pytorch",
+    "pipeline": "object-detection"
+   },
+   {
+    "rank": 65937,
+    "id": "mradermacher/bird-fixer-14b-GGUF",
+    "downloads": 463,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 67143,
+    "id": "francesca9805/tur-latn-100mb-after-ppt-Dp-100mb-packed-bfdiso-ckpt500_seed10",
+    "downloads": 452,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 67581,
+    "id": "mradermacher/Llama-3.2-3B-optimized-i1-GGUF",
+    "downloads": 448,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 67891,
+    "id": "NandemoGHS/Anime-XCodec2-44.1kHz-v2",
+    "downloads": 445,
+    "library": null,
+    "pipeline": "audio-to-audio"
+   },
+   {
+    "rank": 68760,
+    "id": "qikp/baguettotron-600m-GGUF",
+    "downloads": 437,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 69808,
+    "id": "ValueFX9507/Tifa-Deepsex-14b-CoT",
+    "downloads": 427,
+    "library": "transformers",
+    "pipeline": "reinforcement-learning"
+   },
+   {
+    "rank": 70652,
+    "id": "mradermacher/Mira-v1.22.2b-27B-dpo-i1-GGUF",
+    "downloads": 420,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 70732,
+    "id": "mradermacher/cerbero-7b-openchat-i1-GGUF",
+    "downloads": 419,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 70783,
+    "id": "mradermacher/Atlas-72B-SVT-merged-i1-GGUF",
+    "downloads": 419,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 71169,
+    "id": "allenai/open-instruct-human-mix-30b",
+    "downloads": 415,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 72753,
+    "id": "nm-testing/w8a8_dynamic_asym-e2e",
+    "downloads": 403,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 72877,
+    "id": "0xSojalSec/DeepSeek-V4.1-Flash-1017-GSQ-RCO-12-GPU",
+    "downloads": 402,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 73195,
+    "id": "mradermacher/Babel-9B-i1-GGUF",
+    "downloads": 399,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 73804,
+    "id": "2264K/ktransfer-27b-kd-dynamic-s400",
+    "downloads": 395,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 74030,
+    "id": "tattabio/flashppi",
+    "downloads": 393,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 74591,
+    "id": "austindavis/gpt2-lichess-uci-201601",
+    "downloads": 388,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 74672,
+    "id": "mradermacher/twentle-gemma-4-GGUF",
+    "downloads": 388,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 74778,
+    "id": "resnet101/hot-art-flex-lora",
+    "downloads": 387,
+    "library": "diffusers",
+    "pipeline": "text-to-image"
+   },
+   {
+    "rank": 74820,
+    "id": "ElementMerc/qwen3-0.6b-uncensored",
+    "downloads": 387,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 74893,
+    "id": "RichardErkhov/M1LL1X_-_microsoft-phi-3_5-mini-trained-abliterated-QA-1960-all-modules-merged-gguf",
+    "downloads": 386,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 75775,
+    "id": "RichardErkhov/PathFinderKR_-_Llama-3.2-1B-Instruct-Pause_Token-gguf",
+    "downloads": 380,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 76622,
+    "id": "mradermacher/Long-SOVL-Experiment-8B-L3-262K-i1-GGUF",
+    "downloads": 374,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 76769,
+    "id": "InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF",
+    "downloads": 373,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 76940,
+    "id": "collabora/whisper-tiny-hindi",
+    "downloads": 372,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 77132,
+    "id": "mradermacher/aquif-3-moe-17b-a2.8b-i1-GGUF",
+    "downloads": 371,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 77693,
+    "id": "backyardai/Llama-3.1-8B-ArliAI-RPMax-v1.1-GGUF",
+    "downloads": 367,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 78086,
+    "id": "EZCon/Huihui-gemma-4-E4B-it-abliterated-4bit-mlx",
+    "downloads": 365,
+    "library": "mlx",
+    "pipeline": "any-to-any"
+   },
+   {
+    "rank": 78152,
+    "id": "JetBrains-Research/cmg-codet5-without-history",
+    "downloads": 364,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 78459,
+    "id": "prithivMLmods/Qwen3.6-27B-NVFP4-GGUF",
+    "downloads": 363,
+    "library": "transformers",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 78724,
+    "id": "mradermacher/Vision-Braille-Qwen3-8B-GGUF",
+    "downloads": 361,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 78965,
+    "id": "mradermacher/TON-3B-CLEVR-GGUF",
+    "downloads": 359,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 79902,
+    "id": "sagawa/ReactionT5v2-yield",
+    "downloads": 353,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 80049,
+    "id": "timm/vit_huge_patch14_clip_224.laion2b_ft_in1k",
+    "downloads": 352,
+    "library": "timm",
+    "pipeline": "image-classification"
+   },
+   {
+    "rank": 80674,
+    "id": "mradermacher/tame-tiger-i1-GGUF",
+    "downloads": 349,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 80872,
+    "id": "arabsya87sy7a8/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
+    "downloads": 348,
+    "library": "gguf",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 82093,
+    "id": "mradermacher/Uirapuru-U1-9B-i1-GGUF",
+    "downloads": 341,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 82252,
+    "id": "wmueller/zimgturbo",
+    "downloads": 340,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 82325,
+    "id": "RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf",
+    "downloads": 339,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 82546,
+    "id": "mradermacher/Omega-Darker_The-Final-Directive-24B-i1-GGUF",
+    "downloads": 338,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 82733,
+    "id": "mradermacher/LLaDA-8B-Base-JSON-SFT-GGUF",
+    "downloads": 337,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 82874,
+    "id": "mradermacher/PyThagorean-3B-GGUF",
+    "downloads": 336,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 83366,
+    "id": "mradermacher/PsyMedRP-v1-20B-i1-GGUF",
+    "downloads": 333,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 83821,
+    "id": "McGill-NLP/LLM2Vec-Qwen3-06B-mntp",
+    "downloads": 331,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 84443,
+    "id": "mradermacher/granite-speech-3.3-8b-i1-GGUF",
+    "downloads": 328,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 85964,
+    "id": "tensorblock/mlabonne_NeuralDaredevil-7B-GGUF",
+    "downloads": 320,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 86786,
+    "id": "mradermacher/Melinoe-Qwen-30B-A3B-Afterthought-GGUF",
+    "downloads": 316,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 87779,
+    "id": "mradermacher/SOLAR-10.7B-Instruct-Forest-DPO-v1-i1-GGUF",
+    "downloads": 311,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 87800,
+    "id": "mradermacher/llama-2-7b-platypus-guanaco-25-GGUF",
+    "downloads": 311,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 87829,
+    "id": "zeras141a/b0f2d339",
+    "downloads": 311,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 87845,
+    "id": "mradermacher/Soulblighter-24B-v1-GGUF",
+    "downloads": 311,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 88034,
+    "id": "Mungert/X-Ray_Alpha-GGUF",
+    "downloads": 310,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 89374,
+    "id": "mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF",
+    "downloads": 304,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 89919,
+    "id": "lmstudio-community/c4ai-command-r-plus-08-2024-GGUF",
+    "downloads": 301,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 90264,
+    "id": "mradermacher/Orion-HYMT1.5-7B-SFT-v2601-i1-GGUF",
+    "downloads": 300,
+    "library": "transformers",
+    "pipeline": "translation"
+   },
+   {
+    "rank": 90875,
+    "id": "pocketpose/onnx-models",
+    "downloads": 297,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 90955,
+    "id": "Emperordzd/Nexara-Nano-100M-Chat",
+    "downloads": 297,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 91223,
+    "id": "2264K/ktransfer-27b-kd-lam02-s150",
+    "downloads": 296,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 91445,
+    "id": "RichardErkhov/gradientai_-_Llama-3-8B-Instruct-262k-gguf",
+    "downloads": 294,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 92173,
+    "id": "mradermacher/Mergerix-7b-v0.1-GGUF",
+    "downloads": 291,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 92650,
+    "id": "prithivMLmods/SmolLM2-360M-F32-GGUF",
+    "downloads": 289,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 92886,
+    "id": "mradermacher/qwen-2.5-palm-diagnosis-v2-GGUF",
+    "downloads": 288,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 93489,
+    "id": "facebook/mms-tts-mfe",
+    "downloads": 285,
+    "library": "transformers",
+    "pipeline": "text-to-speech"
+   },
+   {
+    "rank": 93756,
+    "id": "mradermacher/Gemma-2-2b-TitanFusion-i1-GGUF",
+    "downloads": 284,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 93806,
+    "id": "s-sahoo/duo-distilled",
+    "downloads": 284,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 94128,
+    "id": "biohub/ESMFold2-Experimental-Fast-base300M-step250k",
+    "downloads": 283,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 94766,
+    "id": "OpenIXCLab/SeC-4B",
+    "downloads": 280,
+    "library": null,
+    "pipeline": "mask-generation"
+   },
+   {
+    "rank": 94850,
+    "id": "airagrp/Ornith-1.5-35B-A3B-mlx-nvfp4",
+    "downloads": 280,
+    "library": "mlx",
+    "pipeline": "image-text-to-text"
+   },
+   {
+    "rank": 94898,
+    "id": "mradermacher/Qwen3.8-27B-USS-Prism-GGUF",
+    "downloads": 280,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 95153,
+    "id": "DeepPavlov/distilrubert-tiny-cased-conversational-5k",
+    "downloads": 278,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 95181,
+    "id": "mlx-community/whisper-small.en-mlx-q4",
+    "downloads": 278,
+    "library": "mlx",
+    "pipeline": null
+   },
+   {
+    "rank": 95948,
+    "id": "CISCai/Mistral-7B-Instruct-v0.3-SOTA-GGUF",
+    "downloads": 275,
+    "library": null,
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 96659,
+    "id": "qing-yao/ppt-pythia-1b-baseline-seed3408-stage2",
+    "downloads": 273,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 96794,
+    "id": "mradermacher/gideon-v0-GGUF",
+    "downloads": 272,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 96880,
+    "id": "mradermacher/nyaya-3b-v3-GGUF",
+    "downloads": 272,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 97252,
+    "id": "RichardErkhov/aqweteddy_-_mistral_tv-neural-marconroni-gguf",
+    "downloads": 270,
+    "library": null,
+    "pipeline": null
+   },
+   {
+    "rank": 97383,
+    "id": "ServiceNow-AI/SuperApriel-15b-Base",
+    "downloads": 270,
+    "library": "transformers",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 99305,
+    "id": "KETI-NLP/ke-t5-base",
+    "downloads": 262,
+    "library": "transformers",
+    "pipeline": null
+   },
+   {
+    "rank": 99536,
+    "id": "liamwh/Swift-Qwen3.8-27B-W4A16-syv-fast",
+    "downloads": 262,
+    "library": "vllm",
+    "pipeline": "text-generation"
+   },
+   {
+    "rank": 99972,
+    "id": "mradermacher/Falcon3-3B-Instruct-Heretic-GGUF",
+    "downloads": 260,
+    "library": "transformers",
+    "pipeline": null
+   }
+  ]
+ }
+}
