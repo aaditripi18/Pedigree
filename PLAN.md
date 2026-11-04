@@ -225,3 +225,30 @@ on these pairs too, since the earlier checkpoint is the parent.
 
 - **H11** The final model is verified against its own checkpoints from step 10,000 on
   for all five runs, and no checkpoint of another run is verified at any step.
+
+## Amendment 2026-11-05 (2): E3 tests the strongest permutation, before any E3 result
+
+A smoke run (3 training steps, scratchpad only, not a result) showed a structural fact
+that follows from the code alone: permuting only feed-forward hidden units leaves every
+attention tensor untouched, so the plain median falls only part way. A real attacker
+would permute the residual stream as well. E3 therefore has two attacks and two defences:
+
+- **Attack (a), FFN only:** the hidden units of every feed-forward block (as before).
+- **Attack (b), full:** (a) plus one random permutation of the residual stream applied
+  consistently to embeddings, position embeddings, every LayerNorm, the input axis of
+  every layer that reads the stream and the output axis of every layer that writes it
+  (attention head space untouched). LayerNorm is permutation-equivariant, so the model
+  computes the same function; each attacked model is checked by running the real model
+  forward before and after on random inputs (max abs difference reported), and a model
+  that fails the check is reported, never used.
+- **Defence (i), one-sided invariant:** median off-diagonal Gram cosine (as before).
+- **Defence (ii), align then compare:** recover the residual permutation by matching the
+  columns of the embedding (or patch-embedding) matrix to the candidate parent's with the
+  Hungarian algorithm on their correlations (weight matching, as in Git Re-Basin), undo
+  it, then apply (i). Independent models are matched the same way, so whatever matching
+  adds to unrelated pairs is measured on the dev negatives, not assumed away.
+
+H4 is judged on attack (b) with defence (ii); attack (a) and defence (i) are reported
+beside it. Families where attack (b) is implemented: text encoder, text decoder, vision
+transformer (the regular transformer stacks); CNN, speech and diffusion get attack (a)
+and the channel permutation already in `transforms.py`, reported as such.

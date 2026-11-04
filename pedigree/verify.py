@@ -137,3 +137,49 @@ class Local:
         with open(f, "rb") as fh:
             fh.seek(start + b)
             return decode(s["dtype"], fh.read(length))
+
+
+# --- permutation-invariant variant (E3) -----------------------------------------------------
+# A function-preserving permutation reorders one axis of a weight matrix (the rows of a
+# feed-forward up-projection, the columns of its down-projection). Gram matrices over the
+# other axis do not change: (PW)'(PW) = W'W. Their diagonal (squared norms) is large and
+# alike for any two trained models, so only off-diagonal entries are compared. Both axes
+# are tried and the larger cosine kept, since which axis was permuted is unknown.
+
+INVARIANT_TENSORS = 12
+INVARIANT_MAX_SIDE = 4096
+
+
+def full(m, name: str) -> np.ndarray:
+    """Every value of one float tensor, with its shape."""
+    shape = m.float_shapes()[name][1]
+    n = int(np.prod(shape))
+    return m.sample(name, max_bytes=n * 4)[:n].reshape(shape)
+
+
+def _offdiag_gram(w: np.ndarray) -> np.ndarray:
+    g = w.T @ w
+    return g[~np.eye(g.shape[0], dtype=bool)]
+
+
+def gram_cosine(a: np.ndarray, b: np.ndarray) -> float:
+    """Permutation-invariant similarity of two same-shape matrices (see above)."""
+    a, b = a.reshape(a.shape[0], -1), b.reshape(b.shape[0], -1)
+    best = float("nan")
+    for x, y in ((a, b), (a.T, b.T)):
+        if x.shape[1] > INVARIANT_MAX_SIDE:
+            continue
+        c = cosine(_offdiag_gram(x), _offdiag_gram(y))
+        best = c if best != best else max(best, c)
+    return best
+
+
+def compare_invariant(model, other, n_tensors: int = INVARIANT_TENSORS) -> dict:
+    """Median permutation-invariant similarity over spaced matrices both models share."""
+    ms, os_ = model.float_shapes(), other.float_shapes()
+    pairing, _, _ = align(ms, os_)
+    mats = [n for n in sorted(pairing) if len(ms[n][1]) >= 2 and int(np.prod(ms[n][1])) >= MIN_ELEMENTS]
+    names = _spaced(mats, n_tensors)
+    cos = {n: gram_cosine(full(model, n), full(other, pairing[n])) for n in names}
+    vals = [c for c in cos.values() if c == c]
+    return {"compared": len(vals), "cosines": cos, "median_invariant": float(np.median(vals)) if vals else None}

@@ -13,7 +13,7 @@ dependencies = ["numpy>=1.24"]
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "safetensors>=0.4", "torch>=2.2"]
 # E1: building ground-truth derivatives (fine-tune, merge, quantise, prune, distil)
-experiments = ["transformers==4.57.1", "torch>=2.2", "safetensors>=0.4", "peft>=0.13"]
+experiments = ["transformers>=4.57", "diffusers>=0.30", "timm>=1.0", "pandas", "pyarrow", "soundfile", "pillow", "torch>=2.2", "safetensors>=0.4", "peft>=0.13"]
 
 [tool.setuptools.packages.find]
 include = ["pedigree*"]

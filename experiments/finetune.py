@@ -23,6 +23,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import os
 import sys
 import time
 import urllib.request
@@ -32,13 +33,14 @@ import numpy as np
 import torch
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "data" / "derivatives"
-DATA = ROOT / "data" / "tasks"
+OUT = Path(os.environ.get("PEDIGREE_DERIVATIVES", ROOT / "data" / "derivatives"))
+DATA = Path(os.environ.get("PEDIGREE_TASKS", ROOT / "data" / "tasks"))
 STEPS_SHORT = 300
 LONG_FACTOR = 10
 BATCH = 8
 LR = 2e-5
 SEED = 0
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 TASK_DATA = {
     "wikitext2": "https://huggingface.co/datasets/Salesforce/wikitext/resolve/main/wikitext-2-raw-v1/train-00000-of-00001.parquet",
@@ -94,7 +96,7 @@ def text_batches(tok, causal: bool, seed: int):
                      < 0.15) & (enc["attention_mask"] == 1)
                 labels[~m] = -100
                 enc["input_ids"] = enc["input_ids"].masked_fill(m, tok.mask_token_id)
-            yield {**enc, "labels": labels}
+            yield {k: v.to(DEVICE) for k, v in {**enc, "labels": labels}.items()}
     return gen(), {"task": "wikitext2", "sha256": digest}
 
 
@@ -113,7 +115,8 @@ def image_batches(size: int, seed: int, mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5
     def gen():
         while True:
             idx = rng.choice(len(df), BATCH, replace=False)
-            yield torch.stack([load(i) for i in idx]), torch.tensor(df["label"].iloc[idx].to_numpy())
+            yield (torch.stack([load(i) for i in idx]).to(DEVICE),
+                   torch.tensor(df["label"].iloc[idx].to_numpy()).to(DEVICE))
     return gen(), {"task": "cifar10", "sha256": digest}
 
 
@@ -163,6 +166,7 @@ def build(family: str, repo: str, scratch: bool):
             x, _ = next(batches)
             noise = torch.randn(x.shape, generator=g)
             t = torch.randint(0, sched.config.num_train_timesteps, (x.shape[0],), generator=g)
+            noise, t = noise.to(DEVICE), t.to(DEVICE)
             return torch.nn.functional.mse_loss(model(sched.add_noise(x, noise, t), t).sample, noise)
         return model, step, info
     if family == "speech":
@@ -191,11 +195,11 @@ def build_speech(repo: str, scratch: bool):
         if "whisper" in repo:
             feats = proc.feature_extractor([audio[i] for i in idx], sampling_rate=16000, return_tensors="pt")
             labels = proc.tokenizer([text[i] for i in idx], padding=True, return_tensors="pt").input_ids
-            return model(input_features=feats.input_features, labels=labels).loss
+            return model(input_features=feats.input_features.to(DEVICE), labels=labels.to(DEVICE)).loss
         inp = proc([audio[i] for i in idx], sampling_rate=16000, return_tensors="pt", padding=True)
         labels = proc.tokenizer([text[i] for i in idx], padding=True, return_tensors="pt").input_ids
         labels[labels == proc.tokenizer.pad_token_id] = -100
-        return model(input_values=inp.input_values, labels=labels).loss
+        return model(input_values=inp.input_values.to(DEVICE), labels=labels.to(DEVICE)).loss
     return model, step, {"task": "librispeech_dummy", "sha256": digest}
 
 
@@ -212,6 +216,8 @@ def train(model, step, steps: int) -> list[float]:
         opt.zero_grad()
         loss.backward()
         opt.step()
+        if not torch.isfinite(loss):
+            raise FloatingPointError(f"loss is {float(loss)} at step {i}: nothing saved")
         if i % 25 == 0 or i == steps - 1:
             losses.append(round(float(loss), 4))
     return losses
@@ -219,20 +225,31 @@ def train(model, step, steps: int) -> list[float]:
 
 def lora(model, family: str, rank: int):
     from peft import LoraConfig, get_peft_model
-    targets = {"text_encoder": ["query", "value"], "text_decoder": ["c_attn", "query_key_value"],
-               "vision_transformer": ["query", "value"], "speech": ["q_proj", "v_proj"],
+    # attention query/value projections; transformers 5 renamed some (ViT: query -> q_proj)
+    targets = {"text_encoder": ["query", "value", "q_proj", "v_proj"],
+               "text_decoder": ["c_attn", "query_key_value"],
+               "vision_transformer": ["query", "value", "q_proj", "v_proj"], "speech": ["q_proj", "v_proj"],
                "vision_cnn": ["conv2"], "diffusion_unet": ["to_q", "to_v"]}[family]
     names = {n.split(".")[-1] for n, _ in model.named_modules()}
-    cfg = LoraConfig(r=rank, lora_alpha=2 * rank, target_modules=[t for t in targets if t in names])
+    found = [t for t in targets if t in names]
+    if not found:
+        raise ValueError(f"no LoRA target among {targets} in {family}")
+    cfg = LoraConfig(r=rank, lora_alpha=2 * rank, target_modules=found)
     return get_peft_model(model, cfg)
 
 
 def save(model, out: Path, meta: dict) -> None:
     from safetensors.torch import save_file
     out.mkdir(parents=True, exist_ok=True)
-    sd = {k: v.detach().contiguous().clone() for k, v in model.state_dict().items()}
+    sd = {k: v.detach().cpu().contiguous().clone() for k, v in model.state_dict().items()}
     save_file(sd, str(out / "model.safetensors"))
     (out / "meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
+
+
+def _versions() -> dict:
+    import peft
+    import transformers
+    return {"torch": torch.__version__, "transformers": transformers.__version__, "peft": peft.__version__}
 
 
 def main(family: str, split: str, only: list[str] | None = None) -> None:
@@ -251,14 +268,18 @@ def main(family: str, split: str, only: list[str] | None = None) -> None:
             continue
         t0 = time.time()
         model, step, info = build(family, repo, scratch)
+        # transformers 5 loads a checkpoint in its stored precision (Pythia is float16);
+        # every derivative is trained in float32 so the optimiser is well defined
+        model = model.float()
         if rank:
             model = lora(model, family, rank)
+        model.to(DEVICE)
         losses = train(model, step, steps)
         if rank:
             model = model.merge_and_unload()
         save(model, out, {"family": family, "split": split, "kind": kind, "base": repo, "base_commit": commit,
                           "steps": steps, "batch": BATCH, "lr": LR, "seed": SEED, "lora_rank": rank,
-                          "scratch": scratch, "data": info, "losses": losses, "seconds": round(time.time() - t0)})
+                          "scratch": scratch, "device": str(DEVICE), "versions": _versions(), "data": info, "losses": losses, "seconds": round(time.time() - t0)})
         print(f"{family}/{split}/{kind}: {steps} steps, loss {losses[0]} -> {losses[-1]}, "
               f"{time.time() - t0:.0f} s", flush=True)
 

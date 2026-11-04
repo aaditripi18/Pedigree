@@ -1,0 +1,175 @@
+"""Run Pedigree's heavy experiments on Kaggle (the author's own account only).
+
+  python scripts/kaggle_run.py push                 # upload the committed code (git archive + COMMIT stamp)
+  python scripts/kaggle_run.py run JOB              # push, then start JOB's notebook
+  python scripts/kaggle_run.py status JOB
+  python scripts/kaggle_run.py pull JOB             # new ledger lines -> results/ledger.jsonl; small files -> results/kaggle/JOB/
+
+Jobs:
+  ft-<family>   GPU: build E1's ground-truth derivatives of the family's dev and fresh
+                bases (experiments/finetune.py). The safetensors stay in the notebook's
+                output (they are tens of GB); later jobs mount that output.
+
+Only committed code runs: the upload is `git archive HEAD`, stamped with the commit,
+so every result names the exact code. The Kaggle API key stays in ~/.kaggle/kaggle.json
+and is read only by the Kaggle CLI.
+"""
+from __future__ import annotations
+
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+import zipfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+USER = os.environ.get("PEDIGREE_KAGGLE_USER", "aadityae5545454")
+DATASET = "pedigree-code"
+LEDGER = ROOT / "results" / "ledger.jsonl"
+FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn", "speech", "diffusion_unet"]
+
+
+def _job(kernel: str, commands: list[list[str]], gpu: bool, sources: list[str] | None = None) -> dict:
+    return {"kernel": kernel, "commands": commands, "gpu": gpu, "sources": sources or []}
+
+
+JOBS = {f"ft-{f}": _job(f"pedigree-ft-{f.replace('_', '-')}",
+                        [["-m", "experiments.finetune", f, "dev"], ["-m", "experiments.finetune", f, "fresh"]],
+                        gpu=True)
+        for f in FAMILIES}
+
+NOTEBOOK = r'''
+import os, pathlib, shutil, subprocess, sys
+src = next(pathlib.Path("/kaggle/input").rglob("Pedigree/COMMIT")).parent
+work = pathlib.Path("/kaggle/working/Pedigree")
+shutil.copytree(src, work)
+print("code", (work / "COMMIT").read_text().strip(), flush=True)
+subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--no-deps", "-e", str(work)], check=True)
+subprocess.run([sys.executable, "-m", "pip", "install", "-q", "peft", "timm", "diffusers", "soundfile"], check=True)
+os.environ["PEDIGREE_CACHE"] = "/tmp/pedigree-hub"
+os.environ["PEDIGREE_DERIVATIVES"] = "/kaggle/working/derivatives"
+os.environ["PEDIGREE_TASKS"] = "/tmp/pedigree-tasks"
+os.environ["PYTHONUNBUFFERED"] = "1"
+ledger = work / "results" / "ledger.jsonl"
+n0 = len(ledger.read_text(encoding="utf-8").splitlines()) if ledger.exists() else 0
+failed = []
+for cmd in COMMANDS:
+    r = subprocess.run([sys.executable, *cmd], cwd=work)
+    print("exit", r.returncode, *cmd, flush=True)
+    if r.returncode != 0:
+        failed.append(" ".join(cmd))
+new = ledger.read_text(encoding="utf-8").splitlines()[n0:] if ledger.exists() else []
+pathlib.Path("/kaggle/working/new_ledger_lines.jsonl").write_text("\n".join(new) + "\n", encoding="utf-8")
+pathlib.Path("/kaggle/working/failed.txt").write_text("\n".join(failed) + "\n", encoding="utf-8")
+print(len(new), "new ledger lines;", len(failed), "failed commands", flush=True)
+shutil.rmtree(work)
+if failed:
+    raise SystemExit("failed: " + "; ".join(failed))
+'''
+
+
+def kaggle(*args: str, check: bool = True) -> subprocess.CompletedProcess:
+    exe = shutil.which("kaggle") or str(Path(sys.executable).parent / ("kaggle.exe" if os.name == "nt" else "kaggle"))
+    env = {**os.environ, "PYTHONUTF8": "1"}
+    r = subprocess.run([exe, *args], capture_output=True, text=True, encoding="utf-8", errors="replace", env=env)
+    if check and r.returncode != 0:
+        sys.exit(f"kaggle {' '.join(args[:2])} failed:\n{r.stdout}{r.stderr}")
+    return r
+
+
+def git(*args: str) -> str:
+    return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+
+
+def push() -> str:
+    if git("status", "--porcelain", "--untracked-files=no", "--", ".", ":(exclude)results"):
+        sys.exit("commit your changes first: Kaggle runs only committed code")
+    sha = git("rev-parse", "--short", "HEAD")
+    ds = f"{USER}/{DATASET}"
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        archive = d / f"pedigree-{sha}.zip"
+        subprocess.run(["git", "archive", "--format=zip", "--prefix=Pedigree/", "-o", str(archive), "HEAD"],
+                       cwd=ROOT, check=True)
+        with zipfile.ZipFile(archive, "a") as z:
+            z.writestr("Pedigree/COMMIT", sha + "\n")
+        (d / "dataset-metadata.json").write_text(json.dumps(
+            {"title": DATASET, "id": ds, "licenses": [{"name": "other"}]}), encoding="utf-8")
+        if kaggle("datasets", "status", ds, check=False).returncode == 0:
+            kaggle("datasets", "version", "-p", str(d), "-m", f"code {sha}")
+        else:
+            kaggle("datasets", "create", "-p", str(d))  # private unless --public
+    for _ in range(90):  # Kaggle can report "ready" before it serves the new version
+        with tempfile.TemporaryDirectory() as d:
+            r = kaggle("datasets", "download", ds, "-f", "Pedigree/COMMIT", "-p", d, check=False)
+            got = [p for p in Path(d).rglob("*") if p.is_file()]
+            if r.returncode == 0 and got:
+                data = got[0].read_bytes()
+                if data[:2] == b"PK":
+                    with zipfile.ZipFile(got[0]) as z:
+                        data = z.read(z.namelist()[0])
+                if data.decode().strip() == sha:
+                    print(f"Kaggle serves code {sha}")
+                    return sha
+        time.sleep(10)
+    sys.exit("Kaggle did not serve the new code within 15 minutes")
+
+
+def notebook_source(job: str, sha: str) -> str:
+    """The script Kaggle runs for one job (tests/test_kaggle_run.py checks it)."""
+    return f"# Pedigree {job}, code {sha}\nCOMMANDS = {JOBS[job]['commands']!r}\n" + NOTEBOOK
+
+
+def run(job: str, sha: str | None = None) -> None:
+    spec = JOBS[job]
+    sha = sha or push()
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        (d / "run.py").write_text(notebook_source(job, sha), encoding="utf-8")
+        (d / "kernel-metadata.json").write_text(json.dumps({
+            "id": f"{USER}/{spec['kernel']}", "title": spec["kernel"], "code_file": "run.py",
+            "language": "python", "kernel_type": "script", "is_private": True,
+            "enable_gpu": spec["gpu"], "enable_tpu": False, "enable_internet": True,
+            "dataset_sources": [f"{USER}/{DATASET}"], "competition_sources": [],
+            "kernel_sources": [f"{USER}/{JOBS[s]['kernel']}" for s in spec["sources"]]}), encoding="utf-8")
+        print(kaggle("kernels", "push", "-p", str(d)).stdout.strip())
+
+
+def status(job: str) -> str:
+    out = kaggle("kernels", "status", f"{USER}/{JOBS[job]['kernel']}").stdout.strip()
+    print(out)
+    return out
+
+
+def pull(job: str) -> None:
+    """Ledger lines, failure list and every derivative's meta.json (not the weights)."""
+    dest = ROOT / "results" / "kaggle" / job
+    with tempfile.TemporaryDirectory() as d:
+        kaggle("kernels", "output", f"{USER}/{JOBS[job]['kernel']}", "-p", d, "--file-pattern",
+               r".*(\.jsonl|\.txt|meta\.json|\.log)$", check=False)
+        for f in Path(d).rglob("*"):
+            if f.is_file() and f.suffix in (".json", ".jsonl", ".txt", ".log"):
+                rel = f.relative_to(d)
+                (dest / rel).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(f, dest / rel)
+    f = dest / "new_ledger_lines.jsonl"
+    new = [ln for ln in f.read_text(encoding="utf-8").splitlines() if ln.strip()] if f.exists() else []
+    have = set(LEDGER.read_text(encoding="utf-8").splitlines()) if LEDGER.exists() else set()
+    add = [ln for ln in new if ln not in have]
+    LEDGER.parent.mkdir(parents=True, exist_ok=True)
+    with open(LEDGER, "a", encoding="utf-8") as out:
+        out.writelines(ln + "\n" for ln in add)
+    print(f"{job}: appended {len(add)} ledger lines; files in {dest}")
+
+
+if __name__ == "__main__":
+    cmd = sys.argv[1]
+    if cmd == "push":
+        push()
+    else:
+        for j in sys.argv[2:]:
+            {"run": run, "status": status, "pull": pull}[cmd](j)
