@@ -144,3 +144,32 @@ Added hypotheses (same rules as H1-H5):
 - **H8** Direction (which of two related models is the parent) is decided
   correctly for >= 90% of ground-truth pairs where it is decided at all, and the
   share left undecided is reported.
+
+## Second instrument: behaviour, where weights cannot be compared (2026-11-04, before any run)
+
+A weight comparison needs shared tensors. A distilled student, a resized model or a
+different architecture shares none with its source, so a weight-only verifier can
+only answer "unverifiable" there; left alone that would become a limitation. Pedigree
+therefore has a second, independent instrument for exactly those cases:
+
+**Behavioural similarity.** Both models run on a fixed probe set (texts for text
+models, images for vision models, audio for speech; frozen and committed, never
+used for training any derivative), and their output distributions are compared
+(mean Jensen-Shannon divergence of next-token / class / token distributions over a
+shared output space, and agreement of top-1 predictions). A distilled student
+imitates its teacher's outputs, so behaviour can show lineage where weights cannot.
+Behaviour is weaker evidence than weights (two models trained on the same task can
+agree for honest reasons), so it is calibrated against same-task independent models,
+not just random ones, and reported as a separate verdict.
+
+- **E5. Behavioural lineage.** Positives: students distilled from each E1 base (and
+  public distilled models whose teacher is documented, such as DistilBERT from
+  BERT-base and DistilGPT-2 from GPT-2). Negatives: independently trained models of
+  the same size and task. Dev/fresh split as in E1.
+- **H9** Where weights cannot be compared, behavioural similarity separates distilled
+  students from independently trained models of the same task with TPR >= 90% at
+  FPR <= 5% on the fresh set.
+
+The audit's verdicts become: verified by weights; verified by behaviour only;
+contradicted; unverifiable (neither instrument applies). The last is reported with
+its share, so no model silently drops out.
