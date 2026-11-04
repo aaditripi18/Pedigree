@@ -51,10 +51,20 @@ def task_file(name: str) -> tuple[Path, str]:
     """Download once; return (path, sha256)."""
     DATA.mkdir(parents=True, exist_ok=True)
     p = DATA / f"{name}.parquet"
-    if not p.exists():
-        with urllib.request.urlopen(urllib.request.Request(TASK_DATA[name], headers={"User-Agent": "pedigree"}),
-                                    timeout=600) as r:
-            p.write_bytes(r.read())
+    for attempt in range(8):  # a lost connection retries; the file is written only when complete
+        if p.exists():
+            break
+        try:
+            with urllib.request.urlopen(urllib.request.Request(TASK_DATA[name], headers={"User-Agent": "pedigree"}),
+                                        timeout=600) as r:
+                body = r.read()
+            tmp = p.with_suffix(".part")
+            tmp.write_bytes(body)
+            tmp.replace(p)
+        except OSError:
+            if attempt == 7:
+                raise
+            time.sleep(min(300, 15 * 2 ** attempt))
     return p, hashlib.sha256(p.read_bytes()).hexdigest()
 
 

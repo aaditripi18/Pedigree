@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from . import hub
+from . import hub, torchzip
 from .align import align
 from .remote import ITEMSIZE, read_header, resolve_url, tensor_bytes
 
@@ -40,15 +40,19 @@ class Remote:
 
     @classmethod
     def open(cls, spec: str) -> "Remote":
-        """spec: hf:org/name[@revision]. Only safetensors weights are read."""
+        """spec: hf:org/name[@revision]. Safetensors weights, or PyTorch zip checkpoints
+        (read without unpickling code, see torchzip) where a model has no safetensors."""
         res = hub.resolve(spec if spec.startswith("hf:") else "hf:" + spec)
-        files = [f for f in res.files if f.endswith(".safetensors")]
+        files = [f for f in res.files if f.endswith((".safetensors", ".bin"))]
         if not files:
-            raise hub.HubError(f"{res.repo}: no safetensors weights")
+            raise hub.HubError(f"{res.repo}: no safetensors or PyTorch weights")
         r = cls(res.repo, res.commit)
         for f in files:
             url = resolve_url(res.repo, f, res.commit)
-            start, header = read_header(url)
+            if f.endswith(".bin"):
+                start, header = torchzip.read_header(url, res.sizes[f])
+            else:
+                start, header = read_header(url)
             for name, s in header.items():
                 if name != "__metadata__" and isinstance(s, dict):
                     r.tensors[name] = (url, start, s)

@@ -173,3 +173,55 @@ not just random ones, and reported as a separate verdict.
 The audit's verdicts become: verified by weights; verified by behaviour only;
 contradicted; unverifiable (neither instrument applies). The last is reported with
 its share, so no model silently drops out.
+
+## Amendment 2026-11-05: ground truth corrected before any comparison
+
+Made after the smoke test of the fine-tuning script and before any pair of trained
+weights was compared (no similarity has been computed on any E1 pair).
+
+**Two "independent" negatives were not independent.** In the frozen list of 2026-11-04:
+
+- `distilgpt2` was listed as independent of `gpt2`. DistilGPT-2's student was
+  initialised from GPT-2's own layers (the transformers distillation recipe that
+  produced it copies every other teacher layer), so it is a *derivative*. It moves to
+  the public distillation positives (E4/E5, partial shapes).
+- `pythia-160m-deduped` was listed as independent of `pythia-160m`. Pythia runs share
+  their initialisation seed, so the two start from the same weights and differ only in
+  training data. It moves to the shared-origin study below.
+
+**Replacement negatives (same architecture, trained from scratch, different seed).**
+
+- gpt2 (dev): Stanford CRFM's Mistral GPT-2 small runs `alias-x21`, `battlestar-x49`,
+  `caprica-x81`, `darkmatter-x343`, `expanse-x777`: five independent from-scratch
+  trainings of the GPT-2 small architecture.
+- pythia-160m (fresh): PolyPythias `pythia-160m-seed1` ... `seed9` (arXiv 2503.09543),
+  nine trainings with different seeds.
+
+**PyTorch checkpoints are read, not only safetensors.** These models (and many Hub
+models) exist only as `pytorch_model.bin`. `pedigree/torchzip.py` reads a PyTorch zip
+checkpoint with range requests through a restricted unpickler that executes nothing
+(tested against a malicious pickle). Without it the Hub audit would silently skip every
+pickle-only model.
+
+**E6 (new). What does weight similarity detect: shared initialisation or shared training?**
+PolyPythias also publishes runs that vary one factor: `data-seed1..3` (data order
+varied, initialisation fixed) and `weight-seed1..3-corrected` (initialisation varied,
+data order fixed; the uncorrected weight-seed models had a training error and are not
+used). Which runs share `pythia-160m`'s initialisation is decided by byte equality of the
+published `step0` weights (`experiments/init_identity.py`, `results/e1_init_identity.json`),
+never by the trained weights. These pairs are neither positives nor negatives for H1;
+they are reported separately.
+
+- **H10** Weight similarity tracks shared initialisation, not shared data: runs that share
+  `pythia-160m`'s step0 weights score above E1's threshold against it on >= 2/3 of pairs,
+  and runs with a different initialisation but the same data order on <= 1/3.
+
+**E7 (new). How far back along a training run is lineage visible?** Each Mistral run
+publishes about 600 checkpoints from step 0 to 400,000. Positives: a run's final weights
+against its own earlier checkpoints (steps 0, 1k, 10k, 50k, 100k, 200k, 300k), exact
+ancestors by construction. Matched negatives: the same steps of the other four runs. The
+result is a curve of similarity against training distance, and direction (H8) is judged
+on these pairs too, since the earlier checkpoint is the parent.
+
+- **H11** The final model is verified against its own checkpoints from step 10,000 on
+  for all five runs, and no checkpoint of another run is verified at any step.
