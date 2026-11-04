@@ -67,7 +67,19 @@ work = pathlib.Path("/kaggle/working/Pedigree")
 shutil.copytree(src, work)
 print("code", (work / "COMMIT").read_text().strip(), flush=True)
 subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--no-deps", "-e", str(work)], check=True)
-subprocess.run([sys.executable, "-m", "pip", "install", "-q", "peft", "timm", "diffusers", "soundfile"], check=True)
+subprocess.run([sys.executable, "-m", "pip", "install", "-q", "peft", "timm", "diffusers", "soundfile", "gguf",
+                "scipy"], check=True)
+# Kaggle's image ships torchao 0.10, which current peft refuses to run LoRA beside; LoRA does not need it
+subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", "-q", "torchao"], check=False)
+# preflight: every library a job uses, on a toy model, before any long run
+PREFLIGHT = (
+    "import torch, peft, transformers, timm, diffusers, safetensors\n"
+    "m = torch.nn.Sequential(torch.nn.Linear(4, 4))\n"
+    "p = peft.get_peft_model(m, peft.LoraConfig(r=2, target_modules=['0']))\n"
+    "p(torch.randn(2, 4)).sum().backward(); p.merge_and_unload()\n"
+    "print('preflight ok: torch', torch.__version__, 'cuda', torch.cuda.is_available(),\n"
+    "      'transformers', transformers.__version__, 'peft', peft.__version__)\n")
+subprocess.run([sys.executable, "-c", PREFLIGHT], check=True)
 os.environ["PEDIGREE_CACHE"] = "/tmp/pedigree-hub"
 os.environ["PEDIGREE_DERIVATIVES"] = "/kaggle/working/derivatives"
 os.environ["PEDIGREE_TASKS"] = "/tmp/pedigree-tasks"

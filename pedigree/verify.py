@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from . import hub, torchzip
+from . import ggufremote, hub, torchzip
 from .align import align
 from .remote import ITEMSIZE, read_header, resolve_url, tensor_bytes
 
@@ -37,6 +37,8 @@ class Remote:
     repo: str
     commit: str
     tensors: dict = field(default_factory=dict)   # name -> (url, data_start, spec)
+    files: list = field(default_factory=list)
+    gguf_meta: dict | None = None
 
     @classmethod
     def open(cls, spec: str) -> "Remote":
@@ -44,11 +46,20 @@ class Remote:
         (read without unpickling code, see torchzip) where a model has no safetensors."""
         res = hub.resolve(spec if spec.startswith("hf:") else "hf:" + spec)
         files = [f for f in res.files if f.endswith((".safetensors", ".bin"))]
-        if not files:
-            raise hub.HubError(f"{res.repo}: no safetensors or PyTorch weights")
+        gguf = [] if files else ggufremote.choose_variant(res.files)
+        if not files and not gguf:
+            raise hub.HubError(f"{res.repo}: no safetensors, PyTorch or GGUF weights")
         r = cls(res.repo, res.commit)
+        for f in gguf:
+            url = resolve_url(res.repo, f, res.commit)
+            meta, header = ggufremote.read_header(url, res.sizes[f])
+            r.gguf_meta = meta
+            r.files.append(f)
+            for name, s in header.items():
+                r.tensors[name] = (url, 0, s)
         for f in files:
             url = resolve_url(res.repo, f, res.commit)
+            r.files.append(f)
             if f.endswith(".bin"):
                 start, header = torchzip.read_header(url, res.sizes[f])
             else:
@@ -59,10 +70,13 @@ class Remote:
         return r
 
     def float_shapes(self) -> dict[str, tuple]:
-        return {n: ("float", tuple(s["shape"])) for n, (_, _, s) in self.tensors.items() if s["dtype"] in FLOATS}
+        return {n: ("float", tuple(s["shape"])) for n, (_, _, s) in self.tensors.items()
+                if s["dtype"] in FLOATS or s["dtype"] == "GGUF"}
 
     def sample(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
         url, start, s = self.tensors[name]
+        if s["dtype"] == "GGUF":
+            return ggufremote.sample(url, s, max_bytes // 4)
         # read the same number of *elements* whatever the stored width, so two
         # models stored in different float types are compared element for element
         elements = max_bytes // 4
@@ -85,8 +99,37 @@ def cosine(a: np.ndarray, b: np.ndarray) -> float:
     return float(a @ b / d) if d > 0 else float("nan")
 
 
+class Renamed:
+    """A model seen under other tensor names (a GGUF file under Hugging Face names)."""
+
+    def __init__(self, model, mapping: dict[str, str]):
+        self.model, self.repo, self.commit = model, model.repo, model.commit
+        self.to_old = {new: old for old, new in mapping.items()}
+
+    def float_shapes(self):
+        fs = self.model.float_shapes()
+        return {new: fs[old] for new, old in self.to_old.items() if old in fs}
+
+    def sample(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
+        return self.model.sample(self.to_old[name], max_bytes)
+
+
+def harmonise(model, other):
+    """Give a GGUF model the tensor names of the other (non-GGUF) model."""
+    def g(m):
+        return getattr(m, "gguf_meta", None)
+    if g(model) and not g(other):
+        names = list(other.float_shapes())
+        model = Renamed(model, ggufremote.hf_names(model.gguf_meta, list(model.float_shapes()), names))
+    elif g(other) and not g(model):
+        names = list(model.float_shapes())
+        other = Renamed(other, ggufremote.hf_names(other.gguf_meta, list(other.float_shapes()), names))
+    return model, other
+
+
 def compare(model: Remote, other: Remote, n_tensors: int = N_TENSORS) -> dict:
     """Name/shape alignment and sampled weight similarity of two models."""
+    model, other = harmonise(model, other)
     ms, os_ = model.float_shapes(), other.float_shapes()
     pairing, dm, do = align(ms, os_)
     match = len(pairing) / max(len(ms), 1)
@@ -176,6 +219,7 @@ def gram_cosine(a: np.ndarray, b: np.ndarray) -> float:
 
 def compare_invariant(model, other, n_tensors: int = INVARIANT_TENSORS) -> dict:
     """Median permutation-invariant similarity over spaced matrices both models share."""
+    model, other = harmonise(model, other)
     ms, os_ = model.float_shapes(), other.float_shapes()
     pairing, _, _ = align(ms, os_)
     mats = [n for n in sorted(pairing) if len(ms[n][1]) >= 2 and int(np.prod(ms[n][1])) >= MIN_ELEMENTS]
