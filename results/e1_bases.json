@@ -1,0 +1,53 @@
+{
+ "frozen": "2026-11-04",
+ "rule": [
+  "Ground truth for E1 (PLAN.md). Small public base models, two per family (dev, fresh),",
+  "chosen from Hub metadata only (safetensors present, size) before any weight is read.",
+  "Positives: (base, a derivative made from it in this repository); lineage exact by",
+  "construction. Negatives: (base, an independently trained public model with the same",
+  "architecture, tensor names and shapes), and (base, the same architecture trained here",
+  "from a fresh random initialisation). Dev chooses rules and thresholds; fresh is judged",
+  "once. Pairs of uncertain relation were left out (ConvNeXt V2 variants share an FCMAE",
+  "pretraining; the Qwen2/Qwen2.5 relation is undocumented)."
+ ],
+ "families": {
+  "text_encoder": {
+   "dev": {"base": "google-bert/bert-base-uncased", "independent": ["google-bert/bert-base-cased"]},
+   "fresh": {"base": "FacebookAI/roberta-base", "independent": ["FacebookAI/xlm-roberta-base"]}
+  },
+  "text_decoder": {
+   "dev": {"base": "openai-community/gpt2", "independent": ["distilbert/distilgpt2"]},
+   "fresh": {"base": "EleutherAI/pythia-160m", "independent": ["EleutherAI/pythia-160m-deduped"]}
+  },
+  "vision_transformer": {
+   "dev": {"base": "google/vit-base-patch16-224-in21k", "independent": ["facebook/vit-mae-base"]},
+   "fresh": {"base": "WinKawaks/vit-small-patch16-224", "independent": ["facebook/dinov2-small"]}
+  },
+  "vision_cnn": {
+   "dev": {"base": "timm/resnet50.a1_in1k", "independent": ["timm/resnet50.tv_in1k", "timm/resnet50.fb_ssl_yfcc100m_ft_in1k"]},
+   "fresh": {"base": "timm/resnet18.a1_in1k", "independent": ["timm/resnet18.tv_in1k"]}
+  },
+  "speech": {
+   "dev": {"base": "openai/whisper-tiny", "independent": ["openai/whisper-tiny.en"]},
+   "fresh": {"base": "facebook/wav2vec2-base-960h", "independent": []}
+  },
+  "diffusion_unet": {
+   "dev": {"base": "google/ddpm-cifar10-32", "independent": []},
+   "fresh": {"base": "google/ddpm-cat-256", "independent": []}
+  }
+ },
+ "notes": {
+  "independent": "public models trained separately; where none with identical shapes exists, the fresh-initialisation negative made here stands in",
+  "partial_shapes": "bert-base-cased, xlm-roberta-base and whisper-tiny.en differ from their base only in vocabulary size; distilgpt2 has half of gpt2's layers. Alignment compares the tensors that match and reports the rest"
+ },
+ "derivatives": [
+  "full fine-tune, short (a few hundred steps on a public task dataset)",
+  "full fine-tune, long (ten times as many steps)",
+  "LoRA adapter merged into the weights (rank 8 and 64)",
+  "8-bit and 4-bit round trip (absmax per block of 32, as GGUF Q8_0 / Q4_0) then dequantised",
+  "magnitude pruning, 50% and 90% of each weight matrix",
+  "knowledge distillation into a smaller student of the same family (different shapes)",
+  "function-preserving neuron permutation of every hidden layer (E3)",
+  "the same architecture trained from a fresh random initialisation (negative)"
+ ]
+}
