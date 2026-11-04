@@ -76,8 +76,9 @@ work = pathlib.Path("/kaggle/working/Pedigree")
 shutil.copytree(src, work)
 print("code", (work / "COMMIT").read_text().strip(), flush=True)
 subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--no-deps", "-e", str(work)], check=True)
-subprocess.run([sys.executable, "-m", "pip", "install", "-q", "peft", "timm", "diffusers", "soundfile", "gguf",
-                "scipy"], check=True)
+# the transformers version every smoke test ran on (Kaggle's 5.20.2 gave wav2vec2 a NaN loss at step 0)
+subprocess.run([sys.executable, "-m", "pip", "install", "-q", "transformers==5.22.1", "peft", "timm", "diffusers",
+                "soundfile", "gguf", "scipy"], check=True)
 # Kaggle's image ships torchao 0.10, which current peft refuses to run LoRA beside; LoRA does not need it
 subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", "-q", "torchao"], check=False)
 # preflight: every library a job uses, on a toy model, before any long run
