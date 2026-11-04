@@ -36,6 +36,12 @@ class RangeFile(io.RawIOBase):
 
     def __init__(self, url: str, size: int):
         self.url, self.size, self.pos = url, size, 0
+        self._block: tuple[int, bytes] | None = None   # the last block read, kept in memory
+
+    def _get(self, b0: int) -> bytes:
+        if self._block is None or self._block[0] != b0:
+            self._block = (b0, fetch_range(self.url, b0, min(b0 + BLOCK, self.size) - 1))
+        return self._block[1]
 
     def readable(self):
         return True
@@ -57,7 +63,7 @@ class RangeFile(io.RawIOBase):
         out = bytearray()
         while len(out) < n:
             b0 = (self.pos // BLOCK) * BLOCK
-            block = fetch_range(self.url, b0, min(b0 + BLOCK, self.size) - 1)
+            block = self._get(b0)
             take = block[self.pos - b0: self.pos - b0 + n - len(out)]
             out += take
             self.pos += len(take)
