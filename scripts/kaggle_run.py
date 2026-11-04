@@ -33,14 +33,20 @@ LEDGER = ROOT / "results" / "ledger.jsonl"
 FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn", "speech", "diffusion_unet"]
 
 
-def _job(kernel: str, commands: list[list[str]], gpu: bool, sources: list[str] | None = None) -> dict:
-    return {"kernel": kernel, "commands": commands, "gpu": gpu, "sources": sources or []}
+def _job(kernel: str, commands: list[list[str]], gpu: bool, sources: list[str] | None = None,
+         env: dict | None = None) -> dict:
+    return {"kernel": kernel, "commands": commands, "gpu": gpu, "sources": sources or [], "env": env or {}}
 
 
 JOBS = {f"ft-{f}": _job(f"pedigree-ft-{f.replace('_', '-')}",
                         [["-m", "experiments.finetune", f, "dev"], ["-m", "experiments.finetune", f, "fresh"]],
                         gpu=True)
         for f in FAMILIES}
+# E1 comparisons: CPU, reading the derivatives from the matching ft- job's output
+JOBS.update({f"e1-{f}": _job(f"pedigree-e1-{f.replace('_', '-')}", [["-m", "experiments.e1_verify", f]], gpu=False,
+                             sources=[f"ft-{f}"], env={"PEDIGREE_DERIVATIVES": "find:derivatives"})
+             for f in FAMILIES})
+JOBS["e6e7"] = _job("pedigree-e6-e7", [["-m", "experiments.e6_e7"]], gpu=False)
 
 NOTEBOOK = r'''
 import os, pathlib, shutil, subprocess, sys
@@ -54,6 +60,11 @@ os.environ["PEDIGREE_CACHE"] = "/tmp/pedigree-hub"
 os.environ["PEDIGREE_DERIVATIVES"] = "/kaggle/working/derivatives"
 os.environ["PEDIGREE_TASKS"] = "/tmp/pedigree-tasks"
 os.environ["PYTHONUNBUFFERED"] = "1"
+for key, value in ENV.items():
+    if value.startswith("find:"):
+        value = str(next(p for p in pathlib.Path("/kaggle/input").rglob(value[5:]) if p.is_dir()))
+    os.environ[key] = value
+    print(key, "=", value, flush=True)
 ledger = work / "results" / "ledger.jsonl"
 n0 = len(ledger.read_text(encoding="utf-8").splitlines()) if ledger.exists() else 0
 failed = []
@@ -121,7 +132,8 @@ def push() -> str:
 
 def notebook_source(job: str, sha: str) -> str:
     """The script Kaggle runs for one job (tests/test_kaggle_run.py checks it)."""
-    return f"# Pedigree {job}, code {sha}\nCOMMANDS = {JOBS[job]['commands']!r}\n" + NOTEBOOK
+    return (f"# Pedigree {job}, code {sha}\nCOMMANDS = {JOBS[job]['commands']!r}\n"
+            f"ENV = {JOBS[job]['env']!r}\n" + NOTEBOOK)
 
 
 def run(job: str, sha: str | None = None) -> None:

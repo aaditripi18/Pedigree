@@ -246,6 +246,11 @@ def save(model, out: Path, meta: dict) -> None:
     (out / "meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
 
 
+def _code() -> dict:
+    from experiments.ledger import git_state
+    return git_state()
+
+
 def _versions() -> dict:
     import peft
     import transformers
@@ -279,7 +284,7 @@ def main(family: str, split: str, only: list[str] | None = None) -> None:
             model = model.merge_and_unload()
         save(model, out, {"family": family, "split": split, "kind": kind, "base": repo, "base_commit": commit,
                           "steps": steps, "batch": BATCH, "lr": LR, "seed": SEED, "lora_rank": rank,
-                          "scratch": scratch, "device": str(DEVICE), "versions": _versions(), "data": info, "losses": losses, "seconds": round(time.time() - t0)})
+                          "scratch": scratch, "device": str(DEVICE), "versions": _versions(), "code": _code(), "data": info, "losses": losses, "seconds": round(time.time() - t0)})
         print(f"{family}/{split}/{kind}: {steps} steps, loss {losses[0]} -> {losses[-1]}, "
               f"{time.time() - t0:.0f} s", flush=True)
 

@@ -16,6 +16,8 @@ def test_every_notebook_defines_what_it_uses():
         bound |= {t.id for n in ast.walk(tree) if isinstance(n, (ast.Assign, ast.For))
                   for t in ast.walk(n.targets[0] if isinstance(n, ast.Assign) else n.target)
                   if isinstance(t, ast.Name)}
+        bound |= {t.id for n in ast.walk(tree) if isinstance(n, ast.comprehension)
+                  for t in ast.walk(n.target) if isinstance(t, ast.Name)}
         used = {n.id for n in ast.walk(tree) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)}
         assert used <= bound | set(dir(builtins)), (job, used - bound)
 
