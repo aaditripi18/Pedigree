@@ -12,28 +12,95 @@
  ],
  "families": {
   "text_encoder": {
-   "dev": {"base": "google-bert/bert-base-uncased", "independent": ["google-bert/bert-base-cased"]},
-   "fresh": {"base": "FacebookAI/roberta-base", "independent": ["FacebookAI/xlm-roberta-base"]}
+   "dev": {
+    "base": "google-bert/bert-base-uncased",
+    "independent": [
+     "google-bert/bert-base-cased"
+    ]
+   },
+   "fresh": {
+    "base": "FacebookAI/roberta-base",
+    "independent": [
+     "FacebookAI/xlm-roberta-base"
+    ]
+   }
   },
   "text_decoder": {
-   "dev": {"base": "openai-community/gpt2", "independent": ["distilbert/distilgpt2"]},
-   "fresh": {"base": "EleutherAI/pythia-160m", "independent": ["EleutherAI/pythia-160m-deduped"]}
+   "dev": {
+    "base": "openai-community/gpt2",
+    "independent": [
+     "stanford-crfm/alias-gpt2-small-x21",
+     "stanford-crfm/battlestar-gpt2-small-x49",
+     "stanford-crfm/caprica-gpt2-small-x81",
+     "stanford-crfm/darkmatter-gpt2-small-x343",
+     "stanford-crfm/expanse-gpt2-small-x777"
+    ]
+   },
+   "fresh": {
+    "base": "EleutherAI/pythia-160m",
+    "independent": [
+     "EleutherAI/pythia-160m-seed1",
+     "EleutherAI/pythia-160m-seed2",
+     "EleutherAI/pythia-160m-seed3",
+     "EleutherAI/pythia-160m-seed4",
+     "EleutherAI/pythia-160m-seed5",
+     "EleutherAI/pythia-160m-seed6",
+     "EleutherAI/pythia-160m-seed7",
+     "EleutherAI/pythia-160m-seed8",
+     "EleutherAI/pythia-160m-seed9"
+    ]
+   }
   },
   "vision_transformer": {
-   "dev": {"base": "google/vit-base-patch16-224-in21k", "independent": ["facebook/vit-mae-base"]},
-   "fresh": {"base": "WinKawaks/vit-small-patch16-224", "independent": ["facebook/dinov2-small"]}
+   "dev": {
+    "base": "google/vit-base-patch16-224-in21k",
+    "independent": [
+     "facebook/vit-mae-base"
+    ]
+   },
+   "fresh": {
+    "base": "WinKawaks/vit-small-patch16-224",
+    "independent": [
+     "facebook/dinov2-small"
+    ]
+   }
   },
   "vision_cnn": {
-   "dev": {"base": "timm/resnet50.a1_in1k", "independent": ["timm/resnet50.tv_in1k", "timm/resnet50.fb_ssl_yfcc100m_ft_in1k"]},
-   "fresh": {"base": "timm/resnet18.a1_in1k", "independent": ["timm/resnet18.tv_in1k"]}
+   "dev": {
+    "base": "timm/resnet50.a1_in1k",
+    "independent": [
+     "timm/resnet50.tv_in1k",
+     "timm/resnet50.fb_ssl_yfcc100m_ft_in1k"
+    ]
+   },
+   "fresh": {
+    "base": "timm/resnet18.a1_in1k",
+    "independent": [
+     "timm/resnet18.tv_in1k"
+    ]
+   }
   },
   "speech": {
-   "dev": {"base": "openai/whisper-tiny", "independent": ["openai/whisper-tiny.en"]},
-   "fresh": {"base": "facebook/wav2vec2-base-960h", "independent": []}
+   "dev": {
+    "base": "openai/whisper-tiny",
+    "independent": [
+     "openai/whisper-tiny.en"
+    ]
+   },
+   "fresh": {
+    "base": "facebook/wav2vec2-base-960h",
+    "independent": []
+   }
   },
   "diffusion_unet": {
-   "dev": {"base": "google/ddpm-cifar10-32", "independent": []},
-   "fresh": {"base": "google/ddpm-cat-256", "independent": []}
+   "dev": {
+    "base": "google/ddpm-cifar10-32",
+    "independent": []
+   },
+   "fresh": {
+    "base": "google/ddpm-cat-256",
+    "independent": []
+   }
   }
  },
  "notes": {
@@ -49,5 +116,46 @@
   "knowledge distillation into a smaller student of the same family (different shapes)",
   "function-preserving neuron permutation of every hidden layer (E3)",
   "the same architecture trained from a fresh random initialisation (negative)"
- ]
+ ],
+ "public_derivatives": {
+  "openai-community/gpt2": [
+   "distilbert/distilgpt2"
+  ],
+  "google-bert/bert-base-uncased": [
+   "distilbert/distilbert-base-uncased"
+  ]
+ },
+ "shared_origin": {
+  "reference": "EleutherAI/pythia-160m",
+  "models": [
+   "EleutherAI/pythia-160m-deduped",
+   "EleutherAI/pythia-160m-data-seed1",
+   "EleutherAI/pythia-160m-data-seed2",
+   "EleutherAI/pythia-160m-data-seed3",
+   "EleutherAI/pythia-160m-weight-seed1-corrected",
+   "EleutherAI/pythia-160m-weight-seed2-corrected",
+   "EleutherAI/pythia-160m-weight-seed3-corrected"
+  ],
+  "labels": "results/e1_init_identity.json (byte equality of step0 weights)"
+ },
+ "trajectory": {
+  "runs": [
+   "stanford-crfm/alias-gpt2-small-x21",
+   "stanford-crfm/battlestar-gpt2-small-x49",
+   "stanford-crfm/caprica-gpt2-small-x81",
+   "stanford-crfm/darkmatter-gpt2-small-x343",
+   "stanford-crfm/expanse-gpt2-small-x777"
+  ],
+  "checkpoint_steps": [
+   0,
+   1000,
+   10000,
+   50000,
+   100000,
+   200000,
+   300000
+  ],
+  "final": 400000
+ },
+ "amended": "2026-11-05, before any comparison: see PLAN.md 'Amendment 2026-11-05'"
 }
