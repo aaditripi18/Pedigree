@@ -12,6 +12,7 @@ dropping it silently.
 from __future__ import annotations
 
 import hashlib
+import http.client
 import json
 import struct
 import time
@@ -65,7 +66,7 @@ def fetch_range(url: str, start: int, end: int, retries: int = RETRIES) -> bytes
             except (TypeError, ValueError):
                 wait = 0.0
             time.sleep(min(max(wait, 5 * 2 ** attempt), 300))
-        except (urllib.error.URLError, TimeoutError, ConnectionError, IOError):
+        except (urllib.error.URLError, http.client.HTTPException, TimeoutError, ConnectionError, IOError):
             if attempt == retries - 1:
                 raise
             time.sleep(min(5 * 2 ** attempt, 120))

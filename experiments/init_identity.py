@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import json
 import sys
+
+import numpy as np
 from pathlib import Path
 
 from pedigree.align import align
@@ -27,7 +29,10 @@ N_TENSORS = 12  # evenly spaced over the model; every byte sampled must match
 
 def identical(a: Remote, b: Remote) -> tuple[bool, int, int]:
     pairs, _, _ = align(a.float_shapes(), b.float_shapes())
-    names = sorted(pairs)
+    shapes = a.float_shapes()
+    # only randomly initialised matrices: LayerNorm gains (all 1) and biases (all 0) are
+    # identical at step 0 in every run whatever its seed, so they say nothing
+    names = sorted(n for n in pairs if len(shapes[n][1]) >= 2 and int(np.prod(shapes[n][1])) >= 4096)
     step = max(1, len(names) // N_TENSORS)
     checked = equal = 0
     for name in names[::step][:N_TENSORS]:
@@ -47,7 +52,7 @@ def main() -> None:
             same, eq, n = identical(ref, other)
             out["models"][repo] = {"shared_init_with_reference": same, "equal_tensors": eq, "checked": n}
             print(f"{repo}: {'SAME' if same else 'different'} init ({eq}/{n} tensors identical)", flush=True)
-        except Exception as e:  # reported, never silently dropped
+        except BaseException as e:  # reported, never silently dropped
             out["models"][repo] = {"error": f"{type(e).__name__}: {e}"}
             print(f"{repo}: ERROR {e}", flush=True)
     (ROOT / "results" / "e1_init_identity.json").write_text(json.dumps(out, indent=1), encoding="utf-8")

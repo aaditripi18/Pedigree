@@ -27,6 +27,7 @@ from pathlib import Path
 
 from experiments import ledger, transforms
 from experiments.finetune import OUT, bases
+from pedigree.rebasin import unpermute
 from pedigree.verify import Local, Remote, compare, compare_invariant
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -38,16 +39,50 @@ def _pair(run, mdl, base, **label) -> None:
     try:
         plain = compare(mdl, base)
         inv = compare_invariant(mdl, base)
+        aligned = {}
+        if ARCH.get(label["family"]):
+            axes, arch_shapes = ARCH[label["family"]]
+            fixed, info = unpermute(mdl, base, axes, arch_shapes)
+            aligned = {"median_aligned_invariant": compare_invariant(fixed, base)["median_invariant"],
+                       "median_aligned_plain": compare(fixed, base)["median_cosine"], "alignment": info}
         run.record(**label, base=base.repo, base_commit=base.commit, model_commit=mdl.commit,
                    matched=plain["matched"], match_share=round(plain["match_share"], 4),
                    compared=plain["compared"], median_cosine=plain["median_cosine"],
                    cosines=plain["cosines"], invariant_compared=inv["compared"],
-                   median_invariant=inv["median_invariant"], seconds=round(time.time() - t0, 1))
+                   median_invariant=inv["median_invariant"], **aligned, seconds=round(time.time() - t0, 1))
         print(f"  {label['kind']:<12} {label.get('model', '')[:40]:<40} plain {plain['median_cosine']}"
-              f"  invariant {inv['median_invariant']}", flush=True)
+              f"  invariant {inv['median_invariant']}  aligned {aligned.get('median_aligned_invariant')}", flush=True)
     except Exception as e:  # reported in the ledger, never dropped
         run.record(**label, base=base.repo, error=f"{type(e).__name__}: {e}")
         print(f"  {label['kind']:<12} ERROR {e}", flush=True)
+
+
+FULL_ATTACK = ("text_encoder", "text_decoder", "vision_transformer")
+ARCH: dict = {}   # family -> (residual axes, float shapes) of the base architecture
+
+
+def arch_model(family: str, repo: str):
+    """The training architecture of a family, from the base's config (no weights)."""
+    from transformers import (AutoConfig, AutoModelForCausalLM, AutoModelForImageClassification,
+                              AutoModelForMaskedLM)
+    if family == "vision_transformer":
+        return AutoModelForImageClassification.from_config(AutoConfig.from_pretrained(repo, num_labels=10))
+    cls = AutoModelForCausalLM if family == "text_decoder" else AutoModelForMaskedLM
+    return cls.from_config(AutoConfig.from_pretrained(repo))
+
+
+def _attack_full(family: str, repo: str):
+    def fn(sd):
+        from experiments.permute_full import attack, random_inputs
+        m = arch_model(family, repo)
+        missing, unexpected = m.load_state_dict(sd, strict=False)
+        if unexpected:
+            raise ValueError(f"derivative does not fit the architecture: {unexpected[:3]}")
+        m, report = attack(m.float(), random_inputs(m, family), seed=0)
+        if not report["verified"]:
+            raise ValueError(f"attack (b) changed the function: {report}")
+        return {k: v.detach().clone() for k, v in m.state_dict().items()}, report
+    return fn
 
 
 def _transformed(src: Path, fn, tmp: Path, name: str) -> tuple[Local, dict]:
@@ -63,13 +98,21 @@ def _transformed(src: Path, fn, tmp: Path, name: str) -> tuple[Local, dict]:
     return Local.open(d), report
 
 
-def main(families: list[str]) -> None:
+def main(families: list[str], splits: tuple = ("dev", "fresh")) -> None:
     spec = json.loads((ROOT / "results" / "e1_bases.json").read_text(encoding="utf-8"))
     run = ledger.Run("E1", derivatives=str(OUT))
     for family in families:
-        for split in ("dev", "fresh"):
+        for split in splits:
             entry = bases()[family][split]
             base = Remote.open("hf:" + entry["base"])
+            ARCH.pop(family, None)
+            if family in FULL_ATTACK:
+                from experiments.permute_full import hidden_size
+                from pedigree.residual import residual_axes
+                m = arch_model(family, entry["base"])
+                ARCH[family] = (residual_axes(m, hidden_size(m)),
+                                {k: ("float", tuple(v.shape)) for k, v in m.state_dict().items()
+                                 if v.is_floating_point()})
             print(f"{family}/{split}: {base.repo}@{base.commit[:10]}", flush=True)
             common = {"family": family, "split": split}
             for kind in TRAINED + ["scratch"]:
@@ -84,12 +127,21 @@ def main(families: list[str]) -> None:
             if (src / "meta.json").exists():
                 with tempfile.TemporaryDirectory(dir=os.environ.get("PEDIGREE_TMP")) as tmp:
                     tmp = Path(tmp)
-                    for name, fn, part in [("q8_0", transforms.quantize_q8_0, "E4"),
-                                           ("q4_0", transforms.quantize_q4_0, "E4"),
-                                           ("prune50", lambda sd: transforms.prune(sd, 0.5), "E4"),
-                                           ("prune90", lambda sd: transforms.prune(sd, 0.9), "E4"),
-                                           ("permuted", transforms.permute_hidden, "E3")]:
-                        m, report = _transformed(src, fn, tmp, name)
+                    jobs = [("q8_0", transforms.quantize_q8_0, "E4"),
+                            ("q4_0", transforms.quantize_q4_0, "E4"),
+                            ("prune50", lambda sd: transforms.prune(sd, 0.5), "E4"),
+                            ("prune90", lambda sd: transforms.prune(sd, 0.9), "E4"),
+                            ("permuted", transforms.permute_hidden, "E3")]
+                    if family in FULL_ATTACK:
+                        jobs.append(("permuted_full", _attack_full(family, entry["base"]), "E3"))
+                    for name, fn, part in jobs:
+                        try:
+                            m, report = _transformed(src, fn, tmp, name)
+                        except Exception as e:
+                            run.record(**common, kind=name, label="positive", experiment_part=part,
+                                       error=f"{type(e).__name__}: {e}")
+                            print(f"  {name}: ERROR {e}", flush=True)
+                            continue
                         _pair(run, m, base, **common, kind=name, model=f"local:{family}/{split}/ft_long+{name}",
                               label="positive", experiment_part=part, transform_report=report)
             for repo in entry["independent"]:

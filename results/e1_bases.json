@@ -133,10 +133,12 @@
    "EleutherAI/pythia-160m-data-seed2",
    "EleutherAI/pythia-160m-data-seed3",
    "EleutherAI/pythia-160m-weight-seed1-corrected",
-   "EleutherAI/pythia-160m-weight-seed2-corrected",
-   "EleutherAI/pythia-160m-weight-seed3-corrected"
+   "EleutherAI/pythia-160m-weight-seed2-corrected"
   ],
-  "labels": "results/e1_init_identity.json (byte equality of step0 weights)"
+  "labels": "results/e1_init_identity.json (byte equality of step0 weights)",
+  "unavailable": {
+   "EleutherAI/pythia-160m-weight-seed3-corrected": "HTTP 401 (private on the Hub, 2026-11-05)"
+  }
  },
  "trajectory": {
   "runs": [
