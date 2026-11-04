@@ -183,6 +183,11 @@ def build_speech(repo: str, scratch: bool):
     proc = AutoProcessor.from_pretrained(repo)
     audio = [sf.read(io.BytesIO(a["bytes"]))[0].astype(np.float32) for a in df["audio"]]
     text = df["text"].str.lower().tolist() if "whisper" in repo else df["text"].tolist()
+    if "whisper" not in repo:
+        # wav2vec2 trains on whole clips: the three longer than 15 s (of 73) exhausted a
+        # 30 GB CPU session; Whisper always pads to 30 s, so its memory does not change
+        keep = [i for i, a in enumerate(audio) if len(a) <= 15 * 16000]
+        audio, text = [audio[i] for i in keep], [text[i] for i in keep]
     rng = np.random.default_rng(SEED)
     if "whisper" in repo:
         from transformers import WhisperForConditionalGeneration as M
