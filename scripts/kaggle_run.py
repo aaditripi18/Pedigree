@@ -47,6 +47,18 @@ JOBS.update({f"e1-{f}": _job(f"pedigree-e1-{f.replace('_', '-')}", [["-m", "expe
                              sources=[f"ft-{f}"], env={"PEDIGREE_DERIVATIVES": "find:derivatives"})
              for f in FAMILIES})
 JOBS["e6e7"] = _job("pedigree-e6-e7", [["-m", "experiments.e6_e7"]], gpu=False)
+# E5: students (GPU) written to their own folder; image teachers come from the ft- output
+E5_FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn"]
+JOBS.update({f"distill-{f}": _job(f"pedigree-distill-{f.replace('_', '-')}",
+                                  [["-m", "experiments.distill", f, "dev"], ["-m", "experiments.distill", f, "fresh"]],
+                                  gpu=True, sources=[f"ft-{f}"],
+                                  env={"PEDIGREE_DERIVATIVES": "/kaggle/working/students",
+                                       "PEDIGREE_TEACHERS": "find:derivatives"})
+             for f in E5_FAMILIES})
+JOBS.update({f"e5-{f}": _job(f"pedigree-e5-{f.replace('_', '-')}", [["-m", "experiments.e5_behaviour", f]],
+                             gpu=True, sources=[f"ft-{f}", f"distill-{f}"],
+                             env={"PEDIGREE_TEACHERS": "find:derivatives", "PEDIGREE_STUDENTS": "find:students"})
+             for f in E5_FAMILIES})
 
 NOTEBOOK = r'''
 import os, pathlib, shutil, subprocess, sys
