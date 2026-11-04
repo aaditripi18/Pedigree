@@ -94,3 +94,42 @@ def compare(model: Remote, other: Remote, n_tensors: int = N_TENSORS) -> dict:
             "float_tensors": len(ms), "matched": len(pairing), "match_share": match,
             "dropped_prefix": [dm, do], "compared": len(vals), "cosines": cos,
             "median_cosine": float(np.median(vals)) if vals else None}
+
+
+@dataclass
+class Local:
+    """A safetensors model on disk (one file, or every *.safetensors in a folder), read
+    with the same interface as Remote, so ground-truth derivatives are compared exactly
+    like Hub models."""
+    repo: str
+    commit: str = "local"
+    tensors: dict = field(default_factory=dict)   # name -> (path, data_start, spec)
+
+    @classmethod
+    def open(cls, path) -> "Local":
+        import json
+        import struct
+        from pathlib import Path
+        path = Path(path)
+        files = sorted(path.glob("*.safetensors")) if path.is_dir() else [path]
+        r = cls(str(path))
+        for f in files:
+            with open(f, "rb") as fh:
+                (n,) = struct.unpack("<Q", fh.read(8))
+                header = json.loads(fh.read(n))
+            for name, s in header.items():
+                if name != "__metadata__" and isinstance(s, dict):
+                    r.tensors[name] = (f, 8 + n, s)
+        return r
+
+    def float_shapes(self) -> dict[str, tuple]:
+        return {n: ("float", tuple(s["shape"])) for n, (_, _, s) in self.tensors.items() if s["dtype"] in FLOATS}
+
+    def sample(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
+        f, start, s = self.tensors[name]
+        elements = max_bytes // 4
+        b, e = s["data_offsets"]
+        length = min(e - b, elements * ITEMSIZE[s["dtype"]]) // ITEMSIZE[s["dtype"]] * ITEMSIZE[s["dtype"]]
+        with open(f, "rb") as fh:
+            fh.seek(start + b)
+            return decode(s["dtype"], fh.read(length))
