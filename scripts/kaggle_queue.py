@@ -33,7 +33,7 @@ def start(job: str, sha: str) -> bool:
     if "successfully pushed" in out:
         print(f"{time.strftime('%H:%M')} started {job}", flush=True)
         return True
-    if "Maximum batch GPU session" in out or "session count" in out:
+    if "Maximum batch" in out or "session count" in out:
         return False
     print(f"{time.strftime('%H:%M')} FAILED to start {job}: {out}", flush=True)
     raise SystemExit(1)

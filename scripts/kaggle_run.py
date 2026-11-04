@@ -42,11 +42,20 @@ JOBS = {f"ft-{f}": _job(f"pedigree-ft-{f.replace('_', '-')}",
                         [["-m", "experiments.finetune", f, "dev"], ["-m", "experiments.finetune", f, "fresh"]],
                         gpu=True)
         for f in FAMILIES}
+# one base per session, on CPU (no GPU quota), for when the weekly GPU quota is spent;
+# the E1 job of a family then mounts both splits' outputs
+JOBS.update({f"ft-{f}@{s}": _job(f"pedigree-ft-{f.replace('_', '-')}-{s}", [["-m", "experiments.finetune", f, s]],
+                                 gpu=False)
+             for f in FAMILIES for s in ("dev", "fresh")})
 # E1 comparisons: CPU, reading the derivatives from the matching ft- job's output
 JOBS.update({f"e1-{f}": _job(f"pedigree-e1-{f.replace('_', '-')}", [["-m", "experiments.e1_verify", f]], gpu=False,
                              sources=[f"ft-{f}"], env={"PEDIGREE_DERIVATIVES": "find:derivatives"})
              for f in FAMILIES})
-JOBS["e6e7"] = _job("pedigree-e6-e7", [["-m", "experiments.e6_e7"]], gpu=False)
+JOBS.update({f"e1-{f}@split": _job(f"pedigree-e1-{f.replace('_', '-')}", [["-m", "experiments.e1_verify", f]],
+                                   gpu=False, sources=[f"ft-{f}@dev", f"ft-{f}@fresh"],
+                                   env={"PEDIGREE_DERIVATIVES": "merge:derivatives"})
+             for f in FAMILIES})
+JOBS["e6e7"] =_job("pedigree-e6-e7", [["-m", "experiments.e6_e7"]], gpu=False)
 # E5: students (GPU) written to their own folder; image teachers come from the ft- output
 E5_FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn"]
 JOBS.update({f"distill-{f}": _job(f"pedigree-distill-{f.replace('_', '-')}",
@@ -85,7 +94,18 @@ os.environ["PEDIGREE_DERIVATIVES"] = "/kaggle/working/derivatives"
 os.environ["PEDIGREE_TASKS"] = "/tmp/pedigree-tasks"
 os.environ["PYTHONUNBUFFERED"] = "1"
 for key, value in ENV.items():
-    if value.startswith("find:"):
+    if value.startswith("merge:"):   # several mounted outputs, one family/split tree
+        dest = pathlib.Path("/tmp/merged-" + value[6:])
+        for root in pathlib.Path("/kaggle/input").rglob(value[6:]):
+            if not root.is_dir():
+                continue
+            for fam in root.iterdir():
+                for split in fam.iterdir():
+                    (dest / fam.name).mkdir(parents=True, exist_ok=True)
+                    if not (dest / fam.name / split.name).exists():
+                        (dest / fam.name / split.name).symlink_to(split, target_is_directory=True)
+        value = str(dest)
+    elif value.startswith("find:"):
         value = str(next(p for p in pathlib.Path("/kaggle/input").rglob(value[5:]) if p.is_dir()))
     os.environ[key] = value
     print(key, "=", value, flush=True)
