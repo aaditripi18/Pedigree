@@ -1,37 +1,37 @@
-[{"stream_name":"stdout","time":15.646213676,"data":"code 226f21a\n"}
-,{"stream_name":"stdout","time":189.403460974,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
-,{"stream_name":"stdout","time":198.50310231,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
-,{"stream_name":"stdout","time":201.040760731,"data":"vision_cnn/dev: timm/resnet50.a1_in1k@767268603c\n"}
-,{"stream_name":"stdout","time":201.047633014,"data":"  ft_short     local:vision_cnn/dev/ft_short            plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":201.054160089,"data":"  ft_long      local:vision_cnn/dev/ft_long             plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":201.060571819,"data":"  lora_r8      local:vision_cnn/dev/lora_r8             plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":201.066529376,"data":"  lora_r64     local:vision_cnn/dev/lora_r64            plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":201.072715623,"data":"  scratch      local:vision_cnn/dev/scratch             plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":201.14343235,"data":"  q8_0: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/dev/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":201.14488258,"data":"  q4_0: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/dev/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":201.145803903,"data":"  prune50: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/dev/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":201.146698201,"data":"  prune90: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/dev/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":201.147590618,"data":"  permuted: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/dev/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":226.469422426,"data":"  independent  timm/resnet50.tv_in1k                    plain 0.00319737869546873  invariant 0.02501766760228715  aligned None\n"}
-,{"stream_name":"stdout","time":247.795160931,"data":"  independent  timm/resnet50.fb_ssl_yfcc100m_ft_in1k    plain 0.0018555089432663002  invariant 0.02588381362470027  aligned None\n"}
-,{"stream_name":"stdout","time":248.657734946,"data":"vision_cnn/fresh: timm/resnet18.a1_in1k@491b427b45\n"}
-,{"stream_name":"stdout","time":248.664147662,"data":"  ft_short     local:vision_cnn/fresh/ft_short          plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":248.668046089,"data":"  ft_long      local:vision_cnn/fresh/ft_long           plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":248.673530152,"data":"  lora_r8      local:vision_cnn/fresh/lora_r8           plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":248.677463196,"data":"  lora_r64     local:vision_cnn/fresh/lora_r64          plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":248.680910352,"data":"  scratch      local:vision_cnn/fresh/scratch           plain None  invariant None  aligned None\n"}
-,{"stream_name":"stdout","time":248.750550289,"data":"  q8_0: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/fresh/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":248.751802905,"data":"  q4_0: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/fresh/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":248.752739031,"data":"  prune50: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/fresh/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":248.753667287,"data":"  prune90: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/fresh/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":248.754668001,"data":"  permuted: ERROR No such file or directory: /tmp/merged-derivatives/vision_cnn/fresh/ft_long/model.safetensors\n"}
-,{"stream_name":"stdout","time":270.062841852,"data":"  independent  timm/resnet18.tv_in1k                    plain -0.0050875666246036145  invariant 0.05251560954485143  aligned None\n"}
-,{"stream_name":"stdout","time":270.554404817,"data":"exit 0 -m experiments.e1_verify vision_cnn\n"}
-,{"stream_name":"stdout","time":270.558784714,"data":"23 new ledger lines; 0 failed commands\n"}
-,{"stream_name":"stderr","time":272.986469405,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":272.98650725,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":273.266718293,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":273.266748657,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":274.167603965,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
-,{"stream_name":"stderr","time":275.287216438,"data":"[NbConvertApp] Writing 290364 bytes to __results__.html\n"}
+[{"stream_name":"stdout","time":6.287010813,"data":"code fe09dfa\n"}
+,{"stream_name":"stdout","time":61.998059755,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":66.665975888,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":69.184339204,"data":"vision_cnn/dev: timm/resnet50.a1_in1k@767268603c\n"}
+,{"stream_name":"stdout","time":85.063481911,"data":"  ft_short     local:vision_cnn/dev/ft_short            plain 0.9999985914266706  invariant 0.9999986859619523  aligned None\n"}
+,{"stream_name":"stdout","time":90.791611618,"data":"  ft_long      local:vision_cnn/dev/ft_long             plain 0.9999606425404326  invariant 0.9999454514696315  aligned None\n"}
+,{"stream_name":"stdout","time":95.343303569,"data":"  lora_r8      local:vision_cnn/dev/lora_r8             plain 1.0  invariant 1.0  aligned None\n"}
+,{"stream_name":"stdout","time":100.452745135,"data":"  lora_r64     local:vision_cnn/dev/lora_r64            plain 1.0  invariant 1.0  aligned None\n"}
+,{"stream_name":"stdout","time":105.100370454,"data":"  scratch      local:vision_cnn/dev/scratch             plain 0.005292770700738866  invariant 0.0024659060833665362  aligned None\n"}
+,{"stream_name":"stdout","time":121.161860538,"data":"  q8_0         local:vision_cnn/dev/ft_long+q8_0        plain 0.999935898239235  invariant 0.9999274149515742  aligned None\n"}
+,{"stream_name":"stdout","time":122.438592222,"data":"  q4_0         local:vision_cnn/dev/ft_long+q4_0        plain 0.9945720042797652  invariant 0.9966207884161006  aligned None\n"}
+,{"stream_name":"stdout","time":124.031371709,"data":"  prune50      local:vision_cnn/dev/ft_long+prune50     plain 0.9777393309820781  invariant 0.9878584142369355  aligned None\n"}
+,{"stream_name":"stdout","time":125.611288806,"data":"  prune90      local:vision_cnn/dev/ft_long+prune90     plain 0.7603538745628013  invariant 0.7920452267263705  aligned None\n"}
+,{"stream_name":"stdout","time":127.016994139,"data":"  permuted     local:vision_cnn/dev/ft_long+permuted    plain 0.03155777410648319  invariant 0.9999428783689825  aligned None\n"}
+,{"stream_name":"stdout","time":143.3661906,"data":"  independent  timm/resnet50.tv_in1k                    plain 0.00319737869546873  invariant 0.02501766760228715  aligned None\n"}
+,{"stream_name":"stdout","time":155.235693928,"data":"  independent  timm/resnet50.fb_ssl_yfcc100m_ft_in1k    plain 0.0018555089432663002  invariant 0.02588381362470027  aligned None\n"}
+,{"stream_name":"stdout","time":155.862421531,"data":"vision_cnn/fresh: timm/resnet18.a1_in1k@491b427b45\n"}
+,{"stream_name":"stdout","time":167.95118225,"data":"  ft_short     local:vision_cnn/fresh/ft_short          plain 0.9999986491374382  invariant 0.9999986136752763  aligned None\n"}
+,{"stream_name":"stdout","time":171.429265732,"data":"  ft_long      local:vision_cnn/fresh/ft_long           plain 0.9999372981038102  invariant 0.9999308066431973  aligned None\n"}
+,{"stream_name":"stdout","time":175.323802226,"data":"  lora_r8      local:vision_cnn/fresh/lora_r8           plain 0.9999999999999998  invariant 1.0  aligned None\n"}
+,{"stream_name":"stdout","time":178.909267382,"data":"  lora_r64     local:vision_cnn/fresh/lora_r64          plain 0.9999999999999998  invariant 1.0  aligned None\n"}
+,{"stream_name":"stdout","time":182.94996753,"data":"  scratch      local:vision_cnn/fresh/scratch           plain -0.0025184532040616794  invariant 0.006169790314355087  aligned None\n"}
+,{"stream_name":"stdout","time":188.103190193,"data":"  q8_0         local:vision_cnn/fresh/ft_long+q8_0      plain 0.9999165188347433  invariant 0.9999101979138578  aligned None\n"}
+,{"stream_name":"stdout","time":188.704485905,"data":"  q4_0         local:vision_cnn/fresh/ft_long+q4_0      plain 0.9946430075304012  invariant 0.997213889229554  aligned None\n"}
+,{"stream_name":"stdout","time":189.445938858,"data":"  prune50      local:vision_cnn/fresh/ft_long+prune50   plain 0.9821127893487074  invariant 0.9921304853862527  aligned None\n"}
+,{"stream_name":"stdout","time":190.171724208,"data":"  prune90      local:vision_cnn/fresh/ft_long+prune90   plain 0.7992888923792527  invariant 0.8218378300018436  aligned None\n"}
+,{"stream_name":"stdout","time":190.911628032,"data":"  permuted     local:vision_cnn/fresh/ft_long+permuted  plain 0.02752809563110039  invariant 0.9999308066431973  aligned None\n"}
+,{"stream_name":"stdout","time":202.646222149,"data":"  independent  timm/resnet18.tv_in1k                    plain -0.0050875666246036145  invariant 0.05251560954485143  aligned None\n"}
+,{"stream_name":"stdout","time":203.115550612,"data":"exit 0 -m experiments.e1_verify vision_cnn\n"}
+,{"stream_name":"stdout","time":203.119418084,"data":"23 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":205.507572436,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":205.507610711,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":205.804782522,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":205.804813054,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":206.678510712,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":207.767074861,"data":"[NbConvertApp] Writing 290915 bytes to __results__.html\n"}
 ]
