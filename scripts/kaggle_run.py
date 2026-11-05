@@ -48,10 +48,12 @@ JOBS.update({f"ft-{f}@{s}": _job(f"pedigree-ft-{f.replace('_', '-')}-{s}", [["-m
                                  gpu=False)
              for f in FAMILIES for s in ("dev", "fresh")})
 KINDS = ["ft_short", "ft_long", "lora_r8", "lora_r64", "scratch"]
-JOBS.update({f"ft-vision_transformer@dev:{k}": _job(f"pedigree-ft-vit-dev-{k.replace('_', '-')}",
-                                                   [["-m", "experiments.finetune", "vision_transformer", "dev", k]],
-                                                   gpu=False)
-             for k in KINDS})
+# one derivative per CPU session, for bases that do not fit in one 12 h session
+SHORT = {"text_encoder": "te", "text_decoder": "td", "vision_transformer": "vit", "vision_cnn": "cnn",
+         "speech": "sp", "diffusion_unet": "unet"}
+JOBS.update({f"ft-{f}@{s}:{k}": _job(f"pedigree-ft-{SHORT[f]}-{s}-{k.replace('_', '-')}",
+                                     [["-m", "experiments.finetune", f, s, k]], gpu=False)
+             for f in FAMILIES for s in ("dev", "fresh") for k in KINDS})
 # E1 comparisons: CPU, reading the derivatives from the matching ft- job's output
 JOBS.update({f"e1-{f}": _job(f"pedigree-e1-{f.replace('_', '-')}", [["-m", "experiments.e1_verify", f]], gpu=False,
                              sources=[f"ft-{f}"], env={"PEDIGREE_DERIVATIVES": "find:derivatives"})
