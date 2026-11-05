@@ -1,0 +1,43 @@
+[{"stream_name":"stdout","time":5.747555592,"data":"code 4f83e99\n"}
+,{"stream_name":"stdout","time":51.38505789,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.20.2 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":62.773689693,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":68.838047816,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2823.97it/s]\n"}
+,{"stream_name":"stderr","time":71.460948543,"data":"[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.\n"}
+,{"stream_name":"stderr","time":71.874996026,"data":"/kaggle/working/Pedigree/experiments/finetune.py:222: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":71.875039406,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":71.878822518,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":165.637532686,"data":"text_decoder/dev/ft_short: 300 steps, loss 4.3489 -\u003e 3.5551, 109 s\n"}
+,{"stream_name":"stderr","time":166.067875184,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2810.24it/s]\n"}
+,{"stream_name":"stdout","time":1243.037299127,"data":"text_decoder/dev/ft_long: 3000 steps, loss 4.3489 -\u003e 3.201, 1077 s\n"}
+,{"stream_name":"stderr","time":1243.500882302,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2938.63it/s]\n"}
+,{"stream_name":"stderr","time":1243.723976199,"data":"/usr/local/lib/python3.13/dist-packages/peft/tuners/lora/layer.py:2760: UserWarning: fan_in_fan_out is set to False but the target module is `Conv1D`. Setting fan_in_fan_out to True.\n"}
+,{"stream_name":"stderr","time":1243.724009105,"data":"  warnings.warn(\n"}
+,{"stream_name":"stdout","time":1957.445569578,"data":"text_decoder/dev/lora_r8: 3000 steps, loss 4.3489 -\u003e 3.5807, 714 s\n"}
+,{"stream_name":"stderr","time":1957.887204627,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2751.19it/s]\n"}
+,{"stream_name":"stderr","time":1958.097150148,"data":"/usr/local/lib/python3.13/dist-packages/peft/tuners/lora/layer.py:2760: UserWarning: fan_in_fan_out is set to False but the target module is `Conv1D`. Setting fan_in_fan_out to True.\n"}
+,{"stream_name":"stderr","time":1958.097204021,"data":"  warnings.warn(\n"}
+,{"stream_name":"stdout","time":2683.514441515,"data":"text_decoder/dev/lora_r64: 3000 steps, loss 4.3489 -\u003e 3.5332, 726 s\n"}
+,{"stream_name":"stdout","time":3756.92613231,"data":"text_decoder/dev/scratch: 3000 steps, loss 10.9975 -\u003e 6.003, 1073 s\n"}
+,{"stream_name":"stdout","time":3758.271592422,"data":"exit 0 -m experiments.finetune text_decoder dev\n"}
+,{"stream_name":"stderr","time":3765.618149643,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":3840.184189952,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2836.89it/s]\n"}
+,{"stream_name":"stderr","time":3841.693915858,"data":"/kaggle/working/Pedigree/experiments/finetune.py:222: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":3841.693967529,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":3841.693972763,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":3941.391509673,"data":"text_decoder/fresh/ft_short: 300 steps, loss 4.0371 -\u003e 3.3921, 181 s\n"}
+,{"stream_name":"stderr","time":3941.803835209,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2723.37it/s]\n"}
+,{"stream_name":"stdout","time":4966.343296011,"data":"text_decoder/fresh/ft_long: 3000 steps, loss 4.0371 -\u003e 2.8677, 1025 s\n"}
+,{"stream_name":"stderr","time":4966.689719575,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2927.09it/s]\n"}
+,{"stream_name":"stdout","time":5569.886910614,"data":"text_decoder/fresh/lora_r8: 3000 steps, loss 4.0371 -\u003e 3.4129, 604 s\n"}
+,{"stream_name":"stderr","time":5570.303115476,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2819.41it/s]\n"}
+,{"stream_name":"stdout","time":6182.176263099,"data":"text_decoder/fresh/lora_r64: 3000 steps, loss 4.0371 -\u003e 3.3756, 612 s\n"}
+,{"stream_name":"stdout","time":7217.45588458,"data":"text_decoder/fresh/scratch: 3000 steps, loss 10.9697 -\u003e 5.5554, 1035 s\n"}
+,{"stream_name":"stdout","time":7218.786228385,"data":"exit 0 -m experiments.finetune text_decoder fresh\n"}
+,{"stream_name":"stdout","time":7218.788929333,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":7220.834397195,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":7220.834427203,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":7221.113720035,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":7221.113752072,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":7221.948752367,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":7222.945549984,"data":"[NbConvertApp] Writing 287021 bytes to __results__.html\n"}
+]

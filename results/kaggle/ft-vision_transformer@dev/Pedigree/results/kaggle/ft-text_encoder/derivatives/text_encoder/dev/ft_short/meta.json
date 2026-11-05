@@ -1,0 +1,43 @@
+{
+ "family": "text_encoder",
+ "split": "dev",
+ "kind": "ft_short",
+ "base": "google-bert/bert-base-uncased",
+ "base_commit": "86b5e0934494bd15c9632b12f734a8a67f723594",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cuda",
+ "versions": {
+  "torch": "2.11.0+cu130",
+  "transformers": "5.20.2",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "6deed70",
+  "dirty": false
+ },
+ "data": {
+  "task": "wikitext2",
+  "sha256": "e83889baabc497075506f91975be5fac0d45c5290b6b20582c8cd1e853d0c9f7"
+ },
+ "losses": [
+  2.1662,
+  2.194,
+  2.2752,
+  2.6674,
+  1.9513,
+  2.4756,
+  2.4108,
+  2.5157,
+  1.552,
+  2.0799,
+  1.9333,
+  2.0703,
+  1.7843
+ ],
+ "seconds": 85
+}

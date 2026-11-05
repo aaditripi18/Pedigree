@@ -1,0 +1,78 @@
+[{"stream_name":"stdout","time":11.097101206,"data":"code 6deed70\n"}
+,{"stream_name":"stdout","time":52.331742222,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.20.2 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":63.371631831,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":69.589676399,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2749.12it/s]\n"}
+,{"stream_name":"stderr","time":69.604692946,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":69.604716397,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":69.604722519,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":69.604727358,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":69.604732284,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":69.604737103,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":69.604741862,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":69.604746675,"data":"\n"}
+,{"stream_name":"stderr","time":69.604751257,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":69.604755885,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":72.613428317,"data":"/kaggle/working/Pedigree/experiments/finetune.py:222: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":72.613482984,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":72.613504836,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":143.04054428,"data":"text_encoder/dev/ft_short: 300 steps, loss 2.1662 -\u003e 1.7843, 85 s\n"}
+,{"stream_name":"stderr","time":143.694905661,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2747.26it/s]\n"}
+,{"stream_name":"stderr","time":143.700343597,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":143.700366949,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":143.700387007,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":143.700392961,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":143.700397425,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":143.700402653,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":143.700407211,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":143.700411572,"data":"\n"}
+,{"stream_name":"stderr","time":143.70041585,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":143.700420145,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":921.576876162,"data":"text_encoder/dev/ft_long: 3000 steps, loss 2.1662 -\u003e 1.8606, 779 s\n"}
+,{"stream_name":"stderr","time":922.245400599,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2605.14it/s]\n"}
+,{"stream_name":"stderr","time":922.250854074,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":922.250878052,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":922.250881344,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":922.250883842,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":922.250886165,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":922.250888475,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":922.250890777,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":922.250893081,"data":"\n"}
+,{"stream_name":"stderr","time":922.25089522,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":922.250897489,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":1417.781165457,"data":"text_encoder/dev/lora_r8: 3000 steps, loss 2.1662 -\u003e 2.3433, 496 s\n"}
+,{"stream_name":"stderr","time":1418.341542941,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2805.60it/s]\n"}
+,{"stream_name":"stderr","time":1418.346758899,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":1418.346779288,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":1418.346784246,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":1418.34678847,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1418.346792677,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1418.346801865,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1418.34680618,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1418.346812074,"data":"\n"}
+,{"stream_name":"stderr","time":1418.346816662,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":1418.346821454,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":1927.495187724,"data":"text_encoder/dev/lora_r64: 3000 steps, loss 2.1662 -\u003e 2.2031, 510 s\n"}
+,{"stream_name":"stdout","time":2700.959543683,"data":"text_encoder/dev/scratch: 3000 steps, loss 10.4306 -\u003e 7.2348, 773 s\n"}
+,{"stream_name":"stdout","time":2702.227391977,"data":"exit 0 -m experiments.finetune text_encoder dev\n"}
+,{"stream_name":"stderr","time":2709.659111909,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":2716.593565939,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2793.71it/s]\n"}
+,{"stream_name":"stderr","time":2717.79539255,"data":"/kaggle/working/Pedigree/experiments/finetune.py:222: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":2717.795479024,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":2717.795486389,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":2807.187208868,"data":"text_encoder/fresh/ft_short: 300 steps, loss 1.581 -\u003e 1.6752, 103 s\n"}
+,{"stream_name":"stderr","time":2807.886262856,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2744.16it/s]\n"}
+,{"stream_name":"stdout","time":3691.635529602,"data":"text_encoder/fresh/ft_long: 3000 steps, loss 1.581 -\u003e 2.0782, 884 s\n"}
+,{"stream_name":"stderr","time":3692.398115502,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2715.47it/s]\n"}
+,{"stream_name":"stdout","time":4227.47643754,"data":"text_encoder/fresh/lora_r8: 3000 steps, loss 1.581 -\u003e 1.9482, 536 s\n"}
+,{"stream_name":"stderr","time":4228.185032365,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2718.25it/s]\n"}
+,{"stream_name":"stdout","time":4776.833564825,"data":"text_encoder/fresh/lora_r64: 3000 steps, loss 1.581 -\u003e 1.9331, 549 s\n"}
+,{"stream_name":"stdout","time":5655.915022101,"data":"text_encoder/fresh/scratch: 3000 steps, loss 10.8336 -\u003e 7.6686, 879 s\n"}
+,{"stream_name":"stdout","time":5657.178920168,"data":"exit 0 -m experiments.finetune text_encoder fresh\n"}
+,{"stream_name":"stdout","time":5657.179690549,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":5659.104530976,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":5659.104575828,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5659.317252261,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5659.317275871,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":5660.066705661,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":5660.971874989,"data":"[NbConvertApp] Writing 287021 bytes to __results__.html\n"}
+]

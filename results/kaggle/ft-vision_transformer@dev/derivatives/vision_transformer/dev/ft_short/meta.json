@@ -1,0 +1,43 @@
+{
+ "family": "vision_transformer",
+ "split": "dev",
+ "kind": "ft_short",
+ "base": "google/vit-base-patch16-224-in21k",
+ "base_commit": "b4569560a39a0f1af58e3ddaf17facf20ab919b0",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cpu",
+ "versions": {
+  "torch": "2.11.0+cpu",
+  "transformers": "5.20.2",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "3752303",
+  "dirty": false
+ },
+ "data": {
+  "task": "cifar10",
+  "sha256": "8428b53a88a11ac374111006708df51469e315a22ac6d66470afd9c78d2ae883"
+ },
+ "losses": [
+  2.302,
+  2.1907,
+  2.0738,
+  1.8629,
+  1.6961,
+  1.5019,
+  1.5552,
+  1.2618,
+  1.0092,
+  0.851,
+  0.9538,
+  0.9061,
+  0.7909
+ ],
+ "seconds": 1962
+}

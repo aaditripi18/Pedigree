@@ -1,0 +1,12 @@
+[{"stream_name":"stdout","time":4.8204494140000005,"data":"code 1652b1a\n"}
+,{"stream_name":"stdout","time":68.564622472,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.20.2 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":81.510238185,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":89.342783711,"data":"\rLoading weights:   0%|          | 0/167 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 167/167 [00:00\u003c00:00, 2072.06it/s]\n"}
+,{"stream_name":"stderr","time":100.513735178,"data":"/kaggle/working/Pedigree/experiments/finetune.py:222: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":100.513802129,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":100.513809349,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":2818.938876195,"data":"speech/dev/ft_short: 300 steps, loss 5.5326 -\u003e 0.0013, 2746 s\n"}
+,{"stream_name":"stderr","time":2820.444324817,"data":"\rLoading weights:   0%|          | 0/167 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 167/167 [00:00\u003c00:00, 2117.30it/s]\n"}
+,{"stream_name":"stdout","time":31220.474833052,"data":"speech/dev/ft_long: 3000 steps, loss 5.5326 -\u003e 0.0, 28402 s\n"}
+,{"stream_name":"stderr","time":31222.048101022,"data":"\rLoading weights:   0%|          | 0/167 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 167/167 [00:00\u003c00:00, 2073.44it/s]\n"}
+]

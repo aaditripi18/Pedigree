@@ -1,0 +1,60 @@
+[{"stream_name":"stdout","time":5.319548262,"data":"code 3752303\n"}
+,{"stream_name":"stdout","time":63.444693997,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.20.2 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":73.434226962,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":78.275844219,"data":"\rLoading weights:   0%|          | 0/198 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 198/198 [00:00\u003c00:00, 2260.50it/s]\n"}
+,{"stream_name":"stderr","time":78.287386415,"data":"[transformers] \u001b[1mViTForImageClassification LOAD REPORT\u001b[0m from: google/vit-base-patch16-224-in21k\n"}
+,{"stream_name":"stderr","time":78.287422943,"data":"Key                 | Status     | \n"}
+,{"stream_name":"stderr","time":78.287427682,"data":"--------------------+------------+-\n"}
+,{"stream_name":"stderr","time":78.287431161,"data":"pooler.dense.bias   | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":78.287434463,"data":"pooler.dense.weight | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":78.287437407,"data":"classifier.bias     | MISSING    | \n"}
+,{"stream_name":"stderr","time":78.287440498,"data":"classifier.weight   | MISSING    | \n"}
+,{"stream_name":"stderr","time":78.287443399,"data":"\n"}
+,{"stream_name":"stderr","time":78.287446547,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":78.287449553,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":78.287453136,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":80.880652511,"data":"/kaggle/working/Pedigree/experiments/finetune.py:113: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":80.880694977,"data":"  return (torch.from_numpy(np.asarray(img)).permute(2, 0, 1).float() / 255 - m) / s\n"}
+,{"stream_name":"stderr","time":88.92913025,"data":"/kaggle/working/Pedigree/experiments/finetune.py:226: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":88.929173283,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":88.929179633,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":2029.183236857,"data":"vision_transformer/dev/ft_short: 300 steps, loss 2.302 -\u003e 0.7909, 1962 s\n"}
+,{"stream_name":"stderr","time":2029.420673933,"data":"\rLoading weights:   0%|          | 0/198 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 198/198 [00:00\u003c00:00, 2545.94it/s]\n"}
+,{"stream_name":"stderr","time":2029.427937195,"data":"[transformers] \u001b[1mViTForImageClassification LOAD REPORT\u001b[0m from: google/vit-base-patch16-224-in21k\n"}
+,{"stream_name":"stderr","time":2029.427976136,"data":"Key                 | Status     | \n"}
+,{"stream_name":"stderr","time":2029.427981571,"data":"--------------------+------------+-\n"}
+,{"stream_name":"stderr","time":2029.427986058,"data":"pooler.dense.bias   | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":2029.428012953,"data":"pooler.dense.weight | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":2029.428017191,"data":"classifier.bias     | MISSING    | \n"}
+,{"stream_name":"stderr","time":2029.428020524,"data":"classifier.weight   | MISSING    | \n"}
+,{"stream_name":"stderr","time":2029.428023853,"data":"\n"}
+,{"stream_name":"stderr","time":2029.428027109,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":2029.428030612,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":2029.428034256,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":21413.279553943,"data":"vision_transformer/dev/ft_long: 3000 steps, loss 2.2606 -\u003e 0.0334, 19384 s\n"}
+,{"stream_name":"stderr","time":21413.532834704,"data":"\rLoading weights:   0%|          | 0/198 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 198/198 [00:00\u003c00:00, 2467.27it/s]\n"}
+,{"stream_name":"stderr","time":21413.540215423,"data":"[transformers] \u001b[1mViTForImageClassification LOAD REPORT\u001b[0m from: google/vit-base-patch16-224-in21k\n"}
+,{"stream_name":"stderr","time":21413.540253583,"data":"Key                 | Status     | \n"}
+,{"stream_name":"stderr","time":21413.54026042,"data":"--------------------+------------+-\n"}
+,{"stream_name":"stderr","time":21413.540263778,"data":"pooler.dense.bias   | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":21413.540266954,"data":"pooler.dense.weight | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":21413.54027018,"data":"classifier.bias     | MISSING    | \n"}
+,{"stream_name":"stderr","time":21413.540273075,"data":"classifier.weight   | MISSING    | \n"}
+,{"stream_name":"stderr","time":21413.540276125,"data":"\n"}
+,{"stream_name":"stderr","time":21413.540279101,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":21413.54028226,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":21413.540285513,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":34834.114753995,"data":"vision_transformer/dev/lora_r8: 3000 steps, loss 2.2606 -\u003e 1.2163, 13421 s\n"}
+,{"stream_name":"stderr","time":34834.403830253,"data":"\rLoading weights:   0%|          | 0/198 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 198/198 [00:00\u003c00:00, 2352.93it/s]\n"}
+,{"stream_name":"stderr","time":34834.412890574,"data":"[transformers] \u001b[1mViTForImageClassification LOAD REPORT\u001b[0m from: google/vit-base-patch16-224-in21k\n"}
+,{"stream_name":"stderr","time":34834.412936003,"data":"Key                 | Status     | \n"}
+,{"stream_name":"stderr","time":34834.412942884,"data":"--------------------+------------+-\n"}
+,{"stream_name":"stderr","time":34834.412948271,"data":"pooler.dense.bias   | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":34834.412952067,"data":"pooler.dense.weight | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":34834.412955178,"data":"classifier.bias     | MISSING    | \n"}
+,{"stream_name":"stderr","time":34834.412958341,"data":"classifier.weight   | MISSING    | \n"}
+,{"stream_name":"stderr","time":34834.412961212,"data":"\n"}
+,{"stream_name":"stderr","time":34834.41296419,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":34834.412967264,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":34834.413118208,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+]

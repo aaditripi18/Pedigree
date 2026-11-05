@@ -1,0 +1,43 @@
+{
+ "family": "speech",
+ "split": "dev",
+ "kind": "ft_short",
+ "base": "openai/whisper-tiny",
+ "base_commit": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cpu",
+ "versions": {
+  "torch": "2.11.0+cpu",
+  "transformers": "5.20.2",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "1652b1a",
+  "dirty": false
+ },
+ "data": {
+  "task": "librispeech_dummy",
+  "sha256": "4e69a06fa5edc90921e5e7e39a7084881f8b3ed9c805c574f4f39c6fde27c603"
+ },
+ "losses": [
+  5.5326,
+  0.1651,
+  0.0225,
+  0.0087,
+  0.007,
+  0.0047,
+  0.0028,
+  0.002,
+  0.0026,
+  0.0023,
+  0.0014,
+  0.0017,
+  0.0013
+ ],
+ "seconds": 2746
+}
