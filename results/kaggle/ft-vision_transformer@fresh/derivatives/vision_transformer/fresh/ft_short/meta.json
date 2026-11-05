@@ -1,0 +1,43 @@
+{
+ "family": "vision_transformer",
+ "split": "fresh",
+ "kind": "ft_short",
+ "base": "WinKawaks/vit-small-patch16-224",
+ "base_commit": "0c08c1829024fa177bd69b6dd09b05ad980854e1",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cpu",
+ "versions": {
+  "torch": "2.11.0+cpu",
+  "transformers": "5.20.2",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "3752303",
+  "dirty": false
+ },
+ "data": {
+  "task": "cifar10",
+  "sha256": "8428b53a88a11ac374111006708df51469e315a22ac6d66470afd9c78d2ae883"
+ },
+ "losses": [
+  3.0081,
+  1.9886,
+  1.0794,
+  0.6429,
+  0.4988,
+  0.1504,
+  0.2751,
+  0.1801,
+  0.0642,
+  0.0914,
+  0.061,
+  0.1769,
+  0.0516
+ ],
+ "seconds": 693
+}
