@@ -159,6 +159,8 @@ class Local:
         from pathlib import Path
         path = Path(path)
         files = sorted(path.glob("*.safetensors")) if path.is_dir() else [path]
+        if not files:
+            raise FileNotFoundError(f"no safetensors weights in {path}")
         r = cls(str(path))
         for f in files:
             with open(f, "rb") as fh:

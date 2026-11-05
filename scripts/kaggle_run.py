@@ -98,7 +98,8 @@ for key, value in ENV.items():
     if value.startswith("merge:"):   # several mounted outputs, one family/split tree
         dest = pathlib.Path("/tmp/merged-" + value[6:])
         for root in pathlib.Path("/kaggle/input").rglob(value[6:]):
-            if not root.is_dir():
+            # the code upload holds committed meta.json copies (no weights): never use them
+            if not root.is_dir() or "Pedigree" in root.parts:
                 continue
             for fam in root.iterdir():
                 for split in fam.iterdir():
@@ -107,7 +108,8 @@ for key, value in ENV.items():
                         (dest / fam.name / split.name).symlink_to(split, target_is_directory=True)
         value = str(dest)
     elif value.startswith("find:"):
-        value = str(next(p for p in pathlib.Path("/kaggle/input").rglob(value[5:]) if p.is_dir()))
+        value = str(next(p for p in pathlib.Path("/kaggle/input").rglob(value[5:])
+                         if p.is_dir() and "Pedigree" not in p.parts))
     os.environ[key] = value
     print(key, "=", value, flush=True)
 ledger = work / "results" / "ledger.jsonl"
