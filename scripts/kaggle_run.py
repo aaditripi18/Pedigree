@@ -47,6 +47,11 @@ JOBS = {f"ft-{f}": _job(f"pedigree-ft-{f.replace('_', '-')}",
 JOBS.update({f"ft-{f}@{s}": _job(f"pedigree-ft-{f.replace('_', '-')}-{s}", [["-m", "experiments.finetune", f, s]],
                                  gpu=False)
              for f in FAMILIES for s in ("dev", "fresh")})
+KINDS = ["ft_short", "ft_long", "lora_r8", "lora_r64", "scratch"]
+JOBS.update({f"ft-vision_transformer@dev:{k}": _job(f"pedigree-ft-vit-dev-{k.replace('_', '-')}",
+                                                   [["-m", "experiments.finetune", "vision_transformer", "dev", k]],
+                                                   gpu=False)
+             for k in KINDS})
 # E1 comparisons: CPU, reading the derivatives from the matching ft- job's output
 JOBS.update({f"e1-{f}": _job(f"pedigree-e1-{f.replace('_', '-')}", [["-m", "experiments.e1_verify", f]], gpu=False,
                              sources=[f"ft-{f}"], env={"PEDIGREE_DERIVATIVES": "find:derivatives"})
@@ -101,11 +106,15 @@ for key, value in ENV.items():
             # the code upload holds committed meta.json copies (no weights): never use them
             if not root.is_dir() or "Pedigree" in root.parts:
                 continue
-            for fam in root.iterdir():
-                for split in fam.iterdir():
-                    (dest / fam.name).mkdir(parents=True, exist_ok=True)
-                    if not (dest / fam.name / split.name).exists():
-                        (dest / fam.name / split.name).symlink_to(split, target_is_directory=True)
+            # link each finished derivative (family/split/kind with its weights), so one
+            # split may come from several sessions (a base split into one kind per session)
+            for kind in root.glob("*/*/*"):
+                if not (kind / "model.safetensors").exists():
+                    continue
+                link = dest / kind.relative_to(root)
+                link.parent.mkdir(parents=True, exist_ok=True)
+                if not link.exists():
+                    link.symlink_to(kind, target_is_directory=True)
         value = str(dest)
     elif value.startswith("find:"):
         value = str(next(p for p in pathlib.Path("/kaggle/input").rglob(value[5:])
