@@ -1,0 +1,43 @@
+{
+ "family": "vision_cnn",
+ "split": "dev",
+ "kind": "ft_short",
+ "base": "timm/resnet50.a1_in1k",
+ "base_commit": "767268603ca0cb0bfe326fa87277f19c419566ef",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cpu",
+ "versions": {
+  "torch": "2.11.0+cpu",
+  "transformers": "5.20.2",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "1652b1a",
+  "dirty": false
+ },
+ "data": {
+  "task": "cifar10",
+  "sha256": "8428b53a88a11ac374111006708df51469e315a22ac6d66470afd9c78d2ae883"
+ },
+ "losses": [
+  2.2837,
+  2.2837,
+  2.2848,
+  2.2252,
+  2.286,
+  2.2365,
+  2.1957,
+  2.257,
+  2.2322,
+  2.2448,
+  2.2506,
+  2.2102,
+  2.1996
+ ],
+ "seconds": 398
+}
