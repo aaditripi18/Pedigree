@@ -1,35 +1,41 @@
-[{"stream_name":"stdout","time":17.607849742,"data":"code 7a60816\n"}
-,{"stream_name":"stdout","time":102.333173792,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
-,{"stream_name":"stdout","time":109.673749362,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
-,{"stream_name":"stderr","time":118.708068557,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
-,{"stream_name":"stdout","time":124.141851488,"data":"vision_transformer/dev: google/vit-base-patch16-224-in21k@b4569560a3\n"}
-,{"stream_name":"stdout","time":124.143928372,"data":"  ft_short: MISSING\n"}
-,{"stream_name":"stdout","time":124.145535942,"data":"  ft_long: MISSING\n"}
-,{"stream_name":"stdout","time":124.146192485,"data":"  lora_r8: MISSING\n"}
-,{"stream_name":"stdout","time":124.14646333,"data":"  lora_r64: MISSING\n"}
-,{"stream_name":"stdout","time":124.146894225,"data":"  scratch: MISSING\n"}
-,{"stream_name":"stdout","time":159.312096744,"data":"  independent  ERROR no shared tensor carries the residual stream alone\n"}
-,{"stream_name":"stderr","time":161.068501017,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
-,{"stream_name":"stdout","time":161.449804143,"data":"vision_transformer/fresh: WinKawaks/vit-small-patch16-224@0c08c18290\n"}
-,{"stream_name":"stdout","time":163.644667696,"data":"  ft_short     local:vision_transformer/fresh/ft_short  plain 0.9999951452493336  invariant 0.9999939004455943  aligned 0.9999939004455943\n"}
-,{"stream_name":"stdout","time":164.440575745,"data":"  ft_long      local:vision_transformer/fresh/ft_long   plain 0.9999649480333763  invariant 0.9999428543345995  aligned 0.9999428543345995\n"}
-,{"stream_name":"stdout","time":165.228121923,"data":"  lora_r8      local:vision_transformer/fresh/lora_r8   plain 1.0  invariant 1.0  aligned 1.0\n"}
-,{"stream_name":"stdout","time":166.070740675,"data":"  lora_r64     local:vision_transformer/fresh/lora_r64  plain 1.0  invariant 1.0  aligned 1.0\n"}
-,{"stream_name":"stdout","time":166.852644994,"data":"  scratch      local:vision_transformer/fresh/scratch   plain -0.0019976368150007146  invariant 0.003838643389723498  aligned 0.011398019252894409\n"}
-,{"stream_name":"stdout","time":173.378922876,"data":"  q8_0         local:vision_transformer/fresh/ft_long+q plain 0.999936186205181  invariant 0.9999305295727852  aligned 0.9999305295727852\n"}
-,{"stream_name":"stdout","time":173.823012533,"data":"  q4_0         local:vision_transformer/fresh/ft_long+q plain 0.9944153054082656  invariant 0.9967659262077363  aligned 0.9967659262077363\n"}
-,{"stream_name":"stdout","time":174.654191962,"data":"  prune50      local:vision_transformer/fresh/ft_long+p plain 0.9920275179913206  invariant 0.9835000686248501  aligned 0.9835000686248501\n"}
-,{"stream_name":"stdout","time":175.370625362,"data":"  prune90      local:vision_transformer/fresh/ft_long+p plain 0.8612925740577955  invariant 0.7281054870163395  aligned 0.7281054870163395\n"}
-,{"stream_name":"stdout","time":175.77773194,"data":"  permuted     local:vision_transformer/fresh/ft_long+p plain 0.9999649480333763  invariant 0.9999428543345995  aligned 0.9999428543345995\n"}
-,{"stream_name":"stderr","time":175.926444878,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
-,{"stream_name":"stdout","time":177.271035342,"data":"  permuted_full local:vision_transformer/fresh/ft_long+p plain -0.016930795327307416  invariant 0.999919144476479  aligned 0.9999428543345995\n"}
-,{"stream_name":"stdout","time":206.195524117,"data":"  independent  ERROR no shared tensor carries the residual stream alone\n"}
-,{"stream_name":"stdout","time":207.205796059,"data":"exit 0 -m experiments.e1_verify vision_transformer\n"}
-,{"stream_name":"stdout","time":207.209921411,"data":"18 new ledger lines; 0 failed commands\n"}
-,{"stream_name":"stderr","time":209.929480868,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":209.929517016,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":210.219303646,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":210.219334633,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":211.154048125,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
-,{"stream_name":"stderr","time":212.432006098,"data":"[NbConvertApp] Writing 291012 bytes to __results__.html\n"}
+[{"stream_name":"stdout","time":18.954390501,"data":"code 7735b92\n"}
+,{"stream_name":"stdout","time":79.111160535,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":86.755342564,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
+,{"stream_name":"stderr","time":93.60310798,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":97.662173296,"data":"vision_transformer/dev: google/vit-base-patch16-224-in21k@b4569560a3\n"}
+,{"stream_name":"stdout","time":127.539834891,"data":"  ft_short     local:vision_transformer/dev/ft_short    plain 0.9999744134858022  invariant 0.9999795009610406  aligned 0.9999795009610406\n"}
+,{"stream_name":"stdout","time":144.455975557,"data":"  ft_long      local:vision_transformer/dev/ft_long     plain 0.9998668088973444  invariant 0.9998851327380818  aligned 0.9998851327380818\n"}
+,{"stream_name":"stdout","time":161.024120295,"data":"  lora_r8      local:vision_transformer/dev/lora_r8     plain 1.0  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":177.733765157,"data":"  lora_r64     local:vision_transformer/dev/lora_r64    plain 1.0  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":194.399167539,"data":"  scratch      local:vision_transformer/dev/scratch     plain 0.001211880547181999  invariant 0.0009270313951116729  aligned 0.0009502608078577825\n"}
+,{"stream_name":"stdout","time":235.16689555,"data":"  q8_0         local:vision_transformer/dev/ft_long+q8_ plain 0.9998510570215369  invariant 0.9998730288307773  aligned 0.9998730288307773\n"}
+,{"stream_name":"stdout","time":244.776526311,"data":"  q4_0         local:vision_transformer/dev/ft_long+q4_ plain 0.9959904930366831  invariant 0.9979270413649585  aligned 0.9979270413649585\n"}
+,{"stream_name":"stdout","time":256.556867157,"data":"  prune50      local:vision_transformer/dev/ft_long+pru plain 0.9669241118717915  invariant 0.9825514799801023  aligned 0.9783681415586909\n"}
+,{"stream_name":"stdout","time":268.055178714,"data":"  prune90      local:vision_transformer/dev/ft_long+pru plain 0.6766739040717846  invariant 0.7572035827299772  aligned 0.7024771497126472\n"}
+,{"stream_name":"stdout","time":277.955564352,"data":"  permuted     local:vision_transformer/dev/ft_long+per plain 0.9998153623807218  invariant 0.9998851327380818  aligned 0.9998851327380818\n"}
+,{"stream_name":"stdout","time":290.561287024,"data":"  permuted_full local:vision_transformer/dev/ft_long+per plain -0.0025658778268436086  invariant 0.9997538301292692  aligned 0.9998851327380818\n"}
+,{"stream_name":"stdout","time":329.76916088,"data":"  independent  facebook/vit-mae-base                    plain 0.001089743828877215  invariant 0.0024022208814922326  aligned 0.004091624276261356\n"}
+,{"stream_name":"stderr","time":331.097968438,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":331.418215121,"data":"vision_transformer/fresh: WinKawaks/vit-small-patch16-224@0c08c18290\n"}
+,{"stream_name":"stdout","time":352.647750908,"data":"  ft_short     local:vision_transformer/fresh/ft_short  plain 0.9999781746105232  invariant 0.9999772289165484  aligned 0.9999772289165484\n"}
+,{"stream_name":"stdout","time":361.14604556,"data":"  ft_long      local:vision_transformer/fresh/ft_long   plain 0.9998536766333423  invariant 0.9998290906239109  aligned 0.9998290906239109\n"}
+,{"stream_name":"stdout","time":370.038278151,"data":"  lora_r8      local:vision_transformer/fresh/lora_r8   plain 0.9999999999999999  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":379.022918383,"data":"  lora_r64     local:vision_transformer/fresh/lora_r64  plain 0.9999999999999999  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":387.779238076,"data":"  scratch      local:vision_transformer/fresh/scratch   plain -0.0013115368919036227  invariant 0.0014279757245165775  aligned 0.0018968981818897894\n"}
+,{"stream_name":"stdout","time":394.214328372,"data":"  q8_0         local:vision_transformer/fresh/ft_long+q plain 0.9998380997797977  invariant 0.9998107434396114  aligned 0.9998107434396114\n"}
+,{"stream_name":"stdout","time":396.12199284,"data":"  q4_0         local:vision_transformer/fresh/ft_long+q plain 0.9959851595718636  invariant 0.9964860412689018  aligned 0.9964860412689018\n"}
+,{"stream_name":"stdout","time":398.474924459,"data":"  prune50      local:vision_transformer/fresh/ft_long+p plain 0.9673013793824825  invariant 0.9720038724775407  aligned 0.9678301748912161\n"}
+,{"stream_name":"stdout","time":400.724065154,"data":"  prune90      local:vision_transformer/fresh/ft_long+p plain 0.6812767385425338  invariant 0.653067960951661  aligned 0.5862018830362095\n"}
+,{"stream_name":"stdout","time":402.688988021,"data":"  permuted     local:vision_transformer/fresh/ft_long+p plain 0.9997998428947565  invariant 0.9998290906239109  aligned 0.9998290906239109\n"}
+,{"stream_name":"stderr","time":402.83562655,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":405.504402193,"data":"  permuted_full local:vision_transformer/fresh/ft_long+p plain -0.0011722337601518485  invariant 0.9996989343846934  aligned 0.9998290906239109\n"}
+,{"stream_name":"stdout","time":436.308336118,"data":"  independent  facebook/dinov2-small                    plain 0.0020186010467989754  invariant 0.002510126303157641  aligned 0.0021417038447890985\n"}
+,{"stream_name":"stdout","time":437.323100187,"data":"exit 0 -m experiments.e1_verify vision_transformer\n"}
+,{"stream_name":"stdout","time":437.32764305,"data":"24 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":440.029163753,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":440.02920179,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":440.339235644,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":440.339268999,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":441.298377655,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":442.620141222,"data":"[NbConvertApp] Writing 291012 bytes to __results__.html\n"}
 ]
