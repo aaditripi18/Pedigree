@@ -62,7 +62,11 @@ JOBS.update({f"e1-{f}@split": _job(f"pedigree-e1-{f.replace('_', '-')}", [["-m",
                                    gpu=False, sources=[f"ft-{f}@dev", f"ft-{f}@fresh"],
                                    env={"PEDIGREE_DERIVATIVES": "merge:derivatives"})
              for f in FAMILIES})
-JOBS["e6e7"] =_job("pedigree-e6-e7", [["-m", "experiments.e6_e7"]], gpu=False)
+# Kaggle refuses a session stopped by its 12 h limit as an input, so a split that hit
+# the limit is rebuilt one derivative per session and E1 reads only finished sessions
+JOBS["e1-vision_transformer@split"]["sources"] = (["ft-vision_transformer@fresh"]
+                                                  + [f"ft-vision_transformer@dev:{k}" for k in KINDS])
+JOBS["e6e7"] = _job("pedigree-e6-e7", [["-m", "experiments.e6_e7"]], gpu=False)
 # E5: students (GPU) written to their own folder; image teachers come from the ft- output
 E5_FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn"]
 JOBS.update({f"distill-{f}": _job(f"pedigree-distill-{f.replace('_', '-')}",
