@@ -42,9 +42,12 @@ def _pair(run, mdl, base, **label) -> None:
         aligned = {}
         if ARCH.get(label["family"]):
             axes, arch_shapes = ARCH[label["family"]]
-            fixed, info = unpermute(mdl, base, axes, arch_shapes)
-            aligned = {"median_aligned_invariant": compare_invariant(fixed, base)["median_invariant"],
-                       "median_aligned_plain": compare(fixed, base)["median_cosine"], "alignment": info}
+            try:   # defence (ii) can be impossible (no shared embedding); plain and invariant still stand
+                fixed, info = unpermute(mdl, base, axes, arch_shapes)
+                aligned = {"median_aligned_invariant": compare_invariant(fixed, base)["median_invariant"],
+                           "median_aligned_plain": compare(fixed, base)["median_cosine"], "alignment": info}
+            except ValueError as e:
+                aligned = {"aligned_error": f"{type(e).__name__}: {e}"}
         run.record(**label, base=base.repo, base_commit=base.commit, model_commit=mdl.commit,
                    matched=plain["matched"], match_share=round(plain["match_share"], 4),
                    compared=plain["compared"], median_cosine=plain["median_cosine"],

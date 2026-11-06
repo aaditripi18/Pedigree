@@ -6,12 +6,36 @@ S5 alignment (MIT), which E8 showed must be used everywhere a pair is compared.
 """
 from __future__ import annotations
 
+import re
+
 _LEGACY_NAMES = {"gamma": "weight", "beta": "bias"}
+# transformers 5 renamed the layers of several architectures (ViT: encoder.layer.N ->
+# layers.N, attention.attention.query -> attention.q_proj, intermediate.dense -> mlp.fc1,
+# output.dense -> mlp.fc2). A model saved with one version and its base saved with the
+# other are the same tensors under two names, so both sides are mapped to one form first.
+_RENAMES = [
+    (re.compile(r"(^|\.)encoder\.layer\.(\d+)\."), r"\1layers.\2."),
+    (re.compile(r"\.attention\.(?:attention|self)\.query\."), ".attention.q_proj."),
+    (re.compile(r"\.attention\.(?:attention|self)\.key\."), ".attention.k_proj."),
+    (re.compile(r"\.attention\.(?:attention|self)\.value\."), ".attention.v_proj."),
+    (re.compile(r"\.attention\.output\.dense\."), ".attention.o_proj."),
+    (re.compile(r"\.attention\.output\.LayerNorm\."), ".attention_layernorm."),
+    (re.compile(r"(layers\.\d+)\.intermediate\.dense\."), r"\1.mlp.fc1."),
+    (re.compile(r"(layers\.\d+)\.output\.dense\."), r"\1.mlp.fc2."),
+    (re.compile(r"(layers\.\d+)\.output\.LayerNorm\."), r"\1.output_layernorm."),
+]
 MAX_DROP = 2
 
 
+def canonical(name: str) -> str:
+    """One spelling for a tensor saved under any transformers version's names."""
+    for pat, rep in _RENAMES:
+        name = pat.sub(rep, name)
+    return name
+
+
 def _canon(name: str, drop: int) -> str:
-    parts = name.split(".")[drop:]
+    parts = canonical(name).split(".")[drop:]
     if parts and parts[-1] in _LEGACY_NAMES:
         parts[-1] = _LEGACY_NAMES[parts[-1]]
     return ".".join(parts)

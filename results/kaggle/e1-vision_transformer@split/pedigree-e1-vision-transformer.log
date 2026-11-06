@@ -1,0 +1,35 @@
+[{"stream_name":"stdout","time":17.607849742,"data":"code 7a60816\n"}
+,{"stream_name":"stdout","time":102.333173792,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":109.673749362,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
+,{"stream_name":"stderr","time":118.708068557,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":124.141851488,"data":"vision_transformer/dev: google/vit-base-patch16-224-in21k@b4569560a3\n"}
+,{"stream_name":"stdout","time":124.143928372,"data":"  ft_short: MISSING\n"}
+,{"stream_name":"stdout","time":124.145535942,"data":"  ft_long: MISSING\n"}
+,{"stream_name":"stdout","time":124.146192485,"data":"  lora_r8: MISSING\n"}
+,{"stream_name":"stdout","time":124.14646333,"data":"  lora_r64: MISSING\n"}
+,{"stream_name":"stdout","time":124.146894225,"data":"  scratch: MISSING\n"}
+,{"stream_name":"stdout","time":159.312096744,"data":"  independent  ERROR no shared tensor carries the residual stream alone\n"}
+,{"stream_name":"stderr","time":161.068501017,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":161.449804143,"data":"vision_transformer/fresh: WinKawaks/vit-small-patch16-224@0c08c18290\n"}
+,{"stream_name":"stdout","time":163.644667696,"data":"  ft_short     local:vision_transformer/fresh/ft_short  plain 0.9999951452493336  invariant 0.9999939004455943  aligned 0.9999939004455943\n"}
+,{"stream_name":"stdout","time":164.440575745,"data":"  ft_long      local:vision_transformer/fresh/ft_long   plain 0.9999649480333763  invariant 0.9999428543345995  aligned 0.9999428543345995\n"}
+,{"stream_name":"stdout","time":165.228121923,"data":"  lora_r8      local:vision_transformer/fresh/lora_r8   plain 1.0  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":166.070740675,"data":"  lora_r64     local:vision_transformer/fresh/lora_r64  plain 1.0  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":166.852644994,"data":"  scratch      local:vision_transformer/fresh/scratch   plain -0.0019976368150007146  invariant 0.003838643389723498  aligned 0.011398019252894409\n"}
+,{"stream_name":"stdout","time":173.378922876,"data":"  q8_0         local:vision_transformer/fresh/ft_long+q plain 0.999936186205181  invariant 0.9999305295727852  aligned 0.9999305295727852\n"}
+,{"stream_name":"stdout","time":173.823012533,"data":"  q4_0         local:vision_transformer/fresh/ft_long+q plain 0.9944153054082656  invariant 0.9967659262077363  aligned 0.9967659262077363\n"}
+,{"stream_name":"stdout","time":174.654191962,"data":"  prune50      local:vision_transformer/fresh/ft_long+p plain 0.9920275179913206  invariant 0.9835000686248501  aligned 0.9835000686248501\n"}
+,{"stream_name":"stdout","time":175.370625362,"data":"  prune90      local:vision_transformer/fresh/ft_long+p plain 0.8612925740577955  invariant 0.7281054870163395  aligned 0.7281054870163395\n"}
+,{"stream_name":"stdout","time":175.77773194,"data":"  permuted     local:vision_transformer/fresh/ft_long+p plain 0.9999649480333763  invariant 0.9999428543345995  aligned 0.9999428543345995\n"}
+,{"stream_name":"stderr","time":175.926444878,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":177.271035342,"data":"  permuted_full local:vision_transformer/fresh/ft_long+p plain -0.016930795327307416  invariant 0.999919144476479  aligned 0.9999428543345995\n"}
+,{"stream_name":"stdout","time":206.195524117,"data":"  independent  ERROR no shared tensor carries the residual stream alone\n"}
+,{"stream_name":"stdout","time":207.205796059,"data":"exit 0 -m experiments.e1_verify vision_transformer\n"}
+,{"stream_name":"stdout","time":207.209921411,"data":"18 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":209.929480868,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":209.929517016,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":210.219303646,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":210.219334633,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":211.154048125,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":212.432006098,"data":"[NbConvertApp] Writing 291012 bytes to __results__.html\n"}
+]

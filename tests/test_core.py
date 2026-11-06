@@ -47,3 +47,20 @@ def test_align_pairs_wrapped_names_and_legacy_layernorm():
 def test_align_refuses_shape_mismatch():
     pairs, _, _ = align({"w": ("float", (4, 4))}, {"w": ("float", (4, 5))})
     assert pairs == {}
+
+
+def test_align_pairs_old_and_new_transformers_names():
+    """A ViT saved by transformers 5 and its base saved by transformers 4 pair up."""
+    old = {"vit.encoder.layer.0.attention.attention.query.weight": ("float", (8, 8)),
+           "vit.encoder.layer.0.attention.output.dense.weight": ("float", (8, 8)),
+           "vit.encoder.layer.0.intermediate.dense.weight": ("float", (32, 8)),
+           "vit.encoder.layer.0.output.dense.weight": ("float", (8, 32))}
+    new = {"vit.layers.0.attention.q_proj.weight": ("float", (8, 8)),
+           "vit.layers.0.attention.o_proj.weight": ("float", (8, 8)),
+           "vit.layers.0.mlp.fc1.weight": ("float", (32, 8)),
+           "vit.layers.0.mlp.fc2.weight": ("float", (8, 32))}
+    pairs, _, _ = align(new, old)
+    assert pairs == {"vit.layers.0.attention.q_proj.weight": "vit.encoder.layer.0.attention.attention.query.weight",
+                     "vit.layers.0.attention.o_proj.weight": "vit.encoder.layer.0.attention.output.dense.weight",
+                     "vit.layers.0.mlp.fc1.weight": "vit.encoder.layer.0.intermediate.dense.weight",
+                     "vit.layers.0.mlp.fc2.weight": "vit.encoder.layer.0.output.dense.weight"}
