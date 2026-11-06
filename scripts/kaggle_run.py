@@ -217,7 +217,7 @@ def status(job: str) -> str:
 
 def pull(job: str) -> None:
     """Ledger lines, failure list and every derivative's meta.json (not the weights)."""
-    dest = ROOT / "results" / "kaggle" / job
+    dest = ROOT / "results" / "kaggle" / job.replace(":", "__")  # ":" is not allowed in Windows names
     with tempfile.TemporaryDirectory() as d:
         kaggle("kernels", "output", f"{USER}/{JOBS[job]['kernel']}", "-p", d, "--file-pattern",
                r".*(\.jsonl|\.txt|meta\.json|\.log)$", check=False)

@@ -1,0 +1,43 @@
+{
+ "family": "text_encoder",
+ "split": "fresh",
+ "kind": "ft_short",
+ "base": "FacebookAI/roberta-base",
+ "base_commit": "e2da8e2f811d1448a5b465c236feacd80ffbac7b",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cuda",
+ "versions": {
+  "torch": "2.11.0+cu130",
+  "transformers": "5.20.2",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "6deed70",
+  "dirty": false
+ },
+ "data": {
+  "task": "wikitext2",
+  "sha256": "e83889baabc497075506f91975be5fac0d45c5290b6b20582c8cd1e853d0c9f7"
+ },
+ "losses": [
+  1.581,
+  2.029,
+  1.8986,
+  2.1353,
+  2.024,
+  2.2411,
+  1.3797,
+  1.977,
+  1.2752,
+  2.0645,
+  2.1551,
+  1.8982,
+  1.6752
+ ],
+ "seconds": 102
+}

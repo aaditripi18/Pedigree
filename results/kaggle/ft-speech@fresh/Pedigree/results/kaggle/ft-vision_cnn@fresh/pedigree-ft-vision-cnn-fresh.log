@@ -1,0 +1,22 @@
+[{"stream_name":"stdout","time":7.893742182,"data":"code 1652b1a\n"}
+,{"stream_name":"stdout","time":66.002659868,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.20.2 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":73.188116653,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":78.378429855,"data":"/kaggle/working/Pedigree/experiments/finetune.py:113: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":78.378483791,"data":"  return (torch.from_numpy(np.asarray(img)).permute(2, 0, 1).float() / 255 - m) / s\n"}
+,{"stream_name":"stderr","time":79.533298686,"data":"/kaggle/working/Pedigree/experiments/finetune.py:222: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":79.533340751,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":79.533348416,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":274.142172489,"data":"vision_cnn/fresh/ft_short: 300 steps, loss 2.3586 -\u003e 2.2141, 204 s\n"}
+,{"stream_name":"stdout","time":2189.006505179,"data":"vision_cnn/fresh/ft_long: 3000 steps, loss 2.268 -\u003e 1.0673, 1915 s\n"}
+,{"stream_name":"stdout","time":3483.725786978,"data":"vision_cnn/fresh/lora_r8: 3000 steps, loss 2.268 -\u003e 1.7648, 1295 s\n"}
+,{"stream_name":"stdout","time":5027.602411451,"data":"vision_cnn/fresh/lora_r64: 3000 steps, loss 2.268 -\u003e 1.5045, 1544 s\n"}
+,{"stream_name":"stdout","time":6963.931488594,"data":"vision_cnn/fresh/scratch: 3000 steps, loss 2.3527 -\u003e 1.783, 1936 s\n"}
+,{"stream_name":"stdout","time":6965.525814245,"data":"exit 0 -m experiments.finetune vision_cnn fresh\n"}
+,{"stream_name":"stdout","time":6965.529247885,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":6968.616853005,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":6968.616889296,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":6969.018001333,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":6969.018038743,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":6970.073379165,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":6971.702026495,"data":"[NbConvertApp] Writing 290083 bytes to __results__.html\n"}
+]

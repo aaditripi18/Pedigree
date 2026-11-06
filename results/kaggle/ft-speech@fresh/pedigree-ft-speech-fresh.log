@@ -1,0 +1,24 @@
+[{"stream_name":"stdout","time":23.724762979,"data":"code a774ba9\n"}
+,{"stream_name":"stdout","time":112.283550731,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":127.458207016,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":134.684371096,"data":"\rLoading weights:   0%|          | 0/212 [00:00\u003c?, ?it/s]\rLoading weights:  73%|███████▎  | 154/212 [00:00\u003c00:00, 1532.54it/s]\rLoading weights: 100%|██████████| 212/212 [00:00\u003c00:00, 1634.30it/s]\n"}
+,{"stream_name":"stderr","time":134.823766074,"data":"[transformers] \u001b[1mWav2Vec2ForCTC LOAD REPORT\u001b[0m from: facebook/wav2vec2-base-960h\n"}
+,{"stream_name":"stderr","time":134.82381593,"data":"Key                        | Status  | \n"}
+,{"stream_name":"stderr","time":134.823822225,"data":"---------------------------+---------+-\n"}
+,{"stream_name":"stderr","time":134.823826196,"data":"wav2vec2.masked_spec_embed | MISSING | \n"}
+,{"stream_name":"stderr","time":134.823830044,"data":"\n"}
+,{"stream_name":"stderr","time":134.823834965,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":134.823841465,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":227.805239268,"data":"/kaggle/working/Pedigree/experiments/finetune.py:231: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":227.805304688,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":227.805311267,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":18924.937301327,"data":"speech/fresh/ft_short: 300 steps, loss 330.7861 -\u003e 19.1891, 18808 s\n"}
+,{"stream_name":"stderr","time":18925.948198814,"data":"\rLoading weights:   0%|          | 0/212 [00:00\u003c?, ?it/s]\rLoading weights:  83%|████████▎ | 176/212 [00:00\u003c00:00, 1754.54it/s]\rLoading weights: 100%|██████████| 212/212 [00:00\u003c00:00, 1827.22it/s]\n"}
+,{"stream_name":"stderr","time":18926.05845997,"data":"[transformers] \u001b[1mWav2Vec2ForCTC LOAD REPORT\u001b[0m from: facebook/wav2vec2-base-960h\n"}
+,{"stream_name":"stderr","time":18926.058505088,"data":"Key                        | Status  | \n"}
+,{"stream_name":"stderr","time":18926.05852433,"data":"---------------------------+---------+-\n"}
+,{"stream_name":"stderr","time":18926.058530249,"data":"wav2vec2.masked_spec_embed | MISSING | \n"}
+,{"stream_name":"stderr","time":18926.058535993,"data":"\n"}
+,{"stream_name":"stderr","time":18926.058541977,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":18926.058547209,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+]

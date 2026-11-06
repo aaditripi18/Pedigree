@@ -1,0 +1,43 @@
+{
+ "family": "text_decoder",
+ "split": "fresh",
+ "kind": "ft_short",
+ "base": "EleutherAI/pythia-160m",
+ "base_commit": "50f5173d932e8e61f858120bcb800b97af589f46",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cuda",
+ "versions": {
+  "torch": "2.11.0+cu130",
+  "transformers": "5.20.2",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "4f83e99",
+  "dirty": false
+ },
+ "data": {
+  "task": "wikitext2",
+  "sha256": "e83889baabc497075506f91975be5fac0d45c5290b6b20582c8cd1e853d0c9f7"
+ },
+ "losses": [
+  4.0371,
+  3.6883,
+  3.5718,
+  3.4567,
+  3.6298,
+  3.4061,
+  3.3927,
+  3.6366,
+  3.6519,
+  3.607,
+  3.7998,
+  3.6489,
+  3.3921
+ ],
+ "seconds": 180
+}

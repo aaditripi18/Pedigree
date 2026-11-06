@@ -1,0 +1,52 @@
+[{"stream_name":"stdout","time":6.301779533,"data":"code 1652b1a\n"}
+,{"stream_name":"stdout","time":60.712408245,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.20.2 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":62.566187028,"data":"PEDIGREE_DERIVATIVES = /kaggle/input/notebooks/aadityae5545454/pedigree-ft-text-decoder/derivatives\n"}
+,{"stream_name":"stdout","time":75.779725635,"data":"text_decoder/dev: openai-community/gpt2@607a30d783\n"}
+,{"stream_name":"stdout","time":119.219036393,"data":"  ft_short     local:text_decoder/dev/ft_short          plain 0.9999939422993342  invariant 0.9999968303467359  aligned 0.9999968303467359\n"}
+,{"stream_name":"stdout","time":144.672368152,"data":"  ft_long      local:text_decoder/dev/ft_long           plain 0.999932322838395  invariant 0.999967085126095  aligned 0.999967085126095\n"}
+,{"stream_name":"stdout","time":169.798963219,"data":"  lora_r8      local:text_decoder/dev/lora_r8           plain 1.0  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":194.827883573,"data":"  lora_r64     local:text_decoder/dev/lora_r64          plain 1.0  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":220.786452097,"data":"  scratch      local:text_decoder/dev/scratch           plain -0.007055114152547089  invariant 0.0010987195813839381  aligned 0.0022797532505865704\n"}
+,{"stream_name":"stdout","time":286.645099371,"data":"  q8_0         local:text_decoder/dev/ft_long+q8_0      plain 0.9999148388880141  invariant 0.9999586293815206  aligned 0.9999586293815206\n"}
+,{"stream_name":"stdout","time":303.340064481,"data":"  q4_0         local:text_decoder/dev/ft_long+q4_0      plain 0.9959922862814059  invariant 0.9980083022524837  aligned 0.9967545212497093\n"}
+,{"stream_name":"stdout","time":321.58751127,"data":"  prune50      local:text_decoder/dev/ft_long+prune50   plain 0.9680340976302637  invariant 0.9864801924408398  aligned 0.9864801924408398\n"}
+,{"stream_name":"stdout","time":340.655118383,"data":"  prune90      local:text_decoder/dev/ft_long+prune90   plain 0.690070771609482  invariant 0.8181994907867753  aligned 0.8181994907867753\n"}
+,{"stream_name":"stdout","time":361.509123114,"data":"  permuted     local:text_decoder/dev/ft_long+permuted  plain 0.5127675442229892  invariant 0.999967085126095  aligned 0.999967085126095\n"}
+,{"stream_name":"stdout","time":386.689211574,"data":"  permuted_full local:text_decoder/dev/ft_long+permuted_ plain 0.002286155432209503  invariant 0.9998888110022535  aligned 0.999967085126095\n"}
+,{"stream_name":"stdout","time":432.326864202,"data":"  independent  stanford-crfm/alias-gpt2-small-x21       plain 0.003221348804658906  invariant 0.0014483076721499657  aligned 0.012274183974600374\n"}
+,{"stream_name":"stdout","time":480.162598429,"data":"  independent  stanford-crfm/battlestar-gpt2-small-x49  plain -0.0007419479514110258  invariant 0.003165295255883199  aligned 0.012387398943425929\n"}
+,{"stream_name":"stdout","time":547.951259064,"data":"  independent  stanford-crfm/caprica-gpt2-small-x81     plain -0.009858309303713324  invariant 0.0061589451692056  aligned 0.011933671575519812\n"}
+,{"stream_name":"stdout","time":615.98572263,"data":"  independent  stanford-crfm/darkmatter-gpt2-small-x343 plain -0.005100477479116718  invariant 0.003280659443331841  aligned 0.011696131209451947\n"}
+,{"stream_name":"stdout","time":673.588924985,"data":"  independent  stanford-crfm/expanse-gpt2-small-x777    plain 0.0006112025095352106  invariant 0.0031845606276890313  aligned 0.011004982272004457\n"}
+,{"stream_name":"stdout","time":723.809806102,"data":"  public_derivative distilbert/distilgpt2                    plain 0.012876854879172003  invariant 0.34239065621243536  aligned 0.34239065621243536\n"}
+,{"stream_name":"stderr","time":725.011485296,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":734.74932942,"data":"text_decoder/fresh: EleutherAI/pythia-160m@50f5173d93\n"}
+,{"stream_name":"stdout","time":780.669380057,"data":"  ft_short     local:text_decoder/fresh/ft_short        plain 0.9999167002276748  invariant 0.9999561206070366  aligned 0.9999561206070366\n"}
+,{"stream_name":"stdout","time":807.550383958,"data":"  ft_long      local:text_decoder/fresh/ft_long         plain 0.9991196954037017  invariant 0.9994680975657247  aligned 0.9994680975657247\n"}
+,{"stream_name":"stdout","time":839.489954512,"data":"  lora_r8      local:text_decoder/fresh/lora_r8         plain 1.0  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":869.010282813,"data":"  lora_r64     local:text_decoder/fresh/lora_r64        plain 1.0  invariant 1.0  aligned 1.0\n"}
+,{"stream_name":"stdout","time":896.613533479,"data":"  scratch      local:text_decoder/fresh/scratch         plain -0.0025556829135578675  invariant 0.00020215350705964723  aligned 0.0013497283653554964\n"}
+,{"stream_name":"stdout","time":937.922524574,"data":"  q8_0         local:text_decoder/fresh/ft_long+q8_0    plain 0.9991030902855539  invariant 0.9994588263421612  aligned 0.9994588263421612\n"}
+,{"stream_name":"stdout","time":956.550096673,"data":"  q4_0         local:text_decoder/fresh/ft_long+q4_0    plain 0.9951394078859517  invariant 0.9968259975599194  aligned 0.9968259975599194\n"}
+,{"stream_name":"stdout","time":979.324393106,"data":"  prune50      local:text_decoder/fresh/ft_long+prune50 plain 0.9639759645854871  invariant 0.9776203652782004  aligned 0.9776203652782004\n"}
+,{"stream_name":"stdout","time":1008.606324803,"data":"  prune90      local:text_decoder/fresh/ft_long+prune90 plain 0.6613715472346025  invariant 0.7147747217991263  aligned 0.7147747217991263\n"}
+,{"stream_name":"stdout","time":1026.970907426,"data":"  permuted     local:text_decoder/fresh/ft_long+permute plain 0.9964149581748027  invariant 0.9994680975657249  aligned 0.9994680975657249\n"}
+,{"stream_name":"stdout","time":1057.934427356,"data":"  permuted_full local:text_decoder/fresh/ft_long+permute plain -0.003231541045623069  invariant 0.12017822360381067  aligned 0.9994680893550307\n"}
+,{"stream_name":"stdout","time":1119.857441465,"data":"  independent  EleutherAI/pythia-160m-seed1             plain 0.0028944934094862164  invariant 0.0027281846437498727  aligned 0.002031003745267165\n"}
+,{"stream_name":"stdout","time":1165.966791341,"data":"  independent  EleutherAI/pythia-160m-seed2             plain -0.003263388907846841  invariant 0.0016326176019279218  aligned 0.002061413380973112\n"}
+,{"stream_name":"stdout","time":1210.751616249,"data":"  independent  EleutherAI/pythia-160m-seed3             plain 0.001357195554201602  invariant 0.002030818552864945  aligned 0.0023735506792731285\n"}
+,{"stream_name":"stdout","time":1269.214345639,"data":"  independent  EleutherAI/pythia-160m-seed4             plain -0.0019943069828787354  invariant 0.0030250252270707318  aligned 0.0006889044552175758\n"}
+,{"stream_name":"stdout","time":1330.930711355,"data":"  independent  EleutherAI/pythia-160m-seed5             plain -0.0008061699406627658  invariant 0.002591660131092145  aligned 0.0026328193726305343\n"}
+,{"stream_name":"stdout","time":1388.684704709,"data":"  independent  EleutherAI/pythia-160m-seed6             plain 0.0037840165602490514  invariant 0.002208639756881066  aligned 0.0013524815643010657\n"}
+,{"stream_name":"stdout","time":1446.896950249,"data":"  independent  EleutherAI/pythia-160m-seed7             plain -0.004800688680304789  invariant 0.0007645442114980495  aligned 0.001505212858798823\n"}
+,{"stream_name":"stdout","time":1506.096411932,"data":"  independent  EleutherAI/pythia-160m-seed8             plain 0.0025208007743601065  invariant 0.004323856605043826  aligned 0.0038871084999936942\n"}
+,{"stream_name":"stdout","time":1563.591584409,"data":"  independent  EleutherAI/pythia-160m-seed9             plain -0.00037191850597357836  invariant 0.002689914444978635  aligned 0.0017472654867826227\n"}
+,{"stream_name":"stdout","time":1565.477256678,"data":"exit 0 -m experiments.e1_verify text_decoder\n"}
+,{"stream_name":"stdout","time":1565.493096227,"data":"37 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":1568.569634165,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1568.569689105,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1568.904556293,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1568.904602726,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1569.889263626,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1571.264768,"data":"[NbConvertApp] Writing 290162 bytes to __results__.html\n"}
+]

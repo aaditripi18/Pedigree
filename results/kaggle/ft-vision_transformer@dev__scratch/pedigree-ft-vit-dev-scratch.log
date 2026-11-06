@@ -1,0 +1,17 @@
+[{"stream_name":"stdout","time":10.569414483,"data":"code a6df77d\n"}
+,{"stream_name":"stdout","time":83.9327974,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":101.341693624,"data":"/kaggle/working/Pedigree/experiments/finetune.py:113: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":101.34175203,"data":"  return (torch.from_numpy(np.asarray(img)).permute(2, 0, 1).float() / 255 - m) / s\n"}
+,{"stream_name":"stderr","time":110.496031266,"data":"/kaggle/working/Pedigree/experiments/finetune.py:231: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":110.496081361,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":110.496087052,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":20275.688387728,"data":"vision_transformer/dev/scratch: 3000 steps, loss 2.545 -\u003e 1.7977, 20188 s\n"}
+,{"stream_name":"stdout","time":20277.448853476,"data":"exit 0 -m experiments.finetune vision_transformer dev scratch\n"}
+,{"stream_name":"stdout","time":20277.462974901,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":20280.077850495,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":20280.077895144,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":20280.387725918,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":20280.387759509,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":20281.323672256,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":20282.536572468,"data":"[NbConvertApp] Writing 290992 bytes to __results__.html\n"}
+]

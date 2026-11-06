@@ -1,0 +1,43 @@
+{
+ "family": "speech",
+ "split": "fresh",
+ "kind": "ft_short",
+ "base": "facebook/wav2vec2-base-960h",
+ "base_commit": "22aad52d435eb6dbaf354bdad9b0da84ce7d6156",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cpu",
+ "versions": {
+  "torch": "2.11.0+cpu",
+  "transformers": "5.22.1",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "a774ba9",
+  "dirty": false
+ },
+ "data": {
+  "task": "librispeech_dummy",
+  "sha256": "4e69a06fa5edc90921e5e7e39a7084881f8b3ed9c805c574f4f39c6fde27c603"
+ },
+ "losses": [
+  330.7861,
+  205.1209,
+  86.3952,
+  64.6412,
+  57.3605,
+  36.0356,
+  34.8794,
+  104.3416,
+  136.9284,
+  63.9948,
+  62.4471,
+  26.3643,
+  19.1891
+ ],
+ "seconds": 18808
+}

@@ -1,0 +1,17 @@
+[{"stream_name":"stdout","time":8.917390575,"data":"code a6df77d\n"}
+,{"stream_name":"stdout","time":71.20306894,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":82.817852565,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":86.499495389,"data":"\rLoading weights:   0%|          | 0/167 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 167/167 [00:00\u003c00:00, 2595.49it/s]\n"}
+,{"stream_name":"stderr","time":97.404846377,"data":"/kaggle/working/Pedigree/experiments/finetune.py:231: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":97.40488923,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":97.404899024,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":27460.736476427,"data":"speech/dev/lora_r8: 3000 steps, loss 5.5326 -\u003e 0.0348, 27386 s\n"}
+,{"stream_name":"stdout","time":27462.401796738,"data":"exit 0 -m experiments.finetune speech dev lora_r8\n"}
+,{"stream_name":"stdout","time":27462.40794398,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":27465.428043751,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":27465.428085922,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":27465.820380094,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":27465.820417461,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":27466.825289303,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":27468.361066112,"data":"[NbConvertApp] Writing 290968 bytes to __results__.html\n"}
+]
