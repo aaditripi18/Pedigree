@@ -1,0 +1,30 @@
+[{"stream_name":"stdout","time":13.607561311,"data":"code e226def\n"}
+,{"stream_name":"stdout","time":81.273614046,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":89.015480332,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":102.727188872,"data":"\rLoading weights:   0%|          | 0/198 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 198/198 [00:00\u003c00:00, 2529.81it/s]\n"}
+,{"stream_name":"stderr","time":102.737729342,"data":"[transformers] \u001b[1mViTForImageClassification LOAD REPORT\u001b[0m from: google/vit-base-patch16-224-in21k\n"}
+,{"stream_name":"stderr","time":102.737769874,"data":"Key                 | Status     | \n"}
+,{"stream_name":"stderr","time":102.7377764,"data":"--------------------+------------+-\n"}
+,{"stream_name":"stderr","time":102.737781468,"data":"pooler.dense.weight | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":102.737786364,"data":"pooler.dense.bias   | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":102.737791377,"data":"classifier.bias     | MISSING    | \n"}
+,{"stream_name":"stderr","time":102.737796382,"data":"classifier.weight   | MISSING    | \n"}
+,{"stream_name":"stderr","time":102.737801333,"data":"\n"}
+,{"stream_name":"stderr","time":102.737806136,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":102.737811048,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":102.737816743,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":111.529828052,"data":"/kaggle/working/Pedigree/experiments/finetune.py:113: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":111.529870071,"data":"  return (torch.from_numpy(np.asarray(img)).permute(2, 0, 1).float() / 255 - m) / s\n"}
+,{"stream_name":"stderr","time":116.78419362,"data":"/kaggle/working/Pedigree/experiments/finetune.py:231: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":116.784241117,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":116.784247633,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":13967.699414368,"data":"vision_transformer/dev/lora_r8: 3000 steps, loss 2.3574 -\u003e 1.1157, 13883 s\n"}
+,{"stream_name":"stdout","time":13969.489574506,"data":"exit 0 -m experiments.finetune vision_transformer dev lora_r8\n"}
+,{"stream_name":"stdout","time":13969.499325912,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":13972.30333195,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":13972.30337436,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":13972.658710541,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":13972.658755934,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":13973.663256342,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":13975.094383772,"data":"[NbConvertApp] Writing 290992 bytes to __results__.html\n"}
+]
