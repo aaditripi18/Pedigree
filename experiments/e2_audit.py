@@ -298,8 +298,7 @@ def main() -> None:
             r = json.loads(line)
             done[r["id"]] = r
     if prev and done:
-        out.write_text("".join(json.dumps(r) + "
-" for r in done.values()), encoding="utf-8")
+        out.write_text("".join(json.dumps(r) + "\n" for r in done.values()), encoding="utf-8")
     pending = [(e, t) for e, t in todo if e["id"] not in done][: a.limit]
     print(f"{len(done)} done, {len(pending)} to audit", flush=True)
     t0, lost, wlock = time.time(), [], threading.Lock()
