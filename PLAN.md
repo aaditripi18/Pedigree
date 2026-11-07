@@ -360,3 +360,20 @@ Fixed while writing the audit code, from reasoning about the rules, not from dat
   as a parent for H2 (it is the same model, uploaded twice).
 - **Network.** A model or candidate that could not be read because of the network (not
   an HTTP 401/403/404 or a format error) is retried in the next pass.
+
+## Amendment 2026-11-07 (3): frozen configs, direction data, H9's rule, before E5 or E2 ran
+
+- **Frozen dimensions.** The Hub's listing leaves `model_type` out for about a third of
+  transformers models (35,032 of 59,473 in the frame), which would hide them from every
+  pool. Every frame model's `config.json` is therefore fetched once and reduced to its
+  `model_type` and dimensions (`results/e2_frame_configs.jsonl.gz`); the pool uses it.
+- **Direction data.** E7 ran before the kurtosis statistic existed, so its 35 same-run
+  pairs are compared again with the plain verifier, recording the kurtosis gap (`E7k`).
+  The plain scores must equal E7's (same tensors, same bytes); any difference is reported.
+- **H5's students.** E5 also runs the weight verifier on every student/teacher pair.
+- **H9's rule (dev only).** Of three statistics (top-1 agreement, 1 - JS divergence, linear
+  CKA), the one with the widest dev gap between distilled students and same-task independent
+  students (lowest positive minus highest negative) is used, with the threshold at the
+  middle of that gap. If no statistic separates dev, agreement is used with the threshold
+  giving the highest dev TPR at dev FPR <= 5%. H9 holds if, on fresh, TPR >= 90% on the
+  distilled students and FPR <= 5% on the same-task independent students.
