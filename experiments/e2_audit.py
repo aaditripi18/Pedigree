@@ -250,7 +250,8 @@ def audit_one(entry: dict, tier: str, frame: pool.Frame) -> dict:
         return rec
     quantised = bool(model.quant) or facts.get("format") == "gguf"
     params = (None if model.quant else pool.meta_params(meta)) or logical_params(model)
-    mdims = pool.dims(pool.config(facts.get("via") or repo))
+    mdims = (frame.frozen_dims[repo] if repo in frame.frozen_dims and not facts.get("via")
+             else pool.dims(pool.config(facts.get("via") or repo)))
     rec.update(params=params, dims=mdims, quantised=quantised)
     rec["declared"] = []
     for b in rec["declared_base"]:

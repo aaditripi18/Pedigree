@@ -90,9 +90,22 @@ def meta_params(m: dict) -> int | None:
 
 
 class Frame:
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, configs: Path | None = None):
+        """path: the frame's listing metadata; configs: the frozen config.json reduction
+        (results/e2_frame_configs.jsonl.gz), which supplies model_type where the listing
+        leaves it out and every frame model's dimensions."""
         with gzip.open(path, "rt", encoding="utf-8") as f:
             self.models = [json.loads(line) for line in f]
+        self.frozen_dims: dict = {}
+        configs = configs or path.with_name("e2_frame_configs.jsonl.gz")
+        if configs.exists():
+            with gzip.open(configs, "rt", encoding="utf-8") as f:
+                cf = {r["id"]: r for r in map(json.loads, f)}
+            for m in self.models:
+                c = cf.get(m["id"], {})
+                if not m.get("model_type") and c.get("model_type"):
+                    m["model_type"] = c["model_type"]
+                self.frozen_dims[m["id"]] = c.get("dims")
         self.by_id = {m["id"]: m for m in self.models}
         self.rank = {m["id"]: i + 1 for i, m in enumerate(self.models)}
         self.children = collections.Counter(b for m in self.models for b in set(m.get("declared_base") or []))
@@ -115,7 +128,7 @@ class Frame:
             p = meta_params(self.by_id[c])
             if abs(p - params) > COARSE * params:
                 continue
-            cd = dims(config(c)) if model_dims else None
+            cd = (self.frozen_dims[c] if c in self.frozen_dims else dims(config(c))) if model_dims else None
             if model_dims and cd:
                 ok = same_dims(model_dims, cd)
             else:

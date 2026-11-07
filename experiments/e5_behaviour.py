@@ -30,6 +30,7 @@ import torch
 from experiments import distill, ledger
 from experiments import finetune as ft
 from pedigree.behaviour import linear_cka
+from pedigree.verify import InMemory, compare
 
 ROOT = Path(__file__).resolve().parent.parent
 PROBE_TEXTS = 256
@@ -182,6 +183,10 @@ def main(family: str, splits: list[str]) -> None:
                         continue
                     m = cls.from_pretrained(name).float()
                 r = compare_behaviour(teacher, m.to(ft.DEVICE).eval(), runner)
+                # H5: the weight verifier on the same pair (students share no initialisation)
+                w = compare(InMemory(m.state_dict()), InMemory(teacher.state_dict()))
+                r.update(weight_median_cosine=w["median_cosine"], weight_compared=w["compared"],
+                         weight_matched=w["matched"])
                 run.record(model=name, kind=kind, label=label, **r)
                 print(f"  {name:<45} agree {r['agreement']:.3f}  js {r['js']:.4f}  cka {r['cka']:.3f}", flush=True)
                 del m

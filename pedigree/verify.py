@@ -382,3 +382,22 @@ def compare_invariant(model, other, n_tensors: int = INVARIANT_TENSORS, max_elem
     cos = {n: gram_cosine(full(model, n), full(other, pairing[n])) for n in names}
     vals = [c for c in cos.values() if c == c]
     return {"compared": len(vals), "cosines": cos, "median_invariant": float(np.median(vals)) if vals else None}
+
+
+class InMemory:
+    """A model held as a state dict (torch tensors or arrays), read like Remote/Local."""
+
+    def __init__(self, sd: dict, repo: str = "memory", commit: str = "memory"):
+        self.repo, self.commit = repo, commit
+        self.arrays = {}
+        for k, v in sd.items():
+            a = v.detach().float().cpu().numpy() if hasattr(v, "detach") else np.asarray(v)
+            if np.issubdtype(a.dtype, np.floating):
+                self.arrays[k] = a.astype(np.float64).ravel()
+        self.shapes = {k: tuple(v.shape) for k, v in sd.items() if k in self.arrays}
+
+    def float_shapes(self) -> dict[str, tuple]:
+        return {k: ("float", s) for k, s in self.shapes.items()}
+
+    def sample(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
+        return self.arrays[name][: max_bytes // 4]
