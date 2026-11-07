@@ -331,3 +331,32 @@ each rule is right on >= 90% of the pairs it decides; the undecided share is rep
   plain - 5 SD of the dev q4_0 values).
 - A model lost to the network is retried in a later pass; the audit is reported only when
   none is lost.
+
+## Amendment 2026-11-07 (2): audit details, before E2 or H7 read any weight
+
+Fixed while writing the audit code, from reasoning about the rules, not from data.
+
+- **Candidate pool, corrected.** The 2% parameter rule above would miss the parent of
+  any fine-tune that replaced its classification head (a ResNet-18 trained for 10 classes
+  has 4% fewer parameters than its 1000-class base). The pool is instead: same family key
+  (`model_type`; else the GGUF architecture; else the library), parameter count within
+  25%, and identical dimensions from `config.json` (hidden size, number of layers, feed-
+  forward size; timm's `architecture`); a candidate or model without readable dimensions
+  falls back to parameter count within 2%. Ranking and the top 30 as before. A model's
+  parameter count is the Hub's safetensors or GGUF count, or, where that is missing or
+  counts packed values (MLX), the number of values its own header describes.
+- **Gated models** are read through a public repository whose weight files have exactly the
+  same SHA-256 as the gated repository's (the Hub publishes checksums of gated files); the
+  report names the copy. Without such a copy a gated model is *not readable (gated)*.
+- **Which files.** Adapter files (`adapter_model.*`) are never taken as model weights; a
+  repository with only an adapter is an *adapter*. A diffusers repository is read through
+  its denoiser (`unet/`, else `transformer/`). A PyTorch file that is not a zip checkpoint
+  (the pre-2020 format) is *not readable (legacy pickle)*.
+- **The invariant check** (defence i) is run on a declared pair only when the plain score
+  is below 0.2 (a superset of every plain threshold the rule can produce from E1 dev), on
+  matrices of at most 32M values each; skipped matrices are recorded.
+- **A copy** is a related candidate whose every sampled value is identical; copies are
+  reported apart from parents and descendants, and a copy created earlier is not counted
+  as a parent for H2 (it is the same model, uploaded twice).
+- **Network.** A model or candidate that could not be read because of the network (not
+  an HTTP 401/403/404 or a format error) is retried in the next pass.

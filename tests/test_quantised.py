@@ -1,0 +1,77 @@
+"""MLX 4-bit and FP8 weights are read as the float values they stand for (E2 reads both)."""
+import numpy as np
+import pytest
+import torch
+from safetensors.torch import save_file
+
+from pedigree import remote, verify
+
+
+@pytest.fixture
+def local_ranges(monkeypatch):
+    def fake(url, start, end, retries=0):
+        with open(url, "rb") as fh:
+            fh.seek(start)
+            return fh.read(end - start + 1)
+    monkeypatch.setattr(remote, "fetch_range", fake)
+
+
+def _open_local(path, config):
+    start, header = remote.read_header(str(path))
+    r = verify.Remote("local/test", "c0")
+    for name, s in header.items():
+        if name != "__metadata__":
+            r.tensors[name] = (str(path), start, s)
+    r._config = lambda: config
+    r._find_quantised()
+    return r
+
+
+def test_mlx_affine_4bit(tmp_path, local_ranges):
+    rng = np.random.default_rng(0)
+    out, cols, gs = 6, 128, 64
+    q = rng.integers(0, 16, size=(out, cols)).astype(np.uint32)
+    words = np.zeros((out, cols // 8), dtype=np.uint32)
+    for k in range(8):
+        words |= q[:, k::8] << (4 * k)
+    scales = rng.normal(size=(out, cols // gs)).astype(np.float16)
+    biases = rng.normal(size=(out, cols // gs)).astype(np.float16)
+    path = tmp_path / "model.safetensors"
+    save_file({"l.weight": torch.from_numpy(words.view(np.int32)).view(torch.uint32),
+               "l.scales": torch.from_numpy(scales), "l.biases": torch.from_numpy(biases)}, str(path))
+    r = _open_local(path, {"quantization": {"bits": 4, "group_size": gs}})
+    assert r.float_shapes() == {"l.weight": ("float", (out, cols))}
+    g = np.arange(cols) // gs
+    want = q * scales.astype(np.float64)[:, g] + biases.astype(np.float64)[:, g]
+    np.testing.assert_allclose(r.sample("l.weight", max_bytes=out * cols * 4), want.ravel())
+    np.testing.assert_allclose(r.sample("l.weight", max_bytes=200 * 4), want.ravel()[:200])
+
+
+def test_fp8_block_scaled(tmp_path, local_ranges):
+    g = torch.Generator().manual_seed(0)
+    w = torch.randn(256, 256, generator=g)
+    s = torch.rand(2, 2, generator=g) + 0.5
+    full_s = s.repeat_interleave(128, 0).repeat_interleave(128, 1)
+    w8 = (w / full_s).to(torch.float8_e4m3fn)
+    path = tmp_path / "model.safetensors"
+    save_file({"l.weight": w8, "l.weight_scale_inv": s}, str(path))
+    r = _open_local(path, {"quantization_config": {"weight_block_size": [128, 128]}})
+    assert set(r.float_shapes()) == {"l.weight"}
+    want = (w8.float() * full_s).numpy().astype(np.float64).ravel()
+    np.testing.assert_allclose(r.sample("l.weight", max_bytes=256 * 256 * 4), want, rtol=1e-6)
+    assert verify.cosine(r.sample("l.weight"), w.numpy().ravel().astype(np.float64)) > 0.99
+
+
+def test_fp8_per_tensor_scale(tmp_path, local_ranges):
+    w = torch.randn(64, 128, generator=torch.Generator().manual_seed(1))
+    path = tmp_path / "model.safetensors"
+    save_file({"l.weight": (w / 3).to(torch.float8_e4m3fn), "l.weight_scale": torch.tensor(3.0)}, str(path))
+    r = _open_local(path, {})
+    assert verify.cosine(r.sample("l.weight"), w.numpy().ravel().astype(np.float64)) > 0.99
+
+
+def test_kurtosis_gap_signs_the_heavier_tail():
+    rng = np.random.default_rng(0)
+    light, heavy = rng.normal(size=20000), rng.standard_t(4, size=20000)
+    assert verify.excess_kurtosis(light) == pytest.approx(0, abs=0.15)
+    assert verify.kurtosis_gap({"a": [verify.excess_kurtosis(heavy), verify.excess_kurtosis(light)]}) > 1

@@ -91,5 +91,5 @@ def tensor_bytes(url: str, data_start: int, spec: dict, max_bytes: int) -> bytes
     return fetch_range(url, data_start + b, data_start + b + length - 1)
 
 
-ITEMSIZE = {"F64": 8, "F32": 4, "F16": 2, "BF16": 2, "I64": 8, "I32": 4, "I16": 2, "I8": 1, "U8": 1,
+ITEMSIZE = {"F64": 8, "F32": 4, "F16": 2, "BF16": 2, "I64": 8, "I32": 4, "I16": 2, "I8": 1, "U8": 1, "U64": 8, "U32": 4, "U16": 2,
             "BOOL": 1, "F8_E4M3": 1, "F8_E5M2": 1}

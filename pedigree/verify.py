@@ -19,6 +19,27 @@ from .align import align
 from .remote import ITEMSIZE, read_header, resolve_url, tensor_bytes
 
 FLOATS = ("F64", "F32", "F16", "BF16")
+FP8 = ("F8_E4M3", "F8_E5M2")
+
+
+def _fp8_table(exp_bits: int, man_bits: int, bias: int, e4m3: bool) -> np.ndarray:
+    """All 256 values of an 8-bit float format (OCP FP8: E4M3 has no infinities)."""
+    out = np.empty(256)
+    for b in range(256):
+        sign = -1.0 if b & 0x80 else 1.0
+        e, m = (b >> man_bits) & ((1 << exp_bits) - 1), b & ((1 << man_bits) - 1)
+        if e4m3 and e == 15 and m == 7:
+            out[b] = np.nan
+        elif not e4m3 and e == 31:
+            out[b] = np.nan if m else sign * np.inf
+        elif e == 0:
+            out[b] = sign * m / (1 << man_bits) * 2.0 ** (1 - bias)
+        else:
+            out[b] = sign * (1 + m / (1 << man_bits)) * 2.0 ** (e - bias)
+    return out
+
+
+FP8_TABLES = {"F8_E4M3": _fp8_table(4, 3, 7, True), "F8_E5M2": _fp8_table(5, 2, 15, False)}
 SAMPLE_BYTES = 32 * 1024
 N_TENSORS = 24
 MIN_ELEMENTS = 4096
@@ -29,6 +50,8 @@ def decode(dtype: str, raw: bytes) -> np.ndarray:
     if dtype == "BF16":
         u = np.frombuffer(raw, dtype="<u2").astype(np.uint32) << 16
         return u.view(np.float32).astype(np.float64)
+    if dtype in FP8_TABLES:
+        return FP8_TABLES[dtype][np.frombuffer(raw, dtype=np.uint8)]
     return np.frombuffer(raw, dtype={"F64": "<f8", "F32": "<f4", "F16": "<f2"}[dtype]).astype(np.float64)
 
 
@@ -39,12 +62,20 @@ class Remote:
     tensors: dict = field(default_factory=dict)   # name -> (url, data_start, spec)
     files: list = field(default_factory=list)
     gguf_meta: dict | None = None
+    quant: dict = field(default_factory=dict)     # weight name -> how to dequantise it (MLX, FP8)
 
     @classmethod
     def open(cls, spec: str) -> "Remote":
         """spec: hf:org/name[@revision]. Safetensors weights, or PyTorch zip checkpoints
         (read without unpickling code, see torchzip) where a model has no safetensors."""
         res = hub.resolve(spec if spec.startswith("hf:") else "hf:" + spec)
+        return cls.from_files(res.repo, res.commit, res.files, res.sizes)
+
+    @classmethod
+    def from_files(cls, repo: str, commit: str, names: list[str], sizes: dict[str, int]) -> "Remote":
+        """A model made of the given weight files of a repository at a commit."""
+        from types import SimpleNamespace
+        res = SimpleNamespace(repo=repo, commit=commit, files=names, sizes=sizes)
         files = [f for f in res.files if f.endswith((".safetensors", ".bin"))]
         gguf = [] if files else ggufremote.choose_variant(res.files)
         if not files and not gguf:
@@ -67,13 +98,98 @@ class Remote:
             for name, s in header.items():
                 if name != "__metadata__" and isinstance(s, dict):
                     r.tensors[name] = (url, start, s)
+        r._find_quantised()
         return r
 
+    def _config(self) -> dict:
+        try:
+            with hub._open(f"{hub.HOST}/{self.repo}/resolve/{self.commit}/config.json") as f:
+                import json
+                return json.loads(f.read().decode("utf-8"))
+        except Exception:
+            return {}
+
+    def _find_quantised(self) -> None:
+        """MLX affine-quantised weights (packed U32 + .scales/.biases) and FP8 weights with
+        their scales are read as the float values they stand for (see _dequantised)."""
+        t = self.tensors
+        mlx = [n for n, (_, _, s) in t.items() if s["dtype"] == "U32" and n.endswith(".weight")
+               and n[:-7] + ".scales" in t and n[:-7] + ".biases" in t]
+        fp8 = [n for n, (_, _, s) in t.items() if s["dtype"] in FP8]
+        if not mlx and not fp8:
+            return
+        cfg = self._config()
+        q = cfg.get("quantization") or cfg.get("quantization_config") or {}
+        for n in mlx:
+            bits, gs = int(q.get("bits", 4)), int(q.get("group_size", 64))
+            out, cols = t[n][2]["shape"]
+            self.quant[n] = {"kind": "mlx", "bits": bits, "group": gs, "shape": (out, cols * 32 // bits),
+                             "scales": n[:-7] + ".scales", "biases": n[:-7] + ".biases"}
+        block = q.get("weight_block_size")
+        for n in fp8:
+            shape = tuple(t[n][2]["shape"])
+            stem = n[:-6] if n.endswith("weight") else n + "_"
+            for sname in (stem + "weight_scale_inv", stem + "weight_scale", stem + "scale"):
+                if sname in t:
+                    sshape = tuple(t[sname][2]["shape"])
+                    self.quant[n] = {"kind": "fp8", "shape": shape, "scale": sname, "scale_shape": sshape,
+                                     "block": tuple(block) if block and len(sshape) == 2 and len(shape) == 2
+                                     and sshape != (shape[0], 1) else None}
+                    break
+            else:
+                self.quant[n] = {"kind": "fp8", "shape": shape, "scale": None}
+
+    def _helpers(self) -> set:
+        h = set()
+        for q in self.quant.values():
+            h.update(x for x in (q.get("scales"), q.get("biases"), q.get("scale")) if x)
+        return h
+
     def float_shapes(self) -> dict[str, tuple]:
-        return {n: ("float", tuple(s["shape"])) for n, (_, _, s) in self.tensors.items()
-                if s["dtype"] in FLOATS or s["dtype"] == "GGUF"}
+        helpers = self._helpers()
+        out = {n: ("float", tuple(s["shape"])) for n, (_, _, s) in self.tensors.items()
+               if (s["dtype"] in FLOATS or s["dtype"] == "GGUF") and n not in helpers}
+        out.update({n: ("float", tuple(q["shape"])) for n, q in self.quant.items()})
+        return out
+
+    def _raw(self, name: str, elements: int) -> np.ndarray:
+        url, start, s = self.tensors[name]
+        return decode(s["dtype"], tensor_bytes(url, start, s, elements * ITEMSIZE[s["dtype"]]))
+
+    def _dequantised(self, name: str, elements: int) -> np.ndarray:
+        q = self.quant[name]
+        rows_total, cols = q["shape"][0], int(np.prod(q["shape"][1:]))
+        rows = min(rows_total, -(-elements // cols))
+        if q["kind"] == "mlx":
+            url, start, s = self.tensors[name]
+            words_per_row = s["shape"][1]
+            raw = tensor_bytes(url, start, s, rows * words_per_row * 4)
+            w = np.frombuffer(raw, dtype="<u4").reshape(rows, words_per_row)
+            per = 32 // q["bits"]
+            mask = (1 << q["bits"]) - 1
+            vals = np.stack([(w >> (q["bits"] * k)) & mask for k in range(per)], axis=-1).reshape(rows, cols)
+            ng = cols // q["group"]
+            sc = self._raw(q["scales"], rows * ng).reshape(rows, ng)
+            bi = self._raw(q["biases"], rows * ng).reshape(rows, ng)
+            g = np.arange(cols) // q["group"]
+            return (vals * sc[:, g] + bi[:, g]).reshape(-1)[:elements]
+        x = self._raw(name, rows * cols).reshape(rows, cols)      # fp8
+        if q["scale"] is None:
+            return x.reshape(-1)[:elements]
+        ss = q["scale_shape"]
+        if q.get("block"):
+            b0, b1 = q["block"]
+            nb = ss[1]
+            sc = self._raw(q["scale"], (-(-rows // b0)) * nb).reshape(-1, nb)
+            x = x * sc[np.arange(rows) // b0][:, np.arange(cols) // b1]
+        elif len(ss) >= 1 and int(np.prod(ss)) == rows_total:              # one scale per row
+            x = x * self._raw(q["scale"], rows).reshape(rows, 1)
+        # a single scale per tensor leaves every cosine unchanged
+        return x.reshape(-1)[:elements]
 
     def sample(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
+        if name in self.quant:
+            return self._dequantised(name, max_bytes // 4)
         url, start, s = self.tensors[name]
         if s["dtype"] == "GGUF":
             return ggufremote.sample(url, s, max_bytes // 4)
@@ -135,12 +251,47 @@ def compare(model: Remote, other: Remote, n_tensors: int = N_TENSORS) -> dict:
     match = len(pairing) / max(len(ms), 1)
     big = [n for n in sorted(pairing) if int(np.prod(ms[n][1])) >= MIN_ELEMENTS]
     names = _spaced(big, n_tensors)
-    cos = {n: cosine(model.sample(n), other.sample(pairing[n])) for n in names}
+    cos, kurt, identical = {}, {}, bool(names)
+    for n in names:
+        a, b = model.sample(n), other.sample(pairing[n])
+        cos[n] = cosine(a, b)
+        kurt[n] = [excess_kurtosis(a), excess_kurtosis(b)]
+        identical &= a.shape == b.shape and bool(np.array_equal(a, b))
     vals = [c for c in cos.values() if c == c]
     return {"model": model.repo, "model_commit": model.commit, "other": other.repo, "other_commit": other.commit,
             "float_tensors": len(ms), "matched": len(pairing), "match_share": match,
-            "dropped_prefix": [dm, do], "compared": len(vals), "cosines": cos,
+            "dropped_prefix": [dm, do], "compared": len(vals), "cosines": cos, "kurtosis": kurt, "identical": identical,
             "median_cosine": float(np.median(vals)) if vals else None}
+
+
+def excess_kurtosis(x: np.ndarray) -> float:
+    """Excess kurtosis of a tensor's values (H8's direction statistic, as in MoTHer:
+    training adds outlying weights, so the child is expected to have the higher value)."""
+    x = x[np.isfinite(x)]
+    if x.size < 4:
+        return float("nan")
+    x = x - x.mean()
+    v = (x ** 2).mean()
+    return float((x ** 4).mean() / v ** 2 - 3) if v > 0 else float("nan")
+
+
+def kurtosis_gap(kurt: dict) -> float | None:
+    """Median over compared tensors of kurtosis(model) - kurtosis(other): positive means
+    the model looks like the child (D2 in PLAN.md, amendment 2026-11-07)."""
+    d = [a - b for a, b in kurt.values() if a == a and b == b]
+    return float(np.median(d)) if d else None
+
+
+def compare_whole(model, other) -> dict:
+    """H6: the plain score over every aligned tensor with >= MIN_ELEMENTS values, each
+    read in full (one tensor at a time, so memory stays at two tensors)."""
+    model, other = harmonise(model, other)
+    ms, os_ = model.float_shapes(), other.float_shapes()
+    pairing, _, _ = align(ms, os_)
+    big = [n for n in sorted(pairing) if int(np.prod(ms[n][1])) >= MIN_ELEMENTS]
+    cos = {n: cosine(full(model, n).ravel(), full(other, pairing[n]).ravel()) for n in big}
+    vals = [c for c in cos.values() if c == c]
+    return {"compared": len(vals), "cosines": cos, "median_whole": float(np.median(vals)) if vals else None}
 
 
 @dataclass
@@ -219,12 +370,14 @@ def gram_cosine(a: np.ndarray, b: np.ndarray) -> float:
     return best
 
 
-def compare_invariant(model, other, n_tensors: int = INVARIANT_TENSORS) -> dict:
-    """Median permutation-invariant similarity over spaced matrices both models share."""
+def compare_invariant(model, other, n_tensors: int = INVARIANT_TENSORS, max_elements: int | None = None) -> dict:
+    """Median permutation-invariant similarity over spaced matrices both models share
+    (only matrices of at most max_elements values, when given: each is read in full)."""
     model, other = harmonise(model, other)
     ms, os_ = model.float_shapes(), other.float_shapes()
     pairing, _, _ = align(ms, os_)
-    mats = [n for n in sorted(pairing) if len(ms[n][1]) >= 2 and int(np.prod(ms[n][1])) >= MIN_ELEMENTS]
+    mats = [n for n in sorted(pairing) if len(ms[n][1]) >= 2 and MIN_ELEMENTS <= int(np.prod(ms[n][1]))
+            and (max_elements is None or int(np.prod(ms[n][1])) <= max_elements)]
     names = _spaced(mats, n_tensors)
     cos = {n: gram_cosine(full(model, n), full(other, pairing[n])) for n in names}
     vals = [c for c in cos.values() if c == c]
