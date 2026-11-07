@@ -83,6 +83,14 @@ JOBS.update({f"e5-{f}": _job(f"pedigree-e5-{f.replace('_', '-')}", [["-m", "expe
                              gpu=True, sources=[f"ft-{f}", f"distill-{f}"],
                              env={"PEDIGREE_TEACHERS": "find:derivatives", "PEDIGREE_STUDENTS": "find:students"})
              for f in E5_FAMILIES})
+# image teachers (ft_long) for E5 live in the CPU sessions of each split
+TEACHER_SOURCES = {"vision_cnn": ["ft-vision_cnn@dev", "ft-vision_cnn@fresh"],
+                   "vision_transformer": ["ft-vision_transformer@dev:ft_long", "ft-vision_transformer@fresh"]}
+for _f, _src in TEACHER_SOURCES.items():
+    JOBS[f"distill-{_f}"]["sources"] = list(_src)
+    JOBS[f"distill-{_f}"]["env"]["PEDIGREE_TEACHERS"] = "merge:derivatives"
+    JOBS[f"e5-{_f}"]["sources"] = list(_src) + [f"distill-{_f}"]
+    JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"] = "merge:derivatives"
 
 NOTEBOOK = r'''
 import os, pathlib, shutil, subprocess, sys
