@@ -66,6 +66,10 @@ JOBS.update({f"e1-{f}@split": _job(f"pedigree-e1-{f.replace('_', '-')}", [["-m",
 # the limit is rebuilt one derivative per session and E1 reads only finished sessions
 JOBS["e1-vision_transformer@split"]["sources"] = (["ft-vision_transformer@fresh"]
                                                   + [f"ft-vision_transformer@dev:{k}" for k in KINDS])
+# wav2vec2 takes about a minute per step on CPU: its fresh split needs the GPU
+JOBS["ft-speech@fresh:gpu"] = _job("pedigree-ft-speech-fresh-gpu", [["-m", "experiments.finetune", "speech", "fresh"]],
+                                   gpu=True)
+JOBS["e1-speech@split"]["sources"] = [f"ft-speech@dev:{k}" for k in KINDS] + ["ft-speech@fresh:gpu"]
 JOBS["e6e7"] = _job("pedigree-e6-e7", [["-m", "experiments.e6_e7"]], gpu=False)
 # E5: students (GPU) written to their own folder; image teachers come from the ft- output
 E5_FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn"]
