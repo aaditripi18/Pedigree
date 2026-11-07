@@ -252,3 +252,82 @@ H4 is judged on attack (b) with defence (ii); attack (a) and defence (i) are rep
 beside it. Families where attack (b) is implemented: text encoder, text decoder, vision
 transformer (the regular transformer stacks); CNN, speech and diffusion get attack (a)
 and the channel permutation already in `transforms.py`, reported as such.
+
+## Amendment 2026-11-07: decision rules, H6-H8 and the audit protocol, before any verdict
+
+Written before any hypothesis verdict was computed and before E2 read any weight.
+**What had been seen.** The run logs had printed the plain, invariant and aligned scores of
+every E1 pair (dev and fresh) for text encoders, text decoders, vision transformers and
+CNNs, and the E6 and E7 scores. Speech and diffusion pairs had not been compared yet, so
+they are the only E1 pairs on which the rule below is tested blind; this is stated beside
+every verdict.
+
+**Threshold rule (every score: plain, invariant, aligned; one threshold per score, pooled
+over families so it applies to Hub models of any family).** t = (highest score of any dev
+negative) + 5 x (standard deviation of the dev negatives' scores). A pair is *related*
+(lineage evidence) when its score is above t. Why this rule: the question every hypothesis
+asks is whether lineage is visible above chance, and the audit makes thousands of
+comparisons (each model against its candidate pool), so the margin is wide (5 SD) rather
+than tuned. Sensitivity rule, reported beside every verdict and never substituted for it:
+the midpoint between the highest dev negative and the lowest dev trained positive.
+
+**Verdict of the weight verifier.** *Related* if plain > t_plain, or the invariant score
+(defence i, or defence ii where implemented) is above its own threshold; *unrelated* if
+every computed score is at or below its threshold while at least 8 tensors were compared;
+otherwise *not comparable* (fewer than 8 shared tensors), which is never counted as
+unrelated.
+
+**H1** positives: the trained kinds (ft_short, ft_long, lora_r8, lora_r64) of every family
+on fresh; negatives: fresh scratch and independent models. ROC AUC and TPR/FPR with Wilson
+95% intervals. Fine-tunes move weights little, so these positives are easy; the hard end is
+measured by E7 (100k-399k further pretraining steps) and E4, reported as a curve.
+
+**H4** on fresh, attack (b) families: plain at or below t_plain on >= 90% of attacked
+models, defence (ii) above t_aligned on >= 90%. **H5** on fresh: q4_0 related (plain) for
+>= 90% of families; the students distilled in E5 (random initialisation) related by weights
+for <= 10% of students. DistilGPT-2 and DistilBERT, initialised from their teachers' layers,
+are reported separately.
+
+**H6, whole files.** Whole-file score: the same median cosine, but over *every* aligned
+tensor with >= 4096 elements, each read in full. Subset: every fresh E1 pair, and 50 E2
+pairs drawn at random (seed 20261107) from the pairs E2 compared whose two models are each
+<= 2 GB. H6 holds if the related/unrelated verdict under the plain rule agrees on >= 98%.
+
+**H7, candidate recall.** The candidate pool of a model (no use of its own declaration):
+frame models (results/e2_frame_meta.jsonl.gz) with the same `model_type` and a parameter
+count within 2% (from the Hub's safetensors metadata; GGUF parameter count for GGUF repos);
+ranked first by how many frame models declare them as a base, then by downloads; the top 30
+are compared, plus the declared base when one exists. Ground truth with a public parent:
+(a) the fresh E1 derivatives and their transforms, parent = the fresh base; (b) E2 models
+whose declared base is related by weights, parent = that base, with the declaration hidden.
+H7 holds if the true parent is in the pool for >= 90% of (a) and of (b) separately.
+
+**H8, direction.** Two rules, both judged: (D1, used by the audit) the relative created
+earlier on the Hub is the parent; judged on E2 pairs whose declared base is related by
+weights (declared base = parent). (D2, weights only, as in MoTHer) the model with the
+lower median excess kurtosis over the compared tensors is the parent; undecided when the
+difference is below the margin m chosen on E1 dev (the smallest m with no dev error);
+judged on fresh E1 trained pairs and all E7 pairs (earlier checkpoint = parent). H8 holds if
+each rule is right on >= 90% of the pairs it decides; the undecided share is reported.
+
+**E2 protocol.** Every sampled model gets exactly one category, with the reason:
+- *weights not readable*: no safetensors, PyTorch zip, GGUF or MLX weights (ONNX-only,
+  pickle-only non-zip, code-only, gated without access, deleted);
+- *adapter*: the repo holds only an adapter (a weight delta); checked for shape consistency
+  with its declared base, not counted in H2 or H3;
+- otherwise, the declared base (if any) is compared: *declared, related*, *declared,
+  unrelated* (H3's "contradicted"), or *declared, not comparable* (then the behaviour
+  instrument where both are text models with the same tokenizer or image classifiers with
+  the same label space and <= 2B parameters each; else unverifiable, reason recorded);
+- every readable model is compared with its candidate pool; a related candidate created
+  earlier is a *discovered parent*, later a *discovered descendant*; identical sampled bytes
+  are a *copy*.
+- **H2** denominator: models with a related earlier relative (declared or discovered);
+  numerator: those that declare no base. **H3** denominator: declared bases that were
+  comparable; numerator: unrelated. Both judged on the pooled 600-model sample as written;
+  the estimate weighted by tier size (1k / 9k / 90k) and per-tier values are reported with
+  Wilson 95% intervals. The Hub's relation tag (finetune, adapter, quantized, merge) is
+  checked against the weights: "quantized" is consistent when plain >= (lowest dev q4_0
+  plain - 5 SD of the dev q4_0 values).
+- A model lost to the network is retried in a later pass; the audit is reported only when
+  none is lost.
