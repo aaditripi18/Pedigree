@@ -81,7 +81,29 @@ def e7() -> None:
         cache.clear()
 
 
+def e7k() -> None:
+    """H8 (D2, amendment 2026-11-07): E7's same-run pairs again with the plain verifier only,
+    recording the kurtosis gap (checkpoint minus final; the checkpoint is the parent)."""
+    from pedigree.verify import kurtosis_gap
+    spec = json.loads((ROOT / "results" / "e1_bases.json").read_text(encoding="utf-8"))["trajectory"]
+    runs, steps, final = spec["runs"], spec["checkpoint_steps"], spec["final"]
+    run = ledger.Run("E7k", runs=runs, steps=steps, final=final)
+    for r in runs:
+        cache: dict = {}
+        for step in steps:
+            a, b = f"hf:{r}@checkpoint-{step}", f"hf:{r}@checkpoint-{final}"
+            try:
+                c = compare(_open(a, cache), _open(b, cache))
+                run.record(model=a, base=b, run_final=r, step=step, distance=final - step,
+                           median_cosine=c["median_cosine"], compared=c["compared"],
+                           kurtosis_gap=kurtosis_gap(c["kurtosis"]), kurtosis=c["kurtosis"])
+                print(f"  {a:<55} plain {c['median_cosine']:.4f} kurtosis gap {kurtosis_gap(c['kurtosis'])}", flush=True)
+            except Exception as e:
+                run.record(model=a, base=b, run_final=r, step=step, error=f"{type(e).__name__}: {e}")
+                print(f"  {a}: ERROR {e}", flush=True)
+
+
 if __name__ == "__main__":
     which = sys.argv[1:] or ["e6", "e7"]
     for w in which:
-        {"e6": e6, "e7": e7}[w]()
+        {"e6": e6, "e7": e7, "e7k": e7k}[w]()
