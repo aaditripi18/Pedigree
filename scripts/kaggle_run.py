@@ -92,6 +92,22 @@ for _f, _src in TEACHER_SOURCES.items():
     JOBS[f"e5-{_f}"]["sources"] = list(_src) + [f"distill-{_f}"]
     JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"] = "merge:derivatives"
 
+# E1b (H6 whole files, H8 direction): the same inputs as the E1 job each family used
+E1_FORM = {"text_encoder": "e1-text_encoder", "text_decoder": "e1-text_decoder",
+           "vision_cnn": "e1-vision_cnn@split", "vision_transformer": "e1-vision_transformer@split",
+           "speech": "e1-speech@split", "diffusion_unet": "e1-diffusion_unet"}
+JOBS.update({f"e1b-{f}": _job(f"pedigree-e1b-{SHORT[f]}", [["-m", "experiments.e1b_whole", f]], gpu=False,
+                              sources=list(JOBS[j]["sources"]), env=dict(JOBS[j]["env"]))
+             for f, j in E1_FORM.items()})
+# E2, the Hub audit: CPU passes of at most 10 h; each later pass mounts the earlier ones
+E2_ENV = {"PEDIGREE_WORKERS": "12", "PEDIGREE_BUDGET_HOURS": "10"}
+E2_OUT = ["--out", "/kaggle/working/e2_audit_raw.jsonl"]
+JOBS["e2"] = _job("pedigree-e2-audit", [["-m", "experiments.e2_audit", *E2_OUT]], gpu=False, env=dict(E2_ENV))
+for _k in range(2, 5):
+    JOBS[f"e2-{_k}"] = _job(f"pedigree-e2-audit-{_k}", [["-m", "experiments.e2_audit", *E2_OUT]], gpu=False,
+                           sources=["e2"] + [f"e2-{i}" for i in range(2, _k)],
+                           env={**E2_ENV, "PEDIGREE_E2_PREVIOUS": "/kaggle/input"})
+
 NOTEBOOK = r'''
 import os, pathlib, shutil, subprocess, sys
 src = next(pathlib.Path("/kaggle/input").rglob("Pedigree/COMMIT")).parent

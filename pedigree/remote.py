@@ -12,6 +12,8 @@ dropping it silently.
 from __future__ import annotations
 
 import hashlib
+import os
+import threading
 import http.client
 import json
 import struct
@@ -54,7 +56,7 @@ def fetch_range(url: str, start: int, end: int, retries: int = RETRIES) -> bytes
             if len(data) != end - start + 1:
                 raise IOError(f"short read: {len(data)} of {end - start + 1} bytes")
             path.parent.mkdir(parents=True, exist_ok=True)
-            tmp = path.with_suffix(".part")
+            tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.part")
             tmp.write_bytes(data)
             tmp.replace(path)
             return data
