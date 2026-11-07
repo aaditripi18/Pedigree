@@ -159,6 +159,9 @@ def build(family: str, repo: str, scratch: bool):
                  else UNet2DModel.from_pretrained(repo))
         sched = DDPMScheduler.from_pretrained(repo)
         size = model.config.sample_size
+        # the 256-pixel UNet at batch 8 does not fit a 16 GB GPU: recompute activations in
+        # the backward pass instead of storing them (same gradients, less memory)
+        model.enable_gradient_checkpointing()
         batches, info = image_batches(size, SEED)
         g = torch.Generator().manual_seed(SEED)
 

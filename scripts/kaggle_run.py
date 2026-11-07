@@ -117,6 +117,7 @@ os.environ["PEDIGREE_CACHE"] = "/tmp/pedigree-hub"
 os.environ["PEDIGREE_DERIVATIVES"] = "/kaggle/working/derivatives"
 os.environ["PEDIGREE_TASKS"] = "/tmp/pedigree-tasks"
 os.environ["PYTHONUNBUFFERED"] = "1"
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 for key, value in ENV.items():
     if value.startswith("merge:"):   # several mounted outputs, one family/split tree
         dest = pathlib.Path("/tmp/merged-" + value[6:])
