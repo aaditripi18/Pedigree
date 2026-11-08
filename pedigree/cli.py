@@ -47,6 +47,8 @@ def check(model: Remote, base: Remote, T: dict, max_elements: int) -> dict:
         out["verdict"] = "unrelated"
     else:
         out["verdict"] = "not comparable"
+    if out["verdict"] in ("related", "identical copy") and c["compared"] < MIN_COMPARED:
+        out["partial"] = True      # few shared tensors (pruned, distilled, resized): evidence for those only
     return out
 
 
@@ -86,7 +88,8 @@ def main(argv: list[str] | None = None) -> int:
                 continue
             inv = f", invariant {r['invariant']:.3f}" if r.get("invariant") is not None else ""
             plain = f"{r['plain']:.3f}" if r.get("plain") is not None else "n/a"
-            print(f"  vs {r['base']}: {r['verdict'].upper()}  (plain {plain}{inv}; "
+            part = " PARTIAL: only these tensors are shared;" if r.get("partial") else ""
+            print(f"  vs {r['base']}: {r['verdict'].upper()}  ({part} plain {plain}{inv}; "
                   f"{r['compared']} tensors compared, {r['matched_tensors']} matched by name and shape)")
     return 0 if all(r.get("verdict") in ("related", "identical copy") for r in report["results"]) else 1
 
