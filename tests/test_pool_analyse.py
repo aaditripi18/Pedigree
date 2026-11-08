@@ -49,3 +49,19 @@ def test_threshold_rule_and_verdicts():
 def test_wilson_and_auc():
     assert analyse.wilson(0, 20)[0] == 0.0 and analyse.wilson(20, 20)[1] == 1.0
     assert analyse.auc([0.9, 0.8], [0.1, 0.0]) == 1.0
+
+
+def test_open_text_reads_every_form_kaggle_produces(tmp_path):
+    rows = '{"id": "a"}\n'
+    gz = tmp_path / "x.jsonl.gz"
+    with gzip.open(gz, "wt") as f:
+        f.write(rows)
+    assert pool.open_text(gz).read() == rows                      # as committed
+    d = tmp_path / "plain"
+    d.mkdir()
+    (d / "x.jsonl").write_text(rows)
+    assert pool.open_text(d / "x.jsonl.gz").read() == rows       # decompressed beside it
+    f2 = tmp_path / "folder"
+    (f2 / "x.jsonl").mkdir(parents=True)
+    (f2 / "x.jsonl" / "x.jsonl").write_text(rows)
+    assert pool.open_text(f2 / "x.jsonl.gz").read() == rows      # unpacked into a folder

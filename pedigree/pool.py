@@ -76,20 +76,19 @@ def _definitive(e: Exception) -> bool:
 
 
 def open_text(path: Path):
-    """A frozen .gz results file, or its decompressed copy (Kaggle unpacks .gz files in
-    uploaded datasets, so the code upload holds e.g. e2_frame_meta.jsonl)."""
+    """A frozen .gz results file, however it reached this machine: as is, decompressed
+    (Kaggle unpacks .gz files in uploaded datasets), or unpacked into a folder."""
     path = Path(path)
-    if path.is_dir():                     # unpacked into a folder of the same name
-        inner = [x for x in path.rglob("*") if x.is_file()]
-        if len(inner) == 1:
-            return open(inner[0], encoding="utf-8")
-    if path.is_file():
-        with open(path, "rb") as fh:
-            gz = fh.read(2) == bytes([0x1F, 0x8B])
-        return gzip.open(path, "rt", encoding="utf-8") if gz else open(path, encoding="utf-8")
-    plain = path.with_suffix("") if path.suffix == ".gz" else path
-    if plain.exists():
-        return open(plain, encoding="utf-8")
+    for cand in (path, path.with_suffix("") if path.suffix == ".gz" else path):
+        if cand.is_dir():
+            inner = sorted((x for x in cand.rglob("*") if x.is_file()), key=lambda x: -x.stat().st_size)
+            if not inner:
+                continue
+            cand = inner[0]
+        if cand.is_file():
+            with open(cand, "rb") as fh:
+                gz = fh.read(2) == bytes([0x1F, 0x8B])
+            return gzip.open(cand, "rt", encoding="utf-8") if gz else open(cand, encoding="utf-8")
     raise FileNotFoundError(path)
 
 
@@ -116,7 +115,7 @@ class Frame:
             self.models = [json.loads(line) for line in f]
         self.frozen_dims: dict = {}
         configs = configs or path.with_name("e2_frame_configs.jsonl.gz")
-        if configs.exists() or configs.with_suffix("").exists():
+        if configs.exists() or configs.with_suffix("").exists():   # file or folder, see open_text
             with open_text(configs) as f:
                 cf = {r["id"]: r for r in map(json.loads, f)}
             for m in self.models:
