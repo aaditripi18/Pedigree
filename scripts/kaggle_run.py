@@ -33,6 +33,11 @@ LEDGER = ROOT / "results" / "ledger.jsonl"
 FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn", "speech", "diffusion_unet"]
 
 
+def ref(job: str) -> str:
+    """owner/kernel of a job: the project account, or a friend's account that ran it and shared it back"""
+    return f"{JOBS[job].get('owner', USER)}/{JOBS[job]['kernel']}"
+
+
 def _job(kernel: str, commands: list[list[str]], gpu: bool, sources: list[str] | None = None,
          env: dict | None = None) -> dict:
     return {"kernel": kernel, "commands": commands, "gpu": gpu, "sources": sources or [], "env": env or {}}
@@ -70,6 +75,21 @@ JOBS["e1-vision_transformer@split"]["sources"] = (["ft-vision_transformer@fresh"
 JOBS["ft-speech@fresh:gpu"] = _job("pedigree-ft-speech-fresh-gpu", [["-m", "experiments.finetune", "speech", "fresh"]],
                                    gpu=True)
 JOBS["e1-speech@split"]["sources"] = [f"ft-speech@dev:{k}" for k in KINDS] + ["ft-speech@fresh:gpu"]
+# diffusion's one-session run hit the 12 h limit (2026-11-08; fresh/scratch unfinished) and
+# Kaggle refuses such a session as an input: rebuilt as dev in one GPU session and each fresh
+# derivative in its own; the two LoRA ones ran on a friend's account (moinuddinhasan8) with this
+# code and were shared back
+JOBS["ft-diffusion_unet@dev:gpu"] = _job("pedigree-ft-unet-dev-gpu",
+                                         [["-m", "experiments.finetune", "diffusion_unet", "dev"]], gpu=True)
+for _k in KINDS:
+    JOBS[f"ft-diffusion_unet@fresh:{_k}:gpu"] = _job(
+        f"pedigree-ft-unet-fresh-{_k.replace('_', '-')}-gpu",
+        [["-m", "experiments.finetune", "diffusion_unet", "fresh", _k]], gpu=True)
+for _k in ("lora_r8", "lora_r64"):
+    JOBS[f"ft-diffusion_unet@fresh:{_k}:gpu"]["owner"] = "moinuddinhasan8"
+JOBS["e1-diffusion_unet"]["sources"] = (["ft-diffusion_unet@dev:gpu"]
+                                        + [f"ft-diffusion_unet@fresh:{k}:gpu" for k in KINDS])
+JOBS["e1-diffusion_unet"]["env"] = {"PEDIGREE_DERIVATIVES": "merge:derivatives"}
 JOBS["e6e7"] = _job("pedigree-e6-e7", [["-m", "experiments.e6_e7"]], gpu=False)
 # E5: students (GPU) written to their own folder; image teachers come from the ft- output
 E5_FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn"]
@@ -273,12 +293,12 @@ def run(job: str, sha: str | None = None) -> None:
             "language": "python", "kernel_type": "script", "is_private": True,
             "enable_gpu": spec["gpu"], "enable_tpu": False, "enable_internet": True,
             "dataset_sources": [f"{USER}/{DATASET}"], "competition_sources": [],
-            "kernel_sources": [f"{USER}/{JOBS[s]['kernel']}" for s in spec["sources"]]}), encoding="utf-8")
+            "kernel_sources": [ref(s) for s in spec["sources"]]}), encoding="utf-8")
         print(kaggle("kernels", "push", "-p", str(d)).stdout.strip())
 
 
 def status(job: str) -> str:
-    out = kaggle("kernels", "status", f"{USER}/{JOBS[job]['kernel']}").stdout.strip()
+    out = kaggle("kernels", "status", ref(job)).stdout.strip()
     print(out)
     return out
 
@@ -287,7 +307,7 @@ def pull(job: str) -> None:
     """Ledger lines, failure list and every derivative's meta.json (not the weights)."""
     dest = ROOT / "results" / "kaggle" / job.replace(":", "__")  # ":" is not allowed in Windows names
     with tempfile.TemporaryDirectory() as d:
-        kaggle("kernels", "output", f"{USER}/{JOBS[job]['kernel']}", "-p", d, "--file-pattern",
+        kaggle("kernels", "output", ref(job), "-p", d, "--file-pattern",
                r".*(\.jsonl|\.txt|meta\.json|\.log)$", check=False)
         for f in Path(d).rglob("*"):
             if f.is_file() and f.suffix in (".json", ".jsonl", ".txt", ".log"):

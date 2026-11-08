@@ -27,7 +27,7 @@ def start(job: str, sha: str) -> bool:
             "language": "python", "kernel_type": "script", "is_private": True,
             "enable_gpu": spec["gpu"], "enable_tpu": False, "enable_internet": True,
             "dataset_sources": [f"{k.USER}/{k.DATASET}"], "competition_sources": [],
-            "kernel_sources": [f"{k.USER}/{k.JOBS[s]['kernel']}" for s in spec["sources"]]}), encoding="utf-8")
+            "kernel_sources": [k.ref(s) for s in spec["sources"]]}), encoding="utf-8")
         r = k.kaggle("kernels", "push", "-p", str(d), check=False)
     out = (r.stdout + r.stderr).strip()
     if "successfully pushed" in out:
@@ -47,7 +47,7 @@ def sources_done(job: str) -> bool:
     """A job starts only when every session it reads from has finished."""
     for src in k.JOBS[job]["sources"]:
         try:
-            st = k.kaggle("kernels", "status", f"{k.USER}/{k.JOBS[src]['kernel']}", check=False).stdout
+            st = k.kaggle("kernels", "status", k.ref(src), check=False).stdout
         except Exception:
             return False
         if "COMPLETE" not in st:

@@ -23,7 +23,7 @@ WAIT = 900
 
 def finished(job: str) -> tuple[bool, list[str]]:
     with tempfile.TemporaryDirectory() as d:
-        k.kaggle("kernels", "output", f"{k.USER}/{k.JOBS[job]['kernel']}", "-p", d,
+        k.kaggle("kernels", "output", k.ref(job), "-p", d,
                  "--file-pattern", r".*(\.jsonl|failed\.txt)$", check=False)
         files = [f for f in Path(d).rglob("*") if f.is_file()]
         failed = [ln for f in files if f.name == "failed.txt"
