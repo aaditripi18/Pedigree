@@ -75,6 +75,24 @@ def _definitive(e: Exception) -> bool:
     return (isinstance(e, urllib.error.HTTPError) and e.code in (401, 403, 404)) or isinstance(e, ValueError)
 
 
+def open_text(path: Path):
+    """A frozen .gz results file, or its decompressed copy (Kaggle unpacks .gz files in
+    uploaded datasets, so the code upload holds e.g. e2_frame_meta.jsonl)."""
+    path = Path(path)
+    if path.is_dir():                     # unpacked into a folder of the same name
+        inner = [x for x in path.rglob("*") if x.is_file()]
+        if len(inner) == 1:
+            return open(inner[0], encoding="utf-8")
+    if path.is_file():
+        with open(path, "rb") as fh:
+            gz = fh.read(2) == b""
+        return gzip.open(path, "rt", encoding="utf-8") if gz else open(path, encoding="utf-8")
+    plain = path.with_suffix("") if path.suffix == ".gz" else path
+    if plain.exists():
+        return open(plain, encoding="utf-8")
+    raise FileNotFoundError(path)
+
+
 def family_key(m: dict) -> str | None:
     if m.get("model_type"):
         return "type:" + m["model_type"]
@@ -94,12 +112,12 @@ class Frame:
         """path: the frame's listing metadata; configs: the frozen config.json reduction
         (results/e2_frame_configs.jsonl.gz), which supplies model_type where the listing
         leaves it out and every frame model's dimensions."""
-        with gzip.open(path, "rt", encoding="utf-8") as f:
+        with open_text(path) as f:
             self.models = [json.loads(line) for line in f]
         self.frozen_dims: dict = {}
         configs = configs or path.with_name("e2_frame_configs.jsonl.gz")
-        if configs.exists():
-            with gzip.open(configs, "rt", encoding="utf-8") as f:
+        if configs.exists() or configs.with_suffix("").exists():
+            with open_text(configs) as f:
                 cf = {r["id"]: r for r in map(json.loads, f)}
             for m in self.models:
                 c = cf.get(m["id"], {})

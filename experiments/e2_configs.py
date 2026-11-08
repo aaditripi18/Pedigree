@@ -39,7 +39,7 @@ def main() -> None:
     ap.add_argument("--rows-out", help="write this shard's rows here (jsonl) instead of the frozen file")
     ap.add_argument("--merge", nargs="*", help="shard row files to combine into the frozen file")
     a = ap.parse_args()
-    with gzip.open(ROOT / "results" / "e2_frame_meta.jsonl.gz", "rt", encoding="utf-8") as f:
+    with pool.open_text(ROOT / "results" / "e2_frame_meta.jsonl.gz") as f:
         ids = [json.loads(line)["id"] for line in f]
     if a.merge is not None:
         got = {}
