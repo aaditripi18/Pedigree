@@ -1,4 +1,5 @@
 {
  "E1-2026-11-05T00:11:03Z-226f21a": "Kaggle input search matched the code upload's committed meta.json copies (no weights): no derivative was compared. Fixed in scripts/kaggle_run.py; rerun.",
- "E1-2026-11-06T15:36:12Z-7a60816": "ViT: transformers 5 renamed the layers, so derivatives (new names) and Hub bases (old names) aligned on 6 of 200 tensors; and the dev derivatives came from time-limited sessions Kaggle would not mount. Fixed by canonical names in pedigree/align.py; rerun."
+ "E1-2026-11-06T15:36:12Z-7a60816": "ViT: transformers 5 renamed the layers, so derivatives (new names) and Hub bases (old names) aligned on 6 of 200 tensors; and the dev derivatives came from time-limited sessions Kaggle would not mount. Fixed by canonical names in pedigree/align.py; rerun.",
+ "E7k-2026-11-07T06:18:35Z-11bcc71": "interrupted by a network outage (23 of 35 pairs failed: getaddrinfo); rerun complete as E7k-2026-11-08T07:45:44Z-115e2d3"
 }
