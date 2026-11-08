@@ -10,6 +10,9 @@ requires-python = ">=3.10"
 license = {text = "MIT"}
 dependencies = ["numpy>=1.24"]
 
+[project.scripts]
+pedigree = "pedigree.cli:main"
+
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "safetensors>=0.4", "torch>=2.2"]
 # E1: building ground-truth derivatives (fine-tune, merge, quantise, prune, distil)
@@ -17,3 +20,6 @@ experiments = ["transformers>=4.57", "diffusers>=0.30", "timm>=1.0", "pandas", "
 
 [tool.setuptools.packages.find]
 include = ["pedigree*"]
+
+[tool.setuptools.package-data]
+pedigree = ["thresholds.json"]
