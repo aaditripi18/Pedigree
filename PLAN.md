@@ -377,3 +377,13 @@ Fixed while writing the audit code, from reasoning about the rules, not from dat
   middle of that gap. If no statistic separates dev, agreement is used with the threshold
   giving the highest dev TPR at dev FPR <= 5%. H9 holds if, on fresh, TPR >= 90% on the
   distilled students and FPR <= 5% on the same-task independent students.
+
+## Amendment 2026-11-08: two file-selection gaps found by a smoke test on non-sample models
+
+A smoke test of the audit on five frame models *outside* the sample (scratchpad only, not a
+result) found: (1) repositories that keep weights only in subfolders without a diffusers
+layout (bundles of several networks) were "not readable"; they are now read through their
+largest weight unit (a folder's sharded set or a single file), the main network; (2) LoRA
+weights saved under a name other than `adapter_model.*` were read as a model; a repository
+whose tensor names are mostly LoRA tensors is now an *adapter*. MLX tensors with an experts
+axis (mixture-of-experts) are dequantised too.

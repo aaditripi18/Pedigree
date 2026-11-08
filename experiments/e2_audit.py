@@ -121,6 +121,8 @@ def weight_files(repo: str, d: dict) -> tuple[str, list[str], dict, dict]:
     except hub.HubError:
         files = []
     files = [f for f in files if f.endswith((".safetensors", ".bin", ".gguf"))]
+    if not files and not prefix:
+        files = _largest_unit(repo, d, names)
     if not files:
         adapters = [n for n in sib if n.split("/")[-1].startswith("adapter_model")]
         top = {n.rsplit(".", 1)[-1] for n in sib}
@@ -139,6 +141,37 @@ def weight_files(repo: str, d: dict) -> tuple[str, list[str], dict, dict]:
     sha = {f: (sib[f].get("lfs") or {}).get("sha256", "") for f in files}
     return ("gguf" if files[0].endswith(".gguf") else "bin" if files[0].endswith(".bin") else "safetensors"),\
         files, sizes, sha
+
+
+def _largest_unit(repo: str, d: dict, names: list[str]) -> list[str]:
+    """Weights kept only in subfolders (bundles of several networks): the largest weight
+    unit anywhere in the repository, a folder's sharded set or a single file (the main
+    network is the largest; amendment 2026-11-08)."""
+    sib = {s["rfilename"]: s for s in d.get("siblings", [])}
+    size = lambda n: int(sib[n].get("size") or (sib[n].get("lfs") or {}).get("size") or 0)  # noqa: E731
+    units = []
+    for n in names:
+        if "/" not in n:
+            continue
+        if n.endswith(".index.json"):
+            folder = n.rsplit("/", 1)[0] + "/"
+            try:
+                with hub._open(f"{hub.HOST}/{repo}/resolve/{d['sha']}/{urllib.parse.quote(n)}") as r:
+                    shards = sorted({folder + v for v in json.loads(r.read().decode("utf-8"))
+                                     .get("weight_map", {}).values()})
+            except Exception as e:
+                if _network(e):
+                    raise NetworkError(str(e)) from None
+                continue
+            if shards and all(x in sib for x in shards):
+                units.append(shards)
+        elif n.endswith((".safetensors", ".gguf")) and "-of-0" not in n:
+            units.append([n])
+        elif n.endswith(".bin") and n.split("/")[-1].startswith(("pytorch_model", "model")) and "-of-0" not in n:
+            units.append([n])
+    if not units:
+        return []
+    return max(units, key=lambda u: (sum(size(x) for x in u), -len(u)))
 
 
 def _search(term: str) -> list[str]:
@@ -205,7 +238,13 @@ def open_repo(repo: str, frame: pool.Frame) -> tuple[Remote | None, dict]:
             try:
                 r = Remote.from_files(src, src_d["sha"], files, sizes)
                 r.repo = repo if src == repo else f"{repo} (via {src})"
-                out = (r, facts)
+                names = list(r.tensors)
+                if names and sum("lora" in n.lower() for n in names) >= len(names) / 2:
+                    # a LoRA saved under another file name: a weight delta, not a model
+                    facts["format"] = facts["reason"] = "adapter"
+                    out = (None, facts)
+                else:
+                    out = (r, facts)
             except Exception as e:
                 if _network(e) and _http_code(e) not in (401, 403, 404):
                     raise NetworkError(f"{repo}: {type(e).__name__}: {e}") from None

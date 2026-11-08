@@ -122,8 +122,9 @@ class Remote:
         q = cfg.get("quantization") or cfg.get("quantization_config") or {}
         for n in mlx:
             bits, gs = int(q.get("bits", 4)), int(q.get("group_size", 64))
-            out, cols = t[n][2]["shape"]
-            self.quant[n] = {"kind": "mlx", "bits": bits, "group": gs, "shape": (out, cols * 32 // bits),
+            shape = list(t[n][2]["shape"])           # (..., packed columns); MoE experts add axes
+            self.quant[n] = {"kind": "mlx", "bits": bits, "group": gs,
+                             "shape": tuple(shape[:-1] + [shape[-1] * 32 // bits]),
                              "scales": n[:-7] + ".scales", "biases": n[:-7] + ".biases"}
         block = q.get("weight_block_size")
         for n in fp8:
@@ -158,11 +159,14 @@ class Remote:
 
     def _dequantised(self, name: str, elements: int) -> np.ndarray:
         q = self.quant[name]
-        rows_total, cols = q["shape"][0], int(np.prod(q["shape"][1:]))
+        if q["kind"] == "mlx":
+            rows_total, cols = int(np.prod(q["shape"][:-1])), q["shape"][-1]
+        else:
+            rows_total, cols = q["shape"][0], int(np.prod(q["shape"][1:]))
         rows = min(rows_total, -(-elements // cols))
         if q["kind"] == "mlx":
             url, start, s = self.tensors[name]
-            words_per_row = s["shape"][1]
+            words_per_row = s["shape"][-1]
             raw = tensor_bytes(url, start, s, rows * words_per_row * 4)
             w = np.frombuffer(raw, dtype="<u4").reshape(rows, words_per_row)
             per = 32 // q["bits"]

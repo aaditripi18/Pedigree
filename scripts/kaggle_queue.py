@@ -35,6 +35,10 @@ def start(job: str, sha: str) -> bool:
         return True
     if "Maximum batch" in out or "session count" in out:
         return False
+    if any(t in out for t in ("Connection aborted", "RemoteDisconnected", "timed out", "getaddrinfo",
+                              "Max retries", "ConnectionError", "503", "502")):
+        print(f"{time.strftime('%H:%M')} network error starting {job}; trying again later", flush=True)
+        return False
     print(f"{time.strftime('%H:%M')} FAILED to start {job}: {out}", flush=True)
     raise SystemExit(1)
 

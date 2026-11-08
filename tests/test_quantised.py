@@ -75,3 +75,22 @@ def test_kurtosis_gap_signs_the_heavier_tail():
     light, heavy = rng.normal(size=20000), rng.standard_t(4, size=20000)
     assert verify.excess_kurtosis(light) == pytest.approx(0, abs=0.15)
     assert verify.kurtosis_gap({"a": [verify.excess_kurtosis(heavy), verify.excess_kurtosis(light)]}) > 1
+
+
+def test_mlx_experts_axis(tmp_path, local_ranges):
+    rng = np.random.default_rng(1)
+    e, out, cols, gs = 3, 4, 64, 32
+    q = rng.integers(0, 16, size=(e, out, cols)).astype(np.uint32)
+    words = np.zeros((e, out, cols // 8), dtype=np.uint32)
+    for k in range(8):
+        words |= q[..., k::8] << (4 * k)
+    scales = rng.normal(size=(e, out, cols // gs)).astype(np.float16)
+    biases = rng.normal(size=(e, out, cols // gs)).astype(np.float16)
+    path = tmp_path / "model.safetensors"
+    save_file({"x.weight": torch.from_numpy(words.view(np.int32)).view(torch.uint32),
+               "x.scales": torch.from_numpy(scales), "x.biases": torch.from_numpy(biases)}, str(path))
+    r = _open_local(path, {"quantization": {"bits": 4, "group_size": gs}})
+    assert r.float_shapes() == {"x.weight": ("float", (e, out, cols))}
+    g = np.arange(cols) // gs
+    want = q * scales.astype(np.float64)[..., g] + biases.astype(np.float64)[..., g]
+    np.testing.assert_allclose(r.sample("x.weight", max_bytes=e * out * cols * 4), want.ravel())
