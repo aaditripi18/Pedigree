@@ -1,1 +1,1 @@
--m experiments.e2_configs --shard 1/2 --rows-out /kaggle/working/e2_configs_shard1.jsonl
+

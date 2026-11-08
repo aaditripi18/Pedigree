@@ -387,3 +387,16 @@ largest weight unit (a folder's sharded set or a single file), the main network;
 weights saved under a name other than `adapter_model.*` were read as a model; a repository
 whose tensor names are mostly LoRA tensors is now an *adapter*. MLX tensors with an experts
 axis (mixture-of-experts) are dequantised too.
+
+## Amendment 2026-11-08 (2): GGUF names in the candidate pool, before E2 or H7 ran
+
+Freezing every frame model's `config.json` (amendment 2026-11-07 (3)) showed that its
+stated reason was mostly wrong: of the 35,032 transformers-tagged frame models without a
+`model_type` in the listing, 34,490 are GGUF repositories, which have no `config.json` at
+all (473 have one; 67 gained a `model_type` from it). They are keyed by their GGUF
+architecture name, and llama.cpp spells those differently from Hugging Face (`qwen35moe`
+vs `qwen3_5_moe`, `gemma3` vs `gemma3_text`), and files Mistral and Mixtral under `llama`,
+Qwen2.5-VL under `qwen2vl`, DeepSeek V2/V3 under `deepseek2`. Left alone, a GGUF upload's
+pool would never contain its Hugging Face parent. Family keys are therefore normalised
+(lower case, separators and a trailing "text" removed) and those four aliases applied. The
+frozen file is kept: it still supplies every frame model's dimensions (27,717 have them).

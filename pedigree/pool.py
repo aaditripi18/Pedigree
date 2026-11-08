@@ -92,11 +92,26 @@ def open_text(path: Path):
     raise FileNotFoundError(path)
 
 
+# llama.cpp files several Hugging Face architectures under one GGUF name
+GGUF_ALIASES = {"mistral": "llama", "mixtral": "llama", "qwen25vl": "qwen2vl", "deepseekv2": "deepseek2",
+                "deepseekv3": "deepseek2"}
+
+
+def norm_type(t: str) -> str:
+    """One spelling for a Hugging Face model_type and a GGUF architecture name:
+    qwen3_5_moe / qwen35moe, gemma3_text / gemma3, gpt_oss / gpt-oss."""
+    import re
+    k = re.sub(r"[^a-z0-9]", "", t.lower())
+    if k.endswith("text") and len(k) > 4:
+        k = k[:-4]
+    return GGUF_ALIASES.get(k, k)
+
+
 def family_key(m: dict) -> str | None:
     if m.get("model_type"):
-        return "type:" + m["model_type"]
+        return "type:" + norm_type(m["model_type"])
     if m.get("gguf_architecture"):
-        return "type:" + m["gguf_architecture"]
+        return "type:" + norm_type(m["gguf_architecture"])
     if m.get("library"):
         return "lib:" + m["library"]
     return None

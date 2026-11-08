@@ -65,3 +65,11 @@ def test_open_text_reads_every_form_kaggle_produces(tmp_path):
     (f2 / "x.jsonl").mkdir(parents=True)
     (f2 / "x.jsonl" / "x.jsonl").write_text(rows)
     assert pool.open_text(f2 / "x.jsonl.gz").read() == rows      # unpacked into a folder
+
+
+def test_gguf_and_hf_names_share_a_family_key():
+    assert pool.family_key({"model_type": "qwen3_5_moe"}) == pool.family_key({"gguf_architecture": "qwen35moe"})
+    assert pool.family_key({"model_type": "gemma3_text"}) == pool.family_key({"gguf_architecture": "gemma3"})
+    assert pool.family_key({"model_type": "gpt_oss"}) == pool.family_key({"gguf_architecture": "gpt-oss"})
+    assert pool.family_key({"model_type": "mistral"}) == pool.family_key({"gguf_architecture": "llama"})
+    assert pool.family_key({"model_type": "bert"}) != pool.family_key({"model_type": "roberta"})
