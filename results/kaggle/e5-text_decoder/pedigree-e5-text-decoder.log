@@ -1,0 +1,93 @@
+[{"stream_name":"stdout","time":26.339212111,"data":"code 7dddbba\n"}
+,{"stream_name":"stdout","time":80.488644474,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":84.064659461,"data":"PEDIGREE_TEACHERS = /kaggle/input/pedigree-ft-text-decoder/derivatives\n"}
+,{"stream_name":"stdout","time":84.110321049,"data":"PEDIGREE_STUDENTS = /kaggle/input/pedigree-distill-text-decoder/students\n"}
+,{"stream_name":"stderr","time":89.238095592,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":95.860666316,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2715.92it/s]\n"}
+,{"stream_name":"stdout","time":213.029910062,"data":"  distill_s0                                    agree 0.287  js 0.4404  cka 0.229\n"}
+,{"stream_name":"stdout","time":326.776850915,"data":"  indep_s0                                      agree 0.246  js 0.5558  cka 0.231\n"}
+,{"stream_name":"stdout","time":438.449560589,"data":"  distill_s1                                    agree 0.271  js 0.4470  cka 0.245\n"}
+,{"stream_name":"stdout","time":549.938447602,"data":"  indep_s1                                      agree 0.246  js 0.5581  cka 0.228\n"}
+,{"stream_name":"stdout","time":660.637616763,"data":"  distill_s2                                    agree 0.287  js 0.4309  cka 0.216\n"}
+,{"stream_name":"stdout","time":771.455479598,"data":"  indep_s2                                      agree 0.247  js 0.5597  cka 0.229\n"}
+,{"stream_name":"stderr","time":774.819219649,"data":"\rLoading weights:   0%|          | 0/76 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 76/76 [00:00\u003c00:00, 2762.11it/s]\n"}
+,{"stream_name":"stdout","time":781.86067737,"data":"  distilbert/distilgpt2                         agree 0.628  js 0.1144  cka 0.686\n"}
+,{"stream_name":"stderr","time":785.4251217,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 11389.26it/s]\n"}
+,{"stream_name":"stderr","time":785.479506197,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/alias-gpt2-small-x21\n"}
+,{"stream_name":"stderr","time":785.479532444,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":785.479537997,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":785.479542488,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":785.479559187,"data":"\n"}
+,{"stream_name":"stderr","time":785.479563287,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":785.479567595,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":793.349675645,"data":"  stanford-crfm/alias-gpt2-small-x21            agree 0.672  js 0.1199  cka 0.213\n"}
+,{"stream_name":"stderr","time":796.621333941,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 7847.20it/s]\n"}
+,{"stream_name":"stderr","time":796.681869219,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/battlestar-gpt2-small-x49\n"}
+,{"stream_name":"stderr","time":796.681891,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":796.681895502,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":796.681912109,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":796.681915223,"data":"\n"}
+,{"stream_name":"stderr","time":796.681918158,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":796.681921096,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":804.769671801,"data":"  stanford-crfm/battlestar-gpt2-small-x49       agree 0.674  js 0.1177  cka 0.210\n"}
+,{"stream_name":"stderr","time":808.791835325,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 10484.53it/s]\n"}
+,{"stream_name":"stderr","time":808.849985136,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/caprica-gpt2-small-x81\n"}
+,{"stream_name":"stderr","time":808.850009425,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":808.850014669,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":808.850019188,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":808.850023771,"data":"\n"}
+,{"stream_name":"stderr","time":808.850027983,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":808.850032389,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":816.356844829,"data":"  stanford-crfm/caprica-gpt2-small-x81          agree 0.673  js 0.1189  cka 0.217\n"}
+,{"stream_name":"stderr","time":819.700256533,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 10655.24it/s]\n"}
+,{"stream_name":"stderr","time":819.751447299,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/darkmatter-gpt2-small-x343\n"}
+,{"stream_name":"stderr","time":819.751471139,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":819.751476427,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":819.751481007,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":819.751485227,"data":"\n"}
+,{"stream_name":"stderr","time":819.751489498,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":819.751493783,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":827.229609465,"data":"  stanford-crfm/darkmatter-gpt2-small-x343      agree 0.669  js 0.1186  cka 0.214\n"}
+,{"stream_name":"stderr","time":830.523690999,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 14135.01it/s]\n"}
+,{"stream_name":"stderr","time":830.577484295,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/expanse-gpt2-small-x777\n"}
+,{"stream_name":"stderr","time":830.57751125,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":830.577516539,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":830.577521022,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":830.577525773,"data":"\n"}
+,{"stream_name":"stderr","time":830.577543896,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":830.577547743,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":838.651064019,"data":"  stanford-crfm/expanse-gpt2-small-x777         agree 0.669  js 0.1226  cka 0.217\n"}
+,{"stream_name":"stderr","time":842.47098267,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2681.31it/s]\n"}
+,{"stream_name":"stdout","time":960.496976277,"data":"  distill_s0                                    agree 0.351  js 0.3615  cka 0.647\n"}
+,{"stream_name":"stdout","time":1079.203844346,"data":"  indep_s0                                      agree 0.279  js 0.5186  cka 0.532\n"}
+,{"stream_name":"stdout","time":1195.362819416,"data":"  distill_s1                                    agree 0.353  js 0.3543  cka 0.661\n"}
+,{"stream_name":"stdout","time":1316.387996693,"data":"  indep_s1                                      agree 0.278  js 0.5182  cka 0.536\n"}
+,{"stream_name":"stdout","time":1435.227854013,"data":"  distill_s2                                    agree 0.352  js 0.3522  cka 0.664\n"}
+,{"stream_name":"stdout","time":1554.168300248,"data":"  indep_s2                                      agree 0.274  js 0.5239  cka 0.520\n"}
+,{"stream_name":"stderr","time":1558.830305396,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2663.04it/s]\n"}
+,{"stream_name":"stdout","time":1567.015288475,"data":"  EleutherAI/pythia-160m-seed1                  agree 0.652  js 0.1298  cka 0.860\n"}
+,{"stream_name":"stderr","time":1573.13521768,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2694.59it/s]\n"}
+,{"stream_name":"stdout","time":1581.116892845,"data":"  EleutherAI/pythia-160m-seed2                  agree 0.657  js 0.1334  cka 0.768\n"}
+,{"stream_name":"stderr","time":1586.479742713,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2621.32it/s]\n"}
+,{"stream_name":"stdout","time":1594.253893686,"data":"  EleutherAI/pythia-160m-seed3                  agree 0.660  js 0.1285  cka 0.836\n"}
+,{"stream_name":"stderr","time":1599.385867676,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 11468.10it/s]\n"}
+,{"stream_name":"stdout","time":1607.305320755,"data":"  EleutherAI/pythia-160m-seed4                  agree 0.654  js 0.1283  cka 0.878\n"}
+,{"stream_name":"stderr","time":1611.63131272,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 10948.87it/s]\n"}
+,{"stream_name":"stdout","time":1619.614942655,"data":"  EleutherAI/pythia-160m-seed5                  agree 0.657  js 0.1300  cka 0.791\n"}
+,{"stream_name":"stderr","time":1625.178310799,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 10192.72it/s]\n"}
+,{"stream_name":"stdout","time":1633.329485328,"data":"  EleutherAI/pythia-160m-seed6                  agree 0.656  js 0.1281  cka 0.916\n"}
+,{"stream_name":"stderr","time":1639.006825922,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 9119.79it/s]\n"}
+,{"stream_name":"stdout","time":1647.249074636,"data":"  EleutherAI/pythia-160m-seed7                  agree 0.662  js 0.1293  cka 0.787\n"}
+,{"stream_name":"stderr","time":1651.968303303,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 8591.44it/s]\n"}
+,{"stream_name":"stdout","time":1660.691567328,"data":"  EleutherAI/pythia-160m-seed8                  agree 0.654  js 0.1339  cka 0.783\n"}
+,{"stream_name":"stderr","time":1664.95993394,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 7737.31it/s]\n"}
+,{"stream_name":"stdout","time":1673.520457091,"data":"  EleutherAI/pythia-160m-seed9                  agree 0.651  js 0.1326  cka 0.808\n"}
+,{"stream_name":"stdout","time":1677.441515956,"data":"exit 0 -m experiments.e5_behaviour text_decoder\n"}
+,{"stream_name":"stdout","time":1677.492108574,"data":"27 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":1679.702683094,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1679.702710132,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1679.975045224,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1679.975087476,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1680.795836074,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1681.872867622,"data":"[NbConvertApp] Writing 291378 bytes to __results__.html\n"}
+]

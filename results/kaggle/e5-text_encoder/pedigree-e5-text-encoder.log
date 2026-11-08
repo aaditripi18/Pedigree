@@ -1,0 +1,42 @@
+[{"stream_name":"stdout","time":49.458703601,"data":"code 7dddbba\n"}
+,{"stream_name":"stdout","time":103.826327538,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":107.817350656,"data":"PEDIGREE_TEACHERS = /kaggle/input/pedigree-ft-text-encoder/derivatives\n"}
+,{"stream_name":"stdout","time":107.817978947,"data":"PEDIGREE_STUDENTS = /kaggle/input/pedigree-distill-text-encoder/students\n"}
+,{"stream_name":"stderr","time":113.450184755,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":120.277387527,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2639.85it/s]\n"}
+,{"stream_name":"stderr","time":120.294461671,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":120.294498363,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":120.294515559,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":120.294519381,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":120.294522645,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":120.294525812,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":120.294528888,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":120.294531979,"data":"\n"}
+,{"stream_name":"stderr","time":120.294534968,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":120.294537927,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":210.154515225,"data":"  distill_s0                                    agree 0.074  js 0.8333  cka 0.126\n"}
+,{"stream_name":"stdout","time":294.786859665,"data":"  indep_s0                                      agree 0.070  js 0.8486  cka 0.146\n"}
+,{"stream_name":"stdout","time":378.987896306,"data":"  distill_s1                                    agree 0.054  js 0.8374  cka 0.232\n"}
+,{"stream_name":"stdout","time":461.579770486,"data":"  indep_s1                                      agree 0.074  js 0.8359  cka 0.208\n"}
+,{"stream_name":"stdout","time":542.92504959,"data":"  distill_s2                                    agree 0.074  js 0.8325  cka 0.115\n"}
+,{"stream_name":"stdout","time":626.719554031,"data":"  indep_s2                                      agree 0.074  js 0.8478  cka 0.078\n"}
+,{"stream_name":"stderr","time":630.209102611,"data":"\rLoading weights:   0%|          | 0/105 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 105/105 [00:00\u003c00:00, 2558.39it/s]\n"}
+,{"stream_name":"stdout","time":633.739652086,"data":"  distilbert/distilbert-base-uncased            agree 0.538  js 0.2779  cka 0.943\n"}
+,{"stream_name":"stdout","time":634.728784594,"data":"  google-bert/bert-base-cased: different tokenizer, skipped (recorded)\n"}
+,{"stream_name":"stderr","time":639.76931457,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2673.25it/s]\n"}
+,{"stream_name":"stdout","time":757.330339399,"data":"  distill_s0                                    agree 0.094  js 0.8494  cka 0.018\n"}
+,{"stream_name":"stdout","time":870.318260644,"data":"  indep_s0                                      agree 0.068  js 0.8968  cka 0.101\n"}
+,{"stream_name":"stdout","time":988.852601624,"data":"  distill_s1                                    agree 0.091  js 0.8546  cka 0.018\n"}
+,{"stream_name":"stdout","time":1104.119051113,"data":"  indep_s1                                      agree 0.031  js 0.8798  cka 0.050\n"}
+,{"stream_name":"stdout","time":1219.856065875,"data":"  distill_s2                                    agree 0.085  js 0.8595  cka 0.071\n"}
+,{"stream_name":"stdout","time":1338.594491484,"data":"  indep_s2                                      agree 0.096  js 0.8762  cka 0.017\n"}
+,{"stream_name":"stdout","time":1342.286382615,"data":"  FacebookAI/xlm-roberta-base: different tokenizer, skipped (recorded)\n"}
+,{"stream_name":"stdout","time":1343.74611851,"data":"exit 0 -m experiments.e5_behaviour text_encoder\n"}
+,{"stream_name":"stdout","time":1343.752775824,"data":"15 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":1345.931751925,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1345.931785183,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1346.199650367,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1346.199700819,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1347.048298796,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1348.079278218,"data":"[NbConvertApp] Writing 291378 bytes to __results__.html\n"}
+]

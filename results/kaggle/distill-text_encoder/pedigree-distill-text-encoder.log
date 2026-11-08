@@ -1,0 +1,106 @@
+[{"stream_name":"stdout","time":21.666802198,"data":"code c62de00\n"}
+,{"stream_name":"stdout","time":76.595001187,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":79.9290923,"data":"PEDIGREE_DERIVATIVES = /kaggle/working/students\n"}
+,{"stream_name":"stdout","time":79.930557224,"data":"PEDIGREE_TEACHERS = /kaggle/input/pedigree-ft-text-encoder/derivatives\n"}
+,{"stream_name":"stderr","time":85.751887143,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":92.684081497,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2460.55it/s]\n"}
+,{"stream_name":"stderr","time":92.699742391,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":92.699797699,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":92.69980558500001,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":92.699811545,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":92.699817003,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":92.699821775,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":92.699826542,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":92.699831146,"data":"\n"}
+,{"stream_name":"stderr","time":92.699835706,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":92.699842356,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":97.824497873,"data":"/kaggle/working/Pedigree/experiments/distill.py:134: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":97.824541467,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":97.824548011,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":553.917573916,"data":"text_encoder/dev/distill_s0: loss 10.802 -\u003e 7.471, 472 s\n"}
+,{"stream_name":"stderr","time":554.451957396,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2575.28it/s]\n"}
+,{"stream_name":"stderr","time":554.457543133,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":554.457579941,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":554.457585608,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":554.457604739,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":554.457609864,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":554.457614178,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":554.457618478,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":554.457623449,"data":"\n"}
+,{"stream_name":"stderr","time":554.457628142,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":554.457632725,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":861.720095021,"data":"text_encoder/dev/indep_s0: loss 10.4825 -\u003e 7.4354, 308 s\n"}
+,{"stream_name":"stderr","time":862.450921942,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2638.49it/s]\n"}
+,{"stream_name":"stderr","time":862.456728419,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":862.456765857,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":862.456772528,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":862.456777742,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":862.456782706,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":862.456787633,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":862.456792151,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":862.456796603,"data":"\n"}
+,{"stream_name":"stderr","time":862.456800958,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":862.456805341,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":1323.760306672,"data":"text_encoder/dev/distill_s1: loss 11.6137 -\u003e 8.1563, 462 s\n"}
+,{"stream_name":"stderr","time":1324.241517201,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2664.56it/s]\n"}
+,{"stream_name":"stderr","time":1324.246852513,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":1324.246877894,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":1324.246883437,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":1324.246887999,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1324.246892421,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1324.246896883,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1324.246901719,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1324.246906173,"data":"\n"}
+,{"stream_name":"stderr","time":1324.246910436,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":1324.246914969,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":1630.560470434,"data":"text_encoder/dev/indep_s1: loss 10.5157 -\u003e 7.0879, 307 s\n"}
+,{"stream_name":"stderr","time":1631.0894919,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2723.36it/s]\n"}
+,{"stream_name":"stderr","time":1631.094892416,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":1631.094914266,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":1631.094919116,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":1631.094923337,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1631.094943834,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1631.094946615,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1631.094948926,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":1631.094951544,"data":"\n"}
+,{"stream_name":"stderr","time":1631.094953816,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":1631.094956084,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":2092.487084788,"data":"text_encoder/dev/distill_s2: loss 9.7186 -\u003e 6.4776, 462 s\n"}
+,{"stream_name":"stderr","time":2092.997703639,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2397.13it/s]\n"}
+,{"stream_name":"stderr","time":2093.004832616,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":2093.00488014,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":2093.00488741,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":2093.004892855,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":2093.004897515,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":2093.004902294,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":2093.004907064,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":2093.004911688,"data":"\n"}
+,{"stream_name":"stderr","time":2093.004916192,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":2093.004920721,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":2400.191639991,"data":"text_encoder/dev/indep_s2: loss 10.4182 -\u003e 6.7374, 308 s\n"}
+,{"stream_name":"stdout","time":2401.445637454,"data":"exit 0 -m experiments.distill text_encoder dev\n"}
+,{"stream_name":"stderr","time":2406.839820467,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":2413.630994435,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2723.47it/s]\n"}
+,{"stream_name":"stderr","time":2416.957542996,"data":"/kaggle/working/Pedigree/experiments/distill.py:134: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":2416.957580028,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":2416.957586524,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":2952.04612479,"data":"text_encoder/fresh/distill_s0: loss 17.9883 -\u003e 11.0326, 549 s\n"}
+,{"stream_name":"stderr","time":2952.73747101,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2541.29it/s]\n"}
+,{"stream_name":"stdout","time":3327.389725587,"data":"text_encoder/fresh/indep_s0: loss 11.1081 -\u003e 7.427, 375 s\n"}
+,{"stream_name":"stderr","time":3328.017519149,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2541.04it/s]\n"}
+,{"stream_name":"stdout","time":3864.22466113,"data":"text_encoder/fresh/distill_s1: loss 18.7507 -\u003e 13.2383, 537 s\n"}
+,{"stream_name":"stderr","time":3864.851961112,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2766.23it/s]\n"}
+,{"stream_name":"stdout","time":4239.735621074,"data":"text_encoder/fresh/indep_s1: loss 11.0235 -\u003e 7.4654, 376 s\n"}
+,{"stream_name":"stderr","time":4240.364843104,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2679.08it/s]\n"}
+,{"stream_name":"stdout","time":4776.608728951,"data":"text_encoder/fresh/distill_s2: loss 18.2911 -\u003e 11.4626, 537 s\n"}
+,{"stream_name":"stderr","time":4777.241522756,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2688.95it/s]\n"}
+,{"stream_name":"stdout","time":5152.491664019,"data":"text_encoder/fresh/indep_s2: loss 11.0411 -\u003e 7.6737, 376 s\n"}
+,{"stream_name":"stdout","time":5153.695693079,"data":"exit 0 -m experiments.distill text_encoder fresh\n"}
+,{"stream_name":"stdout","time":5153.699312283,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":5155.591608501,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":5155.591650286,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5155.786045573,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5155.786079855,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":5156.50694535,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":5157.320588285,"data":"[NbConvertApp] Writing 291713 bytes to __results__.html\n"}
+]
