@@ -1,0 +1,35 @@
+[{"stream_name":"stdout","time":32.471488568,"data":"code 7dddbba\n"}
+,{"stream_name":"stdout","time":113.909068899,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":130.271277845,"data":"PEDIGREE_TEACHERS = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":130.27188023,"data":"PEDIGREE_STUDENTS = /kaggle/input/pedigree-distill-vision-transformer/students\n"}
+,{"stream_name":"stderr","time":136.102322304,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":204.641416827,"data":"/kaggle/working/Pedigree/experiments/e5_behaviour.py:61: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":204.641467447,"data":"  xs = [(torch.from_numpy(np.asarray(Image.open(io.BytesIO(b[\"bytes\"])).convert(\"RGB\").resize((size, size))))\n"}
+,{"stream_name":"stdout","time":265.794803427,"data":"  distill_s0                                    agree 0.288  js 0.5291  cka 0.235\n"}
+,{"stream_name":"stdout","time":315.797289787,"data":"  indep_s0                                      agree 0.274  js 0.5332  cka 0.257\n"}
+,{"stream_name":"stdout","time":367.429005199,"data":"  distill_s1                                    agree 0.334  js 0.5073  cka 0.254\n"}
+,{"stream_name":"stdout","time":421.427447582,"data":"  indep_s1                                      agree 0.311  js 0.5263  cka 0.245\n"}
+,{"stream_name":"stdout","time":476.001218652,"data":"  distill_s2                                    agree 0.357  js 0.4959  cka 0.261\n"}
+,{"stream_name":"stdout","time":533.701041562,"data":"  indep_s2                                      agree 0.362  js 0.4985  cka 0.260\n"}
+,{"stream_name":"stderr","time":533.913453735,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stderr","time":547.332586892,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":558.035525052,"data":"  distill_s0                                    agree 0.307  js 0.5634  cka 0.313\n"}
+,{"stream_name":"stderr","time":558.149140757,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":569.070910023,"data":"  indep_s0                                      agree 0.305  js 0.5766  cka 0.340\n"}
+,{"stream_name":"stderr","time":569.212612397,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":580.380483944,"data":"  distill_s1                                    agree 0.326  js 0.5582  cka 0.336\n"}
+,{"stream_name":"stderr","time":580.5032171,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":591.321161557,"data":"  indep_s1                                      agree 0.327  js 0.5760  cka 0.332\n"}
+,{"stream_name":"stderr","time":591.426990431,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":602.764278325,"data":"  distill_s2                                    agree 0.339  js 0.5529  cka 0.337\n"}
+,{"stream_name":"stderr","time":602.871173,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":614.139731926,"data":"  indep_s2                                      agree 0.357  js 0.5585  cka 0.335\n"}
+,{"stream_name":"stdout","time":619.546745136,"data":"exit 0 -m experiments.e5_behaviour vision_transformer\n"}
+,{"stream_name":"stdout","time":619.553264193,"data":"12 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":622.183248463,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":622.183282351,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":622.548197113,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":622.548225312,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":623.451335923,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":624.978953803,"data":"[NbConvertApp] Writing 291391 bytes to __results__.html\n"}
+]

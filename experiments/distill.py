@@ -27,7 +27,8 @@ import torch
 
 from experiments import finetune as ft
 
-SEEDS = (0, 1, 2)
+# E5 used seeds 0-2; H12's new students are fresh seeds 3-7 (PLAN.md amendment 2026-11-08 (3))
+SEEDS = tuple(int(x) for x in os.environ.get("PEDIGREE_SEEDS", "0,1,2").split(","))
 STEPS = 2000
 TEMPERATURE = 2.0
 LR = 1e-4

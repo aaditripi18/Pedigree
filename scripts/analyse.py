@@ -253,6 +253,65 @@ def h9(e5):
             "evidence": f"{stat} > {t:.4f} (chosen on dev): TPR {tp}/{len(fp_)}, FPR {fp}/{len(fn)}"}
 
 
+H12_STATS = {"agreement": lambda r: r.get("agreement"),
+             "1-js": lambda r: 1 - r["js"] if num(r.get("js")) is not None else None,
+             "cka": lambda r: r.get("cka")}
+
+
+def _seed(r) -> int:
+    return int(str(r.get("model", "")).rsplit("_s", 1)[-1]) if "_s" in str(r.get("model", "")) else -1
+
+
+def h12_scores(e5o, stat: str, split: str):
+    """Margins over the family's reference independents (seeds 0-2) on one split:
+    (distilled, independent) lists of (family, model, margin). A reference independent is
+    scored against the other two."""
+    f = H12_STATS[stat]
+    P, N = [], []
+    for fam in sorted({r["family"] for r in e5o if r.get("split") == split}):
+        rows = [r for r in e5o if r.get("split") == split and r["family"] == fam and not r.get("error")
+                and r.get("kind") in ("distill", "indep") and num(f(r)) is not None]
+        refs = {r["model"]: f(r) for r in rows if r["kind"] == "indep" and _seed(r) <= 2}
+        for r in rows:
+            others = [v for m, v in refs.items() if m != r["model"]]
+            if len(others) < 2:
+                continue
+            (P if r["kind"] == "distill" else N).append((fam, r["model"], f(r) - max(others)))
+    return P, N
+
+
+def h12(e5o):
+    statement = ("On off-task inputs, a distilled student agrees with its teacher more than the family's "
+                 "same-task independent students do (TPR >= 90% at FPR <= 5%, fresh).")
+    if not e5o or not any(_seed(r) >= 3 for r in e5o if r.get("split") == "fresh"):
+        return {"id": "H12", "statement": statement, "verdict": "pending", "evidence": "needs the new students"}
+    dev = {}
+    for stat in H12_STATS:
+        P, N = h12_scores(e5o, stat, "dev")
+        p, n = [m for *_, m in P], [m for *_, m in N]
+        dev[stat] = {"gap": min(p) - max(n), "mid": (min(p) + max(n)) / 2, "max_neg": max(n),
+                     "tpr_at_fpr0": sum(x > max(n) for x in p) / len(p)}
+    best = max(dev, key=lambda s: dev[s]["gap"])
+    if dev[best]["gap"] > 0:
+        stat, t = best, dev[best]["mid"]
+    else:   # none separates dev: highest dev TPR at FPR 0, widest gap breaking ties
+        stat = max(dev, key=lambda s: (dev[s]["tpr_at_fpr0"], dev[s]["gap"]))
+        t = dev[stat]["max_neg"]
+    P, N = h12_scores(e5o, stat, "fresh")
+    P = [x for x in P if _seed({"model": x[1]}) >= 3]
+    N = [x for x in N if _seed({"model": x[1]}) >= 3]
+    tp, fp = sum(m > t for *_, m in P), sum(m > t for *_, m in N)
+    done = len({x[0] for x in P}) >= 4
+    ok = (tp / len(P) >= 0.9 and fp / len(N) <= 0.05) if done and P and N else None
+    per_family = {fam: {"tpr": [sum(m > t for f2, _, m in P if f2 == fam), sum(f2 == fam for f2, *_ in P)],
+                        "fpr": [sum(m > t for f2, _, m in N if f2 == fam), sum(f2 == fam for f2, *_ in N)]}
+                  for fam in sorted({x[0] for x in P})}
+    return {"id": "H12", "statement": statement, "verdict": verdict(ok),
+            "numbers": {"statistic": stat, "threshold": t, "tpr": [tp, len(P)], "fpr": [fp, len(N)],
+                        "per_family": per_family, "dev": dev},
+            "evidence": f"{stat} margin > {t:.4f} (chosen on dev): TPR {tp}/{len(P)}, FPR {fp}/{len(N)}"}
+
+
 def h10(e6, T, rule):
     sh = [r for r in e6 if r.get("shared_init") and not r.get("error")]
     ds = [r for r in e6 if r.get("relation") == "different_init_same_data" and not r.get("error")]
@@ -357,7 +416,11 @@ def main() -> None:
     h7a = latest_runs(rows, "H7a", lambda r: r.get("family"))
     e2 = latest_runs(rows, "E2", lambda r: 0)
     e2w = latest_runs(rows, "E2W", lambda r: 0)
-    for r in e5:                     # E5 keeps family/split in the run's metadata
+    def by_family_split(exp):
+        return latest_runs(rows, exp, lambda r: ((r.get("meta") or {}).get("family", r.get("family")),
+                                                (r.get("meta") or {}).get("split", r.get("split"))))
+    e5o, e5n = by_family_split("E5o"), by_family_split("E5n")
+    for r in e5 + e5o + e5n:         # E5 keeps family/split in the run's metadata
         meta = r.get("meta") or {}
         r.setdefault("family", meta.get("family"))
         r.setdefault("split", meta.get("split"))
@@ -368,7 +431,7 @@ def main() -> None:
         A = audit(e2, T, rule) if e2 else None
         hs = [h1(e1, T, rule), *(h2h3(A, len(e2) == 600) if A else []), h4(e1, T, rule), h5(e1, e5, T, rule),
               h6(e1b, e2w, T, rule), h7(h7a, e2, T, rule), h8(e1b, e7k, e2, T, rule), h9(e5), h10(e6, T, rule),
-              h11(e7, T, rule)]
+              h11(e7, T, rule), h12(e5o)]
         out["rules"][rule] = {"hypotheses": hs, "audit": A}
     # the CLI's thresholds are exactly the published rule's
     (ROOT / "pedigree" / "thresholds.json").write_text(json.dumps(

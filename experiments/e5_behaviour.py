@@ -38,6 +38,11 @@ PROBE_IMAGES = 1000
 MAX_LEN = 64
 BATCH = 16
 STUDENTS = Path(os.environ.get("PEDIGREE_STUDENTS", ft.OUT))
+# H12 (PLAN.md amendment 2026-11-08 (3)): "test" = E5's probes, "offtask" = noise images and
+# word-shuffled lines; which student seeds each split has; the ledger name of the run
+PROBES = os.environ.get("PEDIGREE_PROBES", "test")
+SPLIT_SEEDS = json.loads(os.environ.get("PEDIGREE_E5_SEEDS", '{"dev": [0, 1, 2], "fresh": [0, 1, 2]}'))
+EXPERIMENT = os.environ.get("PEDIGREE_EXPERIMENT", "E5")
 PROBE_DATA = {
     "wikitext2_test": "https://huggingface.co/datasets/Salesforce/wikitext/resolve/main/wikitext-2-raw-v1/test-00000-of-00001.parquet",
     "cifar10_test": "https://huggingface.co/datasets/uoft-cs/cifar10/resolve/main/plain_text/test-00000-of-00001.parquet",
@@ -49,10 +54,22 @@ def text_probes() -> tuple[list[str], str]:
     import pandas as pd
     path, digest = ft.task_file("wikitext2_test")
     lines = [t.strip() for t in pd.read_parquet(path)["text"].tolist() if len(t.split()) > 20]
-    return lines[:PROBE_TEXTS], digest
+    lines = lines[:PROBE_TEXTS]
+    if PROBES == "offtask":   # the same tokens, no sentence: each line's words shuffled, seed 0
+        import random
+        out = []
+        for t in lines:
+            w = t.split()
+            random.Random(0).shuffle(w)
+            out.append(" ".join(w))
+        lines = out
+    return lines, digest
 
 
 def image_probes(size: int, mean, std) -> tuple[torch.Tensor, str]:
+    if PROBES == "offtask":   # N(0, 1) noise in the normalised input space, seed 0
+        g = torch.Generator().manual_seed(0)
+        return torch.randn(PROBE_IMAGES, 3, size, size, generator=g), "randn-seed0"
     import pandas as pd
     from PIL import Image
     path, digest = ft.task_file("cifar10_test")
@@ -154,7 +171,7 @@ def main(family: str, splits: list[str]) -> None:
             cls = AutoModelForCausalLM if causal else AutoModelForMaskedLM
             public = [(r, "positive", "public_derivative") for r in spec.get("public_derivatives", {}).get(repo, [])]
             public += [(r, "negative", "independent") for r in ft.bases()[family][split]["independent"]]
-            probe = {"probes": "wikitext2_test", "sha256": digest, "n": len(lines)}
+            probe = {"probes": "wikitext2_test" + ("_shuffled" if PROBES == "offtask" else ""), "sha256": digest, "n": len(lines)}
         else:
             size = 224 if family == "vision_transformer" else 160
             norm = ((0.5,) * 3, (0.5,) * 3) if family == "vision_transformer" else \
@@ -162,10 +179,12 @@ def main(family: str, splits: list[str]) -> None:
             x, digest = image_probes(size, *norm)
             runner = lambda m: _image_run(m, x)  # noqa: E731
             public, cls = [], None
-            probe = {"probes": "cifar10_test", "sha256": digest, "n": len(x)}
-        run = ledger.Run("E5", family=family, split=split, teacher=info.get("teacher", repo), **probe)
+            probe = {"probes": "noise" if PROBES == "offtask" else "cifar10_test", "sha256": digest, "n": len(x)}
+        run = ledger.Run(EXPERIMENT, family=family, split=split, teacher=info.get("teacher", repo), **probe)
         cands = [(f"{k}_s{s}", "positive" if k == "distill" else "negative", k)
-                 for s in distill.SEEDS for k in ("distill", "indep")]
+                 for s in SPLIT_SEEDS[split] for k in ("distill", "indep")]
+        if EXPERIMENT == "E5n":   # only the new students on E5's probes
+            public = []
         for name, label, kind in cands + public:
             try:
                 if kind in ("distill", "indep"):

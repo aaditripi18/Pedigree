@@ -73,3 +73,19 @@ def test_gguf_and_hf_names_share_a_family_key():
     assert pool.family_key({"model_type": "gpt_oss"}) == pool.family_key({"gguf_architecture": "gpt-oss"})
     assert pool.family_key({"model_type": "mistral"}) == pool.family_key({"gguf_architecture": "llama"})
     assert pool.family_key({"model_type": "bert"}) != pool.family_key({"model_type": "roberta"})
+
+
+def test_h12_margin_rule_on_synthetic_students():
+    rows = []
+    for fam, level in (("a", 0.2), ("b", 0.5), ("c", 0.8), ("d", 0.3)):   # each family its own level
+        for split, seeds in (("dev", range(3)), ("fresh", range(8))):
+            for s in seeds:
+                rows.append({"family": fam, "split": split, "kind": "indep", "model": f"indep_s{s}",
+                             "agreement": level + 0.001 * s, "js": 0.5, "cka": 0.5})
+                rows.append({"family": fam, "split": split, "kind": "distill", "model": f"distill_s{s}",
+                             "agreement": level + 0.05, "js": 0.5, "cka": 0.5})
+    h = analyse.h12(rows)
+    assert h["numbers"]["statistic"] == "agreement"
+    assert h["numbers"]["tpr"] == [20, 20]
+    # new independents (seeds 3-7) sit up to 0.007 above the references, below the dev midpoint (~0.024)
+    assert h["numbers"]["fpr"] == [0, 20] and h["verdict"] == "supported"

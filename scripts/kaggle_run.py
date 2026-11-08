@@ -92,6 +92,28 @@ for _f, _src in TEACHER_SOURCES.items():
     JOBS[f"e5-{_f}"]["sources"] = list(_src) + [f"distill-{_f}"]
     JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"] = "merge:derivatives"
 
+# H12 (PLAN.md amendment 2026-11-08 (3)): new fresh students (seeds 3-7), then off-task probes
+# on every student (E5o) and E5's probes on the new ones (E5n)
+NEW_SEEDS = [3, 4, 5, 6, 7]
+for _f in E5_FAMILIES:
+    JOBS[f"distill2-{_f}"] = _job(f"pedigree-distill2-{_f.replace('_', '-')}",
+                                  [["-m", "experiments.distill", _f, "fresh"]], gpu=True,
+                                  sources=list(JOBS[f"distill-{_f}"]["sources"]),
+                                  env={**JOBS[f"distill-{_f}"]["env"], "PEDIGREE_SEEDS": ",".join(map(str, NEW_SEEDS))})
+    _teach = [s for s in JOBS[f"e5-{_f}"]["sources"] if not s.startswith("distill-")]
+    JOBS[f"h12-{_f}"] = _job(f"pedigree-h12-{_f.replace('_', '-')}",
+                             [["-m", "experiments.e5_behaviour", _f, "dev", "fresh"],
+                              ["-m", "experiments.e5_behaviour", _f, "fresh"]], gpu=True,
+                             sources=_teach + [f"distill-{_f}", f"distill2-{_f}"],
+                             env={"PEDIGREE_TEACHERS": JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"],
+                                  "PEDIGREE_STUDENTS": "merge:students"})
+    # the two commands differ in probes, seeds and ledger name: set per command below
+    JOBS[f"h12-{_f}"]["command_env"] = [
+        {"PEDIGREE_PROBES": "offtask", "PEDIGREE_EXPERIMENT": "E5o",
+         "PEDIGREE_E5_SEEDS": json.dumps({"dev": [0, 1, 2], "fresh": [0, 1, 2] + NEW_SEEDS})},
+        {"PEDIGREE_PROBES": "test", "PEDIGREE_EXPERIMENT": "E5n",
+         "PEDIGREE_E5_SEEDS": json.dumps({"fresh": NEW_SEEDS})}]
+
 # E1b (H6 whole files, H8 direction): the same inputs as the E1 job each family used
 E1_FORM = {"text_encoder": "e1-text_encoder", "text_decoder": "e1-text_decoder",
            "vision_cnn": "e1-vision_cnn@split", "vision_transformer": "e1-vision_transformer@split",
@@ -171,8 +193,9 @@ for key, value in ENV.items():
 ledger = work / "results" / "ledger.jsonl"
 n0 = len(ledger.read_text(encoding="utf-8").splitlines()) if ledger.exists() else 0
 failed = []
-for cmd in COMMANDS:
-    r = subprocess.run([sys.executable, *cmd], cwd=work)
+for i, cmd in enumerate(COMMANDS):
+    extra = CMD_ENV[i] if i < len(CMD_ENV) else {}
+    r = subprocess.run([sys.executable, *cmd], cwd=work, env={**os.environ, **extra})
     print("exit", r.returncode, *cmd, flush=True)
     if r.returncode != 0:
         failed.append(" ".join(cmd))
@@ -236,7 +259,7 @@ def push() -> str:
 def notebook_source(job: str, sha: str) -> str:
     """The script Kaggle runs for one job (tests/test_kaggle_run.py checks it)."""
     return (f"# Pedigree {job}, code {sha}\nCOMMANDS = {JOBS[job]['commands']!r}\n"
-            f"ENV = {JOBS[job]['env']!r}\n" + NOTEBOOK)
+            f"ENV = {JOBS[job]['env']!r}\nCMD_ENV = {JOBS[job].get('command_env', [])!r}\n" + NOTEBOOK)
 
 
 def run(job: str, sha: str | None = None) -> None:
