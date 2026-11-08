@@ -116,8 +116,19 @@ def weight_files(repo: str, d: dict) -> tuple[str, list[str], dict, dict]:
             j["weight_map"] = {k: v.replace("diffusion_pytorch_model", "model", 1)
                                for k, v in j.get("weight_map", {}).items()}
         return j
+    def read_index_or_names(idx):
+        try:
+            return read_index(idx)
+        except urllib.error.HTTPError as e:
+            if _network(e):
+                raise NetworkError(f"{repo}: HTTP {e.code}") from None
+            # gated: the index cannot be read, but the shard names are public
+            import re
+            stem = idx.replace(".index.json", "").rsplit(".", 1)
+            pat = re.compile(rf"^{re.escape(stem[0])}-\d{{5}}-of-\d{{5}}\.{re.escape(stem[1])}$")
+            return {"weight_map": {n: n for n in inner if pat.match(n)}}
     try:
-        files = [real(f) for f in hub.choose_files(inner, read_index)]
+        files = [real(f) for f in hub.choose_files(inner, read_index_or_names)]
     except hub.HubError:
         files = []
     files = [f for f in files if f.endswith((".safetensors", ".bin", ".gguf"))]
@@ -350,6 +361,10 @@ def main() -> None:
             return e["id"], audit_one(e, t, frame), None
         except NetworkError as err:
             return e["id"], None, str(err)
+        except Exception as err:      # a bug or an unforeseen format: lost (retried), never categorised
+            import traceback
+            traceback.print_exc()
+            return e["id"], None, f"unexpected {type(err).__name__}: {err}"
 
     with ThreadPoolExecutor(WORKERS) as ex:
         futs = [ex.submit(work, e, t) for e, t in pending]
