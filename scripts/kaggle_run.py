@@ -111,6 +111,8 @@ for _k in range(2, 5):
 # frozen configs, second half (the Hub limits each address to 3000 file requests per 5 minutes)
 JOBS["e2-configs"] = _job("pedigree-e2-configs", [["-m", "experiments.e2_configs", "--shard", "1/2", "--rows-out",
                                                   "/kaggle/working/e2_configs_shard1.jsonl"]], gpu=False)
+# the behaviour fallback of E2 (needs E2 in the committed ledger); GPU for the forward passes
+JOBS["e2-behaviour"] = _job("pedigree-e2-behaviour", [["-m", "experiments.e2_behaviour"]], gpu=True)
 # H6 on the Hub: needs E2 in the committed ledger
 JOBS["e2-whole"] = _job("pedigree-e2-whole", [["-m", "experiments.e2_whole"]], gpu=False)
 # H7 (a): every family's fresh derivatives (their own headers), merged
