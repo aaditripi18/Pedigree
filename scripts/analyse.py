@@ -1,0 +1,392 @@
+"""Every Pedigree verdict, computed from results/ledger.jsonl under the rules in PLAN.md
+(amendments of 2026-11-07 fix the thresholds and H6-H9). Nothing here is tuned: the
+thresholds come from E1 dev negatives only, by the rule written before any verdict.
+
+Writes results/verdicts.json and docs/RESULTS.md.
+
+    python scripts/analyse.py
+"""
+from __future__ import annotations
+
+import json
+import math
+from collections import defaultdict
+from pathlib import Path
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parent.parent
+LEDGER = ROOT / "results" / "ledger.jsonl"
+FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn", "speech", "diffusion_unet"]
+BLIND = {"speech", "diffusion_unet"}       # compared after the threshold rule was written
+TRAINED = ("ft_short", "ft_long", "lora_r8", "lora_r64")
+SCORES = {"plain": "median_cosine", "invariant": "median_invariant", "aligned": "median_aligned_invariant"}
+Z = 5
+MIN_COMPARED = 8
+TIER_SIZE = {"top_1k": 1_000, "1k_10k": 9_000, "10k_100k": 90_000}
+
+
+# --- ledger ----------------------------------------------------------------------------------
+
+def load() -> list[dict]:
+    invalid = set(json.loads((ROOT / "results" / "ledger_invalid.json").read_text(encoding="utf-8")))
+    rows = [json.loads(line) for line in LEDGER.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return [r for r in rows if r.get("run_id") not in invalid]
+
+
+def latest_runs(rows: list[dict], experiment: str, key) -> list[dict]:
+    """The rows of the latest run of `experiment` for each value of key(row)."""
+    best: dict = {}
+    for r in rows:
+        if r.get("experiment") != experiment:
+            continue
+        k = key(r)
+        if k not in best or r["run_id"] > best[k]:
+            best[k] = r["run_id"]
+    keep = set(best.values())
+    return [r for r in rows if r.get("experiment") == experiment and r["run_id"] in keep]
+
+
+def num(x) -> float | None:
+    return x if isinstance(x, (int, float)) and x == x else None
+
+
+def wilson(k: int, n: int, z: float = 1.96) -> list[float] | None:
+    if n == 0:
+        return None
+    p = k / n
+    d = 1 + z * z / n
+    c = (p + z * z / (2 * n)) / d
+    h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return [round(max(0.0, c - h), 4), round(min(1.0, c + h), 4)]
+
+
+def auc(pos: list[float], neg: list[float]) -> float | None:
+    if not pos or not neg:
+        return None
+    wins = sum((p > q) + 0.5 * (p == q) for p in pos for q in neg)
+    return wins / (len(pos) * len(neg))
+
+
+def verdict(ok: bool | None) -> str:
+    return "pending" if ok is None else ("supported" if ok else "not supported")
+
+
+# --- thresholds (amendment 2026-11-07) ---------------------------------------------------------
+
+def thresholds(e1: list[dict]) -> dict:
+    out = {}
+    for name, field in SCORES.items():
+        neg = [num(r.get(field)) for r in e1 if r["split"] == "dev" and r.get("label") == "negative"
+               and r.get("kind") in ("scratch", "independent") and not r.get("error")]
+        neg = [x for x in neg if x is not None]
+        pos = [num(r.get(field)) for r in e1 if r["split"] == "dev" and r.get("kind") in TRAINED and not r.get("error")]
+        pos = [x for x in pos if x is not None]
+        if len(neg) < 2:
+            continue
+        t = max(neg) + Z * float(np.std(neg, ddof=1))
+        out[name] = {"t": t, "midpoint": (max(neg) + min(pos)) / 2 if pos else None, "n_negatives": len(neg),
+                     "max_negative": max(neg), "sd_negatives": float(np.std(neg, ddof=1)),
+                     "min_trained_positive": min(pos) if pos else None}
+    return out
+
+
+def related(r: dict, T: dict, rule: str = "t", plain_only: bool = False) -> str:
+    """related / unrelated / not comparable, by the weight verifier's verdict rule."""
+    scores = {k: num(r.get(f)) for k, f in SCORES.items() if k in T and (not plain_only or k == "plain")}
+    scores = {k: v for k, v in scores.items() if v is not None}
+    if any(v > T[k][rule] for k, v in scores.items()):
+        return "related"
+    if scores and (r.get("compared") or 0) >= MIN_COMPARED:
+        return "unrelated"
+    return "not comparable"
+
+
+# --- hypotheses -----------------------------------------------------------------------------------
+
+def h1(e1, T, rule):
+    fresh = [r for r in e1 if r["split"] == "fresh" and not r.get("error")]
+    pos = [r for r in fresh if r.get("kind") in TRAINED]
+    neg = [r for r in fresh if r.get("kind") in ("scratch", "independent")]
+    tp = sum(related(r, T, rule) == "related" for r in pos)
+    fp = sum(related(r, T, rule) == "related" for r in neg)
+    a = auc([r["median_cosine"] for r in pos if num(r.get("median_cosine")) is not None],
+            [r["median_cosine"] for r in neg if num(r.get("median_cosine")) is not None])
+    fams = sorted({r["family"] for r in pos})
+    done = set(fams) >= set(FAMILIES)
+    ok = (tp / len(pos) >= 0.95 and fp / len(neg) <= 0.01) if pos and neg and done else None
+    return {"id": "H1", "statement": "The verifier separates derivatives from independent same-architecture models "
+            "on fresh ground truth with TPR >= 95% at FPR <= 1%.", "verdict": verdict(ok),
+            "numbers": {"tpr": [tp, len(pos), wilson(tp, len(pos))], "fpr": [fp, len(neg), wilson(fp, len(neg))],
+                        "auc_plain": a, "families": fams},
+            "evidence": f"TPR {tp}/{len(pos)}, FPR {fp}/{len(neg)}, AUC (plain) {a:.3f}" if a is not None else "pending"}
+
+
+def h4(e1, T, rule):
+    rows = [r for r in e1 if r["split"] == "fresh" and r.get("kind") == "permuted_full" and not r.get("error")]
+    hidden = sum(num(r.get("median_cosine")) is not None and r["median_cosine"] <= T["plain"][rule] for r in rows)
+    restored = sum(num(r.get("median_aligned_invariant")) is not None
+                   and r["median_aligned_invariant"] > T["aligned"][rule] for r in rows)
+    n = len(rows)
+    ok = (hidden / n >= 0.9 and restored / n >= 0.9) if n >= 3 else None
+    return {"id": "H4", "statement": "A function-preserving permutation (attack b) hides lineage from the plain "
+            "verifier on >= 90% of derivatives, and defence (ii) restores it on >= 90%.", "verdict": verdict(ok),
+            "numbers": {"hidden": [hidden, n], "restored": [restored, n],
+                        "rows": {r["family"]: [r.get("median_cosine"), r.get("median_aligned_invariant")] for r in rows}},
+            "evidence": f"plain hidden on {hidden}/{n}; aligned restores {restored}/{n}"}
+
+
+def h5(e1, e5, T, rule):
+    q4 = [r for r in e1 if r["split"] == "fresh" and r.get("kind") == "q4_0" and not r.get("error")]
+    q4_ok = sum(num(r.get("median_cosine")) is not None and r["median_cosine"] > T["plain"][rule] for r in q4)
+    st = [r for r in e5 if r.get("split") == "fresh" and r.get("kind") == "distill" and not r.get("error")]
+    st_rel = sum(num(r.get("weight_median_cosine")) is not None and (r.get("weight_compared") or 0) >= MIN_COMPARED
+                 and r["weight_median_cosine"] > T["plain"][rule] for r in st)
+    done = len(q4) >= len(FAMILIES) and len({r.get("family") for r in st}) >= 4
+    ok = (q4_ok / len(q4) >= 0.9 and st_rel / len(st) <= 0.1) if done and q4 and st else None
+    return {"id": "H5", "statement": "4-bit quantised derivatives are still verified (>= 90%); students distilled "
+            "from a random initialisation are not (<= 10%).", "verdict": verdict(ok),
+            "numbers": {"q4": [q4_ok, len(q4)], "students_related": [st_rel, len(st)]},
+            "evidence": f"q4_0 verified {q4_ok}/{len(q4)}; distilled students related by weights {st_rel}/{len(st)}"}
+
+
+def h6(e1b, e2w, T, rule):
+    rows = [r for r in e1b if r["split"] == "fresh" and num(r.get("median_whole")) is not None
+            and num(r.get("median_cosine")) is not None]
+    t = T["plain"][rule]
+    agree = sum((r["median_cosine"] > t) == (r["median_whole"] > t) for r in rows)
+    hub = [r for r in e2w if num(r.get("median_whole")) is not None and num(r.get("median_cosine")) is not None]
+    agree_hub = sum((r["median_cosine"] > t) == (r["median_whole"] > t) for r in hub)
+    n = len(rows) + len(hub)
+    done = len({r["family"] for r in rows}) >= len(FAMILIES) and len(hub) >= 40
+    ok = ((agree + agree_hub) / n >= 0.98) if done else None
+    return {"id": "H6", "statement": "The sampled verdict equals the whole-file verdict for >= 98% of pairs.",
+            "verdict": verdict(ok),
+            "numbers": {"e1": [agree, len(rows)], "e2": [agree_hub, len(hub)],
+                        "max_abs_difference": max([abs(r["median_cosine"] - r["median_whole"]) for r in rows + hub],
+                                                  default=None)},
+            "evidence": f"E1 fresh pairs {agree}/{len(rows)}, Hub pairs {agree_hub}/{len(hub)} agree"}
+
+
+def h7(h7a, e2, T, rule):
+    a_hit = sum(bool(r.get("parent_in_pool")) for r in h7a if not r.get("error"))
+    a_n = sum(not r.get("error") for r in h7a)
+    b = []
+    for m in e2:
+        for d in m.get("declared", []):
+            if related(d, T, rule) == "related" and not d.get("identical"):
+                b.append(d["base"] in {p["candidate"] for p in m.get("pool", [])})
+    done_a = len({r["family"] for r in h7a if not r.get("error")}) >= len(FAMILIES)
+    ok = (a_hit / a_n >= 0.9 and sum(b) / len(b) >= 0.9) if done_a and a_n and b else None
+    return {"id": "H7", "statement": "The candidate pool contains the true parent for >= 90% of ground-truth "
+            "derivatives (a) and of Hub models whose declared base is verified (b).", "verdict": verdict(ok),
+            "numbers": {"a": [a_hit, a_n, wilson(a_hit, a_n)], "b": [sum(b), len(b), wilson(sum(b), len(b))]},
+            "evidence": f"(a) {a_hit}/{a_n}; (b) {sum(b)}/{len(b)}"}
+
+
+def d2_margin(e1b) -> float | None:
+    dev = [r["kurtosis_gap"] for r in e1b if r["split"] == "dev" and r.get("kind") in TRAINED
+           and num(r.get("kurtosis_gap")) is not None]
+    if not dev:
+        return None
+    wrong = [abs(g) for g in dev if g < 0]
+    return max(wrong) if wrong else 0.0
+
+
+def h8(e1b, e7k, e2, T, rule):
+    m = d2_margin(e1b)
+    pairs = [(r["kurtosis_gap"], "e1") for r in e1b if r["split"] == "fresh" and r.get("kind") in TRAINED
+             and num(r.get("kurtosis_gap")) is not None]
+    pairs += [(-r["kurtosis_gap"], "e7") for r in e7k if num(r.get("kurtosis_gap")) is not None]
+    decided = [g for g, _ in pairs if m is not None and abs(g) > m]
+    right = sum(g > 0 for g in decided)
+    d1 = []
+    for mo in e2:
+        for d in mo.get("declared", []):
+            if related(d, T, rule) == "related" and not d.get("identical") and d.get("created") and mo.get("created") \
+                    and d["created"] != mo["created"]:
+                d1.append(d["created"] < mo["created"])
+    ok2 = (right / len(decided) >= 0.9) if decided else (False if pairs and m is not None else None)
+    ok1 = (sum(d1) / len(d1) >= 0.9) if d1 else None
+    ok = None if ok1 is None or ok2 is None or len(e7k) < 35 else (ok1 and ok2)
+    return {"id": "H8", "statement": "Direction is decided correctly for >= 90% of the pairs where it is decided "
+            "(D1 Hub dates; D2 weight kurtosis), with the undecided share reported.", "verdict": verdict(ok),
+            "numbers": {"d2_margin": m, "d2": [right, len(decided), len(pairs)], "d1": [sum(d1), len(d1)]},
+            "evidence": f"D1 (dates) right on {sum(d1)}/{len(d1)}; D2 (kurtosis, margin {m}) right on {right}/"
+                        f"{len(decided)} decided, undecided {len(pairs) - len(decided)}/{len(pairs)}"}
+
+
+def h9(e5):
+    stats = {"agreement": lambda r: r.get("agreement"), "1-js": lambda r: 1 - r["js"] if num(r.get("js")) is not None
+             else None, "cka": lambda r: r.get("cka")}
+
+    def split(s):
+        return ([r for r in e5 if r.get("split") == s and r.get("kind") == "distill" and not r.get("error")],
+                [r for r in e5 if r.get("split") == s and r.get("kind") == "indep" and not r.get("error")])
+    dp, dn = split("dev")
+    fp_, fn = split("fresh")
+    if len({r.get("family") for r in fp_}) < 4 or not dp or not dn:
+        return {"id": "H9", "statement": "Behaviour separates distilled students from same-task independent "
+                "students with TPR >= 90% at FPR <= 5% (fresh).", "verdict": "pending", "evidence": "needs E5"}
+    gaps = {}
+    for name, f in stats.items():
+        p = [f(r) for r in dp if num(f(r)) is not None]
+        q = [f(r) for r in dn if num(f(r)) is not None]
+        if p and q:
+            gaps[name] = (min(p) - max(q), (min(p) + max(q)) / 2)
+    best = max(gaps, key=lambda k: gaps[k][0])
+    if gaps[best][0] > 0:
+        stat, t = best, gaps[best][1]
+    else:                                     # not separable on dev: agreement at dev FPR <= 5%
+        stat = "agreement"
+        q = sorted(stats[stat](r) for r in dn)
+        k = int(math.floor(0.05 * len(q)))
+        t = q[-1 - k] if q else None
+    f = stats[stat]
+    tp = sum(f(r) > t for r in fp_)
+    fp = sum(f(r) > t for r in fn)
+    ok = tp / len(fp_) >= 0.9 and fp / len(fn) <= 0.05
+    return {"id": "H9", "statement": "Behaviour separates distilled students from same-task independent students "
+            "with TPR >= 90% at FPR <= 5% (fresh).", "verdict": verdict(ok),
+            "numbers": {"statistic": stat, "threshold": t, "tpr": [tp, len(fp_)], "fpr": [fp, len(fn)],
+                        "dev_gaps": {k: v[0] for k, v in gaps.items()}},
+            "evidence": f"{stat} > {t:.4f} (chosen on dev): TPR {tp}/{len(fp_)}, FPR {fp}/{len(fn)}"}
+
+
+def h10(e6, T, rule):
+    sh = [r for r in e6 if r.get("shared_init") and not r.get("error")]
+    ds = [r for r in e6 if r.get("relation") == "different_init_same_data" and not r.get("error")]
+    a = sum(related(r, T, rule) == "related" for r in sh)
+    b = sum(related(r, T, rule) == "related" for r in ds)
+    ok = (a / len(sh) >= 2 / 3 and b / len(ds) <= 1 / 3) if sh and ds else None
+    return {"id": "H10", "statement": "Weight similarity tracks shared initialisation, not shared data.",
+            "verdict": verdict(ok), "numbers": {"shared_init": [a, len(sh)], "different_init_same_data": [b, len(ds)]},
+            "evidence": f"shared initialisation related {a}/{len(sh)}; different initialisation, same data {b}/{len(ds)}"}
+
+
+def h11(e7, T, rule):
+    by = defaultdict(list)
+    for r in e7:
+        if not r.get("error"):
+            by[r["run_final"]].append(r)
+    own_ok, other_hits, curve = True, 0, defaultdict(list)
+    for run, rs in by.items():
+        for r in rs:
+            rel = related(r, T, rule) == "related"
+            if r["same_run"]:
+                curve[r["step"]].append(r["median_cosine"])
+                if r["step"] >= 10_000 and not rel:
+                    own_ok = False
+            elif rel:
+                other_hits += 1
+    ok = (own_ok and other_hits == 0) if len(by) == 5 else None
+    return {"id": "H11", "statement": "A final model is verified against its own checkpoints from step 10,000 on, "
+            "and against no checkpoint of another run.", "verdict": verdict(ok),
+            "numbers": {"own_from_10k_all_related": own_ok, "other_run_related": other_hits,
+                        "curve": {s: [min(v), max(v)] for s, v in sorted(curve.items())}},
+            "evidence": f"own checkpoints from 10k all related: {own_ok}; other runs related: {other_hits}"}
+
+
+# --- E2: categories, H2, H3 -----------------------------------------------------------------------
+
+def audit(e2, T, rule) -> dict:
+    cats, h2, h3, relation_tags = [], [], [], []
+    for m in e2:
+        tier = m["tier"]
+        if m.get("reason"):
+            cats.append((tier, "adapter" if m["reason"] == "adapter" else "not readable", m["reason"]))
+            continue
+        dec = [(d, related(d, T, rule)) for d in m.get("declared", [])]
+        for d, v in dec:
+            if v != "not comparable":
+                h3.append((tier, v == "unrelated", m["id"], d["base"], d.get("median_cosine")))
+        rel_pool = [p for p in m.get("pool", []) if related(p, T, rule, plain_only=True) == "related"]
+        earlier = [p for p in rel_pool if not p.get("identical") and p.get("created") and m.get("created")
+                   and p["created"] < m["created"]]
+        declared_rel = [d for d, v in dec if v == "related" and not d.get("identical")]
+        derived = bool(earlier or declared_rel)
+        if derived:
+            h2.append((tier, not m.get("declared_base"), m["id"]))
+        if dec:
+            v = {x for _, x in dec}
+            cat = ("declared, related" if "related" in v else "declared, unrelated" if "unrelated" in v
+                   else "declared, not comparable")
+        else:
+            cat = "no declaration, parent found" if earlier else "no declaration, no parent found"
+        cats.append((tier, cat, ""))
+        if m.get("base_relation") == "quantized":
+            relation_tags.append((m["id"], [d.get("median_cosine") for d, _ in dec]))
+
+    def prop(items, flag=1):
+        k = sum(x[flag] for x in items)
+        n = len(items)
+        per = {t: [sum(x[flag] for x in items if x[0] == t), sum(1 for x in items if x[0] == t)] for t in TIER_SIZE}
+        w = sum(TIER_SIZE[t] * (a / b) for t, (a, b) in per.items() if b) / sum(TIER_SIZE[t] for t, (a, b) in
+                                                                               per.items() if b) if n else None
+        return {"k": k, "n": n, "share": k / n if n else None, "wilson": wilson(k, n), "per_tier": per,
+                "tier_weighted": w}
+    counts = defaultdict(lambda: defaultdict(int))
+    for t, c, _ in cats:
+        counts[c][t] += 1
+    return {"categories": {c: dict(v) for c, v in counts.items()}, "h2": prop(h2), "h3": prop(h3),
+            "contradicted": [x[2:] for x in h3 if x[1]], "n_models": len(e2)}
+
+
+def h2h3(A, done):
+    h2 = {"id": "H2", "statement": "At least 30% of Hub models verifiably derived from another public model do not "
+          "declare a base.", "verdict": verdict(A["h2"]["share"] >= 0.30 if done and A["h2"]["n"] else None),
+          "numbers": A["h2"], "evidence": f"{A['h2']['k']}/{A['h2']['n']} undeclared"}
+    h3 = {"id": "H3", "statement": "At least 5% of declared bases are contradicted by the weights.",
+          "verdict": verdict(A["h3"]["share"] >= 0.05 if done and A["h3"]["n"] else None),
+          "numbers": A["h3"], "evidence": f"{A['h3']['k']}/{A['h3']['n']} contradicted"}
+    return [h2, h3]
+
+
+# --- main -------------------------------------------------------------------------------------------
+
+def main() -> None:
+    rows = load()
+    e1 = latest_runs(rows, "E1", lambda r: r.get("family"))
+    e1b = latest_runs(rows, "E1b", lambda r: r.get("family"))
+    e5 = latest_runs(rows, "E5", lambda r: (r.get("meta", {}) or {}).get("family", r.get("family")))
+    e6 = latest_runs(rows, "E6", lambda r: 0)
+    e7 = latest_runs(rows, "E7", lambda r: 0)
+    e7k = [r for r in latest_runs(rows, "E7k", lambda r: 0) if not r.get("error")]
+    h7a = latest_runs(rows, "H7a", lambda r: r.get("family"))
+    e2 = latest_runs(rows, "E2", lambda r: 0)
+    e2w = latest_runs(rows, "E2W", lambda r: 0)
+    for r in e5:                     # E5 keeps family/split in the run's metadata
+        meta = r.get("meta") or {}
+        r.setdefault("family", meta.get("family"))
+        r.setdefault("split", meta.get("split"))
+    T = thresholds(e1)
+    out = {"thresholds": T, "families_in_e1": sorted({r["family"] for r in e1}), "blind_families": sorted(BLIND),
+           "rules": {}}
+    for rule in ("t", "midpoint"):
+        A = audit(e2, T, rule) if e2 else None
+        hs = [h1(e1, T, rule), *(h2h3(A, len(e2) == 600) if A else []), h4(e1, T, rule), h5(e1, e5, T, rule),
+              h6(e1b, e2w, T, rule), h7(h7a, e2, T, rule), h8(e1b, e7k, e2, T, rule), h9(e5), h10(e6, T, rule),
+              h11(e7, T, rule)]
+        out["rules"][rule] = {"hypotheses": hs, "audit": A}
+    (ROOT / "results" / "verdicts.json").write_text(json.dumps(out, indent=1, default=str), encoding="utf-8")
+    md = ["# Results", "", "Generated by `scripts/analyse.py` from `results/ledger.jsonl`. Do not edit by hand.", "",
+          "## Thresholds (E1 dev negatives only; PLAN.md amendment 2026-11-07)", "",
+          "| Score | Threshold (max + 5 SD) | Midpoint (sensitivity) | Dev negatives | Highest | Lowest dev fine-tune |",
+          "|---|--:|--:|--:|--:|--:|"]
+    for k, v in T.items():
+        md.append(f"| {k} | {v['t']:.4f} | {v['midpoint']:.4f} | {v['n_negatives']} | {v['max_negative']:.4f} "
+                  f"| {v['min_trained_positive']:.4f} |")
+    md += ["", f"Families compared blind (after the rule was written): {', '.join(sorted(BLIND))}.", "",
+           "## Hypotheses", "", "| | Hypothesis | Verdict | Evidence | Under the midpoint rule |", "|---|---|---|---|---|"]
+    mid = {h["id"]: h for h in out["rules"]["midpoint"]["hypotheses"]}
+    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: int(h["id"][1:])):
+        md.append(f"| {h['id']} | {h['statement']} | **{h['verdict']}** | {h['evidence']} | {mid[h['id']]['verdict']} |")
+    (ROOT / "docs").mkdir(exist_ok=True)
+    (ROOT / "docs" / "RESULTS.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: int(h["id"][1:])):
+        print(f"{h['id']:>4} {h['verdict']:<14} {h['evidence']}")
+    print({k: round(v["t"], 4) for k, v in T.items()})
+
+
+if __name__ == "__main__":
+    main()

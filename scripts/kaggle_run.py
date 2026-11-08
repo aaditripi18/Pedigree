@@ -108,6 +108,13 @@ for _k in range(2, 5):
                            sources=["e2"] + [f"e2-{i}" for i in range(2, _k)],
                            env={**E2_ENV, "PEDIGREE_E2_PREVIOUS": "/kaggle/input"})
 
+# H6 on the Hub: needs E2 in the committed ledger
+JOBS["e2-whole"] = _job("pedigree-e2-whole", [["-m", "experiments.e2_whole"]], gpu=False)
+# H7 (a): every family's fresh derivatives (their own headers), merged
+JOBS["h7"] = _job("pedigree-h7", [["-m", "experiments.h7_pool"]], gpu=False,
+                  sources=sorted({s for f in FAMILIES for s in JOBS[E1_FORM[f]]["sources"]}),
+                  env={"PEDIGREE_DERIVATIVES": "merge:derivatives"})
+
 NOTEBOOK = r'''
 import os, pathlib, shutil, subprocess, sys
 src = next(pathlib.Path("/kaggle/input").rglob("Pedigree/COMMIT")).parent
