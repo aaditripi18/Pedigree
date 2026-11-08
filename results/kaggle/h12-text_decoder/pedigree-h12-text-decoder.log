@@ -1,0 +1,115 @@
+[{"stream_name":"stdout","time":20.510938882,"data":"code 986dc98\n"}
+,{"stream_name":"stdout","time":69.409184238,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":72.696436761,"data":"PEDIGREE_TEACHERS = /kaggle/input/pedigree-ft-text-decoder/derivatives\n"}
+,{"stream_name":"stdout","time":83.463527951,"data":"PEDIGREE_STUDENTS = /tmp/merged-students\n"}
+,{"stream_name":"stderr","time":89.078242637,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":97.185109627,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2748.65it/s]\n"}
+,{"stream_name":"stdout","time":191.618051484,"data":"  distill_s0                                    agree 0.263  js 0.4025  cka 0.194\n"}
+,{"stream_name":"stdout","time":274.719102872,"data":"  indep_s0                                      agree 0.227  js 0.4902  cka 0.193\n"}
+,{"stream_name":"stdout","time":364.394376171,"data":"  distill_s1                                    agree 0.256  js 0.3906  cka 0.206\n"}
+,{"stream_name":"stdout","time":451.56847013,"data":"  indep_s1                                      agree 0.230  js 0.4853  cka 0.193\n"}
+,{"stream_name":"stdout","time":539.441029694,"data":"  distill_s2                                    agree 0.252  js 0.3855  cka 0.184\n"}
+,{"stream_name":"stdout","time":626.632625871,"data":"  indep_s2                                      agree 0.225  js 0.4945  cka 0.215\n"}
+,{"stream_name":"stderr","time":631.405689632,"data":"\rLoading weights:   0%|          | 0/76 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 76/76 [00:00\u003c00:00, 3035.96it/s]\n"}
+,{"stream_name":"stdout","time":638.753906726,"data":"  distilbert/distilgpt2                         agree 0.517  js 0.1246  cka 0.514\n"}
+,{"stream_name":"stderr","time":644.65952891,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 9628.71it/s]\n"}
+,{"stream_name":"stderr","time":644.712896618,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/alias-gpt2-small-x21\n"}
+,{"stream_name":"stderr","time":644.712924572,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":644.712930033,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":644.71293466,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":644.712939127,"data":"\n"}
+,{"stream_name":"stderr","time":644.712943273,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":644.712947568,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":652.881049904,"data":"  stanford-crfm/alias-gpt2-small-x21            agree 0.556  js 0.1442  cka 0.230\n"}
+,{"stream_name":"stderr","time":658.744341463,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 9494.57it/s]\n"}
+,{"stream_name":"stderr","time":658.803320966,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/battlestar-gpt2-small-x49\n"}
+,{"stream_name":"stderr","time":658.803350988,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":658.803355271,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":658.803373051,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":658.803376353,"data":"\n"}
+,{"stream_name":"stderr","time":658.803379361,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":658.803382246,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":666.848422711,"data":"  stanford-crfm/battlestar-gpt2-small-x49       agree 0.556  js 0.1429  cka 0.224\n"}
+,{"stream_name":"stderr","time":674.729462136,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 14143.01it/s]\n"}
+,{"stream_name":"stderr","time":674.793079551,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/caprica-gpt2-small-x81\n"}
+,{"stream_name":"stderr","time":674.793111825,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":674.793133686,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":674.793138011,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":674.793141713,"data":"\n"}
+,{"stream_name":"stderr","time":674.793145257,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":674.7931489,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":682.861979744,"data":"  stanford-crfm/caprica-gpt2-small-x81          agree 0.553  js 0.1432  cka 0.226\n"}
+,{"stream_name":"stderr","time":690.374417914,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 10963.67it/s]\n"}
+,{"stream_name":"stderr","time":690.423058741,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/darkmatter-gpt2-small-x343\n"}
+,{"stream_name":"stderr","time":690.4230878,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":690.423093125,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":690.423097716,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":690.423102223,"data":"\n"}
+,{"stream_name":"stderr","time":690.42310642,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":690.423110751,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":698.598382413,"data":"  stanford-crfm/darkmatter-gpt2-small-x343      agree 0.562  js 0.1471  cka 0.236\n"}
+,{"stream_name":"stderr","time":705.855055945,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 9288.26it/s]\n"}
+,{"stream_name":"stderr","time":705.911352384,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/expanse-gpt2-small-x777\n"}
+,{"stream_name":"stderr","time":705.911386769,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":705.911392073,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":705.911396586,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":705.911401121,"data":"\n"}
+,{"stream_name":"stderr","time":705.911405531,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":705.911430458,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":714.182374875,"data":"  stanford-crfm/expanse-gpt2-small-x777         agree 0.553  js 0.1479  cka 0.232\n"}
+,{"stream_name":"stderr","time":718.875245589,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2764.15it/s]\n"}
+,{"stream_name":"stdout","time":811.600072563,"data":"  distill_s0                                    agree 0.321  js 0.3265  cka 0.664\n"}
+,{"stream_name":"stdout","time":911.169515181,"data":"  indep_s0                                      agree 0.246  js 0.4647  cka 0.553\n"}
+,{"stream_name":"stdout","time":1004.208770409,"data":"  distill_s1                                    agree 0.320  js 0.3123  cka 0.689\n"}
+,{"stream_name":"stdout","time":1094.867714195,"data":"  indep_s1                                      agree 0.251  js 0.4603  cka 0.552\n"}
+,{"stream_name":"stdout","time":1184.795160799,"data":"  distill_s2                                    agree 0.322  js 0.3074  cka 0.681\n"}
+,{"stream_name":"stdout","time":1279.87834102,"data":"  indep_s2                                      agree 0.239  js 0.4672  cka 0.538\n"}
+,{"stream_name":"stdout","time":1370.266092294,"data":"  distill_s3                                    agree 0.323  js 0.3104  cka 0.684\n"}
+,{"stream_name":"stdout","time":1459.366775803,"data":"  indep_s3                                      agree 0.245  js 0.4671  cka 0.532\n"}
+,{"stream_name":"stdout","time":1554.656218685,"data":"  distill_s4                                    agree 0.322  js 0.3124  cka 0.688\n"}
+,{"stream_name":"stdout","time":1646.615578819,"data":"  indep_s4                                      agree 0.243  js 0.4638  cka 0.538\n"}
+,{"stream_name":"stdout","time":1738.151648194,"data":"  distill_s5                                    agree 0.315  js 0.3133  cka 0.686\n"}
+,{"stream_name":"stdout","time":1836.797003854,"data":"  indep_s5                                      agree 0.251  js 0.4623  cka 0.563\n"}
+,{"stream_name":"stdout","time":1927.353829445,"data":"  distill_s6                                    agree 0.327  js 0.3103  cka 0.688\n"}
+,{"stream_name":"stdout","time":2016.463085403,"data":"  indep_s6                                      agree 0.252  js 0.4631  cka 0.546\n"}
+,{"stream_name":"stdout","time":2108.213413747,"data":"  distill_s7                                    agree 0.324  js 0.3125  cka 0.677\n"}
+,{"stream_name":"stdout","time":2203.437352,"data":"  indep_s7                                      agree 0.253  js 0.4623  cka 0.560\n"}
+,{"stream_name":"stderr","time":2208.501514927,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2576.25it/s]\n"}
+,{"stream_name":"stdout","time":2216.712762887,"data":"  EleutherAI/pythia-160m-seed1                  agree 0.538  js 0.1410  cka 0.871\n"}
+,{"stream_name":"stderr","time":2221.909580438,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2883.22it/s]\n"}
+,{"stream_name":"stdout","time":2229.943961923,"data":"  EleutherAI/pythia-160m-seed2                  agree 0.539  js 0.1474  cka 0.817\n"}
+,{"stream_name":"stderr","time":2235.221353953,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2740.93it/s]\n"}
+,{"stream_name":"stdout","time":2243.157758596,"data":"  EleutherAI/pythia-160m-seed3                  agree 0.550  js 0.1398  cka 0.867\n"}
+,{"stream_name":"stderr","time":2248.708130365,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 9918.15it/s]\n"}
+,{"stream_name":"stdout","time":2256.956481943,"data":"  EleutherAI/pythia-160m-seed4                  agree 0.542  js 0.1460  cka 0.881\n"}
+,{"stream_name":"stderr","time":2263.034291342,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 10173.51it/s]\n"}
+,{"stream_name":"stdout","time":2271.737598714,"data":"  EleutherAI/pythia-160m-seed5                  agree 0.540  js 0.1440  cka 0.835\n"}
+,{"stream_name":"stderr","time":2277.899811404,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 8263.32it/s]\n"}
+,{"stream_name":"stdout","time":2286.732297614,"data":"  EleutherAI/pythia-160m-seed6                  agree 0.541  js 0.1420  cka 0.917\n"}
+,{"stream_name":"stderr","time":2293.171817353,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 9741.80it/s]\n"}
+,{"stream_name":"stdout","time":2302.468589082,"data":"  EleutherAI/pythia-160m-seed7                  agree 0.542  js 0.1397  cka 0.829\n"}
+,{"stream_name":"stderr","time":2308.789364599,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 15417.17it/s]\n"}
+,{"stream_name":"stdout","time":2317.954476764,"data":"  EleutherAI/pythia-160m-seed8                  agree 0.538  js 0.1471  cka 0.823\n"}
+,{"stream_name":"stderr","time":2323.974028128,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 12662.57it/s]\n"}
+,{"stream_name":"stdout","time":2332.802061563,"data":"  EleutherAI/pythia-160m-seed9                  agree 0.546  js 0.1455  cka 0.850\n"}
+,{"stream_name":"stdout","time":2336.051777026,"data":"exit 0 -m experiments.e5_behaviour text_decoder dev fresh\n"}
+,{"stream_name":"stderr","time":2344.402280971,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2727.18it/s]\n"}
+,{"stream_name":"stdout","time":2360.243084923,"data":"  distill_s3                                    agree 0.348  js 0.3578  cka 0.662\n"}
+,{"stream_name":"stdout","time":2374.020699055,"data":"  indep_s3                                      agree 0.275  js 0.5190  cka 0.547\n"}
+,{"stream_name":"stdout","time":2388.12136304,"data":"  distill_s4                                    agree 0.357  js 0.3547  cka 0.665\n"}
+,{"stream_name":"stdout","time":2402.014378255,"data":"  indep_s4                                      agree 0.277  js 0.5183  cka 0.518\n"}
+,{"stream_name":"stdout","time":2415.779699775,"data":"  distill_s5                                    agree 0.352  js 0.3554  cka 0.671\n"}
+,{"stream_name":"stdout","time":2429.483977593,"data":"  indep_s5                                      agree 0.285  js 0.5141  cka 0.546\n"}
+,{"stream_name":"stdout","time":2443.237640222,"data":"  distill_s6                                    agree 0.356  js 0.3538  cka 0.667\n"}
+,{"stream_name":"stdout","time":2456.997734563,"data":"  indep_s6                                      agree 0.273  js 0.5185  cka 0.532\n"}
+,{"stream_name":"stdout","time":2470.820348155,"data":"  distill_s7                                    agree 0.352  js 0.3546  cka 0.663\n"}
+,{"stream_name":"stdout","time":2484.712770602,"data":"  indep_s7                                      agree 0.283  js 0.5132  cka 0.550\n"}
+,{"stream_name":"stdout","time":2486.023102973,"data":"exit 0 -m experiments.e5_behaviour text_decoder fresh\n"}
+,{"stream_name":"stdout","time":2486.035211947,"data":"47 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":2487.999611997,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2487.999641883,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2488.211298034,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2488.211323105,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2488.95639874,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2489.866751933,"data":"[NbConvertApp] Writing 293468 bytes to __results__.html\n"}
+]
