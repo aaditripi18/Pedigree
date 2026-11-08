@@ -33,8 +33,29 @@ def one(repo: str) -> dict:
 
 
 def main() -> None:
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--shard", default="0/1", help="k/n: only every n-th frame model, starting at k")
+    ap.add_argument("--rows-out", help="write this shard's rows here (jsonl) instead of the frozen file")
+    ap.add_argument("--merge", nargs="*", help="shard row files to combine into the frozen file")
+    a = ap.parse_args()
     with gzip.open(ROOT / "results" / "e2_frame_meta.jsonl.gz", "rt", encoding="utf-8") as f:
         ids = [json.loads(line)["id"] for line in f]
+    if a.merge is not None:
+        got = {}
+        for path in a.merge:
+            for line in Path(path).read_text(encoding="utf-8").splitlines():
+                r = json.loads(line)
+                got[r["id"]] = r
+        missing = [i for i in ids if i not in got or got[i].get("error")]
+        if missing:
+            raise SystemExit(f"{len(missing)} frame models missing from the shards")
+        with gzip.open(OUT, "wt", encoding="utf-8") as f:
+            f.writelines(json.dumps(got[i], sort_keys=True) + "\n" for i in ids)
+        print(f"wrote {OUT.name}: {sum(got[i]['config'] for i in ids)} of {len(ids)} have a config.json")
+        return
+    k, n = map(int, a.shard.split("/"))
+    ids = ids[k::n]
     rows = []
     with ThreadPoolExecutor(24) as ex:
         for k, r in enumerate(ex.map(one, ids), 1):
@@ -42,8 +63,12 @@ def main() -> None:
             if k % 5000 == 0:
                 print(f"{k}/{len(ids)}", flush=True)
     lost = [r["id"] for r in rows if r.get("error")]
-    if lost:
+    if lost and not a.rows_out:
         raise SystemExit(f"{len(lost)} configs lost to the network; run again (finished ones are cached)")
+    if a.rows_out:
+        Path(a.rows_out).write_text("".join(json.dumps(r, sort_keys=True) + "\n" for r in rows), encoding="utf-8")
+        print(f"wrote {len(rows)} rows to {a.rows_out}")
+        return
     tmp = OUT.with_suffix(".part")
     with gzip.open(tmp, "wt", encoding="utf-8") as f:
         f.writelines(json.dumps(r, sort_keys=True) + "\n" for r in rows)
