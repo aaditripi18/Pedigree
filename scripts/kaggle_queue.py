@@ -43,9 +43,21 @@ def start(job: str, sha: str) -> bool:
     raise SystemExit(1)
 
 
+def sources_done(job: str) -> bool:
+    """A job starts only when every session it reads from has finished."""
+    for src in k.JOBS[job]["sources"]:
+        try:
+            st = k.kaggle("kernels", "status", f"{k.USER}/{k.JOBS[src]['kernel']}", check=False).stdout
+        except Exception:
+            return False
+        if "COMPLETE" not in st:
+            return False
+    return True
+
+
 def main(sha: str, jobs: list[str]) -> None:
     for job in jobs:
-        while not start(job, sha):
+        while not (sources_done(job) and start(job, sha)):
             time.sleep(WAIT)
         time.sleep(120)
         print(f"{time.strftime('%H:%M')} {job}: {k.status(job)}", flush=True)
