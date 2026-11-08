@@ -400,3 +400,32 @@ Qwen2.5-VL under `qwen2vl`, DeepSeek V2/V3 under `deepseek2`. Left alone, a GGUF
 pool would never contain its Hugging Face parent. Family keys are therefore normalised
 (lower case, separators and a trailing "text" removed) and those four aliases applied. The
 frozen file is kept: it still supplies every frame model's dimensions (27,717 have them).
+
+## Amendment 2026-11-08 (3): H12, behaviour on off-task inputs, after H9 was decided
+
+H9 is not supported (fresh TPR 3/12 at FPR 2/12 with agreement; no statistic separated dev),
+and stays so. Its numbers show why: each family has its own level of teacher agreement (1 - JS
+about 0.15 for the masked LM, 0.85 for the CNN), and in-distribution probes reward any model
+that learned the task, so same-task independent students sit close to distilled ones. Both
+points suggest a new hypothesis, written before any of its data exists:
+
+- **H12** On off-task inputs, a distilled student agrees with its teacher more than the
+  family's same-task independent students do: TPR >= 90% on new distilled students at
+  FPR <= 5% on new independent students (fresh).
+- **Off-task probes (frozen).** Images: 1,000 images of N(0, 1) noise in the model's
+  normalised input space, `torch.Generator` seed 0. Text: E5's 256 WikiText-2 test lines with
+  their words shuffled (Python `random.Random(0)` per line), so the tokens are familiar and
+  the text is not. Masked positions as in E5.
+- **Score.** The statistic for the student minus the highest value of the same statistic among
+  the family's reference independent students on the same split (indep seeds 0-2; a dev
+  independent student is scored against the other two).
+- **Rule (fixed on dev, seeds 0-2 only).** Of agreement, 1 - JS and CKA, the one with the
+  widest dev gap between distilled and independent scores, threshold at the middle of the
+  gap. If none separates dev: the statistic and threshold with the highest dev TPR at dev
+  FPR = 0 (12 negatives), the widest gap breaking ties.
+- **New data.** Fresh-split students with seeds 3-7 (five distilled, five independent per
+  family; 20 and 20), trained exactly as E5's, after this amendment. They are judged against
+  references seeds 0-2. The same students are also scored on E5's original probes (recorded as
+  `E5n`, so H9's runs are untouched), to show how much the change of probes, rather than the
+  new students, explains.
+- Ledger: `E5o` (off-task probes, seeds 0-7, both splits), `E5n` (original probes, seeds 3-7).

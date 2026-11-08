@@ -348,7 +348,9 @@ def main() -> None:
     rows = load()
     e1 = latest_runs(rows, "E1", lambda r: r.get("family"))
     e1b = latest_runs(rows, "E1b", lambda r: r.get("family"))
-    e5 = latest_runs(rows, "E5", lambda r: (r.get("meta", {}) or {}).get("family", r.get("family")))
+    # E5 runs dev and fresh as separate runs: keep the latest of each (family, split)
+    e5 = latest_runs(rows, "E5", lambda r: ((r.get("meta") or {}).get("family", r.get("family")),
+                                            (r.get("meta") or {}).get("split", r.get("split"))))
     e6 = latest_runs(rows, "E6", lambda r: 0)
     e7 = latest_runs(rows, "E7", lambda r: 0)
     e7k = [r for r in latest_runs(rows, "E7k", lambda r: 0) if not r.get("error")]
