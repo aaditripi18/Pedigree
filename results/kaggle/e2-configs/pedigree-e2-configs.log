@@ -1,0 +1,24 @@
+[{"stream_name":"stdout","time":53.81910025,"data":"code cdd26a3\n"}
+,{"stream_name":"stdout","time":118.711190604,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":120.335868698,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":120.336498468,"data":"  File \"\u003cfrozen runpy\u003e\", line 203, in _run_module_as_main\n"}
+,{"stream_name":"stderr","time":120.336538683,"data":"  File \"\u003cfrozen runpy\u003e\", line 88, in _run_code\n"}
+,{"stream_name":"stderr","time":120.33654437,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_configs.py\", line 80, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":120.336548496,"data":"    main()\n"}
+,{"stream_name":"stderr","time":120.336551943,"data":"    ~~~~^^\n"}
+,{"stream_name":"stderr","time":120.336555415,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_configs.py\", line 42, in main\n"}
+,{"stream_name":"stderr","time":120.336559009,"data":"    with pool.open_text(ROOT / \"results\" / \"e2_frame_meta.jsonl.gz\") as f:\n"}
+,{"stream_name":"stderr","time":120.336562713,"data":"         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":120.336569443,"data":"  File \"/kaggle/working/Pedigree/pedigree/pool.py\", line 92, in open_text\n"}
+,{"stream_name":"stderr","time":120.336573115,"data":"    return open(plain, encoding=\"utf-8\")\n"}
+,{"stream_name":"stderr","time":120.33657684,"data":"IsADirectoryError: [Errno 21] Is a directory: '/kaggle/working/Pedigree/results/e2_frame_meta.jsonl'\n"}
+,{"stream_name":"stdout","time":120.357745861,"data":"exit 1 -m experiments.e2_configs --shard 1/2 --rows-out /kaggle/working/e2_configs_shard1.jsonl\n"}
+,{"stream_name":"stdout","time":120.361533403,"data":"0 new ledger lines; 1 failed commands\n"}
+,{"stream_name":"stderr","time":120.382895543,"data":"failed: -m experiments.e2_configs --shard 1/2 --rows-out /kaggle/working/e2_configs_shard1.jsonl\n"}
+,{"stream_name":"stderr","time":123.0449102,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":123.044952411,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":123.390197478,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":123.390231411,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":124.37716614,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":125.720023504,"data":"[NbConvertApp] Writing 291306 bytes to __results__.html\n"}
+]

@@ -1,0 +1,39 @@
+[{"stream_name":"stdout","time":16.577613353,"data":"code e366325\n"}
+,{"stream_name":"stdout","time":83.38739094,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":85.630315216,"data":"PEDIGREE_DERIVATIVES = /kaggle/input/notebooks/aadityae5545454/pedigree-ft-text-decoder/derivatives\n"}
+,{"stream_name":"stdout","time":89.196152496,"data":"text_decoder/dev: openai-community/gpt2@607a30d783\n"}
+,{"stream_name":"stdout","time":116.394690074,"data":"  ft_short         local:text_decoder/dev/ft_short        sampled 0.9999939422993342  whole None  kurtosis gap 0.00016223862164044256\n"}
+,{"stream_name":"stdout","time":119.893781273,"data":"  ft_long          local:text_decoder/dev/ft_long         sampled 0.999932322838395  whole None  kurtosis gap -0.0005995674031054055\n"}
+,{"stream_name":"stdout","time":123.338131998,"data":"  lora_r8          local:text_decoder/dev/lora_r8         sampled 1.0  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":126.95512021,"data":"  lora_r64         local:text_decoder/dev/lora_r64        sampled 1.0  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":129.161511746,"data":"text_decoder/fresh: EleutherAI/pythia-160m@50f5173d93\n"}
+,{"stream_name":"stdout","time":233.042319565,"data":"  ft_short         local:text_decoder/fresh/ft_short      sampled 0.9999167002276748  whole 0.99992201458928  kurtosis gap -0.00021882108639958986\n"}
+,{"stream_name":"stdout","time":248.237586963,"data":"  ft_long          local:text_decoder/fresh/ft_long       sampled 0.9991196954037017  whole 0.9991410482818138  kurtosis gap -0.004691210250912903\n"}
+,{"stream_name":"stdout","time":263.773121856,"data":"  lora_r8          local:text_decoder/fresh/lora_r8       sampled 1.0  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":279.348133278,"data":"  lora_r64         local:text_decoder/fresh/lora_r64      sampled 1.0  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":294.520742083,"data":"  scratch          local:text_decoder/fresh/scratch       sampled -0.0025556829135578675  whole -0.0001489730256152331  kurtosis gap -0.5932597289836519\n"}
+,{"stream_name":"stdout","time":298.980375207,"data":"  q8_0             local:text_decoder/fresh/ft_long+q8_0  sampled 0.9991030902855539  whole 0.9991265811317481  kurtosis gap -0.004574889423699213\n"}
+,{"stream_name":"stdout","time":305.800559936,"data":"  q4_0             local:text_decoder/fresh/ft_long+q4_0  sampled 0.9951394078859517  whole 0.9953331606224111  kurtosis gap -0.019300859942942283\n"}
+,{"stream_name":"stdout","time":323.391907925,"data":"  prune50          cal:text_decoder/fresh/ft_long+prune50 sampled 0.9639759645854871  whole 0.9657091231488679  kurtosis gap 0.49913080242160146\n"}
+,{"stream_name":"stdout","time":333.690342663,"data":"  prune90          cal:text_decoder/fresh/ft_long+prune90 sampled 0.6613715472346025  whole 0.6847309396565354  kurtosis gap 10.171341747313265\n"}
+,{"stream_name":"stdout","time":339.401316449,"data":"  permuted         al:text_decoder/fresh/ft_long+permuted sampled 0.9964149581748027  whole 0.9959401429300043  kurtosis gap -0.0075028329298594265\n"}
+,{"stream_name":"stderr","time":344.901753006,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":363.138466981,"data":"  permuted_full    xt_decoder/fresh/ft_long+permuted_full sampled -0.003231541045623069  whole 0.0008618561807351169  kurtosis gap -0.010845534189323658\n"}
+,{"stream_name":"stdout","time":478.083121448,"data":"  independent      EleutherAI/pythia-160m-seed1           sampled 0.0028944934094862164  whole -1.5828202550241287e-05  kurtosis gap 0.09308666421666634\n"}
+,{"stream_name":"stdout","time":570.836058883,"data":"  independent      EleutherAI/pythia-160m-seed2           sampled -0.003263388907846841  whole -8.420791149345898e-06  kurtosis gap 0.0014225365785436317\n"}
+,{"stream_name":"stdout","time":670.212062665,"data":"  independent      EleutherAI/pythia-160m-seed3           sampled 0.001357195554201602  whole -9.570858985859807e-05  kurtosis gap 0.019306940361417224\n"}
+,{"stream_name":"stdout","time":817.75607503,"data":"  independent      EleutherAI/pythia-160m-seed4           sampled -0.0019943069828787354  whole 0.0001006841188746458  kurtosis gap -0.04442106146438718\n"}
+,{"stream_name":"stdout","time":977.578087512,"data":"  independent      EleutherAI/pythia-160m-seed5           sampled -0.0008061699406627658  whole 1.234087586090695e-05  kurtosis gap 0.07443624231076207\n"}
+,{"stream_name":"stdout","time":1131.699073177,"data":"  independent      EleutherAI/pythia-160m-seed6           sampled 0.0037840165602490514  whole 0.0002968757335514405  kurtosis gap -0.09188663802984087\n"}
+,{"stream_name":"stdout","time":1286.337695483,"data":"  independent      EleutherAI/pythia-160m-seed7           sampled -0.004800688680304789  whole 0.0002222746822837297  kurtosis gap 0.000878043746403101\n"}
+,{"stream_name":"stdout","time":1432.378149402,"data":"  independent      EleutherAI/pythia-160m-seed8           sampled 0.0025208007743601065  whole 4.169960579333485e-05  kurtosis gap 0.1415462001493215\n"}
+,{"stream_name":"stdout","time":1589.97306393,"data":"  independent      EleutherAI/pythia-160m-seed9           sampled -0.00037191850597357836  whole 0.00014618193583891326  kurtosis gap 0.16362462090575014\n"}
+,{"stream_name":"stdout","time":1592.385610687,"data":"exit 0 -m experiments.e1b_whole text_decoder\n"}
+,{"stream_name":"stdout","time":1592.425975177,"data":"24 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":1595.457221307,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1595.457291297,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1595.955072167,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1595.955137327,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1596.870263038,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1598.510971817,"data":"[NbConvertApp] Writing 291247 bytes to __results__.html\n"}
+]

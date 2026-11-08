@@ -1,0 +1,28 @@
+[{"stream_name":"stdout","time":15.631488065,"data":"code c62de00\n"}
+,{"stream_name":"stdout","time":54.811710531,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":63.440714843,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":65.513579723,"data":"speech/dev: openai/whisper-tiny@169d4a4341\n"}
+,{"stream_name":"stdout","time":75.970582571,"data":"  ft_short         local:speech/dev/ft_short              sampled 0.9999740397216923  whole None  kurtosis gap 0.00035931082549844895\n"}
+,{"stream_name":"stdout","time":78.739736826,"data":"  ft_long          local:speech/dev/ft_long               sampled 0.9999664416161969  whole None  kurtosis gap -0.0003188521845789438\n"}
+,{"stream_name":"stdout","time":81.491012034,"data":"  lora_r8          local:speech/dev/lora_r8               sampled 0.9999999999999999  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":84.28089935,"data":"  lora_r64         local:speech/dev/lora_r64              sampled 0.9999999999999999  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":85.219604101,"data":"speech/fresh: facebook/wav2vec2-base-960h@22aad52d43\n"}
+,{"stream_name":"stdout","time":139.454195172,"data":"  ft_short         local:speech/fresh/ft_short            sampled 0.9999951674049637  whole 0.9999939306789425  kurtosis gap -3.065248706080048e-05\n"}
+,{"stream_name":"stdout","time":153.286421413,"data":"  ft_long          local:speech/fresh/ft_long             sampled 0.9999623965472789  whole 0.9999538127067206  kurtosis gap 0.00037205501762160864\n"}
+,{"stream_name":"stdout","time":167.36472062,"data":"  lora_r8          local:speech/fresh/lora_r8             sampled 0.9999999999999999  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":181.917904781,"data":"  lora_r64         local:speech/fresh/lora_r64            sampled 0.9999999999999999  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":195.916707828,"data":"  scratch          local:speech/fresh/scratch             sampled -0.0017066713240484186  whole -6.884837954466649e-05  kurtosis gap -0.40590845553234556\n"}
+,{"stream_name":"stdout","time":199.903656771,"data":"  q8_0             local:speech/fresh/ft_long+q8_0        sampled 0.9999438585554556  whole 0.9999356710192149  kurtosis gap 1.8011303626330744e-05\n"}
+,{"stream_name":"stdout","time":201.816540683,"data":"  q4_0             local:speech/fresh/ft_long+q4_0        sampled 0.9960566148773199  whole 0.9958130788282546  kurtosis gap -0.02433007273640042\n"}
+,{"stream_name":"stdout","time":205.213823549,"data":"  prune50          local:speech/fresh/ft_long+prune50     sampled 0.97227455344803  whole 0.9704275970153255  kurtosis gap 0.43112749265823025\n"}
+,{"stream_name":"stdout","time":208.477979994,"data":"  prune90          local:speech/fresh/ft_long+prune90     sampled 0.7099388394939126  whole 0.7051644499357268  kurtosis gap 8.211949149132487\n"}
+,{"stream_name":"stdout","time":209.863937498,"data":"  permuted         local:speech/fresh/ft_long+permuted    sampled 0.9999296357219203  whole 0.9999044630530819  kurtosis gap -0.00016833031505303353\n"}
+,{"stream_name":"stdout","time":210.364732878,"data":"exit 0 -m experiments.e1b_whole speech\n"}
+,{"stream_name":"stdout","time":210.367590415,"data":"14 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":212.262126943,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":212.262171783,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":212.482741392,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":212.482820002,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":213.191860021,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":214.014901446,"data":"[NbConvertApp] Writing 291236 bytes to __results__.html\n"}
+]

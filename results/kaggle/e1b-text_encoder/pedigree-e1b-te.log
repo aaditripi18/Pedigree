@@ -1,0 +1,31 @@
+[{"stream_name":"stdout","time":40.048640909,"data":"code e366325\n"}
+,{"stream_name":"stdout","time":97.768467248,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":99.246279708,"data":"PEDIGREE_DERIVATIVES = /kaggle/input/notebooks/aadityae5545454/pedigree-ft-text-encoder/derivatives\n"}
+,{"stream_name":"stdout","time":101.830057523,"data":"text_encoder/dev: google-bert/bert-base-uncased@86b5e09344\n"}
+,{"stream_name":"stdout","time":113.555576136,"data":"  ft_short         local:text_encoder/dev/ft_short        sampled 0.9999497074699699  whole None  kurtosis gap -8.988474636373311e-05\n"}
+,{"stream_name":"stdout","time":122.457563074,"data":"  ft_long          local:text_encoder/dev/ft_long         sampled 0.9996038095220263  whole None  kurtosis gap 5.522004285829496e-06\n"}
+,{"stream_name":"stdout","time":127.318161449,"data":"  lora_r8          local:text_encoder/dev/lora_r8         sampled 0.9999999999999999  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":132.394152863,"data":"  lora_r64         local:text_encoder/dev/lora_r64        sampled 0.9999999999999999  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":133.147469724,"data":"text_encoder/fresh: FacebookAI/roberta-base@e2da8e2f81\n"}
+,{"stream_name":"stdout","time":185.701686847,"data":"  ft_short         local:text_encoder/fresh/ft_short      sampled 0.9999799274406871  whole 0.999979480948332  kurtosis gap 0.00010284237653590544\n"}
+,{"stream_name":"stdout","time":204.816185205,"data":"  ft_long          local:text_encoder/fresh/ft_long       sampled 0.9998314815876843  whole 0.9998161197640283  kurtosis gap -0.001494374224329409\n"}
+,{"stream_name":"stdout","time":224.867909457,"data":"  lora_r8          local:text_encoder/fresh/lora_r8       sampled 1.0  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":243.887075868,"data":"  lora_r64         local:text_encoder/fresh/lora_r64      sampled 1.0  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":262.671871856,"data":"  scratch          local:text_encoder/fresh/scratch       sampled 0.001907181186409406  whole -3.4898078201696804e-05  kurtosis gap -1.075605636726147\n"}
+,{"stream_name":"stdout","time":296.925402173,"data":"  q8_0             local:text_encoder/fresh/ft_long+q8_0  sampled 0.9998144743603732  whole 0.9998003211718437  kurtosis gap -0.0011526080725765553\n"}
+,{"stream_name":"stdout","time":302.223751021,"data":"  q4_0             local:text_encoder/fresh/ft_long+q4_0  sampled 0.9957565946462514  whole 0.995748035786729  kurtosis gap -0.029309431089393545\n"}
+,{"stream_name":"stdout","time":310.289658506,"data":"  prune50          cal:text_encoder/fresh/ft_long+prune50 sampled 0.9695030037681633  whole 0.9714078141274356  kurtosis gap 0.4439836552665122\n"}
+,{"stream_name":"stdout","time":317.37560469699997,"data":"  prune90          cal:text_encoder/fresh/ft_long+prune90 sampled 0.688568608543298  whole 0.7105653493438183  kurtosis gap 8.621306827618232\n"}
+,{"stream_name":"stdout","time":322.710258761,"data":"  permuted         al:text_encoder/fresh/ft_long+permuted sampled 0.9996096055017911  whole 0.9997375679277755  kurtosis gap -0.0022815746213713517\n"}
+,{"stream_name":"stderr","time":326.502273043,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":335.773687035,"data":"  permuted_full    xt_encoder/fresh/ft_long+permuted_full sampled 0.006833414501291529  whole 0.00702610034875261  kurtosis gap -0.00968529335736057\n"}
+,{"stream_name":"stdout","time":376.309616633,"data":"  independent      FacebookAI/xlm-roberta-base            sampled -0.0017062623451141645  whole -0.0003585852385202399  kurtosis gap 0.7937727666979488\n"}
+,{"stream_name":"stdout","time":377.466525465,"data":"exit 0 -m experiments.e1b_whole text_encoder\n"}
+,{"stream_name":"stdout","time":377.471327167,"data":"16 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":379.948578434,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":379.948666874,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":380.229454373,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":380.229488112,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":381.206482745,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":382.394641668,"data":"[NbConvertApp] Writing 291247 bytes to __results__.html\n"}
+]

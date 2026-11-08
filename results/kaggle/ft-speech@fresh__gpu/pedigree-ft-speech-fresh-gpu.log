@@ -1,0 +1,52 @@
+[{"stream_name":"stdout","time":37.612766547,"data":"code be22b5c\n"}
+,{"stream_name":"stdout","time":95.188760173,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stderr","time":108.489805322,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":113.820230292,"data":"\rLoading weights:   0%|          | 0/212 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 212/212 [00:00\u003c00:00, 2894.73it/s]\n"}
+,{"stream_name":"stderr","time":113.923749935,"data":"[transformers] \u001b[1mWav2Vec2ForCTC LOAD REPORT\u001b[0m from: facebook/wav2vec2-base-960h\n"}
+,{"stream_name":"stderr","time":113.923782546,"data":"Key                        | Status  | \n"}
+,{"stream_name":"stderr","time":113.923787807,"data":"---------------------------+---------+-\n"}
+,{"stream_name":"stderr","time":113.923796284,"data":"wav2vec2.masked_spec_embed | MISSING | \n"}
+,{"stream_name":"stderr","time":113.923799629,"data":"\n"}
+,{"stream_name":"stderr","time":113.923802404,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":113.923805199,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":121.110975883,"data":"/kaggle/working/Pedigree/experiments/finetune.py:231: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":121.111015425,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":121.111021163,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":544.830800422,"data":"speech/fresh/ft_short: 300 steps, loss 278.7758 -\u003e 18.0374, 444 s\n"}
+,{"stream_name":"stderr","time":545.568382712,"data":"\rLoading weights:   0%|          | 0/212 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 212/212 [00:00\u003c00:00, 2726.41it/s]\n"}
+,{"stream_name":"stderr","time":545.663385862,"data":"[transformers] \u001b[1mWav2Vec2ForCTC LOAD REPORT\u001b[0m from: facebook/wav2vec2-base-960h\n"}
+,{"stream_name":"stderr","time":545.663444936,"data":"Key                        | Status  | \n"}
+,{"stream_name":"stderr","time":545.663450483,"data":"---------------------------+---------+-\n"}
+,{"stream_name":"stderr","time":545.663454845,"data":"wav2vec2.masked_spec_embed | MISSING | \n"}
+,{"stream_name":"stderr","time":545.663461443,"data":"\n"}
+,{"stream_name":"stderr","time":545.663468841,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":545.663472017,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":4715.945802117,"data":"speech/fresh/ft_long: 3000 steps, loss 250.4839 -\u003e 42.1815, 4171 s\n"}
+,{"stream_name":"stderr","time":4716.625133288,"data":"\rLoading weights:   0%|          | 0/212 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 212/212 [00:00\u003c00:00, 2862.18it/s]\n"}
+,{"stream_name":"stderr","time":4716.719680468,"data":"[transformers] \u001b[1mWav2Vec2ForCTC LOAD REPORT\u001b[0m from: facebook/wav2vec2-base-960h\n"}
+,{"stream_name":"stderr","time":4716.719717387,"data":"Key                        | Status  | \n"}
+,{"stream_name":"stderr","time":4716.7197266,"data":"---------------------------+---------+-\n"}
+,{"stream_name":"stderr","time":4716.719729673,"data":"wav2vec2.masked_spec_embed | MISSING | \n"}
+,{"stream_name":"stderr","time":4716.719749394,"data":"\n"}
+,{"stream_name":"stderr","time":4716.719751801,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":4716.719754145,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":7664.388206738,"data":"speech/fresh/lora_r8: 3000 steps, loss 262.5426 -\u003e 61.6319, 2948 s\n"}
+,{"stream_name":"stderr","time":7665.074414405,"data":"\rLoading weights:   0%|          | 0/212 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 212/212 [00:00\u003c00:00, 2719.66it/s]\n"}
+,{"stream_name":"stderr","time":7665.171103408,"data":"[transformers] \u001b[1mWav2Vec2ForCTC LOAD REPORT\u001b[0m from: facebook/wav2vec2-base-960h\n"}
+,{"stream_name":"stderr","time":7665.171140067,"data":"Key                        | Status  | \n"}
+,{"stream_name":"stderr","time":7665.171146014,"data":"---------------------------+---------+-\n"}
+,{"stream_name":"stderr","time":7665.171153965,"data":"wav2vec2.masked_spec_embed | MISSING | \n"}
+,{"stream_name":"stderr","time":7665.17116194,"data":"\n"}
+,{"stream_name":"stderr","time":7665.171165733,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":7665.171168597,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":10642.528682651,"data":"speech/fresh/lora_r64: 3000 steps, loss 264.2091 -\u003e 63.9042, 2978 s\n"}
+,{"stream_name":"stdout","time":14805.780655744,"data":"speech/fresh/scratch: 3000 steps, loss 14124.627 -\u003e 582.4915, 4163 s\n"}
+,{"stream_name":"stdout","time":14809.103206229,"data":"exit 0 -m experiments.finetune speech fresh\n"}
+,{"stream_name":"stdout","time":14809.106827572,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":14811.19988681,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":14811.19992601,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":14811.454715583,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":14811.454745117,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":14812.234536113,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":14813.24451118,"data":"[NbConvertApp] Writing 290910 bytes to __results__.html\n"}
+]

@@ -1,0 +1,29 @@
+[{"stream_name":"stdout","time":13.471548061,"data":"code e366325\n"}
+,{"stream_name":"stdout","time":83.727844686,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":90.400860499,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":94.700650239,"data":"vision_cnn/dev: timm/resnet50.a1_in1k@767268603c\n"}
+,{"stream_name":"stdout","time":119.707019799,"data":"  ft_short         local:vision_cnn/dev/ft_short          sampled 0.9999985914266706  whole None  kurtosis gap -8.165163423656807e-05\n"}
+,{"stream_name":"stdout","time":122.571125295,"data":"  ft_long          local:vision_cnn/dev/ft_long           sampled 0.9999606425404326  whole None  kurtosis gap 0.0009016587416255106\n"}
+,{"stream_name":"stdout","time":125.19158166,"data":"  lora_r8          local:vision_cnn/dev/lora_r8           sampled 1.0  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":127.743415332,"data":"  lora_r64         local:vision_cnn/dev/lora_r64          sampled 1.0  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":129.8859958,"data":"vision_cnn/fresh: timm/resnet18.a1_in1k@491b427b45\n"}
+,{"stream_name":"stdout","time":173.620603362,"data":"  ft_short         local:vision_cnn/fresh/ft_short        sampled 0.9999986491374382  whole 0.9999985967570945  kurtosis gap -0.0005112597702039423\n"}
+,{"stream_name":"stdout","time":178.182775404,"data":"  ft_long          local:vision_cnn/fresh/ft_long         sampled 0.9999372981038102  whole 0.9999450616417007  kurtosis gap -0.0011629881465431424\n"}
+,{"stream_name":"stdout","time":182.630397765,"data":"  lora_r8          local:vision_cnn/fresh/lora_r8         sampled 0.9999999999999998  whole 0.9999999999999998  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":186.961967418,"data":"  lora_r64         local:vision_cnn/fresh/lora_r64        sampled 0.9999999999999998  whole 0.9999999999999998  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":191.403559563,"data":"  scratch          local:vision_cnn/fresh/scratch         sampled -0.0025184532040616794  whole 0.0006001974088025575  kurtosis gap -8.60493924671531\n"}
+,{"stream_name":"stdout","time":191.893753909,"data":"  q8_0             local:vision_cnn/fresh/ft_long+q8_0    sampled 0.9999165188347433  whole 0.9999226253123041  kurtosis gap -6.03605474007729e-05\n"}
+,{"stream_name":"stdout","time":192.478548574,"data":"  q4_0             local:vision_cnn/fresh/ft_long+q4_0    sampled 0.9946430075304012  whole 0.9947211337490911  kurtosis gap -0.16952874431035436\n"}
+,{"stream_name":"stdout","time":193.241963273,"data":"  prune50          local:vision_cnn/fresh/ft_long+prune50 sampled 0.9821127893487074  whole 0.9819183268525327  kurtosis gap 0.786086315834833\n"}
+,{"stream_name":"stdout","time":193.920589203,"data":"  prune90          local:vision_cnn/fresh/ft_long+prune90 sampled 0.7992888923792527  whole 0.7970827403684755  kurtosis gap 15.67247441221808\n"}
+,{"stream_name":"stdout","time":194.572852845,"data":"  permuted         ocal:vision_cnn/fresh/ft_long+permuted sampled 0.02752809563110039  whole 0.027766536876427828  kurtosis gap -0.06855419440948296\n"}
+,{"stream_name":"stdout","time":241.447391265,"data":"  independent      timm/resnet18.tv_in1k                  sampled -0.0050875666246036145  whole 0.002635398055060145  kurtosis gap -4.031649122898858\n"}
+,{"stream_name":"stdout","time":241.899854522,"data":"exit 0 -m experiments.e1b_whole vision_cnn\n"}
+,{"stream_name":"stdout","time":241.904526765,"data":"15 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":244.701370362,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":244.701409665,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":245.007990385,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":245.00801938,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":245.968912245,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":247.299986309,"data":"[NbConvertApp] Writing 291244 bytes to __results__.html\n"}
+]

@@ -1,0 +1,32 @@
+[{"stream_name":"stdout","time":17.631785891,"data":"code e366325\n"}
+,{"stream_name":"stdout","time":55.65987519,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":62.878020623,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":65.214449476,"data":"vision_transformer/dev: google/vit-base-patch16-224-in21k@b4569560a3\n"}
+,{"stream_name":"stdout","time":77.1443448,"data":"  ft_short         local:vision_transformer/dev/ft_short  sampled 0.9999744134858022  whole None  kurtosis gap -0.00027874068057864854\n"}
+,{"stream_name":"stdout","time":80.532273488,"data":"  ft_long          local:vision_transformer/dev/ft_long   sampled 0.9998668088973444  whole None  kurtosis gap -0.0006166398300750942\n"}
+,{"stream_name":"stdout","time":83.866332402,"data":"  lora_r8          local:vision_transformer/dev/lora_r8   sampled 1.0  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":87.64191754,"data":"  lora_r64         local:vision_transformer/dev/lora_r64  sampled 1.0  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":88.737383002,"data":"vision_transformer/fresh: WinKawaks/vit-small-patch16-224@0c08c18290\n"}
+,{"stream_name":"stdout","time":135.468015339,"data":"  ft_short         ocal:vision_transformer/fresh/ft_short sampled 0.9999781746105232  whole 0.9999785346129791  kurtosis gap -0.00011965170476035958\n"}
+,{"stream_name":"stdout","time":146.746999702,"data":"  ft_long          local:vision_transformer/fresh/ft_long sampled 0.9998536766333423  whole 0.9998477941544173  kurtosis gap -0.00013915331320846214\n"}
+,{"stream_name":"stdout","time":157.529597087,"data":"  lora_r8          local:vision_transformer/fresh/lora_r8 sampled 0.9999999999999999  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":168.593109949,"data":"  lora_r64         ocal:vision_transformer/fresh/lora_r64 sampled 0.9999999999999999  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":179.494353584,"data":"  scratch          local:vision_transformer/fresh/scratch sampled -0.0013115368919036227  whole -0.0005160982208485851  kurtosis gap -0.3583235429944924\n"}
+,{"stream_name":"stdout","time":179.929224157,"data":"  q8_0             :vision_transformer/fresh/ft_long+q8_0 sampled 0.9998380997797977  whole 0.9998318254163043  kurtosis gap -0.00017992516319442764\n"}
+,{"stream_name":"stdout","time":180.394539155,"data":"  q4_0             :vision_transformer/fresh/ft_long+q4_0 sampled 0.9959851595718636  whole 0.9958891397446804  kurtosis gap -0.018670964081893615\n"}
+,{"stream_name":"stdout","time":181.130331636,"data":"  prune50          sion_transformer/fresh/ft_long+prune50 sampled 0.9673013793824825  whole 0.9669913508502663  kurtosis gap 0.4624148769330867\n"}
+,{"stream_name":"stdout","time":181.843036661,"data":"  prune90          sion_transformer/fresh/ft_long+prune90 sampled 0.6812767385425338  whole 0.6852192232111592  kurtosis gap 9.178897967059875\n"}
+,{"stream_name":"stdout","time":182.2561638,"data":"  permuted         ion_transformer/fresh/ft_long+permuted sampled 0.9997998428947565  whole 0.9998100057132417  kurtosis gap 0.0026523261818727217\n"}
+,{"stream_name":"stderr","time":184.958707304,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":184.981985988,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":187.622711541,"data":"  permuted_full    ransformer/fresh/ft_long+permuted_full sampled -0.0011722337601518485  whole 0.001880906314711741  kurtosis gap 0.004943701038017778\n"}
+,{"stream_name":"stdout","time":225.481957796,"data":"  independent      facebook/dinov2-small                  sampled 0.0020186010467989754  whole 0.00012430117280575517  kurtosis gap 0.3209976664174572\n"}
+,{"stream_name":"stdout","time":226.352123981,"data":"exit 0 -m experiments.e1b_whole vision_transformer\n"}
+,{"stream_name":"stdout","time":226.354944012,"data":"16 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":228.124651089,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":228.124678879,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":228.315482495,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":228.315515685,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":228.942202774,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":229.708797681,"data":"[NbConvertApp] Writing 291260 bytes to __results__.html\n"}
+]
