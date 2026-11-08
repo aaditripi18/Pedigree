@@ -1,0 +1,50 @@
+[{"stream_name":"stdout","time":25.651477477,"data":"code 986dc98\n"}
+,{"stream_name":"stdout","time":82.019205251,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":95.202254369,"data":"PEDIGREE_TEACHERS = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":104.977518246,"data":"PEDIGREE_STUDENTS = /tmp/merged-students\n"}
+,{"stream_name":"stderr","time":109.522200133,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":143.100927318,"data":"  distill_s0                                    agree 0.000  js 0.9980  cka 0.008\n"}
+,{"stream_name":"stdout","time":153.014856159,"data":"  indep_s0                                      agree 0.000  js 1.0000  cka 0.007\n"}
+,{"stream_name":"stdout","time":162.923116621,"data":"  distill_s1                                    agree 0.000  js 0.9980  cka 0.008\n"}
+,{"stream_name":"stdout","time":173.204633281,"data":"  indep_s1                                      agree 0.000  js 1.0000  cka 0.007\n"}
+,{"stream_name":"stdout","time":183.55641099,"data":"  distill_s2                                    agree 0.000  js 0.9993  cka 0.008\n"}
+,{"stream_name":"stdout","time":193.530860266,"data":"  indep_s2                                      agree 0.000  js 0.9995  cka 0.006\n"}
+,{"stream_name":"stdout","time":202.510690038,"data":"  distill_s0                                    agree 0.000  js 0.7065  cka 0.020\n"}
+,{"stream_name":"stdout","time":204.876749559,"data":"  indep_s0                                      agree 0.000  js 0.7785  cka 0.019\n"}
+,{"stream_name":"stdout","time":207.219042605,"data":"  distill_s1                                    agree 0.039  js 0.5921  cka 0.017\n"}
+,{"stream_name":"stdout","time":209.636456589,"data":"  indep_s1                                      agree 0.000  js 0.7276  cka 0.015\n"}
+,{"stream_name":"stdout","time":211.890779691,"data":"  distill_s2                                    agree 1.000  js 0.5259  cka 0.018\n"}
+,{"stream_name":"stdout","time":214.396199985,"data":"  indep_s2                                      agree 0.000  js 0.7794  cka 0.018\n"}
+,{"stream_name":"stdout","time":216.671595247,"data":"  distill_s3                                    agree 0.334  js 0.5135  cka 0.015\n"}
+,{"stream_name":"stdout","time":219.139957909,"data":"  indep_s3                                      agree 1.000  js 0.6749  cka 0.015\n"}
+,{"stream_name":"stdout","time":221.443578405,"data":"  distill_s4                                    agree 0.000  js 0.5575  cka 0.020\n"}
+,{"stream_name":"stdout","time":223.842689619,"data":"  indep_s4                                      agree 0.000  js 0.6479  cka 0.017\n"}
+,{"stream_name":"stdout","time":226.257554181,"data":"  distill_s5                                    agree 0.009  js 0.5448  cka 0.019\n"}
+,{"stream_name":"stdout","time":228.593006595,"data":"  indep_s5                                      agree 0.000  js 0.7783  cka 0.019\n"}
+,{"stream_name":"stdout","time":231.090425119,"data":"  distill_s6                                    agree 0.000  js 0.7448  cka 0.020\n"}
+,{"stream_name":"stdout","time":233.533633538,"data":"  indep_s6                                      agree 0.000  js 0.8073  cka 0.018\n"}
+,{"stream_name":"stdout","time":236.093434,"data":"  distill_s7                                    agree 0.999  js 0.5523  cka 0.017\n"}
+,{"stream_name":"stdout","time":238.455370265,"data":"  indep_s7                                      agree 1.000  js 0.6897  cka 0.016\n"}
+,{"stream_name":"stdout","time":241.765584003,"data":"exit 0 -m experiments.e5_behaviour vision_cnn dev fresh\n"}
+,{"stream_name":"stderr","time":245.986222912,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":248.602749871,"data":"/kaggle/working/Pedigree/experiments/e5_behaviour.py:78: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":248.602796059,"data":"  xs = [(torch.from_numpy(np.asarray(Image.open(io.BytesIO(b[\"bytes\"])).convert(\"RGB\").resize((size, size))))\n"}
+,{"stream_name":"stdout","time":251.385016262,"data":"  distill_s3                                    agree 0.519  js 0.1350  cka 0.559\n"}
+,{"stream_name":"stdout","time":252.637342264,"data":"  indep_s3                                      agree 0.498  js 0.1614  cka 0.501\n"}
+,{"stream_name":"stdout","time":253.947905294,"data":"  distill_s4                                    agree 0.525  js 0.1359  cka 0.532\n"}
+,{"stream_name":"stdout","time":255.201322912,"data":"  indep_s4                                      agree 0.444  js 0.1768  cka 0.465\n"}
+,{"stream_name":"stdout","time":256.460472714,"data":"  distill_s5                                    agree 0.520  js 0.1371  cka 0.559\n"}
+,{"stream_name":"stdout","time":257.716220481,"data":"  indep_s5                                      agree 0.471  js 0.1725  cka 0.471\n"}
+,{"stream_name":"stdout","time":258.973711084,"data":"  distill_s6                                    agree 0.533  js 0.1327  cka 0.556\n"}
+,{"stream_name":"stdout","time":260.22979181,"data":"  indep_s6                                      agree 0.491  js 0.1711  cka 0.476\n"}
+,{"stream_name":"stdout","time":261.50038713,"data":"  distill_s7                                    agree 0.541  js 0.1312  cka 0.537\n"}
+,{"stream_name":"stdout","time":262.760165922,"data":"  indep_s7                                      agree 0.489  js 0.1647  cka 0.485\n"}
+,{"stream_name":"stdout","time":263.946207376,"data":"exit 0 -m experiments.e5_behaviour vision_cnn fresh\n"}
+,{"stream_name":"stdout","time":263.950374406,"data":"32 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":266.00534126,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":266.005370593,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":266.265838417,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":266.265867927,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":267.068963053,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":268.06220202,"data":"[NbConvertApp] Writing 293463 bytes to __results__.html\n"}
+]
