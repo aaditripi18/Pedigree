@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Pedigree checker</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#5d5b55;--line:#e3e0d8;--card:#fff;--accent:#1f5f8b;--ok:#2d6a3e;--no:#9a3b2e;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#141413;--fg:#ecebe6;--muted:#a3a19a;--line:#2e2d2a;--card:#1c1c1a;--accent:#7fb4dc;--ok:#7cc48f;--no:#e28c7c}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:920px;margin:0 auto;padding:40px 16px 80px}h1{font-size:2rem;line-height:1.2;margin:0 0 12px}
+h2{font-size:1.25rem;margin:48px 0 12px;padding-top:16px;border-top:1px solid var(--line)}p,li{color:var(--fg)}
+.lede{font-size:1.1rem;color:var(--muted)}nav{display:flex;gap:16px;margin-bottom:32px;font-size:.95rem}
+a{color:var(--accent)}table{width:100%;border-collapse:collapse;font-size:.92rem;display:block;overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600}
+.num{font-variant-numeric:tabular-nums;text-align:right}.ok{color:var(--ok);font-weight:600}.no{color:var(--no);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}
+.card{background:var(--card);border:1px solid var(--line);padding:16px}.card b{display:block;font-size:1.6rem;font-variant-numeric:tabular-nums}
+code,pre{font-family:var(--mono);font-size:.88rem}pre{background:var(--card);border:1px solid var(--line);padding:12px;overflow-x:auto}
+input{font:inherit;padding:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);width:100%}
+button{font:inherit;padding:8px 16px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+#log{color:var(--muted);font-size:.9rem;min-height:1.5em}.verdict{font-size:1.4rem;font-weight:700}
+</style><script>globalThis.THRESHOLDS = {"plain": 0.026246, "invariant": 0.067221};</script>
+<script type="module">
+import { openModel, compare, setWaitLog } from "./checker.js";
+const $ = id => document.getElementById(id), log = t => $("log").textContent = t;
+setWaitLog(log);
+$("f").addEventListener("submit", async ev => {
+  ev.preventDefault(); $("out").textContent = "";
+  try {
+    const m = await openModel($("model").value.trim(), log);
+    const bases = $("base").value.trim() ? [$("base").value.trim()] : m.declared;
+    if (!bases.length) { log(""); $("out").textContent = "This model card declares no base_model. Name a base to compare with."; return; }
+    for (const b of bases) {
+      const r = await compare(m, await openModel(b, log), log);
+      const div = document.createElement("div");
+      const v = document.createElement("p"); v.className = "verdict"; v.textContent = `vs ${b}: ${r.verdict}${r.partial ? " (partial: few shared tensors)" : ""}`;
+      const d = document.createElement("p"); d.textContent = `median cosine ${r.plain === null ? "n/a" : r.plain.toFixed(4)} over ${r.compared} tensors (${r.matched} matched by name and shape); threshold ${THRESHOLDS.plain}`;
+      div.append(v, d); $("out").append(div);
+    }
+    log("done");
+  } catch (err) { log(""); $("out").textContent = "Could not compare: " + err.message; }
+});
+</script></head><body><main>
+<nav><a href="index.html">Findings</a><a href="check.html">Check a model</a><a href="https://github.com/aaditripi18/Pedigree">Code</a></nav>
+<h1>Check a model's declared base</h1>
+<p class="lede">Compares a model's weights with its declared <code>base_model</code> (or a base you name) in this
+page. It reads file headers and the first 8,192 values of up to 24 matched tensors from huggingface.co; nothing is
+sent anywhere else.</p>
+<form id="f"><p><label>Model<br><input id="model" placeholder="org/model" required></label></p>
+<p><label>Base (leave empty to use the declared base_model)<br><input id="base" placeholder="org/base"></label></p>
+<p><button>Compare</button></p></form>
+<p id="log"></p><div id="out"></div>
+<p>Safetensors models only; for PyTorch, GGUF and MLX files, gated models and the permutation-invariant check, use the
+CLI.</p></main></body></html>

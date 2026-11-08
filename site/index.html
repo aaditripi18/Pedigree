@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Pedigree</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#5d5b55;--line:#e3e0d8;--card:#fff;--accent:#1f5f8b;--ok:#2d6a3e;--no:#9a3b2e;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#141413;--fg:#ecebe6;--muted:#a3a19a;--line:#2e2d2a;--card:#1c1c1a;--accent:#7fb4dc;--ok:#7cc48f;--no:#e28c7c}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:920px;margin:0 auto;padding:40px 16px 80px}h1{font-size:2rem;line-height:1.2;margin:0 0 12px}
+h2{font-size:1.25rem;margin:48px 0 12px;padding-top:16px;border-top:1px solid var(--line)}p,li{color:var(--fg)}
+.lede{font-size:1.1rem;color:var(--muted)}nav{display:flex;gap:16px;margin-bottom:32px;font-size:.95rem}
+a{color:var(--accent)}table{width:100%;border-collapse:collapse;font-size:.92rem;display:block;overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600}
+.num{font-variant-numeric:tabular-nums;text-align:right}.ok{color:var(--ok);font-weight:600}.no{color:var(--no);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}
+.card{background:var(--card);border:1px solid var(--line);padding:16px}.card b{display:block;font-size:1.6rem;font-variant-numeric:tabular-nums}
+code,pre{font-family:var(--mono);font-size:.88rem}pre{background:var(--card);border:1px solid var(--line);padding:12px;overflow-x:auto}
+input{font:inherit;padding:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);width:100%}
+button{font:inherit;padding:8px 16px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+#log{color:var(--muted);font-size:.9rem;min-height:1.5em}.verdict{font-size:1.4rem;font-weight:700}
+</style></head><body><main>
+<nav><a href="index.html">Findings</a><a href="check.html">Check a model</a><a href="https://github.com/aaditripi18/Pedigree">Code</a></nav>
+<h1>Pedigree: do models come from where they say they do?</h1>
+<p class="lede">A model card's <code>base_model</code> tells licence checks, procurement reviews and the Hub
+what a model is built on. Nobody checks it. Pedigree checks it from the weights, on a frozen random sample of the
+Hub, with a verifier measured on ground truth first.</p>
+
+<h2>Hypotheses</h2>
+<p>Every decision rule was committed in <a href="https://github.com/aaditripi18/Pedigree/blob/main/PLAN.md">PLAN.md</a> before the runs it
+governs; verdicts are never reworded. The last column repeats each verdict under a second threshold rule.</p>
+<table><tr><th></th><th>Hypothesis</th><th>Verdict</th><th>Evidence</th><th>Midpoint rule</th></tr><tr><td>H1</td><td>The verifier separates derivatives from independent same-architecture models on fresh ground truth with TPR &gt;= 95% at FPR &lt;= 1%.</td><td><span class="">pending</span></td><td>TPR 20/20, FPR 0/17, AUC (plain) 1.000</td><td>pending</td></tr><tr><td>H4</td><td>A function-preserving permutation (attack b) hides lineage from the plain verifier on &gt;= 90% of derivatives, and defence (ii) restores it on &gt;= 90%.</td><td><span class="ok">supported</span></td><td>plain hidden on 3/3; aligned restores 3/3</td><td>supported</td></tr><tr><td>H5</td><td>4-bit quantised derivatives are still verified (&gt;= 90%); students distilled from a random initialisation are not (&lt;= 10%).</td><td><span class="">pending</span></td><td>q4_0 verified 5/5; distilled students related by weights 0/0</td><td>pending</td></tr><tr><td>H6</td><td>The sampled verdict equals the whole-file verdict for &gt;= 98% of pairs.</td><td><span class="">pending</span></td><td>E1 fresh pairs 65/65, Hub pairs 0/0 agree</td><td>pending</td></tr><tr><td>H7</td><td>The candidate pool contains the true parent for &gt;= 90% of ground-truth derivatives (a) and of Hub models whose declared base is verified (b).</td><td><span class="">pending</span></td><td>(a) 0/0; (b) 0/0</td><td>pending</td></tr><tr><td>H8</td><td>Direction is decided correctly for &gt;= 90% of the pairs where it is decided (D1 Hub dates; D2 weight kurtosis), with the undecided share reported.</td><td><span class="">pending</span></td><td>D1 (dates) right on 0/0; D2 (kurtosis, margin 0.0006166398300750942) right on 12/15 decided, undecided 17/32</td><td>pending</td></tr><tr><td>H9</td><td>Behaviour separates distilled students from same-task independent students with TPR &gt;= 90% at FPR &lt;= 5% (fresh).</td><td><span class="">pending</span></td><td>needs E5</td><td>pending</td></tr><tr><td>H10</td><td>Weight similarity tracks shared initialisation, not shared data.</td><td><span class="ok">supported</span></td><td>shared initialisation related 4/4; different initialisation, same data 0/2</td><td>not supported</td></tr><tr><td>H11</td><td>A final model is verified against its own checkpoints from step 10,000 on, and against no checkpoint of another run.</td><td><span class="ok">supported</span></td><td>own checkpoints from 10k all related: True; other runs related: 0</td><td>not supported</td></tr></table>
+<h2>Thresholds</h2>
+<p>Fixed from development negatives only: the highest score of any unrelated pair plus five standard deviations,
+wide because the audit makes thousands of comparisons.</p>
+<table><tr><th>Score</th><th>Threshold</th><th>Highest dev negative</th><th>Dev negatives</th></tr><tr><td>plain</td><td class='num'>0.0262</td><td class='num'>0.0053</td><td class='num'>15</td></tr><tr><td>invariant</td><td class='num'>0.0672</td><td class='num'>0.0259</td><td class='num'>15</td></tr><tr><td>aligned</td><td class='num'>0.0388</td><td class='num'>0.0124</td><td class='num'>10</td></tr></table>
+<h2>Check a model yourself</h2>
+<p><a href="check.html">The browser checker</a> runs the same comparison in this page, reading only file headers
+and small slices of tensors from the Hub. The CLI does the same for PyTorch, GGUF and MLX files too:</p>
+<pre>pip install git+https://github.com/aaditripi18/Pedigree
+pedigree verify hf:org/model --base hf:org/base</pre></main></body></html>

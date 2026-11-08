@@ -91,11 +91,19 @@ export function median(xs) {
   return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2;
 }
 
+let onWait = () => {};
+export function setWaitLog(fn) { onWait = fn; }
+
 async function range(url, start, end) {
   for (let attempt = 0; attempt < 5; attempt++) {
     const r = await fetch(url, { headers: { Range: `bytes=${start}-${end}` } });
     if (r.status === 206 || (r.status === 200 && start === 0)) return (await r.arrayBuffer()).slice(0, end - start + 1);
-    if (r.status === 429 || r.status >= 500) { await new Promise(res => setTimeout(res, 2000 * 2 ** attempt)); continue; }
+    if (r.status === 429 || r.status >= 500) {
+      const wait = 2000 * 2 ** attempt;
+      onWait(`the Hub asked this browser to slow down; retrying in ${wait / 1000} s`);
+      await new Promise(res => setTimeout(res, wait));
+      continue;
+    }
     throw new Error(r.status === 401 || r.status === 403 ? "gated or private model (read it with the CLI and a token)"
       : `HTTP ${r.status} for ${url}`);
   }
