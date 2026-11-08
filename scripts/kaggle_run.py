@@ -120,6 +120,10 @@ for _f in E5_FAMILIES:
                                   [["-m", "experiments.distill", _f, "fresh"]], gpu=True,
                                   sources=list(JOBS[f"distill-{_f}"]["sources"]),
                                   env={**JOBS[f"distill-{_f}"]["env"], "PEDIGREE_SEEDS": ",".join(map(str, NEW_SEEDS))})
+    # three of the four new-student jobs ran on friends' accounts with this code, shared back
+    _owner = {"text_encoder": "alien5060707", "vision_transformer": "rohajraj", "vision_cnn": "alubalub"}
+    if _f in _owner:
+        JOBS[f"distill2-{_f}"]["owner"] = _owner[_f]
     _teach = [s for s in JOBS[f"e5-{_f}"]["sources"] if not s.startswith("distill-")]
     JOBS[f"h12-{_f}"] = _job(f"pedigree-h12-{_f.replace('_', '-')}",
                              [["-m", "experiments.e5_behaviour", _f, "dev", "fresh"],
