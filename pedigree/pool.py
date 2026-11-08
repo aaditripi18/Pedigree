@@ -85,7 +85,7 @@ def open_text(path: Path):
             return open(inner[0], encoding="utf-8")
     if path.is_file():
         with open(path, "rb") as fh:
-            gz = fh.read(2) == b""
+            gz = fh.read(2) == bytes([0x1F, 0x8B])
         return gzip.open(path, "rt", encoding="utf-8") if gz else open(path, encoding="utf-8")
     plain = path.with_suffix("") if path.suffix == ".gz" else path
     if plain.exists():
