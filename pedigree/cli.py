@@ -12,7 +12,7 @@ is executed: PyTorch checkpoints are read by a restricted unpickler.
 Verdicts use the thresholds fixed on ground truth (pedigree/thresholds.json, written by
 scripts/analyse.py from E1 dev negatives): related, unrelated (while enough tensors were
 compared), or not comparable. "Unrelated" means the weights show no lineage, not that
-the claim is false for every reason; read the README's limitations.
+the claim is false for every reason; the README's "Every caveat, measured" says when.
 """
 from __future__ import annotations
 
