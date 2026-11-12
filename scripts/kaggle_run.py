@@ -154,10 +154,13 @@ JOBS.update({f"e1b-{f}": _job(f"pedigree-e1b-{SHORT[f]}", [["-m", "experiments.e
 E2_ENV = {"PEDIGREE_WORKERS": "12", "PEDIGREE_BUDGET_HOURS": "10"}
 E2_OUT = ["--out", "/kaggle/working/e2_audit_raw.jsonl"]
 JOBS["e2"] = _job("pedigree-e2-audit", [["-m", "experiments.e2_audit", *E2_OUT]], gpu=False, env=dict(E2_ENV))
+# Kaggle would not mount the earlier passes' outputs as kernel sources (pass 2 started from 0),
+# so later passes read them from a private dataset of first readings (scripts/e2_previous.py)
+E2_PREVIOUS = "pedigree-e2-previous"
 for _k in range(2, 5):
     JOBS[f"e2-{_k}"] = _job(f"pedigree-e2-audit-{_k}", [["-m", "experiments.e2_audit", *E2_OUT]], gpu=False,
-                           sources=["e2"] + [f"e2-{i}" for i in range(2, _k)],
                            env={**E2_ENV, "PEDIGREE_E2_PREVIOUS": "/kaggle/input"})
+    JOBS[f"e2-{_k}"]["datasets"] = [E2_PREVIOUS]
 
 # frozen configs, second half (the Hub limits each address to 3000 file requests per 5 minutes)
 JOBS["e2-configs"] = _job("pedigree-e2-configs", [["-m", "experiments.e2_configs", "--shard", "1/2", "--rows-out",
@@ -306,7 +309,8 @@ def run(job: str, sha: str | None = None) -> None:
             "id": f"{USER}/{spec['kernel']}", "title": spec["kernel"], "code_file": "run.py",
             "language": "python", "kernel_type": "script", "is_private": True,
             "enable_gpu": spec["gpu"], "enable_tpu": False, "enable_internet": True,
-            "dataset_sources": [f"{USER}/{DATASET}"], "competition_sources": [],
+            "dataset_sources": [f"{USER}/{DATASET}", *(f"{USER}/{x}" for x in spec.get("datasets", []))],
+            "competition_sources": [],
             "kernel_sources": [ref(s) for s in spec["sources"]]}), encoding="utf-8")
         print(kaggle("kernels", "push", "-p", str(d)).stdout.strip())
 

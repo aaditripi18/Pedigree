@@ -1,0 +1,195 @@
+{
+ "passes": [
+  "results/kaggle/e2",
+  "results/kaggle/e2-2"
+ ],
+ "first_readings": 520,
+ "reread": 457,
+ "identical": 429,
+ "changed_fields": {
+  "declared": 12,
+  "commit": 13,
+  "pool": 8,
+  "params": 1,
+  "quantised": 1,
+  "reason": 1
+ },
+ "changed": [
+  {
+   "id": "Comfy-Org/MiniMax-H3",
+   "fields": [
+    "declared"
+   ]
+  },
+  {
+   "id": "unsloth/MiniMax-H3-GGUF",
+   "fields": [
+    "declared"
+   ]
+  },
+  {
+   "id": "huihui-ai/Huihui-Qwen3.6-35B-A3B-abliterated-MTP-GGUF",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "handy-computer/parakeet-tdt-0.6b-v3-gguf",
+   "fields": [
+    "pool"
+   ]
+  },
+  {
+   "id": "antirez/deepseek-v4-gguf",
+   "fields": [
+    "pool"
+   ]
+  },
+  {
+   "id": "trl-internal-testing/tiny-Qwen2_5_VLForConditionalGeneration",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF",
+   "fields": [
+    "commit",
+    "declared"
+   ]
+  },
+  {
+   "id": "FINAL-Bench/POCKET-Darwin-180B-GGUF",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF",
+   "fields": [
+    "pool"
+   ]
+  },
+  {
+   "id": "LiquidAI/LFM2.5-Audio-1.5B-GGUF",
+   "fields": [
+    "declared"
+   ]
+  },
+  {
+   "id": "trl-internal-testing/tiny-Gemma2ForCausalLM",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "RedHatAI/Qwen3.8-27B-INT4",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "handy-computer/parakeet-tdt-0.6b-v2-gguf",
+   "fields": [
+    "pool"
+   ]
+  },
+  {
+   "id": "kyuz0/deepseek-v4.1-flash-gguf",
+   "fields": [
+    "declared",
+    "pool"
+   ]
+  },
+  {
+   "id": "Cloudflare/clef-flash",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF",
+   "fields": [
+    "pool"
+   ]
+  },
+  {
+   "id": "BennyDaBall/Qwen-Image-2.1-NVFP4",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "incoai/GLM-5.3-Flash-DFlash2",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "yujiepan/mixtral-8xtiny-random",
+   "fields": [
+    "pool"
+   ]
+  },
+  {
+   "id": "openbmb/MiniCPM-V-4.6-gguf",
+   "fields": [
+    "commit",
+    "declared"
+   ]
+  },
+  {
+   "id": "LiquidAI/LFM2-24B-A2B-GGUF",
+   "fields": [
+    "declared"
+   ]
+  },
+  {
+   "id": "KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2",
+   "fields": [
+    "declared",
+    "params",
+    "pool",
+    "quantised",
+    "reason"
+   ]
+  },
+  {
+   "id": "abakanai/Minimax_h3_hybrid",
+   "fields": [
+    "declared"
+   ]
+  },
+  {
+   "id": "BennyDaBall/Fibo-2.0-dev-NVFP4",
+   "fields": [
+    "commit"
+   ]
+  },
+  {
+   "id": "mohommed/LFM3-1.7B-Frontier-SmartAgent",
+   "fields": [
+    "declared"
+   ]
+  },
+  {
+   "id": "mondk/LFM3-1.7B-Claude-Code-GGUF",
+   "fields": [
+    "declared"
+   ]
+  },
+  {
+   "id": "mradermacher/Qwen3.8-27B-TWIN-TURBO-Fable-Cold-Fusion-709-ULTRA-HERETIC-Uncensored-GGUF",
+   "fields": [
+    "commit",
+    "declared"
+   ]
+  }
+ ]
+}
