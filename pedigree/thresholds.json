@@ -1,8 +1,9 @@
 {
- "plain": 0.026246,
- "invariant": 0.067221,
+ "plain": 0.02554,
+ "invariant": 0.066201,
  "rule": "max(E1 dev negatives) + 5 SD, PLAN.md amendment 2026-11-07",
  "families": [
+  "diffusion_unet",
   "speech",
   "text_decoder",
   "text_encoder",
