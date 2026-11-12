@@ -1,0 +1,36 @@
+[{"stream_name":"stdout","time":33.283924356,"data":"code 986dc98\n"}
+,{"stream_name":"stdout","time":102.075226385,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":127.285000514,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":132.908165316,"data":"text_encoder/ft_short: key type:roberta params 163351218 pool 30 parent in pool True\n"}
+,{"stream_name":"stdout","time":133.356463274,"data":"text_encoder/ft_long: key type:roberta params 163351218 pool 30 parent in pool True\n"}
+,{"stream_name":"stdout","time":133.652129115,"data":"text_encoder/lora_r8: key type:roberta params 163351218 pool 30 parent in pool True\n"}
+,{"stream_name":"stdout","time":133.905284786,"data":"text_encoder/lora_r64: key type:roberta params 163351218 pool 30 parent in pool True\n"}
+,{"stream_name":"stdout","time":134.212961408,"data":"text_decoder/ft_short: key type:gptneox params 162322944 pool 30 parent in pool False\n"}
+,{"stream_name":"stdout","time":134.557786177,"data":"text_decoder/ft_long: key type:gptneox params 162322944 pool 30 parent in pool False\n"}
+,{"stream_name":"stdout","time":134.779153938,"data":"text_decoder/lora_r8: key type:gptneox params 162322944 pool 30 parent in pool False\n"}
+,{"stream_name":"stdout","time":134.982103569,"data":"text_decoder/lora_r64: key type:gptneox params 162322944 pool 30 parent in pool False\n"}
+,{"stream_name":"stdout","time":135.430353698,"data":"vision_transformer/ft_short: key type:vit params 21669514 pool 5 parent in pool True\n"}
+,{"stream_name":"stdout","time":135.755248686,"data":"vision_transformer/ft_long: key type:vit params 21669514 pool 5 parent in pool True\n"}
+,{"stream_name":"stdout","time":136.185001215,"data":"vision_transformer/lora_r8: key type:vit params 21669514 pool 5 parent in pool True\n"}
+,{"stream_name":"stdout","time":136.383344257,"data":"vision_transformer/lora_r64: key type:vit params 21669514 pool 5 parent in pool True\n"}
+,{"stream_name":"stdout","time":136.729751304,"data":"vision_cnn/ft_short: key lib:timm params 11191242 pool 11 parent in pool True\n"}
+,{"stream_name":"stdout","time":137.037252881,"data":"vision_cnn/ft_long: key lib:timm params 11191242 pool 11 parent in pool True\n"}
+,{"stream_name":"stdout","time":137.258131794,"data":"vision_cnn/lora_r8: key lib:timm params 11191242 pool 11 parent in pool True\n"}
+,{"stream_name":"stdout","time":137.476616543,"data":"vision_cnn/lora_r64: key lib:timm params 11191242 pool 11 parent in pool True\n"}
+,{"stream_name":"stdout","time":138.012982264,"data":"speech/ft_short: key type:wav2vec2 params 94396320 pool 30 parent in pool True\n"}
+,{"stream_name":"stdout","time":138.35623241,"data":"speech/ft_long: key type:wav2vec2 params 94396320 pool 30 parent in pool True\n"}
+,{"stream_name":"stdout","time":138.705440847,"data":"speech/lora_r8: key type:wav2vec2 params 94396320 pool 30 parent in pool True\n"}
+,{"stream_name":"stdout","time":139.0753132,"data":"speech/lora_r64: key type:wav2vec2 params 94396320 pool 30 parent in pool True\n"}
+,{"stream_name":"stdout","time":139.34015213,"data":"diffusion_unet/ft_short: key lib:diffusers params 113673219 pool 3 parent in pool True\n"}
+,{"stream_name":"stdout","time":139.651160338,"data":"diffusion_unet/ft_long: key lib:diffusers params 113673219 pool 3 parent in pool True\n"}
+,{"stream_name":"stdout","time":139.857556048,"data":"diffusion_unet/lora_r8: key lib:diffusers params 113673219 pool 3 parent in pool True\n"}
+,{"stream_name":"stdout","time":140.361602513,"data":"diffusion_unet/lora_r64: key lib:diffusers params 113673219 pool 3 parent in pool True\n"}
+,{"stream_name":"stdout","time":140.939511487,"data":"exit 0 -m experiments.h7_pool\n"}
+,{"stream_name":"stdout","time":140.946493942,"data":"24 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":143.942895099,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":143.942938134,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":144.338967709,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":144.339005239,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":145.392491683,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":146.824448866,"data":"[NbConvertApp] Writing 292040 bytes to __results__.html\n"}
+]

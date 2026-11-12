@@ -1,0 +1,28 @@
+[{"stream_name":"stdout","time":30.103851304,"data":"code 986dc98\n"}
+,{"stream_name":"stdout","time":100.744229822,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":110.976275632,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":113.810868985,"data":"diffusion_unet/dev: google/ddpm-cifar10-32@267b167dc0\n"}
+,{"stream_name":"stdout","time":126.738273298,"data":"  ft_short         local:diffusion_unet/dev/ft_short      sampled 0.9999971747825495  whole None  kurtosis gap 3.94560317071857e-05\n"}
+,{"stream_name":"stdout","time":130.303590464,"data":"  ft_long          local:diffusion_unet/dev/ft_long       sampled 0.9999769490036028  whole None  kurtosis gap 0.0007718288432485565\n"}
+,{"stream_name":"stdout","time":133.617145099,"data":"  lora_r8          local:diffusion_unet/dev/lora_r8       sampled 1.0  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":136.813337409,"data":"  lora_r64         local:diffusion_unet/dev/lora_r64      sampled 1.0  whole None  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":137.981091334,"data":"diffusion_unet/fresh: google/ddpm-cat-256@82ca0d5db4\n"}
+,{"stream_name":"stdout","time":237.478791633,"data":"  ft_short         local:diffusion_unet/fresh/ft_short    sampled 0.9999670569561169  whole 0.9999624044241782  kurtosis gap 0.00017390061837063708\n"}
+,{"stream_name":"stdout","time":261.425986669,"data":"  ft_long          local:diffusion_unet/fresh/ft_long     sampled 0.999788870142118  whole 0.9996785142361848  kurtosis gap 0.001583497254174615\n"}
+,{"stream_name":"stdout","time":285.786290449,"data":"  lora_r8          local:diffusion_unet/fresh/lora_r8     sampled 1.0  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":311.590259612,"data":"  lora_r64         local:diffusion_unet/fresh/lora_r64    sampled 1.0  whole 1.0  kurtosis gap 0.0\n"}
+,{"stream_name":"stdout","time":337.966382366,"data":"  scratch          local:diffusion_unet/fresh/scratch     sampled 0.0016547084916170244  whole 6.851518682931179e-05  kurtosis gap -1.0650307644415418\n"}
+,{"stream_name":"stdout","time":343.659347937,"data":"  q8_0             ocal:diffusion_unet/fresh/ft_long+q8_0 sampled 0.9997714416554517  whole 0.9996640231457758  kurtosis gap 0.0010887710889868618\n"}
+,{"stream_name":"stdout","time":346.571555865,"data":"  q4_0             ocal:diffusion_unet/fresh/ft_long+q4_0 sampled 0.9965058052033479  whole 0.9958761937099162  kurtosis gap -0.006686816916776639\n"}
+,{"stream_name":"stdout","time":352.648826529,"data":"  prune50          l:diffusion_unet/fresh/ft_long+prune50 sampled 0.958682735944427  whole 0.9636705835042585  kurtosis gap 0.5032056810137476\n"}
+,{"stream_name":"stdout","time":358.964217272,"data":"  prune90          l:diffusion_unet/fresh/ft_long+prune90 sampled 0.651935928887879  whole 0.6696714425710313  kurtosis gap 9.078406616673233\n"}
+,{"stream_name":"stdout","time":361.716494815,"data":"  permuted         :diffusion_unet/fresh/ft_long+permuted sampled 0.999788870142118  whole 0.9996785142361848  kurtosis gap 0.001583497254174615\n"}
+,{"stream_name":"stdout","time":362.851159701,"data":"exit 0 -m experiments.e1b_whole diffusion_unet\n"}
+,{"stream_name":"stdout","time":362.874997538,"data":"14 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":365.940305986,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":365.940350952,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":366.333938466,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":366.333992827,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":367.533947423,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":369.242825723,"data":"[NbConvertApp] Writing 292123 bytes to __results__.html\n"}
+]

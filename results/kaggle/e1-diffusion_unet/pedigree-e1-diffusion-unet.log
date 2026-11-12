@@ -1,0 +1,34 @@
+[{"stream_name":"stdout","time":24.124000551,"data":"code 986dc98\n"}
+,{"stream_name":"stdout","time":84.875753811,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":94.035804998,"data":"PEDIGREE_DERIVATIVES = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":96.644768581,"data":"diffusion_unet/dev: google/ddpm-cifar10-32@267b167dc0\n"}
+,{"stream_name":"stdout","time":116.913151716,"data":"  ft_short     local:diffusion_unet/dev/ft_short        plain 0.9999971747825495  invariant 0.9999964102187184  aligned None\n"}
+,{"stream_name":"stdout","time":125.037379737,"data":"  ft_long      local:diffusion_unet/dev/ft_long         plain 0.9999769490036028  invariant 0.9999693333475428  aligned None\n"}
+,{"stream_name":"stdout","time":133.692217617,"data":"  lora_r8      local:diffusion_unet/dev/lora_r8         plain 1.0  invariant 1.0000000000000002  aligned None\n"}
+,{"stream_name":"stdout","time":142.444842599,"data":"  lora_r64     local:diffusion_unet/dev/lora_r64        plain 1.0  invariant 1.0000000000000002  aligned None\n"}
+,{"stream_name":"stdout","time":151.650333557,"data":"  scratch      local:diffusion_unet/dev/scratch         plain -0.0007501826381741077  invariant 0.0009576273269684839  aligned None\n"}
+,{"stream_name":"stdout","time":183.664554196,"data":"  q8_0         local:diffusion_unet/dev/ft_long+q8_0    plain 0.9999515178035359  invariant 0.9999619378579749  aligned None\n"}
+,{"stream_name":"stdout","time":185.560384801,"data":"  q4_0         local:diffusion_unet/dev/ft_long+q4_0    plain 0.995945761272945  invariant 0.9982973829220847  aligned None\n"}
+,{"stream_name":"stdout","time":187.958458002,"data":"  prune50      local:diffusion_unet/dev/ft_long+prune50 plain 0.9675340467098594  invariant 0.9848274903550247  aligned None\n"}
+,{"stream_name":"stdout","time":190.279233836,"data":"  prune90      local:diffusion_unet/dev/ft_long+prune90 plain 0.6927128653197399  invariant 0.7860196750841978  aligned None\n"}
+,{"stream_name":"stdout","time":191.99678681,"data":"  permuted     local:diffusion_unet/dev/ft_long+permute plain 0.9999769490036028  invariant 0.9999693333475428  aligned None\n"}
+,{"stream_name":"stdout","time":192.690180665,"data":"diffusion_unet/fresh: google/ddpm-cat-256@82ca0d5db4\n"}
+,{"stream_name":"stdout","time":208.697251731,"data":"  ft_short     local:diffusion_unet/fresh/ft_short      plain 0.9999670569561169  invariant 0.9999433964793147  aligned None\n"}
+,{"stream_name":"stdout","time":218.364815577,"data":"  ft_long      local:diffusion_unet/fresh/ft_long       plain 0.999788870142118  invariant 0.9995551262705455  aligned None\n"}
+,{"stream_name":"stdout","time":227.474688691,"data":"  lora_r8      local:diffusion_unet/fresh/lora_r8       plain 1.0  invariant 1.0  aligned None\n"}
+,{"stream_name":"stdout","time":234.105447835,"data":"  lora_r64     local:diffusion_unet/fresh/lora_r64      plain 1.0  invariant 1.0  aligned None\n"}
+,{"stream_name":"stdout","time":239.461173503,"data":"  scratch      local:diffusion_unet/fresh/scratch       plain 0.0016547084916170244  invariant 0.0017413467827470431  aligned None\n"}
+,{"stream_name":"stdout","time":339.725505164,"data":"  q8_0         local:diffusion_unet/fresh/ft_long+q8_0  plain 0.9997714416554517  invariant 0.9995433670317198  aligned None\n"}
+,{"stream_name":"stdout","time":341.532662586,"data":"  q4_0         local:diffusion_unet/fresh/ft_long+q4_0  plain 0.9965058052033479  invariant 0.9976586929875917  aligned None\n"}
+,{"stream_name":"stdout","time":344.930024885,"data":"  prune50      local:diffusion_unet/fresh/ft_long+prune plain 0.958682735944427  invariant 0.9850645240500484  aligned None\n"}
+,{"stream_name":"stdout","time":347.847228326,"data":"  prune90      local:diffusion_unet/fresh/ft_long+prune plain 0.651935928887879  invariant 0.817733231791632  aligned None\n"}
+,{"stream_name":"stdout","time":348.895134421,"data":"  permuted     local:diffusion_unet/fresh/ft_long+permu plain 0.999788870142118  invariant 0.9995551262705455  aligned None\n"}
+,{"stream_name":"stdout","time":349.493700892,"data":"exit 0 -m experiments.e1_verify diffusion_unet\n"}
+,{"stream_name":"stdout","time":349.500582077,"data":"20 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":351.98092639,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":351.980956481,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":352.281350546,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":352.281377868,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":353.174004999,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":354.380926792,"data":"[NbConvertApp] Writing 292122 bytes to __results__.html\n"}
+]
