@@ -237,10 +237,15 @@ if failed:
 '''
 
 
-def kaggle(*args: str, check: bool = True) -> subprocess.CompletedProcess:
+def kaggle(*args: str, check: bool = True, timeout: int = 3600) -> subprocess.CompletedProcess:
     exe = shutil.which("kaggle") or str(Path(sys.executable).parent / ("kaggle.exe" if os.name == "nt" else "kaggle"))
     env = {**os.environ, "PYTHONUTF8": "1"}
-    r = subprocess.run([exe, *args], capture_output=True, text=True, encoding="utf-8", errors="replace", env=env)
+    try:
+        r = subprocess.run([exe, *args], capture_output=True, text=True, encoding="utf-8", errors="replace",
+                           env=env, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        # a hung connection once froze a chain for days: report it as the network error it is
+        r = subprocess.CompletedProcess([exe, *args], 1, "", f"kaggle call timed out after {timeout} s")
     if check and r.returncode != 0:
         sys.exit(f"kaggle {' '.join(args[:2])} failed:\n{r.stdout}{r.stderr}")
     return r
