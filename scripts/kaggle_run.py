@@ -131,10 +131,11 @@ for _f in E5_FAMILIES:
     _teach = [s for s in JOBS[f"e5-{_f}"]["sources"] if not s.startswith("distill-")]
     JOBS[f"h12-{_f}"] = _job(f"pedigree-h12-{_f.replace('_', '-')}",
                              [["-m", "experiments.e5_behaviour", _f, "dev", "fresh"],
-                              ["-m", "experiments.e5_behaviour", _f, "fresh"]], gpu=True,
+                              ["-m", "experiments.e5_behaviour", _f, "fresh"]], gpu=False,
                              sources=_teach + [f"distill-{_f}", f"distill2-{_f}"],
                              env={"PEDIGREE_TEACHERS": JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"],
                                   "PEDIGREE_STUDENTS": "merge:students"})
+    # CPU: e5_behaviour never uses the GPU (the vision and decoder runs asked for one needlessly)
     # the two commands differ in probes, seeds and ledger name: set per command below
     JOBS[f"h12-{_f}"]["command_env"] = [
         {"PEDIGREE_PROBES": "offtask", "PEDIGREE_EXPERIMENT": "E5o",
