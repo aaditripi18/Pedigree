@@ -1,0 +1,43 @@
+{
+ "family": "diffusion_unet",
+ "split": "dev",
+ "kind": "ft_short",
+ "base": "google/ddpm-cifar10-32",
+ "base_commit": "267b167dc01f0e4e61923ea244e8b988f84deb80",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cuda",
+ "versions": {
+  "torch": "2.11.0+cu130",
+  "transformers": "5.22.1",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "986dc98",
+  "dirty": false
+ },
+ "data": {
+  "task": "cifar10",
+  "sha256": "8428b53a88a11ac374111006708df51469e315a22ac6d66470afd9c78d2ae883"
+ },
+ "losses": [
+  0.0279,
+  0.0165,
+  0.0353,
+  0.0736,
+  0.0426,
+  0.0245,
+  0.0452,
+  0.0073,
+  0.0277,
+  0.0471,
+  0.0063,
+  0.0324,
+  0.0096
+ ],
+ "seconds": 70
+}

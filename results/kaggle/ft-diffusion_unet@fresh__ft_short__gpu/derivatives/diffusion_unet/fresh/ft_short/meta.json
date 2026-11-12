@@ -1,0 +1,43 @@
+{
+ "family": "diffusion_unet",
+ "split": "fresh",
+ "kind": "ft_short",
+ "base": "google/ddpm-cat-256",
+ "base_commit": "82ca0d5db4a5ec6ff0e9be8d86852490bc18a3d9",
+ "steps": 300,
+ "batch": 8,
+ "lr": 2e-05,
+ "seed": 0,
+ "lora_rank": null,
+ "scratch": false,
+ "device": "cuda",
+ "versions": {
+  "torch": "2.11.0+cu130",
+  "transformers": "5.22.1",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "986dc98",
+  "dirty": false
+ },
+ "data": {
+  "task": "cifar10",
+  "sha256": "8428b53a88a11ac374111006708df51469e315a22ac6d66470afd9c78d2ae883"
+ },
+ "losses": [
+  0.0022,
+  0.0032,
+  0.0011,
+  0.0025,
+  0.0024,
+  0.0064,
+  0.0022,
+  0.0011,
+  0.002,
+  0.0018,
+  0.0013,
+  0.0015,
+  0.0019
+ ],
+ "seconds": 1138
+}
