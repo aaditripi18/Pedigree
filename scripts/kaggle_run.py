@@ -87,6 +87,10 @@ for _k in KINDS:
         [["-m", "experiments.finetune", "diffusion_unet", "fresh", _k]], gpu=True)
 for _k in ("lora_r8", "lora_r64"):
     JOBS[f"ft-diffusion_unet@fresh:{_k}:gpu"]["owner"] = "moinuddinhasan8"
+# the project account's weekly GPU quota ran out (2026-11-10) after ft_long and scratch; the last
+# two ran on friends' accounts with this code and were shared back
+JOBS["ft-diffusion_unet@dev:gpu"]["owner"] = "rohajraj"
+JOBS["ft-diffusion_unet@fresh:ft_short:gpu"]["owner"] = "alubalub"
 JOBS["e1-diffusion_unet"]["sources"] = (["ft-diffusion_unet@dev:gpu"]
                                         + [f"ft-diffusion_unet@fresh:{k}:gpu" for k in KINDS])
 JOBS["e1-diffusion_unet"]["env"] = {"PEDIGREE_DERIVATIVES": "merge:derivatives"}
