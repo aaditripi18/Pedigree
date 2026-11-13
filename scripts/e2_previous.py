@@ -4,7 +4,9 @@
 
 Each model keeps its first reading. Models read again by a later pass (pass 2 could not mount
 pass 1, so it re-read 457 of them) are compared field by field; the comparison is written to
-results/e2_rereads.json, a measure of how much the Hub moved between passes.
+results/e2_rereads.json, a measure of how much the Hub moved between passes. Passes from 3 on
+start from this file and copy its readings, so only passes 1 and 2 are independent readings:
+results/e2_rereads.json is computed from those two.
 """
 from __future__ import annotations
 
@@ -37,7 +39,8 @@ def main(dirs: list[str]) -> None:
             changed.append({"id": r["id"], "fields": diff})
             for f in diff:
                 fields[f] = fields.get(f, 0) + 1
-    (ROOT / "results" / "e2_rereads.json").write_text(json.dumps(
+    if len(dirs) <= 2:   # later passes copy earlier readings, which are not re-reads
+      (ROOT / "results" / "e2_rereads.json").write_text(json.dumps(
         {"passes": dirs, "first_readings": len(first), "reread": len(later),
          "identical": len(later) - len(changed), "changed_fields": fields, "changed": changed}, indent=1) + "\n",
         encoding="utf-8")

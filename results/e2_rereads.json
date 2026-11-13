@@ -1,12 +1,12 @@
 {
  "passes": [
   "results/kaggle/e2",
-  "results/kaggle/e2-2",
-  "results/kaggle/e2-3"
+  "results/kaggle/e2-2"
  ],
- "first_readings": 594,
- "reread": 977,
- "identical": 949,
+ "note": "only pass 2 re-read models independently (it could not mount pass 1); later passes copied earlier readings",
+ "first_readings": 520,
+ "reread": 457,
+ "identical": 429,
  "changed_fields": {
   "declared": 12,
   "commit": 13,
