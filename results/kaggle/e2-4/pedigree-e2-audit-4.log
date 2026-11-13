@@ -1,0 +1,23 @@
+[{"stream_name":"stdout","time":32.777222428,"data":"code e281697\n"}
+,{"stream_name":"stdout","time":95.070643176,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":96.374829918,"data":"PEDIGREE_WORKERS = 12\n"}
+,{"stream_name":"stdout","time":96.374867255,"data":"PEDIGREE_BUDGET_HOURS = 10\n"}
+,{"stream_name":"stdout","time":96.374873684,"data":"PEDIGREE_E2_PREVIOUS = /kaggle/input\n"}
+,{"stream_name":"stdout","time":108.393227811,"data":"594 done, 6 to audit\n"}
+,{"stream_name":"stdout","time":131.212728506,"data":"[1/6] lynaNSFW/minimaxH3_Collection: adapter; declared -; pool 0 best None  (23s)\n"}
+,{"stream_name":"stdout","time":132.787824879,"data":"[2/6] wmueller/zimgturbo: safetensors; declared -; pool 0 best None  (24s)\n"}
+,{"stream_name":"stdout","time":594.399876219,"data":"[3/6] Qwen/Qwen-Image-Edit-2509: safetensors; declared -; pool 25 best 1.0  (486s)\n"}
+,{"stream_name":"stdout","time":913.628832127,"data":"[4/6] prithivMLmods/SmolLM2-360M-F32-GGUF: gguf; declared HuggingFaceTB/SmolLM2-360M-Instruct=0.9999841503170788; pool 30 best 1.0  (805s)\n"}
+,{"stream_name":"stdout","time":1104.049176917,"data":"[5/6] openbmb/MiniCPM5-2B: safetensors; declared -; pool 30 best 1.0  (996s)\n"}
+,{"stream_name":"stdout","time":1112.078301889,"data":"[6/6] xinsir/controlnet-union-sdxl-1.0: safetensors; declared -; pool 30 best 1.0  (1004s)\n"}
+,{"stream_name":"stdout","time":1112.079661284,"data":"600 of 600 done; 0 lost to the network or the time budget\n"}
+,{"stream_name":"stdout","time":1112.257725906,"data":"recorded in the ledger\n"}
+,{"stream_name":"stdout","time":1112.803751566,"data":"exit 0 -m experiments.e2_audit --out /kaggle/working/e2_audit_raw.jsonl\n"}
+,{"stream_name":"stdout","time":1112.839473194,"data":"600 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":1115.674495961,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1115.674537326,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1115.989184982,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1115.98921449,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1116.947899534,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1118.266771087,"data":"[NbConvertApp] Writing 292425 bytes to __results__.html\n"}
+]

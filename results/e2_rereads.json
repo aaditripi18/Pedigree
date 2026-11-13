@@ -1,11 +1,12 @@
 {
  "passes": [
   "results/kaggle/e2",
-  "results/kaggle/e2-2"
+  "results/kaggle/e2-2",
+  "results/kaggle/e2-3"
  ],
- "first_readings": 520,
- "reread": 457,
- "identical": 429,
+ "first_readings": 594,
+ "reread": 977,
+ "identical": 949,
  "changed_fields": {
   "declared": 12,
   "commit": 13,

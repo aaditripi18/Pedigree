@@ -1,0 +1,619 @@
+[{"stream_name":"stdout","time":18.001278749,"data":"code 7dddbba\n"}
+,{"stream_name":"stdout","time":70.83361115,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":72.070893394,"data":"PEDIGREE_WORKERS = 12\n"}
+,{"stream_name":"stdout","time":72.070931034,"data":"PEDIGREE_BUDGET_HOURS = 10\n"}
+,{"stream_name":"stdout","time":74.111199724,"data":"0 done, 600 to audit\n"}
+,{"stream_name":"stdout","time":74.572815977,"data":"[1/600] ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF: not readable (HubError: ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF: no safetensors, PyTorch or GGUF weights); declared -; pool 0 best None  (0s)\n"}
+,{"stream_name":"stdout","time":178.09680591,"data":"[2/600] Comfy-Org/MiniMax-H3: safetensors; declared MiniMaxAI/MiniMax-H3=1.0; pool 0 best None  (104s)\n"}
+,{"stream_name":"stdout","time":210.902576126,"data":"[3/600] autogluon/chronos-2: safetensors; declared -; pool 7 best 1.0  (137s)\n"}
+,{"stream_name":"stdout","time":398.250142358,"data":"[4/600] facebook/opt-125m: bin; declared -; pool 6 best 1.0  (324s)\n"}
+,{"stream_name":"stdout","time":997.447805896,"data":"[5/600] nomic-ai/nomic-embed-text-v1.5: safetensors; declared -; pool 18 best 1.0  (923s)\n"}
+,{"stream_name":"stdout","time":1027.688467561,"data":"[6/600] google-bert/bert-base-uncased: safetensors; declared -; pool 30 best 0.9998164682390607  (954s)\n"}
+,{"stream_name":"stdout","time":1186.926777722,"data":"[7/600] datasocietyco/bge-base-en-v1.5-course-recommender-v5: safetensors; declared BAAI/bge-base-en-v1.5=0.9999998748031; pool 30 best 0.9999998748031  (1113s)\n"}
+,{"stream_name":"stdout","time":1289.35852989,"data":"[8/600] Qwen/Qwen2.5-7B-Instruct: safetensors; declared Qwen/Qwen2.5-7B=0.9998491590021403; pool 30 best 1.0  (1215s)\n"}
+,{"stream_name":"stdout","time":1295.158354621,"data":"[9/600] SamLowe/roberta-base-go_emotions: safetensors; declared -; pool 30 best 0.999168890631281  (1221s)\n"}
+,{"stream_name":"stdout","time":1296.722767509,"data":"[10/600] nvidia/Qwen3.6-35B-A3B-NVFP4: safetensors; declared Qwen/Qwen3.6-35B-A3B=0.9999999999999998; pool 0 best None  (1223s)\n"}
+,{"stream_name":"stdout","time":1353.194586062,"data":"[11/600] FacebookAI/xlm-roberta-base: safetensors; declared -; pool 30 best 0.9999860006668151  (1279s)\n"}
+,{"stream_name":"stdout","time":1468.938976903,"data":"[12/600] Qwen/Qwen3.5-9B: safetensors; declared Qwen/Qwen3.5-9B-Base=0.9999802467567096; pool 30 best 1.0  (1395s)\n"}
+,{"stream_name":"stdout","time":1569.889409244,"data":"[13/600] Qwen/Qwen3-VL-8B-Instruct: safetensors; declared -; pool 30 best 1.0  (1496s)\n"}
+,{"stream_name":"stdout","time":1572.62288481,"data":"[14/600] BAAI/bge-m3: bin; declared -; pool 30 best 0.9999932256454009  (1499s)\n"}
+,{"stream_name":"stdout","time":1636.417063531,"data":"[15/600] BAAI/bge-reranker-v2-m3: safetensors; declared -; pool 30 best 0.9979238447935412  (1562s)\n"}
+,{"stream_name":"stdout","time":1636.654640439,"data":"[16/600] Xenova/bge-base-en-v1.5: not readable (onnx only); declared -; pool 0 best None  (1563s)\n"}
+,{"stream_name":"stdout","time":1710.882639391,"data":"[17/600] facebook/dinov2-small: safetensors; declared -; pool 3 best 1.0  (1637s)\n"}
+,{"stream_name":"stdout","time":1775.80112041,"data":"[18/600] unsloth/MiniMax-H3-GGUF: gguf; declared MiniMaxAI/MiniMax-H3=0.9999822273835666; pool 7 best 1.0  (1702s)\n"}
+,{"stream_name":"stdout","time":1777.846172938,"data":"[19/600] NeoQuasar/Kronos-small: safetensors; declared -; pool 0 best None  (1704s)\n"}
+,{"stream_name":"stdout","time":1857.949518903,"data":"[20/600] k2-fsa/OmniVoice: safetensors; declared Qwen/Qwen3-0.6B=0.2787563601262766; pool 17 best 0.9999986346376156  (1784s)\n"}
+,{"stream_name":"stdout","time":1883.641783597,"data":"[21/600] Qwen/Qwen3-VL-4B-Instruct: safetensors; declared -; pool 30 best 1.0  (1810s)\n"}
+,{"stream_name":"stdout","time":2045.249827274,"data":"[22/600] jonatasgrosman/wav2vec2-large-xlsr-53-arabic: bin; declared -; pool 30 best 0.9987896815150199  (1971s)\n"}
+,{"stream_name":"stdout","time":2045.344286031,"data":"[23/600] jonatasgrosman/wav2vec2-large-xlsr-53-russian: bin; declared -; pool 30 best 0.9997666246421082  (1971s)\n"}
+,{"stream_name":"stdout","time":2204.144180238,"data":"[24/600] autogluon/chronos-bolt-tiny: safetensors; declared -; pool 4 best 1.0  (2130s)\n"}
+,{"stream_name":"stdout","time":2451.72272178,"data":"[25/600] Qwen/Qwen3-14B: safetensors; declared Qwen/Qwen3-14B-Base=0.997067350270278; pool 30 best 1.0  (2378s)\n"}
+,{"stream_name":"stdout","time":2455.354293815,"data":"[26/600] circlestone-labs/Anima: safetensors; declared nvidia/Cosmos-Predict2-2B-Text2Image=not readable (gated, no byte-identical public copy); pool 0 best None  (2381s)\n"}
+,{"stream_name":"stdout","time":2456.009487017,"data":"[27/600] google/gemma-4-31B-it: safetensors; declared google/gemma-4-31B=0.9999661604256553; pool 30 best 1.0  (2382s)\n"}
+,{"stream_name":"stdout","time":2538.714478329,"data":"[28/600] Qwen/Qwen3-Reranker-4B: safetensors; declared Qwen/Qwen3-4B-Base=0.9966690450887259; pool 30 best 0.9992461546960191  (2465s)\n"}
+,{"stream_name":"stdout","time":2538.792330866,"data":"[29/600] Qwen/Qwen3-4B-Instruct-2507: safetensors; declared -; pool 30 best 1.0  (2465s)\n"}
+,{"stream_name":"stdout","time":2539.042911129,"data":"[30/600] Qdrant/bge-small-en-v1.5-onnx-Q: not readable (onnx only); declared -; pool 0 best None  (2465s)\n"}
+,{"stream_name":"stdout","time":2543.045644528,"data":"[31/600] scragnog/MOSS-Music-8B-Instruct-GGUF: gguf; declared OpenMOSS-Team/MOSS-Music-8B-Instruct=0.9999864165024654; pool 0 best None  (2469s)\n"}
+,{"stream_name":"stdout","time":2618.053789743,"data":"[32/600] facebook/musicgen-medium: bin; declared -; pool 1 best 0.8849310736885532  (2544s)\n"}
+,{"stream_name":"stdout","time":2620.189249953,"data":"[33/600] comfyicu/LTX-2.5: safetensors; declared -; pool 0 best None  (2546s)\n"}
+,{"stream_name":"stdout","time":2622.635648116,"data":"[34/600] laion/CLIP-convnext_base_w-laion2B-s13B-b82K-augreg: safetensors; declared -; pool 0 best None  (2549s)\n"}
+,{"stream_name":"stdout","time":2622.860429553,"data":"[35/600] nvidia/bigvgan_v2_22khz_80band_256x: not readable (other checkpoint format); declared -; pool 0 best None  (2549s)\n"}
+,{"stream_name":"stdout","time":2661.690680921,"data":"[36/600] jonatasgrosman/wav2vec2-large-xlsr-53-chinese-zh-cn: bin; declared -; pool 30 best 0.9999940152445094  (2588s)\n"}
+,{"stream_name":"stdout","time":2893.527849299,"data":"[37/600] sentence-transformers/all-MiniLM-L12-v2: safetensors; declared microsoft/MiniLM-L12-H384-uncased=not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); pool 30 best 0.9643447545229011  (2819s)\n"}
+,{"stream_name":"stdout","time":2893.60412908,"data":"[38/600] thenlper/gte-small: safetensors; declared -; pool 30 best 0.9997280069529586  (2819s)\n"}
+,{"stream_name":"stdout","time":2990.049683223,"data":"[39/600] meta-llama/Prompt-Guard-86M: safetensors; declared -; pool 22 best 0.9999999934618184  (2916s)\n"}
+,{"stream_name":"stdout","time":3019.99683925,"data":"[40/600] BAAI/bge-reranker-large: safetensors; declared -; pool 30 best 0.9927947275898453  (2946s)\n"}
+,{"stream_name":"stdout","time":3033.399086011,"data":"[41/600] byteshape/Qwen3.8-27B-GGUF: gguf; declared Qwen/Qwen3.8-27B=0.9998208454238676; pool 30 best 0.9998208614524697  (2959s)\n"}
+,{"stream_name":"stdout","time":3033.629972652,"data":"[42/600] Systran/faster-whisper-small.en: not readable (no weight files); declared -; pool 0 best None  (2960s)\n"}
+,{"stream_name":"stdout","time":3068.958839055,"data":"[43/600] huihui-ai/Huihui-Qwen3.6-35B-A3B-abliterated-MTP-GGUF: gguf; declared Qwen/Qwen3.6-35B-A3B=0.9999853189786718; pool 30 best 1.0  (2995s)\n"}
+,{"stream_name":"stdout","time":3069.477118593,"data":"[44/600] cambridgeltl/SapBERT-from-PubMedBERT-fulltext: safetensors; declared -; pool 30 best 0.9945319258496179  (2995s)\n"}
+,{"stream_name":"stdout","time":3094.866432898,"data":"[45/600] lmstudio-community/Qwen3.8-27B-MLX-4bit: safetensors; declared Qwen/Qwen3.8-27B=0.9956402265912232; pool 30 best 0.9956402265912232  (3021s)\n"}
+,{"stream_name":"stdout","time":3149.542238578,"data":"[46/600] nvidia/Gemma-4-26B-A4B-NVFP4: safetensors; declared google/gemma-4-26B-A4B-it=1.0; pool 1 best -1  (3075s)\n"}
+,{"stream_name":"stdout","time":3253.009545492,"data":"[47/600] mixedbread-ai/mxbai-embed-large-v1: safetensors; declared -; pool 30 best 0.9999997440574604  (3179s)\n"}
+,{"stream_name":"stdout","time":3413.709139312,"data":"[48/600] google/siglip2-base-patch16-224: safetensors; declared -; pool 11 best 1.0  (3340s)\n"}
+,{"stream_name":"stdout","time":3518.312470588,"data":"[49/600] microsoft/table-transformer-structure-recognition: safetensors; declared -; pool 10 best 0.9999029190721269  (3444s)\n"}
+,{"stream_name":"stdout","time":3556.347651178,"data":"[50/600] SWivid/F5-TTS: safetensors; declared -; pool 6 best 0.9920652465528947  (3482s)\n"}
+,{"stream_name":"stdout","time":3586.926304997,"data":"[51/600] thinkingmachines/Inkling-Small: safetensors; declared -; pool 3 best 1.0  (3513s)\n"}
+,{"stream_name":"stdout","time":3663.401729771,"data":"[52/600] google/siglip2-base-patch16-naflex: safetensors; declared -; pool 1 best 0.9991891816831615  (3589s)\n"}
+,{"stream_name":"stdout","time":4178.473244015,"data":"[53/600] kindlingai/glm-5.3-exlr8-k2-k3-k4: safetensors; declared zai-org/GLM-5.3-BF16=None; pool 0 best None  (4104s)\n"}
+,{"stream_name":"stdout","time":4314.322183726,"data":"[54/600] gigant/romanian-wav2vec2: safetensors; declared facebook/wav2vec2-xls-r-300m=0.7189688352400356; pool 30 best 0.726360187543241  (4240s)\n"}
+,{"stream_name":"stdout","time":4440.870709336,"data":"[55/600] jonatasgrosman/wav2vec2-large-xlsr-53-finnish: bin; declared -; pool 30 best 0.9488317790444782  (4367s)\n"}
+,{"stream_name":"stdout","time":4472.562875004,"data":"[56/600] Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice: safetensors; declared -; pool 30 best 1.0  (4398s)\n"}
+,{"stream_name":"stdout","time":4485.815294341,"data":"[57/600] distilbert/distilroberta-base: safetensors; declared -; pool 30 best 0.9999533911719993  (4412s)\n"}
+,{"stream_name":"stdout","time":4534.028004596,"data":"[58/600] Comfy-Org/Qwen3-VL: safetensors; declared Qwen/Qwen3-VL-4B-Instruct=None, Qwen/Qwen3-VL-8B-Instruct=1.0; pool 0 best None  (4460s)\n"}
+,{"stream_name":"stdout","time":4557.416305444,"data":"[59/600] cross-encoder/ms-marco-MiniLM-L12-v2: safetensors; declared microsoft/MiniLM-L12-H384-uncased=not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); pool 30 best 0.9830337726356344  (4483s)\n"}
+,{"stream_name":"stdout","time":4678.692972551,"data":"[60/600] RedHatAI/gemma-4-26B-A4B-it-FP8-dynamic: safetensors; declared google/gemma-4-26B-A4B-it=0.9998293649856624; pool 23 best 1.0  (4605s)\n"}
+,{"stream_name":"stdout","time":4679.411298104,"data":"[61/600] Qwen/Qwen3.5-35B-A3B: safetensors; declared Qwen/Qwen3.5-35B-A3B-Base=0.9984264167894612; pool 30 best 1.0  (4605s)\n"}
+,{"stream_name":"stdout","time":4691.700374616,"data":"[62/600] kingabzpro/wav2vec2-large-xls-r-300m-Urdu: safetensors; declared facebook/wav2vec2-xls-r-300m=0.9977979091318974; pool 30 best 0.9978251530340616  (4618s)\n"}
+,{"stream_name":"stdout","time":4888.387793963,"data":"[63/600] ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF: gguf; declared Qwen/Qwen3.8-27B=0.9969050081873825; pool 30 best 0.9986672735643108  (4814s)\n"}
+,{"stream_name":"stdout","time":5058.733977254,"data":"[64/600] Lightricks/LTX-Video: safetensors; declared -; pool 17 best 1.0  (4985s)\n"}
+,{"stream_name":"stdout","time":5082.193674647,"data":"[65/600] intfloat/e5-base-v2: safetensors; declared -; pool 30 best 0.8856655216558905  (5008s)\n"}
+,{"stream_name":"stdout","time":5645.943819711,"data":"[66/600] Qwen/Qwen2.5-14B-Instruct-AWQ: safetensors; declared Qwen/Qwen2.5-14B-Instruct=0.9994533007917732; pool 30 best 0.9996212811314523  (5572s)\n"}
+,{"stream_name":"stdout","time":5759.516551862,"data":"[67/600] mpoyraz/wav2vec2-xls-r-300m-cv7-turkish: bin; declared -; pool 30 best 0.9945160804291118  (5685s)\n"}
+,{"stream_name":"stdout","time":5866.094873307,"data":"[68/600] prithivida/parrot_paraphraser_on_T5: bin; declared -; pool 30 best 0.9999124228691567  (5792s)\n"}
+,{"stream_name":"stdout","time":5925.208576952,"data":"[69/600] HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF: gguf; declared Qwen/Qwen3.8-27B=0.9999844025868883; pool 30 best 0.9973137275558988  (5851s)\n"}
+,{"stream_name":"stdout","time":5965.450998575,"data":"[70/600] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-NVFP4: safetensors; declared nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16=0.999997366452255; pool 0 best None  (5891s)\n"}
+,{"stream_name":"stdout","time":6240.056034333,"data":"[71/600] handy-computer/parakeet-tdt-0.6b-v3-gguf: gguf; declared nvidia/parakeet-tdt-0.6b-v3=None; pool 30 best 0.9999983398136953  (6166s)\n"}
+,{"stream_name":"stdout","time":6241.970595057,"data":"[72/600] unslothai/1: safetensors; declared -; pool 0 best None  (6168s)\n"}
+,{"stream_name":"stdout","time":6245.239364604,"data":"[73/600] facebook/nllb-200-distilled-600M: bin; declared -; pool 0 best None  (6171s)\n"}
+,{"stream_name":"stdout","time":6257.319656377,"data":"[74/600] unsloth/Z-Image-Turbo-GGUF: gguf; declared Tongyi-MAI/Z-Image-Turbo=None; pool 30 best 1.0  (6183s)\n"}
+,{"stream_name":"stdout","time":6283.87346743,"data":"[75/600] NeuML/pubmedbert-base-embeddings: safetensors; declared microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext=not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); pool 30 best 0.9945319258496179  (6210s)\n"}
+,{"stream_name":"stdout","time":6286.393392759,"data":"[76/600] PaddlePaddle/PP-DocLayoutV3_safetensors: safetensors; declared PaddlePaddle/PP-DocLayoutV3=not readable (no weight files); pool 0 best None  (6212s)\n"}
+,{"stream_name":"stdout","time":6374.150599087,"data":"[77/600] Qwen/Qwen2-VL-2B-Instruct: safetensors; declared Qwen/Qwen2-VL-2B=0.9998616597179395; pool 30 best 1.0  (6300s)\n"}
+,{"stream_name":"stdout","time":6374.398093843,"data":"[78/600] Qdrant/bm25: not readable (no weight files); declared -; pool 0 best None  (6300s)\n"}
+,{"stream_name":"stdout","time":6562.917529861,"data":"[79/600] openbmb/MiniCPM5-2B: LOST (rahul7star/gemma-gguf: InvalidURL: URL can't contain control characters. '/rahul7star/gemma-gguf/resolve/eb8a2921d43ec87ba17367a8a4721c504076dd90/model-JDeepSeek-V4-Pro-Qwen3.5-4Bi-quality (Q6_K).gguf' (found at least ' '))\n"}
+,{"stream_name":"stdout","time":6608.495164284,"data":"[80/600] agentionai/Qwen3.8-27B-AP-GGUF: gguf; declared Qwen/Qwen3.8-27B=0.999835068661742; pool 30 best 0.999835068661742  (6534s)\n"}
+,{"stream_name":"stdout","time":6611.83636835,"data":"[81/600] Qwen/Qwen3-30B-A3B-Instruct-2507: safetensors; declared -; pool 30 best 0.9999999999999998  (6538s)\n"}
+,{"stream_name":"stdout","time":6611.889363563,"data":"[82/600] Qwen/Qwen3-Coder-30B-A3B-Instruct: safetensors; declared -; pool 30 best 0.9999538156335896  (6538s)\n"}
+,{"stream_name":"stdout","time":6613.720021789,"data":"[83/600] microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (6540s)\n"}
+,{"stream_name":"stdout","time":6648.058236402,"data":"[84/600] jonatasgrosman/wav2vec2-large-xlsr-53-persian: bin; declared -; pool 30 best 0.9950504839164838  (6574s)\n"}
+,{"stream_name":"stdout","time":6649.160281668,"data":"[85/600] sshleifer/tiny-gpt2: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (6575s)\n"}
+,{"stream_name":"stdout","time":7007.525821527,"data":"[86/600] tencent/Hy3: safetensors; declared -; pool 15 best 1.0  (6933s)\n"}
+,{"stream_name":"stdout","time":7068.025273685,"data":"[87/600] antirez/deepseek-v4-gguf: gguf; declared deepseek-ai/DeepSeek-V4-Flash=None; pool 30 best 1.0  (6994s)\n"}
+,{"stream_name":"stdout","time":7124.772989496,"data":"[88/600] google/siglip-base-patch16-224: safetensors; declared -; pool 5 best 0.9999996545036627  (7051s)\n"}
+,{"stream_name":"stdout","time":7263.457125673,"data":"[89/600] albert/albert-base-v2: safetensors; declared -; pool 6 best 1.0  (7189s)\n"}
+,{"stream_name":"stdout","time":7290.76847055,"data":"[90/600] meta-llama/Llama-3.2-3B-Instruct: safetensors; declared -; pool 30 best 1.0  (7217s)\n"}
+,{"stream_name":"stdout","time":7292.958423994,"data":"[91/600] peft-internal-testing/tiny-clip-text-2: safetensors; declared -; pool 0 best None  (7219s)\n"}
+,{"stream_name":"stdout","time":7294.601587017,"data":"[92/600] lightonai/LightOnOCR-2-1B: safetensors; declared -; pool 7 best 1.0  (7220s)\n"}
+,{"stream_name":"stdout","time":7325.066581762,"data":"[93/600] OpenGVLab/InternVL2-1B: safetensors; declared OpenGVLab/InternViT-300M-448px=0.9943489509096237, Qwen/Qwen2-0.5B-Instruct=0.990586439317277; pool 11 best 0.9957188703514611  (7251s)\n"}
+,{"stream_name":"stdout","time":7385.990205233,"data":"[94/600] nomic-ai/nomic-embed-text-v2-moe: safetensors; declared nomic-ai/nomic-embed-text-v2-moe-unsupervised=0.9998685731624163; pool 0 best None  (7312s)\n"}
+,{"stream_name":"stdout","time":7424.820461364,"data":"[95/600] cyankiwi/gemma-4-26B-A4B-it-AWQ-4bit: safetensors; declared google/gemma-4-26B-A4B-it=0.9999999999999999; pool 30 best 1.0  (7351s)\n"}
+,{"stream_name":"stdout","time":7760.213295673,"data":"[96/600] amunchet/rorshark-vit-base: safetensors; declared google/vit-base-patch16-224-in21k=0.9999723827751485; pool 30 best 0.9999723827751485  (7686s)\n"}
+,{"stream_name":"stdout","time":7792.432106016,"data":"[97/600] sentence-transformers/distiluse-base-multilingual-cased-v2: safetensors; declared -; pool 30 best 1.0  (7718s)\n"}
+,{"stream_name":"stdout","time":7808.509414698,"data":"[98/600] Comfy-Org/ACE-Step-1.5: safetensors; declared ACE-Step/Ace-Step1.5=1.0; pool 0 best None  (7734s)\n"}
+,{"stream_name":"stdout","time":7808.746923354,"data":"[99/600] onnx-community/Kokoro-82M-v1.0-ONNX: not readable (onnx only); declared -; pool 0 best None  (7735s)\n"}
+,{"stream_name":"stdout","time":7813.400331234,"data":"[100/600] Lightricks/LTX-2.3-fp8: safetensors; declared -; pool 0 best None  (7739s)\n"}
+,{"stream_name":"stdout","time":7864.832700028,"data":"[101/600] timm/resnet34.a1_in1k: safetensors; declared -; pool 1 best 0.004131527058231981  (7791s)\n"}
+,{"stream_name":"stdout","time":7920.736570026,"data":"[102/600] unsloth/Qwen-Image-Edit-2511-GGUF: gguf; declared Qwen/Qwen-Image-Edit-2511=None; pool 30 best 1.0  (7847s)\n"}
+,{"stream_name":"stdout","time":7920.984726122,"data":"[103/600] Synaptics/yolo: not readable (no weight files); declared -; pool 0 best None  (7847s)\n"}
+,{"stream_name":"stdout","time":7937.073565972,"data":"[104/600] softcatala/wav2vec2-large-xlsr-catala: bin; declared -; pool 30 best 0.8363933505413803  (7863s)\n"}
+,{"stream_name":"stdout","time":7938.408258786,"data":"[105/600] Helsinki-NLP/opus-mt-zh-en: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (7864s)\n"}
+,{"stream_name":"stdout","time":8161.714693775,"data":"[106/600] dbmdz/bert-large-cased-finetuned-conll03-english: safetensors; declared -; pool 30 best 0.9996187727248875  (8088s)\n"}
+,{"stream_name":"stdout","time":8210.460187573,"data":"[107/600] poolside/Laguna-M.1: safetensors; declared -; pool 5 best 1.0  (8136s)\n"}
+,{"stream_name":"stdout","time":8218.885673129,"data":"[108/600] prism-ml/Ternary-Bonsai-2-2B-gguf: gguf; declared Qwen/Qwen3.5-2B=None; pool 30 best -1  (8145s)\n"}
+,{"stream_name":"stdout","time":8258.631569856,"data":"[109/600] hugging-quants/gemma-2-9b-it-AWQ-INT4: safetensors; declared google/gemma-2-9b-it=1.0; pool 30 best 1.0  (8185s)\n"}
+,{"stream_name":"stdout","time":8285.645526062,"data":"[110/600] Infomaniak-AI/vllm-translategemma-4b-it: safetensors; declared -; pool 13 best 1.0  (8212s)\n"}
+,{"stream_name":"stdout","time":8308.693625223,"data":"[111/600] Marqo/nsfw-image-detection-384: safetensors; declared -; pool 1 best 0.9977148883323284  (8235s)\n"}
+,{"stream_name":"stdout","time":8367.523849647,"data":"[112/600] scragnog/YuE2-GGUF: gguf; declared m-a-p/YuE2-3B=None; pool 0 best None  (8293s)\n"}
+,{"stream_name":"stdout","time":8575.696821527,"data":"[113/600] amazon/chronos-t5-base: safetensors; declared -; pool 30 best 1.0  (8502s)\n"}
+,{"stream_name":"stdout","time":8677.85450535,"data":"[114/600] handy-computer/whisper-large-v3-turbo-gguf: gguf; declared openai/whisper-large-v3-turbo=None; pool 30 best -1  (8604s)\n"}
+,{"stream_name":"stdout","time":8907.802771823,"data":"[115/600] migtissera/Tess-4.5-27B-GGUF: gguf; declared migtissera/Tess-4.5-27B=0.9999845866885612; pool 30 best 0.9999916758707675  (8834s)\n"}
+,{"stream_name":"stdout","time":8909.041704256,"data":"[116/600] Qwen/Qwen2.5-VL-32B-Instruct: safetensors; declared -; pool 13 best 1.0  (8835s)\n"}
+,{"stream_name":"stdout","time":8931.078809081,"data":"[117/600] google/flan-t5-base: safetensors; declared -; pool 30 best 0.9998953749523773  (8857s)\n"}
+,{"stream_name":"stdout","time":9008.942593503,"data":"[118/600] facebook/hubert-large-ls960-ft: bin; declared -; pool 4 best 0.9998219333219657  (8935s)\n"}
+,{"stream_name":"stdout","time":9015.547799986,"data":"[119/600] Accio-Lab/occamy-1.0-GGUF: gguf; declared Accio-Lab/occamy-1.0=0.999985222636773; pool 30 best 0.999985222636773  (8941s)\n"}
+,{"stream_name":"stdout","time":9066.974154809,"data":"[120/600] IDEA-Research/grounding-dino-tiny: safetensors; declared -; pool 1 best 0.008548608877620613  (8993s)\n"}
+,{"stream_name":"stdout","time":9088.68163172,"data":"[121/600] gaunernst/gemma-3-27b-it-int4-awq: safetensors; declared google/gemma-3-27b-it=0.9999999995830096; pool 30 best 0.9999999995830096  (9015s)\n"}
+,{"stream_name":"stdout","time":9217.61695171,"data":"[122/600] mudler/KAT-Coder-V2.5-Dev-APEX-GGUF: gguf; declared Kwaipilot/KAT-Coder-V2.5-Dev=0.9998440902719338; pool 30 best 0.9998440902719338  (9144s)\n"}
+,{"stream_name":"stdout","time":9272.685848702,"data":"[123/600] lpiccinelli/unidepth-v2-vitl14: safetensors; declared -; pool 1 best 0.9474943713189852  (9199s)\n"}
+,{"stream_name":"stdout","time":9274.708765017,"data":"[124/600] Salesforce/blip-vqa-base: safetensors; declared -; pool 0 best None  (9201s)\n"}
+,{"stream_name":"stdout","time":9645.146632536,"data":"[125/600] google/diffusiongemma-26B-A4B-it: safetensors; declared -; pool 11 best 1.0  (9571s)\n"}
+,{"stream_name":"stdout","time":10083.593062382,"data":"[126/600] Qwen/Qwen2.5-1.5B: safetensors; declared -; pool 30 best 0.9999999999999999  (10009s)\n"}
+,{"stream_name":"stdout","time":10087.766198243,"data":"[127/600] unsloth/gemma-4-12b-it-GGUF: gguf; declared google/gemma-4-12B-it=None; pool 30 best 1.0  (10014s)\n"}
+,{"stream_name":"stdout","time":10158.184649965,"data":"[128/600] kha-white/manga-ocr-base: bin; declared -; pool 1 best 1.0  (10084s)\n"}
+,{"stream_name":"stdout","time":10193.694203454,"data":"[129/600] answerdotai/ModernBERT-large: safetensors; declared -; pool 30 best 0.999993036202281  (10120s)\n"}
+,{"stream_name":"stdout","time":10320.257207874,"data":"[130/600] Qwen/Qwen3.5-4B-Base: safetensors; declared -; pool 30 best 1.0  (10246s)\n"}
+,{"stream_name":"stdout","time":10320.482198897,"data":"[131/600] rhasspy/faster-whisper-base-int8: not readable (no weight files); declared -; pool 0 best None  (10246s)\n"}
+,{"stream_name":"stdout","time":10327.54198449,"data":"[132/600] aubmindlab/bert-base-arabertv02: safetensors; declared -; pool 30 best 0.006501388168290513  (10253s)\n"}
+,{"stream_name":"stdout","time":10339.541091121,"data":"[133/600] datalab-to/surya-ocr-2-gguf: gguf; declared -; pool 1 best -1  (10265s)\n"}
+,{"stream_name":"stdout","time":10356.248496979,"data":"[134/600] Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata: gguf; declared Qwen/Qwen3.8-Flash-Next=None; pool 5 best 1.0  (10282s)\n"}
+,{"stream_name":"stdout","time":10414.887771279,"data":"[135/600] togatogah/jinen-v1-small.gguf: gguf; declared -; pool 30 best 0.0032578320486875696  (10341s)\n"}
+,{"stream_name":"stdout","time":10429.577346282,"data":"[136/600] gvs/wav2vec2-large-xlsr-malayalam: bin; declared -; pool 30 best 0.9911658134695093  (10355s)\n"}
+,{"stream_name":"stderr","time":10453.135372364,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":10453.136549454,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 361, in work\n"}
+,{"stream_name":"stderr","time":10453.136569504,"data":"    return e[\"id\"], audit_one(e, t, frame), None\n"}
+,{"stream_name":"stderr","time":10453.136575394,"data":"                    ~~~~~~~~~^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":10453.136580654,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 317, in audit_one\n"}
+,{"stream_name":"stderr","time":10453.136585434,"data":"    other, cf = open_repo(c, frame)\n"}
+,{"stream_name":"stderr","time":10453.136590224,"data":"                ~~~~~~~~~^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":10453.136595074,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 233, in open_repo\n"}
+,{"stream_name":"stderr","time":10453.136599534,"data":"    fmt, files, sizes, _ = weight_files(repo, d)\n"}
+,{"stream_name":"stderr","time":10453.136604294,"data":"                           ~~~~~~~~~~~~^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":10453.136608794,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 151, in weight_files\n"}
+,{"stream_name":"stderr","time":10453.136613344,"data":"    sizes = {f: int(sib[f].get(\"size\") or (sib[f].get(\"lfs\") or {}).get(\"size\") or 0) for f in files}\n"}
+,{"stream_name":"stderr","time":10453.136618594,"data":"                    ~~~^^^\n"}
+,{"stream_name":"stderr","time":10453.136622934,"data":"KeyError: 'transformer/diffusion_pytorch_model-00001-of-00001.safetensors'\n"}
+,{"stream_name":"stdout","time":10453.136919824,"data":"[137/600] Qwen/Qwen-Image-Edit-2509: LOST (unexpected KeyError: 'transformer/diffusion_pytorch_model-00001-of-00001.safetensors')\n"}
+,{"stream_name":"stdout","time":10528.801856078,"data":"[138/600] laion/CLIP-ViT-H-14-laion2B-s32B-b79K: safetensors; declared -; pool 4 best 0.9999485385166971  (10455s)\n"}
+,{"stream_name":"stdout","time":10543.535363905,"data":"[139/600] sentence-transformers/all-roberta-large-v1: safetensors; declared -; pool 30 best 0.9809623610955398  (10469s)\n"}
+,{"stream_name":"stdout","time":10544.736595111,"data":"[140/600] facebook/dino-vitb16: bin; declared -; pool 30 best 0.004045836036571184  (10471s)\n"}
+,{"stream_name":"stdout","time":10545.025100502,"data":"[141/600] unsloth/Inkling-Small-GGUF: not readable (HubError: unsloth/Inkling-Small-GGUF: no safetensors, PyTorch or GGUF weights); declared -; pool 0 best None  (10471s)\n"}
+,{"stream_name":"stdout","time":10547.417536616,"data":"[142/600] google/fnet-base: bin; declared -; pool 0 best None  (10473s)\n"}
+,{"stream_name":"stdout","time":10608.57986575,"data":"[143/600] emrecan/bert-base-turkish-cased-mean-nli-stsb-tr: safetensors; declared -; pool 30 best 0.9998952244388795  (10534s)\n"}
+,{"stream_name":"stdout","time":10658.087274358,"data":"[144/600] google/siglip2-so400m-patch16-256: safetensors; declared -; pool 7 best 0.9999959116535442  (10584s)\n"}
+,{"stream_name":"stdout","time":10696.771985914,"data":"[145/600] Qwen/Qwen2-VL-7B-Instruct: safetensors; declared Qwen/Qwen2-VL-7B=0.9999314332093043; pool 30 best 0.9999999999999998  (10623s)\n"}
+,{"stream_name":"stdout","time":10699.304460177,"data":"[146/600] Intel/dpt-hybrid-midas: bin; declared -; pool 0 best None  (10625s)\n"}
+,{"stream_name":"stdout","time":10712.186943678,"data":"[147/600] timm/efficientnet_b0.ra_in1k: safetensors; declared -; pool 2 best 0.997429750167589  (10638s)\n"}
+,{"stream_name":"stdout","time":10714.196554182,"data":"[148/600] segment-any-text/sat-3l-sm: safetensors; declared -; pool 0 best None  (10640s)\n"}
+,{"stream_name":"stdout","time":10722.721658799,"data":"[149/600] ornith-ai/Ornith-1.5-9B: safetensors; declared -; pool 30 best 1.0  (10649s)\n"}
+,{"stream_name":"stdout","time":10724.826704453,"data":"[150/600] CompVis/stable-diffusion-safety-checker: bin; declared -; pool 0 best None  (10651s)\n"}
+,{"stream_name":"stdout","time":10782.435097732,"data":"[151/600] ml-resources/flux-3-image-klein-comfy: safetensors; declared black-forest-labs/flux-3-image-klein=None, black-forest-labs/flux-3-image-klein-base=None, black-forest-labs/flux-3-image-klein-pup=1.0; pool 0 best None  (10708s)\n"}
+,{"stream_name":"stdout","time":10784.444011468,"data":"[152/600] autogluon/mitra-classifier: safetensors; declared -; pool 0 best None  (10710s)\n"}
+,{"stream_name":"stdout","time":10795.685006752,"data":"[153/600] ukisai/Swift-Qwen3.8-27B-GGUF: gguf; declared ukisai/Swift-Qwen3.8-27b=0.9999844025868883; pool 30 best 0.999992183884165  (10722s)\n"}
+,{"stream_name":"stdout","time":10797.282130604,"data":"[154/600] Helsinki-NLP/opus-mt-en-ru: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (10723s)\n"}
+,{"stream_name":"stdout","time":10860.070946747,"data":"[155/600] TencentBAC/Conan-embedding-v1: safetensors; declared -; pool 30 best 0.9999997688015816  (10786s)\n"}
+,{"stream_name":"stdout","time":10984.28039147,"data":"[156/600] dascim/juribert-base: safetensors; declared -; pool 30 best 0.005720980086694385  (10910s)\n"}
+,{"stream_name":"stdout","time":10994.490275736,"data":"[157/600] unsloth/Qwen-Image-2.1: safetensors; declared -; pool 15 best 1.0  (10920s)\n"}
+,{"stream_name":"stdout","time":11013.515652817,"data":"[158/600] cross-encoder/ms-marco-TinyBERT-L2-v2: safetensors; declared nreimers/BERT-Tiny_L-2_H-128_A-2=0.9841456937603028; pool 30 best 0.9831679981253163  (10939s)\n"}
+,{"stream_name":"stdout","time":11015.317575711,"data":"[159/600] unslothai/vram-16: safetensors; declared -; pool 0 best None  (10941s)\n"}
+,{"stream_name":"stdout","time":11030.067726016,"data":"[160/600] nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4: safetensors; declared -; pool 0 best None  (10956s)\n"}
+,{"stream_name":"stdout","time":11411.392011223,"data":"[161/600] QuantStack/Wan2.2-TI2V-5B-GGUF: gguf; declared Wan-AI/Wan2.2-TI2V-5B=None; pool 13 best 1.0  (11337s)\n"}
+,{"stream_name":"stdout","time":11452.129594993,"data":"[162/600] sanskar003/Qwen3.5-4B-AWQ: not readable (gated, no byte-identical public copy); declared -; pool 0 best None  (11378s)\n"}
+,{"stream_name":"stdout","time":11699.554648449,"data":"[163/600] mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF: gguf; declared prithivMLmods/Qwen3-VL-8B-Instruct-abliterated-v1=not readable (gated, no byte-identical public copy); pool 30 best 1.0  (11625s)\n"}
+,{"stream_name":"stdout","time":11710.479130579,"data":"[164/600] Qwen/Qwen3-ASR-0.6B-hf: safetensors; declared -; pool 17 best 1.0  (11636s)\n"}
+,{"stream_name":"stdout","time":11814.629119242,"data":"[165/600] DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF: gguf; declared DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-MTP=1.0000000000000002; pool 30 best 0.9973852509878127  (11741s)\n"}
+,{"stream_name":"stdout","time":11818.66064139,"data":"[166/600] trl-internal-testing/tiny-Qwen2_5_VLForConditionalGeneration: safetensors; declared -; pool 0 best None  (11745s)\n"}
+,{"stream_name":"stdout","time":11876.2428758,"data":"[167/600] RedHatAI/gemma-4-31B-it-FP8-block: safetensors; declared google/gemma-4-31B-it=0.9999999999999999; pool 30 best 0.9999999999999999  (11802s)\n"}
+,{"stream_name":"stdout","time":11970.167166875,"data":"[168/600] SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF: gguf; declared ukisai/Swift-Qwen3.8-Flash-Next=None; pool 30 best 1.0  (11896s)\n"}
+,{"stream_name":"stdout","time":11970.279177278,"data":"[169/600] ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF: gguf; declared ukisai/Swift-Qwen3.8-Flash-Next=None; pool 30 best 0.9996657788205143  (11896s)\n"}
+,{"stream_name":"stdout","time":12030.386644082,"data":"[170/600] unsloth/llama-3-8b-Instruct-bnb-4bit: safetensors; declared meta-llama/Llama-3-8B-Instruct=not readable (HTTP 401); pool 30 best 1.0  (11956s)\n"}
+,{"stream_name":"stdout","time":12089.900823817,"data":"[171/600] unsloth/gemma-4-26B-A4B-it-GGUF: gguf; declared google/gemma-4-26B-A4B-it=None; pool 30 best 1.0  (12016s)\n"}
+,{"stream_name":"stdout","time":12092.059208431,"data":"[172/600] sentence-transformers/paraphrase-albert-small-v2: safetensors; declared -; pool 0 best None  (12018s)\n"}
+,{"stream_name":"stdout","time":12104.383939973,"data":"[173/600] unsloth/Wan2.2-TI2V-5B-GGUF: gguf; declared Wan-AI/Wan2.2-TI2V-5B=None; pool 13 best 1.0  (12030s)\n"}
+,{"stream_name":"stdout","time":12132.247456164,"data":"[174/600] Qwen/Qwen2.5-Coder-7B: safetensors; declared Qwen/Qwen2.5-7B=0.4650758817900864; pool 30 best 0.9999821357068401  (12058s)\n"}
+,{"stream_name":"stdout","time":12156.925891955,"data":"[175/600] FINAL-Bench/POCKET-Darwin-180B-GGUF: gguf; declared FINAL-Bench/Darwin-180B-RSI-R3=None; pool 30 best 1.0000000000000002  (12083s)\n"}
+,{"stream_name":"stdout","time":12183.563875709,"data":"[176/600] Freepik/nsfw_image_detector: safetensors; declared timm/eva02_base_patch14_448.mim_in22k_ft_in22k_in1k=0.9993906481139793; pool 0 best None  (12109s)\n"}
+,{"stream_name":"stdout","time":12222.389263355,"data":"[177/600] Qwen/Qwen2.5-Coder-1.5B: safetensors; declared Qwen/Qwen2.5-1.5B=0.6047896509040069; pool 30 best 1.0  (12148s)\n"}
+,{"stream_name":"stdout","time":12223.583478096,"data":"[178/600] emilyalsentzer/Bio_Discharge_Summary_BERT: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (12149s)\n"}
+,{"stream_name":"stdout","time":12314.175249184,"data":"[179/600] google/medgemma-4b-it: safetensors; declared google/medgemma-4b-pt=0.9977125218322517; pool 30 best 0.9977125218322517  (12240s)\n"}
+,{"stream_name":"stdout","time":12337.539200342,"data":"[180/600] Qwen/Qwen2.5-Coder-3B-Instruct: safetensors; declared Qwen/Qwen2.5-Coder-3B=0.9997241543738344; pool 30 best 1.0  (12263s)\n"}
+,{"stream_name":"stdout","time":12357.196952426,"data":"[181/600] unsloth/Qwen3.6-27B-NVFP4: safetensors; declared Qwen/Qwen3.6-27B=0.999846080412853; pool 0 best None  (12283s)\n"}
+,{"stream_name":"stdout","time":12497.679857981,"data":"[182/600] jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata: gguf; declared 0bserverx/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored=None; pool 30 best 0.996130262514036  (12424s)\n"}
+,{"stream_name":"stdout","time":12499.106452859,"data":"[183/600] IlyaGusev/saiga_llama3_8b: safetensors; declared -; pool 30 best 1.0  (12425s)\n"}
+,{"stream_name":"stdout","time":12541.774545051,"data":"[184/600] deepseek-ai/DeepSeek-OCR-2: safetensors; declared -; pool 9 best 1.0  (12468s)\n"}
+,{"stream_name":"stdout","time":12581.84487179,"data":"[185/600] failspy/Meta-Llama-3-8B-Instruct-abliterated-v3: safetensors; declared -; pool 30 best 1.0  (12508s)\n"}
+,{"stream_name":"stdout","time":12582.077889557,"data":"[186/600] ByteDance/LatentSync-1.5: not readable (other checkpoint format); declared -; pool 0 best None  (12508s)\n"}
+,{"stream_name":"stdout","time":12592.856115399,"data":"[187/600] Qwen/Qwen2.5-Coder-32B-Instruct: safetensors; declared Qwen/Qwen2.5-Coder-32B=0.9990867584619039; pool 30 best 1.0  (12519s)\n"}
+,{"stream_name":"stdout","time":12710.200406415,"data":"[188/600] laion/larger_clap_general: bin; declared -; pool 3 best 0.9567491751538171  (12636s)\n"}
+,{"stream_name":"stdout","time":12750.303554151,"data":"[189/600] ibm-granite/granite-4.1-3b: safetensors; declared -; pool 30 best 1.0  (12676s)\n"}
+,{"stream_name":"stdout","time":12834.835739267,"data":"[190/600] google/gemma-3-27b-it: safetensors; declared google/gemma-3-27b-pt=0.9952699948388571; pool 30 best 1.0  (12761s)\n"}
+,{"stream_name":"stdout","time":12920.341983516,"data":"[191/600] peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF: gguf; declared ornith-ai/Ornith-1.5-35B-A3B=0.999985368257202; pool 30 best 1.0  (12846s)\n"}
+,{"stream_name":"stdout","time":12921.72863476,"data":"[192/600] sshleifer/distilbart-cnn-12-6: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (12848s)\n"}
+,{"stream_name":"stdout","time":12938.599115528,"data":"[193/600] autogluon/chronos-2-synth: safetensors; declared -; pool 7 best 0.0024054992765270692  (12864s)\n"}
+,{"stream_name":"stdout","time":13166.073488189,"data":"[194/600] tiny-random/qwen3.5-moe: safetensors; declared Qwen/Qwen3.5-397B-A17B=None; pool 1 best 0.004082292265087283  (13092s)\n"}
+,{"stream_name":"stdout","time":13242.573595317,"data":"[195/600] bartowski/Meta-Llama-3.1-8B-Instruct-GGUF: gguf; declared meta-llama/Meta-Llama-3.1-8B-Instruct=0.9999852649299613; pool 30 best 0.9999852649299613  (13168s)\n"}
+,{"stream_name":"stdout","time":13453.725288844,"data":"[196/600] huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF: gguf; declared deepseek-ai/DeepSeek-V4-Flash-0731=None; pool 30 best 1.0  (13380s)\n"}
+,{"stream_name":"stdout","time":13478.713174592,"data":"[197/600] unsloth/Qwen3-VL-8B-Instruct-GGUF: gguf; declared Qwen/Qwen3-VL-8B-Instruct=0.9999856577670151; pool 30 best 1.0  (13405s)\n"}
+,{"stream_name":"stdout","time":13649.868251165,"data":"[198/600] LiquidAI/LFM2.5-Audio-1.5B-GGUF: gguf; declared LiquidAI/LFM2.5-Audio-1.5B=None; pool 30 best 0.8479196247243179  (13576s)\n"}
+,{"stream_name":"stdout","time":13814.478693819,"data":"[199/600] deepseek-ai/DeepSeek-R1-0528-Qwen3-8B: safetensors; declared -; pool 30 best 1.0  (13740s)\n"}
+,{"stream_name":"stdout","time":13986.83327394,"data":"[200/600] lengyue233/content-vec-best: bin; declared -; pool 19 best 1.0  (13913s)\n"}
+,{"stream_name":"stdout","time":14081.079256324,"data":"[201/600] gabor-hosu/e5-mistral-7b-instruct-bnb-4bit: safetensors; declared intfloat/e5-mistral-7b-instruct=1.0; pool 30 best 1.0  (14007s)\n"}
+,{"stream_name":"stdout","time":14114.633216837,"data":"[202/600] JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF: gguf; declared JetBrains/Mellum2.1-12B-A2.5B-Thinking=None; pool 30 best 1.0  (14041s)\n"}
+,{"stream_name":"stdout","time":14123.259775918,"data":"[203/600] trl-internal-testing/tiny-Gemma2ForCausalLM: safetensors; declared -; pool 0 best None  (14049s)\n"}
+,{"stream_name":"stdout","time":14149.594415945,"data":"[204/600] Qwen/Qwen2-7B: safetensors; declared -; pool 30 best 0.9979385607393496  (14075s)\n"}
+,{"stream_name":"stdout","time":14151.836563057,"data":"[205/600] trl-internal-testing/tiny-Qwen3_5ForConditionalGeneration-NoThink: safetensors; declared -; pool 0 best None  (14078s)\n"}
+,{"stream_name":"stdout","time":14172.842362276,"data":"[206/600] RedHatAI/Qwen3.8-27B-INT4: safetensors; declared Qwen/Qwen3.8-27B=0.9960143429464261; pool 30 best 0.9999844025868883  (14099s)\n"}
+,{"stream_name":"stdout","time":14198.182953832,"data":"[207/600] OpenMed/OpenMed-NER-OncologyDetect-BigMed-278M: safetensors; declared -; pool 30 best 0.9999151095235264  (14124s)\n"}
+,{"stream_name":"stdout","time":14218.798366528,"data":"[208/600] Qwen/Qwen2-0.5B-Instruct: safetensors; declared Qwen/Qwen2-0.5B=0.9998649948978177; pool 30 best 1.0  (14145s)\n"}
+,{"stream_name":"stdout","time":14242.02596482,"data":"[209/600] ornith-ai/Ornith-1.5-35B-A3B-MLX: safetensors; declared -; pool 30 best 0.9991128440726802  (14168s)\n"}
+,{"stream_name":"stdout","time":14269.556546639,"data":"[210/600] lmstudio-community/gemma-4-26B-A4B-it-MLX-6bit: safetensors; declared google/gemma-4-26B-A4B-it=None; pool 30 best -1  (14195s)\n"}
+,{"stream_name":"stdout","time":14404.196232808,"data":"[211/600] incoai/Qwen3.8-27B-DFlash2: safetensors; declared Qwen/Qwen3.8-27B=-0.0038424452002443934; pool 30 best 1.0  (14330s)\n"}
+,{"stream_name":"stdout","time":14540.996422484,"data":"[212/600] bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF: gguf; declared deepseek-ai/DeepSeek-R1-Distill-Qwen-7B=0.9999850457685135; pool 30 best 0.9999850457685135  (14467s)\n"}
+,{"stream_name":"stdout","time":14556.950575163,"data":"[213/600] OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF: gguf; declared prism-ml/Ternary-Bonsai-2-27B-gguf=None; pool 30 best -1  (14483s)\n"}
+,{"stream_name":"stdout","time":14660.775220071,"data":"[214/600] xinsir/controlnet-union-sdxl-1.0: LOST (Dung306080/Controlnet: InvalidURL: URL can't contain control characters. '/Dung306080/Controlnet/resolve/5efcdf8fd3a3c0f5c3b89effd52fd83b8476215d/xinsir-controlnet-tile-sdxl-1.0 .safetensors' (found at least ' '))\n"}
+,{"stream_name":"stdout","time":14678.16249581,"data":"[215/600] Qwen/Qwen3.5-35B-A3B-Base: safetensors; declared -; pool 30 best 0.9988430081454991  (14604s)\n"}
+,{"stream_name":"stdout","time":14761.345472995,"data":"[216/600] handy-computer/parakeet-tdt-0.6b-v2-gguf: gguf; declared nvidia/parakeet-tdt-0.6b-v2=not readable (other checkpoint format); pool 30 best 1.0  (14687s)\n"}
+,{"stream_name":"stdout","time":14763.436891543,"data":"[217/600] fal/MiniMax-H3-Realism-People-LoRA: adapter; declared -; pool 0 best None  (14689s)\n"}
+,{"stream_name":"stdout","time":14765.190911258,"data":"[218/600] Helsinki-NLP/opus-mt-ar-en: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (14691s)\n"}
+,{"stream_name":"stdout","time":14780.61821724,"data":"[219/600] lightx2v/Wan2.2-Distill-Loras: adapter; declared -; pool 0 best None  (14707s)\n"}
+,{"stream_name":"stdout","time":14798.683330913,"data":"[220/600] OpenMOSS-Team/MOSS-TTS-Nano-100M: bin; declared -; pool 1 best 1.0  (14725s)\n"}
+,{"stream_name":"stdout","time":14811.338341493,"data":"[221/600] nvidia/Kimi-K2.6-NVFP4: safetensors; declared moonshotai/Kimi-K2.6=1.0; pool 0 best None  (14737s)\n"}
+,{"stream_name":"stdout","time":14862.584285686,"data":"[222/600] facebook/convnextv2-tiny-22k-224: safetensors; declared -; pool 2 best 0.9969428475117976  (14788s)\n"}
+,{"stream_name":"stdout","time":14946.500532409,"data":"[223/600] OpenMed/OpenMed-NER-GenomicDetect-ElectraMed-560M: safetensors; declared -; pool 30 best 0.999953496410427  (14872s)\n"}
+,{"stream_name":"stdout","time":14951.319717035,"data":"[224/600] ibm-granite/granite-docling-258M: safetensors; declared -; pool 6 best 0.9985060265436843  (14877s)\n"}
+,{"stream_name":"stdout","time":15055.484976296,"data":"[225/600] biohub/ESMC-6B: safetensors; declared -; pool 6 best 1.0  (14981s)\n"}
+,{"stream_name":"stdout","time":15057.263026837,"data":"[226/600] OpenMed/OpenMed-NER-GenomicDetect-TinyMed-135M: safetensors; declared -; pool 30 best 0.9995960050399172  (14983s)\n"}
+,{"stream_name":"stdout","time":15057.70365291,"data":"[227/600] Qwen/Qwen3.8-Flash-Next-FP8: safetensors; declared Qwen/Qwen3.8-Flash-Next=1.0; pool 30 best 1.0  (14984s)\n"}
+,{"stream_name":"stdout","time":15059.417802496,"data":"[228/600] ScottzillaSystems/qwen-image-edit-plus-nsfw-lora: adapter; declared -; pool 0 best None  (14985s)\n"}
+,{"stream_name":"stdout","time":15315.25500957,"data":"[229/600] OpenMed/OpenMed-NER-GenomeDetect-SuperMedical-125M: safetensors; declared -; pool 30 best 0.9998067250107396  (15241s)\n"}
+,{"stream_name":"stdout","time":15329.713469659,"data":"[230/600] microsoft/Phi-4-multimodal-instruct: safetensors; declared -; pool 3 best 1.0  (15256s)\n"}
+,{"stream_name":"stdout","time":15403.075275511,"data":"[231/600] unsloth/Qwen2.5-7B-Instruct-bnb-4bit: safetensors; declared Qwen/Qwen2.5-7B-Instruct=1.0; pool 30 best 1.0  (15329s)\n"}
+,{"stream_name":"stdout","time":15442.77072357,"data":"[232/600] unitary/unbiased-toxic-roberta: bin; declared -; pool 30 best 0.9276801880808829  (15369s)\n"}
+,{"stream_name":"stdout","time":15471.137741628,"data":"[233/600] OpenMed/OpenMed-PII-SuperClinical-Small-44M-v1: safetensors; declared microsoft/deberta-v3-small=0.9994188276358951; pool 22 best 0.9993799162043613  (15397s)\n"}
+,{"stream_name":"stdout","time":15530.314093431,"data":"[234/600] cointegrated/rubert-tiny-sentiment-balanced: safetensors; declared -; pool 3 best 0.9960766973320411  (15456s)\n"}
+,{"stream_name":"stdout","time":15613.557857193,"data":"[235/600] timm/inception_resnet_v2.tf_in1k: safetensors; declared -; pool 1 best 0.003479071322820654  (15539s)\n"}
+,{"stream_name":"stdout","time":15807.82484291,"data":"[236/600] lmstudio-community/gemma-4-31B-it-MLX-4bit: safetensors; declared google/gemma-4-31B-it=0.9958004850304933; pool 30 best 0.9958009345295717  (15734s)\n"}
+,{"stream_name":"stdout","time":15810.257974088,"data":"[237/600] Comfy-Org/Mage-Flow: safetensors; declared microsoft/Mage-Flow=not readable (HTTP 401); pool 0 best None  (15736s)\n"}
+,{"stream_name":"stdout","time":15811.198717643,"data":"[238/600] JackFram/llama-68m: bin; declared -; pool 8 best 0.999936004134705  (15737s)\n"}
+,{"stream_name":"stdout","time":15812.494239634,"data":"[239/600] trl-internal-testing/tiny-Gemma4ForConditionalGeneration: safetensors; declared -; pool 0 best None  (15738s)\n"}
+,{"stream_name":"stdout","time":15813.839768241,"data":"[240/600] vinai/bertweet-base: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (15740s)\n"}
+,{"stream_name":"stdout","time":15817.175668028,"data":"[241/600] JusperLee/TIGER-DnR: safetensors; declared -; pool 0 best None  (15743s)\n"}
+,{"stream_name":"stdout","time":15874.094544819,"data":"[242/600] PaddlePaddle/PaddleOCR-VL-1.6: safetensors; declared -; pool 15 best 1.0  (15800s)\n"}
+,{"stream_name":"stdout","time":16205.842861203,"data":"[243/600] pottokao/Qwen-Image-2.1-Text-Encoder-Heretic-GGUF: gguf; declared pottokao/Qwen-Image-2.1-Text-Encoder-Heretic=0.9995529944772064; pool 30 best 1.0  (16132s)\n"}
+,{"stream_name":"stdout","time":16206.350581089,"data":"[244/600] lmstudio-community/Qwen3-VL-8B-Instruct-MLX-8bit: not readable (no weight files); declared -; pool 0 best None  (16132s)\n"}
+,{"stream_name":"stdout","time":16223.303473098,"data":"[245/600] nvidia/GLM-5.2-NVFP4: safetensors; declared zai-org/GLM-5.2=1.0; pool 0 best None  (16149s)\n"}
+,{"stream_name":"stdout","time":16223.550527992,"data":"[246/600] zgpu-ai/zlm-v1-moderation-edge: not readable (onnx only); declared -; pool 0 best None  (16149s)\n"}
+,{"stream_name":"stdout","time":16223.861349577,"data":"[247/600] facebook/cotracker3: not readable (other checkpoint format); declared -; pool 0 best None  (16150s)\n"}
+,{"stream_name":"stdout","time":16225.997864337,"data":"[248/600] Helsinki-NLP/opus-mt-tc-big-en-tr: bin; declared -; pool 0 best None  (16152s)\n"}
+,{"stream_name":"stdout","time":16274.161771976,"data":"[249/600] Qwen/Qwen2.5-0.5B-Instruct-GGUF: gguf; declared Qwen/Qwen2.5-0.5B-Instruct=0.9897692376521909; pool 30 best 0.9999855662678172  (16200s)\n"}
+,{"stream_name":"stdout","time":16419.31064458,"data":"[250/600] handy-computer/Voxtral-Mini-3B-2507-gguf: gguf; declared mistralai/Voxtral-Mini-3B-2507=None; pool 5 best 1.0  (16345s)\n"}
+,{"stream_name":"stdout","time":16433.89488674,"data":"[251/600] IstroSec/ThinkingCap-Qwen3.8-27B-abliterated-NVFP4A16: safetensors; declared IstroSec/ThinkingCap-Qwen3.8-27B-abliterated=1.0; pool 30 best -1  (16360s)\n"}
+,{"stream_name":"stdout","time":16565.438376567,"data":"[252/600] timm/vit_base_patch16_clip_224.laion400m_e32: safetensors; declared -; pool 2 best -0.0006285695084093305  (16491s)\n"}
+,{"stream_name":"stdout","time":16565.671841172,"data":"[253/600] nvidia/Audio2Face-3D-v3.0: not readable (onnx only); declared -; pool 0 best None  (16492s)\n"}
+,{"stream_name":"stdout","time":16646.854259568,"data":"[254/600] chimingw/Qwen3.8-27B-Uncensored-OrcaRouter-GGUF: gguf; declared orcarouter/Qwen3.8-27B-Uncensored-FP8=0.9999844025868883; pool 30 best 1.0  (16573s)\n"}
+,{"stream_name":"stdout","time":17011.895503292,"data":"[255/600] google/gemma-4-26B-A4B-it-assistant: safetensors; declared -; pool 22 best 1.0  (16938s)\n"}
+,{"stream_name":"stdout","time":17017.25807132,"data":"[256/600] NeuML/colbert-bert-tiny: safetensors; declared google/bert_uncased_L-2_H-128_A-2=0.9997684878294205; pool 30 best 1.0  (16943s)\n"}
+,{"stream_name":"stdout","time":17095.045646053,"data":"[257/600] NousResearch/Meta-Llama-3.1-8B: safetensors; declared -; pool 30 best 1.0  (17021s)\n"}
+,{"stream_name":"stdout","time":17187.002039188,"data":"[258/600] VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct: safetensors; declared -; pool 30 best 1.0  (17113s)\n"}
+,{"stream_name":"stdout","time":17189.351900407,"data":"[259/600] unsloth/Qwen2.5-3B-Instruct-bnb-4bit: safetensors; declared Qwen/Qwen2.5-3B-Instruct=1.0000000000000002; pool 30 best 1.0000000000000002  (17115s)\n"}
+,{"stream_name":"stdout","time":17345.959313336,"data":"[260/600] kyuz0/deepseek-v4.1-flash-gguf: gguf; declared deepseek-ai/DeepSeek-V4.1-Flash=None, deepseek-ai/DeepSeek-V4.1-Flash-1017=None; pool 30 best 0.9980237115876425  (17272s)\n"}
+,{"stream_name":"stdout","time":17581.538257418,"data":"[261/600] unsloth/Ornith-1.5-122B-GGUF: gguf; declared ornith-ai/Ornith-1.5-122B=0.999845708992578; pool 30 best 0.999845708992578  (17507s)\n"}
+,{"stream_name":"stdout","time":17738.995957158,"data":"[262/600] Cloudflare/clef-flash: safetensors; declared Qwen/Qwen3.5-9B=0.998730023226732; pool 30 best 1.0  (17665s)\n"}
+,{"stream_name":"stdout","time":17831.35248233,"data":"[263/600] bigcode/tiny_starcoder_py: safetensors; declared -; pool 1 best 0.999338936039041  (17757s)\n"}
+,{"stream_name":"stdout","time":17963.501840221,"data":"[264/600] mdmachine/ACEStep-XL-Regrind-V1: safetensors; declared ACE-Step/acestep-v15-xl-turbo=0.9999986544129439; pool 1 best -1  (17889s)\n"}
+,{"stream_name":"stdout","time":18164.359059211,"data":"[265/600] ggml-org/gemma-3-4b-it-GGUF: gguf; declared google/gemma-3-4b-it=None; pool 30 best 1.0  (18090s)\n"}
+,{"stream_name":"stdout","time":18164.728221227,"data":"[266/600] zgpu-ai/zlm-v1-signal-extract: not readable (onnx only); declared -; pool 0 best None  (18091s)\n"}
+,{"stream_name":"stdout","time":18203.067014239,"data":"[267/600] mixedbread-ai/mxbai-rerank-large-v2: safetensors; declared -; pool 30 best 0.9999999999999999  (18129s)\n"}
+,{"stream_name":"stdout","time":18359.377276169,"data":"[268/600] huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF: gguf; declared deepseek-ai/DeepSeek-V4-Flash-Vision-Exp=None; pool 30 best 0.9959997501358335  (18285s)\n"}
+,{"stream_name":"stdout","time":18468.09127479,"data":"[269/600] baidu/Qianfan-OCR: safetensors; declared -; pool 1 best 0.998968444626801  (18394s)\n"}
+,{"stream_name":"stdout","time":18765.96953011,"data":"[270/600] ornith-ai/Ornith-1.5-122B-MLX: safetensors; declared -; pool 30 best 0.9999757547847297  (18692s)\n"}
+,{"stream_name":"stdout","time":18970.641865242,"data":"[271/600] MaziyarPanahi/sqlcoder-7b-2-GGUF: gguf; declared defog/sqlcoder-7b-2=0.9999856811284841; pool 30 best 0.9999856811284841  (18897s)\n"}
+,{"stream_name":"stdout","time":18984.988452866,"data":"[272/600] dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF: gguf; declared Nanbeige/Nanbeige4.3-33B=0.9998428380685607; pool 30 best 0.9998428380685607  (18911s)\n"}
+,{"stream_name":"stdout","time":18999.282066902,"data":"[273/600] allenai/OLMoE-1B-7B-0924: safetensors; declared -; pool 30 best 0.999985380841822  (18925s)\n"}
+,{"stream_name":"stdout","time":19004.922023257,"data":"[274/600] lmstudio-community/Qwen3-Coder-Next-MLX-4bit: safetensors; declared Qwen/Qwen3-Coder-Next=0.9951222597203612; pool 30 best 0.9956577501092967  (18931s)\n"}
+,{"stream_name":"stdout","time":19034.565930279,"data":"[275/600] yujiepan/qwen2.5-tiny-random: safetensors; declared -; pool 4 best 1.0  (18960s)\n"}
+,{"stream_name":"stdout","time":19102.267710805,"data":"[276/600] google/siglip-large-patch16-384: safetensors; declared -; pool 3 best 0.9984975430526687  (19028s)\n"}
+,{"stream_name":"stdout","time":19134.894783331,"data":"[277/600] nvidia/Qwen3.8-Flash-Next-FP4-Local: safetensors; declared Qwen/Qwen3.8-Flash-Next=0.9997891251482928; pool 0 best None  (19061s)\n"}
+,{"stream_name":"stdout","time":19286.007586744,"data":"[278/600] antirez/glm-5.3-flash-gguf: gguf; declared -; pool 30 best -1  (19212s)\n"}
+,{"stream_name":"stdout","time":19359.53945761,"data":"[279/600] MaziyarPanahi/gemma-3-1b-it-GGUF: gguf; declared google/gemma-3-1b-it=0.9999846834639163; pool 21 best 1.0  (19285s)\n"}
+,{"stream_name":"stdout","time":19399.199146396,"data":"[280/600] amazon/chronos-t5-mini: safetensors; declared -; pool 3 best 1.0  (19325s)\n"}
+,{"stream_name":"stdout","time":19601.269651977,"data":"[281/600] Manojb/stable-diffusion-2-1-base: safetensors; declared -; pool 30 best 1.0  (19527s)\n"}
+,{"stream_name":"stdout","time":19602.512204216,"data":"[282/600] Helsinki-NLP/opus-mt-tr-en: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (19528s)\n"}
+,{"stream_name":"stdout","time":20036.899252352,"data":"[283/600] cstr/qwen3-tts-0.6b-customvoice-GGUF: gguf; declared Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice=None; pool 30 best 1.0  (19963s)\n"}
+,{"stream_name":"stdout","time":20098.363848736,"data":"[284/600] LiquidAI/LFM2.5-VL-3B: safetensors; declared LiquidAI/LFM2.5-2.6B-Base=0.8611505031379096; pool 14 best 1.0  (20024s)\n"}
+,{"stream_name":"stdout","time":20118.559390667,"data":"[285/600] Mapika/decider-2b: safetensors; declared Qwen/Qwen3.5-2B-Base=0.9986572607684113; pool 30 best 0.9988567706014386  (20044s)\n"}
+,{"stream_name":"stdout","time":20118.801887576,"data":"[286/600] rtr46/meiki.text.detect.v0: not readable (onnx only); declared -; pool 0 best None  (20045s)\n"}
+,{"stream_name":"stdout","time":20121.053912822,"data":"[287/600] timm/swinv2_base_window12to16_192to256.ms_in22k_ft_in1k: safetensors; declared -; pool 0 best None  (20047s)\n"}
+,{"stream_name":"stdout","time":20228.660726318,"data":"[288/600] cais/HarmBench-Llama-2-13b-cls: safetensors; declared -; pool 30 best 0.9999922257190874  (20155s)\n"}
+,{"stream_name":"stdout","time":20233.545396416,"data":"[289/600] OpenMed/OpenMed-ZeroShot-NER-Oncology-XLarge-770M: bin; declared -; pool 1 best 0.9999920178263211  (20159s)\n"}
+,{"stream_name":"stdout","time":20286.503797907,"data":"[290/600] BennyDaBall/Qwen-Image-2.1-NVFP4: safetensors; declared Comfy-Org/Qwen-Image-2.1=1.0; pool 0 best None  (20212s)\n"}
+,{"stream_name":"stdout","time":20443.87974035,"data":"[291/600] ESGBERT/SocRoBERTa-social: bin; declared -; pool 30 best 0.9787386943822687  (20370s)\n"}
+,{"stream_name":"stdout","time":20444.138651467,"data":"[292/600] unsloth/DeepSeek-V4-Flash-GGUF: not readable (no weight files); declared -; pool 0 best None  (20370s)\n"}
+,{"stream_name":"stdout","time":20481.373416586,"data":"[293/600] sentence-transformers/multi-qa-distilbert-cos-v1: safetensors; declared -; pool 30 best 0.9825878866770579  (20407s)\n"}
+,{"stream_name":"stdout","time":20489.212816006,"data":"[294/600] orcarouter/GLM-5.3-Flash-Uncensored-FP8: safetensors; declared zai-org/GLM-5.3-Flash=1.0; pool 30 best 1.0  (20415s)\n"}
+,{"stream_name":"stdout","time":20609.148201829,"data":"[295/600] timm/caformer_b36.sail_in22k_ft_in1k_384: safetensors; declared -; pool 2 best 0.9979989892580652  (20535s)\n"}
+,{"stream_name":"stdout","time":20698.911835693,"data":"[296/600] TheBloke/Llama-2-7B-GGUF: gguf; declared meta-llama/Llama-2-7b-hf=0.9999852463780419; pool 30 best 0.9999852463780419  (20625s)\n"}
+,{"stream_name":"stdout","time":20818.061740999,"data":"[297/600] utrobinmv/t5_translate_en_ru_zh_small_1024: safetensors; declared -; pool 2 best 0.0014193429428592547  (20744s)\n"}
+,{"stream_name":"stdout","time":20897.92297472,"data":"[298/600] RedHatAI/Meta-Llama-3.1-8B-Instruct-quantized.w4a16: safetensors; declared meta-llama/Llama-3.1-8B-Instruct=1.0; pool 30 best 1.0  (20824s)\n"}
+,{"stream_name":"stdout","time":20954.272494421,"data":"[299/600] dbmdz/bert-base-german-cased: safetensors; declared -; pool 30 best 0.003631285605469526  (20880s)\n"}
+,{"stream_name":"stdout","time":20954.51755381,"data":"[300/600] litert-community/embeddinggemma-2-text-270m-litert-lm: not readable (no weight files); declared -; pool 0 best None  (20880s)\n"}
+,{"stream_name":"stdout","time":20972.084141174,"data":"[301/600] MediaCatch/xls-r-300m-danish-mc-v2: safetensors; declared MediaCatch/xls-r-300m-danish-mc=not readable (HTTP 401); pool 30 best 0.3403154977824683  (20898s)\n"}
+,{"stream_name":"stdout","time":21255.41194535,"data":"[302/600] dangvantuan/sentence-camembert-base: safetensors; declared -; pool 21 best 0.9999305149687429  (21181s)\n"}
+,{"stream_name":"stdout","time":21466.609110555,"data":"[303/600] deepseek-ai/DeepSeek-V3.2-Exp: safetensors; declared deepseek-ai/DeepSeek-V3.2-Exp-Base=0.9996689880217973; pool 8 best 1.0  (21392s)\n"}
+,{"stream_name":"stdout","time":21468.88828824,"data":"[304/600] fastino/gliner2.5-small-v1: safetensors; declared -; pool 0 best None  (21395s)\n"}
+,{"stream_name":"stdout","time":21496.507931305,"data":"[305/600] yujiepan/gemma-3-tiny-random: safetensors; declared -; pool 1 best 1.0  (21422s)\n"}
+,{"stream_name":"stdout","time":21683.700701691,"data":"[306/600] IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF: gguf; declared Accio-Lab/occamy-1.0=0.999985222636773; pool 30 best 0.999985222636773  (21610s)\n"}
+,{"stream_name":"stdout","time":21725.049270799,"data":"[307/600] DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4: gguf; declared orcarouter/GLM-5.3-Flash-Uncensored-FP8=None, zai-org/GLM-5.3-Flash=None; pool 30 best 1.0  (21651s)\n"}
+,{"stream_name":"stdout","time":21810.969695195,"data":"[308/600] timm/swin_tiny_patch4_window7_224.ms_in22k_ft_in1k: safetensors; declared -; pool 2 best -0.0019583924797587043  (21737s)\n"}
+,{"stream_name":"stdout","time":21831.865479208,"data":"[309/600] unsloth/gemma-4-31B-it-unsloth-bnb-4bit: safetensors; declared google/gemma-4-31B-it=1.0; pool 30 best 1.0  (21758s)\n"}
+,{"stream_name":"stdout","time":21924.803021879,"data":"[310/600] LiquidAI/LFM2.5-VL-450M-GGUF: gguf; declared LiquidAI/LFM2.5-VL-450M=None; pool 30 best 0.8388594357806879  (21851s)\n"}
+,{"stream_name":"stdout","time":21925.699248564,"data":"[311/600] incoai/GLM-5.3-Flash-DFlash2: safetensors; declared zai-org/GLM-5.3-Flash=0.9817617164884911; pool 21 best 0.954478651156582  (21852s)\n"}
+,{"stream_name":"stdout","time":21950.346251525,"data":"[312/600] zai-org/glm-4-9b-chat: safetensors; declared -; pool 30 best 0.999993079972612  (21876s)\n"}
+,{"stream_name":"stdout","time":22017.868554718,"data":"[313/600] huihui-ai/Huihui-Qwen3.5-4B-abliterated: safetensors; declared Qwen/Qwen3.5-4B=1.0; pool 30 best 1.0  (21944s)\n"}
+,{"stream_name":"stdout","time":22062.492087879,"data":"[314/600] z-lab/Qwen3.6-35B-A3B-DFlash: safetensors; declared Qwen/Qwen3.6-35B-A3B=-0.012966851418538467; pool 3 best 1.0  (21988s)\n"}
+,{"stream_name":"stdout","time":22089.206154967,"data":"[315/600] egeorcun/lucida: safetensors; declared ZhengPeng7/BiRefNet_HR=0.991521194159115; pool 6 best 0.990262909259539  (22015s)\n"}
+,{"stream_name":"stdout","time":22139.895208175,"data":"[316/600] deepseek-ai/deepseek-llm-7b-base: bin; declared -; pool 30 best 0.9987896078384316  (22066s)\n"}
+,{"stream_name":"stdout","time":22143.839913911,"data":"[317/600] OpenMed/OpenMed-ZeroShot-NER-Anatomy-Multi-209M: bin; declared -; pool 3 best 0.9999984004889642  (22070s)\n"}
+,{"stream_name":"stdout","time":22227.825782932,"data":"[318/600] VAGOsolutions/SauerkrautLM-ColQwen3-2b-v0.1: safetensors; declared Qwen/Qwen3-VL-2B=not readable (HTTP 401); pool 30 best 1.0  (22154s)\n"}
+,{"stream_name":"stdout","time":22317.017387841,"data":"[319/600] KoichiYasuoka/bert-base-thai-upos: bin; declared Geotrend/bert-base-th-cased=0.9999216410094268; pool 30 best 0.6564834241391246  (22243s)\n"}
+,{"stream_name":"stdout","time":22337.905085965,"data":"[320/600] TheBloke/Llama-2-13B-chat-GGUF: gguf; declared meta-llama/Llama-2-13b-chat-hf=0.9999724605839326; pool 30 best 0.9999724605839326  (22264s)\n"}
+,{"stream_name":"stdout","time":22350.090466448,"data":"[321/600] cyberdelia/CyberRealisticFlux: safetensors; declared -; pool 0 best None  (22276s)\n"}
+,{"stream_name":"stdout","time":22374.548882018,"data":"[322/600] yujiepan/mixtral-8xtiny-random: safetensors; declared -; pool 5 best 1.0  (22300s)\n"}
+,{"stream_name":"stdout","time":22390.258681785,"data":"[323/600] google/canine-s: safetensors; declared -; pool 1 best 0.003155616616985547  (22316s)\n"}
+,{"stream_name":"stdout","time":22391.723373229,"data":"[324/600] cardiffnlp/twitter-xlm-roberta-base: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (22318s)\n"}
+,{"stream_name":"stdout","time":22423.748328209,"data":"[325/600] timteh673/Qwen3.5-122B-A10B-Opus-Reasoning-GGUF: gguf; declared Qwen/Qwen3.5-122B-A10B=0.9999856496732413; pool 30 best 1.0  (22350s)\n"}
+,{"stream_name":"stdout","time":22517.756450982,"data":"[326/600] patrickbdevaney/MiMo-V2.6-Flash-REAP50-GGUF: gguf; declared patrickbdevaney/MiMo-V2.6-Flash-REAP50=0.34731506013318086; pool 0 best None  (22444s)\n"}
+,{"stream_name":"stdout","time":22540.215395253,"data":"[327/600] Voodisss/Qwen3-Reranker-4B-GGUF-llama_cpp: gguf; declared Qwen/Qwen3-Reranker-4B=0.9999849060574233; pool 30 best 0.9999849060574233  (22466s)\n"}
+,{"stream_name":"stdout","time":22542.885110068,"data":"[328/600] OleehyO/TexTeller: safetensors; declared -; pool 0 best None  (22469s)\n"}
+,{"stream_name":"stdout","time":22571.081824518,"data":"[329/600] OpenMed/OpenMed-PII-French-BiomedBERT-Base-110M-v1: safetensors; declared microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract=not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); pool 30 best 0.005341334716494979  (22497s)\n"}
+,{"stream_name":"stdout","time":22572.801309151,"data":"[330/600] MoritzLaurer/ModernBERT-large-zeroshot-v2.0: safetensors; declared answerdotai/ModernBERT-large=0.9997987222570637; pool 30 best 0.9997987222570637  (22499s)\n"}
+,{"stream_name":"stdout","time":22723.59317043,"data":"[331/600] OpenMed/OpenMed-PII-Italian-SnowflakeMed-Large-568M-v1: safetensors; declared Snowflake/snowflake-arctic-embed-l-v2.0=0.999909617851218; pool 30 best 0.999909617851218  (22649s)\n"}
+,{"stream_name":"stdout","time":22819.333193263,"data":"[332/600] XiaomiMiMo/MiMo-V2.6-Flash-MOPD: safetensors; declared -; pool 0 best None  (22745s)\n"}
+,{"stream_name":"stdout","time":22822.913088921,"data":"[333/600] optimum-intel-internal-testing/tiny-mamba: safetensors; declared -; pool 0 best None  (22749s)\n"}
+,{"stream_name":"stdout","time":22822.913118601,"data":"[334/600] AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF: not readable (HubError: AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF: no safetensors, PyTorch or GGUF weights); declared -; pool 0 best None  (22749s)\n"}
+,{"stream_name":"stdout","time":22957.85067768,"data":"[335/600] tencent/WeMM-Embedding-2B: safetensors; declared Qwen/Qwen3.5-2B=0.9950192528601898; pool 10 best 0.995089033589152  (22884s)\n"}
+,{"stream_name":"stdout","time":23077.169406441,"data":"[336/600] prism-ml/Bonsai-27B-unpacked: safetensors; declared -; pool 30 best 0.7824176152869834  (23003s)\n"}
+,{"stream_name":"stdout","time":23078.600465663,"data":"[337/600] facebook/mbart-large-cc25: not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); declared -; pool 0 best None  (23004s)\n"}
+,{"stream_name":"stdout","time":23082.321215332,"data":"[338/600] yujiepan/clip-vit-tiny-random-patch14-336: safetensors; declared -; pool 0 best None  (23008s)\n"}
+,{"stream_name":"stdout","time":23203.834712077,"data":"[339/600] garak-llm/roberta-large-snli_mnli_fever_anli_R1_R2_R3-nli: safetensors; declared -; pool 30 best 0.9996071937946134  (23130s)\n"}
+,{"stream_name":"stdout","time":23259.677286425,"data":"[340/600] deepvk/USER2-small: safetensors; declared deepvk/RuModernBERT-small=0.862424276745531; pool 3 best 0.862424276745531  (23186s)\n"}
+,{"stream_name":"stdout","time":23662.633373227,"data":"[341/600] ibm-granite/granite-embedding-reranker-english-r2: safetensors; declared ibm-granite/granite-embedding-english-r2=0.9944624046298356; pool 30 best 0.9944624046298356  (23589s)\n"}
+,{"stream_name":"stdout","time":23662.746704189,"data":"[342/600] cisco-ai/SecureBERT2.0-cross_encoder: safetensors; declared cisco-ai/SecureBERT2.0-base=0.9998394614480837; pool 30 best 0.9998394614480837  (23589s)\n"}
+,{"stream_name":"stdout","time":23668.30703187,"data":"[343/600] optimum-intel-internal-testing/tiny-random-LevitModel: bin; declared -; pool 0 best None  (23594s)\n"}
+,{"stream_name":"stdout","time":23705.859541422,"data":"[344/600] Hiveurban/multilingual-e5-base: safetensors; declared -; pool 30 best 1.0  (23632s)\n"}
+,{"stream_name":"stdout","time":23770.295874847,"data":"[345/600] lllyasviel/control_v11p_sd15_inpaint: safetensors; declared runwayml/stable-diffusion-v1-5=0.9941797441648069; pool 30 best 1.0  (23696s)\n"}
+,{"stream_name":"stdout","time":23776.561474932,"data":"[346/600] EleniF/babylm_1_2_6k_ACLM: bin; declared -; pool 0 best None  (23702s)\n"}
+,{"stream_name":"stdout","time":23780.439515972,"data":"[347/600] HorizonRobotics/HoloMotion_models: safetensors; declared -; pool 0 best None  (23706s)\n"}
+,{"stream_name":"stdout","time":23808.820958528,"data":"[348/600] calcuis/hunyuanimage-gguf: gguf; declared tencent/HunyuanImage-2.1=None; pool 0 best None  (23735s)\n"}
+,{"stream_name":"stdout","time":23938.39796792,"data":"[349/600] tencent/WeVisDoc-4B: safetensors; declared -; pool 30 best 0.9993791551698326  (23864s)\n"}
+,{"stream_name":"stdout","time":24001.451191713,"data":"[350/600] calcuis/kontext-gguf: safetensors; declared black-forest-labs/FLUX.1-Kontext-dev=1.0; pool 1 best -1  (23927s)\n"}
+,{"stream_name":"stdout","time":24410.037325144,"data":"[351/600] lynaNSFW/minimaxH3_Collection: LOST (lynaNSFW/minimaxH3_Collection: InvalidURL: URL can't contain control characters. '/lynaNSFW/minimaxH3_Collection/resolve/f3bb3fb125236e7b52579f76fedebba668bfcbd2/MM-H3 - Pussy Lora.safetensors' (found at least ' '))\n"}
+,{"stream_name":"stdout","time":24533.121567681,"data":"[352/600] LunarOilRig/PaddleOCR-VL-1.6-GGUF-Q4: gguf; declared PaddlePaddle/PaddleOCR-VL-1.6=0.9973797622810376; pool 14 best 0.9973673303674955  (24459s)\n"}
+,{"stream_name":"stdout","time":24657.815279754,"data":"[353/600] zai-org/GLM-5.1: safetensors; declared -; pool 30 best 0.9998716335227092  (24584s)\n"}
+,{"stream_name":"stdout","time":24680.19467135,"data":"[354/600] openbmb/MiniCPM-V-4.6-gguf: gguf; declared openbmb/MiniCPM-V-4.6=None; pool 30 best 0.9914439805781392  (24606s)\n"}
+,{"stream_name":"stdout","time":24751.283403592,"data":"[355/600] Abiray/Qwen3.6-35B-A3B-Q4_K_M-GGUF: gguf; declared Qwen/Qwen3.6-35B-A3B=0.9998421552476779; pool 30 best 0.9998421552476779  (24677s)\n"}
+,{"stream_name":"stdout","time":24910.293010797,"data":"[356/600] bartowski/Qwen_Qwen3-VL-32B-Instruct-GGUF: gguf; declared Qwen/Qwen3-VL-32B-Instruct=0.9999855370161844; pool 30 best 1.0  (24836s)\n"}
+,{"stream_name":"stdout","time":25059.062924106,"data":"[357/600] yandex/YandexGPT-5-Lite-8B-instruct: safetensors; declared yandex/YandexGPT-5-Lite-8B-pretrain=0.999802042164335; pool 30 best 0.9796504774175347  (24985s)\n"}
+,{"stream_name":"stdout","time":25059.064269246,"data":"[358/600] dphn/dolphin-2.9.1-llama-3-8b: safetensors; declared meta-llama/Meta-Llama-3-8B=0.9974798950637378; pool 30 best 0.9999976927054495  (24985s)\n"}
+,{"stream_name":"stdout","time":25359.563722627,"data":"[359/600] ggml-org/gemma-3-4b-it-qat-GGUF: gguf; declared google/gemma-3-4b-it-qat=not readable (HTTP 401); pool 30 best 0.9999257342364246  (25285s)\n"}
+,{"stream_name":"stdout","time":25705.39641182,"data":"[360/600] lightblue/suzume-llama-3-8B-multilingual-orpo-borda-full: safetensors; declared lightblue/suzume-llama-3-8B-multilingual=0.9999948052171814; pool 30 best 1.0  (25631s)\n"}
+,{"stream_name":"stdout","time":25895.322424399,"data":"[361/600] LiquidAI/LFM2-24B-A2B-GGUF: gguf; declared LiquidAI/LFM2-24B-A2B=0.9999901582612962; pool 30 best 1.0  (25821s)\n"}
+,{"stream_name":"stdout","time":25978.321129967,"data":"[362/600] microsoft/phi-4-gguf: gguf; declared -; pool 30 best 1.0  (25904s)\n"}
+,{"stream_name":"stdout","time":26052.761440809,"data":"[363/600] unitary/multilingual-toxic-xlm-roberta: bin; declared -; pool 30 best 0.991628486214716  (25979s)\n"}
+,{"stream_name":"stdout","time":26054.998847411,"data":"[364/600] yonigozlan/EdgeTAM-hf: safetensors; declared -; pool 0 best None  (25981s)\n"}
+,{"stream_name":"stdout","time":26057.385971906,"data":"[365/600] timm/vit_tiny_patch16_dinov3_qkvb.eupe_lvd1689m: safetensors; declared -; pool 0 best None  (25983s)\n"}
+,{"stream_name":"stdout","time":26221.558782168,"data":"[366/600] llm-jp/llm-jp-4.1-33b-thinking-gguf: gguf; declared -; pool 30 best 1.0  (26147s)\n"}
+,{"stream_name":"stdout","time":26349.267609375,"data":"[367/600] unsloth/orpheus-3b-0.1-ft-GGUF: gguf; declared canopylabs/orpheus-3b-0.1-ft=0.999983804645761, meta-llama/Llama-3.2-3B-Instruct=0.6781088361365069, canopylabs/orpheus-3b-0.1-pretrained=not readable (gated, no byte-identical public copy); pool 30 best 0.9999851632083898  (26275s)\n"}
+,{"stream_name":"stdout","time":26501.631535534,"data":"[368/600] bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF: gguf; declared TheDrummer/Rocinante-XL-16B-v1=0.9999849393702572; pool 24 best 1.0  (26428s)\n"}
+,{"stream_name":"stdout","time":26564.414781444,"data":"[369/600] Davlan/afro-xlmr-base: safetensors; declared -; pool 30 best 0.9159020042557215  (26490s)\n"}
+,{"stream_name":"stdout","time":26567.132639729,"data":"[370/600] FINAL-Bench/Darwin-35B-ZTC-Vision: safetensors; declared -; pool 30 best 0.9999026629405018  (26493s)\n"}
+,{"stream_name":"stdout","time":26684.382855026,"data":"[371/600] mradermacher/Qwen2.5-VL-7B-Instruct-Unredacted-MAX-GGUF: gguf; declared prithivMLmods/Qwen2.5-VL-7B-Instruct-Unredacted-MAX=0.999984821787922; pool 30 best 1.0  (26610s)\n"}
+,{"stream_name":"stdout","time":26689.581261699,"data":"[372/600] unsloth/Qwen3-4B-bnb-4bit: safetensors; declared Qwen/Qwen3-4B=1.0; pool 30 best 1.0  (26615s)\n"}
+,{"stream_name":"stdout","time":26948.10503259,"data":"[373/600] bartowski/EVA-Qwen2.5-14B-v0.2-GGUF: gguf; declared EVA-UNIT-01/EVA-Qwen2.5-14B-v0.2=0.9999852620781132; pool 30 best 0.9999852620781132  (26874s)\n"}
+,{"stream_name":"stdout","time":26948.20907085,"data":"[374/600] unsloth/Qwen2.5-Coder-14B-Instruct-128K-GGUF: gguf; declared Qwen/Qwen2.5-Coder-14B-Instruct=0.9999855169153309; pool 30 best 0.9999855169153309  (26874s)\n"}
+,{"stream_name":"stdout","time":26978.955072595,"data":"[375/600] flavour/CLIP-ViT-B-16-DataComp.XL-s13B-b90K: safetensors; declared -; pool 14 best 0.0027338897298422303  (26905s)\n"}
+,{"stream_name":"stdout","time":27111.281366306,"data":"[376/600] ibm-granite/granite-4.0-h-micro: safetensors; declared -; pool 6 best 1.0  (27037s)\n"}
+,{"stream_name":"stdout","time":27164.725509725,"data":"[377/600] KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2: safetensors; declared timm/tf_efficientnet_b5.ns_jft_in1k=None; pool 2 best 0.9327273018537628  (27091s)\n"}
+,{"stream_name":"stdout","time":27164.973883061,"data":"[378/600] nvidia/stt_en_conformer_ctc_large: not readable (other checkpoint format); declared -; pool 0 best None  (27091s)\n"}
+,{"stream_name":"stdout","time":27238.693216579,"data":"[379/600] mradermacher/DeepHat-V1-7B-GGUF: gguf; declared DeepHat/DeepHat-V1-7B=0.9999848493490648; pool 30 best 0.9999848493490648  (27165s)\n"}
+,{"stream_name":"stdout","time":27332.173859757,"data":"[380/600] mradermacher/Llama-3.2-1B-Instruct-Uncensored-GGUF: gguf; declared nicoboss/Llama-3.2-1B-Instruct-Uncensored=0.9999847473119035; pool 30 best 0.9999151663896222  (27258s)\n"}
+,{"stream_name":"stdout","time":27399.731286961,"data":"[381/600] maya-research/maya1: safetensors; declared -; pool 30 best 0.999361294756328  (27326s)\n"}
+,{"stream_name":"stdout","time":27408.84396042,"data":"[382/600] hotchpotch/japanese-reranker-small-v2: safetensors; declared cl-nagoya/ruri-v3-pt-70m=0.9688935917692502; pool 2 best 0.9688656565539038  (27335s)\n"}
+,{"stream_name":"stdout","time":27409.51202271,"data":"[383/600] Lightricks/LTX-2.5-22b-IC-LoRA-Deblur: not readable (gated, no byte-identical public copy); declared -; pool 0 best None  (27335s)\n"}
+,{"stream_name":"stdout","time":27609.577724861,"data":"[384/600] facebook/mask2former-swin-large-ade-panoptic: safetensors; declared -; pool 6 best 0.9978342053224318  (27535s)\n"}
+,{"stream_name":"stdout","time":27852.360247407,"data":"[385/600] Intel/Qwen3.8-Flash-Next-W4A16-AutoRound: safetensors; declared Qwen/Qwen3.8-Flash-Next=1.0; pool 5 best 1.0  (27778s)\n"}
+,{"stream_name":"stdout","time":28013.399154841,"data":"[386/600] nvidia/domain-classifier: safetensors; declared -; pool 30 best 0.9957678806491461  (27939s)\n"}
+,{"stream_name":"stdout","time":28042.999964785,"data":"[387/600] chfm/Qwen-Image-2.1-GGUF: gguf; declared Qwen/Qwen-Image-2.1=None; pool 21 best 1.0  (27969s)\n"}
+,{"stream_name":"stdout","time":28183.477790485,"data":"[388/600] EleutherAI/pythia-12b: safetensors; declared -; pool 7 best 0.9999999999999999  (28109s)\n"}
+,{"stream_name":"stdout","time":28301.595525024,"data":"[389/600] OpenMed/OpenMed-PII-German-ClinicDischarge-Base-110M-v1: safetensors; declared emilyalsentzer/Bio_Discharge_Summary_BERT=not readable (ValueError: not a zip-format PyTorch file (legacy pickle files are not read)); pool 30 best 0.7179448493695599  (28227s)\n"}
+,{"stream_name":"stdout","time":28528.821263189,"data":"[390/600] mtheo/camembert-base-xnli: safetensors; declared -; pool 21 best 0.9983012733904553  (28455s)\n"}
+,{"stream_name":"stdout","time":28529.116107729,"data":"[391/600] onnx-community/Nemotron-3-Diarization-ONNX: not readable (onnx only); declared -; pool 0 best None  (28455s)\n"}
+,{"stream_name":"stdout","time":28566.722823502,"data":"[392/600] nvidia/Kimodo-SOMA-RP-v1.1: safetensors; declared -; pool 6 best 0.513874516431731  (28493s)\n"}
+,{"stream_name":"stdout","time":29787.095727275,"data":"[393/600] kevinzhou21/Qwen3.5-9B-Distill-Deepseek-V4.1-Flash-20261004: gguf; declared -; pool 30 best 0.9999999999999999  (29713s)\n"}
+,{"stream_name":"stdout","time":29841.893856132,"data":"[394/600] smp-hub/mit_b2.imagenet: safetensors; declared -; pool 3 best 0.9889620492637994  (29768s)\n"}
+,{"stream_name":"stdout","time":29854.333846513,"data":"[395/600] google/codegemma-7b-it: not readable (gated, no byte-identical public copy); declared -; pool 0 best None  (29780s)\n"}
+,{"stream_name":"stdout","time":29895.769889854,"data":"[396/600] mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF: gguf; declared Monero/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b=0.9998468572188537; pool 30 best 0.9996439477870205  (29822s)\n"}
+,{"stream_name":"stdout","time":29951.632437622,"data":"[397/600] unsloth/Muse-Glimmer-30B-unsloth-bnb-4bit: safetensors; declared meta-models/Muse-Glimmer-30B=1.0; pool 27 best 1.0  (29878s)\n"}
+,{"stream_name":"stdout","time":29956.27218972,"data":"[398/600] parler-tts/parler-tts-large-v1: safetensors; declared -; pool 0 best None  (29882s)\n"}
+,{"stream_name":"stdout","time":30191.277547559,"data":"[399/600] mradermacher/Qwen3-235B-A22B-abliterated-i1-GGUF: gguf; declared null-space/Qwen3-235B-A22B-abliterated=0.9998440087773554; pool 30 best 1.0  (30117s)\n"}
+,{"stream_name":"stdout","time":30260.64250219,"data":"[400/600] EZForever/gemma-4-26B-A4B-it-qat-uncensored-heretic-UDmerge-GGUF: gguf; declared unsloth/gemma-4-26B-A4B-it-qat-GGUF=1.0, llmfan46/gemma-4-26B-A4B-it-qat-q4_0-unquantized-uncensored-heretic=None; pool 30 best 1.0  (30187s)\n"}
+,{"stream_name":"stdout","time":30329.353790875,"data":"[401/600] Futurix-AI/FxAI-decision-model: safetensors; declared -; pool 30 best 0.010541027963725587  (30255s)\n"}
+,{"stream_name":"stdout","time":30351.307979699,"data":"[402/600] abakanai/Minimax_h3_hybrid: safetensors; declared MiniMaxAI/MiniMax-H3=0.9999822273835666, Comfy-Org/MiniMax-H3=0.9999841269484455; pool 0 best None  (30277s)\n"}
+,{"stream_name":"stdout","time":30450.173574583,"data":"[403/600] TheBloke/Yi-6B-200K-GGUF: gguf; declared 01-ai/Yi-6B-200K=0.9982598382603374; pool 4 best 0.9961487947717749  (30376s)\n"}
+,{"stream_name":"stdout","time":30454.22277744,"data":"[404/600] hf-tiny-v2/tiny-random-Olmo2ForCausalLM: safetensors; declared -; pool 0 best None  (30380s)\n"}
+,{"stream_name":"stdout","time":30473.762092887,"data":"[405/600] boumehdi/wav2vec2-large-xlsr-moroccan-darija: bin; declared facebook/wav2vec2-large-xlsr-53=0.955237067011388; pool 30 best 0.954491816606216  (30400s)\n"}
+,{"stream_name":"stdout","time":30501.164396291,"data":"[406/600] microsoft/trocr-small-stage1: bin; declared -; pool 4 best 0.9991342900552569  (30427s)\n"}
+,{"stream_name":"stdout","time":30509.372192781,"data":"[407/600] jockibaba/jockibaba8: safetensors; declared -; pool 30 best 0.999842005135832  (30435s)\n"}
+,{"stream_name":"stdout","time":30537.542692032,"data":"[408/600] sainteye/ifoodie-classifier-v8: safetensors; declared -; pool 30 best 0.9998923565838645  (30463s)\n"}
+,{"stream_name":"stdout","time":30539.915216736,"data":"[409/600] releaseworthy/dasiwa-minimax-h3-turbo-int8: safetensors; declared -; pool 0 best None  (30466s)\n"}
+,{"stream_name":"stdout","time":30576.896029933,"data":"[410/600] urchade/gliner_base: bin; declared -; pool 2 best 0.9997421805538198  (30503s)\n"}
+,{"stream_name":"stdout","time":30626.905811259,"data":"[411/600] peft-internal-testing/tiny-random-gemma4-E2B: safetensors; declared -; pool 4 best 1.0  (30553s)\n"}
+,{"stream_name":"stdout","time":30707.678043374,"data":"[412/600] freakyskittle/apex-flash-1-abliterated-GGUF: gguf; declared cantina-security/apex-flash-1-abliterated=None; pool 30 best 0.9999862567414601  (30634s)\n"}
+,{"stream_name":"stdout","time":30909.305981172,"data":"[413/600] lemonyins/Qwen3.6-27B-uncensored-abliterated-i1-IQ4_XS-GGUF-Smaller: gguf; declared Qwen/Qwen3.6-27B=0.9998327642243527; pool 30 best 0.9998327642243527  (30835s)\n"}
+,{"stream_name":"stdout","time":30967.2079199,"data":"[414/600] BennyDaBall/Fibo-2.0-dev-NVFP4: safetensors; declared briaai/Fibo-2.0-dev=1.0; pool 0 best None  (30893s)\n"}
+,{"stream_name":"stdout","time":31139.283069199,"data":"[415/600] aisingapore/Llama-SEA-Guard-8B-2602: safetensors; declared aisingapore/Llama-SEA-LION-v3-8B-IT=0.9999379728915918; pool 4 best 0.9976810203826356  (31065s)\n"}
+,{"stream_name":"stdout","time":31381.681649744,"data":"[416/600] kingabzpro/wav2vec2-large-xls-r-1b-Swedish: safetensors; declared facebook/wav2vec2-xls-r-1b=0.9978595887675674; pool 26 best 0.9965407709811596  (31308s)\n"}
+,{"stream_name":"stdout","time":31486.679949169,"data":"[417/600] HauhauCS/GPT-OSS-20B-Uncensored-HauhauCS-Aggressive: gguf; declared gpt-oss-20b=not readable (HTTP 401); pool 30 best 1.0  (31413s)\n"}
+,{"stream_name":"stdout","time":31531.192132587,"data":"[418/600] Gen-Verse/MMaDA-8B-MixCoT: safetensors; declared -; pool 30 best 0.9815017535257528  (31457s)\n"}
+,{"stream_name":"stdout","time":31533.325163616,"data":"[419/600] Tumo505/SSL-ECG-Classification-model-card: safetensors; declared -; pool 0 best None  (31459s)\n"}
+,{"stream_name":"stdout","time":31812.579604985,"data":"[420/600] mradermacher/llama-3-youko-8b-instruct-GGUF: gguf; declared rinna/llama-3-youko-8b-instruct=0.9999853418041995; pool 30 best 0.9874101036878861  (31738s)\n"}
+,{"stream_name":"stdout","time":31824.564199721,"data":"[421/600] mradermacher/Qwen3-Omni-30B-A3B-Captioner-GGUF: gguf; declared mrTEN10/Qwen3-Omni-30B-A3B-Captioner=None; pool 30 best 0.9999087545500633  (31750s)\n"}
+,{"stream_name":"stdout","time":31828.626427046,"data":"[422/600] habib-analyst/sonocnn: safetensors; declared -; pool 0 best None  (31755s)\n"}
+,{"stream_name":"stdout","time":32125.61400441,"data":"[423/600] PrunaAI/openai-community-gpt2-GGUF-smashed: gguf; declared openai-community/gpt2=0.0005206191789434984; pool 30 best 0.004832587329800464  (32052s)\n"}
+,{"stream_name":"stdout","time":32207.263757318,"data":"[424/600] Thox-ai/ThoxClip-Qwen3-0.6B: safetensors; declared Qwen/Qwen3-0.6B=0.9999719793157136; pool 30 best 0.9999838345517208  (32133s)\n"}
+,{"stream_name":"stdout","time":32415.212495831,"data":"[425/600] MaziyarPanahi/Mistral-7B-v0.3: safetensors; declared -; pool 30 best 1.0  (32341s)\n"}
+,{"stream_name":"stdout","time":33423.540378471,"data":"[426/600] mohommed/LFM3-1.7B-Frontier-SmartAgent: safetensors; declared LiquidAI/LFM3-1.7B=0.9999272574613678; pool 30 best 0.9999393167480666  (33349s)\n"}
+,{"stream_name":"stdout","time":33478.836067335,"data":"[427/600] mradermacher/CAT-Translate-7b-i1-GGUF: gguf; declared cyberagent/CAT-Translate-7b=0.9998443434525068; pool 30 best 0.999999909670654  (33405s)\n"}
+,{"stream_name":"stdout","time":33484.405644679,"data":"[428/600] allenai/unifiedqa-t5-large: bin; declared -; pool 0 best None  (33410s)\n"}
+,{"stream_name":"stdout","time":33498.778810731,"data":"[429/600] Winnougan/MiniMax-H3-PTD-LoRAs-Quantized-ComfyUI: adapter; declared -; pool 0 best None  (33425s)\n"}
+,{"stream_name":"stdout","time":33865.905835005,"data":"[430/600] Geotrend/distilbert-base-en-nl-cased: safetensors; declared -; pool 30 best 0.002702088909901021  (33792s)\n"}
+,{"stream_name":"stdout","time":34155.822519942,"data":"[431/600] bartowski/soob3123_amoral-gemma3-12B-v2-GGUF: gguf; declared soob3123/amoral-gemma3-12B-v2=None; pool 30 best 0.9999961367901886  (34082s)\n"}
+,{"stream_name":"stdout","time":34319.007828791,"data":"[432/600] QuantFactory/Llama-3.1-8B-Stheno-v3.4-GGUF: gguf; declared -; pool 30 best 0.9999852771106696  (34245s)\n"}
+,{"stream_name":"stdout","time":34349.082567631,"data":"[433/600] mradermacher/dolphin-2.9.1-yi-1.5-34b-GGUF: gguf; declared dphn/dolphin-2.9.1-yi-1.5-34b=0.9999856923425219; pool 30 best 0.9999856923425219  (34275s)\n"}
+,{"stream_name":"stdout","time":34363.204850529,"data":"[434/600] ldiex/TACA: adapter; declared -; pool 0 best None  (34289s)\n"}
+,{"stream_name":"stdout","time":34365.352406341,"data":"[435/600] Synthyra/ESMFold2: safetensors; declared -; pool 0 best None  (34291s)\n"}
+,{"stream_name":"stdout","time":34399.500637593,"data":"[436/600] mradermacher/granite-3.1-8b-Reasoning-i1-GGUF: gguf; declared ruslanmv/granite-3.1-8b-Reasoning=0.9998324783298926; pool 30 best 0.9999904639310117  (34325s)\n"}
+,{"stream_name":"stdout","time":34513.133263148,"data":"[437/600] mondk/LFM3-1.7B-Claude-Code-GGUF: gguf; declared LiquidAI/LFM3-1.7B=None; pool 30 best 0.999930328795305  (34439s)\n"}
+,{"stream_name":"stdout","time":34522.2335534,"data":"[438/600] mradermacher/Qwen3.5-2B-Wolof-Instruct-v1-i1-GGUF: gguf; declared mamelles/Qwen3.5-2B-Wolof-Instruct-v1=0.9998715741029789; pool 30 best 0.9998045697212838  (34448s)\n"}
+,{"stream_name":"stdout","time":34522.460053383,"data":"[439/600] vadimbelsky/arabic-emirati-female-piper: not readable (onnx only); declared -; pool 0 best None  (34448s)\n"}
+,{"stream_name":"stdout","time":34558.878849056,"data":"[440/600] AtomicChat/d1-2B-GGUF: gguf; declared LiquidAI/d1-2B=None; pool 30 best 1.0  (34485s)\n"}
+,{"stream_name":"stdout","time":34676.716329708,"data":"[441/600] mradermacher/Logics-SWE-Qwen3.6-27B-GGUF: gguf; declared Logics-MLLM/Logics-SWE-Qwen3.6-27B=0.9999841401325735; pool 30 best 0.9999820597142237  (34603s)\n"}
+,{"stream_name":"stdout","time":34814.411238683,"data":"[442/600] legraphista/RoLlama2-7b-Chat-IMat-GGUF: gguf; declared OpenLLM-Ro/RoLlama2-7b-Chat=0.99998545813937; pool 30 best 0.9992487143777627  (34740s)\n"}
+,{"stream_name":"stdout","time":34867.928045832,"data":"[443/600] baerquants/GLM-5.3-UD-Q4_K_XL-layers: gguf; declared unsloth/GLM-5.3-GGUF=not readable (no weight files); pool 2 best 1.0  (34794s)\n"}
+,{"stream_name":"stdout","time":34922.785715624,"data":"[444/600] mistralai/Ministral-3-14B-Reasoning-2512-GGUF: gguf; declared mistralai/Ministral-3-14B-Reasoning-2512=None; pool 30 best 1.0  (34849s)\n"}
+,{"stream_name":"stdout","time":35010.230978495,"data":"[445/600] mradermacher/Qwen3.8-27B-Brainwaves-WFH-GGUF: gguf; declared nightmedia/Qwen3.8-27B-Brainwaves-WFH=0.9999841785343979; pool 30 best 0.9999509544764797  (34936s)\n"}
+,{"stream_name":"stdout","time":35066.093009901,"data":"[446/600] nikita-savelyev-cerebras/tiny-random-kimi-k2.7-code-int4: safetensors; declared moonshotai/Kimi-K2.7-Code=None; pool 1 best -0.0014472317288980456  (34992s)\n"}
+,{"stream_name":"stdout","time":35134.557769335,"data":"[447/600] mradermacher/Qwen3.8-27B-TWIN-TURBO-Fable-Cold-Fusion-709-ULTRA-HERETIC-Uncensored-GGUF: gguf; declared DavidAU/Qwen3.8-27B-TWIN-TURBO-Fable-Cold-Fusion-709-ULTRA-HERETIC-Uncensored=0.9999846506052863; pool 30 best 0.9999846506052863  (35060s)\n"}
+,{"stream_name":"stdout","time":35351.92658655,"data":"[448/600] mzoelfakar/Al-Khwarizmi-3B-GGUF: gguf; declared mzoelfakar/Al-Khwarizmi-3B=0.9999850953845295; pool 30 best 0.9999850953845295  (35278s)\n"}
+,{"stream_name":"stdout","time":35589.282219639,"data":"[449/600] mradermacher/Mistral-Small-4-119B-2603-i1-GGUF: gguf; declared mistralai/Mistral-Small-4-119B-2603=None; pool 20 best 0.9999492830477721  (35515s)\n"}
+,{"stream_name":"stdout","time":35692.947678051,"data":"[450/600] gen-robot/openvla-7b-rlvla-sft_16k: safetensors; declared gen-robot/openvla-7b-rlvla-warmup=0.9813271790956997; pool 12 best 0.9786112535683696  (35619s)\n"}
+,{"stream_name":"stdout","time":35718.772114951,"data":"[451/600] mradermacher/Mero-Artemis-31B-v1-GGUF: gguf; declared pineapplesuperfan/Mero-Artemis-31B-v1=None; pool 30 best 0.994135082089559  (35645s)\n"}
+,{"stream_name":"stdout","time":35980.476451471,"data":"[452/600] mradermacher/Solar-Decision-JEV-27B-V2-GGUF: gguf; declared SargeDev/Solar-Decision-JEV-27B-V2=0.9999844025868883; pool 30 best 0.9999844025868883  (35906s)\n"}
+,{"stream_name":"stdout","time":36148.303189183,"data":"[453/600] mradermacher/Llama-3-8B-Ultrachat-200K-i1-GGUF: gguf; declared Magpie-Align/Llama-3-8B-Ultrachat-200K=0.9998423356162309; pool 30 best 0.9996386157824921  (36074s)\n"}
+,{"stream_name":"stdout","time":36148.303244653,"data":"[454/600] miifanboy/Spark-X2.5-4B-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303250573,"data":"[455/600] tencent/HunyuanVideo-I2V: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303255553,"data":"[456/600] mradermacher/Chochmah-1B-Instruct-DPO-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303260293,"data":"[457/600] RichardErkhov/ricdomolm_-_lawma-8b-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303264773,"data":"[458/600] ostris/flux2_berthe_morisot: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303269344,"data":"[459/600] Helsinki-NLP/opus-mt-en-trk: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303273493,"data":"[460/600] mradermacher/gemma-4-31B-it-heretic-z-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303277924,"data":"[461/600] mradermacher/QiMing-Socratic-VL-8B-Instruct-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303282113,"data":"[462/600] flair/chunk-english: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303286764,"data":"[463/600] pearl-ai/Qwen3-30B-A3B-Instruct-2507-pearl: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303292073,"data":"[464/600] mobilint/Qwen2.5-0.5B-Instruct-Batch16: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303296744,"data":"[465/600] RichardErkhov/mii-community_-_zefiro-7b-base-ITA-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303301444,"data":"[466/600] mradermacher/Pathfinder-RP-12B-RU-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303305484,"data":"[467/600] tao1000/hh3: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303309673,"data":"[468/600] ToxicityPrompts/PolyGuard-Qwen: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303314104,"data":"[469/600] Demonthos/candle-quantized-whisper-large-v3-turbo: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303318333,"data":"[470/600] Anonymiserad/SweMedMCQ-EuroLLM-1.7B-Answer-EN-SV: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303322713,"data":"[471/600] ishiki-emo/mojicast-fugumt-ja-en-ct2: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303327213,"data":"[472/600] flypg/DeepSeek-R1-Distill-Qwen-14B-Japanese-chat-quant: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303331384,"data":"[473/600] mradermacher/Anubis-70B-v1.1-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303335744,"data":"[474/600] Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303358853,"data":"[475/600] HiTZ/gpt2-eus-euscrawl: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303362833,"data":"[476/600] facebook/metaclip-2-worldwide-l14: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303366044,"data":"[477/600] mradermacher/Koa-express-31B-qat-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303431244,"data":"[478/600] obsxrver/wan2.2-i2v-scat: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303454744,"data":"[479/600] mradermacher/Llama3.1-8B-Thinking-R1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303459064,"data":"[480/600] bartowski/Meta-Llama-3-120B-Instruct-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303463024,"data":"[481/600] mradermacher/patricide-12B-Unslop-Mell-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303467213,"data":"[482/600] NobodyWho/LFM2.5-VL-1.6B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303470504,"data":"[483/600] chkla/roberta-argument: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303474044,"data":"[484/600] mradermacher/llemma_34b-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303477493,"data":"[485/600] tomaarsen/Qwen3-VL-Embedding-8B: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303481513,"data":"[486/600] brunogcp/supergemma4-26b-abliterated-multimodal-gguf-4bit: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303485283,"data":"[487/600] inclusionAI/Ling-2.5-1T: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303488663,"data":"[488/600] mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303492433,"data":"[489/600] multimodal-vision-ai/mvai-video-action-compare-models: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303495583,"data":"[490/600] RichardErkhov/etri-xainlp_-_llama2-12.8b_lora-dpo_v1-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303499303,"data":"[491/600] QuantFactory/Lama-DPOlphin-8B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303502893,"data":"[492/600] mradermacher/Qwen3.5-0.8B-heretic-v3-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303506823,"data":"[493/600] mradermacher/Glitch-v1.1-8B-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303510343,"data":"[494/600] mradermacher/DeepHermes-3-Llama-3-8B-Preview-Heretic-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303514143,"data":"[495/600] TalTechNLP/voxlingua107-epaca-tdnn: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303517783,"data":"[496/600] mradermacher/Gemma4-31B-IT-Abliterated-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303520763,"data":"[497/600] chaoliangUNSW/Jev-Style-2B-Decision-v3-MLX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303524443,"data":"[498/600] francesca9805/urd-100mb-after-wc-uniform-newlex-before-ckpt500-packed-bfdiso_seed3407: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303535553,"data":"[499/600] mlx-community/granite-4.1-8b-8bit: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303539923,"data":"[500/600] ekacare/parrotlet-a-2.5-pro: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303543723,"data":"[501/600] mradermacher/chime-in-detector-gemma4-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303547213,"data":"[502/600] mradermacher/MistralBase-4x7B-MoE-ECE-PRYMMAL-Martial-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303550923,"data":"[503/600] RichardErkhov/mlfoundations-dev_-_hp_ablations_llama3_epoch2_dcftv1.2-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303573683,"data":"[504/600] mradermacher/Aura-4o-Rebirth-Gemma-4-31B-Merged-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303577823,"data":"[505/600] devpotatopotato/qwen3-14b-sft-261023-bigmath-gpt-oss-120b-fsdp-1-epoch-1: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303581853,"data":"[506/600] SVECTOR-CORPORATION/SPTK-2: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303585933,"data":"[507/600] mradermacher/Qwen-2.5-base-7b-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303588823,"data":"[508/600] jinreiyu/Bonsai-REDUX2-GGUF-Q4_K_M-BLANK-PRIMED-V5-LeanV2-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303591813,"data":"[509/600] kstathop/Casual-Snapshot-Realism: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303597803,"data":"[510/600] qualcomm/DETR-ResNet101-DC5: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303601023,"data":"[511/600] mradermacher/bird-fixer-14b-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303604363,"data":"[512/600] francesca9805/tur-latn-100mb-after-ppt-Dp-100mb-packed-bfdiso-ckpt500_seed10: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303607723,"data":"[513/600] mradermacher/Llama-3.2-3B-optimized-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303625183,"data":"[514/600] NandemoGHS/Anime-XCodec2-44.1kHz-v2: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303662493,"data":"[515/600] qikp/baguettotron-600m-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303667053,"data":"[516/600] ValueFX9507/Tifa-Deepsex-14b-CoT: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303670453,"data":"[517/600] mradermacher/Mira-v1.22.2b-27B-dpo-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303674043,"data":"[518/600] mradermacher/cerbero-7b-openchat-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303682053,"data":"[519/600] mradermacher/Atlas-72B-SVT-merged-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303685313,"data":"[520/600] allenai/open-instruct-human-mix-30b: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303714483,"data":"[521/600] nm-testing/w8a8_dynamic_asym-e2e: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303718523,"data":"[522/600] 0xSojalSec/DeepSeek-V4.1-Flash-1017-GSQ-RCO-12-GPU: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303721883,"data":"[523/600] mradermacher/Babel-9B-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303797003,"data":"[524/600] 2264K/ktransfer-27b-kd-dynamic-s400: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303808423,"data":"[525/600] tattabio/flashppi: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303812163,"data":"[526/600] austindavis/gpt2-lichess-uci-201601: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303815063,"data":"[527/600] mradermacher/twentle-gemma-4-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303824003,"data":"[528/600] resnet101/hot-art-flex-lora: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303827483,"data":"[529/600] ElementMerc/qwen3-0.6b-uncensored: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303835054,"data":"[530/600] RichardErkhov/M1LL1X_-_microsoft-phi-3_5-mini-trained-abliterated-QA-1960-all-modules-merged-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303838434,"data":"[531/600] RichardErkhov/PathFinderKR_-_Llama-3.2-1B-Instruct-Pause_Token-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303858603,"data":"[532/600] mradermacher/Long-SOVL-Experiment-8B-L3-262K-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303862533,"data":"[533/600] InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303879903,"data":"[534/600] collabora/whisper-tiny-hindi: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303883633,"data":"[535/600] mradermacher/aquif-3-moe-17b-a2.8b-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303942783,"data":"[536/600] backyardai/Llama-3.1-8B-ArliAI-RPMax-v1.1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303955403,"data":"[537/600] EZCon/Huihui-gemma-4-E4B-it-abliterated-4bit-mlx: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303959693,"data":"[538/600] JetBrains-Research/cmg-codet5-without-history: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303980463,"data":"[539/600] prithivMLmods/Qwen3.6-27B-NVFP4-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.303984803,"data":"[540/600] mradermacher/Vision-Braille-Qwen3-8B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304001453,"data":"[541/600] mradermacher/TON-3B-CLEVR-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304005423,"data":"[542/600] sagawa/ReactionT5v2-yield: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304008743,"data":"[543/600] timm/vit_huge_patch14_clip_224.laion2b_ft_in1k: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304012323,"data":"[544/600] mradermacher/tame-tiger-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304016433,"data":"[545/600] arabsya87sy7a8/Qwythos-9B-Claude-Mythos-5-1M-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304027633,"data":"[546/600] mradermacher/Uirapuru-U1-9B-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304030923,"data":"[547/600] wmueller/zimgturbo: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304074713,"data":"[548/600] RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304079523,"data":"[549/600] mradermacher/Omega-Darker_The-Final-Directive-24B-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304083243,"data":"[550/600] mradermacher/LLaDA-8B-Base-JSON-SFT-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304086423,"data":"[551/600] mradermacher/PyThagorean-3B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304104943,"data":"[552/600] mradermacher/PsyMedRP-v1-20B-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304108963,"data":"[553/600] McGill-NLP/LLM2Vec-Qwen3-06B-mntp: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304112223,"data":"[554/600] mradermacher/granite-speech-3.3-8b-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304144473,"data":"[555/600] tensorblock/mlabonne_NeuralDaredevil-7B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304148943,"data":"[556/600] mradermacher/Melinoe-Qwen-30B-A3B-Afterthought-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304152303,"data":"[557/600] mradermacher/SOLAR-10.7B-Instruct-Forest-DPO-v1-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304183053,"data":"[558/600] mradermacher/llama-2-7b-platypus-guanaco-25-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304187413,"data":"[559/600] zeras141a/b0f2d339: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304190773,"data":"[560/600] mradermacher/Soulblighter-24B-v1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304199803,"data":"[561/600] Mungert/X-Ray_Alpha-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304203163,"data":"[562/600] mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304239673,"data":"[563/600] lmstudio-community/c4ai-command-r-plus-08-2024-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304254153,"data":"[564/600] mradermacher/Orion-HYMT1.5-7B-SFT-v2601-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304257573,"data":"[565/600] pocketpose/onnx-models: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304275633,"data":"[566/600] Emperordzd/Nexara-Nano-100M-Chat: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304278823,"data":"[567/600] 2264K/ktransfer-27b-kd-lam02-s150: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304282163,"data":"[568/600] RichardErkhov/gradientai_-_Llama-3-8B-Instruct-262k-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304285433,"data":"[569/600] mradermacher/Mergerix-7b-v0.1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304296463,"data":"[570/600] prithivMLmods/SmolLM2-360M-F32-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304299473,"data":"[571/600] mradermacher/qwen-2.5-palm-diagnosis-v2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304344883,"data":"[572/600] facebook/mms-tts-mfe: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304354753,"data":"[573/600] mradermacher/Gemma-2-2b-TitanFusion-i1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304358133,"data":"[574/600] s-sahoo/duo-distilled: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304366553,"data":"[575/600] biohub/ESMFold2-Experimental-Fast-base300M-step250k: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304374263,"data":"[576/600] OpenIXCLab/SeC-4B: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304377543,"data":"[577/600] airagrp/Ornith-1.5-35B-A3B-mlx-nvfp4: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304401603,"data":"[578/600] mradermacher/Qwen3.8-27B-USS-Prism-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304405733,"data":"[579/600] DeepPavlov/distilrubert-tiny-cased-conversational-5k: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304408663,"data":"[580/600] mlx-community/whisper-small.en-mlx-q4: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304416033,"data":"[581/600] CISCai/Mistral-7B-Instruct-v0.3-SOTA-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304419373,"data":"[582/600] qing-yao/ppt-pythia-1b-baseline-seed3408-stage2: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304454633,"data":"[583/600] mradermacher/gideon-v0-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304459013,"data":"[584/600] mradermacher/nyaya-3b-v3-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304462113,"data":"[585/600] RichardErkhov/aqweteddy_-_mistral_tv-neural-marconroni-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304484363,"data":"[586/600] ServiceNow-AI/SuperApriel-15b-Base: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304488273,"data":"[587/600] KETI-NLP/ke-t5-base: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304491723,"data":"[588/600] liamwh/Swift-Qwen3.8-27B-W4A16-syv-fast: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36148.304513223,"data":"[589/600] mradermacher/Falcon3-3B-Instruct-Heretic-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":36197.962820929,"data":"[590/600] RichardErkhov/m8than_-_mistral-7b-instruct-0.2-gguf: gguf; declared -; pool 30 best 0.9999853084715513  (36124s)\n"}
+,{"stream_name":"stdout","time":36197.964872128,"data":"[591/600] mradermacher/eros-7B-BETA-GGUF: gguf; declared tavtav/eros-7B-BETA=0.9999792683466158; pool 30 best 0.9904220689273358  (36124s)\n"}
+,{"stream_name":"stdout","time":36265.938189028,"data":"[592/600] mradermacher/natural-functions-i1-GGUF: gguf; declared cfahlgren1/natural-functions=0.9998287387494977; pool 30 best 0.9996873511311382  (36192s)\n"}
+,{"stream_name":"stdout","time":36394.587694732,"data":"[593/600] RAS-LAB/Qwen3.6-26B-A3B-KREAP-8bit-MLX: safetensors; declared mlx-community/Qwen3.6-35B-A3B-8bit=1.0; pool 19 best 0.999972277186722  (36320s)\n"}
+,{"stream_name":"stdout","time":36704.186524039,"data":"[594/600] mradermacher/deepseek-uncensored-lore-i1-GGUF: gguf; declared luvGPT/deepseek-uncensored-lore=0.9998459483018114; pool 30 best 0.47940343032809407  (36630s)\n"}
+,{"stream_name":"stdout","time":37097.044949449,"data":"[595/600] tensorblock/Qwen_Qwen3-1.7B-GGUF: gguf; declared Qwen/Qwen3-1.7B=0.9875634694239159; pool 30 best 0.9875634694239159  (37023s)\n"}
+,{"stream_name":"stdout","time":37392.152288772,"data":"[596/600] NousResearch/Llama-2-70b-chat-hf: safetensors; declared -; pool 30 best 0.9747184754699425  (37318s)\n"}
+,{"stream_name":"stdout","time":38358.618832458,"data":"[597/600] mradermacher/llmfan46-Qwen3.5-9B-ultra-heretic-i1-GGUF: gguf; declared CCSSNE/llmfan46-Qwen3.5-9B-ultra-heretic=0.9998420629815041; pool 30 best 0.9998420629815041  (38285s)\n"}
+,{"stream_name":"stdout","time":39393.304151853,"data":"[598/600] boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF: gguf; declared nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16=None, nota-ai/Nemotron-3.5-Lightning-30B-A3B-Nota-Ternary-MLX-1014=None; pool 30 best -1  (39319s)\n"}
+,{"stream_name":"stdout","time":40404.62910032,"data":"[599/600] Indexnusrefather/Erebus-RP-Mini-4B-Instruct-2608-v0.1: gguf; declared Qwen/Qwen3.5-4B=None; pool 30 best 0.9999999999999998  (40331s)\n"}
+]

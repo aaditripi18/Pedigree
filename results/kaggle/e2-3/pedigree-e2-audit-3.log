@@ -1,0 +1,110 @@
+[{"stream_name":"stdout","time":70.966184058,"data":"code 3f9048f\n"}
+,{"stream_name":"stdout","time":126.700754378,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":128.042596153,"data":"PEDIGREE_WORKERS = 12\n"}
+,{"stream_name":"stdout","time":128.042636571,"data":"PEDIGREE_BUDGET_HOURS = 10\n"}
+,{"stream_name":"stdout","time":128.042643237,"data":"PEDIGREE_E2_PREVIOUS = /kaggle/input\n"}
+,{"stream_name":"stdout","time":167.021272931,"data":"520 done, 80 to audit\n"}
+,{"stream_name":"stderr","time":288.001565685,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":288.002457993,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 361, in work\n"}
+,{"stream_name":"stderr","time":288.00254581,"data":"    return e[\"id\"], audit_one(e, t, frame), None\n"}
+,{"stream_name":"stderr","time":288.002554267,"data":"                    ~~~~~~~~~^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":288.002559162,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 317, in audit_one\n"}
+,{"stream_name":"stderr","time":288.002564408,"data":"    other, cf = open_repo(c, frame)\n"}
+,{"stream_name":"stderr","time":288.002569337,"data":"                ~~~~~~~~~^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":288.002574124,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 233, in open_repo\n"}
+,{"stream_name":"stderr","time":288.002579176,"data":"    fmt, files, sizes, _ = weight_files(repo, d)\n"}
+,{"stream_name":"stderr","time":288.002584269,"data":"                           ~~~~~~~~~~~~^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":288.002592862,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 151, in weight_files\n"}
+,{"stream_name":"stderr","time":288.002597974,"data":"    sizes = {f: int(sib[f].get(\"size\") or (sib[f].get(\"lfs\") or {}).get(\"size\") or 0) for f in files}\n"}
+,{"stream_name":"stderr","time":288.002603413,"data":"                    ~~~^^^\n"}
+,{"stream_name":"stderr","time":288.002608212,"data":"KeyError: 'transformer/diffusion_pytorch_model-00001-of-00001.safetensors'\n"}
+,{"stream_name":"stdout","time":288.003310372,"data":"[1/80] Qwen/Qwen-Image-Edit-2509: LOST (unexpected KeyError: 'transformer/diffusion_pytorch_model-00001-of-00001.safetensors')\n"}
+,{"stream_name":"stdout","time":478.914596333,"data":"[2/80] qikp/baguettotron-600m-GGUF: gguf; declared PleIAs/baguettotron-600m=1.0; pool 8 best 1.0  (312s)\n"}
+,{"stream_name":"stdout","time":484.307521371,"data":"[3/80] nm-testing/w8a8_dynamic_asym-e2e: safetensors; declared -; pool 30 best 1.0  (317s)\n"}
+,{"stream_name":"stdout","time":563.210479351,"data":"[4/80] lynaNSFW/minimaxH3_Collection: LOST (lynaNSFW/minimaxH3_Collection: InvalidURL: URL can't contain control characters. '/lynaNSFW/minimaxH3_Collection/resolve/2c79bbcec44246dbf4ee112f93bc2e4eaca6c3cc/H3_DR34ML4Y_P1 (1).safetensors' (found at least ' '))\n"}
+,{"stream_name":"stdout","time":564.329364653,"data":"[5/80] tattabio/flashppi: safetensors; declared -; pool 0 best None  (397s)\n"}
+,{"stream_name":"stdout","time":779.017148188,"data":"[6/80] 0xSojalSec/DeepSeek-V4.1-Flash-1017-GSQ-RCO-12-GPU: gguf; declared deepseek-ai/DeepSeek-V4.1-Flash-1017=None; pool 2 best 1.0  (612s)\n"}
+,{"stream_name":"stdout","time":829.684788878,"data":"[7/80] austindavis/gpt2-lichess-uci-201601: safetensors; declared -; pool 7 best 0.005238126206641179  (663s)\n"}
+,{"stream_name":"stdout","time":840.796251771,"data":"[8/80] resnet101/hot-art-flex-lora: adapter; declared -; pool 0 best None  (674s)\n"}
+,{"stream_name":"stdout","time":863.406896309,"data":"[9/80] mradermacher/Babel-9B-i1-GGUF: gguf; declared Tower-Babel/Babel-9B=0.9998282995512161; pool 3 best 0.999296744886242  (696s)\n"}
+,{"stream_name":"stdout","time":934.890156859,"data":"[10/80] xinsir/controlnet-union-sdxl-1.0: LOST (Dung306080/Controlnet: InvalidURL: URL can't contain control characters. '/Dung306080/Controlnet/resolve/5efcdf8fd3a3c0f5c3b89effd52fd83b8476215d/xinsir-controlnet-tile-sdxl-1.0 .safetensors' (found at least ' '))\n"}
+,{"stream_name":"stdout","time":1483.393410384,"data":"[11/80] mradermacher/cerbero-7b-openchat-i1-GGUF: gguf; declared galatolo/cerbero-7b-openchat=0.999827090238721; pool 30 best 0.9993428735592709  (1316s)\n"}
+,{"stream_name":"stdout","time":1569.015619395,"data":"[12/80] openbmb/MiniCPM5-2B: LOST (rahul7star/gemma-gguf: InvalidURL: URL can't contain control characters. '/rahul7star/gemma-gguf/resolve/d0002763827eadd659ad5c5ecf48d5b1728cc069/model-JDeepSeek-V4-Pro-Qwen3.5-4Bi-quality (Q6_K).gguf' (found at least ' '))\n"}
+,{"stream_name":"stdout","time":1697.847035128,"data":"[13/80] mradermacher/twentle-gemma-4-GGUF: gguf; declared maximedb/twentle-gemma-4=None; pool 30 best 0.9949086912306091  (1531s)\n"}
+,{"stream_name":"stdout","time":1700.826393747,"data":"[14/80] mradermacher/Mira-v1.22.2b-27B-dpo-i1-GGUF: gguf; declared Lambent/Mira-v1.22.2b-27B-dpo=None; pool 30 best 0.9925399270265363  (1534s)\n"}
+,{"stream_name":"stdout","time":1705.144323017,"data":"[15/80] allenai/open-instruct-human-mix-30b: bin; declared -; pool 30 best 0.010694239756414486  (1538s)\n"}
+,{"stream_name":"stdout","time":1974.73019637,"data":"[16/80] ElementMerc/qwen3-0.6b-uncensored: safetensors; declared Qwen/Qwen3-0.6B=1.0; pool 30 best 1.0  (1808s)\n"}
+,{"stream_name":"stdout","time":1978.34447005,"data":"[17/80] ValueFX9507/Tifa-Deepsex-14b-CoT: gguf; declared deepseek-ai/deepseek-r1-14b=not readable (HTTP 401); pool 30 best 0.9997315425535516  (1811s)\n"}
+,{"stream_name":"stdout","time":1991.541788108,"data":"[18/80] collabora/whisper-tiny-hindi: safetensors; declared -; pool 12 best 0.840880188947343  (1825s)\n"}
+,{"stream_name":"stdout","time":2313.459003197,"data":"[19/80] prithivMLmods/Qwen3.6-27B-NVFP4-GGUF: gguf; declared Qwen/Qwen3.6-27B=0.9967191412327282; pool 30 best 0.9967191412327282  (2146s)\n"}
+,{"stream_name":"stdout","time":2327.913044719,"data":"[20/80] 2264K/ktransfer-27b-kd-dynamic-s400: safetensors; declared Qwen/Qwen3.8-27B=0.9999995631624339; pool 30 best 0.9999995631624339  (2161s)\n"}
+,{"stream_name":"stdout","time":2639.062388782,"data":"[21/80] RichardErkhov/M1LL1X_-_microsoft-phi-3_5-mini-trained-abliterated-QA-1960-all-modules-merged-gguf: gguf; declared -; pool 30 best 0.9999530378653676  (2472s)\n"}
+,{"stream_name":"stdout","time":2665.425955574,"data":"[22/80] RichardErkhov/PathFinderKR_-_Llama-3.2-1B-Instruct-Pause_Token-gguf: gguf; declared -; pool 30 best 0.9223411974743319  (2498s)\n"}
+,{"stream_name":"stdout","time":2917.091110913,"data":"[23/80] timm/vit_huge_patch14_clip_224.laion2b_ft_in1k: safetensors; declared -; pool 5 best 0.9998603680110738  (2750s)\n"}
+,{"stream_name":"stdout","time":2925.036540148,"data":"[24/80] mradermacher/Long-SOVL-Experiment-8B-L3-262K-i1-GGUF: gguf; declared saishf/Long-SOVL-Experiment-8B-L3-262K=0.9998424608868542; pool 30 best 0.9996839622144229  (2758s)\n"}
+,{"stream_name":"stdout","time":2925.142266748,"data":"[25/80] backyardai/Llama-3.1-8B-ArliAI-RPMax-v1.1-GGUF: gguf; declared ArliAI/Llama-3.1-8B-ArliAI-RPMax-v1.1=0.9999853792926778; pool 30 best 0.9995006850010566  (2758s)\n"}
+,{"stream_name":"stdout","time":2925.426471081,"data":"[26/80] arabsya87sy7a8/Qwythos-9B-Claude-Mythos-5-1M-GGUF: not readable (HTTP 403); declared -; pool 0 best None  (2758s)\n"}
+,{"stream_name":"stdout","time":2937.290839553,"data":"[27/80] EZCon/Huihui-gemma-4-E4B-it-abliterated-4bit-mlx: safetensors; declared huihui-ai/Huihui-gemma-4-E4B-it-abliterated=1.0; pool 30 best 1.0  (2770s)\n"}
+,{"stream_name":"stdout","time":2956.841161125,"data":"[28/80] JetBrains-Research/cmg-codet5-without-history: safetensors; declared -; pool 30 best 0.9743879730815455  (2790s)\n"}
+,{"stream_name":"stdout","time":3329.214588426,"data":"[29/80] wmueller/zimgturbo: LOST (wmueller/zimgturbo: InvalidURL: URL can't contain control characters. '/wmueller/zimgturbo/resolve/e837d6521e50890c1404b2fad9fec4f3293f8573/milk fountain.safetensors' (found at least ' '))\n"}
+,{"stream_name":"stdout","time":3560.191462529,"data":"[30/80] sagawa/ReactionT5v2-yield: bin; declared -; pool 30 best 0.03556847850378379  (3393s)\n"}
+,{"stream_name":"stdout","time":3783.71761717,"data":"[31/80] RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf: gguf; declared -; pool 30 best 0.999934001439624  (3617s)\n"}
+,{"stream_name":"stdout","time":3818.529830343,"data":"[32/80] mradermacher/Vision-Braille-Qwen3-8B-GGUF: gguf; declared Violet-yo/Vision-Braille-Qwen3-8B=0.9999853333656004; pool 30 best 0.9935457723648521  (3652s)\n"}
+,{"stream_name":"stdout","time":3818.641211353,"data":"[33/80] McGill-NLP/LLM2Vec-Qwen3-06B-mntp: adapter; declared -; pool 0 best None  (3652s)\n"}
+,{"stream_name":"stdout","time":4094.626136577,"data":"[34/80] InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF: gguf; declared -; pool 30 best 0.9999999999999987  (3928s)\n"}
+,{"stream_name":"stdout","time":4150.318458878,"data":"[35/80] mradermacher/Atlas-72B-SVT-merged-i1-GGUF: gguf; declared SILVERTHRONE/Atlas-72B-SVT-merged=0.9998496232490621; pool 30 best 1.0  (3983s)\n"}
+,{"stream_name":"stdout","time":4748.657205833,"data":"[36/80] tensorblock/mlabonne_NeuralDaredevil-7B-GGUF: gguf; declared mlabonne/NeuralDaredevil-7B=0.9570904234637947; pool 30 best 0.9857793189888067  (4582s)\n"}
+,{"stream_name":"stdout","time":5061.374003381,"data":"[37/80] mradermacher/aquif-3-moe-17b-a2.8b-i1-GGUF: gguf; declared aquif-ai/aquif-3-moe-17B-A2.8B=not readable (HTTP 401); pool 30 best 0.9999996350571058  (4894s)\n"}
+,{"stream_name":"stdout","time":5277.686006116,"data":"[38/80] mradermacher/Omega-Darker_The-Final-Directive-24B-i1-GGUF: gguf; declared ReadyArt/Omega-Darker_The-Final-Directive-24B=0.9997681420627329; pool 30 best 0.9992637492887542  (5111s)\n"}
+,{"stream_name":"stdout","time":5326.815697237,"data":"[39/80] mradermacher/PyThagorean-3B-GGUF: gguf; declared prithivMLmods/PyThagorean-3B=0.9999850719026365; pool 30 best 0.9999485472408159  (5160s)\n"}
+,{"stream_name":"stdout","time":5354.538325378,"data":"[40/80] mradermacher/PsyMedRP-v1-20B-i1-GGUF: gguf; declared Undi95/PsyMedRP-v1-20B=0.9998469861670018; pool 30 best 0.999661132745744  (5188s)\n"}
+,{"stream_name":"stdout","time":5628.979342786,"data":"[41/80] mradermacher/granite-speech-3.3-8b-i1-GGUF: gguf; declared ibm-granite/granite-speech-3.3-8b=None; pool 30 best 0.9998446261867555  (5462s)\n"}
+,{"stream_name":"stdout","time":5630.442064906,"data":"[42/80] zeras141a/b0f2d339: safetensors; declared -; pool 30 best 0.006136035933340247  (5463s)\n"}
+,{"stream_name":"stdout","time":5662.017627672,"data":"[43/80] mradermacher/tame-tiger-i1-GGUF: gguf; declared cathuriges/tame-tiger=None; pool 30 best 0.9998131058038249  (5495s)\n"}
+,{"stream_name":"stdout","time":6225.458271881,"data":"[44/80] mradermacher/LLaDA-8B-Base-JSON-SFT-GGUF: gguf; declared tarsur909/LLaDA-8B-Base-JSON-SFT=0.9999856193918808; pool 28 best 0.9999856193918808  (6058s)\n"}
+,{"stream_name":"stdout","time":6225.581926406,"data":"[45/80] pocketpose/onnx-models: not readable (onnx only); declared -; pool 0 best None  (6059s)\n"}
+,{"stream_name":"stdout","time":6227.24755836,"data":"[46/80] Emperordzd/Nexara-Nano-100M-Chat: bin; declared -; pool 0 best None  (6060s)\n"}
+,{"stream_name":"stdout","time":6233.491976329,"data":"[47/80] mradermacher/Soulblighter-24B-v1-GGUF: gguf; declared OccultAI/Soulblighter-24B-v1=0.9999758368857423; pool 30 best 0.9985319930044504  (6066s)\n"}
+,{"stream_name":"stdout","time":6236.665262174,"data":"[48/80] mradermacher/TON-3B-CLEVR-GGUF: gguf; declared kolerk/TON-3B-CLEVR=0.9999852409210448; pool 30 best 0.9999537079307586  (6070s)\n"}
+,{"stream_name":"stdout","time":6263.536269782,"data":"[49/80] 2264K/ktransfer-27b-kd-lam02-s150: safetensors; declared Qwen/Qwen3.8-27B=0.9999998160619152; pool 30 best 0.9999998160619152  (6097s)\n"}
+,{"stream_name":"stdout","time":6278.07475357,"data":"[50/80] mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF: gguf; declared DareModels/MiniCPM5-1B-Hermes-Agentic=0.9999848309560657; pool 30 best 0.9999465253078732  (6111s)\n"}
+,{"stream_name":"stdout","time":6487.781668057,"data":"[51/80] mradermacher/Mergerix-7b-v0.1-GGUF: gguf; declared MiniMoog/Mergerix-7b-v0.1=0.9999850904856392; pool 30 best 0.9998258168338735  (6321s)\n"}
+,{"stream_name":"stdout","time":6495.417069136,"data":"[52/80] RichardErkhov/gradientai_-_Llama-3-8B-Instruct-262k-gguf: gguf; declared -; pool 30 best 0.9996844271016061  (6328s)\n"}
+,{"stream_name":"stdout","time":6658.659265381,"data":"[53/80] prithivMLmods/SmolLM2-360M-F32-GGUF: LOST (prithivMLmods/SmolLM2-360M-F32-GGUF: InvalidURL: URL can't contain control characters. '/prithivMLmods/SmolLM2-360M-F32-GGUF/resolve/7bcc1b24e5460e8f89c1bc062c90e6de1a639b8a/ SmolLM2-360M-Instruct.Q8_0.gguf' (found at least ' '))\n"}
+,{"stream_name":"stdout","time":6777.706110506,"data":"[54/80] mradermacher/llama-2-7b-platypus-guanaco-25-GGUF: gguf; declared psroy/llama-2-7b-platypus-guanaco-25=0.9999854226909023; pool 30 best 0.9999854226909023  (6611s)\n"}
+,{"stream_name":"stdout","time":6798.387977925,"data":"[55/80] s-sahoo/duo-distilled: safetensors; declared -; pool 1 best 0.9979017447780727  (6631s)\n"}
+,{"stream_name":"stdout","time":6815.108913899,"data":"[56/80] biohub/ESMFold2-Experimental-Fast-base300M-step250k: safetensors; declared -; pool 2 best 0.05186702799676564  (6648s)\n"}
+,{"stream_name":"stdout","time":6820.032724333,"data":"[57/80] OpenIXCLab/SeC-4B: safetensors; declared OpenGVLab/InternVL2.5-4B=not readable (HTTP 401), facebook/sam2.1-hiera-large=0.9998337839709701; pool 0 best None  (6653s)\n"}
+,{"stream_name":"stdout","time":6832.32952625,"data":"[58/80] mradermacher/SOLAR-10.7B-Instruct-Forest-DPO-v1-i1-GGUF: gguf; declared abhishekchohan/SOLAR-10.7B-Instruct-Forest-DPO-v1=0.9998321496985394; pool 30 best 0.9998229302271582  (6665s)\n"}
+,{"stream_name":"stdout","time":6833.516567846,"data":"[59/80] DeepPavlov/distilrubert-tiny-cased-conversational-5k: bin; declared -; pool 0 best None  (6666s)\n"}
+,{"stream_name":"stdout","time":6833.62881354,"data":"[60/80] mlx-community/whisper-small.en-mlx-q4: not readable (other checkpoint format); declared -; pool 0 best None  (6667s)\n"}
+,{"stream_name":"stdout","time":7081.944282211,"data":"[61/80] mradermacher/Melinoe-Qwen-30B-A3B-Afterthought-GGUF: gguf; declared bgg1996/Melinoe-Qwen-30B-A3B-Afterthought=0.999984872676644; pool 30 best 0.9999287011940473  (6915s)\n"}
+,{"stream_name":"stdout","time":7101.32038247,"data":"[62/80] CISCai/Mistral-7B-Instruct-v0.3-SOTA-GGUF: gguf; declared mistralai/Mistral-7B-Instruct-v0.3=0.9024259588111991; pool 30 best 0.9025953694884414  (6934s)\n"}
+,{"stream_name":"stdout","time":7123.203336643,"data":"[63/80] mradermacher/Qwen3.8-27B-USS-Prism-GGUF: gguf; declared nightmedia/Qwen3.8-27B-USS-Prism=0.9999845888975548; pool 30 best 0.99964455858631  (6956s)\n"}
+,{"stream_name":"stdout","time":7408.05458175,"data":"[64/80] facebook/mms-tts-mfe: safetensors; declared -; pool 30 best 0.007410668829690633  (7241s)\n"}
+,{"stream_name":"stdout","time":7459.472578279,"data":"[65/80] RichardErkhov/aqweteddy_-_mistral_tv-neural-marconroni-gguf: gguf; declared -; pool 30 best 0.99883436034192  (7292s)\n"}
+,{"stream_name":"stdout","time":7465.686181853,"data":"[66/80] ServiceNow-AI/SuperApriel-15b-Base: safetensors; declared -; pool 0 best None  (7299s)\n"}
+,{"stream_name":"stdout","time":7681.219291563,"data":"[67/80] mradermacher/Uirapuru-U1-9B-i1-GGUF: gguf; declared SynastriaNetworks/Uirapuru-U1-9B=0.9998420629815041; pool 30 best 0.9999435740726204  (7514s)\n"}
+,{"stream_name":"stdout","time":7719.555902451,"data":"[68/80] KETI-NLP/ke-t5-base: safetensors; declared -; pool 30 best 0.003673667893430219  (7553s)\n"}
+,{"stream_name":"stdout","time":8039.78332008,"data":"[69/80] lmstudio-community/c4ai-command-r-plus-08-2024-GGUF: gguf; declared CohereForAI/c4ai-command-r-plus-08-2024=not readable (gated, no byte-identical public copy); pool 13 best 0.9877286280988125  (7873s)\n"}
+,{"stream_name":"stdout","time":8330.029544264,"data":"[70/80] Mungert/X-Ray_Alpha-GGUF: gguf; declared google/gemma-3-4b-it=None; pool 30 best 0.9993318007341928  (8163s)\n"}
+,{"stream_name":"stdout","time":8332.489740453,"data":"[71/80] mradermacher/Gemma-2-2b-TitanFusion-i1-GGUF: gguf; declared bunnycore/Gemma-2-2b-TitanFusion=0.9998318159394277; pool 30 best 0.9998058319215866  (8165s)\n"}
+,{"stream_name":"stdout","time":8631.245270963,"data":"[72/80] liamwh/Swift-Qwen3.8-27B-W4A16-syv-fast: safetensors; declared ukisai/Swift-Qwen3.8-27b=0.9999999999999999, TheUnderscore/Swift-Qwen3.8-27b-W4A16-AWQ=1.0; pool 30 best 1.0  (8464s)\n"}
+,{"stream_name":"stdout","time":8649.162497866,"data":"[73/80] mradermacher/nyaya-3b-v3-GGUF: gguf; declared NyayaLabs98/nyaya-3b-v3=0.9999850273110569; pool 30 best 0.9998926688317473  (8482s)\n"}
+,{"stream_name":"stdout","time":8873.791153821,"data":"[74/80] mradermacher/Falcon3-3B-Instruct-Heretic-GGUF: gguf; declared ChiKoi7/Falcon3-3B-Instruct-Heretic=0.9999851498532777; pool 30 best 0.9999794403317758  (8707s)\n"}
+,{"stream_name":"stdout","time":9029.589221402,"data":"[75/80] qing-yao/ppt-pythia-1b-baseline-seed3408-stage2: safetensors; declared EleutherAI/pythia-1b=0.0029454695262190835; pool 30 best 0.4754054415945058  (8863s)\n"}
+,{"stream_name":"stdout","time":9052.972857015,"data":"[76/80] airagrp/Ornith-1.5-35B-A3B-mlx-nvfp4: safetensors; declared ornith-ai/Ornith-1.5-35B-A3B=1.0; pool 30 best 1.0  (8886s)\n"}
+,{"stream_name":"stdout","time":9255.796164183,"data":"[77/80] mradermacher/gideon-v0-GGUF: gguf; declared openminderai/gideon-v0=0.9999855106405539; pool 30 best 0.9999855106405539  (9089s)\n"}
+,{"stream_name":"stdout","time":9411.159689539,"data":"[78/80] mradermacher/qwen-2.5-palm-diagnosis-v2-GGUF: gguf; declared Sanyongli/qwen-2.5-palm-diagnosis-v2=0.9999846000658568; pool 30 best 0.9997652045194381  (9244s)\n"}
+,{"stream_name":"stdout","time":9492.987522952,"data":"[79/80] mradermacher/Orion-HYMT1.5-7B-SFT-v2601-i1-GGUF: gguf; declared 3tic/Orion-HYMT1.5-7B-SFT-v2601=not readable (HTTP 401); pool 30 best 0.8944278936085368  (9326s)\n"}
+,{"stream_name":"stdout","time":39294.641924824,"data":"[80/80] ibm-granite/granite-4.2-3b: safetensors; declared ibm-granite/granite-4.1-3b-base=0.9886939303079303; pool 30 best 1.0  (39128s)\n"}
+,{"stream_name":"stdout","time":39294.667810233,"data":"594 of 600 done; 6 lost to the network or the time budget\n"}
+,{"stream_name":"stdout","time":39310.229018384,"data":"exit 0 -m experiments.e2_audit --out /kaggle/working/e2_audit_raw.jsonl\n"}
+,{"stream_name":"stdout","time":39310.262172673,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":39313.587282054,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":39313.587334258,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":39313.959975955,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":39313.960008465,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":39315.573496088,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":39316.782233785,"data":"[NbConvertApp] Writing 292425 bytes to __results__.html\n"}
+]
