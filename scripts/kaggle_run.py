@@ -243,13 +243,16 @@ if failed:
 
 def kaggle(*args: str, check: bool = True, timeout: int = 3600) -> subprocess.CompletedProcess:
     exe = shutil.which("kaggle") or str(Path(sys.executable).parent / ("kaggle.exe" if os.name == "nt" else "kaggle"))
+    py = Path(exe).parent / ("python.exe" if os.name == "nt" else "python")
+    # run the CLI as a module of its own interpreter: Windows Application Control can block kaggle.exe
+    cmd = [str(py), "-m", "kaggle"] if py.exists() else [exe]
     env = {**os.environ, "PYTHONUTF8": "1"}
     try:
-        r = subprocess.run([exe, *args], capture_output=True, text=True, encoding="utf-8", errors="replace",
+        r = subprocess.run([*cmd, *args], capture_output=True, text=True, encoding="utf-8", errors="replace",
                            env=env, timeout=timeout)
     except subprocess.TimeoutExpired:
         # a hung connection once froze a chain for days: report it as the network error it is
-        r = subprocess.CompletedProcess([exe, *args], 1, "", f"kaggle call timed out after {timeout} s")
+        r = subprocess.CompletedProcess([*cmd, *args], 1, "", f"kaggle call timed out after {timeout} s")
     if check and r.returncode != 0:
         sys.exit(f"kaggle {' '.join(args[:2])} failed:\n{r.stdout}{r.stderr}")
     return r
