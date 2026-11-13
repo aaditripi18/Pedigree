@@ -19,6 +19,7 @@ import json
 import struct
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -30,7 +31,7 @@ HEADER_MAX = 100 * 1024 * 1024
 
 
 def resolve_url(repo: str, filename: str, revision: str = "main") -> str:
-    return f"https://huggingface.co/{repo}/resolve/{revision}/{filename}"
+    return f"https://huggingface.co/{repo}/resolve/{revision}/{urllib.parse.quote(filename)}"
 
 
 def _cache_path(url: str, start: int, end: int) -> Path:

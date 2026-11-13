@@ -132,6 +132,8 @@ def weight_files(repo: str, d: dict) -> tuple[str, list[str], dict, dict]:
     except hub.HubError:
         files = []
     files = [f for f in files if f.endswith((".safetensors", ".bin", ".gguf"))]
+    if any(f not in sib for f in files):   # the index names shards the repository does not hold
+        return "not readable (index names missing files)", [], {}, {}
     if not files and not prefix:
         files = _largest_unit(repo, d, names)
     if not files:
