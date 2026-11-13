@@ -149,3 +149,21 @@ def test_mlx_mixed_precision_layer(tmp_path, local_ranges):
     assert r.float_shapes() == {"mlp.gate.weight": ("float", (out, cols))}
     want = q * scales.astype(np.float64) + biases.astype(np.float64)
     np.testing.assert_allclose(r.sample("mlp.gate.weight", max_bytes=out * cols * 4), want.ravel())
+
+
+def test_mlx_override_under_reordered_path(tmp_path, local_ranges):
+    """A vision-language export names the layer model.language_model.X while its config says
+    language_model.model.X; the 8-bit override still applies."""
+    rng = np.random.default_rng(3)
+    out, cols = 2, 64
+    q = rng.integers(0, 256, size=(out, cols)).astype(np.uint8)
+    scales = rng.normal(size=(out, 1)).astype(np.float16)
+    biases = rng.normal(size=(out, 1)).astype(np.float16)
+    path = tmp_path / "model.safetensors"
+    stem = "model.language_model.layers.0.mlp.gate"
+    save_file({stem + ".weight": torch.from_numpy(q.view("<u4").view(np.int32).copy()).view(torch.uint32),
+               stem + ".scales": torch.from_numpy(scales), stem + ".biases": torch.from_numpy(biases)}, str(path))
+    cfg = {"quantization": {"bits": 4, "group_size": 64, "language_model.model.layers.0.mlp.gate": {"bits": 8}}}
+    r = _open_local(path, cfg)
+    want = q * scales.astype(np.float64) + biases.astype(np.float64)
+    np.testing.assert_allclose(r.sample(stem + ".weight", max_bytes=out * cols * 4), want.ravel())

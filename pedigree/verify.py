@@ -120,11 +120,17 @@ class Remote:
             return
         cfg = self._config()
         q = cfg.get("quantization") or cfg.get("quantization_config") or {}
+        def plain_path(k: str) -> tuple:   # vision-language exports reorder "model" and "language_model"
+            return tuple(x for x in k.split(".") if x not in ("model", "language_model"))
+        layers = {plain_path(k): v for k, v in q.items() if isinstance(v, dict)}
         for n in mlx:
-            own = q.get(n[:-7])          # mixed precision: MLX writes per-layer exceptions under the layer's path
-            own = own if isinstance(own, dict) else {}
+            # mixed precision: MLX writes per-layer exceptions under the layer's path
+            own = q.get(n[:-7]) if isinstance(q.get(n[:-7]), dict) else layers.get(plain_path(n[:-7]), {})
             bits, gs = int(own.get("bits", q.get("bits", 4))), int(own.get("group_size", q.get("group_size", 64)))
             shape = list(t[n][2]["shape"])           # (..., packed columns); MoE experts add axes
+            groups = t[n[:-7] + ".scales"][2]["shape"][-1]
+            if shape[-1] * 32 != groups * gs * bits and (shape[-1] * 32) % (groups * gs) == 0:
+                bits = shape[-1] * 32 // (groups * gs)   # the stored shapes decide when the config disagrees
             self.quant[n] = {"kind": "mlx", "bits": bits, "group": gs,
                              "shape": tuple(shape[:-1] + [shape[-1] * 32 // bits]),
                              "scales": n[:-7] + ".scales", "biases": n[:-7] + ".biases"}
