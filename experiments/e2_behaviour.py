@@ -58,39 +58,42 @@ def _load_text(repo: str):
     tok = AutoTokenizer.from_pretrained(repo)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
-    return model.float().eval(), tok, causal
+    return model.float().to(e5.ft.DEVICE).eval(), tok, causal
 
 
 def _load_image(repo: str):
     from transformers import AutoImageProcessor, AutoModelForImageClassification
-    model = AutoModelForImageClassification.from_pretrained(repo).float().eval()
+    model = AutoModelForImageClassification.from_pretrained(repo).float().to(e5.ft.DEVICE).eval()
     proc = AutoImageProcessor.from_pretrained(repo)
     size = proc.size.get("height") or proc.size.get("shortest_edge") or 224
     return model, (size, tuple(proc.image_mean), tuple(proc.image_std))
 
 
 def pair(model_id: str, base_id: str) -> dict:
+    """Only loading decides "not applicable" (a model that is not a language model or an
+    image classifier, a missing head, other labels). Once both load as the same kind, any
+    error while probing is raised: it is a failure of the run, not a property of the pair."""
     try:
         a, ta, ca = _load_text(model_id)
         b, tb, cb = _load_text(base_id)
-        if ca != cb:
-            return {"applicable": False, "reason": "one causal, one masked language model"}
-        if ta.get_vocab() != tb.get_vocab():
-            return {"applicable": False, "reason": "different tokenizers: no shared output space"}
-        lines, digest = e5.text_probes()
-        r = e5.compare_behaviour(b, a, lambda m: e5._text_run(m, tb, lines, cb))
-        return {"applicable": True, "modality": "text", "probes": digest, **r}
     except Exception as text_err:
         try:
             a, (size, mean, std) = _load_image(model_id)
             b, _ = _load_image(base_id)
-            if a.config.id2label != b.config.id2label:
-                return {"applicable": False, "reason": f"text: {text_err}; image: different label sets"}
-            x, digest = e5.image_probes(size, mean, std)
-            r = e5.compare_behaviour(b, a, lambda m: e5._image_run(m, x))
-            return {"applicable": True, "modality": "image", "probes": digest, **r}
         except Exception as img_err:
             return {"applicable": False, "reason": f"text: {str(text_err)[:150]}; image: {str(img_err)[:150]}"}
+        if a.config.id2label != b.config.id2label:
+            return {"applicable": False, "reason": f"text: {str(text_err)[:150]}; image: different label sets"}
+        x, digest = e5.image_probes(size, mean, std)
+        r = e5.compare_behaviour(b, a, lambda m: e5._image_run(m, x))
+        return {"applicable": True, "modality": "image", "probes": digest, **r}
+    if ca != cb:
+        return {"applicable": False, "reason": "one causal, one masked language model"}
+    if ta.get_vocab() != tb.get_vocab():
+        return {"applicable": False, "reason": "different tokenizers: no shared output space"}
+    lines, digest = e5.text_probes()
+    r = e5.compare_behaviour(b, a, lambda m: e5._text_run(m, tb, lines, cb))
+    return {"applicable": True, "modality": "text", "probes": digest, **r}
 
 
 def main() -> None:
@@ -106,9 +109,12 @@ def main() -> None:
         if (m.get("params") or 0) > MAX_PARAMS:
             r = {"applicable": False, "reason": "model above 2B parameters"}
         else:
-            r = pair(m["id"], d["base"])
+            try:
+                r = pair(m["id"], d["base"])
+            except Exception as e:   # a failed run, not a verdict: analyse.py counts it apart
+                r = {"applicable": None, "error": f"{type(e).__name__}: {str(e)[:300]}"}
         run.record(model=m["id"], base=d["base"], tier=m["tier"], **r)
-        print(f"  {m['id']} vs {d['base']}: {r.get('modality') or r['reason'][:90]} "
+        print(f"  {m['id']} vs {d['base']}: {r.get('modality') or r.get('reason', r.get('error', ''))[:90]} "
               f"{'agree %.3f' % r['agreement'] if r.get('applicable') else ''}", flush=True)
 
 
