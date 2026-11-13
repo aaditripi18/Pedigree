@@ -391,6 +391,36 @@ def audit(e2, T, rule) -> dict:
             "contradicted": [x[2:] for x in h3 if x[1]], "n_models": len(e2)}
 
 
+def behaviour_audit(e2b, h9r) -> dict | None:
+    """E2's second instrument (PLAN.md, 2026-11-04 and amendment 2026-11-07): declared pairs the
+    weights could not compare, judged by H9's rule as chosen on E5 dev. Reported as its own
+    category, never moved into H3 (whose denominator is bases compared by weights), and shown
+    with H9's fresh error rates, which measure how far a behaviour verdict can be trusted."""
+    if not e2b:
+        return None
+    n = h9r.get("numbers") or {}
+    stat, t = n.get("statistic"), n.get("threshold")
+    get = {"agreement": lambda r: r.get("agreement"), "1-js": lambda r: 1 - r["js"] if num(r.get("js")) is not None
+           else None, "cka": lambda r: r.get("cka")}.get(stat)
+    out = {"rule": {"statistic": stat, "threshold": t, "fresh_tpr": n.get("tpr"), "fresh_fpr": n.get("fpr"),
+                    "h9": h9r["verdict"]}, "pairs": len(e2b), "verified_by_behaviour": [], "below_rule": [],
+           "not_applicable": defaultdict(int), "failed": []}
+    for r in e2b:
+        key = (r["model"], r["base"])
+        if r.get("applicable") is None:
+            out["failed"].append([*key, r.get("error")])
+        elif not r["applicable"]:
+            why = ("neither a shared language-model output nor a shared label set" if r["reason"].startswith("text:")
+                   else r["reason"])
+            out["not_applicable"][why] += 1
+        else:
+            v = get(r) if get else None
+            (out["verified_by_behaviour"] if num(v) is not None and v > t else out["below_rule"]).append(
+                [*key, r.get("modality"), v])
+    out["not_applicable"] = dict(out["not_applicable"])
+    return out
+
+
 def h2h3(A, done):
     h2 = {"id": "H2", "statement": "At least 30% of Hub models verifiably derived from another public model do not "
           "declare a base.", "verdict": verdict(A["h2"]["share"] >= 0.30 if done and A["h2"]["n"] else None),
@@ -416,6 +446,7 @@ def main() -> None:
     h7a = latest_runs(rows, "H7a", lambda r: r.get("family"))
     e2 = latest_runs(rows, "E2", lambda r: 0)
     e2w = latest_runs(rows, "E2W", lambda r: 0)
+    e2b = latest_runs(rows, "E2B", lambda r: 0)
     def by_family_split(exp):
         return latest_runs(rows, exp, lambda r: ((r.get("meta") or {}).get("family", r.get("family")),
                                                 (r.get("meta") or {}).get("split", r.get("split"))))
@@ -432,7 +463,8 @@ def main() -> None:
         hs = [h1(e1, T, rule), *(h2h3(A, len(e2) == 600) if A else []), h4(e1, T, rule), h5(e1, e5, T, rule),
               h6(e1b, e2w, T, rule), h7(h7a, e2, T, rule), h8(e1b, e7k, e2, T, rule), h9(e5), h10(e6, T, rule),
               h11(e7, T, rule), h12(e5o)]
-        out["rules"][rule] = {"hypotheses": hs, "audit": A}
+        out["rules"][rule] = {"hypotheses": hs, "audit": A,
+                              "behaviour": behaviour_audit(e2b, next(h for h in hs if h["id"] == "H9"))}
     # the CLI's thresholds are exactly the published rule's
     (ROOT / "pedigree" / "thresholds.json").write_text(json.dumps(
         {k: round(v["t"], 6) for k, v in T.items() if k in ("plain", "invariant")} |
