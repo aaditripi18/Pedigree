@@ -40,10 +40,10 @@ def main(dirs: list[str]) -> None:
             for f in diff:
                 fields[f] = fields.get(f, 0) + 1
     if len(dirs) <= 2:   # later passes copy earlier readings, which are not re-reads
-      (ROOT / "results" / "e2_rereads.json").write_text(json.dumps(
-        {"passes": dirs, "first_readings": len(first), "reread": len(later),
-         "identical": len(later) - len(changed), "changed_fields": fields, "changed": changed}, indent=1) + "\n",
-        encoding="utf-8")
+        (ROOT / "results" / "e2_rereads.json").write_text(json.dumps(
+            {"passes": dirs, "first_readings": len(first), "reread": len(later),
+             "identical": len(later) - len(changed), "changed_fields": fields, "changed": changed}, indent=1) + "\n",
+            encoding="utf-8")
     print(f"{len(first)} models; {len(later)} re-read, {len(later) - len(changed)} identical; fields {fields}")
     with tempfile.TemporaryDirectory() as d:
         d = Path(d)
