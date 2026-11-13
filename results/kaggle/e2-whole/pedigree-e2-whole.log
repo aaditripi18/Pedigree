@@ -1,0 +1,62 @@
+[{"stream_name":"stdout","time":28.920981604,"data":"code af7cae3\n"}
+,{"stream_name":"stdout","time":82.004547548,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":167.121242075,"data":" 1 OpenMed/OpenMed-PII-German-ClinicDischarge-Base-110M-v1 vs sergeyzh/BERTA: sampled 0.0003 whole -0.0002\n"}
+,{"stream_name":"stdout","time":228.34157857,"data":" 2 sentence-transformers/all-MiniLM-L12-v2 vs OpenMed/OpenMed-PII-ClinicalE5-Small-33M-v1: sampled 0.8917 whole 0.8912\n"}
+,{"stream_name":"stdout","time":293.316315346,"data":" 3 francesca9805/urd-100mb-after-wc-uniform-newlex-before-ckpt500-packed-bfdiso_seed3407 vs aariciah/gpt2-japanese-20k-lc: sampled -0.0038 whole -0.0004\n"}
+,{"stream_name":"stdout","time":341.138234073,"data":" 4 facebook/convnextv2-tiny-22k-224 vs facebook/convnextv2-tiny-1k-224: sampled 0.3546 whole 0.3008\n"}
+,{"stream_name":"stdout","time":407.734479309,"data":" 5 NeuML/pubmedbert-base-embeddings vs intfloat/e5-base-v2: sampled 0.0006 whole -0.0000\n"}
+,{"stream_name":"stdout","time":506.754304559,"data":" 6 dascim/juribert-base vs indiejoseph/bert-base-cantonese: sampled -0.0026 whole 0.0000\n"}
+,{"stream_name":"stdout","time":525.416318943,"data":" 7 unsloth/Qwen2.5-3B-Instruct-bnb-4bit vs unsloth/Qwen2.5-Coder-3B-Instruct-bnb-4bit: sampled 0.6929 whole 0.6184\n"}
+,{"stream_name":"stdout","time":675.150302409,"data":" 8 facebook/mms-tts-mfe vs facebook/mms-tts-ind: sampled 0.0074 whole -0.0003\n"}
+,{"stream_name":"stdout","time":768.878317739,"data":" 9 datasocietyco/bge-base-en-v1.5-course-recommender-v5 vs StephanAkkerman/FinTwitBERT-sentiment: sampled 0.0020 whole 0.0001\n"}
+,{"stream_name":"stdout","time":1013.979536518,"data":"10 gvs/wav2vec2-large-xlsr-malayalam vs sarahai/uzbek-stt-3: sampled 0.0011 whole -0.0000\n"}
+,{"stream_name":"stdout","time":1093.571247148,"data":"11 FacebookAI/xlm-roberta-base vs krutrim-ai-labs/Vyakyarth: sampled 0.6831 whole 0.6596\n"}
+,{"stream_name":"stdout","time":1142.402385492,"data":"12 aubmindlab/bert-base-arabertv02 vs jinaai/jina-embeddings-v2-base-code: sampled 0.0018 whole -0.0001\n"}
+,{"stream_name":"stdout","time":1275.886756155,"data":"13 MoritzLaurer/ModernBERT-large-zeroshot-v2.0 vs OpenMed/OpenMed-NER-ProteinDetect-ModernClinical-395M: sampled 0.9886 whole 0.9895\n"}
+,{"stream_name":"stdout","time":1406.545330791,"data":"14 answerdotai/ModernBERT-large vs OpenMed/OpenMed-NER-ChemicalDetect-ModernMed-395M: sampled 0.9998 whole 0.9998\n"}
+,{"stream_name":"stdout","time":1554.970226504,"data":"15 prithivida/parrot_paraphraser_on_T5 vs google/flan-t5-base: sampled -0.0047 whole -0.0000\n"}
+,{"stream_name":"stdout","time":1616.373335542,"data":"16 google-bert/bert-base-uncased vs StephanAkkerman/FinTwitBERT-sentiment: sampled -0.0009 whole 0.0001\n"}
+,{"stream_name":"stdout","time":1704.269215912,"data":"17 FacebookAI/xlm-roberta-base vs Ar86Bat/multilang-pii-ner: sampled 0.9982 whole 0.9980\n"}
+,{"stream_name":"stdout","time":1875.850314688,"data":"18 sentence-transformers/all-roberta-large-v1 vs MoritzLaurer/roberta-large-zeroshot-v2.0-c: sampled 0.9805 whole 0.9800\n"}
+,{"stream_name":"stdout","time":1916.670242113,"data":"19 autogluon/chronos-bolt-tiny vs amazon/chronos-t5-tiny: sampled 0.0004 whole 0.0004\n"}
+,{"stream_name":"stdout","time":1963.427268436,"data":"20 austindavis/gpt2-lichess-uci-201601 vs c-bone/CrystaLLM-pi_ft_alex_mp_20-text: sampled 0.0031 whole 0.0002\n"}
+,{"stream_name":"stdout","time":2131.052741708,"data":"21 sentence-transformers/all-roberta-large-v1 vs zhx123/ftrobertallm: sampled 0.9809 whole 0.9803\n"}
+,{"stream_name":"stdout","time":2279.342272282,"data":"22 facebook/mms-tts-mfe vs facebook/mms-tts-kaz: sampled 0.0038 whole 0.0007\n"}
+,{"stream_name":"stdout","time":2385.602255288,"data":"23 amazon/chronos-t5-base vs sagawa/ReactionT5v2-forward: sampled 0.0022 whole -0.0000\n"}
+,{"stream_name":"stdout","time":2572.712354492,"data":"24 OpenMed/OpenMed-NER-GenomicDetect-ElectraMed-560M vs OpenMed/OpenMed-NER-ProteinDetect-SnowMed-568M: sampled 0.9449 whole 0.9468\n"}
+,{"stream_name":"stdout","time":2759.363286051,"data":"25 MediaCatch/xls-r-300m-danish-mc-v2 vs comodoro/wav2vec2-xls-r-300m-cs-250: sampled 0.3277 whole 0.3814\n"}
+,{"stream_name":"stdout","time":2863.04234551,"data":"26 cisco-ai/SecureBERT2.0-cross_encoder vs OpenMed/OpenMed-NER-ChemicalDetect-ModernClinical-149M: sampled 0.9153 whole 0.9256\n"}
+,{"stream_name":"stdout","time":2958.305377095,"data":"27 mtheo/camembert-base-xnli vs sparse-encoder/splade-camembert-base-v2: sampled 0.9974 whole 0.9978\n"}
+,{"stream_name":"stdout","time":3076.799405886,"data":"28 MoritzLaurer/ModernBERT-large-zeroshot-v2.0 vs tasksource/ModernBERT-large-nli: sampled 0.9993 whole 0.9994\n"}
+,{"stream_name":"stdout","time":3174.138255797,"data":"29 OpenMed/OpenMed-PII-French-BiomedBERT-Base-110M-v1 vs FinLang/finance-embeddings-investopedia: sampled -0.0001 whole -0.0001\n"}
+,{"stream_name":"stdout","time":3377.412593418,"data":"30 jonatasgrosman/wav2vec2-large-xlsr-53-arabic vs kingabzpro/wav2vec2-large-xls-r-300m-Urdu: sampled -0.0013 whole -0.0000\n"}
+,{"stream_name":"stdout","time":3450.0725857,"data":"31 OpenMed/OpenMed-NER-GenomeDetect-SuperMedical-125M vs bkai-foundation-models/vietnamese-bi-encoder: sampled -0.0008 whole -0.0003\n"}
+,{"stream_name":"stdout","time":3609.749266732,"data":"32 MediaCatch/xls-r-300m-danish-mc-v2 vs reazon-research/japanese-wav2vec2-large: sampled -0.0003 whole 0.0001\n"}
+,{"stream_name":"stdout","time":3713.903509938,"data":"33 ibm-granite/granite-embedding-reranker-english-r2 vs tasksource/ModernBERT-base-nli: sampled 0.0138 whole 0.0141\n"}
+,{"stream_name":"stdout","time":3864.748276041,"data":"34 Qwen/Qwen2-0.5B-Instruct vs gyanbhambhani/oss-jev-qwen05-decision-noul-v2: sampled -0.0028 whole 0.0002\n"}
+,{"stream_name":"stdout","time":3963.16731999,"data":"35 Davlan/afro-xlmr-base vs bardsai/eu-pii-anonimization-multilang: sampled 0.9155 whole 0.9114\n"}
+,{"stream_name":"stdout","time":4019.208292728,"data":"36 Geotrend/distilbert-base-en-nl-cased vs nickprock/multi-sentence-BERTino: sampled -0.0002 whole 0.0000\n"}
+,{"stream_name":"stdout","time":4094.432371209,"data":"37 aubmindlab/bert-base-arabertv02 vs aubmindlab/bert-base-arabertv2: sampled 0.0053 whole 0.0000\n"}
+,{"stream_name":"stdout","time":4145.03704965,"data":"38 sentence-transformers/distiluse-base-multilingual-cased-v2 vs OpenMed/OpenMed-NER-OncologyDetect-TinyMed-135M: sampled 0.3064 whole 0.3211\n"}
+,{"stream_name":"stdout","time":4358.312460057,"data":"39 jonatasgrosman/wav2vec2-large-xlsr-53-finnish vs kresnik/wav2vec2-large-xlsr-korean: sampled 0.8940 whole 0.8918\n"}
+,{"stream_name":"stdout","time":4444.851252891,"data":"40 facebook/dino-vitb16 vs google/vit-base-patch16-224: sampled 0.0029 whole 0.0000\n"}
+,{"stream_name":"stdout","time":4565.585462186,"data":"41 google/flan-t5-base vs syssec-utd/py313-pylingual-v3-statement: sampled -0.0038 whole -0.0000\n"}
+,{"stream_name":"stdout","time":4598.41232139,"data":"42 togatogah/jinen-v1-small.gguf vs TULLUS/codeparrot-small-multi-F32: sampled 0.0026 whole -0.0001\n"}
+,{"stream_name":"stdout","time":4688.271452517,"data":"43 OpenMed/OpenMed-NER-OncologyDetect-BigMed-278M vs OpenMed/OpenMed-NER-PathologyDetect-BigMed-278M: sampled 0.9998 whole 0.9998\n"}
+,{"stream_name":"stdout","time":4759.404249845,"data":"44 mtheo/camembert-base-xnli vs almanach/camembert-base: sampled 0.9980 whole 0.9984\n"}
+,{"stream_name":"stdout","time":4812.430260847,"data":"45 OpenMed/OpenMed-NER-GenomicDetect-TinyMed-135M vs Davlan/distilbert-base-multilingual-cased-ner-hrl: sampled 0.9978 whole 0.9976\n"}
+,{"stream_name":"stdout","time":5141.550602384,"data":"46 Qwen/Qwen3-ASR-0.6B-hf vs ConwayResearch/Underdog-Bark-0.8B-1.0: sampled 0.9956 whole 0.9958\n"}
+,{"stream_name":"stdout","time":5207.819855564,"data":"47 NeuML/pubmedbert-base-embeddings vs aubmindlab/bert-base-arabertv2: sampled -0.0047 whole -0.0001\n"}
+,{"stream_name":"stdout","time":5280.399614809,"data":"48 SamLowe/roberta-base-go_emotions vs OpenMed/OpenMed-NER-PharmaDetect-SuperMedical-125M: sampled 0.9989 whole 0.9989\n"}
+,{"stream_name":"stdout","time":5345.910326799,"data":"49 OpenMed/OpenMed-NER-GenomeDetect-SuperMedical-125M vs PlanTL-GOB-ES/bsc-bio-ehr-es: sampled -0.0012 whole 0.0001\n"}
+,{"stream_name":"stdout","time":5450.819321646,"data":"50 lengyue233/content-vec-best vs yky-h/japanese-hubert-base: sampled 0.0028 whole 0.0004\n"}
+,{"stream_name":"stdout","time":5450.895121685,"data":"50 pairs scored of 9652 compared by E2\n"}
+,{"stream_name":"stdout","time":5451.749578373,"data":"exit 0 -m experiments.e2_whole\n"}
+,{"stream_name":"stdout","time":5451.808994006,"data":"50 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":5454.271796236,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":5454.271891397,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5454.568919794,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5454.5689471,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":5455.501886395,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":5456.654956046,"data":"[NbConvertApp] Writing 291910 bytes to __results__.html\n"}
+]

@@ -1,0 +1,116 @@
+[{"stream_name":"stdout","time":31.847186653,"data":"code 519fc4c\n"}
+,{"stream_name":"stdout","time":99.620723715,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":103.093035228,"data":"94 declared pairs not comparable by weights\n"}
+,{"stream_name":"stderr","time":106.776356577,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":110.395621061,"data":"  sentence-transformers/all-MiniLM-L12-v2 vs microsoft/MiniLM-L12-H384-uncased: text: not a language model (['BertModel']); image: Unrecognized configuration class \u003cclass \n"}
+,{"stream_name":"stdout","time":110.395798698,"data":"  unsloth/gemma-4-12b-it-GGUF vs google/gemma-4-12B-it: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":110.396014525,"data":"  circlestone-labs/Anima vs nvidia/Cosmos-Predict2-2B-Text2Image: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":110.396244425,"data":"  unsloth/gemma-4-26B-A4B-it-GGUF vs google/gemma-4-26B-A4B-it: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":111.586076515,"data":"  kindlingai/glm-5.3-exlr8-k2-k3-k4 vs zai-org/GLM-5.3-BF16: text: kindlingai/glm-5.3-exlr8-k2-k3-k4 does not appear to have a file named pytorch_model \n"}
+,{"stream_name":"stdout","time":111.586135783,"data":"  Comfy-Org/Qwen3-VL vs Qwen/Qwen3-VL-4B-Instruct: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":112.040511073,"data":"  cross-encoder/ms-marco-MiniLM-L12-v2 vs microsoft/MiniLM-L12-H384-uncased: text: not a language model (['BertForSequenceClassification']); image: Unrecognized config \n"}
+,{"stream_name":"stdout","time":112.040656752,"data":"  antirez/deepseek-v4-gguf vs deepseek-ai/DeepSeek-V4-Flash: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":112.465316916,"data":"  handy-computer/parakeet-tdt-0.6b-v3-gguf vs nvidia/parakeet-tdt-0.6b-v3: text: Unrecognized model in handy-computer/parakeet-tdt-0.6b-v3-gguf. Should have a `model \n"}
+,{"stream_name":"stdout","time":112.465514093,"data":"  unsloth/Z-Image-Turbo-GGUF vs Tongyi-MAI/Z-Image-Turbo: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":112.906440213,"data":"  NeuML/pubmedbert-base-embeddings vs microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext: text: not a language model (['BertModel']); image: Unrecognized configuration class \u003cclass \n"}
+,{"stream_name":"stdout","time":113.374351105,"data":"  PaddlePaddle/PP-DocLayoutV3_safetensors vs PaddlePaddle/PP-DocLayoutV3: text: not a language model (['PPDocLayoutV3ForObjectDetection']); image: Unrecognized conf \n"}
+,{"stream_name":"stdout","time":113.374512648,"data":"  unsloth/Qwen-Image-Edit-2511-GGUF vs Qwen/Qwen-Image-Edit-2511: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":113.374796681,"data":"  ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs ukisai/Swift-Qwen3.8-Flash-Next: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":113.797108799,"data":"  prism-ml/Ternary-Bonsai-2-2B-gguf vs Qwen/Qwen3.5-2B: text: Unrecognized model in prism-ml/Ternary-Bonsai-2-2B-gguf. Should have a `model_type`  \n"}
+,{"stream_name":"stdout","time":113.797300373,"data":"  mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF vs prithivMLmods/Qwen3-VL-8B-Instruct-abliterated-v1: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.233275953,"data":"  scragnog/YuE2-GGUF vs m-a-p/YuE2-3B: text: Unrecognized model in scragnog/YuE2-GGUF. Should have a `model_type` key in its conf \n"}
+,{"stream_name":"stdout","time":114.648466425,"data":"  handy-computer/whisper-large-v3-turbo-gguf vs openai/whisper-large-v3-turbo: text: Unrecognized model in handy-computer/whisper-large-v3-turbo-gguf. Should have a `mod \n"}
+,{"stream_name":"stdout","time":114.648624277,"data":"  Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata vs Qwen/Qwen3.8-Flash-Next: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.648879242,"data":"  ml-resources/flux-3-image-klein-comfy vs black-forest-labs/flux-3-image-klein: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.649090445,"data":"  ml-resources/flux-3-image-klein-comfy vs black-forest-labs/flux-3-image-klein-base: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.649370527,"data":"  unsloth/llama-3-8b-Instruct-bnb-4bit vs meta-llama/Llama-3-8B-Instruct: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.649586106,"data":"  SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs ukisai/Swift-Qwen3.8-Flash-Next: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.649814925,"data":"  QuantStack/Wan2.2-TI2V-5B-GGUF vs Wan-AI/Wan2.2-TI2V-5B: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.650021392,"data":"  JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs JetBrains/Mellum2.1-12B-A2.5B-Thinking: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.650253549,"data":"  FINAL-Bench/POCKET-Darwin-180B-GGUF vs FINAL-Bench/Darwin-180B-RSI-R3: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.65049063,"data":"  unsloth/Wan2.2-TI2V-5B-GGUF vs Wan-AI/Wan2.2-TI2V-5B: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.650733578,"data":"  jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs 0bserverx/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":114.650889542,"data":"  huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs deepseek-ai/DeepSeek-V4-Flash-0731: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":115.06523035,"data":"  LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2.5-Audio-1.5B: text: Unrecognized model in LiquidAI/LFM2.5-Audio-1.5B-GGUF. Should have a `model_type` ke \n"}
+,{"stream_name":"stdout","time":115.537050094,"data":"  tiny-random/qwen3.5-moe vs Qwen/Qwen3.5-397B-A17B: text: not a language model (['Qwen3_5MoeForConditionalGeneration']); image: Unrecognized c \n"}
+,{"stream_name":"stdout","time":115.948167937,"data":"  handy-computer/parakeet-tdt-0.6b-v2-gguf vs nvidia/parakeet-tdt-0.6b-v2: text: Unrecognized model in handy-computer/parakeet-tdt-0.6b-v2-gguf. Should have a `model \n"}
+,{"stream_name":"stdout","time":115.948194153,"data":"  lmstudio-community/gemma-4-26B-A4B-it-MLX-6bit vs google/gemma-4-26B-A4B-it: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":115.948430636,"data":"  OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs prism-ml/Ternary-Bonsai-2-27B-gguf: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":115.948583405,"data":"  ggml-org/gemma-3-4b-it-GGUF vs google/gemma-3-4b-it: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":115.948785306,"data":"  kyuz0/deepseek-v4.1-flash-gguf vs deepseek-ai/DeepSeek-V4.1-Flash: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":115.948934506,"data":"  kyuz0/deepseek-v4.1-flash-gguf vs deepseek-ai/DeepSeek-V4.1-Flash-1017: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":115.949105966,"data":"  Comfy-Org/Mage-Flow vs microsoft/Mage-Flow: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":116.370270795,"data":"  cstr/qwen3-tts-0.6b-customvoice-GGUF vs Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice: text: Unrecognized model in cstr/qwen3-tts-0.6b-customvoice-GGUF. Should have a `model_typ \n"}
+,{"stream_name":"stdout","time":116.370358925,"data":"  handy-computer/Voxtral-Mini-3B-2507-gguf vs mistralai/Voxtral-Mini-3B-2507: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":116.370550384,"data":"  huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs deepseek-ai/DeepSeek-V4-Flash-Vision-Exp: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":116.782045822,"data":"  LiquidAI/LFM2.5-VL-450M-GGUF vs LiquidAI/LFM2.5-VL-450M: text: Unrecognized model in LiquidAI/LFM2.5-VL-450M-GGUF. Should have a `model_type` key i \n"}
+,{"stream_name":"stdout","time":117.420264685,"data":"  MediaCatch/xls-r-300m-danish-mc-v2 vs MediaCatch/xls-r-300m-danish-mc: text: not a language model (['Wav2Vec2ForCTC']); image: Unrecognized configuration class \u003c \n"}
+,{"stream_name":"stdout","time":117.420495928,"data":"  VAGOsolutions/SauerkrautLM-ColQwen3-2b-v0.1 vs Qwen/Qwen3-VL-2B: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":117.420704936,"data":"  DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs orcarouter/GLM-5.3-Flash-Uncensored-FP8: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":117.420953413,"data":"  DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs zai-org/GLM-5.3-Flash: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":117.831068102,"data":"  openbmb/MiniCPM-V-4.6-gguf vs openbmb/MiniCPM-V-4.6: text: Unrecognized model in openbmb/MiniCPM-V-4.6-gguf. Should have a `model_type` key in  \n"}
+,{"stream_name":"stdout","time":118.280646305,"data":"  z-lab/Qwen3.6-35B-A3B-DFlash vs Qwen/Qwen3.6-35B-A3B: text: not a language model (['DFlashDraftModel']); image: Unrecognized configuration class \n"}
+,{"stream_name":"stdout","time":118.900614469,"data":"  OpenMed/OpenMed-PII-French-BiomedBERT-Base-110M-v1 vs microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract: text: not a language model (['BertForTokenClassification']); image: Unrecognized configura \n"}
+,{"stream_name":"stdout","time":118.900656807,"data":"  mistralai/Ministral-3-14B-Reasoning-2512-GGUF vs mistralai/Ministral-3-14B-Reasoning-2512: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":118.900872766,"data":"  calcuis/hunyuanimage-gguf vs tencent/HunyuanImage-2.1: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":118.901076788,"data":"  unsloth/orpheus-3b-0.1-ft-GGUF vs canopylabs/orpheus-3b-0.1-pretrained: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":118.901257356,"data":"  ggml-org/gemma-3-4b-it-qat-GGUF vs google/gemma-3-4b-it-qat: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":118.901449661,"data":"  HauhauCS/GPT-OSS-20B-Uncensored-HauhauCS-Aggressive vs gpt-oss-20b: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":119.412569761,"data":"  KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2 vs timm/tf_efficientnet_b5.ns_jft_in1k: text: You are trying to access a gated repo.\n"}
+,{"stream_name":"stdout","time":119.412604912,"data":"Make sure to have access to it at https://hug \n"}
+,{"stream_name":"stdout","time":119.412613492,"data":"  chfm/Qwen-Image-2.1-GGUF vs Qwen/Qwen-Image-2.1: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":120.03560751,"data":"  OpenMed/OpenMed-PII-German-ClinicDischarge-Base-110M-v1 vs emilyalsentzer/Bio_Discharge_Summary_BERT: text: not a language model (['BertForTokenClassification']); image: Unrecognized configura \n"}
+,{"stream_name":"stdout","time":120.035666547,"data":"  mradermacher/Qwen3-Omni-30B-A3B-Captioner-GGUF vs mrTEN10/Qwen3-Omni-30B-A3B-Captioner: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":120.036011514,"data":"  EZForever/gemma-4-26B-A4B-it-qat-uncensored-heretic-UDmerge-GGUF vs llmfan46/gemma-4-26B-A4B-it-qat-q4_0-unquantized-uncensored-heretic: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":120.036059724,"data":"  freakyskittle/apex-flash-1-abliterated-GGUF vs cantina-security/apex-flash-1-abliterated: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":120.036280552,"data":"  boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":120.036466824,"data":"  boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs nota-ai/Nemotron-3.5-Lightning-30B-A3B-Nota-Ternary-MLX-1014: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":120.036636849,"data":"  bartowski/soob3123_amoral-gemma3-12B-v2-GGUF vs soob3123/amoral-gemma3-12B-v2: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":120.036792385,"data":"  mradermacher/Mistral-Small-4-119B-2603-i1-GGUF vs mistralai/Mistral-Small-4-119B-2603: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":120.453775185,"data":"  mondk/LFM3-1.7B-Claude-Code-GGUF vs LiquidAI/LFM3-1.7B: text: Unrecognized model in mondk/LFM3-1.7B-Claude-Code-GGUF. Should have a `model_type` k \n"}
+,{"stream_name":"stdout","time":120.871461889,"data":"  baerquants/GLM-5.3-UD-Q4_K_XL-layers vs unsloth/GLM-5.3-GGUF: text: Unrecognized model in baerquants/GLM-5.3-UD-Q4_K_XL-layers. Should have a `model_typ \n"}
+,{"stream_name":"stdout","time":121.299065338,"data":"  AtomicChat/d1-2B-GGUF vs LiquidAI/d1-2B: text: Unrecognized model in AtomicChat/d1-2B-GGUF. Should have a `model_type` key in its c \n"}
+,{"stream_name":"stdout","time":121.299765317,"data":"  Indexnusrefather/Erebus-RP-Mini-4B-Instruct-2608-v0.1 vs Qwen/Qwen3.5-4B: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":121.948414511,"data":"  nikita-savelyev-cerebras/tiny-random-kimi-k2.7-code-int4 vs moonshotai/Kimi-K2.7-Code: text: not a language model (['KimiK25ForConditionalGeneration']); image: Unrecognized conf \n"}
+,{"stream_name":"stdout","time":121.948648887,"data":"  mradermacher/Mero-Artemis-31B-v1-GGUF vs pineapplesuperfan/Mero-Artemis-31B-v1: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":121.948936583,"data":"  miifanboy/Spark-X2.5-4B-i1-GGUF vs XHToken/Spark-X2.5-4B: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":121.949087942,"data":"  mradermacher/gemma-4-31B-it-heretic-z-i1-GGUF vs callmegrr/gemma-4-31B-it-heretic-z: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":122.384617711,"data":"The repository mobilint/Qwen2.5-0.5B-Instruct-Batch16 contains custom code which must be executed to correctly load the model. You can inspect the repository content at https://hf.co/mobilint/Qwen2.5-0.5B-Instruct-Batch16 .\n"}
+,{"stream_name":"stdout","time":122.384660136,"data":" You can inspect the repository content at https://hf.co/mobilint/Qwen2.5-0.5B-Instruct-Batch16.\n"}
+,{"stream_name":"stdout","time":122.384665884,"data":"You can avoid this prompt in future by passing the argument `trust_remote_code=True`.\n"}
+,{"stream_name":"stdout","time":122.384670458,"data":"\n"}
+,{"stream_name":"stdout","time":122.591031066,"data":"Do you wish to run the custom code? [y/N] The repository mobilint/Qwen2.5-0.5B-Instruct-Batch16 contains custom code which must be executed to correctly load the model. You can inspect the repository content at https://hf.co/mobilint/Qwen2.5-0.5B-Instruct-Batch16 .\n"}
+,{"stream_name":"stdout","time":122.591067969,"data":" You can inspect the repository content at https://hf.co/mobilint/Qwen2.5-0.5B-Instruct-Batch16.\n"}
+,{"stream_name":"stdout","time":122.591072262,"data":"You can avoid this prompt in future by passing the argument `trust_remote_code=True`.\n"}
+,{"stream_name":"stdout","time":122.591075071,"data":"\n"}
+,{"stream_name":"stdout","time":122.59131913,"data":"Do you wish to run the custom code? [y/N]   mobilint/Qwen2.5-0.5B-Instruct-Batch16 vs Qwen/Qwen2.5-0.5B-Instruct: text: The repository mobilint/Qwen2.5-0.5B-Instruct-Batch16 contains custom code which mus \n"}
+,{"stream_name":"stdout","time":123.223754524,"data":"  Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs incoai/Qwen3.8-27B-DFlash2: text: not a language model (['DFlash2DraftModel']); image: Unrecognized configuration clas \n"}
+,{"stream_name":"stdout","time":123.66596011,"data":"  NobodyWho/LFM2.5-VL-1.6B-GGUF vs LiquidAI/LFM2.5-VL-1.6B: text: Unrecognized model in NobodyWho/LFM2.5-VL-1.6B-GGUF. Should have a `model_type` key  \n"}
+,{"stream_name":"stdout","time":123.66599472,"data":"  brunogcp/supergemma4-26b-abliterated-multimodal-gguf-4bit vs Jiunsong/supergemma4-26b-abliterated-multimodal: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":123.666263973,"data":"  mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs nvidia/Ising-Calibration-1.5-31B-BF16: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.094374108,"data":"  mradermacher/Qwen3.5-0.8B-heretic-v3-i1-GGUF vs tvall43/Qwen3.5-0.8B-heretic-v3: text: Unrecognized model in mradermacher/Qwen3.5-0.8B-heretic-v3-i1-GGUF. Should have a `m \n"}
+,{"stream_name":"stdout","time":124.094637718,"data":"  mradermacher/Gemma4-31B-IT-Abliterated-i1-GGUF vs DuoNeural/Gemma4-31B-IT-Abliterated: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.094785553,"data":"  ekacare/parrotlet-a-2.5-pro vs openai/whisper-large-v3: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.094988502,"data":"  mradermacher/chime-in-detector-gemma4-GGUF vs showrounak/chime-in-detector-gemma4: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.095180075,"data":"  mradermacher/Aura-4o-Rebirth-Gemma-4-31B-Merged-GGUF vs SevenOfNine/Aura-4o-Rebirth-Gemma-4-31B-Merged: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.095374498,"data":"  mradermacher/Llama-3.2-3B-optimized-i1-GGUF vs fraQtl/Llama-3.2-3B-fraQtl-kv: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.095546764,"data":"  ValueFX9507/Tifa-Deepsex-14b-CoT vs deepseek-ai/deepseek-r1-14b: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.095740171,"data":"  mradermacher/Mira-v1.22.2b-27B-dpo-i1-GGUF vs Lambent/Mira-v1.22.2b-27B-dpo: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.09591543,"data":"  0xSojalSec/DeepSeek-V4.1-Flash-1017-GSQ-RCO-12-GPU vs deepseek-ai/DeepSeek-V4.1-Flash-1017: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.096087575,"data":"  mradermacher/twentle-gemma-4-GGUF vs maximedb/twentle-gemma-4: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.096295741,"data":"  mradermacher/aquif-3-moe-17b-a2.8b-i1-GGUF vs aquif-ai/aquif-3-moe-17B-A2.8B: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.096444319,"data":"  mradermacher/tame-tiger-i1-GGUF vs cathuriges/tame-tiger: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.096659999,"data":"  mradermacher/granite-speech-3.3-8b-i1-GGUF vs ibm-granite/granite-speech-3.3-8b: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.096832578,"data":"  Mungert/X-Ray_Alpha-GGUF vs google/gemma-3-4b-it: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.097002953,"data":"  lmstudio-community/c4ai-command-r-plus-08-2024-GGUF vs CohereForAI/c4ai-command-r-plus-08-2024: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.097189175,"data":"  mradermacher/Orion-HYMT1.5-7B-SFT-v2601-i1-GGUF vs 3tic/Orion-HYMT1.5-7B-SFT-v2601: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":124.097398036,"data":"  OpenIXCLab/SeC-4B vs OpenGVLab/InternVL2.5-4B: model above 2B parameters \n"}
+,{"stream_name":"stdout","time":125.611447204,"data":"exit 0 -m experiments.e2_behaviour\n"}
+,{"stream_name":"stdout","time":125.636845144,"data":"94 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":128.316785176,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":128.31683263,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":128.70446872,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":128.704508181,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":129.706407543,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":131.096490957,"data":"[NbConvertApp] Writing 291918 bytes to __results__.html\n"}
+]
