@@ -51,7 +51,7 @@ def verdict_cell(v: str) -> str:
 
 def index(V: dict) -> str:
     rules = V["rules"]["t"]
-    hs = sorted(rules["hypotheses"], key=lambda h: int(h["id"][1:]))
+    hs = sorted(rules["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("ab")), h["id"]))
     mid = {h["id"]: h["verdict"] for h in V["rules"]["midpoint"]["hypotheses"]}
     rows = "".join(f"<tr><td>{h['id']}</td><td>{e(h['statement'])}</td><td>{verdict_cell(h['verdict'])}</td>"
                    f"<td>{e(h['evidence'])}</td><td>{e(mid[h['id']])}</td></tr>" for h in hs)
@@ -69,15 +69,53 @@ def index(V: dict) -> str:
 ({h3['k']} of {h3['n']}; 95% interval {h3['wilson'][0] * 100:.0f}–{h3['wilson'][1] * 100:.0f}%)</div>
 <div class="card"><b>{A['n_models']}</b>models audited, drawn at random from three download tiers of the Hub's
 top 100,000; every one is accounted for</div></div>"""
+    LABEL = [("declared, related", "Declares a base, and the weights confirm it"),
+             ("declared, unrelated", "Declares a base the weights contradict"),
+             ("declared, not comparable", "Declares a base that cannot be compared by weights"),
+             ("no declaration, parent found", "Declares no base; an earlier related model was found"),
+             ("no declaration, no parent found", "Declares no base; no related earlier model found"),
+             ("not readable", "Weights not readable"), ("adapter", "An adapter only")]
+    crows = "".join(f"<tr><td>{e(lbl)}</td><td class='num'>{sum(A['categories'].get(k, {}).values())}</td></tr>"
+                    for k, lbl in LABEL) if A else ""
+    B = rules.get("behaviour") or {}
+    beh = ""
+    if B:
+        na = B["not_applicable"]
+        beh = (f"<p>Weights cannot be compared for {B['pairs']} declared pairs. The behaviour instrument, pre-registered "
+               f"for them, applied to {len(B['verified_by_behaviour']) + len(B['below_rule'])}: "
+               + "; ".join(f"{n} {e(k)}" for k, n in sorted(na.items(), key=lambda x: -x[1]))
+               + ". On ground truth it did not separate distilled students from independent ones (H9, H12), so it "
+               "is reported as its own category and never moves H3.</p>")
+    F = (V.get("reader_fixed") or {}).get("t")
+    fixed = ""
+    if F:
+        ch = [k for k, x in F["verdicts"].items() if x["changes"]]
+        fixed = (f"<p>{F['rescored']} comparisons in the audit ended in a file-reader error. After the readers were "
+                 f"fixed they were scored again (E2r): all but {F['still_errors']} now score (those use GGUF tensor "
+                 "types outside llama.cpp's published list), and "
+                 + ("no verdict changes: " if not ch else f"the verdict of {', '.join(ch)} changes: ")
+                 + "; ".join(f"{k} {e(x['evidence'])}" for k, x in F["verdicts"].items()) + ".</p>")
+    h13 = {h["id"]: h for h in hs}.get("H13a")
+    pool2 = ""
+    if h13 and h13.get("numbers"):
+        n = h13["numbers"]
+        pool2 = (f"<p>Pool v2, pre-registered and judged on a fresh sample: it held the confirmed parent for "
+                 f"{n['v2'][0]} of {n['v2'][1]} fresh models (E2's pool: {n['v1'][0]}), at a mean of "
+                 f"{n['mean_pool_size']:.0f} candidates; H13a {e(h13['verdict'])}, H13b "
+                 f"{e({h['id']: h for h in hs}['H13b']['verdict'])}.</p>")
     body = f"""<h1>Pedigree: do models come from where they say they do?</h1>
 <p class="lede">A model card's <code>base_model</code> tells licence checks, procurement reviews and the Hub
 what a model is built on. Nobody checks it. Pedigree checks it from the weights, on a frozen random sample of the
 Hub, with a verifier measured on ground truth first.</p>
 {cards}
+<h2>The audit</h2>
+<table><tr><th>Category</th><th>Models</th></tr>{crows}</table>
+{beh}{fixed}
 <h2>Hypotheses</h2>
 <p>Every decision rule was committed in <a href="{REPO_URL}/blob/main/PLAN.md">PLAN.md</a> before the runs it
 governs; verdicts are never reworded. The last column repeats each verdict under a second threshold rule.</p>
 <table><tr><th></th><th>Hypothesis</th><th>Verdict</th><th>Evidence</th><th>Midpoint rule</th></tr>{rows}</table>
+{"<h2>Finding a parent nobody declared</h2>" + pool2 if pool2 else ""}
 <h2>Thresholds</h2>
 <p>Fixed from development negatives only: the highest score of any unrelated pair plus five standard deviations,
 wide because the audit makes thousands of comparisons.</p>
