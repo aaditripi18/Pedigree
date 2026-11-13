@@ -421,6 +421,61 @@ def behaviour_audit(e2b, h9r) -> dict | None:
     return out
 
 
+def with_rescores(e2, e2r):
+    """E2 with each comparison that ended in a reader error replaced by its E2r score (the
+    fixed readers); E2's own records are not changed."""
+    import copy
+    new = {(r["model"], r["other"], r["role"]): r for r in e2r if "lost" not in r}
+    out = copy.deepcopy(e2)
+    keep = ("median_cosine", "compared", "matched", "match_share", "identical", "kurtosis_gap",
+            "median_invariant", "invariant_compared", "error")
+    for m in out:
+        for role, key, rows in (("declared", "base", m.get("declared", [])), ("pool", "candidate", m.get("pool", []))):
+            for d in rows:
+                r = new.get((m["id"], d[key], role))
+                if d.get("error") and r:
+                    d.pop("error")
+                    d.update({k: r[k] for k in keep if k in r})
+    return out
+
+
+def h13(h13r, T, rule) -> list[dict]:
+    """H13 (PLAN.md, amendment 2026-11-13): pool v2 on the fresh sample. The ground truth is each
+    fresh model's declared base where the weights confirm it (as H7 b); both pools are rebuilt
+    from the frozen metadata, so the job that read the weights could not tune them."""
+    st_a = "Pool v2 holds the weight-verified declared parent for >= 90% of fresh Hub models."
+    st_b = "Pool v2 holds more of those parents than E2's pool (exact one-sided McNemar, p < 0.05)."
+    if len(h13r) < 360:
+        return [{"id": "H13a", "statement": st_a, "verdict": "pending", "evidence": "needs H13"},
+                {"id": "H13b", "statement": st_b, "verdict": "pending", "evidence": "needs H13"}]
+    from pedigree import pool
+    from pedigree.pool_v2 import PoolV2, float_params
+    F = pool.Frame(ROOT / "results" / "e2_frame_meta.jsonl.gz")
+    P = PoolV2(F, ROOT / "results" / "e2_bases_meta.jsonl.gz")
+    pairs = []
+    for m in h13r:
+        for d in m.get("declared", []):
+            if related(d, T, rule) != "related" or d.get("identical"):
+                continue
+            want = P.name(d["base"])
+            v1 = {P.name(c) for c in F.candidates(m["family_key"], m.get("params"), m.get("dims"), exclude={m["id"]})}
+            params = m.get("params") if m.get("quantised") else (float_params(F.by_id.get(m["id"], {})) or m.get("params"))
+            v2 = P.candidates(m["id"], m["family_key"], params, m.get("dims"), bool(m.get("quantised")))
+            pairs.append((m["tier"], want in v1, want in v2, len(v2)))
+    n = len(pairs)
+    k2, k1 = sum(p[2] for p in pairs), sum(p[1] for p in pairs)
+    b = sum(p[2] and not p[1] for p in pairs)
+    c = sum(p[1] and not p[2] for p in pairs)
+    pval = sum(math.comb(b + c, i) for i in range(b, b + c + 1)) / 2 ** (b + c) if b + c else 1.0
+    per = {t: [sum(p[2] for p in pairs if p[0] == t), sum(1 for p in pairs if p[0] == t)] for t in TIER_SIZE}
+    nums = {"n": n, "v2": [k2, n, wilson(k2, n)], "v1": [k1, n, wilson(k1, n)], "v2_only": b, "v1_only": c,
+            "mcnemar_p": pval, "v2_per_tier": per, "mean_pool_size": sum(p[3] for p in pairs) / n if n else None}
+    return [{"id": "H13a", "statement": st_a, "verdict": verdict(k2 / n >= 0.9 if n else None), "numbers": nums,
+             "evidence": f"v2 {k2}/{n} (E2's pool {k1}/{n})"},
+            {"id": "H13b", "statement": st_b, "verdict": verdict(pval < 0.05 if n else None), "numbers": nums,
+             "evidence": f"v2 only {b}, E2's pool only {c}, p = {pval:.2g}"}]
+
+
 def h2h3(A, done):
     h2 = {"id": "H2", "statement": "At least 30% of Hub models verifiably derived from another public model do not "
           "declare a base.", "verdict": verdict(A["h2"]["share"] >= 0.30 if done and A["h2"]["n"] else None),
@@ -447,6 +502,8 @@ def main() -> None:
     e2 = latest_runs(rows, "E2", lambda r: 0)
     e2w = latest_runs(rows, "E2W", lambda r: 0)
     e2b = latest_runs(rows, "E2B", lambda r: 0)
+    e2r = latest_runs(rows, "E2r", lambda r: 0)
+    h13r = latest_runs(rows, "H13", lambda r: 0)
     def by_family_split(exp):
         return latest_runs(rows, exp, lambda r: ((r.get("meta") or {}).get("family", r.get("family")),
                                                 (r.get("meta") or {}).get("split", r.get("split"))))
@@ -462,7 +519,17 @@ def main() -> None:
         A = audit(e2, T, rule) if e2 else None
         hs = [h1(e1, T, rule), *(h2h3(A, len(e2) == 600) if A else []), h4(e1, T, rule), h5(e1, e5, T, rule),
               h6(e1b, e2w, T, rule), h7(h7a, e2, T, rule), h8(e1b, e7k, e2, T, rule), h9(e5), h10(e6, T, rule),
-              h11(e7, T, rule), h12(e5o)]
+              h11(e7, T, rule), h12(e5o), *h13(h13r, T, rule)]
+        if e2r:
+            e2f = with_rescores(e2, e2r)
+            Af = audit(e2f, T, rule)
+            hf = {h["id"]: h for h in [*h2h3(Af, len(e2f) == 600), h7(h7a, e2f, T, rule)]}
+            out.setdefault("reader_fixed", {})[rule] = {
+                "rescored": len(e2r), "lost": sum("lost" in r for r in e2r),
+                "still_errors": sum(bool(r.get("error")) for r in e2r), "audit": Af,
+                "verdicts": {k: {"verdict": v["verdict"], "evidence": v["evidence"],
+                                 "changes": v["verdict"] != next(h for h in hs if h["id"] == k)["verdict"]}
+                             for k, v in hf.items()}}
         out["rules"][rule] = {"hypotheses": hs, "audit": A,
                               "behaviour": behaviour_audit(e2b, next(h for h in hs if h["id"] == "H9"))}
     # the CLI's thresholds are exactly the published rule's
@@ -481,11 +548,11 @@ def main() -> None:
     md += ["", f"Families compared blind (after the rule was written): {', '.join(sorted(BLIND))}.", "",
            "## Hypotheses", "", "| | Hypothesis | Verdict | Evidence | Under the midpoint rule |", "|---|---|---|---|---|"]
     mid = {h["id"]: h for h in out["rules"]["midpoint"]["hypotheses"]}
-    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: int(h["id"][1:])):
+    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("ab")), h["id"])):
         md.append(f"| {h['id']} | {h['statement']} | **{h['verdict']}** | {h['evidence']} | {mid[h['id']]['verdict']} |")
     (ROOT / "docs").mkdir(exist_ok=True)
     (ROOT / "docs" / "RESULTS.md").write_text("\n".join(md) + "\n", encoding="utf-8")
-    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: int(h["id"][1:])):
+    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("ab")), h["id"])):
         print(f"{h['id']:>4} {h['verdict']:<14} {h['evidence']}")
     print({k: round(v["t"], 4) for k, v in T.items()})
 

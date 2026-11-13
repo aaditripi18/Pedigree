@@ -131,3 +131,21 @@ def test_gguf_fork_type_is_named(monkeypatch):
     from pedigree import ggufremote
     with pytest.raises(ValueError, match="not in llama.cpp's published list"):
         ggufremote.sample("u", {"qtype": 142, "shape": [10], "start": 0}, 10)
+
+
+def test_mlx_mixed_precision_layer(tmp_path, local_ranges):
+    """A layer listed under its own path in the quantisation config (8-bit inside a 4-bit model)
+    is read with its own width."""
+    rng = np.random.default_rng(2)
+    out, cols, gs = 2, 64, 64
+    q = rng.integers(0, 256, size=(out, cols)).astype(np.uint8)
+    words = q.view("<u4")
+    scales = rng.normal(size=(out, 1)).astype(np.float16)
+    biases = rng.normal(size=(out, 1)).astype(np.float16)
+    path = tmp_path / "model.safetensors"
+    save_file({"mlp.gate.weight": torch.from_numpy(words.view(np.int32).copy()).view(torch.uint32),
+               "mlp.gate.scales": torch.from_numpy(scales), "mlp.gate.biases": torch.from_numpy(biases)}, str(path))
+    r = _open_local(path, {"quantization": {"bits": 4, "group_size": 64, "mlp.gate": {"bits": 8, "group_size": 64}}})
+    assert r.float_shapes() == {"mlp.gate.weight": ("float", (out, cols))}
+    want = q * scales.astype(np.float64) + biases.astype(np.float64)
+    np.testing.assert_allclose(r.sample("mlp.gate.weight", max_bytes=out * cols * 4), want.ravel())

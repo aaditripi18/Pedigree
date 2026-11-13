@@ -121,7 +121,9 @@ class Remote:
         cfg = self._config()
         q = cfg.get("quantization") or cfg.get("quantization_config") or {}
         for n in mlx:
-            bits, gs = int(q.get("bits", 4)), int(q.get("group_size", 64))
+            own = q.get(n[:-7])          # mixed precision: MLX writes per-layer exceptions under the layer's path
+            own = own if isinstance(own, dict) else {}
+            bits, gs = int(own.get("bits", q.get("bits", 4))), int(own.get("group_size", q.get("group_size", 64)))
             shape = list(t[n][2]["shape"])           # (..., packed columns); MoE experts add axes
             self.quant[n] = {"kind": "mlx", "bits": bits, "group": gs,
                              "shape": tuple(shape[:-1] + [shape[-1] * 32 // bits]),
