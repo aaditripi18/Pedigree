@@ -94,3 +94,40 @@ def test_mlx_experts_axis(tmp_path, local_ranges):
     g = np.arange(cols) // gs
     want = q * scales.astype(np.float64)[..., g] + biases.astype(np.float64)[..., g]
     np.testing.assert_allclose(r.sample("x.weight", max_bytes=e * out * cols * 4), want.ravel())
+
+
+@pytest.mark.parametrize("bits", [3, 6])
+def test_mlx_values_straddling_words(tmp_path, local_ranges, bits):
+    """MLX 3- and 6-bit rows are bit streams: a value may start in one 32-bit word and end in the
+    next (E2 errored on 49 such comparisons before this was read correctly)."""
+    rng = np.random.default_rng(1)
+    out, cols, gs = 4, 160, 32       # 160 x 3 = 480 and 160 x 6 = 960 bits: whole words, values straddle
+    q = rng.integers(0, 1 << bits, size=(out, cols)).astype(np.uint8)
+    stream = ((q[:, :, None] >> np.arange(bits)) & 1).astype(np.uint8).reshape(out, cols * bits)
+    words = np.packbits(stream, axis=1, bitorder="little").view("<u4")
+    scales = rng.normal(size=(out, cols // gs)).astype(np.float16)
+    biases = rng.normal(size=(out, cols // gs)).astype(np.float16)
+    path = tmp_path / "model.safetensors"
+    save_file({"l.weight": torch.from_numpy(words.view(np.int32).copy()).view(torch.uint32),
+               "l.scales": torch.from_numpy(scales), "l.biases": torch.from_numpy(biases)}, str(path))
+    r = _open_local(path, {"quantization": {"bits": bits, "group_size": gs}})
+    assert r.float_shapes() == {"l.weight": ("float", (out, cols))}
+    g = np.arange(cols) // gs
+    want = q * scales.astype(np.float64)[:, g] + biases.astype(np.float64)[:, g]
+    np.testing.assert_allclose(r.sample("l.weight", max_bytes=out * cols * 4), want.ravel())
+
+
+def test_gguf_plain_integer_tensor(monkeypatch):
+    """A GGUF int8 tensor is stored as it is; the reader casts it instead of dequantising."""
+    from pedigree import ggufremote
+    data = np.arange(-50, 50, dtype=np.int8).tobytes()
+    monkeypatch.setattr(remote, "fetch_range", lambda url, a, b, retries=0: data[a:b + 1])
+    import gguf
+    spec = {"qtype": int(gguf.GGMLQuantizationType.I8), "shape": [100], "start": 0}
+    np.testing.assert_array_equal(ggufremote.sample("u", spec, 30), np.arange(-50, -20, dtype=np.float64))
+
+
+def test_gguf_fork_type_is_named(monkeypatch):
+    from pedigree import ggufremote
+    with pytest.raises(ValueError, match="not in llama.cpp's published list"):
+        ggufremote.sample("u", {"qtype": 142, "shape": [10], "start": 0}, 10)

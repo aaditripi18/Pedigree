@@ -168,10 +168,12 @@ class Remote:
             url, start, s = self.tensors[name]
             words_per_row = s["shape"][-1]
             raw = tensor_bytes(url, start, s, rows * words_per_row * 4)
-            w = np.frombuffer(raw, dtype="<u4").reshape(rows, words_per_row)
-            per = 32 // q["bits"]
-            mask = (1 << q["bits"]) - 1
-            vals = np.stack([(w >> (q["bits"] * k)) & mask for k in range(per)], axis=-1).reshape(rows, cols)
+            # each row is one little-endian bit stream: value k holds bits k*b .. k*b+b-1, so 3- and
+            # 6-bit values may straddle two words (4- and 8-bit ones never do)
+            b = q["bits"]
+            bits = np.unpackbits(np.frombuffer(raw, dtype=np.uint8).reshape(rows, words_per_row * 4), axis=1,
+                                 bitorder="little")[:, :cols * b].reshape(rows, cols, b)
+            vals = bits.astype(np.int64) @ (1 << np.arange(b, dtype=np.int64))
             ng = cols // q["group"]
             sc = self._raw(q["scales"], rows * ng).reshape(rows, ng)
             bi = self._raw(q["biases"], rows * ng).reshape(rows, ng)

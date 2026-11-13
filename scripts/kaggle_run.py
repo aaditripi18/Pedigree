@@ -168,6 +168,9 @@ JOBS["e2-configs"] = _job("pedigree-e2-configs", [["-m", "experiments.e2_configs
 # pool v2: metadata of declared bases outside the frame, second half (the Hub limits each address)
 JOBS["bases-meta"] = _job("pedigree-bases-meta", [["-m", "experiments.e2_bases_meta", "--shard", "1/2", "--part",
                                                   "/kaggle/working/e2_bases_meta.part.jsonl"]], gpu=False)
+# E2r: E2's comparisons that ended in a reader error, scored again with the fixed readers
+JOBS["e2-rescore"] = _job("pedigree-e2-rescore", [["-m", "experiments.e2_rescore"]], gpu=False,
+                          env={"PEDIGREE_WORKERS": "8"})
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
 # fit Kaggle's CPU budget, and the statistics do not depend on the device
 JOBS["e2-behaviour"] = _job("pedigree-e2-behaviour", [["-m", "experiments.e2_behaviour"]], gpu=False)

@@ -101,10 +101,18 @@ def sample(url: str, spec: dict, elements: int) -> np.ndarray:
     """The first `elements` values (float64) of a GGUF tensor, dequantised."""
     import gguf
     from .remote import fetch_range
-    qtype = gguf.GGMLQuantizationType(spec["qtype"])
+    try:
+        qtype = gguf.GGMLQuantizationType(spec["qtype"])
+    except ValueError:
+        raise ValueError(f"GGUF tensor type {spec['qtype']} is not in llama.cpp's published list "
+                         "(a fork's own format)") from None
     block, type_size = gguf.GGML_QUANT_SIZES[qtype]
     total = int(np.prod(spec["shape"]))
     n = min(elements, total)
+    plain = {"I8": "<i1", "I16": "<i2", "I32": "<i4", "I64": "<i8", "F64": "<f8"}.get(qtype.name)
+    if plain:                       # integer and float64 tensors are stored as they are, not quantised
+        raw = fetch_range(url, spec["start"], spec["start"] + n * type_size - 1)
+        return np.frombuffer(raw, dtype=plain).astype(np.float64)[:n]
     blocks = -(-n // block)
     raw = fetch_range(url, spec["start"], spec["start"] + blocks * type_size - 1)
     vals = gguf.quants.dequantize(np.frombuffer(raw, dtype=np.uint8), qtype)
