@@ -6,3 +6,8 @@ data/
 models/
 .claude/
 pedigree.egg-info/
+
+# intermediate row files of resumable fetches; the frozen .gz is committed
+*.part.jsonl
+# code copies Kaggle bundles into a job's outputs
+results/kaggle/*/Pedigree/
