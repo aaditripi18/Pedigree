@@ -165,6 +165,9 @@ for _k in range(2, 5):
 # frozen configs, second half (the Hub limits each address to 3000 file requests per 5 minutes)
 JOBS["e2-configs"] = _job("pedigree-e2-configs", [["-m", "experiments.e2_configs", "--shard", "1/2", "--rows-out",
                                                   "/kaggle/working/e2_configs_shard1.jsonl"]], gpu=False)
+# pool v2: metadata of declared bases outside the frame, second half (the Hub limits each address)
+JOBS["bases-meta"] = _job("pedigree-bases-meta", [["-m", "experiments.e2_bases_meta", "--shard", "1/2", "--part",
+                                                  "/kaggle/working/e2_bases_meta.part.jsonl"]], gpu=False)
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
 # fit Kaggle's CPU budget, and the statistics do not depend on the device
 JOBS["e2-behaviour"] = _job("pedigree-e2-behaviour", [["-m", "experiments.e2_behaviour"]], gpu=False)

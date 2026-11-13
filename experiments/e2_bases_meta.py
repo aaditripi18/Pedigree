@@ -11,7 +11,7 @@ results/e2_bases_meta.jsonl.gz, sorted by id. A base the Hub no longer has is ke
 "missing": true; a renamed one keeps the asked-for id with its current name in "canonical".
 A network failure is retried, never written.
 
-    python -m experiments.e2_bases_meta
+    python -m experiments.e2_bases_meta [--shard 1/2 --part PATH]
 """
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ from pedigree import pool
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "results" / "e2_bases_meta.jsonl.gz"
-PART = ROOT / "results" / "e2_bases_meta.part.jsonl"
+PART_DEFAULT = ROOT / "results" / "e2_bases_meta.part.jsonl"
 
 
 def wanted() -> list[str]:
@@ -60,14 +60,22 @@ def one(repo: str) -> dict | None:
 
 
 def main() -> None:
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--shard", default="0/1", help="k/n: only every n-th base, starting at k (the Hub limits each address)")
+    ap.add_argument("--part", default=str(PART_DEFAULT), help="this shard's row file")
+    a = ap.parse_args()
+    part = Path(a.part)
+    k, n = map(int, a.shard.split("/"))
     todo = wanted()
+    mine = set(todo[k::n])
     done = set()
-    if PART.exists():
-        done = {json.loads(x)["id"] for x in PART.read_text(encoding="utf-8").splitlines() if x}
-    rest = [b for b in todo if b not in done]
+    if part.exists():
+        done = {json.loads(x)["id"] for x in part.read_text(encoding="utf-8").splitlines() if x}
+    rest = [b for b in todo if b not in done and b in mine]
     print(f"{len(todo)} declared bases outside the frame; {len(done)} fetched, {len(rest)} to fetch", flush=True)
     failed = 0
-    with PART.open("a", encoding="utf-8") as out, ThreadPoolExecutor(4) as ex:
+    with part.open("a", encoding="utf-8") as out, ThreadPoolExecutor(4) as ex:
         for k, r in enumerate(ex.map(one, rest)):
             if r is None:
                 failed += 1
@@ -78,7 +86,9 @@ def main() -> None:
                 print(f"  {k}/{len(rest)}, {failed} to retry", flush=True)
     if failed:
         raise SystemExit(f"{failed} bases failed on the network; run again to fetch them")
-    rows = {json.loads(x)["id"]: json.loads(x) for x in PART.read_text(encoding="utf-8").splitlines() if x}
+    if n > 1:
+        return                      # shards are merged by appending their row files, then one run without --shard
+    rows = {json.loads(x)["id"]: json.loads(x) for x in part.read_text(encoding="utf-8").splitlines() if x}
     with gzip.open(OUT, "wt", encoding="utf-8") as f:
         f.writelines(json.dumps(rows[b], sort_keys=True) + "\n" for b in todo)
     print(f"wrote {OUT.name}: {len(todo)} bases, {sum(1 for b in todo if rows[b].get('missing'))} missing")
