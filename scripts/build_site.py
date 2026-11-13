@@ -65,8 +65,8 @@ def index(V: dict) -> str:
         cards = f"""<div class="cards">
 <div class="card"><b>{h2['share'] * 100:.0f}%</b>of Hub models whose weights show a public parent do not declare it
 ({h2['k']} of {h2['n']}; 95% interval {h2['wilson'][0] * 100:.0f}–{h2['wilson'][1] * 100:.0f}%)</div>
-<div class="card"><b>{h3['share'] * 100:.0f}%</b>of declared bases are contradicted by the weights
-({h3['k']} of {h3['n']}; 95% interval {h3['wilson'][0] * 100:.0f}–{h3['wilson'][1] * 100:.0f}%)</div>
+<div class="card"><b>{h3['share'] * 100:.1f}%</b>of declared bases are contradicted by the weights
+({h3['k']} of {h3['n']}; 95% interval {h3['wilson'][0] * 100:.1f}–{h3['wilson'][1] * 100:.1f}%)</div>
 <div class="card"><b>{A['n_models']}</b>models audited, drawn at random from three download tiers of the Hub's
 top 100,000; every one is accounted for</div></div>"""
     LABEL = [("declared, related", "Declares a base, and the weights confirm it"),
@@ -77,13 +77,16 @@ top 100,000; every one is accounted for</div></div>"""
              ("not readable", "Weights not readable"), ("adapter", "An adapter only")]
     crows = "".join(f"<tr><td>{e(lbl)}</td><td class='num'>{sum(A['categories'].get(k, {}).values())}</td></tr>"
                     for k, lbl in LABEL) if A else ""
+    READ = {"model above 2B parameters": "pairs with a model above 2B parameters",
+            "neither a shared language-model output nor a shared label set":
+                "pairs with neither a shared language-model output nor a shared label set"}
     B = rules.get("behaviour") or {}
     beh = ""
     if B:
         na = B["not_applicable"]
         beh = (f"<p>Weights cannot be compared for {B['pairs']} declared pairs. The behaviour instrument, pre-registered "
                f"for them, applied to {len(B['verified_by_behaviour']) + len(B['below_rule'])}: "
-               + "; ".join(f"{n} {e(k)}" for k, n in sorted(na.items(), key=lambda x: -x[1]))
+               + "; ".join(f"{n} {e(READ.get(k, k))}" for k, n in sorted(na.items(), key=lambda x: -x[1]))
                + ". On ground truth it did not separate distilled students from independent ones (H9, H12), so it "
                "is reported as its own category and never moves H3.</p>")
     F = (V.get("reader_fixed") or {}).get("t")

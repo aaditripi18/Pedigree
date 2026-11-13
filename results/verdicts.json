@@ -1,0 +1,1562 @@
+{
+ "thresholds": {
+  "plain": {
+   "t": 0.025539921783829564,
+   "midpoint": 0.5024482901113826,
+   "n_negatives": 16,
+   "max_negative": 0.005292770700738866,
+   "sd_negatives": 0.00404943021661814,
+   "min_trained_positive": 0.9996038095220263
+  },
+  "invariant": {
+   "t": 0.06620051786637829,
+   "midpoint": 0.5127832804559045,
+   "n_negatives": 16,
+   "max_negative": 0.02588381362470027,
+   "sd_negatives": 0.008063340848335605,
+   "min_trained_positive": 0.9996827472871086
+  },
+  "aligned": {
+   "t": 0.038766668213091486,
+   "midpoint": 0.5060350731152673,
+   "n_negatives": 10,
+   "max_negative": 0.012387398943425929,
+   "sd_negatives": 0.005275853853933111,
+   "min_trained_positive": 0.9996827472871086
+  }
+ },
+ "families_in_e1": [
+  "diffusion_unet",
+  "speech",
+  "text_decoder",
+  "text_encoder",
+  "vision_cnn",
+  "vision_transformer"
+ ],
+ "blind_families": [
+  "diffusion_unet",
+  "speech"
+ ],
+ "rules": {
+  "t": {
+   "hypotheses": [
+    {
+     "id": "H1",
+     "statement": "The verifier separates derivatives from independent same-architecture models on fresh ground truth with TPR >= 95% at FPR <= 1%.",
+     "verdict": "supported",
+     "numbers": {
+      "tpr": [
+       24,
+       24,
+       [
+        0.862,
+        1.0
+       ]
+      ],
+      "fpr": [
+       0,
+       18,
+       [
+        0.0,
+        0.1759
+       ]
+      ],
+      "auc_plain": 1.0,
+      "families": [
+       "diffusion_unet",
+       "speech",
+       "text_decoder",
+       "text_encoder",
+       "vision_cnn",
+       "vision_transformer"
+      ]
+     },
+     "evidence": "TPR 24/24, FPR 0/18, AUC (plain) 1.000"
+    },
+    {
+     "id": "H2",
+     "statement": "At least 30% of Hub models verifiably derived from another public model do not declare a base.",
+     "verdict": "not supported",
+     "numbers": {
+      "k": 105,
+      "n": 364,
+      "share": 0.28846153846153844,
+      "wilson": [
+       0.2443,
+       0.337
+      ],
+      "per_tier": {
+       "top_1k": [
+        38,
+        101
+       ],
+       "1k_10k": [
+        41,
+        120
+       ],
+       "10k_100k": [
+        26,
+        143
+       ]
+      },
+      "tier_weighted": 0.1981487398739874
+     },
+     "evidence": "105/364 undeclared"
+    },
+    {
+     "id": "H3",
+     "statement": "At least 5% of declared bases are contradicted by the weights.",
+     "verdict": "not supported",
+     "numbers": {
+      "k": 3,
+      "n": 227,
+      "share": 0.013215859030837005,
+      "wilson": [
+       0.0045,
+       0.0381
+      ],
+      "per_tier": {
+       "top_1k": [
+        1,
+        55
+       ],
+       "1k_10k": [
+        0,
+        71
+       ],
+       "10k_100k": [
+        2,
+        101
+       ]
+      },
+      "tier_weighted": 0.018003600360036006
+     },
+     "evidence": "3/227 contradicted"
+    },
+    {
+     "id": "H4",
+     "statement": "A function-preserving permutation (attack b) hides lineage from the plain verifier on >= 90% of derivatives, and defence (ii) restores it on >= 90%.",
+     "verdict": "supported",
+     "numbers": {
+      "hidden": [
+       3,
+       3
+      ],
+      "restored": [
+       3,
+       3
+      ],
+      "rows": {
+       "text_encoder": [
+        0.006833414501291529,
+        0.9999066159194046
+       ],
+       "text_decoder": [
+        -0.003231541045623069,
+        0.9994680893550307
+       ],
+       "vision_transformer": [
+        -0.0011722337601518485,
+        0.9998290906239109
+       ]
+      }
+     },
+     "evidence": "plain hidden on 3/3; aligned restores 3/3"
+    },
+    {
+     "id": "H5",
+     "statement": "4-bit quantised derivatives are still verified (>= 90%); students distilled from a random initialisation are not (<= 10%).",
+     "verdict": "supported",
+     "numbers": {
+      "q4": [
+       6,
+       6
+      ],
+      "students_related": [
+       0,
+       12
+      ]
+     },
+     "evidence": "q4_0 verified 6/6; distilled students related by weights 0/12"
+    },
+    {
+     "id": "H6",
+     "statement": "The sampled verdict equals the whole-file verdict for >= 98% of pairs.",
+     "verdict": "supported",
+     "numbers": {
+      "e1": [
+       75,
+       75
+      ],
+      "e2": [
+       50,
+       50
+      ],
+      "max_abs_difference": 0.07447868741784847
+     },
+     "evidence": "E1 fresh pairs 75/75, Hub pairs 50/50 agree"
+    },
+    {
+     "id": "H7",
+     "statement": "The candidate pool contains the true parent for >= 90% of ground-truth derivatives (a) and of Hub models whose declared base is verified (b).",
+     "verdict": "not supported",
+     "numbers": {
+      "a": [
+       20,
+       24,
+       [
+        0.6415,
+        0.9332
+       ]
+      ],
+      "b": [
+       76,
+       199,
+       [
+        0.3172,
+        0.451
+       ]
+      ]
+     },
+     "evidence": "(a) 20/24; (b) 76/199"
+    },
+    {
+     "id": "H8",
+     "statement": "Direction is decided correctly for >= 90% of the pairs where it is decided (D1 Hub dates; D2 weight kurtosis), with the undecided share reported.",
+     "verdict": "not supported",
+     "numbers": {
+      "d2_margin": 0.0006166398300750942,
+      "d2": [
+       35,
+       39,
+       59
+      ],
+      "d1": [
+       183,
+       193
+      ]
+     },
+     "evidence": "D1 (dates) right on 183/193; D2 (kurtosis, margin 0.00062) right on 35/39 decided, undecided 20/59"
+    },
+    {
+     "id": "H9",
+     "statement": "Behaviour separates distilled students from same-task independent students with TPR >= 90% at FPR <= 5% (fresh).",
+     "verdict": "not supported",
+     "numbers": {
+      "statistic": "agreement",
+      "threshold": 0.447,
+      "tpr": [
+       3,
+       12
+      ],
+      "fpr": [
+       2,
+       12
+      ],
+      "dev_gaps": {
+       "agreement": -0.3929347915806851,
+       "1-js": -0.5600346094768077,
+       "cka": -0.2763459416374358
+      }
+     },
+     "evidence": "agreement > 0.4470 (chosen on dev): TPR 3/12, FPR 2/12"
+    },
+    {
+     "id": "H10",
+     "statement": "Weight similarity tracks shared initialisation, not shared data.",
+     "verdict": "supported",
+     "numbers": {
+      "shared_init": [
+       4,
+       4
+      ],
+      "different_init_same_data": [
+       0,
+       2
+      ]
+     },
+     "evidence": "shared initialisation related 4/4; different initialisation, same data 0/2"
+    },
+    {
+     "id": "H11",
+     "statement": "A final model is verified against its own checkpoints from step 10,000 on, and against no checkpoint of another run.",
+     "verdict": "supported",
+     "numbers": {
+      "own_from_10k_all_related": true,
+      "other_run_related": 0,
+      "curve": {
+       "0": [
+        0.0247262914019633,
+        0.04453756272282834
+       ],
+       "1000": [
+        0.12257184044164779,
+        0.13957100107614717
+       ],
+       "10000": [
+        0.30716660308125326,
+        0.3676422070230788
+       ],
+       "50000": [
+        0.5484107392766628,
+        0.5952175313240968
+       ],
+       "100000": [
+        0.7027765944122472,
+        0.7460511096335818
+       ],
+       "200000": [
+        0.897289754866913,
+        0.9132716366816473
+       ],
+       "300000": [
+        0.9823954977062138,
+        0.9843997877755324
+       ]
+      }
+     },
+     "evidence": "own checkpoints from 10k all related: True; other runs related: 0"
+    },
+    {
+     "id": "H12",
+     "statement": "On off-task inputs, a distilled student agrees with its teacher more than the family's same-task independent students do (TPR >= 90% at FPR <= 5%, fresh).",
+     "verdict": "not supported",
+     "numbers": {
+      "statistic": "1-js",
+      "threshold": 0.03419459539344771,
+      "tpr": [
+       9,
+       20
+      ],
+      "fpr": [
+       3,
+       20
+      ],
+      "per_family": {
+       "text_decoder": {
+        "tpr": [
+         5,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
+       "text_encoder": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
+       "vision_cnn": {
+        "tpr": [
+         4,
+         5
+        ],
+        "fpr": [
+         3,
+         5
+        ]
+       },
+       "vision_transformer": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       }
+      },
+      "dev": {
+       "agreement": {
+        "gap": -0.5429999999999999,
+        "mid": -0.022499999999999992,
+        "max_neg": 0.249,
+        "tpr_at_fpr0": 0.0
+       },
+       "1-js": {
+        "gap": -0.15884413843830458,
+        "mid": -0.04522747382570458,
+        "max_neg": 0.03419459539344771,
+        "tpr_at_fpr0": 0.25
+       },
+       "cka": {
+        "gap": -0.15826420771143745,
+        "mid": -0.04242392031560397,
+        "max_neg": 0.036708183540114764,
+        "tpr_at_fpr0": 0.0
+       }
+      }
+     },
+     "evidence": "1-js margin > 0.0342 (chosen on dev): TPR 9/20, FPR 3/20"
+    },
+    {
+     "id": "H13a",
+     "statement": "Pool v2 holds the weight-verified declared parent for >= 90% of fresh Hub models.",
+     "verdict": "supported",
+     "numbers": {
+      "n": 216,
+      "v2": [
+       196,
+       216,
+       [
+        0.8613,
+        0.9393
+       ]
+      ],
+      "v1": [
+       93,
+       216,
+       [
+        0.3663,
+        0.4972
+       ]
+      ],
+      "v2_only": 104,
+      "v1_only": 1,
+      "mcnemar_p": 2.6131017485446016e-30,
+      "v2_per_tier": {
+       "top_1k": [
+        60,
+        63
+       ],
+       "1k_10k": [
+        61,
+        71
+       ],
+       "10k_100k": [
+        75,
+        82
+       ]
+      },
+      "mean_pool_size": 53.76851851851852
+     },
+     "evidence": "v2 196/216 (E2's pool 93/216)"
+    },
+    {
+     "id": "H13b",
+     "statement": "Pool v2 holds more of those parents than E2's pool (exact one-sided McNemar, p < 0.05).",
+     "verdict": "supported",
+     "numbers": {
+      "n": 216,
+      "v2": [
+       196,
+       216,
+       [
+        0.8613,
+        0.9393
+       ]
+      ],
+      "v1": [
+       93,
+       216,
+       [
+        0.3663,
+        0.4972
+       ]
+      ],
+      "v2_only": 104,
+      "v1_only": 1,
+      "mcnemar_p": 2.6131017485446016e-30,
+      "v2_per_tier": {
+       "top_1k": [
+        60,
+        63
+       ],
+       "1k_10k": [
+        61,
+        71
+       ],
+       "10k_100k": [
+        75,
+        82
+       ]
+      },
+      "mean_pool_size": 53.76851851851852
+     },
+     "evidence": "v2 only 104, E2's pool only 1, p = 2.6e-30"
+    }
+   ],
+   "audit": {
+    "categories": {
+     "declared, related": {
+      "top_1k": 53,
+      "1k_10k": 70,
+      "10k_100k": 91
+     },
+     "no declaration, parent found": {
+      "top_1k": 38,
+      "1k_10k": 41,
+      "10k_100k": 26
+     },
+     "no declaration, no parent found": {
+      "top_1k": 64,
+      "1k_10k": 44,
+      "10k_100k": 28
+     },
+     "not readable": {
+      "top_1k": 17,
+      "1k_10k": 17,
+      "10k_100k": 12
+     },
+     "declared, not comparable": {
+      "top_1k": 27,
+      "1k_10k": 24,
+      "10k_100k": 33
+     },
+     "declared, unrelated": {
+      "top_1k": 1,
+      "10k_100k": 2
+     },
+     "adapter": {
+      "1k_10k": 4,
+      "10k_100k": 8
+     }
+    },
+    "h2": {
+     "k": 105,
+     "n": 364,
+     "share": 0.28846153846153844,
+     "wilson": [
+      0.2443,
+      0.337
+     ],
+     "per_tier": {
+      "top_1k": [
+       38,
+       101
+      ],
+      "1k_10k": [
+       41,
+       120
+      ],
+      "10k_100k": [
+       26,
+       143
+      ]
+     },
+     "tier_weighted": 0.1981487398739874
+    },
+    "h3": {
+     "k": 3,
+     "n": 227,
+     "share": 0.013215859030837005,
+     "wilson": [
+      0.0045,
+      0.0381
+     ],
+     "per_tier": {
+      "top_1k": [
+       1,
+       55
+      ],
+      "1k_10k": [
+       0,
+       71
+      ],
+      "10k_100k": [
+       2,
+       101
+      ]
+     },
+     "tier_weighted": 0.018003600360036006
+    },
+    "contradicted": [
+     [
+      "incoai/Qwen3.8-27B-DFlash2",
+      "Qwen/Qwen3.8-27B",
+      -0.0038424452002443934
+     ],
+     [
+      "PrunaAI/openai-community-gpt2-GGUF-smashed",
+      "openai-community/gpt2",
+      0.0005206191789434984
+     ],
+     [
+      "qing-yao/ppt-pythia-1b-baseline-seed3408-stage2",
+      "EleutherAI/pythia-1b",
+      0.0029454695262190835
+     ]
+    ],
+    "n_models": 600
+   },
+   "behaviour": {
+    "rule": {
+     "statistic": "agreement",
+     "threshold": 0.447,
+     "fresh_tpr": [
+      3,
+      12
+     ],
+     "fresh_fpr": [
+      2,
+      12
+     ],
+     "h9": "not supported"
+    },
+    "pairs": 94,
+    "verified_by_behaviour": [],
+    "below_rule": [],
+    "not_applicable": {
+     "neither a shared language-model output nor a shared label set": 28,
+     "model above 2B parameters": 66
+    },
+    "failed": []
+   }
+  },
+  "midpoint": {
+   "hypotheses": [
+    {
+     "id": "H1",
+     "statement": "The verifier separates derivatives from independent same-architecture models on fresh ground truth with TPR >= 95% at FPR <= 1%.",
+     "verdict": "supported",
+     "numbers": {
+      "tpr": [
+       24,
+       24,
+       [
+        0.862,
+        1.0
+       ]
+      ],
+      "fpr": [
+       0,
+       18,
+       [
+        0.0,
+        0.1759
+       ]
+      ],
+      "auc_plain": 1.0,
+      "families": [
+       "diffusion_unet",
+       "speech",
+       "text_decoder",
+       "text_encoder",
+       "vision_cnn",
+       "vision_transformer"
+      ]
+     },
+     "evidence": "TPR 24/24, FPR 0/18, AUC (plain) 1.000"
+    },
+    {
+     "id": "H2",
+     "statement": "At least 30% of Hub models verifiably derived from another public model do not declare a base.",
+     "verdict": "not supported",
+     "numbers": {
+      "k": 102,
+      "n": 352,
+      "share": 0.2897727272727273,
+      "wilson": [
+       0.2449,
+       0.3392
+      ],
+      "per_tier": {
+       "top_1k": [
+        36,
+        97
+       ],
+       "1k_10k": [
+        41,
+        117
+       ],
+       "10k_100k": [
+        25,
+        138
+       ]
+      },
+      "tier_weighted": 0.1982932800055167
+     },
+     "evidence": "102/352 undeclared"
+    },
+    {
+     "id": "H3",
+     "statement": "At least 5% of declared bases are contradicted by the weights.",
+     "verdict": "supported",
+     "numbers": {
+      "k": 15,
+      "n": 227,
+      "share": 0.06607929515418502,
+      "wilson": [
+       0.0405,
+       0.1062
+      ],
+      "per_tier": {
+       "top_1k": [
+        3,
+        55
+       ],
+       "1k_10k": [
+        1,
+        71
+       ],
+       "10k_100k": [
+        11,
+        101
+       ]
+      },
+      "tier_weighted": 0.09983286215945537
+     },
+     "evidence": "15/227 contradicted"
+    },
+    {
+     "id": "H4",
+     "statement": "A function-preserving permutation (attack b) hides lineage from the plain verifier on >= 90% of derivatives, and defence (ii) restores it on >= 90%.",
+     "verdict": "supported",
+     "numbers": {
+      "hidden": [
+       3,
+       3
+      ],
+      "restored": [
+       3,
+       3
+      ],
+      "rows": {
+       "text_encoder": [
+        0.006833414501291529,
+        0.9999066159194046
+       ],
+       "text_decoder": [
+        -0.003231541045623069,
+        0.9994680893550307
+       ],
+       "vision_transformer": [
+        -0.0011722337601518485,
+        0.9998290906239109
+       ]
+      }
+     },
+     "evidence": "plain hidden on 3/3; aligned restores 3/3"
+    },
+    {
+     "id": "H5",
+     "statement": "4-bit quantised derivatives are still verified (>= 90%); students distilled from a random initialisation are not (<= 10%).",
+     "verdict": "supported",
+     "numbers": {
+      "q4": [
+       6,
+       6
+      ],
+      "students_related": [
+       0,
+       12
+      ]
+     },
+     "evidence": "q4_0 verified 6/6; distilled students related by weights 0/12"
+    },
+    {
+     "id": "H6",
+     "statement": "The sampled verdict equals the whole-file verdict for >= 98% of pairs.",
+     "verdict": "supported",
+     "numbers": {
+      "e1": [
+       75,
+       75
+      ],
+      "e2": [
+       50,
+       50
+      ],
+      "max_abs_difference": 0.07447868741784847
+     },
+     "evidence": "E1 fresh pairs 75/75, Hub pairs 50/50 agree"
+    },
+    {
+     "id": "H7",
+     "statement": "The candidate pool contains the true parent for >= 90% of ground-truth derivatives (a) and of Hub models whose declared base is verified (b).",
+     "verdict": "not supported",
+     "numbers": {
+      "a": [
+       20,
+       24,
+       [
+        0.6415,
+        0.9332
+       ]
+      ],
+      "b": [
+       75,
+       187,
+       [
+        0.3335,
+        0.4726
+       ]
+      ]
+     },
+     "evidence": "(a) 20/24; (b) 75/187"
+    },
+    {
+     "id": "H8",
+     "statement": "Direction is decided correctly for >= 90% of the pairs where it is decided (D1 Hub dates; D2 weight kurtosis), with the undecided share reported.",
+     "verdict": "not supported",
+     "numbers": {
+      "d2_margin": 0.0006166398300750942,
+      "d2": [
+       35,
+       39,
+       59
+      ],
+      "d1": [
+       171,
+       181
+      ]
+     },
+     "evidence": "D1 (dates) right on 171/181; D2 (kurtosis, margin 0.00062) right on 35/39 decided, undecided 20/59"
+    },
+    {
+     "id": "H9",
+     "statement": "Behaviour separates distilled students from same-task independent students with TPR >= 90% at FPR <= 5% (fresh).",
+     "verdict": "not supported",
+     "numbers": {
+      "statistic": "agreement",
+      "threshold": 0.447,
+      "tpr": [
+       3,
+       12
+      ],
+      "fpr": [
+       2,
+       12
+      ],
+      "dev_gaps": {
+       "agreement": -0.3929347915806851,
+       "1-js": -0.5600346094768077,
+       "cka": -0.2763459416374358
+      }
+     },
+     "evidence": "agreement > 0.4470 (chosen on dev): TPR 3/12, FPR 2/12"
+    },
+    {
+     "id": "H10",
+     "statement": "Weight similarity tracks shared initialisation, not shared data.",
+     "verdict": "not supported",
+     "numbers": {
+      "shared_init": [
+       0,
+       4
+      ],
+      "different_init_same_data": [
+       0,
+       2
+      ]
+     },
+     "evidence": "shared initialisation related 0/4; different initialisation, same data 0/2"
+    },
+    {
+     "id": "H11",
+     "statement": "A final model is verified against its own checkpoints from step 10,000 on, and against no checkpoint of another run.",
+     "verdict": "not supported",
+     "numbers": {
+      "own_from_10k_all_related": false,
+      "other_run_related": 0,
+      "curve": {
+       "0": [
+        0.0247262914019633,
+        0.04453756272282834
+       ],
+       "1000": [
+        0.12257184044164779,
+        0.13957100107614717
+       ],
+       "10000": [
+        0.30716660308125326,
+        0.3676422070230788
+       ],
+       "50000": [
+        0.5484107392766628,
+        0.5952175313240968
+       ],
+       "100000": [
+        0.7027765944122472,
+        0.7460511096335818
+       ],
+       "200000": [
+        0.897289754866913,
+        0.9132716366816473
+       ],
+       "300000": [
+        0.9823954977062138,
+        0.9843997877755324
+       ]
+      }
+     },
+     "evidence": "own checkpoints from 10k all related: False; other runs related: 0"
+    },
+    {
+     "id": "H12",
+     "statement": "On off-task inputs, a distilled student agrees with its teacher more than the family's same-task independent students do (TPR >= 90% at FPR <= 5%, fresh).",
+     "verdict": "not supported",
+     "numbers": {
+      "statistic": "1-js",
+      "threshold": 0.03419459539344771,
+      "tpr": [
+       9,
+       20
+      ],
+      "fpr": [
+       3,
+       20
+      ],
+      "per_family": {
+       "text_decoder": {
+        "tpr": [
+         5,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
+       "text_encoder": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
+       "vision_cnn": {
+        "tpr": [
+         4,
+         5
+        ],
+        "fpr": [
+         3,
+         5
+        ]
+       },
+       "vision_transformer": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       }
+      },
+      "dev": {
+       "agreement": {
+        "gap": -0.5429999999999999,
+        "mid": -0.022499999999999992,
+        "max_neg": 0.249,
+        "tpr_at_fpr0": 0.0
+       },
+       "1-js": {
+        "gap": -0.15884413843830458,
+        "mid": -0.04522747382570458,
+        "max_neg": 0.03419459539344771,
+        "tpr_at_fpr0": 0.25
+       },
+       "cka": {
+        "gap": -0.15826420771143745,
+        "mid": -0.04242392031560397,
+        "max_neg": 0.036708183540114764,
+        "tpr_at_fpr0": 0.0
+       }
+      }
+     },
+     "evidence": "1-js margin > 0.0342 (chosen on dev): TPR 9/20, FPR 3/20"
+    },
+    {
+     "id": "H13a",
+     "statement": "Pool v2 holds the weight-verified declared parent for >= 90% of fresh Hub models.",
+     "verdict": "supported",
+     "numbers": {
+      "n": 211,
+      "v2": [
+       194,
+       211,
+       [
+        0.8748,
+        0.9491
+       ]
+      ],
+      "v1": [
+       93,
+       211,
+       [
+        0.3754,
+        0.5082
+       ]
+      ],
+      "v2_only": 102,
+      "v1_only": 1,
+      "mcnemar_p": 1.0255191767873153e-29,
+      "v2_per_tier": {
+       "top_1k": [
+        59,
+        62
+       ],
+       "1k_10k": [
+        60,
+        69
+       ],
+       "10k_100k": [
+        75,
+        80
+       ]
+      },
+      "mean_pool_size": 53.725118483412324
+     },
+     "evidence": "v2 194/211 (E2's pool 93/211)"
+    },
+    {
+     "id": "H13b",
+     "statement": "Pool v2 holds more of those parents than E2's pool (exact one-sided McNemar, p < 0.05).",
+     "verdict": "supported",
+     "numbers": {
+      "n": 211,
+      "v2": [
+       194,
+       211,
+       [
+        0.8748,
+        0.9491
+       ]
+      ],
+      "v1": [
+       93,
+       211,
+       [
+        0.3754,
+        0.5082
+       ]
+      ],
+      "v2_only": 102,
+      "v1_only": 1,
+      "mcnemar_p": 1.0255191767873153e-29,
+      "v2_per_tier": {
+       "top_1k": [
+        59,
+        62
+       ],
+       "1k_10k": [
+        60,
+        69
+       ],
+       "10k_100k": [
+        75,
+        80
+       ]
+      },
+      "mean_pool_size": 53.725118483412324
+     },
+     "evidence": "v2 only 102, E2's pool only 1, p = 1e-29"
+    }
+   ],
+   "audit": {
+    "categories": {
+     "declared, related": {
+      "top_1k": 51,
+      "1k_10k": 69,
+      "10k_100k": 88
+     },
+     "no declaration, parent found": {
+      "top_1k": 36,
+      "1k_10k": 41,
+      "10k_100k": 25
+     },
+     "no declaration, no parent found": {
+      "top_1k": 66,
+      "1k_10k": 44,
+      "10k_100k": 29
+     },
+     "not readable": {
+      "top_1k": 17,
+      "1k_10k": 17,
+      "10k_100k": 12
+     },
+     "declared, unrelated": {
+      "top_1k": 3,
+      "1k_10k": 1,
+      "10k_100k": 5
+     },
+     "declared, not comparable": {
+      "top_1k": 27,
+      "1k_10k": 24,
+      "10k_100k": 33
+     },
+     "adapter": {
+      "1k_10k": 4,
+      "10k_100k": 8
+     }
+    },
+    "h2": {
+     "k": 102,
+     "n": 352,
+     "share": 0.2897727272727273,
+     "wilson": [
+      0.2449,
+      0.3392
+     ],
+     "per_tier": {
+      "top_1k": [
+       36,
+       97
+      ],
+      "1k_10k": [
+       41,
+       117
+      ],
+      "10k_100k": [
+       25,
+       138
+      ]
+     },
+     "tier_weighted": 0.1982932800055167
+    },
+    "h3": {
+     "k": 15,
+     "n": 227,
+     "share": 0.06607929515418502,
+     "wilson": [
+      0.0405,
+      0.1062
+     ],
+     "per_tier": {
+      "top_1k": [
+       3,
+       55
+      ],
+      "1k_10k": [
+       1,
+       71
+      ],
+      "10k_100k": [
+       11,
+       101
+      ]
+     },
+     "tier_weighted": 0.09983286215945537
+    },
+    "contradicted": [
+     [
+      "k2-fsa/OmniVoice",
+      "Qwen/Qwen3-0.6B",
+      0.2787563601262766
+     ],
+     [
+      "Qwen/Qwen2.5-Coder-7B",
+      "Qwen/Qwen2.5-7B",
+      0.4650758817900864
+     ],
+     [
+      "incoai/Qwen3.8-27B-DFlash2",
+      "Qwen/Qwen3.8-27B",
+      -0.0038424452002443934
+     ],
+     [
+      "patrickbdevaney/MiMo-V2.6-Flash-REAP50-GGUF",
+      "patrickbdevaney/MiMo-V2.6-Flash-REAP50",
+      0.34731506013318086
+     ],
+     [
+      "PrunaAI/openai-community-gpt2-GGUF-smashed",
+      "openai-community/gpt2",
+      0.0005206191789434984
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "francesca9805/urd-100mb-after-wc-uniform-newlex-before-ckpt500-packed-bfdiso_seed3407",
+      "francesca9805/ppt-wc-uniform-newlex-urd-before-100mb-packed-bfdiso_seed3407",
+      0.13506576211045834
+     ],
+     [
+      "francesca9805/tur-latn-100mb-after-ppt-Dp-100mb-packed-bfdiso-ckpt500_seed10",
+      "francesca9805/tur-latn-100mb-ppt-Dp-100mb-packed-bfdiso_seed10",
+      0.19108082233436974
+     ],
+     [
+      "qing-yao/ppt-pythia-1b-baseline-seed3408-stage2",
+      "EleutherAI/pythia-1b",
+      0.0029454695262190835
+     ]
+    ],
+    "n_models": 600
+   },
+   "behaviour": {
+    "rule": {
+     "statistic": "agreement",
+     "threshold": 0.447,
+     "fresh_tpr": [
+      3,
+      12
+     ],
+     "fresh_fpr": [
+      2,
+      12
+     ],
+     "h9": "not supported"
+    },
+    "pairs": 94,
+    "verified_by_behaviour": [],
+    "below_rule": [],
+    "not_applicable": {
+     "neither a shared language-model output nor a shared label set": 28,
+     "model above 2B parameters": 66
+    },
+    "failed": []
+   }
+  }
+ },
+ "reader_fixed": {
+  "t": {
+   "rescored": 159,
+   "lost": 0,
+   "still_errors": 99,
+   "audit": {
+    "categories": {
+     "declared, related": {
+      "top_1k": 53,
+      "1k_10k": 71,
+      "10k_100k": 91
+     },
+     "no declaration, parent found": {
+      "top_1k": 38,
+      "1k_10k": 42,
+      "10k_100k": 26
+     },
+     "no declaration, no parent found": {
+      "top_1k": 64,
+      "1k_10k": 43,
+      "10k_100k": 28
+     },
+     "not readable": {
+      "top_1k": 17,
+      "1k_10k": 17,
+      "10k_100k": 12
+     },
+     "declared, not comparable": {
+      "top_1k": 27,
+      "1k_10k": 23,
+      "10k_100k": 33
+     },
+     "declared, unrelated": {
+      "top_1k": 1,
+      "10k_100k": 2
+     },
+     "adapter": {
+      "1k_10k": 4,
+      "10k_100k": 8
+     }
+    },
+    "h2": {
+     "k": 106,
+     "n": 367,
+     "share": 0.2888283378746594,
+     "wilson": [
+      0.2448,
+      0.3372
+     ],
+     "per_tier": {
+      "top_1k": [
+       38,
+       101
+      ],
+      "1k_10k": [
+       42,
+       123
+      ],
+      "10k_100k": [
+       26,
+       143
+      ]
+     },
+     "tier_weighted": 0.1981304471910606
+    },
+    "h3": {
+     "k": 3,
+     "n": 228,
+     "share": 0.013157894736842105,
+     "wilson": [
+      0.0045,
+      0.038
+     ],
+     "per_tier": {
+      "top_1k": [
+       1,
+       55
+      ],
+      "1k_10k": [
+       0,
+       72
+      ],
+      "10k_100k": [
+       2,
+       101
+      ]
+     },
+     "tier_weighted": 0.018003600360036006
+    },
+    "contradicted": [
+     [
+      "incoai/Qwen3.8-27B-DFlash2",
+      "Qwen/Qwen3.8-27B",
+      -0.0038424452002443934
+     ],
+     [
+      "PrunaAI/openai-community-gpt2-GGUF-smashed",
+      "openai-community/gpt2",
+      0.0005206191789434984
+     ],
+     [
+      "qing-yao/ppt-pythia-1b-baseline-seed3408-stage2",
+      "EleutherAI/pythia-1b",
+      0.0029454695262190835
+     ]
+    ],
+    "n_models": 600
+   },
+   "verdicts": {
+    "H2": {
+     "verdict": "not supported",
+     "evidence": "106/367 undeclared",
+     "changes": false
+    },
+    "H3": {
+     "verdict": "not supported",
+     "evidence": "3/228 contradicted",
+     "changes": false
+    },
+    "H7": {
+     "verdict": "not supported",
+     "evidence": "(a) 20/24; (b) 77/200",
+     "changes": false
+    }
+   }
+  },
+  "midpoint": {
+   "rescored": 159,
+   "lost": 0,
+   "still_errors": 99,
+   "audit": {
+    "categories": {
+     "declared, related": {
+      "top_1k": 51,
+      "1k_10k": 70,
+      "10k_100k": 88
+     },
+     "no declaration, parent found": {
+      "top_1k": 36,
+      "1k_10k": 42,
+      "10k_100k": 25
+     },
+     "no declaration, no parent found": {
+      "top_1k": 66,
+      "1k_10k": 43,
+      "10k_100k": 29
+     },
+     "not readable": {
+      "top_1k": 17,
+      "1k_10k": 17,
+      "10k_100k": 12
+     },
+     "declared, unrelated": {
+      "top_1k": 3,
+      "1k_10k": 1,
+      "10k_100k": 5
+     },
+     "declared, not comparable": {
+      "top_1k": 27,
+      "1k_10k": 23,
+      "10k_100k": 33
+     },
+     "adapter": {
+      "1k_10k": 4,
+      "10k_100k": 8
+     }
+    },
+    "h2": {
+     "k": 103,
+     "n": 355,
+     "share": 0.29014084507042254,
+     "wilson": [
+      0.2454,
+      0.3394
+     ],
+     "per_tier": {
+      "top_1k": [
+       36,
+       97
+      ],
+      "1k_10k": [
+       42,
+       120
+      ],
+      "10k_100k": [
+       25,
+       138
+      ]
+     },
+     "tier_weighted": 0.19825481846705512
+    },
+    "h3": {
+     "k": 15,
+     "n": 228,
+     "share": 0.06578947368421052,
+     "wilson": [
+      0.0403,
+      0.1057
+     ],
+     "per_tier": {
+      "top_1k": [
+       3,
+       55
+      ],
+      "1k_10k": [
+       1,
+       72
+      ],
+      "10k_100k": [
+       11,
+       101
+      ]
+     },
+     "tier_weighted": 0.09981525652565257
+    },
+    "contradicted": [
+     [
+      "k2-fsa/OmniVoice",
+      "Qwen/Qwen3-0.6B",
+      0.2787563601262766
+     ],
+     [
+      "Qwen/Qwen2.5-Coder-7B",
+      "Qwen/Qwen2.5-7B",
+      0.4650758817900864
+     ],
+     [
+      "incoai/Qwen3.8-27B-DFlash2",
+      "Qwen/Qwen3.8-27B",
+      -0.0038424452002443934
+     ],
+     [
+      "patrickbdevaney/MiMo-V2.6-Flash-REAP50-GGUF",
+      "patrickbdevaney/MiMo-V2.6-Flash-REAP50",
+      0.34731506013318086
+     ],
+     [
+      "PrunaAI/openai-community-gpt2-GGUF-smashed",
+      "openai-community/gpt2",
+      0.0005206191789434984
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "francesca9805/urd-100mb-after-wc-uniform-newlex-before-ckpt500-packed-bfdiso_seed3407",
+      "francesca9805/ppt-wc-uniform-newlex-urd-before-100mb-packed-bfdiso_seed3407",
+      0.13506576211045834
+     ],
+     [
+      "francesca9805/tur-latn-100mb-after-ppt-Dp-100mb-packed-bfdiso-ckpt500_seed10",
+      "francesca9805/tur-latn-100mb-ppt-Dp-100mb-packed-bfdiso_seed10",
+      0.19108082233436974
+     ],
+     [
+      "qing-yao/ppt-pythia-1b-baseline-seed3408-stage2",
+      "EleutherAI/pythia-1b",
+      0.0029454695262190835
+     ]
+    ],
+    "n_models": 600
+   },
+   "verdicts": {
+    "H2": {
+     "verdict": "not supported",
+     "evidence": "103/355 undeclared",
+     "changes": false
+    },
+    "H3": {
+     "verdict": "supported",
+     "evidence": "15/228 contradicted",
+     "changes": false
+    },
+    "H7": {
+     "verdict": "not supported",
+     "evidence": "(a) 20/24; (b) 76/188",
+     "changes": false
+    }
+   }
+  }
+ }
+}

@@ -212,7 +212,7 @@ def h8(e1b, e7k, e2, T, rule):
     return {"id": "H8", "statement": "Direction is decided correctly for >= 90% of the pairs where it is decided "
             "(D1 Hub dates; D2 weight kurtosis), with the undecided share reported.", "verdict": verdict(ok),
             "numbers": {"d2_margin": m, "d2": [right, len(decided), len(pairs)], "d1": [sum(d1), len(d1)]},
-            "evidence": f"D1 (dates) right on {sum(d1)}/{len(d1)}; D2 (kurtosis, margin {m}) right on {right}/"
+            "evidence": f"D1 (dates) right on {sum(d1)}/{len(d1)}; D2 (kurtosis, margin {m:.2g}) right on {right}/"
                         f"{len(decided)} decided, undecided {len(pairs) - len(decided)}/{len(pairs)}"}
 
 
