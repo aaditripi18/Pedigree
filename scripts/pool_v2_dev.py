@@ -45,6 +45,15 @@ def main(bases: str) -> None:
     h7a = [r for r in A.latest_runs(rows, "H7a", lambda r: r.get("family")) if not r.get("error")]
     F = pool.Frame(ROOT / "results" / "e2_frame_meta.jsonl.gz")
     P = PoolV2(F, Path(bases))
+    cache = ROOT / "results" / "h7_dev_searches.json"      # one Hub search per dev model, fetched once
+    searches = json.loads(cache.read_text(encoding="utf-8")) if cache.exists() else {}
+    need = sorted({m["id"] for m in e2 if m.get("declared")} - set(searches))
+    if need:
+        from experiments.e2_audit import _search
+        from pedigree.pool_v2 import search_term
+        for i in need:
+            searches[i] = {"term": search_term(i), "hits": _search(search_term(i))}
+        cache.write_text(json.dumps(searches, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     hub, tally = [], collections.Counter()
     for m in e2:
         for d in m.get("declared", []):
@@ -53,11 +62,13 @@ def main(bases: str) -> None:
             b = d["base"]
             v1 = b in {p["candidate"] for p in m.get("pool", [])}
             params = m.get("params") if m.get("quantised") else (float_params(F.by_id.get(m["id"], {})) or m.get("params"))
-            cands = P.candidates(m["id"], m["family_key"], params, m.get("dims"), bool(m.get("quantised")))
+            cands = P.candidates(m["id"], m["family_key"], params, m.get("dims"), bool(m.get("quantised")),
+                                 searched=searches[m["id"]]["hits"])
             v2 = P.name(b) in cands
             cause = "in pool" if v1 else v1_cause(F, m, b)
             tally[(cause, v2)] += 1
-            hub.append({"model": m["id"], "base": b, "v1": v1, "v1_cause": cause, "v2": v2,
+            hub.append({"model": m["id"], "base": b, "v1": v1, "v1_cause": cause, "v2": v2, "v2_size": len(cands),
+                        "v1_size": len(m.get("pool", [])),
                         "v2_rank": cands.index(P.name(b)) + 1 if v2 else None})
     e1 = []
     for r in h7a:
@@ -65,7 +76,9 @@ def main(bases: str) -> None:
         e1.append({"family": r["family"], "kind": r["kind"], "base": r["base"], "v1": r["parent_in_pool"],
                    "v2": r["base"] in cands})
     out = {"bases_meta": Path(bases).name, "hub": {"n": len(hub), "v1": sum(h["v1"] for h in hub),
-                                                  "v2": sum(h["v2"] for h in hub)},
+                                                  "v2": sum(h["v2"] for h in hub),
+                                                  "mean_pool_v1": sum(h["v1_size"] for h in hub) / len(hub),
+                                                  "mean_pool_v2": sum(h["v2_size"] for h in hub) / len(hub)},
            "e1": {"n": len(e1), "v1": sum(e["v1"] for e in e1), "v2": sum(e["v2"] for e in e1)},
            "by_cause": {f"{c} -> v2 {'hit' if v else 'miss'}": n for (c, v), n in sorted(tally.items())},
            "hub_pairs": hub, "e1_pairs": e1}

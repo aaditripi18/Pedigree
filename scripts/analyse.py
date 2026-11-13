@@ -460,7 +460,8 @@ def h13(h13r, T, rule) -> list[dict]:
             want = P.name(d["base"])
             v1 = {P.name(c) for c in F.candidates(m["family_key"], m.get("params"), m.get("dims"), exclude={m["id"]})}
             params = m.get("params") if m.get("quantised") else (float_params(F.by_id.get(m["id"], {})) or m.get("params"))
-            v2 = P.candidates(m["id"], m["family_key"], params, m.get("dims"), bool(m.get("quantised")))
+            v2 = P.candidates(m["id"], m["family_key"], params, m.get("dims"), bool(m.get("quantised")),
+                              searched=(m.get("search") or {}).get("hits", []))
             pairs.append((m["tier"], want in v1, want in v2, len(v2)))
     n = len(pairs)
     k2, k1 = sum(p[2] for p in pairs), sum(p[1] for p in pairs)

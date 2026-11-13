@@ -21,8 +21,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from experiments import ledger
-from experiments.e2_audit import BUDGET, WORKERS, NetworkError, _pair, logical_params, open_repo
+from experiments.e2_audit import BUDGET, WORKERS, NetworkError, _pair, _search, logical_params, open_repo
 from pedigree import pool
+from pedigree.pool_v2 import search_term
 
 ROOT = Path(__file__).resolve().parent.parent
 SAMPLE = ROOT / "results" / "h13_sample.json"
@@ -53,6 +54,7 @@ def read_one(repo: str, tier: str, frame: pool.Frame) -> dict:
     rec.update(facts)
     if model is None:
         return rec
+    rec["search"] = {"term": search_term(repo), "hits": _search(search_term(repo))}   # pool v2's rule 6, frozen here
     rec.update(params=(None if model.quant else pool.meta_params(meta)) or logical_params(model),
                dims=(frame.frozen_dims[repo] if repo in frame.frozen_dims and not facts.get("via")
                      else pool.dims(pool.config(facts.get("via") or repo))),

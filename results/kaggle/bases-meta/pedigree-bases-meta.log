@@ -1,0 +1,36 @@
+[{"stream_name":"stdout","time":36.071405689,"data":"code 0e87673\n"}
+,{"stream_name":"stdout","time":118.154049199,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":121.447676641,"data":"23649 declared bases outside the frame; 0 fetched, 11824 to fetch\n"}
+,{"stream_name":"stdout","time":121.983339618,"data":"  0/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":377.927603952,"data":"  500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":679.461131903,"data":"  1000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":980.397720304,"data":"  1500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":1281.731396598,"data":"  2000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":1583.09720502,"data":"  2500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":1884.296092529,"data":"  3000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":2184.877226648,"data":"  3500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":2485.660400281,"data":"  4000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":2786.962502968,"data":"  4500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":3089.238347519,"data":"  5000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":3390.428337716,"data":"  5500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":3692.126409004,"data":"  6000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":3994.493535141,"data":"  6500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":4294.450507916,"data":"  7000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":4600.231285656,"data":"  7500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":4897.46298273,"data":"  8000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":5202.010889753,"data":"  8500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":5503.473096468,"data":"  9000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":5802.793133721,"data":"  9500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":6104.198719076,"data":"  10000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":6407.449116708,"data":"  10500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":6709.760329603,"data":"  11000/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":7012.400098559,"data":"  11500/11824, 0 to retry\n"}
+,{"stream_name":"stdout","time":7300.093168677,"data":"exit 0 -m experiments.e2_bases_meta --shard 1/2 --part /kaggle/working/e2_bases_meta.part.jsonl\n"}
+,{"stream_name":"stdout","time":7300.137299043,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":7303.145696582,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":7303.145740648,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":7303.569953651,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":7303.569988802,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":7304.618279318,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":7306.234967501,"data":"[NbConvertApp] Writing 292177 bytes to __results__.html\n"}
+]

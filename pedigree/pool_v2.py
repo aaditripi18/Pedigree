@@ -7,7 +7,8 @@ own declaration.
    (results/e2_bases_meta.jsonl.gz). Renamed repositories are matched by their current name.
 2. Ranking. The pool is the union of the first POOL candidates by children (v1's order) and
    the first POOL by how much of the candidate's name (owner and quantisation words dropped)
-   appears in the model's own name, ties broken by downloads; at most 2 x POOL are compared.
+   appears in the model's own name, ties broken first for unquantised candidates (a parent is
+   rarely a quantised file), then by downloads; at most 2 x POOL are compared.
 3. Quantised models (GGUF, packed 4/8-bit) report packed parameter counts: for them the size
    filter is dropped wherever dimensions decide, and is 0.1x-1.3x otherwise (GGUF files store
    tied embeddings twice). An unquantised model without dimensions keeps the 25% size window
@@ -18,6 +19,12 @@ own declaration.
    (timm_wrapper / timm) do not exclude a candidate whose name matches (>= 0.5); nor does any
    family key for a quantised model whose name matches closely (>= 0.8), since repackagers'
    configs often name another architecture (a Gemma 3 GGUF whose config says llama).
+   A candidate whose whole name appears in the model's name passes the family and size
+   filters (a fine-tune named after its base, such as ThoxClip-Qwen3-0.6B).
+6. Hub search. The Hub is searched once for the model's own name (owner and trailing
+   quantisation words dropped); up to SEARCH_KEEP results whose names match closely (>= 0.8) and
+   are not quantised files join the pool. This reaches parents that no frame model declares, and
+   so are outside the universe of (1). The results are recorded when the model is read.
 """
 from __future__ import annotations
 
@@ -28,6 +35,7 @@ from pathlib import Path
 from . import pool
 
 POOL = pool.POOL
+SEARCH_KEEP = 10
 QUANT_WORDS = {"gguf", "i1", "imatrix", "nvfp4", "mxfp4", "fp4", "fp8", "int4", "int8", "awq", "gptq", "bnb", "4bit",
                "8bit", "mlx", "exl2", "exl3", "dynamic", "w4a16", "w8a8", "w4a4", "nf4", "onnx", "ov", "openvino",
                "quantized", "quant", "quants", "static", "nvfp4a16", "fp8a16", "gs128", "q4", "q8", "q4km", "q5km",
@@ -58,6 +66,27 @@ def float_params(m: dict) -> int | None:
     total = pool.meta_params(m)
     f = sum(v for k, v in by.items() if k in FLOAT_DTYPES) if isinstance(by, dict) else 0
     return f if f and total and f >= total / 2 else total
+
+
+def search_term(repo: str) -> str:
+    """The model's own name without its owner and without trailing quantisation words, as the
+    Hub search (a substring match on ids) needs it: "Qwen-2.5-base-7b-GGUF" -> "Qwen-2.5-base-7b"."""
+    name = repo.split("/", 1)[-1]
+    parts = re.split(r"([-_ ]+)", name)
+    while len(parts) > 2 and parts[-1].lower() in QUANT_WORDS:
+        parts = parts[:-2]
+    return "".join(parts).strip("-_ ")
+
+
+def from_search(model: str, hits: list[str], limit: int = SEARCH_KEEP) -> list[str]:
+    """Hub search results for the model's name that match it closely and are not quantised files."""
+    return [h for h in hits if h != model and name_match(model, h) >= 0.8 and not quantised_name(h, {})][:limit]
+
+
+def quantised_name(repo: str, m: dict) -> bool:
+    """A GGUF repository, or a name carrying a quantisation word."""
+    name = repo.split("/", 1)[-1].lower()
+    return bool(m.get("gguf_total")) or any(w in QUANT_WORDS for w in re.split(r"[-_ ]+", name))
 
 
 def weak(key: str | None) -> bool:
@@ -95,7 +124,7 @@ class PoolV2:
         return self.canonical.get(repo, repo)
 
     def candidates(self, model: str, key: str | None, params: int | None, model_dims: dict | None,
-                   quantised: bool, limit: int = POOL) -> list[str]:
+                   quantised: bool, limit: int = POOL, searched: list[str] = ()) -> list[str]:
         out = []
         for c in self.ids:
             if c == model:
@@ -106,14 +135,18 @@ class PoolV2:
             nm = name_match(model, c)
             ck = pool.family_key(m)
             k1, k2 = ALIASES.get(key, key), ALIASES.get(ck, ck)
-            if k1 != k2 and not ((weak(k1) or weak(k2)) and nm >= 0.5) and not (quantised and nm >= 0.8):
+            whole = nm == 1.0             # the candidate's whole name is in the model's name
+            if k1 != k2 and not ((weak(k1) or weak(k2)) and nm >= 0.5) and not (quantised and nm >= 0.8) \
+                    and not whole:
                 continue
             cd = self.dims.get(c)
             p = float_params(m)
             by_dims = bool(model_dims and cd)
-            if by_dims and not pool.same_dims(model_dims, cd):
+            if whole:
+                pass
+            elif by_dims and not pool.same_dims(model_dims, cd):
                 continue
-            if not by_dims:
+            elif not by_dims:
                 if not p or not params:
                     if nm < 0.5:
                         continue
@@ -127,5 +160,7 @@ class PoolV2:
             out.append((nm, self.children.get(c, 0), self.frame.rank.get(c, 10 ** 7), c))
         # v1's order (children) and the name order each fill a pool; v2 is their union
         by_children = [c for *_, c in sorted(out, key=lambda x: (-x[1], x[2]))[:limit]]
-        by_name = [c for *_, c in sorted(out, key=lambda x: (-x[0], x[2]))[:limit]]   # ties: most downloaded
-        return by_children + [c for c in by_name if c not in set(by_children)]
+        # ties: an unquantised candidate first (a parent is rarely a quantised file), then most downloaded
+        by_name = [c for *_, c in sorted(out, key=lambda x: (-x[0], quantised_name(x[3], self.meta[x[3]]), x[2]))[:limit]]
+        got = by_children + [c for c in by_name if c not in set(by_children)]
+        return got + [c for c in from_search(model, list(searched)) if c not in set(got)]

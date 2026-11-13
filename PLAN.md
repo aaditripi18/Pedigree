@@ -429,3 +429,41 @@ points suggest a new hypothesis, written before any of its data exists:
   `E5n`, so H9's runs are untouched), to show how much the change of probes, rather than the
   new students, explains.
 - Ledger: `E5o` (off-task probes, seeds 0-7, both splits), `E5n` (original probes, seeds 3-7).
+
+## Amendment 2026-11-13: reader fixes, candidate pool v2 and H13, after every earlier verdict
+
+All twelve earlier verdicts stand as recorded; nothing below changes them.
+
+**Reader fixes (E2r).** 159 of E2's comparisons ended in a reader error, not a verdict. Three
+were reader bugs: MLX 3- and 6-bit values straddle 32-bit words (they were unpacked as if not);
+MLX per-layer bit widths are written under the layer's path, sometimes with `model` and
+`language_model` in the other order; GGUF int8 tensors are stored as they are, not quantised.
+The fourth cause is GGUF tensor types outside llama.cpp's published list (fork formats, types 42,
+45, 101, 142, 339), which no reader can decode from a public specification; they now say so.
+`E2r` scores the 159 again with the fixed readers. E2 stays as recorded; `scripts/analyse.py`
+reports beside it E2 with these scores, and says whether any verdict would change.
+
+**Candidate pool v2.** E2's pool held the weight-verified declared parent for 76 of 199 Hub
+models (H7 b). Every miss has a recorded cause (`results/h7_misses.json`). Pool v2
+(`pedigree/pool_v2.py`) answers each cause without reading the model's own declaration: the
+frame plus every base that another frame model declares (`results/e2_bases_meta.jsonl.gz`,
+23,649 bases fetched 2026-11-13; renamed repositories matched by their current name); the union
+of the children-ranked and name-ranked top 30; parameter counts without integer buffers; size
+and family rules loosened only where packed formats, missing dimensions or the model's name
+justify it; and one Hub search for the model's own name. It was designed on E2's 199 models and
+H7 (a)'s 24 derivatives, so its numbers there are dev numbers: 174/199 and 24/24, at a mean of
+54 candidates against E2's 26.
+
+**H13, judged on fresh data only.** A new sample (`results/h13_sample.json`, committed
+2026-11-13 before any of it was read): 120 frame models per download tier that declare a base
+and were not in E2's sample (seed 20261113). Each is compared by weights with its declared
+bases exactly as in E2, and its Hub search is recorded (`experiments/h13_fresh.py`, ledger
+`H13`). The ground truth is each declared base the weights confirm (not a byte-identical copy),
+as in H7 (b). Both pools are rebuilt from frozen metadata after the reading.
+
+- **H13a** Pool v2 holds the weight-verified declared parent for >= 90% of these models.
+- **H13b** Pool v2 holds more of them than E2's pool: exact one-sided McNemar test on the
+  discordant pairs, p < 0.05.
+
+Wilson intervals, per-tier values and the mean pool size are reported. The audit's E2 numbers
+are not recomputed with pool v2: E2 is reported with the pool it ran with.
