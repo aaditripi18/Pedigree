@@ -495,3 +495,31 @@ bases unreadable. `pedigree/torchzip.py` now reads them with the same restricted
 (PyTorch's tensor records only, any other global refused; `tests/test_torchzip.py` includes a
 legacy file carrying code). E2p (`experiments/e2_rescore.py --match "legacy pickle" --name E2p`)
 scores again every E2 comparison that ended in that error, and is applied beside E2 as E2r is.
+
+## Amendment 2026-11-17 (2): H14, behaviour by shared mistakes, before any of its data
+
+H9 and H12 stand as recorded (not supported). Agreement, Jensen-Shannon divergence and CKA
+measure how alike two models' answers are, and a student trained independently on the teacher's
+task learns many of the same answers. What only a distilled student inherits is the teacher's
+idiosyncrasy: its mistakes, and how it spreads probability over the wrong answers.
+
+**Statistics (E5e).** Over E5's probes, with the true answer at each position (the CIFAR-10
+label; the masked token for a masked LM; the next token for a causal LM): *error agreement*, the
+share of positions the teacher gets wrong where the other model gives the same wrong answer; and
+*dark-knowledge divergence*, the Jensen-Shannon divergence of the two distributions once the
+teacher's top class is removed and the rest renormalised. E5's own statistics are unchanged
+(`tests/test_behaviour.py`).
+
+**Rule, chosen on dev only.** E5e scores E5's dev students (seeds 0-2, four families, with the
+public derivatives and independents E5 used). For each statistic, the dev gap is the smallest
+distilled score minus the largest independent score (for the divergence, negated). The statistic
+with the larger gap is used, with its threshold at the gap's midpoint (if no gap is positive: the
+threshold that admits the most distilled students while admitting no independent one). Both
+are written into `results/verdicts.json` from the dev run alone.
+
+**Fresh data.** New students, never trained before this amendment: seeds 8-12 of each family's
+fresh split, distilled and independent alike (`distill3-*`, GPU), 20 distilled and 20
+independent; E5e-fresh scores only them.
+
+- **H14** On the fresh students, the dev rule identifies distilled students with TPR >= 90% at
+  FPR <= 5% (at most one independent student admitted), per-family values reported.

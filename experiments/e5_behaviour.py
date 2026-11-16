@@ -214,7 +214,7 @@ def main(family: str, splits: list[str]) -> None:
         run = ledger.Run(EXPERIMENT, family=family, split=split, teacher=info.get("teacher", repo), **probe)
         cands = [(f"{k}_s{s}", "positive" if k == "distill" else "negative", k)
                  for s in SPLIT_SEEDS[split] for k in ("distill", "indep")]
-        if EXPERIMENT == "E5n":   # only the new students on E5's probes
+        if EXPERIMENT in ("E5n", "E5e-fresh"):   # only the new students (H12's and H14's fresh)
             public = []
         for name, label, kind in cands + public:
             try:

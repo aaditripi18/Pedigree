@@ -361,6 +361,30 @@ def pull(job: str) -> None:
     print(f"{job}: appended {len(add)} ledger lines; files in {dest}")
 
 
+
+# H14 (PLAN.md amendment 2026-11-17 (2)): error agreement and dark knowledge. E5e scores the dev
+# students (seeds 0-2) to choose the rule; new fresh students (seeds 8-12, never seen) judge it.
+H14_SEEDS = [8, 9, 10, 11, 12]
+for _f in E5_FAMILIES:
+    _teach = [s for s in JOBS[f"e5-{_f}"]["sources"] if not s.startswith("distill-")]
+    JOBS[f"e5e-dev-{_f}"] = _job(f"pedigree-e5e-dev-{_f.replace('_', '-')}",
+                                 [["-m", "experiments.e5_behaviour", _f, "dev"]], gpu=False,
+                                 sources=_teach + [f"distill-{_f}"],
+                                 env={"PEDIGREE_TEACHERS": JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"],
+                                      "PEDIGREE_STUDENTS": "merge:students", "PEDIGREE_EXPERIMENT": "E5e-dev",
+                                      "PEDIGREE_E5_SEEDS": json.dumps({"dev": [0, 1, 2]})})
+    JOBS[f"distill3-{_f}"] = _job(f"pedigree-distill3-{_f.replace('_', '-')}",
+                                  [["-m", "experiments.distill", _f, "fresh"]], gpu=True,
+                                  sources=list(JOBS[f"distill-{_f}"]["sources"]),
+                                  env={**JOBS[f"distill-{_f}"]["env"], "PEDIGREE_SEEDS": ",".join(map(str, H14_SEEDS))})
+    JOBS[f"e5e-fresh-{_f}"] = _job(f"pedigree-e5e-fresh-{_f.replace('_', '-')}",
+                                   [["-m", "experiments.e5_behaviour", _f, "fresh"]], gpu=False,
+                                   sources=_teach + [f"distill3-{_f}"],
+                                   env={"PEDIGREE_TEACHERS": JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"],
+                                        "PEDIGREE_STUDENTS": "merge:students", "PEDIGREE_EXPERIMENT": "E5e-fresh",
+                                        "PEDIGREE_E5_SEEDS": json.dumps({"fresh": H14_SEEDS})})
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "push":
