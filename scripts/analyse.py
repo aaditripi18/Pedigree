@@ -421,11 +421,13 @@ def behaviour_audit(e2b, h9r) -> dict | None:
     return out
 
 
-def with_rescores(e2, e2r):
+def with_rescores(e2, e2r, e2g=()):
     """E2 with each comparison that ended in a reader error replaced by its E2r score (the
-    fixed readers); E2's own records are not changed."""
+    fixed readers), and each GGUF comparison that compared too few tensors replaced by its E2g
+    score (the name fix of the 2026-11-17 amendment); E2's own records are not changed."""
     import copy
     new = {(r["model"], r["other"], r["role"]): r for r in e2r if "lost" not in r}
+    gnew = {(r["model"], r["other"], r["role"]): r for r in e2g if "lost" not in r}
     out = copy.deepcopy(e2)
     keep = ("median_cosine", "compared", "matched", "match_share", "identical", "kurtosis_gap",
             "median_invariant", "invariant_compared", "error")
@@ -436,6 +438,9 @@ def with_rescores(e2, e2r):
                 if d.get("error") and r:
                     d.pop("error")
                     d.update({k: r[k] for k in keep if k in r})
+                g = gnew.get((m["id"], d[key], role))
+                if g and not d.get("error") and (d.get("compared") or 0) < MIN_COMPARED:
+                    d.update({k: g[k] for k in keep if k in g})
     return out
 
 
@@ -504,6 +509,7 @@ def main() -> None:
     e2w = latest_runs(rows, "E2W", lambda r: 0)
     e2b = latest_runs(rows, "E2B", lambda r: 0)
     e2r = latest_runs(rows, "E2r", lambda r: 0)
+    e2g = latest_runs(rows, "E2g", lambda r: 0)
     h13r = latest_runs(rows, "H13", lambda r: 0)
     def by_family_split(exp):
         return latest_runs(rows, exp, lambda r: ((r.get("meta") or {}).get("family", r.get("family")),
@@ -522,12 +528,14 @@ def main() -> None:
               h6(e1b, e2w, T, rule), h7(h7a, e2, T, rule), h8(e1b, e7k, e2, T, rule), h9(e5), h10(e6, T, rule),
               h11(e7, T, rule), h12(e5o), *h13(h13r, T, rule)]
         if e2r:
-            e2f = with_rescores(e2, e2r)
+            e2f = with_rescores(e2, e2r, e2g)
             Af = audit(e2f, T, rule)
             hf = {h["id"]: h for h in [*h2h3(Af, len(e2f) == 600), h7(h7a, e2f, T, rule)]}
             out.setdefault("reader_fixed", {})[rule] = {
                 "rescored": len(e2r), "lost": sum("lost" in r for r in e2r),
                 "still_errors": sum(bool(r.get("error")) for r in e2r), "audit": Af,
+                "gguf_rescored": len(e2g), "gguf_comparable": sum((r.get("compared") or 0) >= MIN_COMPARED
+                                                                  for r in e2g),
                 "verdicts": {k: {"verdict": v["verdict"], "evidence": v["evidence"],
                                  "changes": v["verdict"] != next(h for h in hs if h["id"] == k)["verdict"]}
                              for k, v in hf.items()}}

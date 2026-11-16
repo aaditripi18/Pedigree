@@ -119,8 +119,15 @@ def sample(url: str, spec: dict, elements: int) -> np.ndarray:
     return np.asarray(vals, dtype=np.float64).ravel()[:n]
 
 
-def hf_names(meta: dict, gguf_names: list[str], hf_candidates: list[str]) -> dict[str, str]:
-    """{gguf tensor name: Hugging Face name} for the HF names a GGUF file holds."""
+def hf_names(meta: dict, gguf_names, hf_candidates) -> dict[str, str]:
+    """{gguf tensor name: Hugging Face name} for the HF names a GGUF file holds.
+
+    llama.cpp's table knows a language model's own names (model.layers.3...). A multimodal
+    checkpoint nests them (model.language_model.layers.3...), so a name the table does not know
+    is tried again with its leading parts dropped (and "model." put back). Such a match is kept
+    only when the HF tensor's shape equals the GGUF tensor's and no other candidate claims the same
+    GGUF tensor that way, so a vision tower's layers.3 cannot stand in for the language model's.
+    Shapes come with dicts {name: (kind, shape)}; with plain lists only exact names are mapped."""
     import gguf
     arch_name = meta.get("general.architecture")
     arch = next((a for a, n in gguf.MODEL_ARCH_NAMES.items() if n == arch_name), None)
@@ -128,10 +135,32 @@ def hf_names(meta: dict, gguf_names: list[str], hf_candidates: list[str]) -> dic
         return {}
     blocks = int(meta.get(f"{arch_name}.block_count", 0) or 0)
     tmap = gguf.get_tensor_name_map(arch, blocks)
+    gshape = gguf_names if isinstance(gguf_names, dict) else {}
+    hshape = hf_candidates if isinstance(hf_candidates, dict) else {}
     have = set(gguf_names)
-    out = {}
+
+    def lookup(name):
+        return tmap.get_name(name, try_suffixes=(".weight", ".bias"))
+
+    out, later = {}, []
     for hf in hf_candidates:
-        g = tmap.get_name(hf, try_suffixes=(".weight", ".bias"))
-        if g and g in have and g not in out:
-            out[g] = hf
+        g = lookup(hf)
+        if g and g in have:
+            if g not in out:
+                out[g] = hf
+        elif gshape and hshape:
+            later.append(hf)
+    stripped: dict[str, list[str]] = {}
+    for hf in later:
+        parts = hf.split(".")
+        for k in range(1, len(parts) - 1):
+            rest = ".".join(parts[k:])
+            g = next((x for x in (lookup(rest), lookup("model." + rest)) if x and x in have), None)
+            if g:
+                if tuple(gshape[g][1]) == tuple(hshape[hf][1]):
+                    stripped.setdefault(g, []).append(hf)
+                break
+    for g, cands in stripped.items():
+        if g not in out and len(cands) == 1:
+            out[g] = cands[0]
     return out

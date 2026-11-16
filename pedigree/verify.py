@@ -249,11 +249,9 @@ def harmonise(model, other):
     def g(m):
         return getattr(m, "gguf_meta", None)
     if g(model) and not g(other):
-        names = list(other.float_shapes())
-        model = Renamed(model, ggufremote.hf_names(model.gguf_meta, list(model.float_shapes()), names))
+        model = Renamed(model, ggufremote.hf_names(model.gguf_meta, model.float_shapes(), other.float_shapes()))
     elif g(other) and not g(model):
-        names = list(model.float_shapes())
-        other = Renamed(other, ggufremote.hf_names(other.gguf_meta, list(other.float_shapes()), names))
+        other = Renamed(other, ggufremote.hf_names(other.gguf_meta, other.float_shapes(), model.float_shapes()))
     return model, other
 
 

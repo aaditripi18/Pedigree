@@ -467,3 +467,24 @@ as in H7 (b). Both pools are rebuilt from frozen metadata after the reading.
 
 Wilson intervals, per-tier values and the mean pool size are reported. The audit's E2 numbers
 are not recomputed with pool v2: E2 is reported with the pool it ran with.
+
+## Amendment 2026-11-17: GGUF names in multimodal checkpoints, after every earlier verdict
+
+All earlier verdicts stand as recorded; nothing below changes them.
+
+Of the 84 E2 models whose declared base could not be compared by weights, most are GGUF files
+(llama.cpp's format) declared against a safetensors base. `ggufremote.hf_names` maps GGUF names
+back with llama.cpp's own table, which knows a language model's plain names
+(`model.layers.3...`). Recent multimodal checkpoints nest the language model
+(`model.language_model.layers.3...`), so almost nothing mapped: on six such pairs, 0 or 1
+tensors aligned. The mapper now also tries a name with its leading parts dropped, keeping such a
+match only when the shapes are equal and no other tensor claims the same GGUF tensor that way (a
+vision tower's `layers.3` cannot stand in); names that mapped before map exactly as before
+(`tests/test_ggufnames.py`). On the six pairs, 399 to 749 tensors now align. No threshold or
+rule changes.
+
+**E2g** (`experiments/e2_gguf_rescore.py`) scores again every comparison of E2's last run, after
+E2r, that involves a GGUF file and compared fewer than `MIN_COMPARED` tensors without an error,
+declared bases and candidate-pool pairs alike. E2 stays as recorded; `scripts/analyse.py`
+reports beside it E2 with the E2r and E2g scores, and says whether any verdict (H2, H3, H7)
+would change. A changed verdict is reported as a change, not as the verdict.
