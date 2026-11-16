@@ -171,6 +171,9 @@ JOBS["bases-meta"] = _job("pedigree-bases-meta", [["-m", "experiments.e2_bases_m
 # E2r: E2's comparisons that ended in a reader error, scored again with the fixed readers
 JOBS["e2-rescore"] = _job("pedigree-e2-rescore", [["-m", "experiments.e2_rescore"]], gpu=False,
                           env={"PEDIGREE_WORKERS": "8"})
+# E2g: E2's GGUF comparisons that compared too few tensors, with the multimodal name fix (2026-11-17)
+JOBS["e2-gguf"] = _job("pedigree-e2-gguf", [["-m", "experiments.e2_gguf_rescore"]], gpu=False,
+                       env={"PEDIGREE_WORKERS": "8"})
 # H13: the fresh sample, each model read with its declared bases (pool v2 is judged afterwards)
 JOBS["h13"] = _job("pedigree-h13", [["-m", "experiments.h13_fresh", "--out", "/kaggle/working/h13_raw.jsonl"]],
                    gpu=False, env=dict(E2_ENV))
