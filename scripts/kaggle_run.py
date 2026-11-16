@@ -377,6 +377,9 @@ for _f in E5_FAMILIES:
                                   [["-m", "experiments.distill", _f, "fresh"]], gpu=True,
                                   sources=list(JOBS[f"distill-{_f}"]["sources"]),
                                   env={**JOBS[f"distill-{_f}"]["env"], "PEDIGREE_SEEDS": ",".join(map(str, H14_SEEDS))})
+    # the new students train on friends' GPUs with this code and are shared back
+    JOBS[f"distill3-{_f}"]["owner"] = {"text_encoder": "alien5060707", "text_decoder": "moinuddinhasan8",
+                                       "vision_transformer": "rohajraj", "vision_cnn": "alubalub"}[_f]
     JOBS[f"e5e-fresh-{_f}"] = _job(f"pedigree-e5e-fresh-{_f.replace('_', '-')}",
                                    [["-m", "experiments.e5_behaviour", _f, "fresh"]], gpu=False,
                                    sources=_teach + [f"distill3-{_f}"],
