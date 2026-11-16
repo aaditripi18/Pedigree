@@ -1,0 +1,38 @@
+[{"stream_name":"stdout","time":23.606056526,"data":"code 1c76b1d\n"}
+,{"stream_name":"stdout","time":74.021528005,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":77.281339105,"data":"PEDIGREE_DERIVATIVES = /kaggle/working/students\n"}
+,{"stream_name":"stdout","time":83.518290823,"data":"PEDIGREE_TEACHERS = /kaggle/input/notebooks/aadityae5545454/pedigree-ft-text-encoder/derivatives\n"}
+,{"stream_name":"stdout","time":83.518326387,"data":"PEDIGREE_SEEDS = 8,9,10,11,12\n"}
+,{"stream_name":"stderr","time":89.899430604,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":101.242434469,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2770.86it/s]\n"}
+,{"stream_name":"stderr","time":107.823040376,"data":"/kaggle/working/Pedigree/experiments/distill.py:135: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":107.823097996,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":107.823105367,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":642.065754183,"data":"text_encoder/fresh/distill_s8: loss 17.3309 -\u003e 13.8936, 557 s\n"}
+,{"stream_name":"stderr","time":643.378006981,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2687.63it/s]\n"}
+,{"stream_name":"stdout","time":1022.032343025,"data":"text_encoder/fresh/indep_s8: loss 10.9593 -\u003e 7.4426, 380 s\n"}
+,{"stream_name":"stderr","time":1023.356820278,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2675.36it/s]\n"}
+,{"stream_name":"stdout","time":1566.133866946,"data":"text_encoder/fresh/distill_s9: loss 17.4989 -\u003e 11.9867, 544 s\n"}
+,{"stream_name":"stderr","time":1567.473983625,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2721.12it/s]\n"}
+,{"stream_name":"stdout","time":1945.470801416,"data":"text_encoder/fresh/indep_s9: loss 10.9648 -\u003e 7.1762, 379 s\n"}
+,{"stream_name":"stderr","time":1946.77874368,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2689.72it/s]\n"}
+,{"stream_name":"stdout","time":2489.873900978,"data":"text_encoder/fresh/distill_s10: loss 17.4317 -\u003e 12.259, 544 s\n"}
+,{"stream_name":"stderr","time":2491.206836658,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2783.63it/s]\n"}
+,{"stream_name":"stdout","time":2868.888954846,"data":"text_encoder/fresh/indep_s10: loss 11.0126 -\u003e 7.6435, 379 s\n"}
+,{"stream_name":"stderr","time":2870.200282322,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2644.52it/s]\n"}
+,{"stream_name":"stdout","time":3412.721238931,"data":"text_encoder/fresh/distill_s11: loss 15.2876 -\u003e 12.6498, 544 s\n"}
+,{"stream_name":"stderr","time":3414.143145604,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2681.86it/s]\n"}
+,{"stream_name":"stdout","time":3792.563007465,"data":"text_encoder/fresh/indep_s11: loss 10.9453 -\u003e 7.4729, 380 s\n"}
+,{"stream_name":"stderr","time":3793.883514702,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2788.89it/s]\n"}
+,{"stream_name":"stdout","time":4337.114096883,"data":"text_encoder/fresh/distill_s12: loss 16.998 -\u003e 11.8962, 545 s\n"}
+,{"stream_name":"stderr","time":4338.413985341,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2673.91it/s]\n"}
+,{"stream_name":"stdout","time":4716.271626607,"data":"text_encoder/fresh/indep_s12: loss 11.0209 -\u003e 7.512, 379 s\n"}
+,{"stream_name":"stdout","time":4717.627529726,"data":"exit 0 -m experiments.distill text_encoder fresh\n"}
+,{"stream_name":"stdout","time":4717.652865802,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":4719.632771832,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":4719.632806334,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":4719.852289152,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":4719.852316154,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":4720.621979927,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":4721.535825396,"data":"[NbConvertApp] Writing 292448 bytes to __results__.html\n"}
+]
