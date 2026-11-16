@@ -8,6 +8,7 @@ E2's own records are untouched. scripts/analyse.py reports E2 as recorded and, b
 these pairs replaced by their new scores.
 
     python -m experiments.e2_rescore
+    python -m experiments.e2_rescore --match "legacy pickle" --name E2p   (amendment 2026-11-17)
 """
 from __future__ import annotations
 
@@ -22,19 +23,26 @@ from pedigree import pool
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def errored(e2: list[dict]) -> list[tuple[str, str, str]]:
+def errored(e2: list[dict], match: str = "") -> list[tuple[str, str, str]]:
     out = []
     for m in e2:
-        out += [(m["id"], d["base"], "declared") for d in m.get("declared", []) if d.get("error")]
-        out += [(m["id"], p["candidate"], "pool") for p in m.get("pool", []) if p.get("error")]
+        out += [(m["id"], d["base"], "declared") for d in m.get("declared", [])
+                if d.get("error") and match in d["error"]]
+        out += [(m["id"], p["candidate"], "pool") for p in m.get("pool", [])
+                if p.get("error") and match in p["error"]]
     return out
 
 
 def main() -> None:
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--match", default="", help="only errors containing this text")
+    ap.add_argument("--name", default="E2r", help="ledger experiment name")
+    a = ap.parse_args()
     rows = [json.loads(x) for x in (ROOT / "results" / "ledger.jsonl").read_text(encoding="utf-8").splitlines() if x]
     e2 = [r for r in rows if r.get("experiment") == "E2"]
     last = max(r["run_id"] for r in e2)
-    pairs = errored([r for r in e2 if r["run_id"] == last])
+    pairs = errored([r for r in e2 if r["run_id"] == last], a.match)
     print(f"{len(pairs)} errored comparisons in {last}", flush=True)
     frame = pool.Frame(ROOT / "results" / "e2_frame_meta.jsonl.gz")
 
@@ -51,7 +59,7 @@ def main() -> None:
                 err = str(e)
         return p, {"lost": err}
 
-    run = ledger.Run("E2r", e2_run=last)
+    run = ledger.Run(a.name, e2_run=last, match=a.match or None)
     lost = 0
     with ThreadPoolExecutor(WORKERS) as ex:
         for (model_id, other_id, role), r in ex.map(one, pairs):

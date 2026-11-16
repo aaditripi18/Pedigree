@@ -152,12 +152,77 @@ def _flatten(obj, prefix=""):
             yield from _flatten(v, f"{prefix}.{k}" if prefix else str(k))
 
 
+LEGACY_MAGIC = 0x1950A86A20F9469CFC6C
+
+
+class _KeyedUnpickler(_Unpickler):
+    """The restricted unpickler, also recording each storage's dtype by key."""
+
+    def __init__(self, *a, **k):
+        super().__init__(*a, **k)
+        self.dtypes: dict[str, str] = {}
+
+    def persistent_load(self, pid):
+        s = super().persistent_load(pid)
+        self.dtypes[s.key] = s.dtype
+        return s
+
+
+def _legacy_header(fh: RangeFile, url: str) -> tuple[int, dict]:
+    """A pre-1.6 PyTorch file: pickled magic number, protocol, system info and the object, then
+    the storage keys, then each storage as an 8-byte element count and its bytes, in key order.
+    Every pickle goes through the restricted unpickler; the storages are located by walking the
+    counts (8 bytes read per storage, on first use)."""
+    buf = io.BufferedReader(fh, BLOCK)
+    if _Unpickler(buf).load() != LEGACY_MAGIC:
+        raise ValueError("not a PyTorch file (neither zip nor legacy magic number)")
+    _Unpickler(buf).load()                      # protocol version
+    _Unpickler(buf).load()                      # system info (endianness, type sizes)
+    up = _KeyedUnpickler(buf)
+    state = up.load()
+    keys = _Unpickler(buf).load()
+    if not isinstance(keys, list):
+        raise ValueError("legacy PyTorch file without a storage key list")
+    first = buf.tell()
+    if isinstance(state, dict) and "state_dict" in state and isinstance(state["state_dict"], dict):
+        state = state["state_dict"]
+    starts: dict[str, int] = {}
+
+    def start_of(key: str) -> int:
+        if not starts:
+            pos = first
+            for k in keys:
+                (numel,) = struct.unpack("<q", fetch_range(url, pos, pos + 7))
+                starts[str(k)] = pos + 8
+                pos += 8 + numel * ITEM[up.dtypes.get(str(k), "U8")]
+        return starts[key]
+
+    return 0, _header(state, start_of)
+
+
+def _header(state, start_of) -> dict:
+    header = {}
+    for name, t in _flatten(state):
+        if not _contiguous(t.shape, t.stride):
+            continue
+        item = ITEM[t.storage.dtype]
+        n = 1
+        for d in t.shape:
+            n *= d
+        header[name] = _LazySpec({"dtype": t.storage.dtype, "shape": list(t.shape)},
+                                 lambda k=t.storage.key, o=t.offset * item, m=n * item:
+                                 [start_of(k) + o, start_of(k) + o + m])
+    return header
+
+
 def read_header(url: str, size: int) -> tuple[int, dict]:
-    """(0, safetensors-style header with absolute offsets) of a remote PyTorch zip file.
-    Non-contiguous tensors are left out (their leading bytes are not their leading values)."""
+    """(0, safetensors-style header with absolute offsets) of a remote PyTorch file: the zip
+    format (torch >= 1.6) or the legacy pickle format before it. Non-contiguous tensors are left
+    out (their leading bytes are not their leading values)."""
     fh = RangeFile(url, size)
     if fh.read(4) != b"PK\x03\x04":
-        raise ValueError("not a zip-format PyTorch file (legacy pickle files are not read)")
+        fh.seek(0)
+        return _legacy_header(fh, url)
     zf = zipfile.ZipFile(fh)
     pkl = [n for n in zf.namelist() if n.endswith("/data.pkl") or n == "data.pkl"]
     if len(pkl) != 1:
@@ -180,15 +245,4 @@ def read_header(url: str, size: int) -> tuple[int, dict]:
             starts[key] = info.header_offset + 30 + nlen + xlen
         return starts[key]
 
-    header = {}
-    for name, t in _flatten(state):
-        if not _contiguous(t.shape, t.stride):
-            continue
-        item = ITEM[t.storage.dtype]
-        n = 1
-        for d in t.shape:
-            n *= d
-        header[name] = _LazySpec({"dtype": t.storage.dtype, "shape": list(t.shape)},
-                                 lambda k=t.storage.key, o=t.offset * item, m=n * item:
-                                 [start_of(k) + o, start_of(k) + o + m])
-    return 0, header
+    return 0, _header(state, start_of)

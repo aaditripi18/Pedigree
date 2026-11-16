@@ -174,6 +174,9 @@ JOBS["e2-rescore"] = _job("pedigree-e2-rescore", [["-m", "experiments.e2_rescore
 # E2g: E2's GGUF comparisons that compared too few tensors, with the multimodal name fix (2026-11-17)
 JOBS["e2-gguf"] = _job("pedigree-e2-gguf", [["-m", "experiments.e2_gguf_rescore"]], gpu=False,
                        env={"PEDIGREE_WORKERS": "8"})
+# E2p: E2's comparisons a legacy (pre-zip) PyTorch file made unreadable, read again (2026-11-17)
+JOBS["e2-legacy"] = _job("pedigree-e2-legacy", [["-m", "experiments.e2_rescore", "--match", "legacy pickle",
+                                                 "--name", "E2p"]], gpu=False, env={"PEDIGREE_WORKERS": "8"})
 # H13: the fresh sample, each model read with its declared bases (pool v2 is judged afterwards)
 JOBS["h13"] = _job("pedigree-h13", [["-m", "experiments.h13_fresh", "--out", "/kaggle/working/h13_raw.jsonl"]],
                    gpu=False, env=dict(E2_ENV))

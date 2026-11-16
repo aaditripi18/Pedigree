@@ -508,7 +508,7 @@ def main() -> None:
     e2 = latest_runs(rows, "E2", lambda r: 0)
     e2w = latest_runs(rows, "E2W", lambda r: 0)
     e2b = latest_runs(rows, "E2B", lambda r: 0)
-    e2r = latest_runs(rows, "E2r", lambda r: 0)
+    e2r = latest_runs(rows, "E2r", lambda r: 0) + latest_runs(rows, "E2p", lambda r: 0)  # E2p: legacy .bin
     e2g = latest_runs(rows, "E2g", lambda r: 0)
     h13r = latest_runs(rows, "H13", lambda r: 0)
     def by_family_split(exp):

@@ -488,3 +488,10 @@ E2r, that involves a GGUF file and compared fewer than `MIN_COMPARED` tensors wi
 declared bases and candidate-pool pairs alike. E2 stays as recorded; `scripts/analyse.py`
 reports beside it E2 with the E2r and E2g scores, and says whether any verdict (H2, H3, H7)
 would change. A changed verdict is reported as a change, not as the verdict.
+
+**E2p.** PyTorch files saved before torch 1.6 are a series of pickles followed by raw storages,
+not a zip; the reader refused them ("legacy pickle files are not read"), which left 6 declared
+bases unreadable. `pedigree/torchzip.py` now reads them with the same restricted unpickler
+(PyTorch's tensor records only, any other global refused; `tests/test_torchzip.py` includes a
+legacy file carrying code). E2p (`experiments/e2_rescore.py --match "legacy pickle" --name E2p`)
+scores again every E2 comparison that ended in that error, and is applied beside E2 as E2r is.
