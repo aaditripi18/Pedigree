@@ -487,7 +487,9 @@ rule changes.
 E2r, that involves a GGUF file and compared fewer than `MIN_COMPARED` tensors without an error,
 declared bases and candidate-pool pairs alike. E2 stays as recorded; `scripts/analyse.py`
 reports beside it E2 with the E2r and E2g scores, and says whether any verdict (H2, H3, H7)
-would change. A changed verdict is reported as a change, not as the verdict.
+would change. A changed verdict is reported as a change, not as the verdict. The first E2g run stopped after 467 of 1,677
+comparisons on an empty Hub reply that one comparison should have recorded; the script now records
+any such failure and resumes, skipping pairs already scored, and each pair's latest score counts.
 
 **E2p.** PyTorch files saved before torch 1.6 are a series of pickles followed by raw storages,
 not a zip; the reader refused them ("legacy pickle files are not read"), which left 6 declared

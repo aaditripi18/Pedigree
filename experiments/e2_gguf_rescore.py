@@ -39,7 +39,11 @@ def main() -> None:
     e2 = [r for r in rows if r.get("experiment") == "E2"]
     last = max(r["run_id"] for r in e2)
     pairs = selected([r for r in e2 if r["run_id"] == last])
-    print(f"{len(pairs)} GGUF comparisons with < {MIN_COMPARED} tensors in {last}", flush=True)
+    # resumable: a pair already scored by an earlier E2g run (not lost) is not read again
+    done = {(r["model"], r["other"], r["role"]) for r in rows if r.get("experiment") == "E2g" and "lost" not in r}
+    print(f"{len(pairs)} GGUF comparisons with < {MIN_COMPARED} tensors in {last}; {len(done & set(pairs))} "
+          "already scored", flush=True)
+    pairs = [p for p in pairs if p not in done]
     frame = pool.Frame(ROOT / "results" / "e2_frame_meta.jsonl.gz")
 
     def one(p):
@@ -54,6 +58,8 @@ def main() -> None:
                 return p, _pair(a, b, invariant=role == "declared")
             except NetworkError as e:
                 err = str(e)
+            except Exception as e:  # noqa: BLE001  (an empty Hub reply once stopped the whole run)
+                err = f"{type(e).__name__}: {e}"[:300]
         return p, {"lost": err}
 
     run = ledger.Run("E2g", e2_run=last)
