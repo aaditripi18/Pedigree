@@ -1,0 +1,30 @@
+[{"stream_name":"stdout","time":103.613282095,"data":"code d043f40\n"}
+,{"stream_name":"stdout","time":152.169369566,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":155.417078381,"data":"PEDIGREE_DERIVATIVES = /kaggle/working/students\n"}
+,{"stream_name":"stdout","time":203.078402706,"data":"PEDIGREE_TEACHERS = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":203.078439438,"data":"PEDIGREE_SEEDS = 8,9,10,11,12\n"}
+,{"stream_name":"stderr","time":217.435243143,"data":"/kaggle/working/Pedigree/experiments/finetune.py:113: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":217.435295673,"data":"  return (torch.from_numpy(np.asarray(img)).permute(2, 0, 1).float() / 255 - m) / s\n"}
+,{"stream_name":"stderr","time":221.311185991,"data":"/kaggle/working/Pedigree/experiments/distill.py:135: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":221.311233267,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":221.311240219,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":276.360021106,"data":"vision_cnn/fresh/distill_s8: loss 1.1009 -\u003e 0.4242, 71 s\n"}
+,{"stream_name":"stderr","time":276.479417035,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":315.48541375,"data":"vision_cnn/fresh/indep_s8: loss 2.3751 -\u003e 1.4112, 39 s\n"}
+,{"stream_name":"stdout","time":372.910268949,"data":"vision_cnn/fresh/distill_s9: loss 1.0849 -\u003e 0.4632, 57 s\n"}
+,{"stream_name":"stdout","time":413.60867878,"data":"vision_cnn/fresh/indep_s9: loss 2.5288 -\u003e 1.207, 41 s\n"}
+,{"stream_name":"stdout","time":470.793974516,"data":"vision_cnn/fresh/distill_s10: loss 1.3658 -\u003e 0.591, 57 s\n"}
+,{"stream_name":"stdout","time":511.581138693,"data":"vision_cnn/fresh/indep_s10: loss 2.4732 -\u003e 1.7141, 41 s\n"}
+,{"stream_name":"stdout","time":568.728745975,"data":"vision_cnn/fresh/distill_s11: loss 1.4668 -\u003e 0.4505, 57 s\n"}
+,{"stream_name":"stdout","time":609.476286065,"data":"vision_cnn/fresh/indep_s11: loss 2.3869 -\u003e 1.6002, 41 s\n"}
+,{"stream_name":"stdout","time":666.526331552,"data":"vision_cnn/fresh/distill_s12: loss 1.5903 -\u003e 0.4152, 57 s\n"}
+,{"stream_name":"stdout","time":707.413891218,"data":"vision_cnn/fresh/indep_s12: loss 2.263 -\u003e 1.5302, 41 s\n"}
+,{"stream_name":"stdout","time":710.416055742,"data":"exit 0 -m experiments.distill vision_cnn fresh\n"}
+,{"stream_name":"stdout","time":710.440137986,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":712.417543349,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":712.417576307,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":712.632619697,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":712.63264746,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":713.367761382,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":714.26385655,"data":"[NbConvertApp] Writing 292445 bytes to __results__.html\n"}
+]
