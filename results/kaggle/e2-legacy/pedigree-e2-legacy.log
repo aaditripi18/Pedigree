@@ -1,0 +1,19 @@
+[{"stream_name":"stdout","time":25.314649584,"data":"code d043f40\n"}
+,{"stream_name":"stdout","time":78.129011069,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":79.499693884,"data":"PEDIGREE_WORKERS = 8\n"}
+,{"stream_name":"stdout","time":79.805608297,"data":"5 errored comparisons in E2-2026-11-13T07:41:03Z-e281697\n"}
+,{"stream_name":"stdout","time":312.276316834,"data":"sentence-transformers/all-MiniLM-L12-v2 vs microsoft/MiniLM-L12-H384-uncased (declared): 0.963732737663193\n"}
+,{"stream_name":"stdout","time":312.950337082,"data":"cross-encoder/ms-marco-MiniLM-L12-v2 vs microsoft/MiniLM-L12-H384-uncased (declared): 0.9830274908186676\n"}
+,{"stream_name":"stdout","time":384.764590907,"data":"NeuML/pubmedbert-base-embeddings vs microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext (declared): 0.9994688718129565\n"}
+,{"stream_name":"stdout","time":384.764650887,"data":"OpenMed/OpenMed-PII-French-BiomedBERT-Base-110M-v1 vs microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract (declared): 0.9997262790773691\n"}
+,{"stream_name":"stdout","time":410.869019363,"data":"OpenMed/OpenMed-PII-German-ClinicDischarge-Base-110M-v1 vs emilyalsentzer/Bio_Discharge_Summary_BERT (declared): 0.9996567674356587\n"}
+,{"stream_name":"stdout","time":410.869782203,"data":"done; 0 lost to the network\n"}
+,{"stream_name":"stdout","time":411.035022778,"data":"exit 0 -m experiments.e2_rescore --match legacy pickle --name E2p\n"}
+,{"stream_name":"stdout","time":411.0553927,"data":"5 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":413.247618208,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":413.247662588,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":413.535430373,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":413.535466823,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":414.300145892,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":415.479909799,"data":"[NbConvertApp] Writing 292263 bytes to __results__.html\n"}
+]

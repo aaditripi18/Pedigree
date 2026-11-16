@@ -1,0 +1,36 @@
+[{"stream_name":"stdout","time":118.656263344,"data":"code 1c76b1d\n"}
+,{"stream_name":"stdout","time":191.077851746,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":192.707678254,"data":"PEDIGREE_TEACHERS = /kaggle/input/notebooks/aadityae5545454/pedigree-ft-text-encoder/derivatives\n"}
+,{"stream_name":"stdout","time":243.190731789,"data":"PEDIGREE_STUDENTS = /tmp/merged-students\n"}
+,{"stream_name":"stdout","time":243.190790005,"data":"PEDIGREE_EXPERIMENT = E5e-dev\n"}
+,{"stream_name":"stdout","time":243.190798143,"data":"PEDIGREE_E5_SEEDS = {\"dev\": [0, 1, 2]}\n"}
+,{"stream_name":"stderr","time":249.114681369,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":258.146422808,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2239.98it/s]\n"}
+,{"stream_name":"stderr","time":258.172718249,"data":"[transformers] \u001b[1mBertForMaskedLM LOAD REPORT\u001b[0m from: google-bert/bert-base-uncased\n"}
+,{"stream_name":"stderr","time":258.17279437,"data":"Key                         | Status     |  | \n"}
+,{"stream_name":"stderr","time":258.172801755,"data":"----------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":258.172807721,"data":"bert.pooler.dense.weight    | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":258.172813492,"data":"cls.seq_relationship.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":258.172818453,"data":"bert.pooler.dense.bias      | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":258.17282379,"data":"cls.seq_relationship.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":258.172829163,"data":"\n"}
+,{"stream_name":"stderr","time":258.172834036,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":258.17283916,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":408.888710664,"data":"  distill_s0                                    agree 0.074  js 0.8333  cka 0.126  err_agree 0.036  dark_js 0.8178\n"}
+,{"stream_name":"stdout","time":554.612843168,"data":"  indep_s0                                      agree 0.070  js 0.8486  cka 0.146  err_agree 0.031  dark_js 0.7894\n"}
+,{"stream_name":"stdout","time":697.613928511,"data":"  distill_s1                                    agree 0.054  js 0.8374  cka 0.232  err_agree 0.032  dark_js 0.8249\n"}
+,{"stream_name":"stdout","time":840.757758074,"data":"  indep_s1                                      agree 0.074  js 0.8359  cka 0.213  err_agree 0.036  dark_js 0.7758\n"}
+,{"stream_name":"stdout","time":986.655979916,"data":"  distill_s2                                    agree 0.074  js 0.8325  cka 0.115  err_agree 0.036  dark_js 0.8196\n"}
+,{"stream_name":"stdout","time":1130.696343117,"data":"  indep_s2                                      agree 0.074  js 0.8478  cka 0.078  err_agree 0.036  dark_js 0.7854\n"}
+,{"stream_name":"stderr","time":1135.047628596,"data":"\rLoading weights:   0%|          | 0/105 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 105/105 [00:00\u003c00:00, 1864.73it/s]\n"}
+,{"stream_name":"stdout","time":1197.364004166,"data":"  distilbert/distilbert-base-uncased            agree 0.538  js 0.2779  cka 0.943  err_agree 0.336  dark_js 0.3049\n"}
+,{"stream_name":"stdout","time":1198.473092522,"data":"  google-bert/bert-base-cased: different tokenizer, skipped (recorded)\n"}
+,{"stream_name":"stdout","time":1199.960943239,"data":"exit 0 -m experiments.e5_behaviour text_encoder dev\n"}
+,{"stream_name":"stdout","time":1200.000437608,"data":"8 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":1202.980855294,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1202.980901123,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1203.387981778,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1203.388024985,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1204.422341603,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1205.925545804,"data":"[NbConvertApp] Writing 292574 bytes to __results__.html\n"}
+]
