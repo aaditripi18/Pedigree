@@ -91,6 +91,13 @@ def tensor_bytes(url: str, data_start: int, spec: dict, max_bytes: int) -> bytes
     length = min(e - b, max_bytes) // itemsize * itemsize
     if length <= 0:
         return b""
+    if spec.get("order") == "F":
+        # a 2-D tensor stored transposed (old PyTorch files converted from TensorFlow): its
+        # leading values are not its leading bytes, so read it whole and put it in row order
+        import numpy as np
+        rows, cols = spec["shape"]
+        raw = np.frombuffer(fetch_range(url, data_start + b, data_start + e - 1), dtype=f"V{itemsize}")
+        return raw.reshape(cols, rows).T.tobytes()[:length]
     return fetch_range(url, data_start + b, data_start + b + length - 1)
 
 

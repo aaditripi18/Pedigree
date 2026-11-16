@@ -203,13 +203,19 @@ def _legacy_header(fh: RangeFile, url: str) -> tuple[int, dict]:
 def _header(state, start_of) -> dict:
     header = {}
     for name, t in _flatten(state):
+        fields = {"dtype": t.storage.dtype, "shape": list(t.shape)}
         if not _contiguous(t.shape, t.stride):
-            continue
+            # a plain transpose of a 2-D matrix is read whole and reordered (remote.tensor_bytes);
+            # any other layout is left out
+            if len(t.shape) == 2 and t.stride == (1, t.shape[0]):
+                fields["order"] = "F"
+            else:
+                continue
         item = ITEM[t.storage.dtype]
         n = 1
         for d in t.shape:
             n *= d
-        header[name] = _LazySpec({"dtype": t.storage.dtype, "shape": list(t.shape)},
+        header[name] = _LazySpec(fields,
                                  lambda k=t.storage.key, o=t.offset * item, m=n * item:
                                  [start_of(k) + o, start_of(k) + o + m])
     return header

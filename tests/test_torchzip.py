@@ -17,6 +17,8 @@ def local_ranges(monkeypatch):
             fh.seek(start)
             return fh.read(end - start + 1)
     monkeypatch.setattr(torchzip, "fetch_range", fake)
+    from pedigree import remote
+    monkeypatch.setattr(remote, "fetch_range", fake)
 
 
 def _read(path, spec):
@@ -26,6 +28,16 @@ def _read(path, spec):
         return fh.read(e - b)
 
 
+def _check_transposed(path, header, t):
+    from pedigree.remote import tensor_bytes
+    spec = header["t"]
+    assert spec["order"] == "F" and spec["shape"] == list(t.shape)
+    got = decode(spec["dtype"], tensor_bytes(str(path), 0, spec, t.numel() * 4))
+    np.testing.assert_array_equal(got, t.contiguous().numpy().ravel())
+    part = decode(spec["dtype"], tensor_bytes(str(path), 0, spec, 5 * 4))   # a sample: leading values
+    np.testing.assert_array_equal(part, t.contiguous().numpy().ravel()[:5])
+
+
 def test_header_matches_the_tensors(tmp_path, local_ranges):
     g = torch.Generator().manual_seed(0)
     base = torch.randn(64, 32, generator=g)
@@ -33,12 +45,14 @@ def test_header_matches_the_tensors(tmp_path, local_ranges):
           "half": torch.randn(300, generator=g).half(),
           "bf": torch.randn(17, 5, generator=g).bfloat16(),
           "view": base.view(-1)[100:612].view(16, 32),              # storage offset
-          "t": torch.randn(8, 4, generator=g).t(),                  # non-contiguous
+          "t": torch.randn(8, 4, generator=g).t(),                  # transposed: read in row order
+          "p": torch.randn(2, 3, 4, generator=g).permute(2, 0, 1),  # other layouts: left out
           "steps": torch.arange(10)}
     path = tmp_path / "pytorch_model.bin"
     torch.save(sd, path)
     start, header = torchzip.read_header(str(path), path.stat().st_size)
-    assert start == 0 and "t" not in header                         # left out, never misread
+    assert start == 0 and "p" not in header                         # left out, never misread
+    _check_transposed(path, header, sd["t"])
     for name in ["emb.weight", "head.weight", "half", "bf", "view"]:
         spec = header[name]
         assert spec["shape"] == list(sd[name].shape)
@@ -78,7 +92,8 @@ def test_legacy_files_are_read_exactly(tmp_path, local_ranges):
     torch.save(sd, path, _use_new_zipfile_serialization=False)
     assert path.read_bytes()[:2] != b"PK"
     start, header = torchzip.read_header(str(path), path.stat().st_size)
-    assert start == 0 and "t" not in header
+    assert start == 0
+    _check_transposed(path, header, sd["t"])
     for name in ["emb.weight", "head.weight", "half", "view"]:
         spec = header[name]
         assert spec["shape"] == list(sd[name].shape)

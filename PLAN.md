@@ -494,7 +494,12 @@ not a zip; the reader refused them ("legacy pickle files are not read"), which l
 bases unreadable. `pedigree/torchzip.py` now reads them with the same restricted unpickler
 (PyTorch's tensor records only, any other global refused; `tests/test_torchzip.py` includes a
 legacy file carrying code). E2p (`experiments/e2_rescore.py --match "legacy pickle" --name E2p`)
-scores again every E2 comparison that ended in that error, and is applied beside E2 as E2r is.
+scores again every E2 comparison that ended in that error, and is applied beside E2 as E2r is. Its
+first run read 2 of the 5 pairs fully; in the other 3 (BERT checkpoints converted from
+TensorFlow) every dense weight is stored transposed, which the reader left out, so only 2 large
+tensors could be compared. A plain transpose of a 2-D tensor is now read whole and put in row
+order (checked on `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext`: 208 of 208
+tensors equal `torch.load`'s); E2p is run again, and its latest run is the one applied.
 
 ## Amendment 2026-11-17 (2): H14, behaviour by shared mistakes, before any of its data
 
