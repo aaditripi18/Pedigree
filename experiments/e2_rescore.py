@@ -24,12 +24,16 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def errored(e2: list[dict], match: str = "") -> list[tuple[str, str, str]]:
+    """Comparisons that ended in a reader error; with `match`, also those whose base was recorded
+    as unreadable (`reason`) for that cause (E2p: legacy PyTorch files)."""
+    def hit(d):
+        if d.get("error"):
+            return match in d["error"]
+        return bool(match) and match in (d.get("reason") or "")
     out = []
     for m in e2:
-        out += [(m["id"], d["base"], "declared") for d in m.get("declared", [])
-                if d.get("error") and match in d["error"]]
-        out += [(m["id"], p["candidate"], "pool") for p in m.get("pool", [])
-                if p.get("error") and match in p["error"]]
+        out += [(m["id"], d["base"], "declared") for d in m.get("declared", []) if hit(d)]
+        out += [(m["id"], p["candidate"], "pool") for p in m.get("pool", []) if hit(p)]
     return out
 
 

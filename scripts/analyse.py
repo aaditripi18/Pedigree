@@ -435,8 +435,9 @@ def with_rescores(e2, e2r, e2g=()):
         for role, key, rows in (("declared", "base", m.get("declared", [])), ("pool", "candidate", m.get("pool", []))):
             for d in rows:
                 r = new.get((m["id"], d[key], role))
-                if d.get("error") and r:
-                    d.pop("error")
+                if r and (d.get("error") or "legacy pickle" in (d.get("reason") or "")):
+                    d.pop("error", None)
+                    d.pop("reason", None)
                     d.update({k: r[k] for k in keep if k in r})
                 g = gnew.get((m["id"], d[key], role))
                 if g and not d.get("error") and (d.get("compared") or 0) < MIN_COMPARED:

@@ -43,6 +43,7 @@ STUDENTS = Path(os.environ.get("PEDIGREE_STUDENTS", ft.OUT))
 PROBES = os.environ.get("PEDIGREE_PROBES", "test")
 SPLIT_SEEDS = json.loads(os.environ.get("PEDIGREE_E5_SEEDS", '{"dev": [0, 1, 2], "fresh": [0, 1, 2]}'))
 EXPERIMENT = os.environ.get("PEDIGREE_EXPERIMENT", "E5")
+TRUTH = EXPERIMENT.startswith("E5e")  # E5e records the error-agreement statistics (amendment 2026-11-17)
 PROBE_DATA = {
     "wikitext2_test": "https://huggingface.co/datasets/Salesforce/wikitext/resolve/main/wikitext-2-raw-v1/test-00000-of-00001.parquet",
     "cifar10_test": "https://huggingface.co/datasets/uoft-cs/cifar10/resolve/main/plain_text/test-00000-of-00001.parquet",
@@ -66,10 +67,12 @@ def text_probes() -> tuple[list[str], str]:
     return lines, digest
 
 
-def image_probes(size: int, mean, std) -> tuple[torch.Tensor, str]:
+def image_probes(size: int, mean, std, labels: bool = False):
+    """(images, digest), or (images, digest, labels) with labels=True (None for noise)."""
     if PROBES == "offtask":   # N(0, 1) noise in the normalised input space, seed 0
         g = torch.Generator().manual_seed(0)
-        return torch.randn(PROBE_IMAGES, 3, size, size, generator=g), "randn-seed0"
+        x = torch.randn(PROBE_IMAGES, 3, size, size, generator=g)
+        return (x, "randn-seed0", None) if labels else (x, "randn-seed0")
     import pandas as pd
     from PIL import Image
     path, digest = ft.task_file("cifar10_test")
@@ -77,6 +80,8 @@ def image_probes(size: int, mean, std) -> tuple[torch.Tensor, str]:
     m, s = torch.tensor(mean).view(3, 1, 1), torch.tensor(std).view(3, 1, 1)
     xs = [(torch.from_numpy(np.asarray(Image.open(io.BytesIO(b["bytes"])).convert("RGB").resize((size, size))))
            .permute(2, 0, 1).float() / 255 - m) / s for b in df["img"]]
+    if labels:
+        return torch.stack(xs), digest, torch.tensor(df["label"].to_numpy(), dtype=torch.long)
     return torch.stack(xs), digest
 
 
@@ -87,17 +92,38 @@ class Stats:
         self.n = 0
         self.agree = 0.0
         self.js = 0.0
+        # E5e (PLAN.md, amendment 2026-11-17): with the true answer at each position
+        self.wrong = 0          # positions the teacher gets wrong
+        self.same_wrong = 0     # ... where the other model makes the same wrong prediction
+        self.dark = 0.0         # JS divergence with the teacher's top class removed (dark knowledge)
 
-    def add(self, p_logits: torch.Tensor, q_logits: torch.Tensor) -> None:
+    def add(self, p_logits: torch.Tensor, q_logits: torch.Tensor, truth: torch.Tensor | None = None) -> None:
         p, q = torch.softmax(p_logits.double(), -1), torch.softmax(q_logits.double(), -1)
         m = (p + q) / 2
         kl = lambda a, b: (a * (torch.log2(a.clamp_min(1e-12)) - torch.log2(b.clamp_min(1e-12)))).sum(-1)  # noqa: E731
         self.js += float(((kl(p, m) + kl(q, m)) / 2).sum())
-        self.agree += float((p.argmax(-1) == q.argmax(-1)).sum())
+        tp, tq = p.argmax(-1), q.argmax(-1)
+        self.agree += float((tp == tq).sum())
         self.n += p.shape[0]
+        if truth is not None:
+            truth = truth.to(tp.device)
+            ok = truth >= 0
+            wrong = ok & (tp != truth)
+            self.wrong += int(wrong.sum())
+            self.same_wrong += int((wrong & (tq == tp)).sum())
+            keep = torch.ones_like(p, dtype=torch.bool).scatter_(-1, tp.unsqueeze(-1), False)
+            pr = torch.where(keep, p, torch.zeros_like(p))
+            qr = torch.where(keep, q, torch.zeros_like(q))
+            pr, qr = pr / pr.sum(-1, keepdim=True).clamp_min(1e-12), qr / qr.sum(-1, keepdim=True).clamp_min(1e-12)
+            mr = (pr + qr) / 2
+            self.dark += float(((kl(pr, mr) + kl(qr, mr)) / 2).sum())
 
     def result(self) -> dict:
-        return {"positions": self.n, "agreement": self.agree / max(self.n, 1), "js": self.js / max(self.n, 1)}
+        out = {"positions": self.n, "agreement": self.agree / max(self.n, 1), "js": self.js / max(self.n, 1)}
+        if self.wrong:
+            out.update(teacher_wrong=self.wrong, error_agreement=self.same_wrong / self.wrong,
+                       dark_js=self.dark / max(self.n, 1))
+        return out
 
 
 def _text_run(model, tok, lines, causal: bool):
@@ -106,19 +132,24 @@ def _text_run(model, tok, lines, causal: bool):
     for i in range(0, len(lines), BATCH):
         enc = tok(lines[i:i + BATCH], truncation=True, max_length=MAX_LEN, padding="max_length", return_tensors="pt")
         mask = enc["attention_mask"] == 1
+        ids = enc["input_ids"].clone()
+        if causal:       # the true answer at a position is the next real token (none after the last)
+            nxt = torch.full_like(ids, -1)
+            nxt[:, :-1] = torch.where(mask[:, 1:], ids[:, 1:], torch.full_like(ids[:, 1:], -1))
         if not causal:   # the same 15% of positions masked for every model compared
             pick = (torch.rand(enc["input_ids"].shape, generator=g) < 0.15) & mask
             enc["input_ids"] = enc["input_ids"].masked_fill(pick, tok.mask_token_id)
             mask = pick
+        truth = (nxt if causal else ids)[mask]
         enc = {k: v.to(ft.DEVICE) for k, v in enc.items()}
         with torch.no_grad():
             out = model(**enc, output_hidden_states=True)
         h = out.hidden_states[-1]
         am = enc["attention_mask"].unsqueeze(-1).to(h.dtype)
-        yield out.logits[mask.to(ft.DEVICE)], ((h * am).sum(1) / am.sum(1)).cpu()
+        yield out.logits[mask.to(ft.DEVICE)], ((h * am).sum(1) / am.sum(1)).cpu(), truth
 
 
-def _image_run(model, x):
+def _image_run(model, x, y=None):
     for i in range(0, len(x), BATCH * 4):
         xb = x[i:i + BATCH * 4].to(ft.DEVICE)
         with torch.no_grad():
@@ -128,16 +159,16 @@ def _image_run(model, x):
             else:                                   # transformers ViT
                 out = model(pixel_values=xb, output_hidden_states=True)
                 f, logits = out.hidden_states[-1][:, 0], out.logits
-        yield logits, f.cpu()
+        yield logits, f.cpu(), (None if y is None else y[i:i + BATCH * 4])
 
 
 def compare_behaviour(teacher, other, runner) -> dict:
     st = Stats()
     rt, ro = [], []
-    for (lt, ft_), (lo, fo) in zip(runner(teacher), runner(other)):
+    for (lt, ft_, truth), (lo, fo, _) in zip(runner(teacher), runner(other)):
         if lt.shape != lo.shape:
             raise ValueError(f"output spaces differ: {tuple(lt.shape)} vs {tuple(lo.shape)}")
-        st.add(lt, lo)
+        st.add(lt, lo, truth if TRUTH else None)
         rt.append(ft_)
         ro.append(fo)
     return {**st.result(), "cka": linear_cka(torch.cat(rt).numpy(), torch.cat(ro).numpy())}
@@ -176,8 +207,8 @@ def main(family: str, splits: list[str]) -> None:
             size = 224 if family == "vision_transformer" else 160
             norm = ((0.5,) * 3, (0.5,) * 3) if family == "vision_transformer" else \
                 ((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
-            x, digest = image_probes(size, *norm)
-            runner = lambda m: _image_run(m, x)  # noqa: E731
+            x, digest, y = image_probes(size, *norm, labels=True)
+            runner = lambda m: _image_run(m, x, y)  # noqa: E731
             public, cls = [], None
             probe = {"probes": "noise" if PROBES == "offtask" else "cifar10_test", "sha256": digest, "n": len(x)}
         run = ledger.Run(EXPERIMENT, family=family, split=split, teacher=info.get("teacher", repo), **probe)
@@ -207,7 +238,9 @@ def main(family: str, splits: list[str]) -> None:
                 r.update(weight_median_cosine=w["median_cosine"], weight_compared=w["compared"],
                          weight_matched=w["matched"])
                 run.record(model=name, kind=kind, label=label, **r)
-                print(f"  {name:<45} agree {r['agreement']:.3f}  js {r['js']:.4f}  cka {r['cka']:.3f}", flush=True)
+                print(f"  {name:<45} agree {r['agreement']:.3f}  js {r['js']:.4f}  cka {r['cka']:.3f}"
+                      + (f"  err_agree {r['error_agreement']:.3f}  dark_js {r['dark_js']:.4f}"
+                         if "error_agreement" in r else ""), flush=True)
                 del m
             except Exception as e:  # recorded, never dropped
                 run.record(model=name, kind=kind, label=label, error=f"{type(e).__name__}: {e}")
