@@ -530,3 +530,27 @@ independent; E5e-fresh scores only them.
 
 - **H14** On the fresh students, the dev rule identifies distilled students with TPR >= 90% at
   FPR <= 5% (at most one independent student admitted), per-family values reported.
+
+## Amendment 2026-11-17 (3): H14b, per-family rules, after E5e dev and before any fresh student is read
+
+E5e dev (four families, seeds 0-2, with E5's public models): pooled over families, neither
+statistic separates distilled from independent models (error agreement: smallest distilled minus
+largest independent -0.564; dark-knowledge divergence -0.674). The families sit on different
+scales, and the well-trained public GPT-2 replicas agree with GPT-2 more than any student does. H14
+keeps its rule as written (error agreement, the fallback threshold, which admits no dev student)
+and is judged on the fresh students unchanged.
+
+Within a family the students separate where they learned the task. **H14b** uses a rule per
+family, chosen on that family's dev students only (`results/h14b_rules.json`, written before any
+fresh student was read): the statistic with the larger gap, threshold at its midpoint.
+
+| Family | Statistic | Dev gap | Threshold |
+|---|---|--:|--:|
+| text decoder | dark-knowledge divergence (lower = distilled) | 0.127 | 0.500 |
+| vision CNN | dark-knowledge divergence | 0.017 | 0.174 |
+| text encoder | none separates (students agree with the teacher on 7% of positions) | -0.003 | - |
+| vision transformer | none separates | -0.023 | - |
+
+- **H14b** On the families with a dev rule (text decoder, vision CNN; 10 fresh distilled and 10
+  fresh independent students), the rule identifies the distilled ones with TPR >= 90% at FPR <= 5%.
+  The two families without a rule are reported as not decidable by behaviour.

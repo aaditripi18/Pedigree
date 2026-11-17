@@ -1,0 +1,24 @@
+[{"stream_name":"stdout","time":25.04207956,"data":"code d043f40\n"}
+,{"stream_name":"stdout","time":72.643242449,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":82.826688429,"data":"PEDIGREE_TEACHERS = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":90.532097403,"data":"PEDIGREE_STUDENTS = /tmp/merged-students\n"}
+,{"stream_name":"stdout","time":90.532141234,"data":"PEDIGREE_EXPERIMENT = E5e-dev\n"}
+,{"stream_name":"stdout","time":90.532146233,"data":"PEDIGREE_E5_SEEDS = {\"dev\": [0, 1, 2]}\n"}
+,{"stream_name":"stderr","time":95.056513536,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":144.644424195,"data":"/kaggle/working/Pedigree/experiments/e5_behaviour.py:81: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":144.644465645,"data":"  xs = [(torch.from_numpy(np.asarray(Image.open(io.BytesIO(b[\"bytes\"])).convert(\"RGB\").resize((size, size))))\n"}
+,{"stream_name":"stdout","time":528.336629327,"data":"  distill_s0                                    agree 0.288  js 0.5291  cka 0.235  err_agree 0.323  dark_js 0.1907\n"}
+,{"stream_name":"stdout","time":899.057517537,"data":"  indep_s0                                      agree 0.274  js 0.5332  cka 0.257  err_agree 0.194  dark_js 0.1932\n"}
+,{"stream_name":"stdout","time":1268.385645755,"data":"  distill_s1                                    agree 0.334  js 0.5073  cka 0.254  err_agree 0.065  dark_js 0.2166\n"}
+,{"stream_name":"stdout","time":1639.799662908,"data":"  indep_s1                                      agree 0.311  js 0.5263  cka 0.245  err_agree 0.097  dark_js 0.2247\n"}
+,{"stream_name":"stdout","time":2009.931790247,"data":"  distill_s2                                    agree 0.357  js 0.4959  cka 0.261  err_agree 0.387  dark_js 0.2108\n"}
+,{"stream_name":"stdout","time":2381.611935366,"data":"  indep_s2                                      agree 0.362  js 0.4985  cka 0.260  err_agree 0.290  dark_js 0.2229\n"}
+,{"stream_name":"stdout","time":2382.863194262,"data":"exit 0 -m experiments.e5_behaviour vision_transformer dev\n"}
+,{"stream_name":"stdout","time":2382.885436091,"data":"6 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":2384.756991089,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2384.757026619,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2384.962354107,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2384.962378677,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2385.640313566,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2386.530885173,"data":"[NbConvertApp] Writing 292587 bytes to __results__.html\n"}
+]

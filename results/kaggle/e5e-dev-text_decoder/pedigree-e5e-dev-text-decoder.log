@@ -1,0 +1,70 @@
+[{"stream_name":"stdout","time":67.12598219,"data":"code 1c76b1d\n"}
+,{"stream_name":"stdout","time":125.302461078,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":153.629059832,"data":"PEDIGREE_TEACHERS = /kaggle/input/notebooks/aadityae5545454/pedigree-ft-text-decoder/derivatives\n"}
+,{"stream_name":"stdout","time":178.624020488,"data":"PEDIGREE_STUDENTS = /tmp/merged-students\n"}
+,{"stream_name":"stdout","time":178.624067178,"data":"PEDIGREE_EXPERIMENT = E5e-dev\n"}
+,{"stream_name":"stdout","time":178.624074989,"data":"PEDIGREE_E5_SEEDS = {\"dev\": [0, 1, 2]}\n"}
+,{"stream_name":"stderr","time":184.098225632,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":192.306834452,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2198.84it/s]\n"}
+,{"stream_name":"stdout","time":534.104321382,"data":"  distill_s0                                    agree 0.287  js 0.4404  cka 0.229  err_agree 0.255  dark_js 0.4346\n"}
+,{"stream_name":"stdout","time":862.252199523,"data":"  indep_s0                                      agree 0.246  js 0.5558  cka 0.231  err_agree 0.179  dark_js 0.5640\n"}
+,{"stream_name":"stdout","time":1191.163901321,"data":"  distill_s1                                    agree 0.271  js 0.4470  cka 0.245  err_agree 0.239  dark_js 0.4366\n"}
+,{"stream_name":"stdout","time":1536.416849553,"data":"  indep_s1                                      agree 0.246  js 0.5581  cka 0.228  err_agree 0.184  dark_js 0.5637\n"}
+,{"stream_name":"stdout","time":1878.029597437,"data":"  distill_s2                                    agree 0.287  js 0.4309  cka 0.216  err_agree 0.255  dark_js 0.4228\n"}
+,{"stream_name":"stdout","time":2218.576675282,"data":"  indep_s2                                      agree 0.247  js 0.5597  cka 0.229  err_agree 0.183  dark_js 0.5673\n"}
+,{"stream_name":"stderr","time":2225.710995962,"data":"\rLoading weights:   0%|          | 0/76 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 76/76 [00:00\u003c00:00, 2279.69it/s]\n"}
+,{"stream_name":"stdout","time":2440.654314099,"data":"  distilbert/distilgpt2                         agree 0.628  js 0.1144  cka 0.686  err_agree 0.571  dark_js 0.1288\n"}
+,{"stream_name":"stderr","time":2445.175994885,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 8209.22it/s]\n"}
+,{"stream_name":"stderr","time":2445.239901926,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/alias-gpt2-small-x21\n"}
+,{"stream_name":"stderr","time":2445.239944333,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":2445.239949775,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":2445.239954508,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":2445.239959138,"data":"\n"}
+,{"stream_name":"stderr","time":2445.239963446,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":2445.23996803,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":2697.599454509,"data":"  stanford-crfm/alias-gpt2-small-x21            agree 0.672  js 0.1199  cka 0.213  err_agree 0.594  dark_js 0.1533\n"}
+,{"stream_name":"stderr","time":2702.888658432,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 7278.89it/s]\n"}
+,{"stream_name":"stderr","time":2702.948156123,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/battlestar-gpt2-small-x49\n"}
+,{"stream_name":"stderr","time":2702.948194708,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":2702.948199436,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":2702.948203042,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":2702.948206643,"data":"\n"}
+,{"stream_name":"stderr","time":2702.948210122,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":2702.948213719,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":2926.539363387,"data":"  stanford-crfm/battlestar-gpt2-small-x49       agree 0.674  js 0.1177  cka 0.210  err_agree 0.595  dark_js 0.1511\n"}
+,{"stream_name":"stderr","time":2932.439301495,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 7454.63it/s]\n"}
+,{"stream_name":"stderr","time":2932.498962256,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/caprica-gpt2-small-x81\n"}
+,{"stream_name":"stderr","time":2932.499008457,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":2932.499016058,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":2932.499022625,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":2932.499028495,"data":"\n"}
+,{"stream_name":"stderr","time":2932.499033186,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":2932.499038506,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":3177.556901594,"data":"  stanford-crfm/caprica-gpt2-small-x81          agree 0.673  js 0.1189  cka 0.217  err_agree 0.596  dark_js 0.1525\n"}
+,{"stream_name":"stderr","time":3183.472899412,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 9044.16it/s]\n"}
+,{"stream_name":"stderr","time":3183.53180518,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/darkmatter-gpt2-small-x343\n"}
+,{"stream_name":"stderr","time":3183.531846042,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":3183.531852532,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":3183.531858042,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":3183.531863363,"data":"\n"}
+,{"stream_name":"stderr","time":3183.531868262,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":3183.531873501,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":3410.368407103,"data":"  stanford-crfm/darkmatter-gpt2-small-x343      agree 0.669  js 0.1186  cka 0.214  err_agree 0.590  dark_js 0.1517\n"}
+,{"stream_name":"stderr","time":3416.082537439,"data":"\rLoading weights:   0%|          | 0/149 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 149/149 [00:00\u003c00:00, 8041.58it/s]\n"}
+,{"stream_name":"stderr","time":3416.142091727,"data":"[transformers] \u001b[1mGPT2LMHeadModel LOAD REPORT\u001b[0m from: stanford-crfm/expanse-gpt2-small-x777\n"}
+,{"stream_name":"stderr","time":3416.142182172,"data":"Key                                     | Status     |  | \n"}
+,{"stream_name":"stderr","time":3416.14218734,"data":"----------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":3416.142191091,"data":"transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":3416.142194586,"data":"\n"}
+,{"stream_name":"stderr","time":3416.142198149,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":3416.142201619,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":3639.025703186,"data":"  stanford-crfm/expanse-gpt2-small-x777         agree 0.669  js 0.1226  cka 0.217  err_agree 0.590  dark_js 0.1561\n"}
+,{"stream_name":"stdout","time":3641.219251779,"data":"exit 0 -m experiments.e5_behaviour text_decoder dev\n"}
+,{"stream_name":"stdout","time":3641.310650537,"data":"12 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":3643.983095043,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":3643.98315961,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":3644.325048044,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":3644.325080875,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":3645.347688316,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":3646.60400647,"data":"[NbConvertApp] Writing 292574 bytes to __results__.html\n"}
+]

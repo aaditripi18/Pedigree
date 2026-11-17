@@ -1,0 +1,26 @@
+{
+ "text_decoder": {
+  "statistic": "dark_js",
+  "gap": 0.12708,
+  "threshold": 0.50016,
+  "direction": "below"
+ },
+ "text_encoder": {
+  "statistic": "error_agreement",
+  "gap": -0.00341,
+  "threshold": null,
+  "direction": "above"
+ },
+ "vision_cnn": {
+  "statistic": "dark_js",
+  "gap": 0.01673,
+  "threshold": 0.17399,
+  "direction": "below"
+ },
+ "vision_transformer": {
+  "statistic": "dark_js",
+  "gap": -0.02331,
+  "threshold": null,
+  "direction": "below"
+ }
+}
