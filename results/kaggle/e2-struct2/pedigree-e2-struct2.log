@@ -1,0 +1,30 @@
+[{"stream_name":"stdout","time":39.324289175,"data":"code 4b53b95\n"}
+,{"stream_name":"stdout","time":110.356628891,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":112.010003038,"data":"PEDIGREE_WORKERS = 8\n"}
+,{"stream_name":"stdout","time":112.567160517,"data":"16 errored comparisons in E2-2026-11-13T07:41:03Z-e281697\n"}
+,{"stream_name":"stdout","time":187.352588484,"data":"0xSojalSec/DeepSeek-V4.1-Flash-1017-GSQ-RCO-12-GPU vs deepseek-ai/DeepSeek-V4.1-Flash-1017 (declared): 0.9993860985467096\n"}
+,{"stream_name":"stdout","time":196.415893401,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs deepseek-ai/DeepSeek-V4-Flash-0731 (declared): 0.9999928634888248\n"}
+,{"stream_name":"stdout","time":211.603712427,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs deepseek-ai/DeepSeek-V4-Flash-Vision-Exp (declared): 0.9999857242964462\n"}
+,{"stream_name":"stdout","time":296.946015192,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs 0bserverx/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored (pool): 0.9962503088486105\n"}
+,{"stream_name":"stdout","time":301.349004412,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs Blackfrost-AI/CYBER-FROST-3.8-BF16 (pool): 0.9955844319143875\n"}
+,{"stream_name":"stdout","time":301.349823911,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs FINAL-Bench/Darwin-180B-RSI-R3 (pool): 0.9960842925246323\n"}
+,{"stream_name":"stdout","time":301.352405835,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs Qwen/Qwen3.8-Flash-Next (pool): 0.9960961938896478\n"}
+,{"stream_name":"stdout","time":354.126642864,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-Flash-Next (pool): 0.9960815247846084\n"}
+,{"stream_name":"stdout","time":354.126686524,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated (pool): 0.9957449807882418\n"}
+,{"stream_name":"stdout","time":354.126954397,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs jedisct1/Qwen3.8-Flash-Next-Uncensored-oQ4e-100K-MTP (pool): 0.9924230249270102\n"}
+,{"stream_name":"stdout","time":354.127114782,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs mlx-community/Qwen3.8-Flash-Next-4bit (pool): 0.9922813822616738\n"}
+,{"stream_name":"stdout","time":354.127300205,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs mlx-community/Qwen3.8-Flash-Next-Uncensored-oQ5e-mtp (pool): 0.9956406681026111\n"}
+,{"stream_name":"stdout","time":354.127460291,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs trohrbaugh/Qwen3.8-Flash-Next-heretic (pool): 0.9959999155680537\n"}
+,{"stream_name":"stdout","time":354.127610738,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs trohrbaugh/Qwen3.8-Flash-Next-heretic-2 (pool): 0.9960961938896478\n"}
+,{"stream_name":"stdout","time":383.424613616,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs ukisai/Swift-Qwen3.8-Flash-Next (declared): 0.9961719704196059\n"}
+,{"stream_name":"stdout","time":383.424670386,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs ukisai/Swift1.5-Qwen3.8-Flash-Next (pool): 0.9961719704196059\n"}
+,{"stream_name":"stdout","time":383.426302898,"data":"done; 0 lost to the network\n"}
+,{"stream_name":"stdout","time":384.466290324,"data":"exit 0 -m experiments.e2_rescore --source E2s --match tensor type|F8_E8M0 --name E2s --alignment auto\n"}
+,{"stream_name":"stdout","time":384.510594102,"data":"16 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":387.316701127,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":387.316744408,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":387.709994836,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":387.710020019,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":388.70253824,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":390.129334364,"data":"[NbConvertApp] Writing 292500 bytes to __results__.html\n"}
+]

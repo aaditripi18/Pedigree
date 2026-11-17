@@ -725,3 +725,7 @@ before that decoder existed) and 3 declared DeepSeek-V4 bases store their FP8 bl
 safetensors `F8_E8M0` (the OCP Microscaling scale format, 2^(e-127), now decoded). Those 16 are scored
 again with E2s's alignment (`e2-struct2`, ledger `E2s`, each pair's latest record counts); H17b is
 recomputed on its 32 pairs from those records and the result is reported here as it comes out.
+*Result (2026-11-18):* all 16 now compare 24 tensors and are related (the 3 DeepSeek-V4 pairs 0.9994-1.0000);
+H17b is 15 of 32 comparable (all related): **not supported**, unchanged. With every re-read, declared
+bases the weights confirm are 263 and unverifiable 35; no verdict changes (H2 106/379, H3 3/279, H7 b
+88/250).

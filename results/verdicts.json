@@ -1329,12 +1329,12 @@
      "verdict": "not supported",
      "numbers": {
       "comparable": [
-       11,
+       15,
        32
       ],
       "scored": 32
      },
-     "evidence": "11/32 comparable"
+     "evidence": "15/32 comparable"
     },
     {
      "id": "H18",
@@ -2754,12 +2754,12 @@
      "verdict": "not supported",
      "numbers": {
       "comparable": [
-       11,
+       15,
        32
       ],
       "scored": 32
      },
-     "evidence": "11/32 comparable"
+     "evidence": "15/32 comparable"
     },
     {
      "id": "H18",
@@ -2966,9 +2966,9 @@
    "audit": {
     "categories": {
      "declared, related": {
-      "top_1k": 64,
-      "1k_10k": 80,
-      "10k_100k": 115
+      "top_1k": 66,
+      "1k_10k": 81,
+      "10k_100k": 116
      },
      "no declaration, parent found": {
       "top_1k": 38,
@@ -2986,9 +2986,9 @@
       "10k_100k": 12
      },
      "declared, not comparable": {
-      "top_1k": 16,
-      "1k_10k": 14,
-      "10k_100k": 9
+      "top_1k": 14,
+      "1k_10k": 13,
+      "10k_100k": 8
      },
      "declared, unrelated": {
       "top_1k": 1,
@@ -3025,27 +3025,27 @@
     },
     "h3": {
      "k": 3,
-     "n": 275,
-     "share": 0.01090909090909091,
+     "n": 279,
+     "share": 0.010752688172043012,
      "wilson": [
       0.0037,
-      0.0316
+      0.0311
      ],
      "per_tier": {
       "top_1k": [
        1,
-       66
+       68
       ],
       "1k_10k": [
        0,
-       82
+       83
       ],
       "10k_100k": [
        2,
-       127
+       128
       ]
      },
-     "tier_weighted": 0.014324743497971845
+     "tier_weighted": 0.014209558823529412
     },
     "contradicted": [
      [
@@ -3069,14 +3069,13 @@
    "gguf_rescored": 1677,
    "gguf_comparable": 774,
    "unverifiable": {
-    "models": 39,
-    "pairs": 40,
+    "models": 35,
+    "pairs": 36,
     "reasons": {
      "GGUF: no tensor name maps": 14,
-     "other format (no shared shapes, draft head, repack, no weights)": 10,
      "declared base not readable when read again (missing, renamed or not a repo id)": 10,
-     "gated or private": 5,
-     "GGUF tensor type of a fork": 1
+     "other format (no shared shapes, draft head, repack, no weights)": 7,
+     "gated or private": 5
     }
    },
    "verdicts": {
@@ -3087,12 +3086,12 @@
     },
     "H3": {
      "verdict": "not supported",
-     "evidence": "3/275 contradicted",
+     "evidence": "3/279 contradicted",
      "changes": false
     },
     "H7": {
      "verdict": "not supported",
-     "evidence": "(a) 20/24; (b) 88/246",
+     "evidence": "(a) 20/24; (b) 88/250",
      "changes": false
     }
    }
@@ -3104,9 +3103,9 @@
    "audit": {
     "categories": {
      "declared, related": {
-      "top_1k": 62,
-      "1k_10k": 79,
-      "10k_100k": 112
+      "top_1k": 64,
+      "1k_10k": 80,
+      "10k_100k": 113
      },
      "no declaration, parent found": {
       "top_1k": 36,
@@ -3129,9 +3128,9 @@
       "10k_100k": 5
      },
      "declared, not comparable": {
-      "top_1k": 16,
-      "1k_10k": 14,
-      "10k_100k": 9
+      "top_1k": 14,
+      "1k_10k": 13,
+      "10k_100k": 8
      },
      "adapter": {
       "1k_10k": 4,
@@ -3164,27 +3163,27 @@
     },
     "h3": {
      "k": 15,
-     "n": 275,
-     "share": 0.05454545454545454,
+     "n": 279,
+     "share": 0.053763440860215055,
      "wilson": [
-      0.0333,
-      0.088
+      0.0328,
+      0.0868
      ],
      "per_tier": {
       "top_1k": [
        3,
-       66
+       68
       ],
       "1k_10k": [
        1,
-       82
+       83
       ],
       "10k_100k": [
        11,
-       127
+       128
       ]
      },
-     "tier_weighted": 0.07950486233566702
+     "tier_weighted": 0.07886926381998582
     },
     "contradicted": [
      [
@@ -3268,14 +3267,13 @@
    "gguf_rescored": 1677,
    "gguf_comparable": 774,
    "unverifiable": {
-    "models": 39,
-    "pairs": 40,
+    "models": 35,
+    "pairs": 36,
     "reasons": {
      "GGUF: no tensor name maps": 14,
-     "other format (no shared shapes, draft head, repack, no weights)": 10,
      "declared base not readable when read again (missing, renamed or not a repo id)": 10,
-     "gated or private": 5,
-     "GGUF tensor type of a fork": 1
+     "other format (no shared shapes, draft head, repack, no weights)": 7,
+     "gated or private": 5
     }
    },
    "verdicts": {
@@ -3286,12 +3284,12 @@
     },
     "H3": {
      "verdict": "supported",
-     "evidence": "15/275 contradicted",
+     "evidence": "15/279 contradicted",
      "changes": false
     },
     "H7": {
      "verdict": "not supported",
-     "evidence": "(a) 20/24; (b) 87/234",
+     "evidence": "(a) 20/24; (b) 87/238",
      "changes": false
     }
    }

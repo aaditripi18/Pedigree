@@ -18,13 +18,13 @@ existed ([PLAN.md](PLAN.md), with dated amendments); every verdict below is comp
 The sample is 200 models drawn uniformly from each of three download tiers of the 100,000 most
 downloaded models (ranks 1-1k, 1k-10k, 10k-100k; seed 20261105). Every model got exactly one
 category, with its reason. The second column is the same 600 models scored again after the file
-reader fixes described [below](#every-caveat-measured) (E2r, E2g, E2p, E2f); no verdict changed.
+reader fixes and re-reads described [below](#every-caveat-measured) (E2r, E2g, E2p, E2f, E2s); no verdict changed.
 
 | Category | Models (audit) | After reader fixes |
 |---|--:|--:|
-| Declares a base, and the weights confirm it | 214 | 246 |
+| Declares a base, and the weights confirm it | 214 | 263 |
 | Declares a base the weights contradict | 3 | 3 |
-| Declares a base that cannot be compared by weights | 84 | 52 |
+| Declares a base that cannot be compared by weights | 84 | 35 |
 | Declares no base; an earlier related model was found | 105 | 106 |
 | Declares no base; no related earlier model found | 136 | 135 |
 | Weights not readable (ONNX-only, gated without a public copy, no weights) | 46 | 46 |
@@ -78,7 +78,7 @@ judged once on fresh pairs.
 | H16 | Behaviour calibrated against reference students trained the same way: TPR >= 90% at FPR <= 5%, fresh | pending | dev rule fixed: drop > 6.3% (dev gap 5.7 points); fresh students wait for GPU quota |
 | H16b | The same, with text-encoder and vision-transformer students trained long enough to learn the task | pending | waits for GPU quota |
 | H17a | Structural GGUF alignment (names ignored) agrees with name alignment on >= 98% of fresh pairs | **not supported** | 279/339 agree; 0 opposite verdicts, the other 60 aligned no tensor (Qwen 3.5-3.8 multimodal/MTP and clip GGUFs) |
-| H17b | Structural alignment makes >= 50% of E2's 32 declared GGUF pairs with no name match comparable | pending | E2s running |
+| H17b | Structural alignment makes >= 50% of E2's 32 declared GGUF pairs with no name match comparable | **not supported** | 15/32 comparable (all 15 related) |
 | H18 | Behaviour confirms >= 90% of the declared Hub pairs weights cannot compare (text models <= 14B) | pending | runs only if H16 or H16b is supported |
 
 H2, H3, H7-H9, H12, H14, H14b, H15 and H17a failed their bars; they are reported as they came out,
@@ -118,24 +118,27 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   comparisons; E2p, 5 legacy bases): with all re-reads, declared bases the weights confirm rise
   from 214 to 243 models and unverifiable ones fall from 84 to 55; no verdict changes (H2
   106/375, H3 3/257, H7 b 77/230).
-- **GGUF tensor types newer than the `gguf` package (E2f, amendment 2026-11-17 (4)).** Five are
+- **GGUF tensor types newer than the `gguf` package (E2f, amendment 2026-11-17 (4)).** Six are
   decoded from their public sources only, each tested byte for byte against that source's own C in
   CI: Q2_0 (42) and F8_E4M3 (43) from llama.cpp master, PrismML's PQ2_0 (142) and PTQ1_0 (143), and
   ik_llama.cpp's IQ4_K (139) and row-interleaved IQ4_K_R4 (339). Scored again, all 4 declared pairs that used them
   compare 24 tensors and are related (one, a ternary model, only by the permutation-invariant score:
-  plain 0.004, invariant 0.743), and 91 of 103 pool comparisons now compare: declared bases the
-  weights confirm rise to 246 and unverifiable ones fall to 52; no verdict changes (H2 106/378,
-  H3 3/261, H7 b 78/234). Types 45, 101 and 103 appear in no public source we could find; the 11
-  pool comparisons that use them say so. The one pool comparison with type 339 also needs ik_llama.cpp's
-  IQ4_K (139), now decoded too, and is being scored again.
-- **The 52 still unverifiable (H17).** Their 54 declared pairs: 32 GGUF files whose architecture
-  llama.cpp's name table does not know, so no tensor name maps; 10 that failed to re-read (network);
-  7 other formats (a random tiny model with no shared shapes, a draft head, a repack, an NPU build,
-  no weight files); 5 gated or private. H17 aligns GGUF tensors by block index and unique shape when
-  names fail. Against name alignment on 339 fresh pairs (H17a, not supported) it agreed on 279 and
-  never gave the opposite verdict; the other 60 it could not align at all (Qwen 3.5-3.8 multimodal
-  and multi-token-prediction GGUFs and clip models, whose two sides differ in block count). H17b
-  applies it to the 32, with the 10 read again.
+  plain 0.004, invariant 0.743), and 92 of 103 pool comparisons now compare (the type-339 pair at
+  0.998). Types 45, 101 and 103 appear in no public source we could find; the 11 pool comparisons
+  that use them say so. DeepSeek-V4 bases store their FP8 block scales as safetensors `F8_E8M0` (the
+  OCP Microscaling scale format, 2^(e-127)), now decoded too.
+- **Structural alignment (H17).** When llama.cpp's names do not map a GGUF file, H17 aligns its
+  tensors by block index and unique shape. Against name alignment on 339 fresh pairs (H17a, not
+  supported) it agreed on 279 and never gave the opposite verdict; the other 60 it could not align
+  at all (Qwen 3.5-3.8 multimodal and multi-token-prediction GGUFs and clip models, whose two sides
+  differ in block count). On E2's 32 declared GGUF pairs no name maps (H17b, not supported), it made
+  15 comparable, all related (E2s).
+- **All re-reads together (E2r, E2g, E2p, E2f, E2s).** Declared bases the weights confirm rise from
+  214 to 263 models and unverifiable ones fall from 84 to 35; no verdict changes (H2 106/379, H3
+  3/279, H7 b 88/250). The 35 (36 declared pairs): 14 GGUF files neither names nor structure align;
+  10 whose declared base is not readable now (missing, renamed, or not a repository id, such as
+  `gpt-oss-20b`); 7 other formats (a random tiny model with no shared shapes, a draft head, a repack,
+  an NPU build, no weight files); 5 gated or private with no byte-identical public copy.
 - **Thresholds.** Under the pre-registered sensitivity rule (the midpoint between the classes
   instead of max + 5 SD) three verdicts change: H3 becomes supported (15/227 contradicted) and
   H10, H11 become not supported. The published rule is max + 5 SD; both are in
