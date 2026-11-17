@@ -3,6 +3,7 @@
 **Do models on the Hugging Face Hub come from the model they say they do?** Pedigree checks a
 model's declared `base_model` against its weights, and audits a frozen random sample of 600 Hub
 models to measure how often declared lineage is missing, unverifiable or contradicted.
+Project site: **https://aaditripi18.github.io/Pedigree/**
 
 Pedigree does not claim a new lineage detector. Weight-based lineage methods already exist and
 are strong (AWM, ICLR 2026; HuRef, NeurIPS 2024; MoTHer, ICLR 2025; see [PLAN.md](PLAN.md)).
@@ -141,7 +142,7 @@ pedigree verify hf:org/model --base hf:org/base   # against a base you name
 
 Verdicts are *related*, *unrelated* (with enough tensors compared) or *not comparable*. Nothing
 downloaded is executed: PyTorch checkpoints are read by a restricted unpickler. A browser version
-is on the [project site](site/index.html).
+is on the [project site](https://aaditripi18.github.io/Pedigree/check.html), which runs in the browser.
 
 ## Reproduce
 
@@ -151,6 +152,9 @@ pytest
 python scripts/analyse.py      # every verdict, from results/ledger.jsonl
 python scripts/build_site.py   # the site, from results/verdicts.json
 ```
+
+CI runs the tests and fails if `results/verdicts.json`, `docs/RESULTS.md` or the site differ
+from what the ledger gives; every push to `main` that changes `site/` redeploys the site.
 
 The heavy runs (fine-tuning ground truth on GPU, the 600-model audit on CPU) ran on Kaggle with
 [`scripts/kaggle_run.py`](scripts/kaggle_run.py), which uploads only committed code and stamps
