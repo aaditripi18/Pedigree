@@ -554,3 +554,8 @@ fresh student was read): the statistic with the larger gap, threshold at its mid
 - **H14b** On the families with a dev rule (text decoder, vision CNN; 10 fresh distilled and 10
   fresh independent students), the rule identifies the distilled ones with TPR >= 90% at FPR <= 5%.
   The two families without a rule are reported as not decidable by behaviour.
+
+**Outcome (recorded after judging, 2026-11-17).** H14 not supported (error agreement above 0.5965:
+TPR 0/20, FPR 0/20). H14b not supported (text decoder TPR 5/5, FPR 0/5; vision CNN TPR 5/5, FPR
+5/5). Behaviour therefore stays a reported category only, and is not extended to Hub pairs above
+2B parameters.

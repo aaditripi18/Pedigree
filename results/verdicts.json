@@ -486,7 +486,7 @@
     {
      "id": "H14",
      "statement": "On fresh students, one rule chosen on dev (pooled over families) identifies distilled students by shared mistakes (TPR >= 90% at FPR <= 5%).",
-     "verdict": "pending",
+     "verdict": "not supported",
      "numbers": {
       "statistic": "error_agreement",
       "sign": 1,
@@ -508,14 +508,24 @@
       "fresh": {
        "tpr": [
         0,
-        15
+        20
        ],
        "fpr": [
         0,
-        15
+        20
        ]
       },
       "per_family": {
+       "text_decoder": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
        "text_encoder": {
         "tpr": [
          0,
@@ -548,12 +558,12 @@
        }
       }
      },
-     "evidence": "error_agreement above 0.5965 (dev): TPR 0/15, FPR 0/15; waiting for text_decoder"
+     "evidence": "error_agreement above 0.5965 (dev): TPR 0/20, FPR 0/20"
     },
     {
      "id": "H14b",
      "statement": "On the families with a dev rule (text decoder, vision CNN), the per-family rule identifies fresh distilled students (TPR >= 90% at FPR <= 5%).",
-     "verdict": "pending",
+     "verdict": "not supported",
      "numbers": {
       "rules": {
        "text_decoder": {
@@ -582,6 +592,16 @@
        }
       },
       "per_family": {
+       "text_decoder": {
+        "tpr": [
+         5,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
        "vision_cnn": {
         "tpr": [
          5,
@@ -595,12 +615,12 @@
       },
       "pooled": {
        "tpr": [
-        5,
-        5
+        10,
+        10
        ],
        "fpr": [
         5,
-        5
+        10
        ]
       },
       "not_decidable": [
@@ -608,7 +628,7 @@
        "vision_transformer"
       ]
      },
-     "evidence": "vision_cnn: dark_js below 0.1740, TPR 5/5, FPR 5/5; waiting for text_decoder; no dev rule: text_encoder, vision_transformer"
+     "evidence": "text_decoder: dark_js below 0.5002, TPR 5/5, FPR 0/5; vision_cnn: dark_js below 0.1740, TPR 5/5, FPR 5/5; no dev rule: text_encoder, vision_transformer"
     }
    ],
    "audit": {
@@ -1186,7 +1206,7 @@
     {
      "id": "H14",
      "statement": "On fresh students, one rule chosen on dev (pooled over families) identifies distilled students by shared mistakes (TPR >= 90% at FPR <= 5%).",
-     "verdict": "pending",
+     "verdict": "not supported",
      "numbers": {
       "statistic": "error_agreement",
       "sign": 1,
@@ -1208,14 +1228,24 @@
       "fresh": {
        "tpr": [
         0,
-        15
+        20
        ],
        "fpr": [
         0,
-        15
+        20
        ]
       },
       "per_family": {
+       "text_decoder": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
        "text_encoder": {
         "tpr": [
          0,
@@ -1248,12 +1278,12 @@
        }
       }
      },
-     "evidence": "error_agreement above 0.5965 (dev): TPR 0/15, FPR 0/15; waiting for text_decoder"
+     "evidence": "error_agreement above 0.5965 (dev): TPR 0/20, FPR 0/20"
     },
     {
      "id": "H14b",
      "statement": "On the families with a dev rule (text decoder, vision CNN), the per-family rule identifies fresh distilled students (TPR >= 90% at FPR <= 5%).",
-     "verdict": "pending",
+     "verdict": "not supported",
      "numbers": {
       "rules": {
        "text_decoder": {
@@ -1282,6 +1312,16 @@
        }
       },
       "per_family": {
+       "text_decoder": {
+        "tpr": [
+         5,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
        "vision_cnn": {
         "tpr": [
          5,
@@ -1295,12 +1335,12 @@
       },
       "pooled": {
        "tpr": [
-        5,
-        5
+        10,
+        10
        ],
        "fpr": [
         5,
-        5
+        10
        ]
       },
       "not_decidable": [
@@ -1308,7 +1348,7 @@
        "vision_transformer"
       ]
      },
-     "evidence": "vision_cnn: dark_js below 0.1740, TPR 5/5, FPR 5/5; waiting for text_decoder; no dev rule: text_encoder, vision_transformer"
+     "evidence": "text_decoder: dark_js below 0.5002, TPR 5/5, FPR 0/5; vision_cnn: dark_js below 0.1740, TPR 5/5, FPR 5/5; no dev rule: text_encoder, vision_transformer"
     }
    ],
    "audit": {

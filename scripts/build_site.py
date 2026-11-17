@@ -49,6 +49,9 @@ def verdict_cell(v: str) -> str:
     return f'<span class="{cls}">{e(v)}</span>'
 
 
+BEHAVIOUR = ("H9", "H12", "H14", "H14b")  # the behaviour hypotheses
+
+
 def index(V: dict) -> str:
     rules = V["rules"]["t"]
     hs = sorted(rules["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("ab")), h["id"]))
@@ -87,8 +90,9 @@ top 100,000; every one is accounted for</div></div>"""
         beh = (f"<p>Weights cannot be compared for {B['pairs']} declared pairs. The behaviour instrument, pre-registered "
                f"for them, applied to {len(B['verified_by_behaviour']) + len(B['below_rule'])}: "
                + "; ".join(f"{n} {e(READ.get(k, k))}" for k, n in sorted(na.items(), key=lambda x: -x[1]))
-               + ". On ground truth it did not separate distilled students from independent ones (H9, H12), so it "
-               "is reported as its own category and never moves H3.</p>")
+               + ". On ground truth it did not separate distilled students from independent ones ("
+               + ", ".join(h["id"] for h in hs if h["id"] in BEHAVIOUR and h["verdict"] == "not supported")
+               + "), so it is reported as its own category, never moves H3, and is not run on larger models.</p>")
     F = (V.get("reader_fixed") or {}).get("t")
     fixed = ""
     if F:

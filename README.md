@@ -70,8 +70,10 @@ judged once on fresh pairs.
 | H12 | Behaviour on off-task inputs separates them | **not supported** | TPR 9/20 at FPR 3/20 |
 | H13a | Candidate pool v2 holds the confirmed parent of >= 90% of fresh Hub models | **supported** | 196/216 (90.7%, interval 86.1-93.9%); E2's pool 93/216 |
 | H13b | Pool v2 holds more of them than E2's pool | **supported** | 104 found only by v2, 1 only by E2's pool; McNemar p = 2.6e-30 |
+| H14 | Behaviour by shared mistakes, one rule for all families, fresh students: TPR >= 90% at FPR <= 5% | **not supported** | error agreement above 0.5965 (dev): TPR 0/20, FPR 0/20 |
+| H14b | The same, with a rule per family (text decoder, vision CNN) | **not supported** | text decoder TPR 5/5, FPR 0/5; vision CNN TPR 5/5, FPR 5/5 |
 
-H2, H3, H7-H9 and H12 failed their bars; they are reported as they came out. H13 was written after
+H2, H3, H7-H9, H12 and H14 (a and b) failed their bars; they are reported as they came out. H13 was written after
 H7 failed, to test a pool designed from H7's misses; it was judged on 360 Hub models no rule was
 chosen on, drawn before any of them was read.
 
@@ -115,8 +117,17 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
 - **Lost models.** A model lost to the network was retried in a later pass; the audit was
   recorded only when all 600 were read. Six losses in pass 3 were two bugs (unescaped spaces in
   file names; an index naming a shard the repository lacks), fixed before pass 4.
-- **Behaviour.** Not supported on ground truth (H9, H12) and applicable to 0 of 94 Hub pairs; it
-  is reported as its own category and never moves H3.
+- **Behaviour.** Not supported on ground truth (H9, H12, H14, H14b) and applicable to 0 of 94 Hub
+  pairs; it is reported as its own category and never moves H3. H14 tested what only a distilled
+  student should inherit: the teacher's mistakes, and how it spreads probability over wrong
+  answers (E5e; 20 fresh distilled and 20 fresh independent students, trained after the rule was
+  written). One rule for all families finds nothing (TPR 0/20): the families sit on different
+  scales. With a rule per family (H14b), dark-knowledge divergence identifies every fresh
+  text-decoder student correctly (5/5 distilled, 0/5 independent) but admits every vision-CNN
+  student (5/5 and 5/5; its dev margin was 0.017), and no rule exists for the text encoder or the
+  vision transformer, whose students barely learn the teacher's task. Because no behaviour rule
+  holds across families, behaviour is not run on the 66 Hub pairs above 2B parameters: a result
+  there could neither confirm nor contradict a declaration. Lineage verdicts rest on weights.
 - **Direction.** Hub dates (D1) are right 94.8% of the time; weight kurtosis (D2) 89.7% on the
   pairs it decides, and it leaves 34% undecided. The audit uses dates.
 
