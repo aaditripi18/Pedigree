@@ -1,0 +1,28 @@
+[{"stream_name":"stdout","time":29.305809208,"data":"code 54788fb\n"}
+,{"stream_name":"stdout","time":99.257066028,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":111.168326697,"data":"PEDIGREE_TEACHERS = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":120.171024363,"data":"PEDIGREE_STUDENTS = /tmp/merged-students\n"}
+,{"stream_name":"stdout","time":120.171065393,"data":"PEDIGREE_EXPERIMENT = E5e-fresh\n"}
+,{"stream_name":"stdout","time":120.171072345,"data":"PEDIGREE_E5_SEEDS = {\"fresh\": [8, 9, 10, 11, 12]}\n"}
+,{"stream_name":"stderr","time":125.304702968,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":134.330698236,"data":"/kaggle/working/Pedigree/experiments/e5_behaviour.py:81: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":134.330765602,"data":"  xs = [(torch.from_numpy(np.asarray(Image.open(io.BytesIO(b[\"bytes\"])).convert(\"RGB\").resize((size, size))))\n"}
+,{"stream_name":"stdout","time":184.301885936,"data":"  distill_s8                                    agree 0.510  js 0.1410  cka 0.509  err_agree 0.467  dark_js 0.0928\n"}
+,{"stream_name":"stdout","time":231.987159517,"data":"  indep_s8                                      agree 0.465  js 0.1724  cka 0.456  err_agree 0.341  dark_js 0.1428\n"}
+,{"stream_name":"stdout","time":279.460604925,"data":"  distill_s9                                    agree 0.506  js 0.1404  cka 0.523  err_agree 0.449  dark_js 0.0952\n"}
+,{"stream_name":"stdout","time":326.316676478,"data":"  indep_s9                                      agree 0.473  js 0.1665  cka 0.491  err_agree 0.407  dark_js 0.1282\n"}
+,{"stream_name":"stdout","time":372.932462763,"data":"  distill_s10                                   agree 0.500  js 0.1463  cka 0.516  err_agree 0.449  dark_js 0.1051\n"}
+,{"stream_name":"stdout","time":419.508357735,"data":"  indep_s10                                     agree 0.458  js 0.1721  cka 0.462  err_agree 0.383  dark_js 0.1311\n"}
+,{"stream_name":"stdout","time":466.078062315,"data":"  distill_s11                                   agree 0.519  js 0.1400  cka 0.526  err_agree 0.481  dark_js 0.0909\n"}
+,{"stream_name":"stdout","time":512.591630415,"data":"  indep_s11                                     agree 0.468  js 0.1755  cka 0.464  err_agree 0.393  dark_js 0.1369\n"}
+,{"stream_name":"stdout","time":559.1730675,"data":"  distill_s12                                   agree 0.511  js 0.1364  cka 0.554  err_agree 0.421  dark_js 0.0908\n"}
+,{"stream_name":"stdout","time":605.74071732,"data":"  indep_s12                                     agree 0.476  js 0.1703  cka 0.490  err_agree 0.388  dark_js 0.1302\n"}
+,{"stream_name":"stdout","time":606.935864517,"data":"exit 0 -m experiments.e5_behaviour vision_cnn fresh\n"}
+,{"stream_name":"stdout","time":606.973986741,"data":"10 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":609.799711735,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":609.799751521,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":610.12545541,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":610.125502091,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":611.101335655,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":612.455376744,"data":"[NbConvertApp] Writing 292588 bytes to __results__.html\n"}
+]

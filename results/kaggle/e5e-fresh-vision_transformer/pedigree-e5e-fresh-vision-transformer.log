@@ -1,0 +1,39 @@
+[{"stream_name":"stdout","time":77.987499101,"data":"code 54788fb\n"}
+,{"stream_name":"stdout","time":144.467919811,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":179.1652996,"data":"PEDIGREE_TEACHERS = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":204.443571921,"data":"PEDIGREE_STUDENTS = /tmp/merged-students\n"}
+,{"stream_name":"stdout","time":204.443613897,"data":"PEDIGREE_EXPERIMENT = E5e-fresh\n"}
+,{"stream_name":"stdout","time":204.443620447,"data":"PEDIGREE_E5_SEEDS = {\"fresh\": [8, 9, 10, 11, 12]}\n"}
+,{"stream_name":"stderr","time":210.10466874,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":210.153224891,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stderr","time":236.36647559,"data":"/kaggle/working/Pedigree/experiments/e5_behaviour.py:81: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":236.366520861,"data":"  xs = [(torch.from_numpy(np.asarray(Image.open(io.BytesIO(b[\"bytes\"])).convert(\"RGB\").resize((size, size))))\n"}
+,{"stream_name":"stderr","time":238.671710994,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":363.422569477,"data":"  distill_s8                                    agree 0.333  js 0.5507  cka 0.347  err_agree 0.273  dark_js 0.3146\n"}
+,{"stream_name":"stderr","time":363.521312675,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":484.914555947,"data":"  indep_s8                                      agree 0.317  js 0.5664  cka 0.324  err_agree 0.303  dark_js 0.2425\n"}
+,{"stream_name":"stderr","time":485.022165755,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":605.43181099,"data":"  distill_s9                                    agree 0.324  js 0.5605  cka 0.335  err_agree 0.273  dark_js 0.3264\n"}
+,{"stream_name":"stderr","time":605.559940455,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":725.388643929,"data":"  indep_s9                                      agree 0.343  js 0.5630  cka 0.347  err_agree 0.364  dark_js 0.2468\n"}
+,{"stream_name":"stderr","time":725.497396613,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":842.678278564,"data":"  distill_s10                                   agree 0.341  js 0.5415  cka 0.354  err_agree 0.273  dark_js 0.2833\n"}
+,{"stream_name":"stderr","time":842.773398796,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":960.495766074,"data":"  indep_s10                                     agree 0.348  js 0.5714  cka 0.340  err_agree 0.333  dark_js 0.2243\n"}
+,{"stream_name":"stderr","time":960.625777796,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":1079.677560145,"data":"  distill_s11                                   agree 0.323  js 0.5564  cka 0.339  err_agree 0.212  dark_js 0.3119\n"}
+,{"stream_name":"stderr","time":1079.8058207,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":1197.216955641,"data":"  indep_s11                                     agree 0.359  js 0.5658  cka 0.354  err_agree 0.152  dark_js 0.2404\n"}
+,{"stream_name":"stderr","time":1197.313756362,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":1316.782191893,"data":"  distill_s12                                   agree 0.329  js 0.5533  cka 0.335  err_agree 0.333  dark_js 0.3257\n"}
+,{"stream_name":"stderr","time":1316.881304954,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":1435.078297478,"data":"  indep_s12                                     agree 0.328  js 0.5753  cka 0.334  err_agree 0.273  dark_js 0.2448\n"}
+,{"stream_name":"stdout","time":1436.501050363,"data":"exit 0 -m experiments.e5_behaviour vision_transformer fresh\n"}
+,{"stream_name":"stdout","time":1436.541277257,"data":"10 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":1439.279186771,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1439.279245988,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1439.630952464,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1439.63098203,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1440.618460346,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1442.13550989,"data":"[NbConvertApp] Writing 292604 bytes to __results__.html\n"}
+]
