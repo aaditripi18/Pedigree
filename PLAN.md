@@ -559,3 +559,136 @@ fresh student was read): the statistic with the larger gap, threshold at its mid
 TPR 0/20, FPR 0/20). H14b not supported (text decoder TPR 5/5, FPR 0/5; vision CNN TPR 5/5, FPR
 5/5). Behaviour therefore stays a reported category only, and is not extended to Hub pairs above
 2B parameters.
+
+## Amendment 2026-11-17 (4): H15-H18, follow-ups to every not-supported verdict, before any of their data
+
+Every earlier verdict stands as recorded; nothing below changes or rewords one. H2 and H3 are
+measurements of the Hub (its declared lineage is more honest than the hypotheses guessed) and get
+no follow-up. H7 was followed up by H13 (supported). Each follow-up starts from a cause found in
+data already recorded, and is judged only on data that does not exist yet.
+
+### H15: direction by a combined rule (follows H8)
+
+**Cause, from E2 and E7k.** D1 (dates) was right on 183 of 193 Hub pairs. Of its 10 errors, 9 are
+pairs from one organisation released together, where the derived repository (instruct, `-it`,
+quantised, fine-tuned) was created 0 to 8 days before its base (Qwen3-14B, gemma-4-31B-it,
+Qwen2-VL-2B/7B-Instruct, Qwen2.5-Coder-3B/32B-Instruct, Qwen3.5-35B-A3B, LFM2-24B-A2B-GGUF,
+nomic-embed-text-v2-moe); 1 is a base repository re-created years after its children
+(runwayml/stable-diffusion-v1-5). D2 (kurtosis) was right on all 35 E7 pairs (100k-400k steps of
+pre-training apart) and wrong on 4 of 24 decided fine-tunes: a short fine-tune moves median
+kurtosis by less than 0.005 in either direction, and a LoRA merge leaves the sampled tensors'
+median gap at exactly 0 (most of the 20 undecided).
+
+**Rule D3 (fixed here; E2's 193 pairs are its dev set).** For a related pair (A, B), not
+byte-identical, with Hub creation dates:
+1. If A and B have different owners (the part before "/"), or their creation dates are more than
+   G = 30 days apart, the earlier is the parent (D1). G is three times the largest gap among D1's
+   same-owner dev errors (8 days), rounded up to a month, so it is not fitted to them.
+2. Otherwise (same owner, within 30 days) the name decides. Names are compared lower-cased, without
+   the owner: if one ends in `-base` and the other equals it without that ending, the `-base` one
+   is the parent; else if one is a strict prefix of the other followed by `-` or `_`, the shorter is
+   the parent.
+3. Otherwise D2 decides if |kurtosis gap| > 0.00062 (D2's dev margin, unchanged).
+4. Otherwise the pair is undecided.
+
+D3 on E2 (dev, seen) is reported beside D1 and D2; nothing was tuned beyond the choices above.
+
+**Fresh data.** A new frozen sample (`results/h15_sample.json`, seed 20261118, committed before any
+of it is read): 120 frame models per download tier that declare a base and are in neither E2's
+nor H13's sample. Each is compared by weights with each declared base exactly as in H13, recording
+both creation dates and the kurtosis gap (`experiments/h15_fresh.py`, ledger `H15`). Ground truth:
+each declared base the weights confirm (related, not byte-identical) is the parent.
+
+- **H15** On the fresh pairs, D3 is right on >= 95% of the pairs it decides and leaves <= 10%
+  undecided. D1 and D2 are reported beside it on the same pairs, with Wilson intervals.
+
+### H16: behaviour calibrated against reference students (follows H9, H12, H14, H14b)
+
+**Cause, from E5e.** Within each training batch the vision-CNN students separate: fresh distilled
+dark-knowledge divergence 0.091-0.105 against independent 0.128-0.143; dev 0.164-0.166 against
+0.182-0.193. But the whole fresh batch sits below the dev threshold (0.174), so the absolute
+threshold admitted all 10. The text decoder shifted the same way (dev distilled 0.42-0.44, fresh
+0.345-0.348) and passed only because its gap was wide. An absolute behaviour threshold does not
+carry from one batch of students to the next; a comparison with independent students trained the
+same way can.
+
+**Score.** For a suspect student S and reference independents R trained with the same recipe on the
+same task: drop(S) = (min over R of dark_js(r) - dark_js(S)) / (min over R of dark_js(r)). S is
+called *distilled* if drop(S) > r*.
+
+**Rule (dev only).** Dev: every E5e student of the two families whose students learn the task (text
+decoder, vision CNN) in both batches already scored (seeds 0-2 and 8-12); each student's references
+are its batch's independent students other than itself. r* = the midpoint between the smallest
+distilled drop and the largest independent drop, pooled over both families and batches; if that gap
+is not positive, H16 is recorded as not supported without a fresh run. `scripts/analyse.py`
+computes r* from the ledger.
+
+**Fresh data (GPU; run once leakcheck's Kaggle work releases the quota).** Per family: distilled and
+independent students seeds 13-17 (the suspects) and independent references seeds 18-20, trained
+exactly as `distill3` (`experiments/distill.py`, same steps), none trained before.
+
+- **H16** On the fresh suspects (10 distilled, 10 independent), drop > r* gives TPR >= 90% and
+  FPR <= 5%.
+
+### H16b: the same test where the students learn the task (follows H14b's undecided families)
+
+**Cause, from E5e.** Text-encoder students agree with their teacher on 5-9% of masked positions,
+distilled and independent alike, and vision-transformer students on about a third: after 2,000
+steps from a random initialisation neither has learned the task, so nothing of the teacher can show
+in their behaviour.
+
+**Change.** Text-encoder and vision-transformer students train for 20,000 steps (learning rate 5e-4,
+1,000 linear warm-up steps, cosine decay), otherwise as in `distill.py`. A batch counts only if its
+independent students reach >= 50% of the teacher's own task accuracy on the probe set (masked-token
+top-1; CIFAR-10 top-1), recorded per student; a family whose batch misses this floor is reported as
+not decidable, with the accuracies. **Dev batch:** distilled and independent seeds 30-32
+(references: the batch's other independents); r*_b chosen exactly as H16's r*. **Fresh batch:**
+suspects seeds 33-37 (distilled and independent), references seeds 38-40.
+
+- **H16b** On the fresh suspects of the families that pass the floor, drop > r*_b gives TPR >= 90%
+  and FPR <= 5% (pooled over those families; if no family passes the floor, not decidable).
+
+### H17: aligning GGUF tensors when names do not map (follows the unverifiable declared bases)
+
+**Cause, from E2 with E2r, E2g and E2p.** 55 models (58 declared pairs) still declare a base that
+cannot be compared by weights: 32 pairs are GGUF files whose architecture the installed llama.cpp
+name table does not know, so 0 tensors align (DeepSeek-V4, NeMo Parakeet, newer multimodal models);
+10 failed on re-reading (network); 4 use GGUF tensor types the installed `gguf` package does not
+list (types 42 and 142); 6 are gated or private (HTTP 401; gated without a byte-identical public
+copy); 6 are other formats (a random tiny model with no shared shapes, a draft head, an EXL repack,
+an NPU build, no weight files).
+
+**Structural alignment.** When names align fewer than 8 tensors, a GGUF tensor is paired with a
+Hugging Face tensor by position: both sides are grouped by block index (`blk.N.` in GGUF; the first
+`.layers.N.`, `.layer.N.`, `.h.N.`, `.blocks.N.` or `.block.N.` on the other side; tensors without
+an index form one group), and the two must have the same number of blocks; within a group, a tensor
+is paired only if its shape occurs exactly once in that group on both sides. Ambiguous shapes are
+left out. Nothing else changes (sampling, cosine, thresholds, `MIN_COMPARED`).
+
+**Fork tensor types.** A type is decoded only from a public source: the newest `gguf` release for
+mainline types; for a fork's type, that fork's published dequantisation, with a test that our
+decoding equals the fork's on the same blocks. A type with no public source is listed with its
+repositories and the reason.
+
+- **H17a** On the fresh GGUF pairs where names align >= 8 tensors (H15's GGUF models against their
+  declared bases and against the two top-ranked E2-pool candidates of each), structural alignment
+  run with names ignored gives the same related / unrelated verdict for >= 98% of pairs (judged
+  only if there are at least 20 such pairs, at least 5 of them unrelated by names).
+- **H17b** Applied to E2's 32 declared GGUF pairs with no name match (`E2s`, beside E2 as E2g is),
+  structural alignment makes >= 50% of them comparable. The 10 network failures are read again in
+  the same run. E2 stays as recorded; changed categories are reported beside it.
+
+### H18: behaviour for declared Hub pairs the weights still cannot compare (only if H16 or H16b is supported)
+
+Behaviour on large models proves nothing unless the behaviour check has passed on ground truth, so
+H18 runs only if H16 or H16b is supported; otherwise it is recorded as not run, with that reason.
+**Scope:** declared pairs still not comparable after H17 whose model and base are both text
+language models of <= 14B parameters with the same tokenizer (identical vocabulary). **Score:**
+dark-knowledge divergence of next-token distributions on E5's text probes; references: the three
+most downloaded frame models with the same tokenizer and a parameter count within 2x that are not
+related by weights to the declared base; drop and r* as in H16 (r* from H16's dev rule). A
+declaration is *confirmed by behaviour* if drop > r*.
+
+- **H18** The rule confirms >= 90% of the declared pairs it can run (H3 measured 1.3% of comparable
+  declarations contradicted, so a valid check should confirm nearly all). Pairs outside the scope
+  are counted by reason.
