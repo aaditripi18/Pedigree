@@ -433,7 +433,7 @@ def behaviour_audit(e2b, h9r) -> dict | None:
     return out
 
 
-def with_rescores(e2, e2r, e2g=(), e2s=()):
+def with_rescores(e2, e2r, e2g=(), e2s=(), e2f=()):
     """E2 with each comparison that ended in a reader error replaced by its E2r score (the
     fixed readers), and each GGUF comparison that compared too few tensors replaced by its E2g
     score (the name fix of the 2026-11-17 amendment); E2's own records are not changed."""
@@ -441,6 +441,7 @@ def with_rescores(e2, e2r, e2g=(), e2s=()):
     new = {(r["model"], r["other"], r["role"]): r for r in e2r if "lost" not in r}
     gnew = {(r["model"], r["other"], r["role"]): r for r in e2g if "lost" not in r}
     snew = {(r["model"], r["other"], r["role"]): r for r in e2s if "lost" not in r}
+    fnew = {(r["model"], r["other"], r["role"]): r for r in e2f if "lost" not in r}
     out = copy.deepcopy(e2)
     keep = ("median_cosine", "compared", "matched", "match_share", "identical", "kurtosis_gap",
             "median_invariant", "invariant_compared", "error")
@@ -452,7 +453,14 @@ def with_rescores(e2, e2r, e2g=(), e2s=()):
                     d.pop("error", None)
                     d.pop("reason", None)
                     d.update({k: r[k] for k in keep if k in r})
+                # E2f: GGUF tensor types decoded from public sources (amendment 2026-11-17 (4))
+                f = fnew.get((m["id"], d[key], role))
                 g = gnew.get((m["id"], d[key], role))
+                if f and g and "tensor type" in str(g.get("error") or ""):
+                    g = f
+                if f and "tensor type" in str(d.get("error") or ""):
+                    d.pop("error", None)
+                    d.update({k: f[k] for k in keep if k in f})
                 if g and not d.get("error") and (d.get("compared") or 0) < MIN_COMPARED:
                     d.update({k: g[k] for k in keep if k in g})
                     if g.get("error"):
@@ -843,6 +851,7 @@ def main() -> None:
     h13r = latest_runs(rows, "H13", lambda r: 0)
     h15r = latest_runs(rows, "H15", lambda r: 0)
     e2s = latest_runs(rows, "E2s", lambda r: (r["model"], r["other"], r["role"]))
+    e2f = latest_runs(rows, "E2f", lambda r: (r["model"], r["other"], r["role"]))
     def by_family_split(exp):
         return latest_runs(rows, exp, lambda r: ((r.get("meta") or {}).get("family", r.get("family")),
                                                 (r.get("meta") or {}).get("split", r.get("split"))))
@@ -869,15 +878,15 @@ def main() -> None:
         hs += [h15(e2, h15r, T, rule), h16r, h16br, *h17(h15r, with_rescores(e2, e2r, e2g), e2s, T, rule),
                h18(h16r, h16br)]
         if e2r:
-            e2f = with_rescores(e2, e2r, e2g, e2s)
-            Af = audit(e2f, T, rule)
-            hf = {h["id"]: h for h in [*h2h3(Af, len(e2f) == 600), h7(h7a, e2f, T, rule)]}
+            e2f_all = with_rescores(e2, e2r, e2g, e2s, e2f)
+            Af = audit(e2f_all, T, rule)
+            hf = {h["id"]: h for h in [*h2h3(Af, len(e2f_all) == 600), h7(h7a, e2f_all, T, rule)]}
             out.setdefault("reader_fixed", {})[rule] = {
                 "rescored": len(e2r), "lost": sum("lost" in r for r in e2r),
                 "still_errors": sum(bool(r.get("error")) for r in e2r), "audit": Af,
                 "gguf_rescored": len(e2g), "gguf_comparable": sum((r.get("compared") or 0) >= MIN_COMPARED
                                                                   for r in e2g),
-                "unverifiable": unverifiable(e2f, T, rule),
+                "unverifiable": unverifiable(e2f_all, T, rule),
                 "verdicts": {k: {"verdict": v["verdict"], "evidence": v["evidence"],
                                  "changes": v["verdict"] != next(h for h in hs if h["id"] == k)["verdict"]}
                              for k, v in hf.items()}}

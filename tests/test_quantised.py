@@ -130,7 +130,7 @@ def test_gguf_plain_integer_tensor(monkeypatch):
 def test_gguf_fork_type_is_named(monkeypatch):
     from pedigree import ggufremote
     with pytest.raises(ValueError, match="not in llama.cpp's published list"):
-        ggufremote.sample("u", {"qtype": 142, "shape": [10], "start": 0}, 10)
+        ggufremote.sample("u", {"qtype": 101, "shape": [10], "start": 0}, 10)
 
 
 def test_mlx_mixed_precision_layer(tmp_path, local_ranges):

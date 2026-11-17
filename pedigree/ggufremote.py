@@ -100,12 +100,23 @@ def read_header(url: str, size: int) -> tuple[dict, dict]:
 def sample(url: str, spec: dict, elements: int) -> np.ndarray:
     """The first `elements` values (float64) of a GGUF tensor, dequantised."""
     import gguf
+    from . import ggufextra
     from .remote import fetch_range
     try:
         qtype = gguf.GGMLQuantizationType(spec["qtype"])
     except ValueError:
-        raise ValueError(f"GGUF tensor type {spec['qtype']} is not in llama.cpp's published list "
-                         "(a fork's own format)") from None
+        qtype = None
+    if qtype is None or qtype not in gguf.GGML_QUANT_SIZES:
+        # newer than the installed gguf package: decoded from the public source (pedigree/ggufextra.py)
+        if spec["qtype"] not in ggufextra.TYPES:
+            raise ValueError(f"GGUF tensor type {spec['qtype']} is not in llama.cpp's published list "
+                             "(a fork's own format)")
+        _, block, type_size = ggufextra.TYPES[spec["qtype"]]
+        total = int(np.prod(spec["shape"]))
+        n = min(elements, total)
+        blocks = -(-n // block)
+        raw = fetch_range(url, spec["start"], spec["start"] + blocks * type_size - 1)
+        return np.asarray(ggufextra.dequantize(raw, spec["qtype"]), dtype=np.float64)[:n]
     block, type_size = gguf.GGML_QUANT_SIZES[qtype]
     total = int(np.prod(spec["shape"]))
     n = min(elements, total)

@@ -9,6 +9,8 @@ these pairs replaced by their new scores.
 
     python -m experiments.e2_rescore
     python -m experiments.e2_rescore --match "legacy pickle" --name E2p   (amendment 2026-11-17)
+    python -m experiments.e2_rescore --source E2r,E2g --match "tensor type" --name E2f
+        (amendment 2026-11-17 (4): GGUF types decoded from public sources, pedigree/ggufextra.py)
 """
 from __future__ import annotations
 
@@ -42,11 +44,21 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--match", default="", help="only errors containing this text")
     ap.add_argument("--name", default="E2r", help="ledger experiment name")
+    ap.add_argument("--source", default="E2", help="E2, or rescoring runs (E2r,E2g) whose latest errors to read again")
     a = ap.parse_args()
     rows = [json.loads(x) for x in (ROOT / "results" / "ledger.jsonl").read_text(encoding="utf-8").splitlines() if x]
     e2 = [r for r in rows if r.get("experiment") == "E2"]
     last = max(r["run_id"] for r in e2)
-    pairs = errored([r for r in e2 if r["run_id"] == last], a.match)
+    if a.source == "E2":
+        pairs = errored([r for r in e2 if r["run_id"] == last], a.match)
+    else:   # each pair's latest record across the named rescoring runs
+        latest: dict = {}
+        for r in rows:
+            if r.get("experiment") in a.source.split(",") and "lost" not in r:
+                k = (r["model"], r["other"], r["role"])
+                if k not in latest or r["run_id"] >= latest[k]["run_id"]:
+                    latest[k] = r
+        pairs = sorted(k for k, r in latest.items() if a.match in str(r.get("error") or ""))
     print(f"{len(pairs)} errored comparisons in {last}", flush=True)
     frame = pool.Frame(ROOT / "results" / "e2_frame_meta.jsonl.gz")
 
