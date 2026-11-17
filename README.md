@@ -17,17 +17,18 @@ existed ([PLAN.md](PLAN.md), with dated amendments); every verdict below is comp
 
 The sample is 200 models drawn uniformly from each of three download tiers of the 100,000 most
 downloaded models (ranks 1-1k, 1k-10k, 10k-100k; seed 20261105). Every model got exactly one
-category, with its reason:
+category, with its reason. The second column is the same 600 models scored again after the file
+reader fixes described [below](#every-caveat-measured) (E2r, E2g, E2p); no verdict changed.
 
-| Category | Models |
-|---|--:|
-| Declares a base, and the weights confirm it | 214 |
-| Declares a base the weights contradict | 3 |
-| Declares a base that cannot be compared by weights | 84 |
-| Declares no base; an earlier related model was found | 105 |
-| Declares no base; no related earlier model found | 136 |
-| Weights not readable (ONNX-only, gated without a public copy, no weights) | 46 |
-| An adapter only (LoRA weights, checked against its base's shapes) | 12 |
+| Category | Models (audit) | After reader fixes |
+|---|--:|--:|
+| Declares a base, and the weights confirm it | 214 | 243 |
+| Declares a base the weights contradict | 3 | 3 |
+| Declares a base that cannot be compared by weights | 84 | 55 |
+| Declares no base; an earlier related model was found | 105 | 106 |
+| Declares no base; no related earlier model found | 136 | 135 |
+| Weights not readable (ONNX-only, gated without a public copy, no weights) | 46 | 46 |
+| An adapter only (LoRA weights, checked against its base's shapes) | 12 | 12 |
 
 - **Undeclared lineage (H2, not supported).** Of the 364 models whose weights show a related
   earlier model, 105 (28.8%, Wilson 95% interval 24.4-33.7%) declare no base. The pre-registered
@@ -74,7 +75,7 @@ judged once on fresh pairs.
 | H14 | Behaviour by shared mistakes, one rule for all families, fresh students: TPR >= 90% at FPR <= 5% | **not supported** | error agreement above 0.5965 (dev): TPR 0/20, FPR 0/20 |
 | H14b | The same, with a rule per family (text decoder, vision CNN) | **not supported** | text decoder TPR 5/5, FPR 0/5; vision CNN TPR 5/5, FPR 5/5 |
 
-H2, H3, H7-H9, H12 and H14 (a and b) failed their bars; they are reported as they came out. H13 was written after
+H2, H3, H7-H9, H12, H14 and H14b failed their bars; they are reported as they came out. H13 was written after
 H7 failed, to test a pool designed from H7's misses; it was judged on 360 Hub models no rule was
 chosen on, drawn before any of them was read.
 

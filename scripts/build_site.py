@@ -78,7 +78,11 @@ top 100,000; every one is accounted for</div></div>"""
              ("no declaration, parent found", "Declares no base; an earlier related model was found"),
              ("no declaration, no parent found", "Declares no base; no related earlier model found"),
              ("not readable", "Weights not readable"), ("adapter", "An adapter only")]
-    crows = "".join(f"<tr><td>{e(lbl)}</td><td class='num'>{sum(A['categories'].get(k, {}).values())}</td></tr>"
+    F = (V.get("reader_fixed") or {}).get("t")
+    FA = (F or {}).get("audit") or {}       # the same 600 models, scored again after the reader fixes
+    n = lambda a, k: sum(a["categories"].get(k, {}).values())
+    crows = "".join(f"<tr><td>{e(lbl)}</td><td class='num'>{n(A, k)}</td>"
+                    + (f"<td class='num'>{n(FA, k)}</td>" if FA else "") + "</tr>"
                     for k, lbl in LABEL) if A else ""
     READ = {"model above 2B parameters": "pairs with a model above 2B parameters",
             "neither a shared language-model output nor a shared label set":
@@ -93,13 +97,14 @@ top 100,000; every one is accounted for</div></div>"""
                + ". On ground truth it did not separate distilled students from independent ones ("
                + ", ".join(h["id"] for h in hs if h["id"] in BEHAVIOUR and h["verdict"] == "not supported")
                + "), so it is reported as its own category, never moves H3, and is not run on larger models.</p>")
-    F = (V.get("reader_fixed") or {}).get("t")
     fixed = ""
     if F:
         ch = [k for k, x in F["verdicts"].items() if x["changes"]]
-        fixed = (f"<p>{F['rescored']} comparisons in the audit ended in a file-reader error. After the readers were "
-                 f"fixed they were scored again (E2r): all but {F['still_errors']} now score (those use GGUF tensor "
-                 "types outside llama.cpp's published list), and "
+        fixed = (f"<p>{F['rescored']} comparisons in the audit could not be read at first (reader errors and "
+                 f"legacy PyTorch files). After the readers were fixed they were scored again (E2r, E2p), with "
+                 f"{F['gguf_rescored']:,} GGUF comparisons re-read under the new name matching (E2g): all but "
+                 f"{F['still_errors']} now score (those use GGUF tensor types outside llama.cpp's published list), "
+                 "giving the second column above, and "
                  + ("no verdict changes: " if not ch else f"the verdict of {', '.join(ch)} changes: ")
                  + "; ".join(f"{k} {e(x['evidence'])}" for k, x in F["verdicts"].items()) + ".</p>")
     h13 = {h["id"]: h for h in hs}.get("H13a")
@@ -116,7 +121,7 @@ what a model is built on. Nobody checks it. Pedigree checks it from the weights,
 Hub, with a verifier measured on ground truth first.</p>
 {cards}
 <h2>The audit</h2>
-<table><tr><th>Category</th><th>Models</th></tr>{crows}</table>
+<table><tr><th>Category</th><th>Models (audit)</th>{"<th>After reader fixes</th>" if FA else ""}</tr>{crows}</table>
 {beh}{fixed}
 <h2>Hypotheses</h2>
 <p>Every decision rule was committed in <a href="{REPO_URL}/blob/main/PLAN.md">PLAN.md</a> before the runs it
