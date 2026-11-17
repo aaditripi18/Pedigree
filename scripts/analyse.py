@@ -118,7 +118,11 @@ def h1(e1, T, rule):
     return {"id": "H1", "statement": "The verifier separates derivatives from independent same-architecture models "
             "on fresh ground truth with TPR >= 95% at FPR <= 1%.", "verdict": verdict(ok),
             "numbers": {"tpr": [tp, len(pos), wilson(tp, len(pos))], "fpr": [fp, len(neg), wilson(fp, len(neg))],
-                        "auc_plain": a, "families": fams},
+                        "auc_plain": a, "families": fams,
+                        # every fresh pair's plain score, for the site's figure
+                        "points": {lab: [[r["family"], r["kind"], round(r["median_cosine"], 5)] for r in rs
+                                         if num(r.get("median_cosine")) is not None]
+                                   for lab, rs in (("derivative", pos), ("independent", neg))}},
             "evidence": f"TPR {tp}/{len(pos)}, FPR {fp}/{len(neg)}, AUC (plain) {a:.3f}" if a is not None else "pending"}
 
 
