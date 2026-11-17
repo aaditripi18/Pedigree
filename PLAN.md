@@ -729,3 +729,61 @@ recomputed on its 32 pairs from those records and the result is reported here as
 H17b is 15 of 32 comparable (all related): **not supported**, unchanged. With every re-read, declared
 bases the weights confirm are 263 and unverifiable 35; no verdict changes (H2 106/379, H3 3/279, H7 b
 88/250).
+
+
+## Amendment 2026-11-18: H19 and H20, the last follow-ups on direction and alignment, before any of their data
+
+Every earlier verdict stands as recorded. H19 follows H15 and H20 follows H17a/H17b; whatever they
+show is recorded, and **no further follow-up on direction or alignment is made after them**. Both
+rules below are fixed from causes already recorded (H15's 15 errors, H17a's 60 abstentions); no data
+for them has been read.
+
+### H19: direction from when each repository's weights were written (follows H15)
+
+**Cause, from H15.** 9 of D3's 15 errors are repositories *created* before their declared base: a
+repackaging repository created months before the bases it now holds, and GGUF quantisations created
+days before the base. A repository's creation date is when its name was registered, not when its
+weights arrived; the weights of a derivative cannot have been written before its parent's.
+
+**Rule D4.** For a repository at the commit read, its *content date* is the earliest last-commit
+date among its current weight files (`.safetensors`, `.gguf`, `.bin`, `.pt`, `.pth`, `.ckpt`; the
+Hub's `tree?expand=true` listing at that commit). Taking the earliest file makes a later conversion
+added to an old repository (a `model.safetensors` beside a 2020 `pytorch_model.bin`) leave the date
+unchanged. Of a related pair, the one with the earlier content date is the parent; the pair is
+*undecided* when the two dates are equal to the second or either is missing.
+
+**Fresh data.** A new frozen sample (`results/h19_sample.json`, seed 20261119, committed before any of
+it is read): 120 frame models per download tier that declare a base and are in none of E2's, H13's or
+H15's samples. Each is compared by weights with each declared base exactly as in H15, and both
+repositories' content dates are recorded (`experiments/h19_fresh.py`, ledger `H19`). Ground truth: each
+declared base the weights confirm (related, not byte-identical) is the parent.
+
+- **H19** On the fresh pairs, D4 is right on >= 95% of the pairs it decides and leaves <= 10%
+  undecided. D1 (creation dates) and D3 are reported beside it on the same pairs, with Wilson intervals.
+
+### H20: structural alignment across unequal block counts (follows H17a and H17b)
+
+**Cause, from H17a.** Structural alignment never gave a wrong verdict but aligned nothing in 60 of 339
+pairs, all multimodal or multi-token-prediction checkpoints and clip models. Its rule required both
+sides to have the same number of blocks, counted over *every* indexed tensor: a Hugging Face
+checkpoint that also holds a vision tower (`visual.blocks.N`) or a multi-token-prediction layer
+(`mtp.layers.0`), or a GGUF file that appends extra blocks, fails that test even though its language
+model's blocks correspond one to one; and clip GGUF files name their blocks `v.blk.N` / `t.blk.N`,
+which the rule did not read as blocks.
+
+**Structural alignment v2.** Each side's indexed tensors are split into *stacks* by the name part
+before the index (`blk`, `v.blk`, `t.blk` in GGUF; e.g. `model.language_model.layers`,
+`model.visual.blocks`, `mtp.layers` on the other side). GGUF stacks are taken largest first; each is
+paired with the unpaired stack of the other side with the same number of blocks, else the one with
+the nearest number of blocks (ties: more tensors). In a stack pair, block i is aligned with block i
+for i below the smaller of the two counts; blocks beyond it are left out. Tensors with no index form
+one group on each side. Within a group, a tensor is paired only if its shape occurs exactly once in
+that group on both sides, as in v1. Nothing else changes (sampling, cosine, thresholds, `MIN_COMPARED`).
+
+- **H20** On the fresh GGUF pairs where names align >= 8 tensors (H19's GGUF models against their
+  declared bases and against the two top-ranked E2-pool candidates of each), v2 run with names ignored
+  gives the same related / unrelated verdict for >= 98% of pairs (judged only if there are at least 20
+  such pairs, at least 5 of them unrelated by names). Opposite verdicts and pairs v2 aligns too few
+  tensors in are reported separately, and v1 is reported beside it on the same pairs. Applied to the 14
+  declared E2 GGUF pairs neither names nor v1 align, the number v2 makes comparable is reported (a
+  measurement, no bar).
