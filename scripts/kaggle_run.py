@@ -180,6 +180,12 @@ JOBS["e2-legacy"] = _job("pedigree-e2-legacy", [["-m", "experiments.e2_rescore",
 # H13: the fresh sample, each model read with its declared bases (pool v2 is judged afterwards)
 JOBS["h13"] = _job("pedigree-h13", [["-m", "experiments.h13_fresh", "--out", "/kaggle/working/h13_raw.jsonl"]],
                    gpu=False, env=dict(E2_ENV))
+# H15 / H17a (amendment 2026-11-17 (4)): the fresh direction sample, GGUF models also aligned both ways
+JOBS["h15"] = _job("pedigree-h15", [["-m", "experiments.h15_fresh", "--out", "/kaggle/working/h15_raw.jsonl"]],
+                   gpu=False, env=dict(E2_ENV))
+# E2s / H17b: E2's GGUF comparisons that still align too few tensors, with structural alignment
+JOBS["e2-struct"] = _job("pedigree-e2-struct", [["-m", "experiments.e2_struct_rescore"]], gpu=False,
+                         env={"PEDIGREE_WORKERS": "8"})
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
 # fit Kaggle's CPU budget, and the statistics do not depend on the device
 JOBS["e2-behaviour"] = _job("pedigree-e2-behaviour", [["-m", "experiments.e2_behaviour"]], gpu=False)

@@ -244,20 +244,38 @@ class Renamed:
         return self.model.sample(self.to_old[name], max_bytes)
 
 
-def harmonise(model, other):
+STRUCT_BELOW = 8     # structural alignment is tried when names pair fewer tensors (H17)
+
+
+def _gguf_mapping(gm, hm, alignment: str) -> dict[str, str]:
+    """{gguf name: hf name}. alignment: "names" (llama.cpp's table, as E2 ran), "auto" (names,
+    else structural alignment when names pair fewer than STRUCT_BELOW tensors and it pairs more),
+    or "struct" (structural alignment only, names ignored: H17a's check)."""
+    from .structalign import struct_names
+    if alignment == "struct":
+        return struct_names(gm.float_shapes(), hm.float_shapes())
+    names = ggufremote.hf_names(gm.gguf_meta, gm.float_shapes(), hm.float_shapes())
+    if alignment == "auto" and len(names) < STRUCT_BELOW:
+        st = struct_names(gm.float_shapes(), hm.float_shapes())
+        if len(st) > len(names):
+            return st
+    return names
+
+
+def harmonise(model, other, alignment: str = "names"):
     """Give a GGUF model the tensor names of the other (non-GGUF) model."""
     def g(m):
         return getattr(m, "gguf_meta", None)
     if g(model) and not g(other):
-        model = Renamed(model, ggufremote.hf_names(model.gguf_meta, model.float_shapes(), other.float_shapes()))
+        model = Renamed(model, _gguf_mapping(model, other, alignment))
     elif g(other) and not g(model):
-        other = Renamed(other, ggufremote.hf_names(other.gguf_meta, other.float_shapes(), model.float_shapes()))
+        other = Renamed(other, _gguf_mapping(other, model, alignment))
     return model, other
 
 
-def compare(model: Remote, other: Remote, n_tensors: int = N_TENSORS) -> dict:
+def compare(model: Remote, other: Remote, n_tensors: int = N_TENSORS, alignment: str = "names") -> dict:
     """Name/shape alignment and sampled weight similarity of two models."""
-    model, other = harmonise(model, other)
+    model, other = harmonise(model, other, alignment)
     ms, os_ = model.float_shapes(), other.float_shapes()
     pairing, dm, do = align(ms, os_)
     match = len(pairing) / max(len(ms), 1)

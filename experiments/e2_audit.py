@@ -274,9 +274,9 @@ def logical_params(r: Remote) -> int:
     return int(sum(np.prod(s[1]) for s in r.float_shapes().values()))
 
 
-def _pair(model: Remote, other: Remote, invariant: bool) -> dict:
+def _pair(model: Remote, other: Remote, invariant: bool, alignment: str = "names") -> dict:
     try:
-        c = compare(model, other)
+        c = compare(model, other, alignment=alignment)
         out = {"median_cosine": c["median_cosine"], "compared": c["compared"], "matched": c["matched"],
                "match_share": round(c["match_share"], 4), "identical": c["identical"],
                "kurtosis_gap": kurtosis_gap(c["kurtosis"]), "cosines": c["cosines"]}
