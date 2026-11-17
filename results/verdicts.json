@@ -482,6 +482,133 @@
       "mean_pool_size": 53.76851851851852
      },
      "evidence": "v2 only 104, E2's pool only 1, p = 2.6e-30"
+    },
+    {
+     "id": "H14",
+     "statement": "On fresh students, one rule chosen on dev (pooled over families) identifies distilled students by shared mistakes (TPR >= 90% at FPR <= 5%).",
+     "verdict": "pending",
+     "numbers": {
+      "statistic": "error_agreement",
+      "sign": 1,
+      "threshold": 0.596452717534463,
+      "dev": {
+       "error_agreement": {
+        "gap": -0.5640847447917032,
+        "mid": 0.31441034513861144,
+        "max_neg": 0.596452717534463,
+        "tpr_at_fpr0": 0.0
+       },
+       "dark_js": {
+        "gap": -0.6738251046630042,
+        "mid": 0.4879884931972357,
+        "max_neg": 0.15107594086573356,
+        "tpr_at_fpr0": 0.07142857142857142
+       }
+      },
+      "fresh": {
+       "tpr": [
+        0,
+        15
+       ],
+       "fpr": [
+        0,
+        15
+       ]
+      },
+      "per_family": {
+       "text_encoder": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
+       "vision_cnn": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
+       "vision_transformer": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       }
+      }
+     },
+     "evidence": "error_agreement above 0.5965 (dev): TPR 0/15, FPR 0/15; waiting for text_decoder"
+    },
+    {
+     "id": "H14b",
+     "statement": "On the families with a dev rule (text decoder, vision CNN), the per-family rule identifies fresh distilled students (TPR >= 90% at FPR <= 5%).",
+     "verdict": "pending",
+     "numbers": {
+      "rules": {
+       "text_decoder": {
+        "statistic": "dark_js",
+        "gap": 0.12708,
+        "threshold": 0.50016,
+        "direction": "below"
+       },
+       "text_encoder": {
+        "statistic": "error_agreement",
+        "gap": -0.00341,
+        "threshold": null,
+        "direction": "above"
+       },
+       "vision_cnn": {
+        "statistic": "dark_js",
+        "gap": 0.01673,
+        "threshold": 0.17399,
+        "direction": "below"
+       },
+       "vision_transformer": {
+        "statistic": "dark_js",
+        "gap": -0.02331,
+        "threshold": null,
+        "direction": "below"
+       }
+      },
+      "per_family": {
+       "vision_cnn": {
+        "tpr": [
+         5,
+         5
+        ],
+        "fpr": [
+         5,
+         5
+        ]
+       }
+      },
+      "pooled": {
+       "tpr": [
+        5,
+        5
+       ],
+       "fpr": [
+        5,
+        5
+       ]
+      },
+      "not_decidable": [
+       "text_encoder",
+       "vision_transformer"
+      ]
+     },
+     "evidence": "vision_cnn: dark_js below 0.1740, TPR 5/5, FPR 5/5; waiting for text_decoder; no dev rule: text_encoder, vision_transformer"
     }
    ],
    "audit": {
@@ -1055,6 +1182,133 @@
       "mean_pool_size": 53.725118483412324
      },
      "evidence": "v2 only 102, E2's pool only 1, p = 1e-29"
+    },
+    {
+     "id": "H14",
+     "statement": "On fresh students, one rule chosen on dev (pooled over families) identifies distilled students by shared mistakes (TPR >= 90% at FPR <= 5%).",
+     "verdict": "pending",
+     "numbers": {
+      "statistic": "error_agreement",
+      "sign": 1,
+      "threshold": 0.596452717534463,
+      "dev": {
+       "error_agreement": {
+        "gap": -0.5640847447917032,
+        "mid": 0.31441034513861144,
+        "max_neg": 0.596452717534463,
+        "tpr_at_fpr0": 0.0
+       },
+       "dark_js": {
+        "gap": -0.6738251046630042,
+        "mid": 0.4879884931972357,
+        "max_neg": 0.15107594086573356,
+        "tpr_at_fpr0": 0.07142857142857142
+       }
+      },
+      "fresh": {
+       "tpr": [
+        0,
+        15
+       ],
+       "fpr": [
+        0,
+        15
+       ]
+      },
+      "per_family": {
+       "text_encoder": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
+       "vision_cnn": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       },
+       "vision_transformer": {
+        "tpr": [
+         0,
+         5
+        ],
+        "fpr": [
+         0,
+         5
+        ]
+       }
+      }
+     },
+     "evidence": "error_agreement above 0.5965 (dev): TPR 0/15, FPR 0/15; waiting for text_decoder"
+    },
+    {
+     "id": "H14b",
+     "statement": "On the families with a dev rule (text decoder, vision CNN), the per-family rule identifies fresh distilled students (TPR >= 90% at FPR <= 5%).",
+     "verdict": "pending",
+     "numbers": {
+      "rules": {
+       "text_decoder": {
+        "statistic": "dark_js",
+        "gap": 0.12708,
+        "threshold": 0.50016,
+        "direction": "below"
+       },
+       "text_encoder": {
+        "statistic": "error_agreement",
+        "gap": -0.00341,
+        "threshold": null,
+        "direction": "above"
+       },
+       "vision_cnn": {
+        "statistic": "dark_js",
+        "gap": 0.01673,
+        "threshold": 0.17399,
+        "direction": "below"
+       },
+       "vision_transformer": {
+        "statistic": "dark_js",
+        "gap": -0.02331,
+        "threshold": null,
+        "direction": "below"
+       }
+      },
+      "per_family": {
+       "vision_cnn": {
+        "tpr": [
+         5,
+         5
+        ],
+        "fpr": [
+         5,
+         5
+        ]
+       }
+      },
+      "pooled": {
+       "tpr": [
+        5,
+        5
+       ],
+       "fpr": [
+        5,
+        5
+       ]
+      },
+      "not_decidable": [
+       "text_encoder",
+       "vision_transformer"
+      ]
+     },
+     "evidence": "vision_cnn: dark_js below 0.1740, TPR 5/5, FPR 5/5; waiting for text_decoder; no dev rule: text_encoder, vision_transformer"
     }
    ],
    "audit": {

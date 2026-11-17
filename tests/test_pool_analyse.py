@@ -89,3 +89,32 @@ def test_h12_margin_rule_on_synthetic_students():
     assert h["numbers"]["tpr"] == [20, 20]
     # new independents (seeds 3-7) sit up to 0.007 above the references, below the dev midpoint (~0.024)
     assert h["numbers"]["fpr"] == [0, 20] and h["verdict"] == "supported"
+
+
+def _e5e(label, ea, js, family="vision_cnn"):
+    return {"label": label, "error_agreement": ea, "dark_js": js, "family": family}
+
+
+def test_h14_rule_takes_the_wider_gap_at_its_midpoint():
+    dev = [_e5e("positive", 0.6, 0.30), _e5e("positive", 0.7, 0.10),
+           _e5e("negative", 0.4, 0.20), _e5e("negative", 0.5, 0.25)]
+    r = analyse.h14_rule(dev)   # error agreement: gap 0.1; dark JS: lower = distilled, gap -0.10
+    assert r["statistic"] == "error_agreement" and r["threshold"] == pytest.approx(0.55)
+
+
+def test_h14_rule_falls_back_to_admitting_no_dev_independent():
+    dev = [_e5e("positive", 0.3, 0.5), _e5e("positive", 0.9, 0.6), _e5e("negative", 0.6, 0.05)]
+    r = analyse.h14_rule(dev)
+    assert r["statistic"] == "error_agreement" and r["threshold"] == 0.6
+    assert not analyse._admit(dev[2], "error_agreement", 1, r["threshold"])
+
+
+def test_h14_is_pending_until_every_family_is_in():
+    dev = [_e5e("positive", 0.9, 0.1), _e5e("negative", 0.1, 0.9)]
+    fresh = [_e5e("positive", 0.9, 0.1), _e5e("negative", 0.1, 0.9)]
+    h14, h14b = analyse.h14(dev, fresh)
+    assert h14["verdict"] == "pending" and h14b["verdict"] == "pending"   # text decoder missing
+    fresh += [_e5e(l, ea, js, f) for f in ("text_decoder", "text_encoder", "vision_transformer")
+              for l, ea, js in (("positive", 0.9, 0.1), ("negative", 0.1, 0.9))]
+    h14, h14b = analyse.h14(dev, fresh)
+    assert h14["verdict"] == "supported" and h14b["verdict"] == "supported"

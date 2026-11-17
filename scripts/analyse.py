@@ -495,6 +495,82 @@ def h2h3(A, done):
 
 # --- main -------------------------------------------------------------------------------------------
 
+# --- H14 / H14b: behaviour by shared mistakes (amendments 2026-11-17 (2) and (3)) ---------------
+
+H14_STATS = {"error_agreement": 1, "dark_js": -1}   # sign: +1 higher = distilled, -1 lower = distilled
+E5_FAMILIES = ["text_decoder", "text_encoder", "vision_cnn", "vision_transformer"]
+
+
+def _admit(r, stat, sign, t) -> bool:
+    return sign * r[stat] > sign * t
+
+
+def h14_rule(dev: list[dict]) -> dict:
+    """H14's pooled rule from E5e dev alone: the statistic with the larger gap (smallest distilled
+    minus largest independent, signed); threshold at the gap's midpoint, or if no gap is positive the
+    threshold admitting the most distilled models and no independent one."""
+    P = [r for r in dev if r["label"] == "positive"]
+    N = [r for r in dev if r["label"] == "negative"]
+    gaps = {}
+    for stat, sign in H14_STATS.items():
+        p, n = [sign * r[stat] for r in P], [sign * r[stat] for r in N]
+        gaps[stat] = {"gap": min(p) - max(n), "mid": sign * (min(p) + max(n)) / 2, "max_neg": sign * max(n),
+                      "tpr_at_fpr0": sum(x > max(n) for x in p) / len(p)}
+    stat = max(gaps, key=lambda s: gaps[s]["gap"])
+    t = gaps[stat]["mid"] if gaps[stat]["gap"] > 0 else gaps[stat]["max_neg"]
+    return {"statistic": stat, "sign": H14_STATS[stat], "threshold": t, "dev": gaps}
+
+
+def _score(rows, stat, sign, t) -> dict:
+    P = [r for r in rows if r["label"] == "positive"]
+    N = [r for r in rows if r["label"] == "negative"]
+    return {"tpr": [sum(_admit(r, stat, sign, t) for r in P), len(P)],
+            "fpr": [sum(_admit(r, stat, sign, t) for r in N), len(N)]}
+
+
+def _passes(sc) -> bool:
+    (tp, np_), (fp, nn) = sc["tpr"], sc["fpr"]
+    return np_ > 0 and nn > 0 and tp / np_ >= 0.9 and fp / nn <= 0.05
+
+
+def h14(dev: list[dict], fresh: list[dict]) -> list[dict]:
+    fams = {r["family"] for r in fresh}
+    rule = h14_rule(dev)
+    stat, sign, t = rule["statistic"], rule["sign"], rule["threshold"]
+    per = {f: _score([r for r in fresh if r["family"] == f], stat, sign, t) for f in sorted(fams)}
+    sc = _score(fresh, stat, sign, t)
+    done = set(E5_FAMILIES) <= fams
+    rel = "above" if sign > 0 else "below"
+    out = [{"id": "H14", "statement": "On fresh students, one rule chosen on dev (pooled over families) identifies "
+                                       "distilled students by shared mistakes (TPR >= 90% at FPR <= 5%).",
+            "verdict": verdict(_passes(sc) if done else None),
+            "numbers": {**rule, "fresh": sc, "per_family": per},
+            "evidence": f"{stat} {rel} {t:.4f} (dev): TPR {sc['tpr'][0]}/{sc['tpr'][1]}, FPR {sc['fpr'][0]}/"
+                        f"{sc['fpr'][1]}" + ("" if done else f"; waiting for {', '.join(sorted(set(E5_FAMILIES) - fams))}")}]
+    rules = json.loads((ROOT / "results" / "h14b_rules.json").read_text(encoding="utf-8"))
+    ruled = sorted(f for f, r in rules.items() if r["threshold"] is not None)
+    per_b, ev = {}, []
+    for f in ruled:
+        r = rules[f]
+        rs = [x for x in fresh if x["family"] == f]
+        if rs:
+            per_b[f] = _score(rs, r["statistic"], 1 if r["direction"] == "above" else -1, r["threshold"])
+            ev.append(f"{f}: {r['statistic']} {r['direction']} {r['threshold']:.4f}, TPR {per_b[f]['tpr'][0]}/"
+                      f"{per_b[f]['tpr'][1]}, FPR {per_b[f]['fpr'][0]}/{per_b[f]['fpr'][1]}")
+    both = {"tpr": [sum(v["tpr"][0] for v in per_b.values()), sum(v["tpr"][1] for v in per_b.values())],
+            "fpr": [sum(v["fpr"][0] for v in per_b.values()), sum(v["fpr"][1] for v in per_b.values())]}
+    done_b = set(ruled) <= set(per_b)
+    missing = sorted(set(ruled) - set(per_b))
+    undecided = sorted(set(rules) - set(ruled))
+    out.append({"id": "H14b", "statement": "On the families with a dev rule (text decoder, vision CNN), the per-family "
+                                           "rule identifies fresh distilled students (TPR >= 90% at FPR <= 5%).",
+                "verdict": verdict(_passes(both) if done_b else None),
+                "numbers": {"rules": rules, "per_family": per_b, "pooled": both, "not_decidable": undecided},
+                "evidence": "; ".join(ev) + (f"; waiting for {', '.join(missing)}" if missing else "")
+                            + f"; no dev rule: {', '.join(undecided)}"})
+    return out
+
+
 def main() -> None:
     rows = load()
     e1 = latest_runs(rows, "E1", lambda r: r.get("family"))
@@ -520,6 +596,10 @@ def main() -> None:
         meta = r.get("meta") or {}
         r.setdefault("family", meta.get("family"))
         r.setdefault("split", meta.get("split"))
+    e5e_dev, e5e_fresh = ([r for r in by_family_split(x) if "error_agreement" in r and r.get("label")]
+                          for x in ("E5e-dev", "E5e-fresh"))
+    for r in e5e_dev + e5e_fresh:
+        r.setdefault("family", (r.get("meta") or {}).get("family"))
     T = thresholds(e1)
     out = {"thresholds": T, "families_in_e1": sorted({r["family"] for r in e1}), "blind_families": sorted(BLIND),
            "rules": {}}
@@ -527,7 +607,7 @@ def main() -> None:
         A = audit(e2, T, rule) if e2 else None
         hs = [h1(e1, T, rule), *(h2h3(A, len(e2) == 600) if A else []), h4(e1, T, rule), h5(e1, e5, T, rule),
               h6(e1b, e2w, T, rule), h7(h7a, e2, T, rule), h8(e1b, e7k, e2, T, rule), h9(e5), h10(e6, T, rule),
-              h11(e7, T, rule), h12(e5o), *h13(h13r, T, rule)]
+              h11(e7, T, rule), h12(e5o), *h13(h13r, T, rule), *h14(e5e_dev, e5e_fresh)]
         if e2r:
             e2f = with_rescores(e2, e2r, e2g)
             Af = audit(e2f, T, rule)
