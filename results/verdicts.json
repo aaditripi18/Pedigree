@@ -1248,15 +1248,15 @@
  },
  "reader_fixed": {
   "t": {
-   "rescored": 159,
+   "rescored": 164,
    "lost": 0,
    "still_errors": 99,
    "audit": {
     "categories": {
      "declared, related": {
-      "top_1k": 53,
-      "1k_10k": 71,
-      "10k_100k": 91
+      "top_1k": 58,
+      "1k_10k": 77,
+      "10k_100k": 108
      },
      "no declaration, parent found": {
       "top_1k": 38,
@@ -1274,9 +1274,9 @@
       "10k_100k": 12
      },
      "declared, not comparable": {
-      "top_1k": 27,
-      "1k_10k": 23,
-      "10k_100k": 33
+      "top_1k": 22,
+      "1k_10k": 17,
+      "10k_100k": 16
      },
      "declared, unrelated": {
       "top_1k": 1,
@@ -1289,51 +1289,51 @@
     },
     "h2": {
      "k": 106,
-     "n": 367,
-     "share": 0.2888283378746594,
+     "n": 375,
+     "share": 0.2826666666666667,
      "wilson": [
-      0.2448,
-      0.3372
+      0.2395,
+      0.3303
      ],
      "per_tier": {
       "top_1k": [
        38,
-       101
+       105
       ],
       "1k_10k": [
        42,
-       123
+       125
       ],
       "10k_100k": [
        26,
-       143
+       145
       ]
      },
-     "tier_weighted": 0.1981304471910606
+     "tier_weighted": 0.1952383579638752
     },
     "h3": {
      "k": 3,
-     "n": 228,
-     "share": 0.013157894736842105,
+     "n": 257,
+     "share": 0.011673151750972763,
      "wilson": [
-      0.0045,
-      0.038
+      0.004,
+      0.0338
      ],
      "per_tier": {
       "top_1k": [
        1,
-       55
+       60
       ],
       "1k_10k": [
        0,
-       72
+       78
       ],
       "10k_100k": [
        2,
-       101
+       119
       ]
      },
-     "tier_weighted": 0.018003600360036006
+     "tier_weighted": 0.015292717086834735
     },
     "contradicted": [
      [
@@ -1354,34 +1354,36 @@
     ],
     "n_models": 600
    },
+   "gguf_rescored": 1677,
+   "gguf_comparable": 774,
    "verdicts": {
     "H2": {
      "verdict": "not supported",
-     "evidence": "106/367 undeclared",
+     "evidence": "106/375 undeclared",
      "changes": false
     },
     "H3": {
      "verdict": "not supported",
-     "evidence": "3/228 contradicted",
+     "evidence": "3/257 contradicted",
      "changes": false
     },
     "H7": {
      "verdict": "not supported",
-     "evidence": "(a) 20/24; (b) 77/200",
+     "evidence": "(a) 20/24; (b) 77/230",
      "changes": false
     }
    }
   },
   "midpoint": {
-   "rescored": 159,
+   "rescored": 164,
    "lost": 0,
    "still_errors": 99,
    "audit": {
     "categories": {
      "declared, related": {
-      "top_1k": 51,
-      "1k_10k": 70,
-      "10k_100k": 88
+      "top_1k": 56,
+      "1k_10k": 76,
+      "10k_100k": 105
      },
      "no declaration, parent found": {
       "top_1k": 36,
@@ -1404,9 +1406,9 @@
       "10k_100k": 5
      },
      "declared, not comparable": {
-      "top_1k": 27,
-      "1k_10k": 23,
-      "10k_100k": 33
+      "top_1k": 22,
+      "1k_10k": 17,
+      "10k_100k": 16
      },
      "adapter": {
       "1k_10k": 4,
@@ -1415,51 +1417,51 @@
     },
     "h2": {
      "k": 103,
-     "n": 355,
-     "share": 0.29014084507042254,
+     "n": 363,
+     "share": 0.2837465564738292,
      "wilson": [
-      0.2454,
-      0.3394
+      0.2398,
+      0.3322
      ],
      "per_tier": {
       "top_1k": [
        36,
-       97
+       101
       ],
       "1k_10k": [
        42,
-       120
+       122
       ],
       "10k_100k": [
        25,
-       138
+       140
       ]
      },
-     "tier_weighted": 0.19825481846705512
+     "tier_weighted": 0.19526224870730635
     },
     "h3": {
      "k": 15,
-     "n": 228,
-     "share": 0.06578947368421052,
+     "n": 257,
+     "share": 0.058365758754863814,
      "wilson": [
-      0.0403,
-      0.1057
+      0.0357,
+      0.0941
      ],
      "per_tier": {
       "top_1k": [
        3,
-       55
+       60
       ],
       "1k_10k": [
        1,
-       72
+       78
       ],
       "10k_100k": [
        11,
-       101
+       119
       ]
      },
-     "tier_weighted": 0.09981525652565257
+     "tier_weighted": 0.08484712346477052
     },
     "contradicted": [
      [
@@ -1540,20 +1542,22 @@
     ],
     "n_models": 600
    },
+   "gguf_rescored": 1677,
+   "gguf_comparable": 774,
    "verdicts": {
     "H2": {
      "verdict": "not supported",
-     "evidence": "103/355 undeclared",
+     "evidence": "103/363 undeclared",
      "changes": false
     },
     "H3": {
      "verdict": "supported",
-     "evidence": "15/228 contradicted",
+     "evidence": "15/257 contradicted",
      "changes": false
     },
     "H7": {
      "verdict": "not supported",
-     "evidence": "(a) 20/24; (b) 76/188",
+     "evidence": "(a) 20/24; (b) 76/218",
      "changes": false
     }
    }
