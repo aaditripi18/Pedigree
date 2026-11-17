@@ -529,6 +529,36 @@
         0.9823954977062138,
         0.9843997877755324
        ]
+      },
+      "other_runs": {
+       "0": [
+        -0.005578509734626778,
+        0.007070698263055037
+       ],
+       "1000": [
+        -0.005912912225400185,
+        0.0059536100336390835
+       ],
+       "10000": [
+        -0.006930979554269695,
+        0.0044577049058738445
+       ],
+       "50000": [
+        -0.008500953202431504,
+        0.005012229149734124
+       ],
+       "100000": [
+        -0.007984574795408733,
+        0.005594860171699649
+       ],
+       "200000": [
+        -0.00505240136914426,
+        0.006476759551746089
+       ],
+       "300000": [
+        -0.004210966136066205,
+        0.006759718996594433
+       ]
       }
      },
      "evidence": "own checkpoints from 10k all related: True; other runs related: 0"
@@ -845,6 +875,315 @@
       ]
      },
      "evidence": "text_decoder: dark_js below 0.5002, TPR 5/5, FPR 0/5; vision_cnn: dark_js below 0.1740, TPR 5/5, FPR 5/5; no dev rule: text_encoder, vision_transformer"
+    },
+    {
+     "id": "H15",
+     "statement": "Direction by D3 (dates across owners or > 30 days apart; names within one release; kurtosis last) is right on >= 95% of fresh decided pairs and leaves <= 10% undecided.",
+     "follows": "H8",
+     "numbers": {
+      "dev": {
+       "n": 199,
+       "d3": [
+        184,
+        189,
+        [
+         0.9396,
+         0.9886
+        ]
+       ],
+       "d3_undecided": [
+        10,
+        199
+       ],
+       "d1": [
+        183,
+        193,
+        [
+         0.9073,
+         0.9716
+        ]
+       ],
+       "d2": [
+        24,
+        94,
+        [
+         0.178,
+         0.3519
+        ]
+       ],
+       "d3_wrong": [
+        [
+         "nomic-ai/nomic-embed-text-v2-moe",
+         "nomic-ai/nomic-embed-text-v2-moe-unsupervised"
+        ],
+        [
+         "LiquidAI/LFM2.5-VL-3B",
+         "LiquidAI/LFM2.5-2.6B-Base"
+        ],
+        [
+         "lllyasviel/control_v11p_sd15_inpaint",
+         "runwayml/stable-diffusion-v1-5"
+        ],
+        [
+         "ibm-granite/granite-embedding-reranker-english-r2",
+         "ibm-granite/granite-embedding-english-r2"
+        ],
+        [
+         "deepvk/USER2-small",
+         "deepvk/RuModernBERT-small"
+        ]
+       ]
+      }
+     },
+     "verdict": "pending",
+     "evidence": "fresh sample running; on E2 (dev) D3 is right on 184/189 decided, undecided 10/199"
+    },
+    {
+     "id": "H16",
+     "statement": "Behaviour calibrated against reference students (dark-knowledge drop below the lowest reference > r*, r* from dev) identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
+     "follows": "H9, H12, H14, H14b",
+     "verdict": "pending",
+     "numbers": {
+      "r_star": 0.06347109919778318,
+      "gap": 0.05651602285958646,
+      "dev": [
+       [
+        "text_decoder",
+        "distill_s0",
+        "distill",
+        0.229
+       ],
+       [
+        "text_decoder",
+        "indep_s0",
+        "indep",
+        -0.0006
+       ],
+       [
+        "text_decoder",
+        "distill_s1",
+        "distill",
+        0.2254
+       ],
+       [
+        "text_decoder",
+        "indep_s1",
+        "indep",
+        0.0006
+       ],
+       [
+        "text_decoder",
+        "distill_s2",
+        "distill",
+        0.25
+       ],
+       [
+        "text_decoder",
+        "indep_s2",
+        "indep",
+        -0.0064
+       ],
+       [
+        "vision_cnn",
+        "distill_s0",
+        "distill",
+        0.0917
+       ],
+       [
+        "vision_cnn",
+        "indep_s0",
+        "indep",
+        -0.0365
+       ],
+       [
+        "vision_cnn",
+        "distill_s1",
+        "distill",
+        0.0991
+       ],
+       [
+        "vision_cnn",
+        "indep_s1",
+        "indep",
+        0.0352
+       ],
+       [
+        "vision_cnn",
+        "distill_s2",
+        "distill",
+        0.103
+       ],
+       [
+        "vision_cnn",
+        "indep_s2",
+        "indep",
+        -0.0583
+       ],
+       [
+        "text_decoder",
+        "distill_s8",
+        "distill",
+        0.3426
+       ],
+       [
+        "text_decoder",
+        "indep_s8",
+        "indep",
+        -0.017
+       ],
+       [
+        "text_decoder",
+        "distill_s9",
+        "distill",
+        0.3356
+       ],
+       [
+        "text_decoder",
+        "indep_s9",
+        "indep",
+        -0.0082
+       ],
+       [
+        "text_decoder",
+        "distill_s10",
+        "distill",
+        0.3391
+       ],
+       [
+        "text_decoder",
+        "indep_s10",
+        "indep",
+        -0.0168
+       ],
+       [
+        "text_decoder",
+        "distill_s11",
+        "distill",
+        0.3382
+       ],
+       [
+        "text_decoder",
+        "indep_s11",
+        "indep",
+        -0.0088
+       ],
+       [
+        "text_decoder",
+        "distill_s12",
+        "distill",
+        0.3368
+       ],
+       [
+        "text_decoder",
+        "indep_s12",
+        "indep",
+        0.0081
+       ],
+       [
+        "vision_cnn",
+        "distill_s8",
+        "distill",
+        0.2763
+       ],
+       [
+        "vision_cnn",
+        "indep_s8",
+        "indep",
+        -0.1137
+       ],
+       [
+        "vision_cnn",
+        "distill_s9",
+        "distill",
+        0.2577
+       ],
+       [
+        "vision_cnn",
+        "indep_s9",
+        "indep",
+        0.0153
+       ],
+       [
+        "vision_cnn",
+        "distill_s10",
+        "distill",
+        0.18
+       ],
+       [
+        "vision_cnn",
+        "indep_s10",
+        "indep",
+        -0.0228
+       ],
+       [
+        "vision_cnn",
+        "distill_s11",
+        "distill",
+        0.291
+       ],
+       [
+        "vision_cnn",
+        "indep_s11",
+        "indep",
+        -0.0678
+       ],
+       [
+        "vision_cnn",
+        "distill_s12",
+        "distill",
+        0.2917
+       ],
+       [
+        "vision_cnn",
+        "indep_s12",
+        "indep",
+        -0.0155
+       ]
+      ]
+     },
+     "evidence": "dev rule: drop > 0.063 (dev gap 0.057); fresh students wait for GPU quota"
+    },
+    {
+     "id": "H16b",
+     "statement": "With students trained long enough to learn the task (text encoder, vision transformer), the reference-calibrated rule from a new dev batch identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
+     "follows": "H14b",
+     "verdict": "pending",
+     "evidence": "dev and fresh students wait for GPU quota"
+    },
+    {
+     "id": "H17a",
+     "statement": "On fresh GGUF pairs where names align >= 8 tensors, structural alignment (names ignored) gives the same related / unrelated verdict for >= 98%.",
+     "follows": "unverifiable declared bases",
+     "verdict": "pending",
+     "numbers": {
+      "agree": [
+       0,
+       0
+      ],
+      "unrelated_by_names": 0
+     },
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H17b",
+     "statement": "Structural alignment makes >= 50% of E2's declared GGUF pairs with no name match comparable.",
+     "follows": "unverifiable declared bases",
+     "verdict": "pending",
+     "numbers": {
+      "comparable": [
+       0,
+       32
+      ],
+      "scored": 0
+     },
+     "evidence": "E2s running (32 pairs with no name match)"
+    },
+    {
+     "id": "H18",
+     "statement": "Behaviour (H16's rule) confirms >= 90% of the declared Hub pairs weights cannot compare that it can run (text models <= 14B sharing one tokenizer).",
+     "follows": "behaviour above 2B parameters",
+     "verdict": "pending",
+     "evidence": "runs only if H16 or H16b is supported"
     }
    ],
    "audit": {
@@ -1465,6 +1804,36 @@
         0.9823954977062138,
         0.9843997877755324
        ]
+      },
+      "other_runs": {
+       "0": [
+        -0.005578509734626778,
+        0.007070698263055037
+       ],
+       "1000": [
+        -0.005912912225400185,
+        0.0059536100336390835
+       ],
+       "10000": [
+        -0.006930979554269695,
+        0.0044577049058738445
+       ],
+       "50000": [
+        -0.008500953202431504,
+        0.005012229149734124
+       ],
+       "100000": [
+        -0.007984574795408733,
+        0.005594860171699649
+       ],
+       "200000": [
+        -0.00505240136914426,
+        0.006476759551746089
+       ],
+       "300000": [
+        -0.004210966136066205,
+        0.006759718996594433
+       ]
       }
      },
      "evidence": "own checkpoints from 10k all related: False; other runs related: 0"
@@ -1781,6 +2150,315 @@
       ]
      },
      "evidence": "text_decoder: dark_js below 0.5002, TPR 5/5, FPR 0/5; vision_cnn: dark_js below 0.1740, TPR 5/5, FPR 5/5; no dev rule: text_encoder, vision_transformer"
+    },
+    {
+     "id": "H15",
+     "statement": "Direction by D3 (dates across owners or > 30 days apart; names within one release; kurtosis last) is right on >= 95% of fresh decided pairs and leaves <= 10% undecided.",
+     "follows": "H8",
+     "numbers": {
+      "dev": {
+       "n": 187,
+       "d3": [
+        172,
+        177,
+        [
+         0.9356,
+         0.9879
+        ]
+       ],
+       "d3_undecided": [
+        10,
+        187
+       ],
+       "d1": [
+        171,
+        181,
+        [
+         0.9013,
+         0.9697
+        ]
+       ],
+       "d2": [
+        20,
+        82,
+        [
+         0.1638,
+         0.3469
+        ]
+       ],
+       "d3_wrong": [
+        [
+         "nomic-ai/nomic-embed-text-v2-moe",
+         "nomic-ai/nomic-embed-text-v2-moe-unsupervised"
+        ],
+        [
+         "LiquidAI/LFM2.5-VL-3B",
+         "LiquidAI/LFM2.5-2.6B-Base"
+        ],
+        [
+         "lllyasviel/control_v11p_sd15_inpaint",
+         "runwayml/stable-diffusion-v1-5"
+        ],
+        [
+         "ibm-granite/granite-embedding-reranker-english-r2",
+         "ibm-granite/granite-embedding-english-r2"
+        ],
+        [
+         "deepvk/USER2-small",
+         "deepvk/RuModernBERT-small"
+        ]
+       ]
+      }
+     },
+     "verdict": "pending",
+     "evidence": "fresh sample running; on E2 (dev) D3 is right on 172/177 decided, undecided 10/187"
+    },
+    {
+     "id": "H16",
+     "statement": "Behaviour calibrated against reference students (dark-knowledge drop below the lowest reference > r*, r* from dev) identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
+     "follows": "H9, H12, H14, H14b",
+     "verdict": "pending",
+     "numbers": {
+      "r_star": 0.06347109919778318,
+      "gap": 0.05651602285958646,
+      "dev": [
+       [
+        "text_decoder",
+        "distill_s0",
+        "distill",
+        0.229
+       ],
+       [
+        "text_decoder",
+        "indep_s0",
+        "indep",
+        -0.0006
+       ],
+       [
+        "text_decoder",
+        "distill_s1",
+        "distill",
+        0.2254
+       ],
+       [
+        "text_decoder",
+        "indep_s1",
+        "indep",
+        0.0006
+       ],
+       [
+        "text_decoder",
+        "distill_s2",
+        "distill",
+        0.25
+       ],
+       [
+        "text_decoder",
+        "indep_s2",
+        "indep",
+        -0.0064
+       ],
+       [
+        "vision_cnn",
+        "distill_s0",
+        "distill",
+        0.0917
+       ],
+       [
+        "vision_cnn",
+        "indep_s0",
+        "indep",
+        -0.0365
+       ],
+       [
+        "vision_cnn",
+        "distill_s1",
+        "distill",
+        0.0991
+       ],
+       [
+        "vision_cnn",
+        "indep_s1",
+        "indep",
+        0.0352
+       ],
+       [
+        "vision_cnn",
+        "distill_s2",
+        "distill",
+        0.103
+       ],
+       [
+        "vision_cnn",
+        "indep_s2",
+        "indep",
+        -0.0583
+       ],
+       [
+        "text_decoder",
+        "distill_s8",
+        "distill",
+        0.3426
+       ],
+       [
+        "text_decoder",
+        "indep_s8",
+        "indep",
+        -0.017
+       ],
+       [
+        "text_decoder",
+        "distill_s9",
+        "distill",
+        0.3356
+       ],
+       [
+        "text_decoder",
+        "indep_s9",
+        "indep",
+        -0.0082
+       ],
+       [
+        "text_decoder",
+        "distill_s10",
+        "distill",
+        0.3391
+       ],
+       [
+        "text_decoder",
+        "indep_s10",
+        "indep",
+        -0.0168
+       ],
+       [
+        "text_decoder",
+        "distill_s11",
+        "distill",
+        0.3382
+       ],
+       [
+        "text_decoder",
+        "indep_s11",
+        "indep",
+        -0.0088
+       ],
+       [
+        "text_decoder",
+        "distill_s12",
+        "distill",
+        0.3368
+       ],
+       [
+        "text_decoder",
+        "indep_s12",
+        "indep",
+        0.0081
+       ],
+       [
+        "vision_cnn",
+        "distill_s8",
+        "distill",
+        0.2763
+       ],
+       [
+        "vision_cnn",
+        "indep_s8",
+        "indep",
+        -0.1137
+       ],
+       [
+        "vision_cnn",
+        "distill_s9",
+        "distill",
+        0.2577
+       ],
+       [
+        "vision_cnn",
+        "indep_s9",
+        "indep",
+        0.0153
+       ],
+       [
+        "vision_cnn",
+        "distill_s10",
+        "distill",
+        0.18
+       ],
+       [
+        "vision_cnn",
+        "indep_s10",
+        "indep",
+        -0.0228
+       ],
+       [
+        "vision_cnn",
+        "distill_s11",
+        "distill",
+        0.291
+       ],
+       [
+        "vision_cnn",
+        "indep_s11",
+        "indep",
+        -0.0678
+       ],
+       [
+        "vision_cnn",
+        "distill_s12",
+        "distill",
+        0.2917
+       ],
+       [
+        "vision_cnn",
+        "indep_s12",
+        "indep",
+        -0.0155
+       ]
+      ]
+     },
+     "evidence": "dev rule: drop > 0.063 (dev gap 0.057); fresh students wait for GPU quota"
+    },
+    {
+     "id": "H16b",
+     "statement": "With students trained long enough to learn the task (text encoder, vision transformer), the reference-calibrated rule from a new dev batch identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
+     "follows": "H14b",
+     "verdict": "pending",
+     "evidence": "dev and fresh students wait for GPU quota"
+    },
+    {
+     "id": "H17a",
+     "statement": "On fresh GGUF pairs where names align >= 8 tensors, structural alignment (names ignored) gives the same related / unrelated verdict for >= 98%.",
+     "follows": "unverifiable declared bases",
+     "verdict": "pending",
+     "numbers": {
+      "agree": [
+       0,
+       0
+      ],
+      "unrelated_by_names": 0
+     },
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H17b",
+     "statement": "Structural alignment makes >= 50% of E2's declared GGUF pairs with no name match comparable.",
+     "follows": "unverifiable declared bases",
+     "verdict": "pending",
+     "numbers": {
+      "comparable": [
+       0,
+       32
+      ],
+      "scored": 0
+     },
+     "evidence": "E2s running (32 pairs with no name match)"
+    },
+    {
+     "id": "H18",
+     "statement": "Behaviour (H16's rule) confirms >= 90% of the declared Hub pairs weights cannot compare that it can run (text models <= 14B sharing one tokenizer).",
+     "follows": "behaviour above 2B parameters",
+     "verdict": "pending",
+     "evidence": "runs only if H16 or H16b is supported"
     }
    ],
    "audit": {
@@ -2082,6 +2760,17 @@
    },
    "gguf_rescored": 1677,
    "gguf_comparable": 774,
+   "unverifiable": {
+    "models": 55,
+    "pairs": 58,
+    "reasons": {
+     "GGUF: no tensor name maps": 32,
+     "read failed again (network)": 10,
+     "other format (no shared shapes, draft head, repack, no weights)": 7,
+     "gated or private": 5,
+     "GGUF tensor type of a fork": 4
+    }
+   },
    "verdicts": {
     "H2": {
      "verdict": "not supported",
@@ -2270,6 +2959,17 @@
    },
    "gguf_rescored": 1677,
    "gguf_comparable": 774,
+   "unverifiable": {
+    "models": 55,
+    "pairs": 58,
+    "reasons": {
+     "GGUF: no tensor name maps": 32,
+     "read failed again (network)": 10,
+     "other format (no shared shapes, draft head, repack, no weights)": 7,
+     "gated or private": 5,
+     "GGUF tensor type of a fork": 4
+    }
+   },
    "verdicts": {
     "H2": {
      "verdict": "not supported",

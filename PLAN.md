@@ -657,6 +657,9 @@ name table does not know, so 0 tensors align (DeepSeek-V4, NeMo Parakeet, newer 
 list (types 42 and 142); 6 are gated or private (HTTP 401; gated without a byte-identical public
 copy); 6 are other formats (a random tiny model with no shared shapes, a draft head, an EXL repack,
 an NPU build, no weight files).
+*Correction (2026-11-17, same day, before any H15-H18 data): `scripts/analyse.py`'s breakdown
+(`reader_fixed.unverifiable`) counts 5 gated or private and 7 other formats, not 6 and 6; the
+hand count above put one draft-head pair in the wrong group. No rule depends on these counts.*
 
 **Structural alignment.** When names align fewer than 8 tensors, a GGUF tensor is paired with a
 Hugging Face tensor by position: both sides are grouped by block index (`blk.N.` in GGUF; the first
