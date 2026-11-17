@@ -1,51 +1,117 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>Pedigree checker</title>
-<style>
-:root{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#5d5b55;--line:#e3e0d8;--card:#fff;--accent:#1f5f8b;--ok:#2d6a3e;--no:#9a3b2e;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
-@media (prefers-color-scheme:dark){:root{--bg:#141413;--fg:#ecebe6;--muted:#a3a19a;--line:#2e2d2a;--card:#1c1c1a;--accent:#7fb4dc;--ok:#7cc48f;--no:#e28c7c}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
-main{max-width:920px;margin:0 auto;padding:40px 16px 80px}h1{font-size:2rem;line-height:1.2;margin:0 0 12px}
-h2{font-size:1.25rem;margin:48px 0 12px;padding-top:16px;border-top:1px solid var(--line)}p,li{color:var(--fg)}
-.lede{font-size:1.1rem;color:var(--muted)}nav{display:flex;gap:16px;margin-bottom:32px;font-size:.95rem}
-a{color:var(--accent)}table{width:100%;border-collapse:collapse;font-size:.92rem;display:block;overflow-x:auto}
-th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600}
-.num{font-variant-numeric:tabular-nums;text-align:right}.ok{color:var(--ok);font-weight:600}.no{color:var(--no);font-weight:600}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}
-.card{background:var(--card);border:1px solid var(--line);padding:16px}.card b{display:block;font-size:1.6rem;font-variant-numeric:tabular-nums}
-code,pre{font-family:var(--mono);font-size:.88rem}pre{background:var(--card);border:1px solid var(--line);padding:12px;overflow-x:auto}
-input{font:inherit;padding:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);width:100%}
-button{font:inherit;padding:8px 16px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
-#log{color:var(--muted);font-size:.9rem;min-height:1.5em}.verdict{font-size:1.4rem;font-weight:700}
-</style><script>globalThis.THRESHOLDS = {"plain": 0.02554, "invariant": 0.066201};</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedigree checker — verify a declared base model</title>
+<meta name="description" content="Compare a Hugging Face model&#x27;s weights with its declared base_model in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230f131c'/%3E%3Ccircle cx='5' cy='5' r='2.2' fill='%239085e9'/%3E%3Ccircle cx='11' cy='11' r='2.2' fill='%239085e9'/%3E%3Cpath d='M5 5 L11 11' stroke='%239085e9' stroke-width='1.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="logo" href="index.html"><span class="dot"></span><span>PEDIGREE</span></a>
+    <nav class="nav" aria-label="Main"><a href="index.html#audit">Audit</a><a href="index.html#instrument">Instrument</a><a href="index.html#hypotheses">Hypotheses</a><a href="index.html#caveats">Caveats</a><a href="index.html#reproduce">Reproduce</a><a href="https://github.com/aaditripi18/Pedigree" rel="noopener">GitHub &#8599;</a></nav>
+    <a class="btn btn-primary btn-sm" href="check.html">Check a model</a>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+
+<section class="hero hero-check">
+  <div class="hero-text">
+    <div class="eyebrow"><span class="dot"></span><span>Browser checker · nothing uploaded</span></div>
+    <h1>Check a model's declared base</h1>
+    <p class="lede">Compares a model's weights with its declared <code>base_model</code>, or a base you name, in this
+    page. It reads file headers and the first 8,192 values of up to 24 matched tensors from huggingface.co; nothing
+    is sent anywhere else.</p>
+  </div>
+</section>
+<div class="check-grid">
+  <section class="panel">
+    <form id="f" class="form">
+      <label>Model<input id="model" placeholder="org/model" autocomplete="off" spellcheck="false" required></label>
+      <label>Base <span class="muted">(empty: the declared base_model)</span>
+      <input id="base" placeholder="org/base" autocomplete="off" spellcheck="false"></label>
+      <div class="btns"><button class="btn btn-primary" id="go">Compare</button>
+      <button type="button" class="btn" id="ex" data-model="microsoft/DialoGPT-small"
+      data-base="openai-community/gpt2">Try an example</button></div>
+    </form>
+    <p id="log" class="log" aria-live="polite"></p>
+    <div id="out" class="out" aria-live="polite"></div>
+  </section>
+  <aside class="panel side">
+    <h3>How to read the verdict</h3>
+    <ul class="kv">
+      <li><span class="pill pill-ok">RELATED</span> median cosine above 0.02554 (the published threshold)</li>
+      <li><span class="pill pill-un">UNRELATED</span> at or below it, with at least 8 tensors compared</li>
+      <li><span class="pill pill-wait">NOT COMPARABLE</span> fewer than 8 shared tensors: never read as unrelated</li>
+    </ul>
+    <p class="fine">Safetensors models only. For PyTorch, GGUF and MLX files, gated models and the
+    permutation-invariant check, use the CLI: <code>pedigree verify hf:org/model</code>.</p>
+    <p class="fine"><a href="index.html#instrument">How the threshold was chosen and tested</a></p>
+  </aside>
+</div>
+</div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <div class="logo"><span class="dot dot-muted"></span><span>PEDIGREE</span></div>
+      <p>Every number on this site is generated from <code>results/ledger.jsonl</code> by
+      <code>scripts/analyse.py</code>. Code under the <a href="https://github.com/aaditripi18/Pedigree/blob/main/LICENSE">MIT licence</a>.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer"><a href="index.html">Findings</a><a href="check.html">Checker</a>
+      <a href="https://github.com/aaditripi18/Pedigree/blob/main/PLAN.md">PLAN.md</a><a href="https://github.com/aaditripi18/Pedigree/blob/main/docs/RESULTS.md">RESULTS.md</a>
+      <a href="https://github.com/aaditripi18/Pedigree">GitHub</a></nav>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+<script>globalThis.THRESHOLDS = {"plain": 0.02554, "invariant": 0.066201};</script>
 <script type="module">
 import { openModel, compare, setWaitLog } from "./checker.js";
 const $ = id => document.getElementById(id), log = t => $("log").textContent = t;
 setWaitLog(log);
+$("ex").addEventListener("click", () => { $("model").value = $("ex").dataset.model; $("base").value = $("ex").dataset.base; $("f").requestSubmit(); });
+function card(base, r) {
+  const cls = r.verdict === "related" ? "ok" : r.verdict === "unrelated" ? "un" : "wait";
+  const d = document.createElement("div"); d.className = "res";
+  const top = document.createElement("div"); top.className = "res-top";
+  const b = document.createElement("span"); b.className = "res-base"; b.textContent = "vs " + base;
+  const p = document.createElement("span"); p.className = "pill pill-" + cls; p.textContent = r.verdict.toUpperCase() + (r.partial ? " (PARTIAL)" : "");
+  top.append(b, p);
+  const n = document.createElement("div"); n.className = "res-num"; n.textContent = r.plain === null ? "n/a" : r.plain.toFixed(4);
+  const s = document.createElement("p"); s.className = "res-sub";
+  s.textContent = `median cosine over ${r.compared} tensors (${r.matched} matched by name and shape) · threshold ${THRESHOLDS.plain}`;
+  const g = document.createElement("div"); g.className = "gauge";
+  const pos = v => Math.max(0, Math.min(100, (v + 0.1) / 1.1 * 100));
+  const mk = document.createElement("i"); mk.className = "g-mk g-" + cls; if (r.plain !== null) mk.style.left = pos(r.plain) + "%"; else mk.hidden = true;
+  const th = document.createElement("i"); th.className = "g-th"; th.style.left = pos(THRESHOLDS.plain) + "%";
+  const l0 = document.createElement("span"); l0.className = "g-l"; l0.textContent = "-0.1";
+  const l1 = document.createElement("span"); l1.className = "g-r"; l1.textContent = "1.0";
+  g.append(th, mk, l0, l1);
+  d.append(top, n, s, g); return d;
+}
 $("f").addEventListener("submit", async ev => {
-  ev.preventDefault(); $("out").textContent = "";
+  ev.preventDefault(); $("out").textContent = ""; $("go").disabled = true;
   try {
     const m = await openModel($("model").value.trim(), log);
     const bases = $("base").value.trim() ? [$("base").value.trim()] : m.declared;
     if (!bases.length) { log(""); $("out").textContent = "This model card declares no base_model. Name a base to compare with."; return; }
-    for (const b of bases) {
-      const r = await compare(m, await openModel(b, log), log);
-      const div = document.createElement("div");
-      const v = document.createElement("p"); v.className = "verdict"; v.textContent = `vs ${b}: ${r.verdict}${r.partial ? " (partial: few shared tensors)" : ""}`;
-      const d = document.createElement("p"); d.textContent = `median cosine ${r.plain === null ? "n/a" : r.plain.toFixed(4)} over ${r.compared} tensors (${r.matched} matched by name and shape); threshold ${THRESHOLDS.plain}`;
-      div.append(v, d); $("out").append(div);
-    }
+    for (const b of bases) $("out").append(card(b, await compare(m, await openModel(b, log), log)));
     log("done");
   } catch (err) { log(""); $("out").textContent = "Could not compare: " + err.message; }
+  finally { $("go").disabled = false; }
+  const q = new URLSearchParams({ model: $("model").value.trim(), base: $("base").value.trim() });
+  if (!$("base").value.trim()) q.delete("base");
+  history.replaceState(null, "", "?" + q);
 });
-</script></head><body><main>
-<nav><a href="index.html">Findings</a><a href="check.html">Check a model</a><a href="https://github.com/aaditripi18/Pedigree">Code</a></nav>
-<h1>Check a model's declared base</h1>
-<p class="lede">Compares a model's weights with its declared <code>base_model</code> (or a base you name) in this
-page. It reads file headers and the first 8,192 values of up to 24 matched tensors from huggingface.co; nothing is
-sent anywhere else.</p>
-<form id="f"><p><label>Model<br><input id="model" placeholder="org/model" required></label></p>
-<p><label>Base (leave empty to use the declared base_model)<br><input id="base" placeholder="org/base"></label></p>
-<p><button>Compare</button></p></form>
-<p id="log"></p><div id="out"></div>
-<p>Safetensors models only; for PyTorch, GGUF and MLX files, gated models and the permutation-invariant check, use the
-CLI.</p></main></body></html>
+// a shareable link: check.html?model=org/model&base=org/base runs the comparison on load
+const params = new URLSearchParams(location.search);
+if (params.get("model")) { $("model").value = params.get("model"); $("base").value = params.get("base") || ""; $("f").requestSubmit(); }
+</script>
+</body>
+</html>

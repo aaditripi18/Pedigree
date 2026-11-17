@@ -74,10 +74,20 @@ judged once on fresh pairs.
 | H13b | Pool v2 holds more of them than E2's pool | **supported** | 104 found only by v2, 1 only by E2's pool; McNemar p = 2.6e-30 |
 | H14 | Behaviour by shared mistakes, one rule for all families, fresh students: TPR >= 90% at FPR <= 5% | **not supported** | error agreement above 0.5965 (dev): TPR 0/20, FPR 0/20 |
 | H14b | The same, with a rule per family (text decoder, vision CNN) | **not supported** | text decoder TPR 5/5, FPR 0/5; vision CNN TPR 5/5, FPR 5/5 |
+| H15 | Direction by D3 (dates across owners or > 30 days; names within one release; kurtosis last): >= 95% right, <= 10% undecided, fresh | pending | fresh sample running; on E2 (dev) right on 184/189 decided, 10/199 undecided |
+| H16 | Behaviour calibrated against reference students trained the same way: TPR >= 90% at FPR <= 5%, fresh | pending | dev rule fixed: drop > 6.3% (dev gap 5.7 points); fresh students wait for GPU quota |
+| H16b | The same, with text-encoder and vision-transformer students trained long enough to learn the task | pending | waits for GPU quota |
+| H17a | Structural GGUF alignment (names ignored) agrees with name alignment on >= 98% of fresh pairs | pending | fresh sample running |
+| H17b | Structural alignment makes >= 50% of E2's 32 declared GGUF pairs with no name match comparable | pending | E2s running |
+| H18 | Behaviour confirms >= 90% of the declared Hub pairs weights cannot compare (text models <= 14B) | pending | runs only if H16 or H16b is supported |
 
-H2, H3, H7-H9, H12, H14 and H14b failed their bars; they are reported as they came out. H13 was written after
-H7 failed, to test a pool designed from H7's misses; it was judged on 360 Hub models no rule was
-chosen on, drawn before any of them was read.
+H2, H3, H7-H9, H12, H14 and H14b failed their bars; they are reported as they came out, and never
+reworded. H2 and H3 are measurements of the Hub (its declarations are more honest than the hypotheses
+guessed). Every other failed hypothesis has a follow-up, designed from the failure's cause in the data
+and written into [PLAN.md](PLAN.md) before any of its data existed: H13 for H7 (supported), H15 for
+H8, H16 and H16b for H9, H12, H14 and H14b, H17 for the unverifiable bases, H18 for behaviour above
+2B parameters. H13 was judged on 360 Hub models no rule was chosen on, drawn before any was read;
+H15 and H17a on a new sample of 360 (seed 20261118), drawn the same way.
 
 ## Every caveat, measured
 
@@ -108,6 +118,14 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   comparisons; E2p, 5 legacy bases): with all re-reads, declared bases the weights confirm rise
   from 214 to 243 models and unverifiable ones fall from 84 to 55; no verdict changes (H2
   106/375, H3 3/257, H7 b 77/230).
+- **The 55 still unverifiable (H17).** Their 58 declared pairs: 32 GGUF files whose architecture
+  llama.cpp's name table does not know, so no tensor name maps; 10 that failed to re-read (network);
+  7 other formats (a random tiny model with no shared shapes, a draft head, a repack, an NPU build,
+  no weight files); 5 gated or private; 4 with GGUF tensor types newer than the published `gguf`
+  package (type 142 is PrismML's ternary PQ2_0, whose kernels are public in its llama.cpp fork).
+  H17 aligns GGUF tensors by block index and unique shape when names fail, validated against
+  name alignment on fresh pairs (H17a), and applies it to the 32 (H17b, with the 10 re-read);
+  fork types are decoded only from the fork's own published code, with a test against it.
 - **Thresholds.** Under the pre-registered sensitivity rule (the midpoint between the classes
   instead of max + 5 SD) three verdicts change: H3 becomes supported (15/227 contradicted) and
   H10, H11 become not supported. The published rule is max + 5 SD; both are in
@@ -127,11 +145,27 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   scales. With a rule per family (H14b), dark-knowledge divergence identifies every fresh
   text-decoder student correctly (5/5 distilled, 0/5 independent) but admits every vision-CNN
   student (5/5 and 5/5; its dev margin was 0.017), and no rule exists for the text encoder or the
-  vision transformer, whose students barely learn the teacher's task. Because no behaviour rule
-  holds across families, behaviour is not run on the 66 Hub pairs above 2B parameters: a result
-  there could neither confirm nor contradict a declaration. Lineage verdicts rest on weights.
-- **Direction.** Hub dates (D1) are right 94.8% of the time; weight kurtosis (D2) 89.7% on the
-  pairs it decides, and it leaves 34% undecided. The audit uses dates.
+  vision transformer, whose students barely learn the teacher's task. The cause is in the data:
+  within each training batch the vision-CNN students do separate (fresh distilled 0.091-0.105
+  against independent 0.128-0.143), but the whole fresh batch sits below the threshold chosen on
+  the dev batch (0.174); an absolute threshold does not carry from one batch to the next. H16
+  scores each student against reference students trained the same way (its rule, a drop of more
+  than 6.3% below the lowest reference, was fixed from dev before any fresh student exists); H16b
+  trains text-encoder and vision-transformer students for 20,000 steps, to a competence floor set
+  in advance. Both run on GPU when the quota is free.
+- **Behaviour above 2B parameters (H18).** 66 of the 94 declared pairs weights could not compare
+  have a model above 2B parameters. Behaviour runs on them (text models up to 14B sharing a
+  tokenizer) only if H16 or H16b is supported: a behaviour result on a large model proves nothing
+  until the behaviour check itself has passed on ground truth. Most of these pairs are GGUF files
+  that H17 may make comparable by weights instead.
+- **Direction (H15).** Hub dates (D1) are right on 183 of 193 pairs; 9 of the 10 misses are one
+  organisation's joint releases, where the derived repository was created up to 7.9 days before
+  its base (Qwen, Gemma, LiquidAI, nomic), and one is a base re-created years later. Weight
+  kurtosis (D2) is right on 35 of 39 decided pairs and leaves 20 of 59 undecided: it is right on
+  every pre-training checkpoint pair, but short fine-tunes move it by less than 0.005 either way and
+  LoRA merges not at all. D3 uses dates across owners or more than 30 days apart, names within one
+  release, and kurtosis last; on E2 (dev) it is right on 184 of 189 decided pairs, and H15 judges
+  it on a fresh sample.
 
 ## Use it
 
@@ -143,7 +177,9 @@ pedigree verify hf:org/model --base hf:org/base   # against a base you name
 
 Verdicts are *related*, *unrelated* (with enough tensors compared) or *not comparable*. Nothing
 downloaded is executed: PyTorch checkpoints are read by a restricted unpickler. A browser version
-is on the [project site](https://aaditripi18.github.io/Pedigree/check.html), which runs in the browser.
+is on the [project site](https://aaditripi18.github.io/Pedigree/check.html): it runs in the page,
+reads only from huggingface.co, and takes shareable links, e.g.
+[DialoGPT-small vs GPT-2](https://aaditripi18.github.io/Pedigree/check.html?model=microsoft/DialoGPT-small&base=openai-community/gpt2).
 
 ## Reproduce
 

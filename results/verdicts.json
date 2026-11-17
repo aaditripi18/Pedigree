@@ -450,6 +450,68 @@
       "d1": [
        183,
        193
+      ],
+      "d1_wrong": [
+       [
+        "Qwen/Qwen3-14B",
+        "Qwen/Qwen3-14B-Base",
+        true,
+        1.1
+       ],
+       [
+        "google/gemma-4-31B-it",
+        "google/gemma-4-31B",
+        true,
+        0.3
+       ],
+       [
+        "Qwen/Qwen3.5-35B-A3B",
+        "Qwen/Qwen3.5-35B-A3B-Base",
+        true,
+        0.0
+       ],
+       [
+        "Qwen/Qwen2-VL-2B-Instruct",
+        "Qwen/Qwen2-VL-2B",
+        true,
+        7.9
+       ],
+       [
+        "nomic-ai/nomic-embed-text-v2-moe",
+        "nomic-ai/nomic-embed-text-v2-moe-unsupervised",
+        true,
+        3.7
+       ],
+       [
+        "Qwen/Qwen2-VL-7B-Instruct",
+        "Qwen/Qwen2-VL-7B",
+        true,
+        7.9
+       ],
+       [
+        "Qwen/Qwen2.5-Coder-32B-Instruct",
+        "Qwen/Qwen2.5-Coder-32B",
+        true,
+        2.1
+       ],
+       [
+        "Qwen/Qwen2.5-Coder-3B-Instruct",
+        "Qwen/Qwen2.5-Coder-3B",
+        true,
+        2.1
+       ],
+       [
+        "LiquidAI/LFM2-24B-A2B-GGUF",
+        "LiquidAI/LFM2-24B-A2B",
+        true,
+        7.0
+       ],
+       [
+        "lllyasviel/control_v11p_sd15_inpaint",
+        "runwayml/stable-diffusion-v1-5",
+        false,
+        503.6
+       ]
       ]
      },
      "evidence": "D1 (dates) right on 183/193; D2 (kurtosis, margin 0.00062) right on 35/39 decided, undecided 20/59"
@@ -500,6 +562,7 @@
      "numbers": {
       "own_from_10k_all_related": true,
       "other_run_related": 0,
+      "runs": 5,
       "curve": {
        "0": [
         0.0247262914019633,
@@ -1725,6 +1788,68 @@
       "d1": [
        171,
        181
+      ],
+      "d1_wrong": [
+       [
+        "Qwen/Qwen3-14B",
+        "Qwen/Qwen3-14B-Base",
+        true,
+        1.1
+       ],
+       [
+        "google/gemma-4-31B-it",
+        "google/gemma-4-31B",
+        true,
+        0.3
+       ],
+       [
+        "Qwen/Qwen3.5-35B-A3B",
+        "Qwen/Qwen3.5-35B-A3B-Base",
+        true,
+        0.0
+       ],
+       [
+        "Qwen/Qwen2-VL-2B-Instruct",
+        "Qwen/Qwen2-VL-2B",
+        true,
+        7.9
+       ],
+       [
+        "nomic-ai/nomic-embed-text-v2-moe",
+        "nomic-ai/nomic-embed-text-v2-moe-unsupervised",
+        true,
+        3.7
+       ],
+       [
+        "Qwen/Qwen2-VL-7B-Instruct",
+        "Qwen/Qwen2-VL-7B",
+        true,
+        7.9
+       ],
+       [
+        "Qwen/Qwen2.5-Coder-32B-Instruct",
+        "Qwen/Qwen2.5-Coder-32B",
+        true,
+        2.1
+       ],
+       [
+        "Qwen/Qwen2.5-Coder-3B-Instruct",
+        "Qwen/Qwen2.5-Coder-3B",
+        true,
+        2.1
+       ],
+       [
+        "LiquidAI/LFM2-24B-A2B-GGUF",
+        "LiquidAI/LFM2-24B-A2B",
+        true,
+        7.0
+       ],
+       [
+        "lllyasviel/control_v11p_sd15_inpaint",
+        "runwayml/stable-diffusion-v1-5",
+        false,
+        503.6
+       ]
       ]
      },
      "evidence": "D1 (dates) right on 171/181; D2 (kurtosis, margin 0.00062) right on 35/39 decided, undecided 20/59"
@@ -1775,6 +1900,7 @@
      "numbers": {
       "own_from_10k_all_related": false,
       "other_run_related": 0,
+      "runs": 5,
       "curve": {
        "0": [
         0.0247262914019633,

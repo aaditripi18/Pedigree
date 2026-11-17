@@ -204,18 +204,23 @@ def h8(e1b, e7k, e2, T, rule):
     pairs += [(-r["kurtosis_gap"], "e7") for r in e7k if num(r.get("kurtosis_gap")) is not None]
     decided = [g for g, _ in pairs if m is not None and abs(g) > m]
     right = sum(g > 0 for g in decided)
-    d1 = []
+    d1, d1_wrong = [], []
     for mo in e2:
         for d in mo.get("declared", []):
             if related(d, T, rule) == "related" and not d.get("identical") and d.get("created") and mo.get("created") \
                     and d["created"] != mo["created"]:
                 d1.append(d["created"] < mo["created"])
+                if not d1[-1]:
+                    d1_wrong.append([mo["id"], d["base"],
+                                     mo["id"].split("/")[0].lower() == d["base"].split("/")[0].lower(),
+                                     round(_days(d["created"], mo["created"]), 1)])
     ok2 = (right / len(decided) >= 0.9) if decided else (False if pairs and m is not None else None)
     ok1 = (sum(d1) / len(d1) >= 0.9) if d1 else None
     ok = None if ok1 is None or ok2 is None or len(e7k) < 35 else (ok1 and ok2)
     return {"id": "H8", "statement": "Direction is decided correctly for >= 90% of the pairs where it is decided "
             "(D1 Hub dates; D2 weight kurtosis), with the undecided share reported.", "verdict": verdict(ok),
-            "numbers": {"d2_margin": m, "d2": [right, len(decided), len(pairs)], "d1": [sum(d1), len(d1)]},
+            "numbers": {"d2_margin": m, "d2": [right, len(decided), len(pairs)], "d1": [sum(d1), len(d1)],
+                        "d1_wrong": d1_wrong},
             "evidence": f"D1 (dates) right on {sum(d1)}/{len(d1)}; D2 (kurtosis, margin {m:.2g}) right on {right}/"
                         f"{len(decided)} decided, undecided {len(pairs) - len(decided)}/{len(pairs)}"}
 
@@ -344,9 +349,10 @@ def h11(e7, T, rule):
                 other[r["step"]].append(r["median_cosine"])
                 other_hits += rel
     ok = (own_ok and other_hits == 0) if len(by) == 5 else None
+    n_runs = len(by)
     return {"id": "H11", "statement": "A final model is verified against its own checkpoints from step 10,000 on, "
             "and against no checkpoint of another run.", "verdict": verdict(ok),
-            "numbers": {"own_from_10k_all_related": own_ok, "other_run_related": other_hits,
+            "numbers": {"own_from_10k_all_related": own_ok, "other_run_related": other_hits, "runs": n_runs,
                         "curve": {s: [min(v), max(v)] for s, v in sorted(curve.items())},
                         "other_runs": {s: [min(v), max(v)] for s, v in sorted(other.items())}},
             "evidence": f"own checkpoints from 10k all related: {own_ok}; other runs related: {other_hits}"}
