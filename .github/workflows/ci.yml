@@ -16,7 +16,9 @@ jobs:
           node-version: 20
       - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
       - run: pip install -e ".[dev]" pandas
-      - run: python -m pytest -q
+      - run: python -m pytest -q -rs
+        env:
+          PEDIGREE_REQUIRE_CC: "1"   # the GGUF reference-parity tests must run here, not skip
       - name: verdicts, RESULTS.md and the site match the ledger
         run: |
           python scripts/analyse.py

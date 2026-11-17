@@ -114,6 +114,13 @@ def sample(url: str, spec: dict, elements: int) -> np.ndarray:
         _, block, type_size = ggufextra.TYPES[spec["qtype"]]
         total = int(np.prod(spec["shape"]))
         n = min(elements, total)
+        group = ggufextra.ROW_GROUP.get(spec["qtype"])
+        if group:       # rows stored interleaved in groups: read whole groups of rows
+            cols = int(spec["shape"][-1])
+            per_group = group * cols // block * type_size
+            nbytes = -(-n // (group * cols)) * per_group
+            raw = fetch_range(url, spec["start"], spec["start"] + nbytes - 1)
+            return np.asarray(ggufextra.dequantize(raw, spec["qtype"], cols), dtype=np.float64)[:n]
         blocks = -(-n // block)
         raw = fetch_range(url, spec["start"], spec["start"] + blocks * type_size - 1)
         return np.asarray(ggufextra.dequantize(raw, spec["qtype"]), dtype=np.float64)[:n]

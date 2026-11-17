@@ -1,7 +1,10 @@
 """GGUF types newer than the gguf package (pedigree/ggufextra.py) decode exactly as their public
 reference implementations do. The C below is copied from those sources (llama.cpp master and
-PrismML-Eng/llama.cpp branch prism, both MIT): dequantize_row_q2_0, dequantize_row_pq2_0,
-dequantize_row_ptq1_0 and ggml_f8_e4m3_to_fp32. Compiled where a C compiler exists (CI: gcc)."""
+PrismML-Eng/llama.cpp branch prism, ikawrakow/ik_llama.cpp, all MIT): dequantize_row_q2_0,
+dequantize_row_pq2_0, dequantize_row_ptq1_0, ggml_f8_e4m3_to_fp32 and dequantize_row_iq4_k_r4 (C++
+`auto` written out as its C type, nothing else changed). Compiled where a C compiler exists; CI
+sets PEDIGREE_REQUIRE_CC=1, so there a missing compiler fails the test instead of skipping it."""
+import os
 import shutil
 import struct
 import subprocess
@@ -29,6 +32,39 @@ typedef struct { ggml_half d; uint8_t qs[QK_PQ2_0 / 4]; } block_pq2_0;
 typedef struct { uint8_t qs[(QK_PTQ1_0 - 4*QK_PTQ1_0/64)/5]; uint8_t qh[QK_PTQ1_0/64]; ggml_half d; } block_ptq1_0;
 static const size_t ptq1_0_stages[3] = {32, 16, 8};
 static inline float fp32_from_bits(uint32_t w) { float f; memcpy(&f, &w, 4); return f; }
+#define QK_K 256
+typedef struct { ggml_half d[4]; uint8_t extra[8]; uint8_t scales_h[QK_K/16]; uint8_t scales_l[QK_K/8]; uint8_t qs[QK_K*2]; } block_iq4_k_r4;
+static const int8_t iq4k_values[32] = {
+    -127, -104, -83, -65, -49, -35, -22, -10, 1, 13, 25, 38, 53, 69, 89, 113,
+    -123, -100, -79, -61, -45, -31, -18,  -6, 5, 17, 29, 42, 57, 73, 93, 117 };
+void dequantize_row_iq4_k_r4(const block_iq4_k_r4 * x, float * y, int64_t k) {
+    int64_t n_per_row = k/4;
+    float * y4[4] = {y, y + n_per_row, y + 2*n_per_row, y + 3*n_per_row};
+    int nblock = n_per_row/QK_K;
+    for (int ibl = 0; ibl < nblock; ++ibl) {
+        for (int k = 0; k < 4; ++k) {
+            const float d = GGML_FP16_TO_FP32(x[ibl].d[k]);
+            for (int ib = 0; ib < QK_K/32; ++ib) {
+                int is = 8*ib + k;
+                float dl1 = d * ((((x[ibl].scales_l[is%32] >> 4*(is/32)) & 0xf) | (((x[ibl].scales_h[is%16] >> 2*(is/16)) & 3) << 4)) - 32);
+                is += 4;
+                float dl2 = d * ((((x[ibl].scales_l[is%32] >> 4*(is/32)) & 0xf) | (((x[ibl].scales_h[is%16] >> 2*(is/16)) & 3) << 4)) - 32);
+                const int8_t * values1 = iq4k_values + (x[ibl].extra[k+0] & (1 << ib) ? 16 : 0);
+                const int8_t * values2 = iq4k_values + (x[ibl].extra[k+4] & (1 << ib) ? 16 : 0);
+                for (int i = 0; i < 4; ++i) {
+                    y4[k][QK_K*ibl+32*ib+i+ 0] = dl1 * values1[x[ibl].qs[64*ib+4*k+i+ 0] & 0xf];
+                    y4[k][QK_K*ibl+32*ib+i+ 8] = dl1 * values1[x[ibl].qs[64*ib+4*k+i+ 0] >>  4];
+                    y4[k][QK_K*ibl+32*ib+i+16] = dl2 * values2[x[ibl].qs[64*ib+4*k+i+16] & 0xf];
+                    y4[k][QK_K*ibl+32*ib+i+24] = dl2 * values2[x[ibl].qs[64*ib+4*k+i+16] >>  4];
+                    y4[k][QK_K*ibl+32*ib+i+ 4] = dl1 * values1[x[ibl].qs[64*ib+4*k+i+32] & 0xf];
+                    y4[k][QK_K*ibl+32*ib+i+12] = dl1 * values1[x[ibl].qs[64*ib+4*k+i+32] >>  4];
+                    y4[k][QK_K*ibl+32*ib+i+20] = dl2 * values2[x[ibl].qs[64*ib+4*k+i+48] & 0xf];
+                    y4[k][QK_K*ibl+32*ib+i+28] = dl2 * values2[x[ibl].qs[64*ib+4*k+i+48] >>  4];
+                }
+            }
+        }
+    }
+}
 
 void dequantize_row_q2_0(const block_q2_0 * x, float * y, int64_t k) {
     static const int qk = QK2_0; const int nb = k / qk;
@@ -65,6 +101,8 @@ int main(int argc, char ** argv) {
     else if (type == 142) dequantize_row_pq2_0((block_pq2_0 *) buf, y, n);
     else if (type == 143) dequantize_row_ptq1_0((block_ptq1_0 *) buf, y, n);
     else if (type == 43) for (long i = 0; i < n; i++) y[i] = ggml_f8_e4m3_to_fp32(buf[i]);
+    else if (type == 339) { long cols = atol(argv[3]); for (long g = 0; g < n / (4 * cols); g++)
+        dequantize_row_iq4_k_r4((block_iq4_k_r4 *) (buf + g * (4 * cols / 256) * 576), y + g * 4 * cols, 4 * cols); }
     fwrite(y, sizeof(float), n, stdout); (void) got; return 0;
 }
 """
@@ -77,6 +115,9 @@ def _random_blocks(qtype: int, nblocks: int, rng) -> bytes:
         off = 26 if qtype == 143 else 0
         for b in range(nblocks):
             raw[b * size + off: b * size + off + 2] = struct.pack("<e", float(rng.uniform(-0.1, 0.1)))
+    if qtype == 339:                # 576-byte blocks of 4 rows: four fp16 scales first
+        for b in range(len(raw) // 576):
+            raw[b * 576: b * 576 + 8] = struct.pack("<4e", *(float(x) for x in rng.uniform(-0.01, 0.01, 4)))
     return bytes(raw)
 
 
@@ -91,21 +132,28 @@ def test_q2_codec_by_hand():
     assert np.allclose(ggufextra.dequantize(raw, 42)[:4], [-0.5, 0.0, 0.5, 1.0])
 
 
-@pytest.mark.skipif(CC is None, reason="no C compiler")
-@pytest.mark.parametrize("qtype", [42, 43, 142, 143])
+def test_ci_has_a_compiler():
+    if os.environ.get("PEDIGREE_REQUIRE_CC") and CC is None:
+        pytest.fail("PEDIGREE_REQUIRE_CC is set but no C compiler was found: the parity tests would not run")
+
+
+@pytest.mark.skipif(CC is None and not os.environ.get("PEDIGREE_REQUIRE_CC"), reason="no C compiler")
+@pytest.mark.parametrize("qtype", [42, 43, 142, 143, 339])
 def test_equals_the_reference_implementation(tmp_path, qtype):
+    assert CC is not None, "no C compiler"
     src = tmp_path / "ref.c"
     src.write_text(REF)
     exe = tmp_path / "ref"
     subprocess.run([CC, "-O1", "-o", str(exe), str(src), "-lm"], check=True)
     rng = np.random.default_rng(qtype)
     _, qk, size = ggufextra.TYPES[qtype]
-    nb = 64 if qk > 1 else 4096
+    cols = 512                                   # IQ4_K_R4: rows of 512 values, two groups of 4 rows
+    nb = (2 * 4 * cols // qk) if qtype == 339 else (64 if qk > 1 else 4096)
     raw = _random_blocks(qtype, nb, rng)
     n = nb * qk
-    ref = np.frombuffer(subprocess.run([str(exe), str(qtype), str(n)], input=raw, capture_output=True,
+    ref = np.frombuffer(subprocess.run([str(exe), str(qtype), str(n), str(cols)], input=raw, capture_output=True,
                                        check=True).stdout, dtype=np.float32)
-    ours = ggufextra.dequantize(raw, qtype).astype(np.float32)
+    ours = ggufextra.dequantize(raw, qtype, cols if qtype == 339 else None).astype(np.float32)
     assert ref.shape == ours.shape
     assert np.array_equal(np.isnan(ref), np.isnan(ours))
     assert np.array_equal(ref[~np.isnan(ref)], ours[~np.isnan(ours)])

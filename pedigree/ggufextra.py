@@ -5,23 +5,30 @@
   43  F8_E4M3   llama.cpp master (ggml-impl.h: ggml_f8_e4m3_to_fp32, OCP FP8)
   142 PQ2_0     PrismML-Eng/llama.cpp, branch prism (dequantize_row_pq2_0): Q2_0's codec, group 128
   143 PTQ1_0    PrismML-Eng/llama.cpp, branch prism (dequantize_row_ptq1_0): TQ1_0's trits, group 128
+  339 IQ4_K_R4  ikawrakow/ik_llama.cpp (ggml-common.h block_iq4_k_r4, iqk_quantize.cpp
+                dequantize_row_iq4_k_r4): IQ4_K with four rows interleaved in each 576-byte block
 
 tests/test_ggufextra.py compiles those reference functions (copied from the sources above, MIT
 licensed) where a C compiler exists, and requires byte-for-byte equal output on random blocks.
 Types with no public source (seen on the Hub: 45, 101, 103) are not decoded, and say so.
+
+A row-interleaved type (ROW_GROUP) stores ROW_GROUP rows together, so the first values of a tensor
+can only be decoded from whole groups of rows: dequantize() then needs the row length.
 """
 from __future__ import annotations
 
 import numpy as np
 
 # type id -> (name, values per block, bytes per block)
-TYPES = {42: ("Q2_0", 64, 18), 43: ("F8_E4M3", 1, 1), 142: ("PQ2_0", 128, 34), 143: ("PTQ1_0", 128, 28)}
+TYPES = {42: ("Q2_0", 64, 18), 43: ("F8_E4M3", 1, 1), 142: ("PQ2_0", 128, 34), 143: ("PTQ1_0", 128, 28),
+         339: ("IQ4_K_R4", 256, 144)}
 SOURCES = {42: "llama.cpp master", 43: "llama.cpp master", 142: "PrismML-Eng/llama.cpp (prism)",
-           143: "PrismML-Eng/llama.cpp (prism)"}
+           143: "PrismML-Eng/llama.cpp (prism)", 339: "ikawrakow/ik_llama.cpp"}
+ROW_GROUP = {339: 4}
+IQ4K_VALUES = np.array([-127, -104, -83, -65, -49, -35, -22, -10, 1, 13, 25, 38, 53, 69, 89, 113,
+                        -123, -100, -79, -61, -45, -31, -18, -6, 5, 17, 29, 42, 57, 73, 93, 117], dtype=np.float32)
 # seen on the Hub, no public definition found (searched llama.cpp, PrismML-Eng/llama.cpp, ik_llama.cpp)
 UNKNOWN = {45, 101, 103}
-# defined publicly but not decoded here (an interleaved row-packed IQ4_K of ik_llama.cpp)
-NOT_YET = {339: "IQ4_K_R4 (ikawrakow/ik_llama.cpp)"}
 
 
 def _q2(raw: bytes, qk: int, size: int) -> np.ndarray:
@@ -65,7 +72,32 @@ def _ptq1(raw: bytes) -> np.ndarray:
     return ((t - 1).astype(np.float32) * d).reshape(-1)
 
 
-def dequantize(raw: bytes, qtype: int) -> np.ndarray:
+def _iq4_k_r4(raw: bytes, cols: int) -> np.ndarray:
+    """dequantize_row_iq4_k_r4, for whole groups of 4 rows of `cols` values: row-major output."""
+    nb = cols // 256
+    B = np.frombuffer(raw, dtype=np.uint8).reshape(-1, nb, 576)          # (groups, blocks per row, bytes)
+    G = B.shape[0]
+    d = B[..., 0:8].copy().view(np.float16).astype(np.float32)          # (G, nb, 4)
+    extra, sh, sl, qs = B[..., 8:16], B[..., 16:32], B[..., 32:64], B[..., 64:576]
+    y = np.empty((G, 4, nb, 256), dtype=np.float32)
+    for k in range(4):
+        for ib in range(8):
+            dls = []
+            for is_ in (8 * ib + k, 8 * ib + k + 4):
+                sc = ((sl[..., is_ % 32] >> (4 * (is_ // 32))) & 0xF) | (((sh[..., is_ % 16] >> (2 * (is_ // 16))) & 3) << 4)
+                dls.append(d[..., k] * (sc.astype(np.float32) - 32))
+            v1 = np.where((extra[..., k] >> ib) & 1, 16, 0)
+            v2 = np.where((extra[..., k + 4] >> ib) & 1, 16, 0)
+            for i in range(4):
+                for off, src, shift, dl, v in ((0, 0, 0, 0, v1), (8, 0, 4, 0, v1), (16, 16, 0, 1, v2), (24, 16, 4, 1, v2),
+                                               (4, 32, 0, 0, v1), (12, 32, 4, 0, v1), (20, 48, 0, 1, v2),
+                                               (28, 48, 4, 1, v2)):
+                    q = (qs[..., 64 * ib + 4 * k + i + src] >> shift) & 0xF
+                    y[:, k, :, 32 * ib + i + off] = dls[dl] * IQ4K_VALUES[v + q]
+    return y.reshape(G * 4, cols).reshape(-1)
+
+
+def dequantize(raw: bytes, qtype: int, cols: int | None = None) -> np.ndarray:
     if qtype == 42:
         return _q2(raw, 64, 18)
     if qtype == 142:
@@ -74,4 +106,8 @@ def dequantize(raw: bytes, qtype: int) -> np.ndarray:
         return _f8_e4m3(raw)
     if qtype == 143:
         return _ptq1(raw)
+    if qtype == 339:
+        if not cols or cols % 256:
+            raise ValueError("IQ4_K_R4 needs the row length (a multiple of 256)")
+        return _iq4_k_r4(raw, cols)
     raise ValueError(f"GGUF tensor type {qtype} has no public specification Pedigree can decode")
