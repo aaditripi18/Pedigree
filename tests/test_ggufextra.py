@@ -102,7 +102,7 @@ int main(int argc, char ** argv) {
     else if (type == 143) dequantize_row_ptq1_0((block_ptq1_0 *) buf, y, n);
     else if (type == 43) for (long i = 0; i < n; i++) y[i] = ggml_f8_e4m3_to_fp32(buf[i]);
     else if (type == 339) { long cols = atol(argv[3]); for (long g = 0; g < n / (4 * cols); g++)
-        dequantize_row_iq4_k_r4((block_iq4_k_r4 *) (buf + g * (4 * cols / 256) * 576), y + g * 4 * cols, 4 * cols); }
+        dequantize_row_iq4_k_r4((block_iq4_k_r4 *) (buf + g * (cols / 256) * 576), y + g * 4 * cols, 4 * cols); }
     fwrite(y, sizeof(float), n, stdout); (void) got; return 0;
 }
 """
