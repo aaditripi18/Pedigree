@@ -188,7 +188,7 @@ JOBS["e2-struct"] = _job("pedigree-e2-struct", [["-m", "experiments.e2_struct_re
                          env={"PEDIGREE_WORKERS": "8"})
 # E2f (amendment 2026-11-17 (4)): comparisons that failed on GGUF types newer than the gguf package,
 # read again with the types decoded from their public sources (pedigree/ggufextra.py)
-JOBS["e2-fork"] = _job("pedigree-e2-fork", [["-m", "experiments.e2_rescore", "--source", "E2r,E2g", "--match",
+JOBS["e2-fork"] = _job("pedigree-e2-fork", [["-m", "experiments.e2_rescore", "--source", "E2r,E2g,E2f", "--match",
                                              "tensor type", "--name", "E2f"]], gpu=False, env={"PEDIGREE_WORKERS": "8"})
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
 # fit Kaggle's CPU budget, and the statistics do not depend on the device
