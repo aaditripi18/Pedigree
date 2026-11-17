@@ -253,10 +253,20 @@ STRUCT_BELOW = 8     # structural alignment is tried when names pair fewer tenso
 def _gguf_mapping(gm, hm, alignment: str) -> dict[str, str]:
     """{gguf name: hf name}. alignment: "names" (llama.cpp's table, as E2 ran), "auto" (names,
     else structural alignment when names pair fewer than STRUCT_BELOW tensors and it pairs more),
-    or "struct" (structural alignment only, names ignored: H17a's check)."""
-    from .structalign import struct_names
+    "struct" (structural alignment only, names ignored: H17a's check), "struct2" (v2, stacks of
+    unequal block counts: H20's check) or "auto2" (names, else v2)."""
+    from .structalign import struct_names, struct_names_v2
     if alignment == "struct":
         return struct_names(gm.float_shapes(), hm.float_shapes())
+    if alignment == "struct2":
+        return struct_names_v2(gm.float_shapes(), hm.float_shapes())
+    if alignment == "auto2":
+        names = ggufremote.hf_names(gm.gguf_meta, gm.float_shapes(), hm.float_shapes())
+        if len(names) < STRUCT_BELOW:
+            st = struct_names_v2(gm.float_shapes(), hm.float_shapes())
+            if len(st) > len(names):
+                return st
+        return names
     names = ggufremote.hf_names(gm.gguf_meta, gm.float_shapes(), hm.float_shapes())
     if alignment == "auto" and len(names) < STRUCT_BELOW:
         st = struct_names(gm.float_shapes(), hm.float_shapes())

@@ -754,7 +754,8 @@ unchanged. Of a related pair, the one with the earlier content date is the paren
 
 **Fresh data.** A new frozen sample (`results/h19_sample.json`, seed 20261119, committed before any of
 it is read): 120 frame models per download tier that declare a base and are in none of E2's, H13's or
-H15's samples. Each is compared by weights with each declared base exactly as in H15, and both
+H15's samples; where a tier has fewer than 120 such models left (the top 1k, after three samples), all
+of them. (Added the same day, when drawing showed the top tier short, before any model was read.) Each is compared by weights with each declared base exactly as in H15, and both
 repositories' content dates are recorded (`experiments/h19_fresh.py`, ledger `H19`). Ground truth: each
 declared base the weights confirm (related, not byte-identical) is the parent.
 

@@ -48,3 +48,62 @@ def struct_names(gguf_shapes: dict, hf_shapes: dict) -> dict[str, str]:
             if len(names) == 1 and other and len(other) == 1:
                 out[names[0]] = other[0]
     return out
+
+
+# --- v2 (PLAN.md, amendment 2026-11-18, H20): stacks, so unequal block counts still align ----------
+
+_GGUF_STACK = re.compile(r"^(?:(.+)\.)?blk\.(\d+)\.")
+_HF_STACK = re.compile(r"(?:^|\.)(layers|layer|h|blocks|block)\.(\d+)\.")
+
+
+def _stack(name: str, gguf_side: bool) -> tuple[str, int] | None:
+    if gguf_side:
+        m = _GGUF_STACK.match(name)
+        return ((m.group(1) + ".blk") if m.group(1) else "blk", int(m.group(2))) if m else None
+    m = _HF_STACK.search(name)
+    return (name[:m.end(1)], int(m.group(2))) if m else None
+
+
+def _stacks(shapes: dict, gguf_side: bool):
+    """({stack: {block: {shape: [names]}}}, {shape: [names]} for tensors without a block index)"""
+    st: dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    free: dict = defaultdict(list)
+    for name, (_kind, shape) in shapes.items():
+        s = _stack(name, gguf_side)
+        if s is None:
+            free[tuple(shape)].append(name)
+        else:
+            st[s[0]][s[1]][tuple(shape)].append(name)
+    return st, free
+
+
+def _unique_pairs(gs: dict, hs: dict, out: dict) -> None:
+    for shape, names in gs.items():
+        other = hs.get(shape)
+        if len(names) == 1 and other and len(other) == 1:
+            out[names[0]] = other[0]
+
+
+def struct_names_v2(gguf_shapes: dict, hf_shapes: dict) -> dict[str, str]:
+    """{gguf tensor name: hf tensor name}. GGUF stacks, largest first, each paired with the unpaired
+    stack of the other side with the same block count, else the nearest (ties: more tensors); block
+    i with block i below the smaller count; unique shapes within each block, and among tensors with
+    no block index."""
+    gst, gfree = _stacks(gguf_shapes, True)
+    hst, hfree = _stacks(hf_shapes, False)
+
+    def size(st, k):
+        return sum(len(v) for blk in st[k].values() for v in blk.values())
+    out: dict = {}
+    free_h = set(hst)
+    for g in sorted(gst, key=lambda k: -size(gst, k)):
+        if not free_h:
+            break
+        ng = len(gst[g])
+        h = min(free_h, key=lambda k: (abs(len(hst[k]) - ng), -size(hst, k)))
+        free_h.discard(h)
+        for i in range(min(len(gst[g]), len(hst[h]))):     # block i with block i
+            if i in gst[g] and i in hst[h]:
+                _unique_pairs(gst[g][i], hst[h][i], out)
+    _unique_pairs(gfree, hfree, out)
+    return out

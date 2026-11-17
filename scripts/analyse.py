@@ -757,6 +757,71 @@ def h18(h16r: dict, h16br: dict) -> dict:
         return {**base, "verdict": "not run", "evidence": "not run: neither H16 nor H16b is supported"}
     return {**base, "verdict": "pending", "evidence": "runs after H16 / H16b"}
 
+
+
+# --- amendment 2026-11-18: H19 and H20, the last follow-ups on direction and alignment -----------
+
+def h19(h19r, n_sample: int, T, rule) -> dict:
+    st = ("Direction by content dates (D4: the earliest last-commit date of each repository's current weight "
+          "files; the earlier is the parent) is right on >= 95% of fresh decided pairs, <= 10% undecided.")
+    base = {"id": "H19", "statement": st, "follows": "H15"}
+    if not h19r or len(h19r) < n_sample:
+        return {**base, "verdict": "pending", "evidence": "fresh sample running"}
+    rows = []
+    for mo in h19r:
+        for d in mo.get("declared", []):
+            if related(d, T, rule) == "related" and not d.get("identical"):
+                rows.append((mo, d))
+    right = wrong = und = 0
+    wrong_pairs = []
+    for mo, d in rows:
+        a, b = mo.get("content_date"), d.get("base_content_date")
+        if not a or not b or a == b:
+            und += 1
+        elif b < a:
+            right += 1
+        else:
+            wrong += 1
+            wrong_pairs.append([mo["id"], d["base"], a, b])
+    dec = right + wrong
+    beside = direction_scores(direction_pairs(h19r, T, rule))
+    ok = dec > 0 and right / dec >= 0.95 and und / len(rows) <= 0.10
+    return {**base, "verdict": verdict(ok),
+            "numbers": {"d4": [right, dec, wilson(right, dec)], "undecided": [und, len(rows)],
+                        "d4_wrong": wrong_pairs, "beside": beside},
+            "evidence": f"D4 right on {right}/{dec} decided, undecided {und}/{len(rows)} (same pairs: D1 "
+                        f"{beside['d1'][0]}/{beside['d1'][1]}, D3 {beside['d3'][0]}/{beside['d3'][1]})"}
+
+
+def h20(h19r, n_sample: int, h20e2, T, rule) -> dict:
+    st = ("On fresh GGUF pairs where names align >= 8 tensors, structural alignment v2 (stacks of unequal block "
+          "counts; names ignored) gives the same related / unrelated verdict for >= 98%.")
+    base = {"id": "H20", "statement": st, "follows": "H17a, H17b"}
+    if not h19r or len(h19r) < n_sample:
+        return {**base, "verdict": "pending", "evidence": "fresh sample running"}
+    pairs = []
+    for m in h19r:
+        for a in [d.get("alignments") for d in m.get("declared", [])] + list(m.get("pool_alignments", [])):
+            if not a or not a.get("names"):
+                continue
+            vn = _verdict_plain(a["names"], T, rule)
+            if vn != "not comparable":
+                pairs.append((vn, _verdict_plain(a.get("struct2"), T, rule), _verdict_plain(a.get("struct"), T, rule)))
+    n = len(pairs)
+    agree = sum(a == b for a, b, _ in pairs)
+    opposite = sum(b != "not comparable" and a != b for a, b, _ in pairs)
+    v1 = sum(a == c for a, _, c in pairs)
+    neg = sum(a == "unrelated" for a, _, _ in pairs)
+    judged = n >= 20 and neg >= 5
+    e2c = sum((r.get("compared") or 0) >= MIN_COMPARED and not r.get("error") for r in h20e2 if "lost" not in r)
+    e2rel = sum(related(r, T, rule) == "related" for r in h20e2 if "lost" not in r)
+    return {**base, "verdict": verdict(agree / n >= 0.98) if judged else "not judged",
+            "numbers": {"agree": [agree, n], "opposite": opposite, "abstained": n - agree - opposite,
+                        "v1_agree": [v1, n], "unrelated_by_names": neg,
+                        "e2_pairs": {"comparable": e2c, "related": e2rel, "n": len(h20e2)}},
+            "evidence": f"v2 {agree}/{n} agree (opposite {opposite}, aligned too few {n - agree - opposite}; v1 "
+                        f"{v1}/{n}); E2's {len(h20e2)} unaligned pairs: {e2c} comparable, {e2rel} related"}
+
 # --- main -------------------------------------------------------------------------------------------
 
 # --- H14 / H14b: behaviour by shared mistakes (amendments 2026-11-17 (2) and (3)) ---------------
@@ -855,6 +920,10 @@ def main() -> None:
     h15r = latest_runs(rows, "H15", lambda r: 0)
     e2s = latest_runs(rows, "E2s", lambda r: (r["model"], r["other"], r["role"]))
     e2f = latest_runs(rows, "E2f", lambda r: (r["model"], r["other"], r["role"]))
+    h19r = latest_runs(rows, "H19", lambda r: 0)
+    h20e2 = latest_runs(rows, "H20e2", lambda r: 0)
+    s19 = json.loads((ROOT / "results" / "h19_sample.json").read_text(encoding="utf-8"))
+    n19 = sum(len(v) for v in s19["sample"].values())
     def by_family_split(exp):
         return latest_runs(rows, exp, lambda r: ((r.get("meta") or {}).get("family", r.get("family")),
                                                 (r.get("meta") or {}).get("split", r.get("split"))))
@@ -879,7 +948,7 @@ def main() -> None:
               h11(e7, T, rule), h12(e5o), *h13(h13r, T, rule), *h14(e5e_dev, e5e_fresh)]
         h16r, h16br = h16(e5e_dev, e5e_fresh, e5e_h16), h16b(e5e_h16b)
         hs += [h15(e2, h15r, T, rule), h16r, h16br, *h17(h15r, with_rescores(e2, e2r, e2g), e2s, T, rule),
-               h18(h16r, h16br)]
+               h18(h16r, h16br), h19(h19r, n19, T, rule), h20(h19r, n19, h20e2, T, rule)]
         if e2r:
             e2f_all = with_rescores(e2, e2r, e2g, e2s, e2f)
             Af = audit(e2f_all, T, rule)

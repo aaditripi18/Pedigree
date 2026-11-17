@@ -195,6 +195,9 @@ JOBS["e2-fork"] = _job("pedigree-e2-fork", [["-m", "experiments.e2_rescore", "--
 JOBS["e2-struct2"] = _job("pedigree-e2-struct2", [["-m", "experiments.e2_rescore", "--source", "E2s", "--match",
                                                    "tensor type|F8_E8M0", "--name", "E2s", "--alignment", "auto"]],
                           gpu=False, env={"PEDIGREE_WORKERS": "8"})
+# H19 / H20 (amendment 2026-11-18): the last direction and alignment follow-ups, one fresh sample
+JOBS["h19"] = _job("pedigree-h19", [["-m", "experiments.h19_fresh", "--out", "/kaggle/working/h19_raw.jsonl"]],
+                   gpu=False, env=dict(E2_ENV))
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
 # fit Kaggle's CPU budget, and the statistics do not depend on the device
 JOBS["e2-behaviour"] = _job("pedigree-e2-behaviour", [["-m", "experiments.e2_behaviour"]], gpu=False)

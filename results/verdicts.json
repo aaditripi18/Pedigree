@@ -1342,6 +1342,20 @@
      "follows": "behaviour above 2B parameters",
      "verdict": "pending",
      "evidence": "runs only if H16 or H16b is supported"
+    },
+    {
+     "id": "H19",
+     "statement": "Direction by content dates (D4: the earliest last-commit date of each repository's current weight files; the earlier is the parent) is right on >= 95% of fresh decided pairs, <= 10% undecided.",
+     "follows": "H15",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H20",
+     "statement": "On fresh GGUF pairs where names align >= 8 tensors, structural alignment v2 (stacks of unequal block counts; names ignored) gives the same related / unrelated verdict for >= 98%.",
+     "follows": "H17a, H17b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {
@@ -2767,6 +2781,20 @@
      "follows": "behaviour above 2B parameters",
      "verdict": "pending",
      "evidence": "runs only if H16 or H16b is supported"
+    },
+    {
+     "id": "H19",
+     "statement": "Direction by content dates (D4: the earliest last-commit date of each repository's current weight files; the earlier is the parent) is right on >= 95% of fresh decided pairs, <= 10% undecided.",
+     "follows": "H15",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H20",
+     "statement": "On fresh GGUF pairs where names align >= 8 tensors, structural alignment v2 (stacks of unequal block counts; names ignored) gives the same related / unrelated verdict for >= 98%.",
+     "follows": "H17a, H17b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {
