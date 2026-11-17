@@ -1,0 +1,376 @@
+[{"stream_name":"stdout","time":131.498358217,"data":"code 560fb72\n"}
+,{"stream_name":"stdout","time":206.782885639,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":208.330771239,"data":"PEDIGREE_WORKERS = 12\n"}
+,{"stream_name":"stdout","time":208.330817899,"data":"PEDIGREE_BUDGET_HOURS = 10\n"}
+,{"stream_name":"stdout","time":211.518281834,"data":"0 done, 360 to read\n"}
+,{"stream_name":"stdout","time":212.909068288,"data":"[1/360] Comfy-Org/sam3.1: safetensors; facebook/sam3.1=not readable (other checkpoint format) (1s)\n"}
+,{"stream_name":"stdout","time":214.61868848,"data":"[2/360] Comfy-Org/TRELLIS.2: safetensors; microsoft/TRELLIS.2-4B=None (3s)\n"}
+,{"stream_name":"stdout","time":240.443708801,"data":"[3/360] Efficient-Large-Model/Open-H3-Regenerate-2K: safetensors; MiniMaxAI/MiniMax-H3=None (29s)\n"}
+,{"stream_name":"stdout","time":246.187717181,"data":"[4/360] Comfy-Org/Flux-1-Dev: safetensors; black-forest-labs/FLUX.1-dev=None, black-forest-labs/FLUX.1-Canny-dev=None, black-forest-labs/FLUX.1-Depth-dev=None, black-forest-labs/FLUX.1-Fill-dev=None (35s)\n"}
+,{"stream_name":"stdout","time":246.289636443,"data":"[5/360] DogukanUrker/Qwen-Image-2.1-Turbo-GGUF: gguf; Qwen/Qwen-Image-2.1-Turbo=0.9999848532762157 (35s)\n"}
+,{"stream_name":"stdout","time":264.724496783,"data":"[6/360] Comfy-Org/ltx-2: safetensors; google/gemma-3-12b-it=1.0, mlabonne/gemma-3-12b-it-abliterated=1.0, ovi054/LTX-2-19b-Squish-LoRA=adapter (53s)\n"}
+,{"stream_name":"stdout","time":341.918348053,"data":"[7/360] DeepBeepMeep/Wan2.2: safetensors; Wan-AI/Wan2.2-T2V-A14B=0.9322333687926654 (130s)\n"}
+,{"stream_name":"stdout","time":362.976140825,"data":"[8/360] AtomicChat/Qwen-Image-2.1-Turbo-Uncensored-GGUF: gguf; Qwen/Qwen3-VL-8B-Instruct=0.9999848726215435 (151s)\n"}
+,{"stream_name":"stdout","time":365.441026041,"data":"[9/360] HuggingFaceTB/SmolLM2-135M-Instruct: safetensors; HuggingFaceTB/SmolLM2-135M=0.9972119347893347 (154s)\n"}
+,{"stream_name":"stdout","time":579.517011863,"data":"[10/360] DeepBeepMeep/Wan2.1: safetensors; Wan-AI/Wan2.1-T2V-1.3B=0.9986438179847645 (368s)\n"}
+,{"stream_name":"stdout","time":621.74705072,"data":"[11/360] Kijai/LTX2.3_comfy: safetensors; Lightricks/LTX-2.3=0.9999669743109139 (410s)\n"}
+,{"stream_name":"stdout","time":650.351353647,"data":"[12/360] Comfy-Org/Wan-2.1: safetensors; Wan-AI/Wan2.1-FLF2V-14B-720P=0.9926004035408291, alibaba-pai/Wan2.1-Fun-V1.1-1.3B-Control-Camera=None, alibaba-pai/Wan2.1-Fun-V1.1-14B-Control-Camera=0.9975275572469922, alibaba-pai/Wan2.1-Fun-V1.1-1.3B-Control=None, alibaba-pai/Wan2.1-Fun-V1.1-1.3B-InP=None, Wan-AI/Wan2.1-I2V-14B-480P=0.9964916135264958, Wan-AI/Wan2.1-I2V-14B-720P=0.9975294043068219, MAGREF-Video/MAGREF=0.9957811815971562, Wan-AI/Wan2.1-T2V-1.3B=None, Wan-AI/Wan2.1-T2V-14B=0.9999999782187539, Wan-AI/Wan2.1-VACE-1.3B=None, Wan-AI/Wan2.1-VACE-14B=0.9999999791583094, htdong/Wan-Alpha=adapter, MeiGen-AI/InfiniteTalk=0.9952849918355439 (439s)\n"}
+,{"stream_name":"stdout","time":655.746786237,"data":"[13/360] HauhauCS/Qwen3.5-9B-Uncensored-HauhauCS-Aggressive: gguf; Qwen/Qwen3.5-9B=0.9999842193144857 (444s)\n"}
+,{"stream_name":"stdout","time":657.788554434,"data":"[14/360] Kijai/WanVideo_comfy_fp8_scaled: safetensors; Wan-AI/Wan2.1-VACE-14B=0.9972484267725406, Wan-AI/Wan2.1-VACE-1.3B=None (446s)\n"}
+,{"stream_name":"stdout","time":658.269426771,"data":"[15/360] DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF: gguf; DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NM-DAU=0.9999841945979459 (447s)\n"}
+,{"stream_name":"stdout","time":658.459136779,"data":"[16/360] DavidAU/Qwen3.8-27B-Turbo-Brilliance-50X-Reasoning-Instruct-NEO-MAX-MTP-GGUF: gguf; Qwen/Qwen3.8-27B=0.9999841264711894 (447s)\n"}
+,{"stream_name":"stdout","time":666.531623103,"data":"[17/360] QuantStack/Wan2.2-Animate-14B-GGUF: gguf; Wan-AI/Wan2.2-Animate-14B=None (455s)\n"}
+,{"stream_name":"stdout","time":667.581968722,"data":"[18/360] ConwayResearch/Underdog-Saluki-27B-1.0: gguf; Qwen/Qwen3.8-27B=0.9115000847078492, ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF=0.9605026347852281 (456s)\n"}
+,{"stream_name":"stdout","time":668.566968813,"data":"[19/360] HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive: gguf; google/gemma-4-e4b-it=0.9999133844093758 (457s)\n"}
+,{"stream_name":"stdout","time":668.789743209,"data":"[20/360] QuantStack/Wan2.2-T2V-A14B-GGUF: gguf; Wan-AI/Wan2.2-T2V-A14B=None (457s)\n"}
+,{"stream_name":"stdout","time":683.622748418,"data":"[21/360] 0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored-GGUF: gguf; Qwen/Qwen3.8-27B=0.9999837045998365 (472s)\n"}
+,{"stream_name":"stdout","time":687.665473384,"data":"[22/360] HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive: gguf; Qwen/Qwen3.6-35B-A3B=0.9998220307052379 (476s)\n"}
+,{"stream_name":"stdout","time":689.243752212,"data":"[23/360] Qwen/Qwen2.5-3B-Instruct-AWQ: safetensors; Qwen/Qwen2.5-3B-Instruct=1.0000000000000002 (478s)\n"}
+,{"stream_name":"stdout","time":692.459875759,"data":"[24/360] FINAL-Bench/POCKET-35B-GGUF: gguf; FINAL-Bench/Darwin-36B-Opus=0.9972407829804563 (481s)\n"}
+,{"stream_name":"stdout","time":694.254401423,"data":"[25/360] Qwen/Qwen2.5-1.5B-Instruct: safetensors; Qwen/Qwen2.5-1.5B=0.9999245663294419 (483s)\n"}
+,{"stream_name":"stdout","time":699.622646724,"data":"[26/360] Qwen/Qwen2-VL-7B-Instruct-AWQ: safetensors; Qwen/Qwen2-VL-7B-Instruct=1.0 (488s)\n"}
+,{"stream_name":"stdout","time":700.107988353,"data":"[27/360] Lorbus/Qwen3.6-27B-int4-AutoRound: safetensors; Qwen/Qwen3.6-27B=1.0 (489s)\n"}
+,{"stream_name":"stdout","time":706.235307502,"data":"[28/360] InternScience/Sage-A1.5-Q4_K_M-GGUF: gguf; InternScience/Sage-A1.5=0.9972040809683105 (495s)\n"}
+,{"stream_name":"stdout","time":708.893726456,"data":"[29/360] OBLITERATUS/Qwen3.8-27B-OBLITERATED: safetensors; Qwen/Qwen3.8-27B=0.9999995728158668 (497s)\n"}
+,{"stream_name":"stdout","time":709.093924717,"data":"[30/360] Qwen/Qwen2.5-3B-Instruct: safetensors; Qwen/Qwen2.5-3B=0.9999232928335358 (498s)\n"}
+,{"stream_name":"stdout","time":869.032974945,"data":"[31/360] Qwen/Qwen2.5-Coder-1.5B-Instruct: safetensors; Qwen/Qwen2.5-Coder-1.5B=0.9998965426694444 (658s)\n"}
+,{"stream_name":"stdout","time":870.695750186,"data":"[32/360] Qwen/Qwen2.5-32B-Instruct-AWQ: safetensors; Qwen/Qwen2.5-32B-Instruct=0.9998323588573923 (659s)\n"}
+,{"stream_name":"stdout","time":876.712362927,"data":"[33/360] Qwen/Qwen3-0.6B: safetensors; Qwen/Qwen3-0.6B-Base=0.9926069746072126 (665s)\n"}
+,{"stream_name":"stdout","time":879.266969111,"data":"[34/360] Qwen/Qwen2.5-Coder-7B-Instruct: safetensors; Qwen/Qwen2.5-Coder-7B=0.9984126775342393 (668s)\n"}
+,{"stream_name":"stdout","time":884.826220267,"data":"[35/360] Qwen/Qwen3-Embedding-0.6B: safetensors; Qwen/Qwen3-0.6B-Base=0.9982476863870223 (673s)\n"}
+,{"stream_name":"stdout","time":885.106233051,"data":"[36/360] Qwen/Qwen3-Reranker-0.6B: safetensors; Qwen/Qwen3-0.6B-Base=0.9925466527445179 (674s)\n"}
+,{"stream_name":"stdout","time":890.751556031,"data":"[37/360] Qwen/Qwen2.5-Coder-32B-Instruct-AWQ: safetensors; Qwen/Qwen2.5-Coder-32B-Instruct=0.9998957777471806 (679s)\n"}
+,{"stream_name":"stdout","time":891.013884806,"data":"[38/360] Qwen/Qwen3-8B-AWQ: safetensors; Qwen/Qwen3-8B=0.9978439267519007 (679s)\n"}
+,{"stream_name":"stdout","time":891.186556239,"data":"[39/360] Qwen/Qwen3-14B-AWQ: safetensors; Qwen/Qwen3-14B=0.9931308026717581 (680s)\n"}
+,{"stream_name":"stdout","time":899.476454305,"data":"[40/360] Qwen/Qwen3-VL-Embedding-8B: safetensors; Qwen/Qwen3-VL-8B-Instruct=0.9998315110493528 (688s)\n"}
+,{"stream_name":"stdout","time":899.58933781,"data":"[41/360] Xenova/whisper-tiny.en: not readable (onnx only); - (688s)\n"}
+,{"stream_name":"stdout","time":901.00021272,"data":"[42/360] Qwen/Qwen2.5-VL-32B-Instruct-AWQ: safetensors; Qwen/Qwen2.5-VL-32B-Instruct=0.999999769214942 (689s)\n"}
+,{"stream_name":"stdout","time":906.839116189,"data":"[43/360] Qwen/Qwen3-VL-8B-Instruct-GGUF: gguf; Qwen/Qwen3-VL-8B-Instruct=0.9999855123531911 (695s)\n"}
+,{"stream_name":"stdout","time":918.935235229,"data":"[44/360] RadixArk/Qwen3.8-27B-NVFP4: safetensors; Qwen/Qwen3.8-27B=0.9999999999999999 (707s)\n"}
+,{"stream_name":"stdout","time":937.342892179,"data":"[45/360] LuffyTheFox/Qwen3.6-35B-A3B-Uncensored-Genesis-Hermes-MTP-GGUF: gguf; HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive=0.9996099427742701 (726s)\n"}
+,{"stream_name":"stdout","time":938.977424376,"data":"[46/360] Yehor/w2v-xls-r-uk: safetensors; facebook/wav2vec2-xls-r-300m=0.9964636309695855 (727s)\n"}
+,{"stream_name":"stdout","time":938.986305772,"data":"[47/360] alefiury/wav2vec2-large-xlsr-53-gender-recognition-librispeech: safetensors; facebook/wav2vec2-xls-r-300m=0.9999714596140886 (727s)\n"}
+,{"stream_name":"stdout","time":948.454333866,"data":"[48/360] aismlv/wav2vec2-large-xlsr-kazakh: safetensors; facebook/wav2vec2-large-xlsr-53=0.9931137781543335 (737s)\n"}
+,{"stream_name":"stdout","time":951.311014331,"data":"[49/360] Qwen/Qwen3.5-35B-A3B-FP8: safetensors; Qwen/Qwen3.5-35B-A3B=0.9996526309604503 (740s)\n"}
+,{"stream_name":"stdout","time":952.215093985,"data":"[50/360] Qwen/Qwen2.5-1.5B-Instruct-GGUF: gguf; Qwen/Qwen2.5-1.5B-Instruct=0.9903982441534089 (741s)\n"}
+,{"stream_name":"stdout","time":955.864910407,"data":"[51/360] camenduru/dinov3-vitl16-pretrain-lvd1689m: safetensors; facebook/dinov3-vit7b16-pretrain-lvd1689m=None (744s)\n"}
+,{"stream_name":"stdout","time":957.472078916,"data":"[52/360] Qwen/Qwen3.6-35B-A3B-FP8: safetensors; Qwen/Qwen3.6-35B-A3B=0.9999999999999999 (746s)\n"}
+,{"stream_name":"stdout","time":962.777934905,"data":"[53/360] autotrust/GEV-26B-Decide: safetensors; google/gemma-4-26B-A4B-it=1.0 (751s)\n"}
+,{"stream_name":"stdout","time":964.534453778,"data":"[54/360] cagliostrolab/animagine-xl-4.0: safetensors; stabilityai/stable-diffusion-xl-base-1.0=0.9507857156592358 (753s)\n"}
+,{"stream_name":"stdout","time":968.504960598,"data":"[55/360] comodoro/wav2vec2-xls-r-300m-cs-250: safetensors; facebook/wav2vec2-xls-r-300m=0.9929182744112066 (757s)\n"}
+,{"stream_name":"stdout","time":968.719289748,"data":"[56/360] Qwen/Qwen3.8-27B-FP8: safetensors; Qwen/Qwen3.8-27B=0.999668478859032 (757s)\n"}
+,{"stream_name":"stdout","time":980.672012988,"data":"[57/360] Jackrong/Qwopus3.8-27B-Flash-V2-GGUF: gguf; Jackrong/Qwopus3.8-27B-Flash=0.9958371861563147 (769s)\n"}
+,{"stream_name":"stdout","time":1171.173263704,"data":"[58/360] cross-encoder/mmarco-mMiniLMv2-L12-H384-v1: safetensors; nreimers/mMiniLMv2-L12-H384-distilled-from-XLMR-Large=0.997642246827087 (960s)\n"}
+,{"stream_name":"stdout","time":1172.118688603,"data":"[59/360] Qwen/Qwen3-8B-GGUF: gguf; Qwen/Qwen3-8B=0.9999853633241627 (961s)\n"}
+,{"stream_name":"stdout","time":1172.238790142,"data":"[60/360] cyankiwi/Qwen3.8-27B-AWQ-INT4: safetensors; Qwen/Qwen3.8-27B=0.9840700352711469 (961s)\n"}
+,{"stream_name":"stdout","time":1172.87623442,"data":"[61/360] deepset/roberta-base-squad2: safetensors; FacebookAI/roberta-base=0.9997574384184924 (961s)\n"}
+,{"stream_name":"stdout","time":1173.886606871,"data":"[62/360] handy-computer/canary-180m-flash-gguf: gguf; nvidia/canary-180m-flash=not readable (other checkpoint format) (962s)\n"}
+,{"stream_name":"stdout","time":1178.368853634,"data":"[63/360] cross-encoder/ms-marco-MiniLM-L6-v2: safetensors; cross-encoder/ms-marco-MiniLM-L12-v2=0.012785007810929717 (967s)\n"}
+,{"stream_name":"stdout","time":1180.303447541,"data":"[64/360] handy-computer/parakeet-ultra-gguf: gguf; moondream/parakeet-ultra=None (969s)\n"}
+,{"stream_name":"stdout","time":1183.258773457,"data":"[65/360] handy-computer/cohere-transcribe-03-2026-gguf: gguf; CohereLabs/cohere-transcribe-03-2026=None (972s)\n"}
+,{"stream_name":"stdout","time":1185.447087937,"data":"[66/360] livekit/turn-detector: safetensors; Qwen/Qwen2.5-0.5B-Instruct=None (974s)\n"}
+,{"stream_name":"stdout","time":1190.591585816,"data":"[67/360] handy-computer/whisper-medium-gguf: gguf; openai/whisper-medium=None (979s)\n"}
+,{"stream_name":"stdout","time":1207.579406252,"data":"[68/360] dphn/dolphin-2.9.1-yi-1.5-34b: safetensors; 01-ai/Yi-1.5-34B=0.9993314583423093 (996s)\n"}
+,{"stream_name":"stdout","time":1209.115827598,"data":"[69/360] cdiamond/Qwen3.8-27B-iMatrix-NVFP4-MTP-GGUF: gguf; Qwen/Qwen3.8-27B=0.9924372088922724 (998s)\n"}
+,{"stream_name":"stdout","time":1231.235428903,"data":"[70/360] casperhansen/llama-3.3-70b-instruct-awq: safetensors; meta-llama/Llama-3.1-70B=0.999594506605411 (1020s)\n"}
+,{"stream_name":"stdout","time":1243.79827047,"data":"[71/360] bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF: gguf; XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B=0.9999838823327347 (1032s)\n"}
+,{"stream_name":"stdout","time":1250.995937254,"data":"[72/360] lmstudio-community/Qwen3.8-27B-MLX-8bit: safetensors; Qwen/Qwen3.8-27B=0.9999734824256854 (1039s)\n"}
+,{"stream_name":"stdout","time":1260.844194795,"data":"[73/360] lmstudio-community/gemma-4-E4B-it-MLX-6bit: safetensors; google/gemma-4-E4B-it=1.0 (1049s)\n"}
+,{"stream_name":"stdout","time":1262.954547959,"data":"[74/360] mlx-community/parakeet-tdt-0.6b-v2: safetensors; nvidia/parakeet-tdt-0.6b-v2=not readable (other checkpoint format) (1051s)\n"}
+,{"stream_name":"stdout","time":1264.307593378,"data":"[75/360] lmstudio-community/Qwen3.8-27B-MLX-6bit: safetensors; Qwen/Qwen3.8-27B=0.9997414288016202 (1053s)\n"}
+,{"stream_name":"stdout","time":1269.010228749,"data":"[76/360] SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF: gguf; ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF=not readable (HubError: ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF: no safetensors, PyTorch or GGUF weights) (1057s)\n"}
+,{"stream_name":"stdout","time":1273.518426722,"data":"[77/360] mistralai/Voxtral-Mini-4B-Realtime-2602: safetensors; mistralai/Ministral-3-3B-Base-2512=0.56349382061746 (1062s)\n"}
+,{"stream_name":"stdout","time":1467.867557585,"data":"[78/360] mlx-community/Qwen3.8-27B-4bit: safetensors; Qwen/Qwen3.8-27B=0.9956385717088431 (1256s)\n"}
+,{"stream_name":"stdout","time":1468.077280191,"data":"[79/360] lmstudio-community/Qwen3.5-9B-GGUF: gguf; Qwen/Qwen3.5-9B=0.9999849594845891 (1257s)\n"}
+,{"stream_name":"stdout","time":1470.11080209,"data":"[80/360] mlx-community/parakeet-tdt-0.6b-v3: safetensors; nvidia/parakeet-tdt-0.6b-v3=1.0 (1259s)\n"}
+,{"stream_name":"stdout","time":1479.178013405,"data":"[81/360] ggml-org/embeddinggemma-300M-GGUF: gguf; google/embeddinggemma-300M=0.9999844917485234 (1268s)\n"}
+,{"stream_name":"stdout","time":1484.844581504,"data":"[82/360] nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16: safetensors; nvidia/NVIDIA-Nemotron-Nano-9B-v2=None (1273s)\n"}
+,{"stream_name":"stdout","time":1484.978884168,"data":"[83/360] onnx-community/embeddinggemma-2-ONNX: not readable (onnx only); - (1273s)\n"}
+,{"stream_name":"stdout","time":1484.978914597,"data":"[84/360] onnx-community/embeddinggemma-300m-ONNX: not readable (onnx only); - (1273s)\n"}
+,{"stream_name":"stdout","time":1488.102450172,"data":"[85/360] orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF: not readable (gated, no byte-identical public copy); - (1277s)\n"}
+,{"stream_name":"stdout","time":1490.462690762,"data":"[86/360] mudler/locate-anything.cpp-gguf: gguf; nvidia/LocateAnything-3B=None (1279s)\n"}
+,{"stream_name":"stdout","time":1492.528627836,"data":"[87/360] jegreene/Swift-1.5-Qwen3.8-27B-heretic-GSQ-RCO-GGUF: gguf; ukisai/Swift-1.5-Qwen3.8-27b=0.9428135312221599 (1281s)\n"}
+,{"stream_name":"stdout","time":1497.090697204,"data":"[88/360] ornith-ai/Ornith-1.5-35B-A3B-DFlash: safetensors; ornith-ai/Ornith-1.5-35B-A3B=-0.013273361392927166 (1286s)\n"}
+,{"stream_name":"stdout","time":1498.647381527,"data":"[89/360] nvidia/Gemma-4-31B-IT-NVFP4: safetensors; google/gemma-4-31B-it=1.0 (1287s)\n"}
+,{"stream_name":"stdout","time":1500.325026297,"data":"[90/360] huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF: gguf; Qwen/Qwen3.8-27B=0.9999827613674941 (1289s)\n"}
+,{"stream_name":"stdout","time":1509.697016417,"data":"[91/360] empero-ai/Qwen3.8-9B-Distill-GGUF: gguf; empero-ai/Qwen3.8-9B=0.9999849608938307 (1298s)\n"}
+,{"stream_name":"stdout","time":1513.404506421,"data":"[92/360] nvidia/Cosmos-Reason2-2B: safetensors; Qwen/Qwen3-VL-2B-Instruct=0.9997757534437595 (1302s)\n"}
+,{"stream_name":"stdout","time":1519.817788315,"data":"[93/360] realrebelai/MiniMax-H3_GGUFs: gguf; Comfy-Org/MiniMax-H3=None (1308s)\n"}
+,{"stream_name":"stdout","time":1523.053494836,"data":"[94/360] raxcore-dev/Rax-4.5: safetensors; raxcore-dev/Rax-4.5=1.0 (1312s)\n"}
+,{"stream_name":"stdout","time":1526.72820684,"data":"[95/360] lmstudio-community/gemma-4-E4B-it-GGUF: gguf; google/gemma-4-E4B-it=0.9999846302988665 (1315s)\n"}
+,{"stream_name":"stdout","time":1555.758769595,"data":"[96/360] mradermacher/Qwen3.5-9B-Kimi-k3-Distilled-GGUF: gguf; khazarai/Qwen3.5-9B-Kimi-k3-Distilled=0.9999847467862522 (1344s)\n"}
+,{"stream_name":"stdout","time":1557.175353492,"data":"[97/360] nomic-ai/nomic-embed-text-v1.5-GGUF: gguf; nomic-ai/nomic-embed-text-v1.5=0.9999855323861185 (1346s)\n"}
+,{"stream_name":"stdout","time":1565.289041901,"data":"[98/360] unsloth/FLUX.2-klein-4B-GGUF: gguf; black-forest-labs/FLUX.2-klein-4B=None (1354s)\n"}
+,{"stream_name":"stdout","time":1565.412374331,"data":"[99/360] unsloth/GLM-5.3-GGUF: not readable (no weight files); - (1354s)\n"}
+,{"stream_name":"stdout","time":1577.859545496,"data":"[100/360] unsloth/LTX-2.3-GGUF: gguf; Lightricks/LTX-2.3=None (1366s)\n"}
+,{"stream_name":"stdout","time":1580.983884953,"data":"[101/360] prism-ml/Ternary-Bonsai-2-27B-gguf: gguf; Qwen/Qwen3.8-27B=0.003398817577466827 (1369s)\n"}
+,{"stream_name":"stdout","time":1593.509098733,"data":"[102/360] unsloth/Llama-3.2-3B-Instruct: safetensors; meta-llama/Llama-3.2-3B-Instruct=1.0 (1382s)\n"}
+,{"stream_name":"stdout","time":1771.859035936,"data":"[103/360] unsloth/Qwen-Image-2512-GGUF: gguf; Qwen/Qwen-Image-2512=None (1560s)\n"}
+,{"stream_name":"stdout","time":1772.571559161,"data":"[104/360] peculiar-ragdoll/Sharp-Spark-X2.5-4B-GGUF: gguf; XHToken/Spark-X2.5-4B=None (1561s)\n"}
+,{"stream_name":"stdout","time":1772.575497657,"data":"[105/360] soyaakinohara/Spark-X2.5-4B-Heretic-jp-gguf: gguf; XHToken/Spark-X2.5-4B=None (1561s)\n"}
+,{"stream_name":"stdout","time":1778.352370161,"data":"[106/360] ukisai/Swift-1.5-Qwen3.8-27B-GSQ-RCO-GGUF: gguf; ukisai/Swift-1.5-Qwen3.8-27b=0.9427156178907237 (1567s)\n"}
+,{"stream_name":"stdout","time":1803.639492665,"data":"[107/360] peculiar-ragdoll/Cyber-Tiel-Coder-35B-A3B-GGUF-MTP: gguf; huihui-ai/Huihui-Ornith-1.5-35B-A3B-abliterated=0.999983308999969 (1592s)\n"}
+,{"stream_name":"stdout","time":1831.448684655,"data":"[108/360] unsloth/DeepSeek-V4.1-Flash-1017-GGUF: gguf; deepseek-ai/DeepSeek-V4.1-Flash-1017=None (1620s)\n"}
+,{"stream_name":"stdout","time":1838.542284307,"data":"[109/360] unsloth/Qwen3.8-27B-NVFP4: safetensors; Qwen/Qwen3.8-27B=0.9998481289621343 (1627s)\n"}
+,{"stream_name":"stdout","time":1846.289619862,"data":"[110/360] peculiar-ragdoll/Dirk-Qwen3.8-27B-GGUF: gguf; Qwen/Qwen3.8-27B=0.9998376162528606 (1635s)\n"}
+,{"stream_name":"stdout","time":1848.62911588,"data":"[111/360] Abiray/SCAIL-2-GGUF: gguf; zai-org/SCAIL-2=not readable (other checkpoint format) (1637s)\n"}
+,{"stream_name":"stdout","time":1850.08737415,"data":"[112/360] Comfy-Org/ltx-2.3: adapter; - (1639s)\n"}
+,{"stream_name":"stdout","time":1850.745344899,"data":"[113/360] unsloth/Qwen3.6-35B-A3B-NVFP4-Fast: safetensors; Qwen/Qwen3.6-35B-A3B=0.9999999999999999 (1639s)\n"}
+,{"stream_name":"stdout","time":1850.849497995,"data":"[114/360] unsloth/Qwen3.6-35B-A3B-NVFP4: safetensors; Qwen/Qwen3.6-35B-A3B=0.9999999999999999 (1639s)\n"}
+,{"stream_name":"stdout","time":1878.10089298,"data":"[115/360] mudler/Ornith-1.5-35B-A3B-APEX-MTP-GGUF: gguf; ornith-ai/Ornith-1.5-35B-A3B=0.9998421748801325 (1667s)\n"}
+,{"stream_name":"stdout","time":1879.063626857,"data":"[116/360] peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF-MTP: gguf; ornith-ai/Ornith-1.5-35B-A3B=0.9999833061612661 (1668s)\n"}
+,{"stream_name":"stdout","time":1880.822411545,"data":"[117/360] IDEA-Research/Rex-Omni: safetensors; Qwen/Qwen2.5-VL-3B-Instruct=0.9977486737182273 (1669s)\n"}
+,{"stream_name":"stdout","time":1885.355290931,"data":"[118/360] agentionai/Qwen3.8-Flash-Next-Gyro-abliterated-Huihui-GGUF: gguf; huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated=None, huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF=not readable (HubError: huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF: no safetensors, PyTorch or GGUF weights) (1674s)\n"}
+,{"stream_name":"stdout","time":1888.60533845,"data":"[119/360] unsloth/Qwen3.8-27B-GGUF: gguf; Qwen/Qwen3.8-27B=0.9999841264711894 (1677s)\n"}
+,{"stream_name":"stdout","time":1891.727727765,"data":"[120/360] Felladrin/Llama-160M-Chat-v1: safetensors; JackFram/llama-160m=0.9992389752888697 (1680s)\n"}
+,{"stream_name":"stdout","time":1901.161057821,"data":"[121/360] GD-ML/DreamX-World-5B: safetensors; Wan-AI/Wan2.2-TI2V-5B=0.9971654501243057 (1690s)\n"}
+,{"stream_name":"stdout","time":1908.751911981,"data":"[122/360] ttindall/Qwen3.8-27B-Defiance-Uncensored-MTP-GGUF: gguf; HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF=1.0, DavidAU/Qwen3.8-27B-Turbo-Brilliance-50X-Reasoning-Instruct-NEO-MAX-MTP-GGUF=0.9999300728269489 (1697s)\n"}
+,{"stream_name":"stdout","time":1920.190598092,"data":"[123/360] LiquidAI/LFM2.5-1.2B-Thinking: safetensors; LiquidAI/LFM2.5-1.2B-Base=0.9299559331308801 (1709s)\n"}
+,{"stream_name":"stdout","time":2070.57004085,"data":"[124/360] JIRU-W/upcycle_dense15000_e32top8_noaux_rewarm200: safetensors; JIRU-W/dense_e1_seq2048_gbs128_10b=0.9423293733038073 (1859s)\n"}
+,{"stream_name":"stdout","time":2073.426488715,"data":"[125/360] NousResearch/Hermes-3-Llama-3.1-8B: safetensors; meta-llama/Meta-Llama-3.1-8B=0.9997765846725786 (1862s)\n"}
+,{"stream_name":"stdout","time":2091.896256616,"data":"[126/360] unsloth/Qwen3.5-2B-GGUF: gguf; Qwen/Qwen3.5-2B=0.9999844303073351 (1880s)\n"}
+,{"stream_name":"stdout","time":2103.440570155,"data":"[127/360] OpenGVLab/InternVL3_5-1B: safetensors; OpenGVLab/InternVL3_5-1B-MPO=0.9999997741233071 (1892s)\n"}
+,{"stream_name":"stdout","time":2116.924551334,"data":"[128/360] OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-GGUF: gguf; prism-ml/Ternary-Bonsai-2-27B-gguf=None (1905s)\n"}
+,{"stream_name":"stdout","time":2120.752108587,"data":"[129/360] IsValorum/Qwen3.8-35B-A3B-Distill-MTP-APEX-I-MiniPlus-V2.1-GGUF: gguf; empero-ai/Qwen3.8-35B-A3B-Distill=0.9999740604562009 (1909s)\n"}
+,{"stream_name":"stdout","time":2121.569549098,"data":"[130/360] unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF: gguf; Qwen/Qwen3-30B-A3B-Instruct-2507=0.9999847714325618 (1910s)\n"}
+,{"stream_name":"stdout","time":2122.887771423,"data":"[131/360] Qwen/Qwen3-Reranker-8B: safetensors; Qwen/Qwen3-8B-Base=0.9960885311537733 (1911s)\n"}
+,{"stream_name":"stdout","time":2127.924676851,"data":"[132/360] OpenMed/OpenMed-PII-German-ClinicalLongformer-Base-149M-v1: safetensors; yikuan8/Clinical-Longformer=0.9999123041634574 (1916s)\n"}
+,{"stream_name":"stdout","time":2147.509589935,"data":"[133/360] RedHatAI/Meta-Llama-3.1-8B-Instruct-quantized.w8a8: safetensors; meta-llama/Llama-3.1-8B-Instruct=1.0 (1936s)\n"}
+,{"stream_name":"stdout","time":2150.645803104,"data":"[134/360] Skywork/Skywork-Reward-Llama-3.1-8B-v0.2: safetensors; meta-llama/Llama-3.1-8B-Instruct=0.9999965246445229 (1939s)\n"}
+,{"stream_name":"stdout","time":2154.733383538,"data":"[135/360] Singh8898/DiegoCropper: safetensors; unsloth/qwen2.5-vl-7b-instruct-bnb-4bit=1.0 (1943s)\n"}
+,{"stream_name":"stdout","time":2159.385700881,"data":"[136/360] WarmBloodAban/Qwen-Image-2.1-LoRAs: adapter; - (1948s)\n"}
+,{"stream_name":"stdout","time":2159.568415927,"data":"[137/360] Xenova/clap-htsat-unfused: not readable (onnx only); - (1948s)\n"}
+,{"stream_name":"stdout","time":2164.057700022,"data":"[138/360] Jackrong/Qwopus3.6-27B-v1-preview-GGUF: gguf; Qwen/Qwen3.6-27B=0.999981067812417 (1953s)\n"}
+,{"stream_name":"stdout","time":2165.15875837,"data":"[139/360] ZhengmingYu/DMAD: adapter; - (1954s)\n"}
+,{"stream_name":"stdout","time":2165.459565745,"data":"[140/360] MaziyarPanahi/WizardLM-2-7B-GGUF: gguf; microsoft/WizardLM-2-7B=not readable (HTTP 401) (1954s)\n"}
+,{"stream_name":"stdout","time":2165.724026882,"data":"[141/360] Veda-Sparse/Minimax-H3-T2VA-Veda-8NFE-600Step-Preview: safetensors; MiniMaxAI/MiniMax-H3=None, larryvrh/MiniMax-H3-Turbo-Lora=adapter (1954s)\n"}
+,{"stream_name":"stdout","time":2167.147920083,"data":"[142/360] akatz-ai/MiniMax-H3-Character-Swap-LoRA: adapter; - (1956s)\n"}
+,{"stream_name":"stdout","time":2170.821710314,"data":"[143/360] RedHatAI/Qwen2.5-VL-7B-Instruct-quantized.w8a8: safetensors; Qwen/Qwen2.5-VL-7B-Instruct=1.0 (1959s)\n"}
+,{"stream_name":"stdout","time":2190.682800111,"data":"[144/360] OpenMed/OpenMed-PII-German-BiomedELECTRA-Large-335M-v1: safetensors; microsoft/BiomedNLP-BiomedELECTRA-large-uncased-abstract=0.999729247944662 (1979s)\n"}
+,{"stream_name":"stdout","time":2196.913701194,"data":"[145/360] allenai/Llama-3.1-Tulu-3-8B-SFT: safetensors; meta-llama/Llama-3.1-8B=0.999623075502781 (1985s)\n"}
+,{"stream_name":"stdout","time":2197.22676003,"data":"[146/360] antflydb/gliner2-base-v1: safetensors; fastino/gliner2-base-v1=1.0 (1986s)\n"}
+,{"stream_name":"stdout","time":2198.047623214,"data":"[147/360] unsloth/gemma-4-E2B-it-qat-mobile-GGUF: gguf; google/gemma-4-E2B-it-qat-mobile-transformers=1.0000000000000002 (1987s)\n"}
+,{"stream_name":"stdout","time":2199.530987651,"data":"[148/360] RedHatAI/Llama-3.3-70B-Instruct-FP8-dynamic: safetensors; meta-llama/Llama-3.3-70B-Instruct=0.9996531162912576 (1988s)\n"}
+,{"stream_name":"stdout","time":2233.274626547,"data":"[149/360] Xenova/sweep-next-edit-1.5B: safetensors; sweepai/sweep-next-edit-1.5B=1.0 (2022s)\n"}
+,{"stream_name":"stdout","time":2242.143507203,"data":"[150/360] cross-encoder/ettin-reranker-68m-v1: safetensors; jhu-clsp/ettin-encoder-68m=0.9733179009985528 (2031s)\n"}
+,{"stream_name":"stdout","time":2381.617662326,"data":"[151/360] IsValorum/Groot-19B-A3B-261023-APEX-I-MiniPlus-V2.1-GGUF: gguf; GrootTeam/Groot-19B-A3B-261023=0.9992823313643078 (2170s)\n"}
+,{"stream_name":"stdout","time":2388.577711799,"data":"[152/360] TheBloke/phi-2-GGUF: gguf; microsoft/phi-2=0.9999855377632426 (2177s)\n"}
+,{"stream_name":"stdout","time":2389.037963166,"data":"[153/360] facebook/dinov3-vits16plus-pretrain-lvd1689m: not readable (gated, no byte-identical public copy); - (2178s)\n"}
+,{"stream_name":"stdout","time":2389.908732295,"data":"[154/360] dannashao/bert-base-uncased-finetuned-advanced-srl_arg: safetensors; bert-base-uncased=0.9987189571976561 (2178s)\n"}
+,{"stream_name":"stdout","time":2426.925115316,"data":"[155/360] deutsche-telekom/gbert-large-paraphrase-cosine: bin; deepset/gbert-large=0.9984755279881653 (2215s)\n"}
+,{"stream_name":"stdout","time":2432.108581467,"data":"[156/360] frtertaer/LTX-2.5-uncensored-v1.1-FP8: gguf; TenStrip/LTX2.3-10Eros=None, Lightricks/LTX-2.5=None, TenStrip/LTX2.3_DMD_Lora=adapter (2221s)\n"}
+,{"stream_name":"stdout","time":2433.427428795,"data":"[157/360] bartowski/Nanbeige_Nanbeige4.2-3B-GGUF: gguf; Nanbeige/Nanbeige4.2-3B=None (2222s)\n"}
+,{"stream_name":"stdout","time":2437.782588867,"data":"[158/360] backyardai/NeuralLemon-7B-GGUF: gguf; itchindigo/NeuralLemon=0.9999850013889744 (2226s)\n"}
+,{"stream_name":"stdout","time":2438.4323617,"data":"[159/360] handy-computer/gigaam-v3-rnnt-gguf: gguf; ai-sage/GigaAM-v3=None (2227s)\n"}
+,{"stream_name":"stdout","time":2458.711688937,"data":"[160/360] TheBloke/WizardCoder-Python-34B-V1.0-GGUF: gguf; WizardLM/WizardCoder-Python-34B-V1.0=0.9999857291202545 (2247s)\n"}
+,{"stream_name":"stdout","time":2474.882463568,"data":"[161/360] handy-computer/granite-speech-4.1-2b-nar-gguf: gguf; ibm-granite/granite-speech-4.1-2b-nar=None (2263s)\n"}
+,{"stream_name":"stdout","time":2483.982939996,"data":"[162/360] bartowski/Dolphin3.0-Qwen2.5-3b-GGUF: gguf; cognitivecomputations/Dolphin3.0-Qwen2.5-3b=0.9999851235774175 (2272s)\n"}
+,{"stream_name":"stdout","time":2484.359618452,"data":"[163/360] heman10x/rlcd-modernbert-151m: safetensors; knowledgator/gliclass-modern-base-v2.0=0.9999968144058216 (2273s)\n"}
+,{"stream_name":"stdout","time":2504.612331172,"data":"[164/360] ge525/Qwen3.8-9B-Distill-uncensored-heretic-Q4_K_M-GGUF: gguf; petruhonk/Qwen3.8-9B-Distill-uncensored-heretic=0.9973711741211081 (2293s)\n"}
+,{"stream_name":"stdout","time":2518.500830223,"data":"[165/360] jinaai/jina-embeddings-v5-text-nano-retrieval: safetensors; jinaai/jina-embeddings-v5-text-nano=0.9996823834776196 (2307s)\n"}
+,{"stream_name":"stdout","time":2520.134875292,"data":"[166/360] joyfox/Qwen-Image-Edit-2509-Upscale2K: adapter; - (2309s)\n"}
+,{"stream_name":"stdout","time":2520.270205435,"data":"[167/360] kaushikvira/Qwen3.8-27B-swift-abliterated-nvfp4full-dflash2-NInfer-v3: not readable (no weight files); - (2309s)\n"}
+,{"stream_name":"stdout","time":2521.234780935,"data":"[168/360] latent-consistency/lcm-lora-sdxl: adapter; - (2310s)\n"}
+,{"stream_name":"stdout","time":2670.606553033,"data":"[169/360] ibm-granite/granite-3.0-8b-instruct: safetensors; ibm-granite/granite-3.0-8b-base=0.8892615280843639 (2459s)\n"}
+,{"stream_name":"stdout","time":2674.476950065,"data":"[170/360] chaoliangUNSW/Jev-Style-Qwen3.5-2B-Decision-GGUF: gguf; Qwen/Qwen3.5-2B-Base=0.9999366135281154 (2463s)\n"}
+,{"stream_name":"stdout","time":2705.889245519,"data":"[171/360] bartowski/cognitivecomputations_Dolphin-Mistral-24B-Venice-Edition-GGUF: gguf; cognitivecomputations/Dolphin-Mistral-24B-Venice-Edition=0.9145047988557418 (2494s)\n"}
+,{"stream_name":"stdout","time":2706.016411256,"data":"[172/360] litert-community/Ternary-Bonsai-1.7B: not readable (no weight files); - (2494s)\n"}
+,{"stream_name":"stdout","time":2706.149659755,"data":"[173/360] litert-community/gemma-4-31B-it-litert-lm: not readable (no weight files); - (2495s)\n"}
+,{"stream_name":"stdout","time":2709.709290938,"data":"[174/360] litagin/anime-whisper: safetensors; kotoba-tech/kotoba-whisper-v2.0=0.9937238589728266 (2498s)\n"}
+,{"stream_name":"stdout","time":2726.389284823,"data":"[175/360] lightx2v/Qwen-Image-2512-Lightning: safetensors; Qwen/Qwen-Image-2512=1.0 (2515s)\n"}
+,{"stream_name":"stdout","time":2729.330853605,"data":"[176/360] ggml-org/Kev-4B-GGUF: gguf; jaredpalmer/kev-4b=adapter (2518s)\n"}
+,{"stream_name":"stdout","time":2738.243576706,"data":"[177/360] lightx2v/LightWan2.2-A14B: safetensors; Wan-AI/Wan2.2-T2V-A14B=0.9345147066523432, Wan-AI/Wan2.2-I2V-A14B=0.9185365197132335 (2527s)\n"}
+,{"stream_name":"stdout","time":2743.253650361,"data":"[178/360] ibyteohdear/Lightricks-LTX-2-DISTILLED-10-Eros: safetensors; Lightricks/LTX-2.3=0.9747189742465616 (2532s)\n"}
+,{"stream_name":"stdout","time":2766.368843294,"data":"[179/360] dealignai/MiniCPM-V-4.7-35B-A3B-CRACK-GGUF: gguf; openbmb/MiniCPM-V-4.7-35B-A3B=0.9999833665664175 (2555s)\n"}
+,{"stream_name":"stdout","time":2806.035569311,"data":"[180/360] lmstudio-community/Qwen3-VL-4B-Instruct-MLX-5bit: safetensors; Qwen/Qwen3-VL-4B-Instruct=0.9989612670515011 (2595s)\n"}
+,{"stream_name":"stdout","time":2815.78630838,"data":"[181/360] AngelSlim/Hy3-GGUF: gguf; tencent/Hy3=None (2604s)\n"}
+,{"stream_name":"stdout","time":2825.175031103,"data":"[182/360] lmstudio-community/Qwen3-8B-GGUF: gguf; Qwen/Qwen3-8B=0.9999853633241627 (2614s)\n"}
+,{"stream_name":"stdout","time":2967.283549617,"data":"[183/360] bartowski/huihui-ai_Qwen3-Coder-Next-abliterated-GGUF: gguf; huihui-ai/Huihui-Qwen3-Coder-Next-abliterated=0.999830892779295 (2756s)\n"}
+,{"stream_name":"stdout","time":2970.590574393,"data":"[184/360] lmstudio-community/Qwen2.5-Coder-1.5B-Instruct-GGUF: gguf; Qwen/Qwen2.5-Coder-1.5B-Instruct=0.999984592913259 (2759s)\n"}
+,{"stream_name":"stdout","time":2971.883891518,"data":"[185/360] ggml-org/Qwen3.6-27B-GGUF: gguf; Qwen/Qwen3.6-27B=0.9843748596134307 (2760s)\n"}
+,{"stream_name":"stdout","time":2979.362842185,"data":"[186/360] lmstudio-community/Mistral-7B-Instruct-v0.3-GGUF: gguf; mistralai/Mistral-7B-Instruct-v0.3=0.9999850875583223 (2768s)\n"}
+,{"stream_name":"stdout","time":2981.945766565,"data":"[187/360] lokeshe09/Qwen3.6-35B-A3B-INT8: safetensors; Qwen/Qwen3.6-35B-A3B=1.0 (2770s)\n"}
+,{"stream_name":"stdout","time":2987.49080839,"data":"[188/360] lmstudio-community/Hermes-4-70B-MLX-8bit: safetensors; NousResearch/Hermes-4-70B=0.9999766934947254 (2776s)\n"}
+,{"stream_name":"stdout","time":2988.578773193,"data":"[189/360] lmstudio-community/Qwen3.6-27B-MLX-4bit: safetensors; Qwen/Qwen3.6-27B=0.9956579910694778 (2777s)\n"}
+,{"stream_name":"stdout","time":2991.64590702,"data":"[190/360] maurienne-ai/Qwen3.8-27B-DFlash2-NVFP4-RTNcal: safetensors; incoai/Qwen3.8-27B-DFlash2=1.0 (2780s)\n"}
+,{"stream_name":"stdout","time":3007.323392292,"data":"[191/360] lynaNSFW/DaSiWa_MMH3_HybridTurbo_V3: safetensors; lynaNSFW/DaSiWa_MiniMax_H3=0.9999958387866195 (2796s)\n"}
+,{"stream_name":"stdout","time":3007.575693511,"data":"[192/360] meta-llama/Llama-Guard-3-8B: safetensors; meta-llama/Meta-Llama-3.1-8B=0.9999952075613115 (2796s)\n"}
+,{"stream_name":"stdout","time":3018.71697233,"data":"[193/360] mlabonne/NeuralDaredevil-8B-abliterated: safetensors; mlabonne/Daredevil-8B-abliterated=0.9999999791946332 (2807s)\n"}
+,{"stream_name":"stdout","time":3019.318768959,"data":"[194/360] mlx-community/Qwen3-8B-4bit: safetensors; Qwen/Qwen3-8B=0.9958378945617055 (2808s)\n"}
+,{"stream_name":"stdout","time":3031.818179329,"data":"[195/360] llmfan46/Qwythos-9B-Claude-Mythos-5-1M-uncensored-heretic-GGUF: gguf; llmfan46/Qwythos-9B-Claude-Mythos-5-1M-uncensored-heretic=0.9999838312724565 (2820s)\n"}
+,{"stream_name":"stdout","time":3078.897932784,"data":"[196/360] michaelw9999/Qwen3.6-35B-A3B-NVFP4-MTP-GGUF: gguf; Qwen/Qwen3.6-35B-A3B=0.9999259099289707 (2867s)\n"}
+,{"stream_name":"stdout","time":3091.186094055,"data":"[197/360] mradermacher/Huihui-Ornith-1.5-35B-A3B-abliterated-GGUF: gguf; huihui-ai/Huihui-Ornith-1.5-35B-A3B-abliterated=0.999983308999969 (2880s)\n"}
+,{"stream_name":"stdout","time":3301.68551563,"data":"[198/360] nvidia/diffusiongemma-26B-A4B-it-NVFP4: safetensors; google/diffusiongemma-26B-A4B-it=1.0 (3090s)\n"}
+,{"stream_name":"stdout","time":3301.809579123,"data":"[199/360] onnx-community/BiRefNet_lite-ONNX: not readable (onnx only); - (3090s)\n"}
+,{"stream_name":"stdout","time":3301.996315968,"data":"[200/360] onnx-community/whisper-tiny.en: not readable (onnx only); - (3090s)\n"}
+,{"stream_name":"stdout","time":3302.424280005,"data":"[201/360] peasantsmith/DeepSeek-V4.1-Flash-1017-Maya-GGUF: gguf; deepseek-ai/DeepSeek-V4.1-Flash-1017=None (3091s)\n"}
+,{"stream_name":"stdout","time":3315.608994961,"data":"[202/360] mradermacher/DeepSeek-V2-Lite-Chat-GGUF: gguf; deepseek-ai/DeepSeek-V2-Lite-Chat=0.9999854889615183 (3104s)\n"}
+,{"stream_name":"stdout","time":3315.733225413,"data":"[203/360] mradermacher/Qwen3-8B-heretic-GGUF: gguf; georgehenney/Qwen3-8B-heretic=0.9999853876315434 (3104s)\n"}
+,{"stream_name":"stdout","time":3316.785291441,"data":"[204/360] prithivMLmods/Qwen-Image-Edit-2511-Object-Remover: adapter; - (3105s)\n"}
+,{"stream_name":"stdout","time":3329.804746604,"data":"[205/360] huihui-ai/Huihui-gemma-4-12B-it-qat-q4_0-unquantized-abliterated-GGUF: gguf; google/gemma-4-12B-it-qat-q4_0-unquantized=None (3118s)\n"}
+,{"stream_name":"stdout","time":3336.738487875,"data":"[206/360] huihui-ai/Huihui-gemma-4-26B-A4B-it-qat-q4_0-unquantized-abliterated-GGUF: gguf; google/gemma-4-26B-A4B-it-qat-q4_0-unquantized=None (3125s)\n"}
+,{"stream_name":"stdout","time":3336.837337412,"data":"[207/360] mradermacher/gemma-4-26B-A4B-it-heretic-GGUF: gguf; coder3101/gemma-4-26B-A4B-it-heretic=0.9999847994825137 (3125s)\n"}
+,{"stream_name":"stdout","time":3355.033405125,"data":"[208/360] sandpies/Minimax-H3-fl2va-ref2va-hybrid-unpruned-int8: safetensors; Comfy-Org/MiniMax-H3=1.0 (3144s)\n"}
+,{"stream_name":"stdout","time":3355.513557014,"data":"[209/360] sergeyzh/rubert-tiny-turbo: safetensors; cointegrated/rubert-tiny2=0.7712288773576377 (3144s)\n"}
+,{"stream_name":"stdout","time":3363.454993896,"data":"[210/360] pyrodog/DeepSeek-V4.1-Flash-UNCENSORED-DwarfStar-Q2: gguf; dealignai/DeepSeek-V4.1-Flash-UNCENSORED-FP8=None (3152s)\n"}
+,{"stream_name":"stdout","time":3363.597261275,"data":"[211/360] unsloth/Kimi-K3-GGUF: not readable (HubError: unsloth/Kimi-K3-GGUF: no safetensors, PyTorch or GGUF weights); - (3152s)\n"}
+,{"stream_name":"stdout","time":3366.117241829,"data":"[212/360] migtissera/Tess-4-27B-GGUF: gguf; migtissera/Tess-4-27B=0.9999838935325376 (3155s)\n"}
+,{"stream_name":"stdout","time":3367.117505533,"data":"[213/360] mradermacher/Goetia-26B-A4B-v1.7-i1-GGUF: gguf; Naphula/Goetia-26B-A4B-v1.7=0.9998186280892924 (3156s)\n"}
+,{"stream_name":"stdout","time":3368.178428349,"data":"[214/360] reazon-research/japanese-wav2vec2-base-rs35kh: safetensors; reazon-research/japanese-wav2vec2-base=0.867916829414247 (3157s)\n"}
+,{"stream_name":"stdout","time":3370.697751775,"data":"[215/360] unsloth/MOSS-Image-SFT-GGUF: gguf; OpenMOSS-Team/MOSS-Image-SFT=None (3159s)\n"}
+,{"stream_name":"stdout","time":3374.512055738,"data":"[216/360] lmstudio-community/gpt-oss-120b-GGUF: gguf; openai/gpt-oss-120b=None (3163s)\n"}
+,{"stream_name":"stdout","time":3377.080739762,"data":"[217/360] unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit: safetensors; meta-llama/Llama-3.1-8B-Instruct=1.0 (3166s)\n"}
+,{"stream_name":"stdout","time":3379.358739567,"data":"[218/360] sriram1983007/SRA-RiskGate-4B: safetensors; Qwen/Qwen3-4B-Instruct-2507=0.999968544811568 (3168s)\n"}
+,{"stream_name":"stdout","time":3380.094937971,"data":"[219/360] mradermacher/latxa-7b-v1.2-i1-GGUF: gguf; HiTZ/latxa-7b-v1.2=0.9998456850885717 (3169s)\n"}
+,{"stream_name":"stdout","time":3383.00099305,"data":"[220/360] unsloth/Z-Image-Turbo-ComfyUI: safetensors; Tongyi-MAI/Z-Image-Turbo=None (3171s)\n"}
+,{"stream_name":"stdout","time":3391.599044191,"data":"[221/360] mudler/gemma-4-26B-A4B-it-Claude-Opus-Distill-APEX-GGUF: gguf; TeichAI/gemma-4-26B-A4B-it-Claude-Opus-Distill=0.9998356741716883 (3180s)\n"}
+,{"stream_name":"stdout","time":3394.721969845,"data":"[222/360] unsloth/Qwen3-14B: safetensors; Qwen/Qwen3-14B=1.0 (3183s)\n"}
+,{"stream_name":"stdout","time":3395.308758272,"data":"[223/360] stabilityai/stable-audio-3-small-music: safetensors; stabilityai/stable-audio-3-small-music-base=0.9999967462090791 (3184s)\n"}
+,{"stream_name":"stdout","time":3396.248827603,"data":"[224/360] petruhonk/Qwen3.8-9B-Distill-uncensored-heretic-GGUF: gguf; empero-ai/Qwen3.8-9B-Distill=0.9999849608938307 (3185s)\n"}
+,{"stream_name":"stdout","time":3396.414852996,"data":"[225/360] wallawalla47/Qwen3.8-27B-Uncensored-NVFP4-NInferV3: not readable (no weight files); - (3185s)\n"}
+,{"stream_name":"stdout","time":3399.554720629,"data":"[226/360] unsloth/Qwen3-4B: safetensors; Qwen/Qwen3-4B=1.0 (3188s)\n"}
+,{"stream_name":"stdout","time":3400.509080035,"data":"[227/360] unsloth/Qwen3-VL-4B-Instruct-unsloth-bnb-4bit: safetensors; Qwen/Qwen3-VL-4B-Instruct=1.0 (3189s)\n"}
+,{"stream_name":"stdout","time":3402.936925792,"data":"[228/360] windowsxp811203/Qwen3.8-27B-Abliterated-GGUF: not readable (gated, no byte-identical public copy); - (3191s)\n"}
+,{"stream_name":"stdout","time":3404.142252582,"data":"[229/360] windowsxp811203/Qwen3.8-Flash-Next-Abliterated-GGUF: not readable (gated, no byte-identical public copy); - (3193s)\n"}
+,{"stream_name":"stdout","time":3410.558076142,"data":"[230/360] unsloth/gemma-4-E2B-it-unsloth-bnb-4bit: safetensors; google/gemma-4-E2B-it=1.0 (3199s)\n"}
+,{"stream_name":"stdout","time":3575.280721492,"data":"[231/360] vllm-sr/d3-flash: safetensors; Qwen/Qwen3.5-9B=0.9999633893891473 (3364s)\n"}
+,{"stream_name":"stdout","time":3584.624225123,"data":"[232/360] zer0int/CLIP-GmP-ViT-L-14: safetensors; openai/clip-vit-large-patch14=0.999987691244504 (3373s)\n"}
+,{"stream_name":"stdout","time":3590.532581774,"data":"[233/360] DuoNeural/Lattice-4E-Lorentz-Holographic-253M-Instruct: safetensors; HuggingFaceTB/SmolLM2-1.7B-Instruct=None (3379s)\n"}
+,{"stream_name":"stdout","time":3595.270876198,"data":"[234/360] utter-project/EuroLLM-1.7B-Instruct: safetensors; utter-project/EuroLLM-1.7B=0.9998668737109264 (3384s)\n"}
+,{"stream_name":"stdout","time":3600.74075035,"data":"[235/360] DKTechin/acestep: gguf; ACE-Step/Ace-Step1.5=None (3389s)\n"}
+,{"stream_name":"stdout","time":3617.022064184,"data":"[236/360] DestinyApocalypse/apocalypse-aid-gemma4-e2b: safetensors; google/gemma-4-e2b=0.8142621518764551 (3406s)\n"}
+,{"stream_name":"stdout","time":3618.873704824,"data":"[237/360] winninghealth/WiNGPT2-Llama-3-8B-Base: safetensors; meta-llama/Meta-Llama-3-8B=0.9899161910365158 (3407s)\n"}
+,{"stream_name":"stdout","time":3639.19041215,"data":"[238/360] KoichiYasuoka/roberta-classical-chinese-base-ud-goeswith: bin; KoichiYasuoka/roberta-classical-chinese-base-char=0.9946048428204488 (3428s)\n"}
+,{"stream_name":"stdout","time":3649.488550232,"data":"[239/360] turintech/Qwen3.5-9B-Artemis-GGUF: gguf; Qwen/Qwen3.5-9B=0.9993329710457499 (3438s)\n"}
+,{"stream_name":"stdout","time":3651.58767417,"data":"[240/360] Muapi/gay-porn-sdxl-pony-ill: adapter; - (3440s)\n"}
+,{"stream_name":"stdout","time":3651.741289663,"data":"[241/360] OpenVINO/LFM3-1.7B-int4-ov: not readable (no weight files); - (3440s)\n"}
+,{"stream_name":"stdout","time":3653.195114863,"data":"[242/360] Goekdeniz-Guelmez/Josiefied-Qwen2.5-1.5B-Instruct-abliterated-v3: safetensors; Goekdeniz-Guelmez/Josiefied-Qwen2.5-1.5B-Instruct-abliterated-v2=0.9999997808633149 (3442s)\n"}
+,{"stream_name":"stdout","time":3673.47441548,"data":"[243/360] Diasol/gemma-3-1b-it-GGUF: gguf; google/gemma-3-1b-it=0.9999846834639163 (3462s)\n"}
+,{"stream_name":"stdout","time":3675.100405654,"data":"[244/360] unsloth/gemma-4-E4B-it-qat-mobile-GGUF: gguf; google/gemma-4-E4B-it-qat-mobile-transformers=0.9999999999999998 (3464s)\n"}
+,{"stream_name":"stdout","time":3675.837566752,"data":"[245/360] RedHatAI/Qwen3-8B-quantized.w4a16: safetensors; Qwen/Qwen3-8B=1.0 (3464s)\n"}
+,{"stream_name":"stdout","time":3679.164651512,"data":"[246/360] LiquidAI/LFM2.5-1.2B-JP-202606-MLX-4bit: safetensors; LiquidAI/LFM2.5-1.2B-JP-202606=0.9957281080539189 (3468s)\n"}
+,{"stream_name":"stdout","time":3687.426146439,"data":"[247/360] LiquidAI/LFM2.5-VL-450M-MLX-6bit: safetensors; LiquidAI/LFM2.5-VL-450M=0.9997411656004533 (3476s)\n"}
+,{"stream_name":"stdout","time":3689.324094076,"data":"[248/360] unsloth/gemma-3n-E4B-it-GGUF: gguf; google/gemma-3n-E4B-it=0.9999853639515096 (3478s)\n"}
+,{"stream_name":"stdout","time":3693.631046768,"data":"[249/360] MergekitCloud/mergekit-121: safetensors; Qwen/Qwen2.5-14B=0.5091658876745238, Qwen/Qwen2.5-Coder-14B-Instruct=0.9779248181936915 (3482s)\n"}
+,{"stream_name":"stdout","time":3700.053925682,"data":"[250/360] TheBloke/phi-2-dpo-GGUF: gguf; lxuechen/phi-2-dpo=not readable (HTTP 401) (3489s)\n"}
+,{"stream_name":"stdout","time":3700.177208727,"data":"[251/360] ahnafnafee/Warlock-GLM-5.3-GGUF: not readable (no weight files); - (3489s)\n"}
+,{"stream_name":"stdout","time":3713.711358682,"data":"[252/360] nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-GGUF: gguf; nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16=0.9987414857157427 (3502s)\n"}
+,{"stream_name":"stdout","time":3869.285681379,"data":"[253/360] Sup2Doggie/Vectorite-Pro-4B: safetensors; unsloth/qwen3-4b-unsloth-bnb-4bit=0.9999933467641113 (3658s)\n"}
+,{"stream_name":"stdout","time":3884.567230162,"data":"[254/360] unsloth/Qwen3-VL-32B-Instruct-GGUF: gguf; Qwen/Qwen3-VL-32B-Instruct=0.9999853530824234 (3673s)\n"}
+,{"stream_name":"stdout","time":3885.388108227,"data":"[255/360] TreezzZ/r2s-scienceworld-qwen3.5-4b-student: safetensors; Qwen/Qwen3.5-4B=0.9999998115831159 (3674s)\n"}
+,{"stream_name":"stdout","time":3894.318059618,"data":"[256/360] unsloth/Llama-3.3-70B-Instruct-GGUF: gguf; meta-llama/Llama-3.3-70B-Instruct=0.9993590824478399 (3683s)\n"}
+,{"stream_name":"stdout","time":3914.696035957,"data":"[257/360] allenai/tmax-8b: safetensors; allenai/tmax-sft-8b=0.9999996336606898 (3703s)\n"}
+,{"stream_name":"stdout","time":3983.551298748,"data":"[258/360] TensorFold/Ling-3.0-flash-oQ5: safetensors; inclusionAI/Ling-3.0-flash=0.9999732156399745 (3772s)\n"}
+,{"stream_name":"stdout","time":3987.414349526,"data":"[259/360] MindFreakGamer/gemma-4-E2B-pocket-mechanic-GGUF: gguf; google/gemma-4-E2B-it=0.9999719473084696 (3776s)\n"}
+,{"stream_name":"stdout","time":3989.310041604,"data":"[260/360] StoryArbor/gemma-4-mtp-drafters-GGUF: gguf; google/gemma-4-12B-it-qat-q4_0-unquantized-assistant=None, google/gemma-4-E4B-it-qat-q4_0-unquantized-assistant=None (3778s)\n"}
+,{"stream_name":"stdout","time":4004.313977092,"data":"[261/360] calcuis/openaudio-gguf: gguf; fishaudio/openaudio-s1-mini=not readable (other checkpoint format) (3793s)\n"}
+,{"stream_name":"stdout","time":4033.62356758,"data":"[262/360] TheBloke/OrcaMaid-v2-FIX-13B-32k-GGUF: gguf; ddh0/OrcaMaid-v2-FIX-13b-32k=0.9999739815664592 (3822s)\n"}
+,{"stream_name":"stdout","time":4033.697112713,"data":"[263/360] TheBloke/vicuna-13B-v1.5-16K-GGUF: gguf; lmsys/vicuna-13b-v1.5-16k=0.9999707365329931 (3822s)\n"}
+,{"stream_name":"stdout","time":4033.80852424,"data":"[264/360] TheBloke/Thespis-13B-v0.5-GGUF: gguf; cgato/Thespis-13b-v0.5=0.9999716632174077 (3822s)\n"}
+,{"stream_name":"stdout","time":4042.371937,"data":"[265/360] backyardai/QuartetAnemoi-70B-t0.0001-GGUF: gguf; alchemonaut/QuartetAnemoi-70B-t0.0001=None (3831s)\n"}
+,{"stream_name":"stdout","time":4185.980441201,"data":"[266/360] bartowski/ArliAI_Llama-3.3-70B-ArliAI-RPMax-v1.4-GGUF: gguf; ArliAI/Llama-3.3-70B-ArliAI-RPMax-v1.4=0.9993605167783502 (3974s)\n"}
+,{"stream_name":"stdout","time":4186.806450375,"data":"[267/360] furiosa-ai/gemma-4-31B-it-FP8-block: safetensors; RedHatAI/gemma-4-31B-it-FP8-block=1.0 (3975s)\n"}
+,{"stream_name":"stdout","time":4195.54362832,"data":"[268/360] bartowski/stepfun-ai_Step-3.5-Flash-GGUF: gguf; stepfun-ai/Step-3.5-Flash=0.9667757525575518 (3984s)\n"}
+,{"stream_name":"stdout","time":4212.187620543,"data":"[269/360] handy-computer/moonshine-base-zh-gguf: gguf; UsefulSensors/moonshine-base-zh=None (4001s)\n"}
+,{"stream_name":"stdout","time":4214.838875238,"data":"[270/360] huggingface-mic/siglip-base-patch16-224-mic: safetensors; google/siglip-base-patch16-224=None (4003s)\n"}
+,{"stream_name":"stdout","time":4221.569012043,"data":"[271/360] bartowski/Rombo-Org_Rombo-LLM-V3.1-QWQ-32b-GGUF: gguf; Rombo-Org/Rombo-LLM-V3.1-QWQ-32b=0.9999854829413651 (4010s)\n"}
+,{"stream_name":"stdout","time":4221.571767951,"data":"[272/360] bartowski/nbeerbower_Dumpling-Qwen2.5-32B-v2-GGUF: gguf; nbeerbower/Dumpling-Qwen2.5-32B-v2=0.999985532411404 (4010s)\n"}
+,{"stream_name":"stdout","time":4226.269080346,"data":"[273/360] bartowski/magnum-v3-34b-GGUF: gguf; anthracite-org/magnum-v3-34b=0.9999856658117762 (4015s)\n"}
+,{"stream_name":"stdout","time":4230.133520683,"data":"[274/360] iceycharon/snofs14: safetensors; wikeeyang/Flux2-Klein-9B-True-V2=None (4019s)\n"}
+,{"stream_name":"stdout","time":4230.448381415,"data":"[275/360] francesca9805/arb-arab-100mb-after-ppt-mp-struct-100mb-ckpt500_seed455: safetensors; francesca9805/arb-arab-100mb-ppt-mp-struct-100mb_seed455=0.15649330265585856 (4019s)\n"}
+,{"stream_name":"stdout","time":4230.585631498,"data":"[276/360] larryliu0820/parakeet-tdt-0.6b-v3-executorch: not readable (no weight files); - (4019s)\n"}
+,{"stream_name":"stdout","time":4242.723972481,"data":"[277/360] dicta-il/dictalm2.0-instruct-GGUF: gguf; dicta-il/dictalm2.0=0.9998634203281844 (4031s)\n"}
+,{"stream_name":"stdout","time":4256.343177294,"data":"[278/360] bealore/Qwen3-VL-Reranker-2B-GGUF: gguf; Qwen/Qwen3-VL-Reranker-2B=0.9999849417313476 (4045s)\n"}
+,{"stream_name":"stdout","time":4256.476183985,"data":"[279/360] litert-community/MiniCPM-V-4.7-1B: not readable (no weight files); - (4045s)\n"}
+,{"stream_name":"stdout","time":4286.729603301,"data":"[280/360] goldhub/YuE2-RS-Finetunes: gguf; m-a-p/YuE2-3B=0.9987965008967549 (4075s)\n"}
+,{"stream_name":"stdout","time":4293.171423467,"data":"[281/360] mobilint/aya-vision-8b: safetensors; CohereLabs/aya-vision-8b=not readable (gated, no byte-identical public copy) (4082s)\n"}
+,{"stream_name":"stdout","time":4309.763915323,"data":"[282/360] lastudio-community/VieNeu-TTS-v3-Turbo-CPP: gguf; pnnbao-ump/VieNeu-TTS-v3-Turbo=0.001190497070317051 (4098s)\n"}
+,{"stream_name":"stdout","time":4320.687427655,"data":"[283/360] leeaandrob/Bonsai-27B-1bit-gguf: gguf; prism-ml/Bonsai-27B=not readable (HTTP 401) (4109s)\n"}
+,{"stream_name":"stdout","time":4497.755669658,"data":"[284/360] fooooooooooooooooooooooooooooooooooooooooo/KAT-Coder-V2.5-Dev-16GB-MixedQuant-GGUF: gguf; Kwaipilot/KAT-Coder-V2.5-Dev=0.9998226505307752 (4286s)\n"}
+,{"stream_name":"stdout","time":4503.10773868,"data":"[285/360] hermitdave/Ornith-1.5-122B-MLX-Imatrix-Mixed-MTP: safetensors; ornith-ai/Ornith-1.5-122B=0.9958804396690013 (4292s)\n"}
+,{"stream_name":"stdout","time":4506.440639524,"data":"[286/360] ijohn07/Qwen3-Coder-30B-A3B-Instruct-FP8-Q4_K_M-GGUF: gguf; Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8=0.9973620752337753 (4295s)\n"}
+,{"stream_name":"stdout","time":4527.600573812,"data":"[287/360] ibm-granite/granite-guardian-4.1-8b-GGUF: gguf; ibm-granite/granite-guardian-4.1-8b=0.9999850484085151 (4316s)\n"}
+,{"stream_name":"stdout","time":4539.051011582,"data":"[288/360] freakyskittle/K2-Horizon-MoVA-36B-A4B-DERISKED-GGUF: gguf; Blackfrost-AI/K2-Horizon-MoVA-36B-A4B-DERISKED-BF16=not readable (HTTP 401) (4328s)\n"}
+,{"stream_name":"stdout","time":4564.033470727,"data":"[289/360] inference-optimization/Inkling-0.6B-A0.6B: safetensors; thinkingmachines/Inkling=-0.0057404061481624215 (4353s)\n"}
+,{"stream_name":"stdout","time":4629.474933642,"data":"[290/360] mradermacher/AtomThink-LLaVA1.5-7B-GGUF: gguf; Kun-Xiang/AtomThink-LLaVA1.5-7B=0.9999854604498789 (4418s)\n"}
+,{"stream_name":"stdout","time":4633.951196463,"data":"[291/360] mradermacher/DeepSeek-R1-Fine-tuned-Medical-GGUF: gguf; YoussefHosni/DeepSeek-R1-Fine-tuned-Medical=None (4422s)\n"}
+,{"stream_name":"stdout","time":4643.775240346,"data":"[292/360] mradermacher/DeepSeekR1-QwQ-SkyT1-32B-Fusion-811-i1-GGUF: gguf; huihui-ai/DeepSeekR1-QwQ-SkyT1-32B-Fusion-811=not readable (HTTP 401) (4432s)\n"}
+,{"stream_name":"stdout","time":4654.253739443,"data":"[293/360] mradermacher/Agente-Llama-3.1-Asistant-16bit-v2-GGUF: gguf; Agnuxo/Agente-Llama-3.1-Asistant-16bit-v2=0.9999849507892324 (4443s)\n"}
+,{"stream_name":"stdout","time":4662.109678821,"data":"[294/360] mradermacher/Damysus-2.7B-Chat-i1-GGUF: gguf; prince-canuma/Damysus-2.7B-Chat=0.9998425814908484 (4451s)\n"}
+,{"stream_name":"stdout","time":4662.186784765,"data":"[295/360] mradermacher/Aurora-8B-i1-GGUF: gguf; scryptiam/Aurora-8B=0.9998701059215462 (4451s)\n"}
+,{"stream_name":"stdout","time":4780.36192987,"data":"[296/360] llmfan46/Qwen3.6-27B-uncensored-heretic-v2-NVFP4-GGUF: gguf; llmfan46/Qwen3.6-27B-uncensored-heretic-v2=0.9954054056613143 (4569s)\n"}
+,{"stream_name":"stdout","time":4784.095066178,"data":"[297/360] jashepp/Ornith-1.0-35B-A3B-MXFP4_MOE_Hybrid-Imatrix-GGUF: gguf; ornith-ai/Ornith-1.0-35B=0.9999838210347805 (4573s)\n"}
+,{"stream_name":"stdout","time":4795.784581969,"data":"[298/360] mradermacher/AutoRefine-Qwen2.5-7B-Instruct-i1-GGUF: gguf; yrshi/AutoRefine-Qwen2.5-7B-Instruct=0.9998266203331534 (4584s)\n"}
+,{"stream_name":"stdout","time":4826.767886815,"data":"[299/360] mradermacher/CHIMERA-4B-RL-i1-GGUF: gguf; TianHongZXY/CHIMERA-4B-RL=0.9998317065586583 (4615s)\n"}
+,{"stream_name":"stdout","time":4832.812205527,"data":"[300/360] mradermacher/FineLlama-3.1-8B-GGUF: gguf; mlabonne/FineLlama-3.1-8B=0.9999850832419578 (4621s)\n"}
+,{"stream_name":"stdout","time":4881.722182674,"data":"[301/360] mradermacher/Ice0.16-02.10-RP-GGUF: gguf; icefog72/Ice0.16-02.10-RP=0.9999849775675212 (4670s)\n"}
+,{"stream_name":"stdout","time":4927.633301101,"data":"[302/360] mradermacher/L3.2-Rogue-Creative-Instruct-DARK-HORROR-Uncensored-Abliterated-7B-GGUF: gguf; DavidAU/L3.2-Rogue-Creative-Instruct-DARK-HORROR-Uncensored-Abliterated-7B=0.9999847321916068 (4716s)\n"}
+,{"stream_name":"stdout","time":4929.529340907,"data":"[303/360] mradermacher/Gobble-Prover-1.7B-GGUF: gguf; anonymous-submission-naacl/Gobble-Prover-1.7B=0.9999850620820137 (4718s)\n"}
+,{"stream_name":"stdout","time":4933.374259612,"data":"[304/360] mradermacher/Firefly-v6-DONTDOWNLOAD-STILLONPROGRESS-GGUF: gguf; Guilherme34/Firefly-v6-DONTDOWNLOAD-STILLONPROGRESS=0.9999844833216025 (4722s)\n"}
+,{"stream_name":"stdout","time":5073.444431717,"data":"[305/360] mradermacher/Llama-3.1-8B-FlashNorm-i1-GGUF: gguf; open-machine/Llama-3.1-8B-FlashNorm-test=0.9998273223594983 (4862s)\n"}
+,{"stream_name":"stdout","time":5085.190721091,"data":"[306/360] mradermacher/Lime-V4-ReasoningBrake-v0.3-GGUF: gguf; naksyu/Lime-V4-ReasoningBrake-v0.3=0.9999838743879474 (4874s)\n"}
+,{"stream_name":"stdout","time":5085.671387516,"data":"[307/360] mradermacher/Llama-3-neoAI-8B-Chat-v0.1-i1-GGUF: gguf; neoai-inc/Llama-3-neoAI-8B-Chat-v0.1=0.9998421488182478 (4874s)\n"}
+,{"stream_name":"stdout","time":5112.98611073,"data":"[308/360] mradermacher/Llama3.2-3B-Math-gsm8k-AutoSFT-i1-GGUF: gguf; theprint/Llama3.2-3B-Math-gsm8k-AutoSFT=0.9998364188708596 (4901s)\n"}
+,{"stream_name":"stdout","time":5114.521593254,"data":"[309/360] mradermacher/Llama-3-Aplite-Instruct-4x8B-i1-GGUF: gguf; raincandy-u/Llama-3-Aplite-Instruct-4x8B-MoE=0.9998420997577463 (4903s)\n"}
+,{"stream_name":"stdout","time":5123.442486621,"data":"[310/360] mradermacher/Magidonia-24B-v4.3-heretic-GGUF: gguf; coder3101/Magidonia-24B-v4.3-heretic=0.9999768401960679 (4912s)\n"}
+,{"stream_name":"stdout","time":5127.39156536,"data":"[311/360] mradermacher/Luth-2-0.8B-GGUF: gguf; kurakurai/Luth-2-0.8B=0.9999842985832331 (4916s)\n"}
+,{"stream_name":"stdout","time":5153.14252992,"data":"[312/360] mradermacher/OpenThaiLLM-Pantip-V1.0.0-Beta-7B-Instruct-GGUF: gguf; nectec/OpenThaiLLM-Pantip-V1.0.0-Beta-7B-Instruct=not readable (HTTP 401) (4942s)\n"}
+,{"stream_name":"stdout","time":5183.330513068,"data":"[313/360] mradermacher/Qwen3-8B-320k-Context-10X-Massive-GGUF: gguf; DavidAU/Qwen3-8B-320k-Context-10X-Massive=not readable (HTTP 401) (4972s)\n"}
+,{"stream_name":"stdout","time":5189.4124235,"data":"[314/360] mradermacher/Misal-1B-base-v0.1-GGUF: gguf; smallstepai/Misal-1B-base-v0.1=0.999985347881089 (4978s)\n"}
+,{"stream_name":"stdout","time":5242.983606252,"data":"[315/360] mradermacher/Qwen2.5-VL-7B-Instruct-misogyny-v2-GGUF: gguf; pltops/Qwen2.5-VL-7B-Instruct-misogyny-v2=not readable (HTTP 401) (5031s)\n"}
+,{"stream_name":"stdout","time":5244.9020215,"data":"[316/360] mradermacher/Qwen3-Space.Agent.DASD.Uncensored-4B-i1-GGUF: gguf; WithinUsAI/Qwen3-Space.Agent.DASD.Uncensored-4B=not readable (HTTP 401) (5033s)\n"}
+,{"stream_name":"stdout","time":5372.022868584,"data":"[317/360] dennny123/MiniMax-M2.7-GGUF: gguf; MiniMaxAI/MiniMax-M2.7=0.9999853288320606 (5161s)\n"}
+,{"stream_name":"stdout","time":5376.140943723,"data":"[318/360] mradermacher/OpenHermes-Qwen1.5-1.8B-GGUF: gguf; vicgalle/OpenHermes-Qwen1.5-1.8B=0.9999855974801906 (5165s)\n"}
+,{"stream_name":"stdout","time":5423.64153393,"data":"[319/360] mradermacher/Qwen3.8-27b-noslop-v2-i1-GGUF: gguf; RefinedNeuro/Qwen3.8-27b-noslop-v2=0.9998259021589593 (5212s)\n"}
+,{"stream_name":"stdout","time":5434.413795994,"data":"[320/360] mradermacher/Pokemon-Red-Qwen3-80B-i1-GGUF: gguf; clarkkitchen22/Pokemon-Red-Qwen3-80B=0.9998289183516009 (5223s)\n"}
+,{"stream_name":"stdout","time":5449.884059388,"data":"[321/360] mradermacher/Qwen2.5-THREADRIPPER-Medium-i1-GGUF: gguf; Xiaojian9992024/Qwen2.5-THREADRIPPER-Medium=0.9998402181170996 (5238s)\n"}
+,{"stream_name":"stdout","time":5449.904048393,"data":"[322/360] mradermacher/Qwen2.5-14B-Hyperionv3-i1-GGUF: gguf; CultriX/Qwen2.5-14B-Hyperionv3=0.9998403960040705 (5238s)\n"}
+,{"stream_name":"stdout","time":5464.542028544,"data":"[323/360] mradermacher/aquif-Grounding-7B-GGUF: gguf; aquif-ai/aquif-Grounding-7B=not readable (HTTP 401) (5253s)\n"}
+,{"stream_name":"stdout","time":5488.572185106,"data":"[324/360] mradermacher/SmolLM2-1.7B-Instruct-heretic-i1-GGUF: gguf; saidutta69/SmolLM2-1.7B-Instruct-heretic=0.9998406155045089 (5277s)\n"}
+,{"stream_name":"stdout","time":5523.926459197,"data":"[325/360] mradermacher/NVIDIA-Nemotron-3-Super-120B-A12B-BF16-GGUF: gguf; nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16=0.9999853367712053 (5312s)\n"}
+,{"stream_name":"stdout","time":5531.219704451,"data":"[326/360] mradermacher/Qwen35B-Agent-R2-Abliterated-GGUF: gguf; hotdogs/Qwen35B-Agent-R2-Abliterated=0.9999504108546533 (5320s)\n"}
+,{"stream_name":"stdout","time":5537.516806817,"data":"[327/360] mradermacher/WebAggregator-8B-i1-GGUF: gguf; CognitiveKernel/WebAggregator-8B=0.9998364327332793 (5326s)\n"}
+,{"stream_name":"stdout","time":5547.158780161,"data":"[328/360] mradermacher/Strawberrylemonade-L3-70B-v1.2-heretic2-i1-GGUF: gguf; sh0ck0r/Strawberrylemonade-L3-70B-v1.2-heretic2=0.999845439271878 (5336s)\n"}
+,{"stream_name":"stdout","time":5567.222705683,"data":"[329/360] mradermacher/XMainframe-v2-Instruct-32b-i1-GGUF: gguf; Fsoft-AIC/XMainframe-v2-Instruct-32b=0.999843532701923 (5356s)\n"}
+,{"stream_name":"stdout","time":5670.429543329,"data":"[330/360] mradermacher/aqua-smaug-0.3-8B-i1-GGUF: gguf; saucam/aqua-smaug-0.3-8B=0.9998439261906596 (5459s)\n"}
+,{"stream_name":"stdout","time":5698.178657186,"data":"[331/360] mradermacher/amoral-gemma3-12B-i1-GGUF: gguf; soob3123/amoral-gemma3-12B-v1=0.9998312771683737 (5487s)\n"}
+,{"stream_name":"stdout","time":5698.305845647,"data":"[332/360] nomic-ai/colnomic-embed-multimodal-3b: adapter; - (5487s)\n"}
+,{"stream_name":"stdout","time":5702.147554584,"data":"[333/360] mradermacher/pythia-70m-deduped-v0-i1-GGUF: gguf; EleutherAI/pythia-70m-deduped-v0=0.9998384539195988 (5491s)\n"}
+,{"stream_name":"stdout","time":5722.914582413,"data":"[334/360] mradermacher/gemma-3-egyptian-4b-v1-GGUF: gguf; Tmatm2200/gemma-3-egyptian-4b-v1=0.9999850509402124 (5511s)\n"}
+,{"stream_name":"stdout","time":5723.564411858,"data":"[335/360] mradermacher/llama-nemotron-embed-1b-v2-GGUF: gguf; nvidia/llama-nemotron-embed-1b-v2=0.9999848493974195 (5512s)\n"}
+,{"stream_name":"stdout","time":5725.669291052,"data":"[336/360] mradermacher/internlm2_5-1_8b-GGUF: gguf; internlm/internlm2_5-1_8b=0.999985631127872 (5514s)\n"}
+,{"stream_name":"stdout","time":5739.148299792,"data":"[337/360] openbmb/MiniCPM-OCR-1.0-GPTQ: safetensors; openbmb/MiniCPM-OCR-1.0=1.0 (5528s)\n"}
+,{"stream_name":"stdout","time":5750.600266509,"data":"[338/360] mradermacher/gemma4-e2b-Snowfox-hf-GGUF: gguf; MichaelAnthony/gemma4-e2b-Snowfox-hf=0.9999877705051651 (5539s)\n"}
+,{"stream_name":"stdout","time":5756.529972847,"data":"[339/360] prithivMLmods/Qwen3-VL-2B-Thinking-abliterated-v1-GGUF: gguf; prithivMLmods/Qwen3-VL-2B-Thinking-abliterated-v1=not readable (gated, no byte-identical public copy) (5545s)\n"}
+,{"stream_name":"stdout","time":5761.893366664,"data":"[340/360] saidutta69/Qwen3.5-2B-heretic: safetensors; Qwen/Qwen3.5-2B=1.0 (5550s)\n"}
+,{"stream_name":"stdout","time":5766.256684473,"data":"[341/360] mradermacher/pythia-1.4b-tulu-v2-mix-GGUF: gguf; kykim0/pythia-1.4b-tulu-v2-mix=0.9355153332268302 (5555s)\n"}
+,{"stream_name":"stdout","time":5780.994449019,"data":"[342/360] mradermacher/grug-27b-v1.1-i1-GGUF: gguf; ProCreations/grug-v1.1-qwen-3.8-27b=0.9998201615194776 (5569s)\n"}
+,{"stream_name":"stdout","time":5781.253178853,"data":"[343/360] smkrv/gigaam-v3-e2e-rnnt-coreml: not readable (no weight files); - (5570s)\n"}
+,{"stream_name":"stdout","time":5781.482908372,"data":"[344/360] mradermacher/recall-honcho-8b-GGUF: gguf; dman1011/recall-honcho-8b=0.9999854889879427 (5570s)\n"}
+,{"stream_name":"stdout","time":5782.886495864,"data":"[345/360] trymirai/Qwen3.5-4B-L: safetensors; Qwen/Qwen3.5-4B=None (5571s)\n"}
+,{"stream_name":"stdout","time":5788.822625398,"data":"[346/360] sakasegawa/Qwen3-ASR-1.7B-GGUF: gguf; Qwen/Qwen3-ASR-1.7B=None (5577s)\n"}
+,{"stream_name":"stdout","time":5814.793058394,"data":"[347/360] mradermacher/tinybrainbot-360m-a75m-v5-instruct-GGUF: gguf; nkthebass/tinybrainbot-360m-a75m-v5-instruct=0.9999849004133032 (5603s)\n"}
+,{"stream_name":"stdout","time":5816.874616325,"data":"[348/360] unsloth/granite-vision-3.2-2b-bnb-4bit: safetensors; ibm-granite/granite-vision-3.2-2b=1.0 (5605s)\n"}
+,{"stream_name":"stdout","time":5824.129520715,"data":"[349/360] prithivMLmods/Aztec-Coder-4B-GGUF: gguf; jsbaicenter/Aztec-Coder-4B=1.0 (5613s)\n"}
+,{"stream_name":"stdout","time":5829.770842328,"data":"[350/360] unsloth/granite-4.1-30b: safetensors; ibm-granite/granite-4.1-30b=1.0 (5618s)\n"}
+,{"stream_name":"stdout","time":5973.986298194,"data":"[351/360] vrgamedevgirl84/Wan14BT2VFusioniX: safetensors; Wan-AI/Wan2.1-T2V-14B=0.9985325295968923 (5762s)\n"}
+,{"stream_name":"stdout","time":5984.405293152,"data":"[352/360] toxicdog/gpt-oss-20b-MXFP4-Q8: safetensors; openai/gpt-oss-20b=0.9999711689319977 (5773s)\n"}
+,{"stream_name":"stdout","time":5984.782993884,"data":"[353/360] mradermacher/spoomplesmaxx-mini-14B-GGUF: gguf; aimeri/spoomplesmaxx-mini-14B=0.9999853907137661 (5773s)\n"}
+,{"stream_name":"stdout","time":5989.967003909,"data":"[354/360] shafire/Zero-Qwen3-8B-OpenZero-GGUF: gguf; Qwen/Qwen3-8B=0.9993235832197525 (5778s)\n"}
+,{"stream_name":"stdout","time":5991.758013111,"data":"[355/360] sigmanih/Qwen-Qwen3.8-27B-GGUF-Q5_K_M: gguf; Qwen/Qwen3.8-27B=0.999302279504477 (5780s)\n"}
+,{"stream_name":"stdout","time":5994.951782039,"data":"[356/360] second-state/internlm2_5-1_8b-chat-GGUF: gguf; internlm/internlm2_5-1_8b-chat=0.9999856926351567 (5783s)\n"}
+,{"stream_name":"stdout","time":6019.126996372,"data":"[357/360] rapid-mlx/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-MLX-4bit: safetensors; nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16=1.0 (5808s)\n"}
+,{"stream_name":"stdout","time":6047.915319621,"data":"[358/360] mradermacher/theprint-moe-8x3-0126-i1-GGUF: gguf; theprint/theprint-moe-8x3-0126=0.9998392071791966 (5836s)\n"}
+,{"stream_name":"stdout","time":6050.411686309,"data":"[359/360] pythoneer/qwen36-35b-a3b-dflash-llamacpp: gguf; Qwen/Qwen3.6-35B-A3B=None (5839s)\n"}
+,{"stream_name":"stdout","time":6237.268622901,"data":"[360/360] xCloudinfo/xVITA-Embed2-zhTW-GGUF: gguf; google/embeddinggemma-2=None (6026s)\n"}
+,{"stream_name":"stdout","time":6237.275434298,"data":"360 of 360 done; 0 lost to the network or the time budget\n"}
+,{"stream_name":"stdout","time":6237.484565376,"data":"recorded in the ledger\n"}
+,{"stream_name":"stdout","time":6251.636529224,"data":"exit 0 -m experiments.h15_fresh --out /kaggle/working/h15_raw.jsonl\n"}
+,{"stream_name":"stdout","time":6251.79303184,"data":"360 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":6255.152324106,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":6255.152366886,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":6255.66468903,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":6255.664722377,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":6256.771795079,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":6258.403047615,"data":"[NbConvertApp] Writing 292285 bytes to __results__.html\n"}
+]

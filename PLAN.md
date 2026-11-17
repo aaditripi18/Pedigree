@@ -695,3 +695,22 @@ declaration is *confirmed by behaviour* if drop > r*.
 - **H18** The rule confirms >= 90% of the declared pairs it can run (H3 measured 1.3% of comparable
   declarations contradicted, so a valid check should confirm nearly all). Pairs outside the scope
   are counted by reason.
+
+**Outcome of H15 and H17a (recorded after judging, 2026-11-17; the H15 job read all 360 sampled
+models, none lost).** Both are **not supported**, and stay so.
+- **H15:** D3 is right on 222 of 237 decided fresh pairs (93.7%, Wilson 89.8-96.1%; bar 95%),
+  undecided 7 of 244 (bar 10%, met). D1 alone is right on 226 of 240 (94.2%), so on fresh pairs D3 is
+  not better than dates alone. Of D3's 15 errors, 9 are pairs with different owners where the derived
+  repository is older than its declared base: one repackaging repository (Comfy-Org/Wan-2.1, 5
+  pairs) created 50-174 days before the five bases it now declares, and 4 GGUF quantisations created
+  0.4-34 days before their base. 5 are within one owner's release where the name rule did not
+  apply (`-instruct` vs `-base`, `-MPO`, an L6 model distilled from L12) and kurtosis decided wrongly;
+  1 is a checkpoint (`ckpt500`) whose name the rule does not relate to its base. Weight kurtosis
+  (D2) is right on 22 of 118 decided fresh Hub pairs: on Hub fine-tunes the child usually has
+  the *lower* kurtosis, the opposite of the direction D2 (after MoTHer) assumes, while on pre-training
+  checkpoints (E7) it was right on all 35.
+- **H17a:** structural alignment agrees with name alignment on 279 of 339 fresh pairs (82.3%; bar
+  98%). It never gave the opposite verdict: 271 related and 8 unrelated pairs agree, 0 flip. All 60
+  disagreements are pairs it aligned no tensor in (not comparable): 29 models, all Qwen 3.5-3.8
+  multimodal or multi-token-prediction GGUF files (`qwen35`, `qwen35moe`) and clip models, where the
+  two sides do not have the same number of blocks. H17b (E2's 32 unmatched pairs) is judged on E2s.

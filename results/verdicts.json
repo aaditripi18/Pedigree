@@ -996,10 +996,103 @@
          "deepvk/RuModernBERT-small"
         ]
        ]
+      },
+      "fresh": {
+       "n": 244,
+       "d3": [
+        222,
+        237,
+        [
+         0.8982,
+         0.9613
+        ]
+       ],
+       "d3_undecided": [
+        7,
+        244
+       ],
+       "d1": [
+        226,
+        240,
+        [
+         0.9045,
+         0.9649
+        ]
+       ],
+       "d2": [
+        22,
+        118,
+        [
+         0.1265,
+         0.2662
+        ]
+       ],
+       "d3_wrong": [
+        [
+         "Comfy-Org/Wan-2.1",
+         "Wan-AI/Wan2.1-FLF2V-14B-720P"
+        ],
+        [
+         "Comfy-Org/Wan-2.1",
+         "alibaba-pai/Wan2.1-Fun-V1.1-14B-Control-Camera"
+        ],
+        [
+         "Comfy-Org/Wan-2.1",
+         "MAGREF-Video/MAGREF"
+        ],
+        [
+         "Comfy-Org/Wan-2.1",
+         "Wan-AI/Wan2.1-VACE-14B"
+        ],
+        [
+         "Comfy-Org/Wan-2.1",
+         "MeiGen-AI/InfiniteTalk"
+        ],
+        [
+         "cross-encoder/ms-marco-MiniLM-L6-v2",
+         "cross-encoder/ms-marco-MiniLM-L12-v2"
+        ],
+        [
+         "unsloth/Qwen3.5-2B-GGUF",
+         "Qwen/Qwen3.5-2B"
+        ],
+        [
+         "LiquidAI/LFM2.5-1.2B-Thinking",
+         "LiquidAI/LFM2.5-1.2B-Base"
+        ],
+        [
+         "OpenGVLab/InternVL3_5-1B",
+         "OpenGVLab/InternVL3_5-1B-MPO"
+        ],
+        [
+         "bartowski/cognitivecomputations_Dolphin-Mistral-24B-Venice-Edition-GGUF",
+         "cognitivecomputations/Dolphin-Mistral-24B-Venice-Edition"
+        ],
+        [
+         "ibm-granite/granite-3.0-8b-instruct",
+         "ibm-granite/granite-3.0-8b-base"
+        ],
+        [
+         "francesca9805/arb-arab-100mb-after-ppt-mp-struct-100mb-ckpt500_seed455",
+         "francesca9805/arb-arab-100mb-ppt-mp-struct-100mb_seed455"
+        ],
+        [
+         "mradermacher/Qwen35B-Agent-R2-Abliterated-GGUF",
+         "hotdogs/Qwen35B-Agent-R2-Abliterated"
+        ],
+        [
+         "mradermacher/pythia-1.4b-tulu-v2-mix-GGUF",
+         "kykim0/pythia-1.4b-tulu-v2-mix"
+        ],
+        [
+         "prithivMLmods/Aztec-Coder-4B-GGUF",
+         "jsbaicenter/Aztec-Coder-4B"
+        ]
+       ]
       }
      },
-     "verdict": "pending",
-     "evidence": "fresh sample running; on E2 (dev) D3 is right on 184/189 decided, undecided 10/199"
+     "verdict": "not supported",
+     "evidence": "D3 right on 222/237 decided, undecided 7/244 (D1 226/240, D2 22/118 decided)"
     },
     {
      "id": "H16",
@@ -1217,15 +1310,17 @@
      "id": "H17a",
      "statement": "On fresh GGUF pairs where names align >= 8 tensors, structural alignment (names ignored) gives the same related / unrelated verdict for >= 98%.",
      "follows": "unverifiable declared bases",
-     "verdict": "pending",
+     "verdict": "not supported",
      "numbers": {
       "agree": [
-       0,
-       0
+       279,
+       339
       ],
-      "unrelated_by_names": 0
+      "unrelated_by_names": 8,
+      "opposite": 0,
+      "abstained": 60
      },
-     "evidence": "fresh sample running"
+     "evidence": "279/339 agree (8 unrelated by names); opposite verdict 0, aligned too few tensors 60"
     },
     {
      "id": "H17b",
@@ -2334,10 +2429,95 @@
          "deepvk/RuModernBERT-small"
         ]
        ]
+      },
+      "fresh": {
+       "n": 241,
+       "d3": [
+        221,
+        234,
+        [
+         0.9073,
+         0.9672
+        ]
+       ],
+       "d3_undecided": [
+        7,
+        241
+       ],
+       "d1": [
+        224,
+        238,
+        [
+         0.9037,
+         0.9646
+        ]
+       ],
+       "d2": [
+        22,
+        115,
+        [
+         0.1299,
+         0.2727
+        ]
+       ],
+       "d3_wrong": [
+        [
+         "Comfy-Org/Wan-2.1",
+         "Wan-AI/Wan2.1-FLF2V-14B-720P"
+        ],
+        [
+         "Comfy-Org/Wan-2.1",
+         "alibaba-pai/Wan2.1-Fun-V1.1-14B-Control-Camera"
+        ],
+        [
+         "Comfy-Org/Wan-2.1",
+         "MAGREF-Video/MAGREF"
+        ],
+        [
+         "Comfy-Org/Wan-2.1",
+         "Wan-AI/Wan2.1-VACE-14B"
+        ],
+        [
+         "Comfy-Org/Wan-2.1",
+         "MeiGen-AI/InfiniteTalk"
+        ],
+        [
+         "unsloth/Qwen3.5-2B-GGUF",
+         "Qwen/Qwen3.5-2B"
+        ],
+        [
+         "LiquidAI/LFM2.5-1.2B-Thinking",
+         "LiquidAI/LFM2.5-1.2B-Base"
+        ],
+        [
+         "OpenGVLab/InternVL3_5-1B",
+         "OpenGVLab/InternVL3_5-1B-MPO"
+        ],
+        [
+         "bartowski/cognitivecomputations_Dolphin-Mistral-24B-Venice-Edition-GGUF",
+         "cognitivecomputations/Dolphin-Mistral-24B-Venice-Edition"
+        ],
+        [
+         "ibm-granite/granite-3.0-8b-instruct",
+         "ibm-granite/granite-3.0-8b-base"
+        ],
+        [
+         "mradermacher/Qwen35B-Agent-R2-Abliterated-GGUF",
+         "hotdogs/Qwen35B-Agent-R2-Abliterated"
+        ],
+        [
+         "mradermacher/pythia-1.4b-tulu-v2-mix-GGUF",
+         "kykim0/pythia-1.4b-tulu-v2-mix"
+        ],
+        [
+         "prithivMLmods/Aztec-Coder-4B-GGUF",
+         "jsbaicenter/Aztec-Coder-4B"
+        ]
+       ]
       }
      },
-     "verdict": "pending",
-     "evidence": "fresh sample running; on E2 (dev) D3 is right on 172/177 decided, undecided 10/187"
+     "verdict": "not supported",
+     "evidence": "D3 right on 221/234 decided, undecided 7/241 (D1 224/238, D2 22/115 decided)"
     },
     {
      "id": "H16",
@@ -2555,15 +2735,17 @@
      "id": "H17a",
      "statement": "On fresh GGUF pairs where names align >= 8 tensors, structural alignment (names ignored) gives the same related / unrelated verdict for >= 98%.",
      "follows": "unverifiable declared bases",
-     "verdict": "pending",
+     "verdict": "not supported",
      "numbers": {
       "agree": [
-       0,
-       0
+       276,
+       339
       ],
-      "unrelated_by_names": 0
+      "unrelated_by_names": 19,
+      "opposite": 3,
+      "abstained": 60
      },
-     "evidence": "fresh sample running"
+     "evidence": "276/339 agree (19 unrelated by names); opposite verdict 3, aligned too few tensors 60"
     },
     {
      "id": "H17b",

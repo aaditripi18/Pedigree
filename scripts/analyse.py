@@ -719,15 +719,18 @@ def h17(h15r, e2f_before, e2s, T, rule) -> list[dict]:
             if vn != "not comparable":
                 pairs.append((vn, _verdict_plain(a.get("struct"), T, rule)))
     agree = sum(a == b for a, b in pairs)
+    flips = sum(b != "not comparable" and a != b for a, b in pairs)     # the opposite verdict, not an abstention
     neg = sum(a == "unrelated" for a, _ in pairs)
     judged = len(pairs) >= 20 and neg >= 5
     if len(h15r) < 360:
         va, ea = "pending", "fresh sample running"
     else:
         va = verdict(agree / len(pairs) >= 0.98) if judged else "not judged"
-        ea = f"{agree}/{len(pairs)} agree ({neg} unrelated by names)"
+        ea = (f"{agree}/{len(pairs)} agree ({neg} unrelated by names); opposite verdict {flips}, "
+              f"aligned too few tensors {len(pairs) - agree - flips}")
     out = [{"id": "H17a", "statement": sa, "follows": "unverifiable declared bases", "verdict": va,
-            "numbers": {"agree": [agree, len(pairs)], "unrelated_by_names": neg}, "evidence": ea}]
+            "numbers": {"agree": [agree, len(pairs)], "unrelated_by_names": neg, "opposite": flips,
+                        "abstained": len(pairs) - agree - flips}, "evidence": ea}]
     target = [(m["id"], d["base"]) for m in e2f_before if not m.get("reason") for d in m.get("declared", [])
               if (m.get("format") == "gguf" or d.get("format") == "gguf") and not d.get("error")
               and (d.get("matched") or 0) == 0]

@@ -74,15 +74,15 @@ judged once on fresh pairs.
 | H13b | Pool v2 holds more of them than E2's pool | **supported** | 104 found only by v2, 1 only by E2's pool; McNemar p = 2.6e-30 |
 | H14 | Behaviour by shared mistakes, one rule for all families, fresh students: TPR >= 90% at FPR <= 5% | **not supported** | error agreement above 0.5965 (dev): TPR 0/20, FPR 0/20 |
 | H14b | The same, with a rule per family (text decoder, vision CNN) | **not supported** | text decoder TPR 5/5, FPR 0/5; vision CNN TPR 5/5, FPR 5/5 |
-| H15 | Direction by D3 (dates across owners or > 30 days; names within one release; kurtosis last): >= 95% right, <= 10% undecided, fresh | pending | fresh sample running; on E2 (dev) right on 184/189 decided, 10/199 undecided |
+| H15 | Direction by D3 (dates across owners or > 30 days; names within one release; kurtosis last): >= 95% right, <= 10% undecided, fresh | **not supported** | right on 222/237 decided (93.7%), undecided 7/244; dates alone 226/240, kurtosis 22/118 |
 | H16 | Behaviour calibrated against reference students trained the same way: TPR >= 90% at FPR <= 5%, fresh | pending | dev rule fixed: drop > 6.3% (dev gap 5.7 points); fresh students wait for GPU quota |
 | H16b | The same, with text-encoder and vision-transformer students trained long enough to learn the task | pending | waits for GPU quota |
-| H17a | Structural GGUF alignment (names ignored) agrees with name alignment on >= 98% of fresh pairs | pending | fresh sample running |
+| H17a | Structural GGUF alignment (names ignored) agrees with name alignment on >= 98% of fresh pairs | **not supported** | 279/339 agree; 0 opposite verdicts, the other 60 aligned no tensor (Qwen 3.5-3.8 multimodal/MTP and clip GGUFs) |
 | H17b | Structural alignment makes >= 50% of E2's 32 declared GGUF pairs with no name match comparable | pending | E2s running |
 | H18 | Behaviour confirms >= 90% of the declared Hub pairs weights cannot compare (text models <= 14B) | pending | runs only if H16 or H16b is supported |
 
-H2, H3, H7-H9, H12, H14 and H14b failed their bars; they are reported as they came out, and never
-reworded. H2 and H3 are measurements of the Hub (its declarations are more honest than the hypotheses
+H2, H3, H7-H9, H12, H14, H14b, H15 and H17a failed their bars; they are reported as they came out,
+and never reworded. H2 and H3 are measurements of the Hub (its declarations are more honest than the hypotheses
 guessed). Every other failed hypothesis has a follow-up, designed from the failure's cause in the data
 and written into [PLAN.md](PLAN.md) before any of its data existed: H13 for H7 (supported), H15 for
 H8, H16 and H16b for H9, H12, H14 and H14b, H17 for the unverifiable bases, H18 for behaviour above
@@ -132,8 +132,10 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   llama.cpp's name table does not know, so no tensor name maps; 10 that failed to re-read (network);
   7 other formats (a random tiny model with no shared shapes, a draft head, a repack, an NPU build,
   no weight files); 5 gated or private. H17 aligns GGUF tensors by block index and unique shape when
-  names fail, validated against name alignment on fresh pairs (H17a), and applies it to the 32
-  (H17b, with the 10 re-read).
+  names fail. Against name alignment on 339 fresh pairs (H17a, not supported) it agreed on 279 and
+  never gave the opposite verdict; the other 60 it could not align at all (Qwen 3.5-3.8 multimodal
+  and multi-token-prediction GGUFs and clip models, whose two sides differ in block count). H17b
+  applies it to the 32, with the 10 read again.
 - **Thresholds.** Under the pre-registered sensitivity rule (the midpoint between the classes
   instead of max + 5 SD) three verdicts change: H3 becomes supported (15/227 contradicted) and
   H10, H11 become not supported. The published rule is max + 5 SD; both are in
@@ -172,8 +174,13 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   kurtosis (D2) is right on 35 of 39 decided pairs and leaves 20 of 59 undecided: it is right on
   every pre-training checkpoint pair, but short fine-tunes move it by less than 0.005 either way and
   LoRA merges not at all. D3 uses dates across owners or more than 30 days apart, names within one
-  release, and kurtosis last; on E2 (dev) it is right on 184 of 189 decided pairs, and H15 judges
-  it on a fresh sample.
+  release, and kurtosis last; on E2 (dev) it is right on 184 of 189 decided pairs. On the fresh
+  sample (H15, not supported) it is right on 222 of 237 decided pairs (93.7%, bar 95%) with 7 of
+  244 undecided, where dates alone are right on 226 of 240: no better. Its errors are mostly
+  repositories older than the base they declare (a repackaging repo created 50-174 days before its
+  five bases; GGUF quantisations created up to 34 days before theirs). And kurtosis is right on only
+  22 of 118 decided fresh Hub pairs: on Hub fine-tunes the child usually has the *lower* kurtosis,
+  the reverse of what the kurtosis rule (after MoTHer) assumes. The audit keeps using dates.
 
 ## Use it
 

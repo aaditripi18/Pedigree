@@ -550,6 +550,8 @@ data.</p>
     d8 = H["H8"]["numbers"]
     h15 = H.get("H15", {})
     dev15 = (h15.get("numbers") or {}).get("dev") or {}
+    f15 = (h15.get("numbers") or {}).get("fresh")
+    n17 = H["H17a"].get("numbers") or {}
     flips = [k for k, v in mid.items() if v != {h["id"]: h["verdict"] for h in hs}.get(k)]
     big = na.get("model above 2B parameters", 0)
     jw = [w for w in d8["d1_wrong"] if w[2] and abs(w[3]) <= 30]
@@ -561,9 +563,11 @@ data.</p>
         ("Declared bases weights cannot compare",
          f"{U.get('models', 0)} models ({U.get('pairs', 0)} pairs) after the reader fixes: "
          + "; ".join(f"{v} {e(k)}" for k, v in (U.get("reasons") or {}).items()) + ".",
-         f"H17 aligns GGUF tensors by block and unique shape when names fail, validated against name alignment on "
-         f"fresh pairs (H17a: {e(H['H17a']['verdict'])}; H17b: {e(H['H17b']['verdict'])}); fork tensor types are "
-         f"decoded only from the fork's published code; gated bases are read through a byte-identical public copy."),
+         f"H17 aligns GGUF tensors by block and unique shape when names fail. Against name alignment on fresh pairs "
+         f"(H17a, {e(H['H17a']['verdict'])}) it agreed on {n17.get('agree', [0, 0])[0]}/{n17.get('agree', [0, 0])[1]}, "
+         f"gave the opposite verdict on {n17.get('opposite', 0)} and aligned nothing on {n17.get('abstained', 0)}; "
+         f"H17b: {e(H['H17b']['verdict'])}. GGUF types newer than the gguf package are decoded only from their public "
+         f"sources; gated bases are read through a byte-identical public copy."),
         ("The candidate pool",
          f"E2's pool missed the parent of {H['H7']['numbers']['b'][1] - H['H7']['numbers']['b'][0]} of "
          f"{H['H7']['numbers']['b'][1]} Hub models; every miss has a recorded cause (results/h7_misses.json).",
@@ -574,9 +578,14 @@ data.</p>
          f"its base. Kurtosis is right on "
          f"{d8['d2'][0]}/{d8['d2'][1]} decided pairs and leaves {d8['d2'][2] - d8['d2'][1]}/{d8['d2'][2]} undecided "
          f"(short fine-tunes and LoRA merges barely move it). H8: {e(H['H8']['verdict'])}.",
-         f"D3 (dates across owners, names within one release, kurtosis last) is right on "
-         f"{dev15.get('d3', [0, 0])[0]}/{dev15.get('d3', [0, 0])[1]} decided dev pairs; H15 judges it on a fresh sample "
-         f"({e(h15.get('verdict', 'pending'))})."),
+         (f"D3 (dates across owners, names within one release, kurtosis last): right on "
+          f"{dev15.get('d3', [0, 0])[0]}/{dev15.get('d3', [0, 0])[1]} decided dev pairs; on the fresh sample (H15, "
+          f"{e(h15.get('verdict', 'pending'))}) {f15['d3'][0]}/{f15['d3'][1]} decided, no better than dates alone "
+          f"({f15['d1'][0]}/{f15['d1'][1]}); kurtosis is right on only {f15['d2'][0]}/{f15['d2'][1]} fresh Hub pairs, "
+          f"the reverse of its assumed direction. The audit keeps dates." if f15 else
+          f"D3 (dates across owners, names within one release, kurtosis last) is right on "
+          f"{dev15.get('d3', [0, 0])[0]}/{dev15.get('d3', [0, 0])[1]} decided dev pairs; H15 judges it on a fresh "
+          f"sample ({e(h15.get('verdict', 'pending'))}).")),
         ("Behaviour as evidence of lineage",
          f"Absolute thresholds do not transfer between training batches (vision CNN: fresh TPR {cnn['tpr'][0]}/"
          f"{cnn['tpr'][1]} at FPR {cnn['fpr'][0]}/{cnn['fpr'][1]}); text-encoder and vision-transformer students never "
