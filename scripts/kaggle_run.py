@@ -190,6 +190,11 @@ JOBS["e2-struct"] = _job("pedigree-e2-struct", [["-m", "experiments.e2_struct_re
 # read again with the types decoded from their public sources (pedigree/ggufextra.py)
 JOBS["e2-fork"] = _job("pedigree-e2-fork", [["-m", "experiments.e2_rescore", "--source", "E2r,E2g,E2f", "--match",
                                              "tensor type", "--name", "E2f"]], gpu=False, env={"PEDIGREE_WORKERS": "8"})
+# E2s, second pass: E2s comparisons that failed on a format decoded since (GGUF types of pedigree/ggufextra.py,
+# safetensors F8_E8M0 scales), scored again with E2s's alignment
+JOBS["e2-struct2"] = _job("pedigree-e2-struct2", [["-m", "experiments.e2_rescore", "--source", "E2s", "--match",
+                                                   "tensor type|F8_E8M0", "--name", "E2s", "--alignment", "auto"]],
+                          gpu=False, env={"PEDIGREE_WORKERS": "8"})
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
 # fit Kaggle's CPU budget, and the statistics do not depend on the device
 JOBS["e2-behaviour"] = _job("pedigree-e2-behaviour", [["-m", "experiments.e2_behaviour"]], gpu=False)

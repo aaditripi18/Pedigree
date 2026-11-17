@@ -39,7 +39,10 @@ def _fp8_table(exp_bits: int, man_bits: int, bias: int, e4m3: bool) -> np.ndarra
     return out
 
 
-FP8_TABLES = {"F8_E4M3": _fp8_table(4, 3, 7, True), "F8_E5M2": _fp8_table(5, 2, 15, False)}
+FP8_TABLES = {"F8_E4M3": _fp8_table(4, 3, 7, True), "F8_E5M2": _fp8_table(5, 2, 15, False),
+              # OCP Microscaling (MX) v1.0 scale format: 8 exponent bits, no sign or mantissa,
+              # value 2^(e - 127), 0xFF is NaN. Stored as the block scales of FP8 weights (DeepSeek-V4).
+              "F8_E8M0": np.where(np.arange(256) == 255, np.nan, np.exp2(np.arange(256, dtype=np.float64) - 127))}
 SAMPLE_BYTES = 32 * 1024
 N_TENSORS = 24
 MIN_ELEMENTS = 4096

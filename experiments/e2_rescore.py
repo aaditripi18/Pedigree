@@ -23,6 +23,7 @@ from experiments.e2_audit import NetworkError, WORKERS, _pair, open_repo
 from pedigree import pool
 
 ROOT = Path(__file__).resolve().parent.parent
+ALIGNMENT = "names"
 
 
 def errored(e2: list[dict], match: str = "") -> list[tuple[str, str, str]]:
@@ -45,7 +46,10 @@ def main() -> None:
     ap.add_argument("--match", default="", help="only errors containing this text")
     ap.add_argument("--name", default="E2r", help="ledger experiment name")
     ap.add_argument("--source", default="E2", help="E2, or rescoring runs (E2r,E2g) whose latest errors to read again")
+    ap.add_argument("--alignment", default="names", help="names, or auto (E2s: structural alignment when names fail)")
     a = ap.parse_args()
+    global ALIGNMENT
+    ALIGNMENT = a.alignment
     rows = [json.loads(x) for x in (ROOT / "results" / "ledger.jsonl").read_text(encoding="utf-8").splitlines() if x]
     e2 = [r for r in rows if r.get("experiment") == "E2"]
     last = max(r["run_id"] for r in e2)
@@ -59,7 +63,8 @@ def main() -> None:
                 # by time: run ids of different experiments do not sort in time order
                 if k not in latest or str(r.get("ts", "")) >= str(latest[k].get("ts", "")):
                     latest[k] = r
-        pairs = sorted(k for k, r in latest.items() if a.match in str(r.get("error") or ""))
+        alts = a.match.split("|")          # "tensor type|F8_E8M0": either text
+        pairs = sorted(k for k, r in latest.items() if any(x in str(r.get("error") or "") for x in alts))
     print(f"{len(pairs)} errored comparisons in {last}", flush=True)
     frame = pool.Frame(ROOT / "results" / "e2_frame_meta.jsonl.gz")
 
@@ -71,12 +76,12 @@ def main() -> None:
                 b, _ = open_repo(other_id, frame)
                 if a is None or b is None:
                     return p, {"error": "not readable on re-reading"}
-                return p, _pair(a, b, invariant=role == "declared")
+                return p, _pair(a, b, invariant=role == "declared", alignment=ALIGNMENT)
             except NetworkError as e:
                 err = str(e)
         return p, {"lost": err}
 
-    run = ledger.Run(a.name, e2_run=last, match=a.match or None)
+    run = ledger.Run(a.name, e2_run=last, match=a.match or None, alignment=a.alignment)
     lost = 0
     with ThreadPoolExecutor(WORKERS) as ex:
         for (model_id, other_id, role), r in ex.map(one, pairs):

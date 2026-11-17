@@ -167,3 +167,11 @@ def test_mlx_override_under_reordered_path(tmp_path, local_ranges):
     r = _open_local(path, cfg)
     want = q * scales.astype(np.float64) + biases.astype(np.float64)
     np.testing.assert_allclose(r.sample(stem + ".weight", max_bytes=out * cols * 4), want.ravel())
+
+
+def test_f8_e8m0_scales_follow_the_ocp_mx_spec():
+    """OCP Microscaling v1.0: E8M0 is 2^(e - 127); 0xFF is NaN (DeepSeek-V4's FP8 block scales)."""
+    from pedigree.verify import decode
+    v = decode("F8_E8M0", bytes([0, 126, 127, 128, 254, 255]))
+    assert v[1] == 0.5 and v[2] == 1.0 and v[3] == 2.0 and v[0] == 2.0 ** -127 and v[4] == 2.0 ** 127
+    assert np.isnan(v[5])

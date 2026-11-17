@@ -541,7 +541,7 @@ def unverifiable(e2f, T, rule) -> dict:
             err = str(d.get("error") or d.get("reason") or "")
             gguf = m.get("format") == "gguf" or d.get("format") == "gguf"
             if "re-reading" in err:
-                k = "read failed again (network)"
+                k = "declared base not readable when read again (missing, renamed or not a repo id)"
             elif "tensor type" in err:
                 k = "GGUF tensor type of a fork"
             elif "401" in err or "gated" in err or "403" in err:

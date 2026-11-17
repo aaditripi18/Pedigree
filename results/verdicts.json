@@ -1326,15 +1326,15 @@
      "id": "H17b",
      "statement": "Structural alignment makes >= 50% of E2's declared GGUF pairs with no name match comparable.",
      "follows": "unverifiable declared bases",
-     "verdict": "pending",
+     "verdict": "not supported",
      "numbers": {
       "comparable": [
-       0,
+       11,
        32
       ],
-      "scored": 0
+      "scored": 32
      },
-     "evidence": "E2s running (32 pairs with no name match)"
+     "evidence": "11/32 comparable"
     },
     {
      "id": "H18",
@@ -2751,15 +2751,15 @@
      "id": "H17b",
      "statement": "Structural alignment makes >= 50% of E2's declared GGUF pairs with no name match comparable.",
      "follows": "unverifiable declared bases",
-     "verdict": "pending",
+     "verdict": "not supported",
      "numbers": {
       "comparable": [
-       0,
+       11,
        32
       ],
-      "scored": 0
+      "scored": 32
      },
-     "evidence": "E2s running (32 pairs with no name match)"
+     "evidence": "11/32 comparable"
     },
     {
      "id": "H18",
@@ -2966,9 +2966,9 @@
    "audit": {
     "categories": {
      "declared, related": {
-      "top_1k": 59,
-      "1k_10k": 78,
-      "10k_100k": 109
+      "top_1k": 64,
+      "1k_10k": 80,
+      "10k_100k": 115
      },
      "no declaration, parent found": {
       "top_1k": 38,
@@ -2986,9 +2986,9 @@
       "10k_100k": 12
      },
      "declared, not comparable": {
-      "top_1k": 21,
-      "1k_10k": 16,
-      "10k_100k": 15
+      "top_1k": 16,
+      "1k_10k": 14,
+      "10k_100k": 9
      },
      "declared, unrelated": {
       "top_1k": 1,
@@ -3001,11 +3001,11 @@
     },
     "h2": {
      "k": 106,
-     "n": 378,
-     "share": 0.2804232804232804,
+     "n": 379,
+     "share": 0.2796833773087071,
      "wilson": [
-      0.2375,
-      0.3277
+      0.2369,
+      0.3269
      ],
      "per_tier": {
       "top_1k": [
@@ -3018,34 +3018,34 @@
       ],
       "10k_100k": [
        26,
-       146
+       147
       ]
      },
-     "tier_weighted": 0.19385887826311707
+     "tier_weighted": 0.19276857912976514
     },
     "h3": {
      "k": 3,
-     "n": 261,
-     "share": 0.011494252873563218,
+     "n": 275,
+     "share": 0.01090909090909091,
      "wilson": [
-      0.0039,
-      0.0332
+      0.0037,
+      0.0316
      ],
      "per_tier": {
       "top_1k": [
        1,
-       61
+       66
       ],
       "1k_10k": [
        0,
-       79
+       82
       ],
       "10k_100k": [
        2,
-       121
+       127
       ]
      },
-     "tier_weighted": 0.015039967484080749
+     "tier_weighted": 0.014324743497971845
     },
     "contradicted": [
      [
@@ -3069,29 +3069,30 @@
    "gguf_rescored": 1677,
    "gguf_comparable": 774,
    "unverifiable": {
-    "models": 52,
-    "pairs": 54,
+    "models": 39,
+    "pairs": 40,
     "reasons": {
-     "GGUF: no tensor name maps": 32,
-     "read failed again (network)": 10,
-     "other format (no shared shapes, draft head, repack, no weights)": 7,
-     "gated or private": 5
+     "GGUF: no tensor name maps": 14,
+     "other format (no shared shapes, draft head, repack, no weights)": 10,
+     "declared base not readable when read again (missing, renamed or not a repo id)": 10,
+     "gated or private": 5,
+     "GGUF tensor type of a fork": 1
     }
    },
    "verdicts": {
     "H2": {
      "verdict": "not supported",
-     "evidence": "106/378 undeclared",
+     "evidence": "106/379 undeclared",
      "changes": false
     },
     "H3": {
      "verdict": "not supported",
-     "evidence": "3/261 contradicted",
+     "evidence": "3/275 contradicted",
      "changes": false
     },
     "H7": {
      "verdict": "not supported",
-     "evidence": "(a) 20/24; (b) 78/234",
+     "evidence": "(a) 20/24; (b) 88/246",
      "changes": false
     }
    }
@@ -3103,9 +3104,9 @@
    "audit": {
     "categories": {
      "declared, related": {
-      "top_1k": 57,
-      "1k_10k": 77,
-      "10k_100k": 106
+      "top_1k": 62,
+      "1k_10k": 79,
+      "10k_100k": 112
      },
      "no declaration, parent found": {
       "top_1k": 36,
@@ -3128,9 +3129,9 @@
       "10k_100k": 5
      },
      "declared, not comparable": {
-      "top_1k": 21,
-      "1k_10k": 16,
-      "10k_100k": 15
+      "top_1k": 16,
+      "1k_10k": 14,
+      "10k_100k": 9
      },
      "adapter": {
       "1k_10k": 4,
@@ -3139,11 +3140,11 @@
     },
     "h2": {
      "k": 103,
-     "n": 366,
-     "share": 0.2814207650273224,
+     "n": 367,
+     "share": 0.28065395095367845,
      "wilson": [
-      0.2378,
-      0.3296
+      0.2371,
+      0.3287
      ],
      "per_tier": {
       "top_1k": [
@@ -3156,34 +3157,34 @@
       ],
       "10k_100k": [
        25,
-       141
+       142
       ]
      },
-     "tier_weighted": 0.19383558716688545
+     "tier_weighted": 0.19271182330713116
     },
     "h3": {
      "k": 15,
-     "n": 261,
-     "share": 0.05747126436781609,
+     "n": 275,
+     "share": 0.05454545454545454,
      "wilson": [
-      0.0351,
-      0.0926
+      0.0333,
+      0.088
      ],
      "per_tier": {
       "top_1k": [
        3,
-       61
+       66
       ],
       "1k_10k": [
        1,
-       79
+       82
       ],
       "10k_100k": [
        11,
-       121
+       127
       ]
      },
-     "tier_weighted": 0.08344922560319946
+     "tier_weighted": 0.07950486233566702
     },
     "contradicted": [
      [
@@ -3267,29 +3268,30 @@
    "gguf_rescored": 1677,
    "gguf_comparable": 774,
    "unverifiable": {
-    "models": 52,
-    "pairs": 54,
+    "models": 39,
+    "pairs": 40,
     "reasons": {
-     "GGUF: no tensor name maps": 32,
-     "read failed again (network)": 10,
-     "other format (no shared shapes, draft head, repack, no weights)": 7,
-     "gated or private": 5
+     "GGUF: no tensor name maps": 14,
+     "other format (no shared shapes, draft head, repack, no weights)": 10,
+     "declared base not readable when read again (missing, renamed or not a repo id)": 10,
+     "gated or private": 5,
+     "GGUF tensor type of a fork": 1
     }
    },
    "verdicts": {
     "H2": {
      "verdict": "not supported",
-     "evidence": "103/366 undeclared",
+     "evidence": "103/367 undeclared",
      "changes": false
     },
     "H3": {
      "verdict": "supported",
-     "evidence": "15/261 contradicted",
+     "evidence": "15/275 contradicted",
      "changes": false
     },
     "H7": {
      "verdict": "not supported",
-     "evidence": "(a) 20/24; (b) 77/222",
+     "evidence": "(a) 20/24; (b) 87/234",
      "changes": false
     }
    }

@@ -1,0 +1,909 @@
+[{"stream_name":"stdout","time":32.980219808,"data":"code 560fb72\n"}
+,{"stream_name":"stdout","time":83.53538808,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":84.753587143,"data":"PEDIGREE_WORKERS = 8\n"}
+,{"stream_name":"stdout","time":85.16525854,"data":"895 GGUF comparisons to score (45 declared); 0 already scored\n"}
+,{"stream_name":"stdout","time":94.316723248,"data":"unsloth/MiniMax-H3-GGUF vs webmp3/Sakura-MiniMax-H3-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":231.722803309,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs Mapika/decider-2b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":231.722836719,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs moravianai/ThinCtx-Qwen3.5-2B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":234.202544909,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs chaoliangUNSW/Jev-Style-2B-Decision-v3 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":378.321650769,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs prism-ml/Ternary-Bonsai-2-2B-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":378.325547579,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs HauhauCS/Qwen3.5-2B-Uncensored-HauhauCS-Aggressive (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":378.326103599,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs chaoliangUNSW/Jev-Style-Qwen3.5-2B-Decision-v2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":378.617817783,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs unsloth/Qwen3.5-2B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":389.407935,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs Jackrong/Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":389.40837604,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs alibiserikbay/JevK5-2B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":389.40863001,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs flock-io/this-that-model-1.2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":389.40903913,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs jiangchengsong/MemDuet-S1-Qwen3.5-2B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":389.4092867,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs VTXAI/Helvete-nano (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":389.417990519,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs lmstudio-community/Qwen3.5-2B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.453270664,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs alibiserikbay/JevK5-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.454152104,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs openbmb/MiniCPM-OCR-Jev-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.454406124,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs mradermacher/Huihui-Qwen3.5-2B-abliterated-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.454513154,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs turintech/Qwen3.5-2B-Artemis-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.454761234,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs mradermacher/Qwen3.5-2B-Uncensored-Abliterix-SOM-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.454861964,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs atakhadivi/Qwen3.8-2B-Uncensored-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.455002914,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs chaoliangUNSW/Jev-Style-2B-Decision-v3-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.455147794,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs cstr/index-echo-2b-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.455306434,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs mradermacher/Qwen3.5-2B-Base-heretic-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.455436024,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs mradermacher/Mozi-2b-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.455737034,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs Muesli-HQ/qwen35-2b-muesli-cleanup-v12-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.455871234,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs mradermacher/bella-bartender-qwen3.5-2b-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.455976004,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs mradermacher/Qwen3.5-2B-Claude-4.6-OS-Auto-Variable-HERETIC-UNCENSORED-THINKING-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.456123744,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs mradermacher/Qwen3.5-2B-EmperoAI-Qwen3.8-Distill-Heretic-Abliterated-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.456210944,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs chaoliangUNSW/Jev-Style-2B-Decision-v4-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.456358794,"data":"HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF vs mradermacher/Qwen3.5-2B-Uncensored-Zero-Refusal-SOMA-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.456429764,"data":"byteshape/Qwen3.8-27B-GGUF vs orcarouter/Qwen3.8-27B-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.456556154,"data":"byteshape/Qwen3.8-27B-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.456696674,"data":"ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF vs orcarouter/Qwen3.8-27B-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.456800394,"data":"antirez/deepseek-v4-gguf vs deepseek-ai/DeepSeek-V4-Flash (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.456921244,"data":"antirez/deepseek-v4-gguf vs unsloth/DeepSeek-V4-Flash-Vision-Exp-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.457004394,"data":"antirez/deepseek-v4-gguf vs AtomicChat/DeepSeek-V4-Flash-0731-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.457162574,"data":"antirez/deepseek-v4-gguf vs apetersson/DeepSeek-V4-Flash-Vision-Exp-Abliterated (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.457251974,"data":"antirez/deepseek-v4-gguf vs teamblobfish/DeepSeek-V4-Flash-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.457387644,"data":"handy-computer/parakeet-tdt-0.6b-v3-gguf vs nvidia/parakeet-tdt-0.6b-v3 (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.457464234,"data":"handy-computer/parakeet-tdt-0.6b-v3-gguf vs danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.457618814,"data":"handy-computer/parakeet-tdt-0.6b-v3-gguf vs FluidVoice-Labs/fluid-speech-mini-gguf (pool): compared 3, 0.9999976926951596\n"}
+,{"stream_name":"stdout","time":978.457707824,"data":"handy-computer/parakeet-tdt-0.6b-v3-gguf vs omi-health/omi-med-stt-v1-gguf (pool): compared 3, 0.6134388673333137\n"}
+,{"stream_name":"stdout","time":978.457842704,"data":"unsloth/Z-Image-Turbo-GGUF vs Tongyi-MAI/Z-Image-Turbo (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.457955134,"data":"unsloth/Z-Image-Turbo-GGUF vs unsloth/Z-Image-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.458080254,"data":"unsloth/Z-Image-Turbo-GGUF vs RunDiffusion/Juggernaut-Z-Image (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.458197574,"data":"unsloth/Z-Image-Turbo-GGUF vs realrebelai/Ming-Image_GGUFs (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.458447394,"data":"unsloth/Z-Image-Turbo-GGUF vs RunDiffusion/Juggernaut-Z-Image-Fast (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.458552734,"data":"unsloth/Z-Image-Turbo-GGUF vs wikeeyang/Z-Image-Turbo-Art (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.458665214,"data":"unsloth/Z-Image-Turbo-GGUF vs milo01/Juggernaut-Z-Image (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.458773074,"data":"unsloth/Z-Image-Turbo-GGUF vs feeday/Z-Image-Turbo-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.458955404,"data":"unsloth/Z-Image-Turbo-GGUF vs ChenDY/NitroFusion2 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.459400244,"data":"agentionai/Qwen3.8-27B-AP-GGUF vs orcarouter/Qwen3.8-27B-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.459528734,"data":"agentionai/Qwen3.8-27B-AP-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":978.459671644,"data":"unsloth/Qwen-Image-Edit-2511-GGUF vs Qwen/Qwen-Image-Edit-2511 (declared): compared 6, 1.0\n"}
+,{"stream_name":"stdout","time":978.459826554,"data":"unsloth/Qwen-Image-Edit-2511-GGUF vs unsloth/Qwen-Image-Layered-GGUF (pool): compared 6, 0.9807420318778803\n"}
+,{"stream_name":"stdout","time":978.459979574,"data":"unsloth/Qwen-Image-Edit-2511-GGUF vs unsloth/Qwen-Image-Edit-2509-GGUF (pool): compared 6, 0.9989890902743706\n"}
+,{"stream_name":"stdout","time":978.460088674,"data":"unsloth/Qwen-Image-Edit-2511-GGUF vs FireRedTeam/FireRed-Image-Edit-1.1-ComfyUI (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":978.460230303,"data":"unsloth/Qwen-Image-Edit-2511-GGUF vs unsloth/Qwen-Image-Edit-GGUF (pool): compared 6, 0.9898545263297984\n"}
+,{"stream_name":"stdout","time":978.460394854,"data":"unsloth/Qwen-Image-Edit-2511-GGUF vs FireRedTeam/FireRed-Image-Edit-1.0-ComfyUI (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1230.194771718,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs ukisai/Swift-Qwen3.8-Flash-Next (declared): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1230.195387408,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs Qwen/Qwen3.8-Flash-Next (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1230.195401968,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1230.195407198,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1230.195420768,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs ukisai/Swift1.5-Qwen3.8-Flash-Next (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1230.195424738,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs Blackfrost-AI/CYBER-FROST-3.8-BF16 (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1230.195428488,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs unsloth/Qwen3.8-Flash-Next-GGUF (pool): compared 2, 0.9962552312102384\n"}
+,{"stream_name":"stdout","time":1230.195431948,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1265.284632118,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs Qwen/Qwen3.8-Flash-Next-FP8 (pool): compared 24, 0.9960296521007423\n"}
+,{"stream_name":"stdout","time":1265.317534095,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF (pool): compared 2, 0.9962552312102384\n"}
+,{"stream_name":"stdout","time":1265.318030355,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs mlx-community/Qwen3.8-Flash-Next-4bit (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1265.318269525,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs trohrbaugh/Qwen3.8-Flash-Next-heretic-2 (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1390.07554759,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-Flash-Next (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1390.08905364,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1390.09644314,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1390.117160858,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1390.129160917,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs windowsxp811203/Qwen3.8-Flash-Next-Abliterated (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1410.608406601,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs 0bserverx/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1410.608469441,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs trohrbaugh/Qwen3.8-Flash-Next-heretic (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1410.608670831,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF (pool): compared 2, 0.9962552312102384\n"}
+,{"stream_name":"stdout","time":1410.608738451,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1447.911886556,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs FINAL-Bench/Darwin-180B-RSI-R3 (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1538.282400958,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs Blackfrost-AI/CYBER-FROST-3.8-FP8 (pool): compared 24, 0.9958526253817093\n"}
+,{"stream_name":"stdout","time":1538.298408807,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-FP8 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1538.304222646,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs ji-farthing/Qwen3.8-Flash-Next-Uncensored-ik-llama-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1538.332433124,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs mlx-community/Qwen3.8-Flash-Next-Uncensored-oQ5e-mtp (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1538.332776004,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs jedisct1/Qwen3.8-Flash-Next-Uncensored-oQ4e-100K-MTP (pool): compared None, ValueError: GGUF tensor type 42 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":1538.333140534,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1538.333357664,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs alibiserikbay/JevK5-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1538.333612904,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs jan1k/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-NVFP4-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1538.333886004,"data":"mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF vs prithivMLmods/Qwen3-VL-8B-Instruct-abliterated-v1 (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1538.334146074,"data":"mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF vs rectangleworm/PornMaster_Klein-9b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1538.334458264,"data":"scragnog/YuE2-GGUF vs m-a-p/YuE2-3B (declared): compared 5, 1.0\n"}
+,{"stream_name":"stdout","time":1679.814164652,"data":"migtissera/Tess-4.5-27B-GGUF vs orcarouter/Qwen3.8-27B-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.814456021,"data":"handy-computer/whisper-large-v3-turbo-gguf vs openai/whisper-large-v3-turbo (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.814473172,"data":"handy-computer/whisper-large-v3-turbo-gguf vs openai/whisper-large-v3-turbo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.814771922,"data":"handy-computer/whisper-large-v3-turbo-gguf vs ivrit-ai/whisper-large-v3-turbo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.814814151,"data":"handy-computer/whisper-large-v3-turbo-gguf vs typhoon-ai/typhoon-whisper-turbo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.814888111,"data":"handy-computer/whisper-large-v3-turbo-gguf vs BELLE-2/Belle-whisper-large-v3-turbo-zh (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.815000742,"data":"handy-computer/whisper-large-v3-turbo-gguf vs givia/whisper-large-v3-turbo-persian (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.815121431,"data":"handy-computer/whisper-large-v3-turbo-gguf vs biodatlab/whisper-th-medium-combined (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.815243532,"data":"handy-computer/whisper-large-v3-turbo-gguf vs Oriserve/Whisper-Hindi2Hinglish-Apex (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.815465612,"data":"handy-computer/whisper-large-v3-turbo-gguf vs kristijonas/paprika-whisper-lt (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.815479752,"data":"handy-computer/whisper-large-v3-turbo-gguf vs JackyHoCL/whisper-large-v3-turbo-cantonese-yue-english (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.815911911,"data":"handy-computer/whisper-large-v3-turbo-gguf vs sbintuitions/kana-whisper (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.815925551,"data":"handy-computer/whisper-large-v3-turbo-gguf vs mesolitica/Malaysian-whisper-large-v3-turbo-v3 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.815929281,"data":"handy-computer/whisper-large-v3-turbo-gguf vs naazimsnh02/whisper-large-v3-turbo-ar-quran (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.815938811,"data":"handy-computer/whisper-large-v3-turbo-gguf vs xkeyC/whisper-large-v3-turbo-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.816099141,"data":"handy-computer/whisper-large-v3-turbo-gguf vs nyralabs/CrisperWhisper2.0_turbo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.816191201,"data":"handy-computer/whisper-large-v3-turbo-gguf vs mlx-community/whisper-large-v3-turbo-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.816325991,"data":"handy-computer/whisper-large-v3-turbo-gguf vs bond005/whisper-podlodka-turbo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.816438821,"data":"handy-computer/whisper-large-v3-turbo-gguf vs mlx-community/whisper-large-v3-turbo-asr-fp16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.816524111,"data":"handy-computer/whisper-large-v3-turbo-gguf vs shyngys879/kazakh-whisper-large-v3-turbo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.816671931,"data":"handy-computer/whisper-large-v3-turbo-gguf vs primeline/whisper-large-v3-turbo-german (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.816768531,"data":"handy-computer/whisper-large-v3-turbo-gguf vs oxide-lab/whisper-large-v3-turbo-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.816874511,"data":"handy-computer/whisper-large-v3-turbo-gguf vs unsloth/whisper-large-v3-turbo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.816949101,"data":"handy-computer/whisper-large-v3-turbo-gguf vs TheStageAI/thewhisper-large-v3-turbo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.817088781,"data":"handy-computer/whisper-large-v3-turbo-gguf vs marianbasti/whisper-large-v3-turbo-latam (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.817168801,"data":"handy-computer/whisper-large-v3-turbo-gguf vs microsoft/paza-whisper-large-v3-turbo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.817280851,"data":"handy-computer/whisper-large-v3-turbo-gguf vs mlx-community/whisper-large-v3-turbo-8bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.817391261,"data":"handy-computer/whisper-large-v3-turbo-gguf vs kinit/whisper-large-v3-turbo-sk (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.817674021,"data":"handy-computer/whisper-large-v3-turbo-gguf vs KBLab/kb-whisper-medium (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.817866691,"data":"handy-computer/whisper-large-v3-turbo-gguf vs JacobLinCool/whisper-large-v3-turbo-verbatim-1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.817982171,"data":"handy-computer/whisper-large-v3-turbo-gguf vs NaiveNeuron/whisper-large-v3-turbo-sk (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.818121041,"data":"handy-computer/whisper-large-v3-turbo-gguf vs danish-foundation-models/edda-v0.2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.818220621,"data":"togatogah/jinen-v1-small.gguf vs power-greg/super-fast-llm (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.818459431,"data":"datalab-to/surya-ocr-2-gguf vs Moeblack/Qwen3.8-27B-chinese-taste-lora (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.818595501,"data":"Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata vs Qwen/Qwen3.8-Flash-Next (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.818716181,"data":"Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata vs hardhant/Qwen3.8-Flash-Next-FP4-Local-Strata (pool): compared 1, 1.0\n"}
+,{"stream_name":"stdout","time":1679.818820681,"data":"Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata vs Maximilian228/Qwen3.8-Flash-Next-NVIDIA-NVFP4-Strata (pool): compared 1, 1.0\n"}
+,{"stream_name":"stdout","time":1679.818995631,"data":"Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata vs Maximilian228/Qwen3.8-Flash-Next-NVFP4-Q8-Mix-Strata (pool): compared 1, 1.0\n"}
+,{"stream_name":"stdout","time":1679.820322391,"data":"Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata vs Maximilian228/Qwen3.8-Flash-Next-Q8_0-Strata (pool): compared 1, 1.0\n"}
+,{"stream_name":"stdout","time":1679.821832381,"data":"Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata vs trymirai/Qwen3.8-Flash-Next-S-strata-experimental (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821847001,"data":"ukisai/Swift-Qwen3.8-27B-GGUF vs orcarouter/Qwen3.8-27B-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.821853281,"data":"ukisai/Swift-Qwen3.8-27B-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.821857271,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs ukisai/Swift-Qwen3.8-Flash-Next (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821861231,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs Qwen/Qwen3.8-Flash-Next (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821864501,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.821868051,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.821871371,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs ukisai/Swift1.5-Qwen3.8-Flash-Next (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821874551,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs Blackfrost-AI/CYBER-FROST-3.8-BF16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821877661,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821881341,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs Qwen/Qwen3.8-Flash-Next-FP8 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821885001,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs mlx-community/Qwen3.8-Flash-Next-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821888601,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs trohrbaugh/Qwen3.8-Flash-Next-heretic-2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821903531,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-Flash-Next (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.821908931,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.821913571,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.821916831,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF (pool): compared 2, 0.9962552312102384\n"}
+,{"stream_name":"stdout","time":1679.821920181,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.821937631,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs windowsxp811203/Qwen3.8-Flash-Next-Abliterated (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.822161561,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs 0bserverx/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.822338471,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs trohrbaugh/Qwen3.8-Flash-Next-heretic (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.822358911,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.822713991,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs FINAL-Bench/Darwin-180B-RSI-R3 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.822753031,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs Blackfrost-AI/CYBER-FROST-3.8-FP8 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.823000141,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-FP8 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.823282131,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs mradermacher/Qwen3.8-Flash-Next-Uncensored-GGUF (pool): compared 2, 0.9978620999931963\n"}
+,{"stream_name":"stdout","time":1679.824244011,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs agentionai/Qwen3.8-Flash-Next-ROCmFP4-FAST-imatrix-GGUF (pool): compared 2, 0.999779654275857\n"}
+,{"stream_name":"stdout","time":1679.824257011,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs ji-farthing/Qwen3.8-Flash-Next-Uncensored-ik-llama-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.82426134,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs mlx-community/Qwen3.8-Flash-Next-Uncensored-oQ5e-mtp (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.824265051,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs shefowl/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-Hybrid-GGUF (pool): compared 2, 0.9916706142856248\n"}
+,{"stream_name":"stdout","time":1679.82426786,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs mudler/Qwen3.8-Flash-Next-APEX-GGUF (pool): compared 2, 0.9979177818401408\n"}
+,{"stream_name":"stdout","time":1679.82427068,"data":"SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs jedisct1/Qwen3.8-Flash-Next-Uncensored-oQ4e-100K-MTP (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.8242818,"data":"QuantStack/Wan2.2-TI2V-5B-GGUF vs Wan-AI/Wan2.2-TI2V-5B (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":1679.824285191,"data":"QuantStack/Wan2.2-TI2V-5B-GGUF vs hum-ma/Wan2.2-TI2V-5B-Turbo-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.824288231,"data":"QuantStack/Wan2.2-TI2V-5B-GGUF vs Kiijoku/Wan2.2-TI2V-5B-Turbo-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1679.82429098,"data":"QuantStack/Wan2.2-TI2V-5B-GGUF vs liaqateagle/Wan2.2-TI2V-5B-Turbo-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1856.26733888,"data":"DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF vs orcarouter/Qwen3.8-27B-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":1856.287287708,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs Qwen/Qwen1.5-0.5B-Chat (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1856.306658896,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs Qwen/Qwen1.5-0.5B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1856.307423886,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs sail/Sailor-0.5B-Chat (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1856.320245605,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs Qwen/Qwen1.5-0.5B-Chat-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1856.343329262,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs Qwen/Qwen2.5-0.5B-Instruct-AWQ (pool): compared 2, 0.9999855662678172\n"}
+,{"stream_name":"stdout","time":1856.344994592,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs second-state/Qwen1.5-0.5B-Chat-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1856.347291582,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs mradermacher/Sailor-0.5B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1856.358516421,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs RedHatAI/Qwen2.5-0.5B-Instruct-quantized.w8a8 (pool): compared 2, 0.9999855662678172\n"}
+,{"stream_name":"stdout","time":1856.386877438,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs abetlen/nanollava-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1856.403115716,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs sail/Sailor-0.5B-Chat-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1856.420180795,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs mradermacher/Qwen1.5-0.5B-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":1856.431717474,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs RedHatAI/Qwen2.5-0.5B-quantized.w8a16 (pool): compared 2, 0.9985842854335599\n"}
+,{"stream_name":"stdout","time":1856.448700482,"data":"Qwen/Qwen2.5-0.5B-Instruct-GGUF vs Qwen/Qwen2.5-Coder-0.5B-Instruct-AWQ (pool): compared 2, 0.5552229517262953\n"}
+,{"stream_name":"stdout","time":1856.454832572,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs JetBrains/Mellum2.1-12B-A2.5B-Thinking (declared): compared 24, 0.9999851446767759\n"}
+,{"stream_name":"stdout","time":1856.46703313,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs JetBrains/Mellum2.1-12B-A2.5B-Thinking (pool): compared 24, 0.9999851446767759\n"}
+,{"stream_name":"stdout","time":1856.46765926,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs JetBrains/Mellum2-12B-A2.5B-Thinking (pool): compared 24, 0.9999847627374147\n"}
+,{"stream_name":"stdout","time":1856.478680969,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs JetBrains/Mellum2-12B-A2.5B-Instruct (pool): compared 24, 0.9933873890586804\n"}
+,{"stream_name":"stdout","time":1856.480148379,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs JetBrains/Mellum2-12B-A2.5B-Base (pool): compared 24, 0.9941932517630316\n"}
+,{"stream_name":"stdout","time":1856.497260547,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs JetBrains/Mellum2.1-12B-A2.5B-Thinking-MTP (pool): compared 24, 0.999985221234938\n"}
+,{"stream_name":"stdout","time":1856.515289525,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs JetBrains/Mellum2-12B-A2.5B-Thinking-SFT (pool): compared 24, 0.9999849103838381\n"}
+,{"stream_name":"stdout","time":1879.395083108,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs JetBrains/Mellum2-12B-A2.5B-Instruct-SFT (pool): compared 24, 0.9933874097357192\n"}
+,{"stream_name":"stdout","time":1893.084810655,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs cyankiwi/Mellum2-12B-A2.5B-Thinking-AWQ-INT4 (pool): compared 24, 0.9972641342700577\n"}
+,{"stream_name":"stdout","time":1979.053317199,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs randmaru/Mellum2.1-12B-A2.5B-Thinking-mlx-mxfp4 (pool): compared 24, 0.9999579559898173\n"}
+,{"stream_name":"stdout","time":1983.638159498,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs niteg/Mellum2.1-12B-A2.5B-Thinking-oQ5e (pool): compared 24, 0.9997667132591137\n"}
+,{"stream_name":"stdout","time":2008.932349888,"data":"JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF vs mlx-community/Mellum2.1-12B-A2.5B-Thinking-6bit (pool): compared 24, 0.9997308152695892\n"}
+,{"stream_name":"stdout","time":2048.300319596,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs FINAL-Bench/Darwin-180B-RSI-R3 (declared): compared 24, 0.999983156096077\n"}
+,{"stream_name":"stdout","time":2048.301255626,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs Qwen/Qwen3.8-Flash-Next (pool): compared 24, 0.9999686126375961\n"}
+,{"stream_name":"stdout","time":2048.322487254,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2048.397114467,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2048.414303046,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs ukisai/Swift1.5-Qwen3.8-Flash-Next (pool): compared 24, 0.999926834918209\n"}
+,{"stream_name":"stdout","time":2048.464949491,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs Blackfrost-AI/CYBER-FROST-3.8-BF16 (pool): compared 24, 0.998782610448782\n"}
+,{"stream_name":"stdout","time":2048.508933696,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs unsloth/Qwen3.8-Flash-Next-GGUF (pool): compared 2, 1.0000000000000002\n"}
+,{"stream_name":"stdout","time":2048.530707705,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated (pool): compared 24, 0.999519343971244\n"}
+,{"stream_name":"stdout","time":2048.547694853,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs Qwen/Qwen3.8-Flash-Next-FP8 (pool): compared 24, 0.999976880098183\n"}
+,{"stream_name":"stdout","time":2048.574496911,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF (pool): compared 2, 1.0000000000000002\n"}
+,{"stream_name":"stdout","time":2096.947202691,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs mlx-community/Qwen3.8-Flash-Next-4bit (pool): compared 24, 0.9961060408866567\n"}
+,{"stream_name":"stdout","time":2096.947309541,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs trohrbaugh/Qwen3.8-Flash-Next-heretic-2 (pool): compared 24, 0.9999620974474522\n"}
+,{"stream_name":"stdout","time":2096.957818819,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-Flash-Next (pool): compared 24, 0.9999554955103531\n"}
+,{"stream_name":"stdout","time":2096.960221169,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2096.971334459,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2096.997675166,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2097.008491675,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs windowsxp811203/Qwen3.8-Flash-Next-Abliterated (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2097.884027233,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs 0bserverx/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored (pool): compared 24, 0.9998187702681856\n"}
+,{"stream_name":"stdout","time":2097.886009862,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs trohrbaugh/Qwen3.8-Flash-Next-heretic (pool): compared 24, 0.9999022265173059\n"}
+,{"stream_name":"stdout","time":2097.886127412,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF (pool): compared 2, 1.0000000000000002\n"}
+,{"stream_name":"stdout","time":2097.903087541,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2097.921434519,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs FINAL-Bench/Darwin-180B-RSI-R3 (pool): compared 24, 0.999983156096077\n"}
+,{"stream_name":"stdout","time":2097.921617279,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs Blackfrost-AI/CYBER-FROST-3.8-FP8 (pool): compared 24, 0.9999573064296536\n"}
+,{"stream_name":"stdout","time":2097.933179038,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-FP8 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2097.933495578,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs ji-farthing/Qwen3.8-Flash-Next-Uncensored-ik-llama-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2132.267293678,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs mlx-community/Qwen3.8-Flash-Next-Uncensored-oQ5e-mtp (pool): compared 24, 0.9996967757100149\n"}
+,{"stream_name":"stdout","time":2132.269164488,"data":"unsloth/Wan2.2-TI2V-5B-GGUF vs Wan-AI/Wan2.2-TI2V-5B (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":2132.283278407,"data":"unsloth/Wan2.2-TI2V-5B-GGUF vs hum-ma/Wan2.2-TI2V-5B-Turbo-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2132.295029236,"data":"unsloth/Wan2.2-TI2V-5B-GGUF vs Kiijoku/Wan2.2-TI2V-5B-Turbo-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2132.319858133,"data":"unsloth/Wan2.2-TI2V-5B-GGUF vs liaqateagle/Wan2.2-TI2V-5B-Turbo-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2217.689031059,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs 0bserverx/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored (declared): compared 24, 0.9967827279274961\n"}
+,{"stream_name":"stdout","time":2217.721763816,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs Qwen/Qwen3.8-Flash-Next (pool): compared 24, 0.9966101789080928\n"}
+,{"stream_name":"stdout","time":2217.749128193,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs orcarouter/Qwen3.8-Flash-Next-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2217.78246338,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2217.848458534,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs ukisai/Swift1.5-Qwen3.8-Flash-Next (pool): compared 24, 0.9965816802547947\n"}
+,{"stream_name":"stdout","time":2217.898439309,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs Blackfrost-AI/CYBER-FROST-3.8-BF16 (pool): compared 24, 0.9953440959154124\n"}
+,{"stream_name":"stdout","time":2217.899026478,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs unsloth/Qwen3.8-Flash-Next-GGUF (pool): compared 2, 0.9919669929331998\n"}
+,{"stream_name":"stdout","time":2217.948908184,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated (pool): compared 24, 0.9962896272951636\n"}
+,{"stream_name":"stdout","time":2219.148182669,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs Qwen/Qwen3.8-Flash-Next-FP8 (pool): compared 24, 0.9891091459915752\n"}
+,{"stream_name":"stdout","time":2219.208989253,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF (pool): compared 2, 0.9919669929331998\n"}
+,{"stream_name":"stdout","time":2219.805325926,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs mlx-community/Qwen3.8-Flash-Next-4bit (pool): compared 24, 0.9925415040023167\n"}
+,{"stream_name":"stdout","time":2219.811103625,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs trohrbaugh/Qwen3.8-Flash-Next-heretic-2 (pool): compared 24, 0.9966096721071416\n"}
+,{"stream_name":"stdout","time":2220.537575946,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs bottlecapai/ThinkingCap-Qwen3.8-Flash-Next (pool): compared 24, 0.9966044550459572\n"}
+,{"stream_name":"stdout","time":2220.570308773,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2220.575882732,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2220.582175421,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2220.5982823,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs windowsxp811203/Qwen3.8-Flash-Next-Abliterated (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2220.629663637,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs 0bserverx/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored (pool): compared 24, 0.9967827279274961\n"}
+,{"stream_name":"stdout","time":2220.640764346,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs trohrbaugh/Qwen3.8-Flash-Next-heretic (pool): compared 24, 0.9967825099598326\n"}
+,{"stream_name":"stdout","time":2220.662024364,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF (pool): compared 2, 0.9919669929331998\n"}
+,{"stream_name":"stdout","time":2220.70375869,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2220.727086558,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs FINAL-Bench/Darwin-180B-RSI-R3 (pool): compared 24, 0.9966044550459572\n"}
+,{"stream_name":"stdout","time":2221.915563873,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs Blackfrost-AI/CYBER-FROST-3.8-FP8 (pool): compared 24, 0.988790232149626\n"}
+,{"stream_name":"stdout","time":2221.915655473,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs orcarouter/Qwen3.8-Flash-Next-Uncensored-FP8 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2221.915836464,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs ji-farthing/Qwen3.8-Flash-Next-Uncensored-ik-llama-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2234.111938384,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs mlx-community/Qwen3.8-Flash-Next-Uncensored-oQ5e-mtp (pool): compared 24, 0.9958656501003723\n"}
+,{"stream_name":"stdout","time":2395.629681529,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs deepseek-ai/DeepSeek-V4-Flash-0731 (declared): compared None, KeyError: 'F8_E8M0'\n"}
+,{"stream_name":"stdout","time":2395.630187659,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs unsloth/DeepSeek-V4-Flash-Vision-Exp-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2395.630201489,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs AtomicChat/DeepSeek-V4-Flash-0731-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2395.630207279,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs apetersson/DeepSeek-V4-Flash-Vision-Exp-Abliterated (pool): compared 24, 0.961731934885093\n"}
+,{"stream_name":"stdout","time":2395.630212389,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs teamblobfish/DeepSeek-V4-Flash-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2395.630282419,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs ggml-org/DeepSeek-V4-Flash-GGUF (pool): compared 4, 0.9999390591835244\n"}
+,{"stream_name":"stdout","time":2395.630400559,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2.5-Audio-1.5B (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":2395.630528869,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2.5-1.2B-Instruct (pool): compared 20, 0.28641030689905\n"}
+,{"stream_name":"stdout","time":2395.630662839,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2-1.2B (pool): compared 20, 0.8713678627980814\n"}
+,{"stream_name":"stdout","time":2395.630753329,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2.5-1.2B-Thinking (pool): compared 20, 0.2759492825482044\n"}
+,{"stream_name":"stdout","time":2395.630874899,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2.5-1.2B-Base (pool): compared 20, 0.2875530697694286\n"}
+,{"stream_name":"stdout","time":2395.631004879,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2.5-1.2B-JP (pool): compared 20, 0.2849136173578816\n"}
+,{"stream_name":"stdout","time":2395.631147079,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2.5-1.2B-JP-202606 (pool): compared 20, 0.2836245665043843\n"}
+,{"stream_name":"stdout","time":2395.631333519,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2-1.2B-RAG (pool): compared 20, 0.8724357715245954\n"}
+,{"stream_name":"stdout","time":2395.631494549,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2-1.2B-Tool (pool): compared 20, 0.8713165529212921\n"}
+,{"stream_name":"stdout","time":2395.631659829,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2-1.2B-Extract (pool): compared 20, 0.8716054507390748\n"}
+,{"stream_name":"stdout","time":2395.631904889,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs Indexnusrefather/Super-Slop-Machina-Roleplay-1.2b-V4-ERP-Tolerant-it (pool): compared 20, 0.28654739791064665\n"}
+,{"stream_name":"stdout","time":2405.210899901,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs Indexnusrefather/Super-Slop-Machina-Roleplay-1.2b-V4-ERP-Tolerant-Preview (pool): compared 20, 0.28647600153410785\n"}
+,{"stream_name":"stdout","time":2408.688119567,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs category271/whispernow-lfm2.5-1.2b (pool): compared 20, 0.28755128924592377\n"}
+,{"stream_name":"stdout","time":2408.698736086,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs Indexnusrefather/Super-Slop-Machina-Roleplay-1.2b (pool): compared 20, 0.28641030689905\n"}
+,{"stream_name":"stdout","time":2408.711895745,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs Indexnusrefather/LFM-2.5-1.2b-Instruct-roleplay-tuned (pool): compared 20, 0.28641030689905\n"}
+,{"stream_name":"stdout","time":2408.712315875,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs richardyoung/LFM2.5-1.2B-Instruct-heretic (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2408.712429525,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs DavidAU/LFM2.5-1.2B-Thinking-Claude-4.6-Opus-Heretic-Uncensored-DISTILL (pool): compared 20, 0.2747666652573322\n"}
+,{"stream_name":"stdout","time":2426.988699072,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs LiquidAI/LFM2-1.2B-Longevity (pool): compared 20, 0.8695698298154309\n"}
+,{"stream_name":"stdout","time":2494.801747771,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs lmstudio-community/LFM2.5-1.2B-Instruct-MLX-8bit (pool): compared 20, 0.2864199493709436\n"}
+,{"stream_name":"stdout","time":2500.481584877,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs lmstudio-community/LFM2.5-1.2B-Instruct-MLX-4bit (pool): compared 20, 0.2836756413228982\n"}
+,{"stream_name":"stdout","time":2537.745971464,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs lmstudio-community/LFM2.5-1.2B-Instruct-MLX-6bit (pool): compared 20, 0.2867195166106325\n"}
+,{"stream_name":"stdout","time":2557.036105895,"data":"LiquidAI/LFM2.5-Audio-1.5B-GGUF vs lmstudio-community/LFM2-1.2B-MLX-8bit (pool): compared 20, 0.8713205583662673\n"}
+,{"stream_name":"stdout","time":2557.036158855,"data":"unsloth/Qwen3-VL-8B-Instruct-GGUF vs rectangleworm/PornMaster_Klein-9b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2557.036195985,"data":"handy-computer/parakeet-tdt-0.6b-v2-gguf vs nvidia/parakeet-tdt-0.6b-v2 (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2557.036205135,"data":"handy-computer/parakeet-tdt-0.6b-v2-gguf vs mudler/parakeet-cpp-gguf (pool): compared 3, 0.6134434829510048\n"}
+,{"stream_name":"stdout","time":2557.036296255,"data":"handy-computer/parakeet-tdt-0.6b-v2-gguf vs danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2557.036370915,"data":"handy-computer/parakeet-tdt-0.6b-v2-gguf vs FluidVoice-Labs/fluid-speech-mini-gguf (pool): compared 3, 0.6134434829510048\n"}
+,{"stream_name":"stdout","time":2557.036563075,"data":"handy-computer/parakeet-tdt-0.6b-v2-gguf vs omi-health/omi-med-stt-v1-gguf (pool): compared 3, 1.0\n"}
+,{"stream_name":"stdout","time":2557.036660355,"data":"handy-computer/parakeet-tdt-0.6b-v2-gguf vs Nalila9633/parakeet-cpp-gguf (pool): compared 2, 0.003635929251204732\n"}
+,{"stream_name":"stdout","time":2557.036807255,"data":"handy-computer/parakeet-tdt-0.6b-v2-gguf vs amandabenson/parakeet-cpp-gguf-fork (pool): compared 2, 0.003635929251204732\n"}
+,{"stream_name":"stdout","time":2557.036981345,"data":"bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF vs Qwen/Qwen1.5-7B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2557.037216065,"data":"bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF vs Qwen/Qwen1.5-7B-Chat (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2607.653614152,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs orcarouter/Qwen3.8-27B-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2607.653744892,"data":"ggml-org/gemma-3-4b-it-GGUF vs dongchengli/gemma-3-4b-it-text-int4-gptq (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2607.654118231,"data":"pottokao/Qwen-Image-2.1-Text-Encoder-Heretic-GGUF vs nvidia/Cosmos-Reason2-8B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2607.654142762,"data":"pottokao/Qwen-Image-2.1-Text-Encoder-Heretic-GGUF vs prithivMLmods/Qwen3-VL-8B-Instruct-c_abliterated-v3 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2608.789784003,"data":"kyuz0/deepseek-v4.1-flash-gguf vs deepseek-ai/DeepSeek-V4.1-Flash (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":2608.790325853,"data":"kyuz0/deepseek-v4.1-flash-gguf vs deepseek-ai/DeepSeek-V4.1-Flash-1017 (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":2608.790629283,"data":"kyuz0/deepseek-v4.1-flash-gguf vs unsloth/DeepSeek-V4.1-Flash-1017-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2608.791413763,"data":"kyuz0/deepseek-v4.1-flash-gguf vs peasantsmith/DeepSeek-V4.1-Flash-1017-Maya-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2608.791924443,"data":"kyuz0/deepseek-v4.1-flash-gguf vs mrfakename/DeepSeek-V4.1-Flash-1017-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2618.41263836,"data":"kyuz0/deepseek-v4.1-flash-gguf vs Adolphsson/DeepSeek-V4.1-Flash-1017-UNCENSORED-Q8_0-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2618.41351798,"data":"kyuz0/deepseek-v4.1-flash-gguf vs antirez/deepseek-v4.1-flash-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2627.006794486,"data":"kyuz0/deepseek-v4.1-flash-gguf vs nazeshinjite/DeepSeek-V4.1-Flash-1017-ds4-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2630.384392103,"data":"kyuz0/deepseek-v4.1-flash-gguf vs audreyt/DeepSeek-V4.1-Flash-Abliterated-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2679.23516401,"data":"kyuz0/deepseek-v4.1-flash-gguf vs Adolphsson/DeepSeek-V4.1-Flash-UNCENSORED-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2679.23542916,"data":"kyuz0/deepseek-v4.1-flash-gguf vs Lucebox/DeepSeek-V4.1-Flash-1017-ROCMFP-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2679.23546431,"data":"kyuz0/deepseek-v4.1-flash-gguf vs orcarouter/DeepSeek-V4.1-Flash-1017-abliterated-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2681.837688385,"data":"kyuz0/deepseek-v4.1-flash-gguf vs AtomicChat/DeepSeek-V4.1-Flash-1017-Uncensored-DwarfStar-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2681.837837175,"data":"kyuz0/deepseek-v4.1-flash-gguf vs pfeifferj/DeepSeek-V4.1-Flash-GSQ-RCO-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2697.166796705,"data":"kyuz0/deepseek-v4.1-flash-gguf vs vcruz305/DeepSeek-V4.1-Flash-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2697.167133385,"data":"kyuz0/deepseek-v4.1-flash-gguf vs Lucebox/DeepSeek-V4.1-Flash-ROCMFP23-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2697.167466815,"data":"kyuz0/deepseek-v4.1-flash-gguf vs smalinin/DeepSeek-V4.1-Flash-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2697.168494815,"data":"kyuz0/deepseek-v4.1-flash-gguf vs pqhaz/DeepSeek-V4.1-Flash-1017-heretic-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2697.169018334,"data":"kyuz0/deepseek-v4.1-flash-gguf vs hsmorikawa/DeepSeek-V4.1-Flash-1017-abliterated-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2697.169334644,"data":"kyuz0/deepseek-v4.1-flash-gguf vs ivanfioravanti/DeepSeek-V4.1-Flash-DS4-IQ2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2712.725151282,"data":"kyuz0/deepseek-v4.1-flash-gguf vs acrogenesis/DeepSeek-V4.1-Flash-1017-IQ2_XXS-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2719.478535448,"data":"kyuz0/deepseek-v4.1-flash-gguf vs prometheusAIR/DeepSeek-V4.1-Flash-1017-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2769.899339619,"data":"kyuz0/deepseek-v4.1-flash-gguf vs mxxm-t/DeepSeek-V4.1-Flash-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2769.899418379,"data":"kyuz0/deepseek-v4.1-flash-gguf vs XcaliburMoon/deepseek-v4.1-flash-1017-gguf (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2769.911983258,"data":"kyuz0/deepseek-v4.1-flash-gguf vs smalinin/DeepSeek-V4.1-Flash-1017-IQ2_XXS-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2769.917325317,"data":"kyuz0/deepseek-v4.1-flash-gguf vs Solstice-AI/DeepSeek-V4.1-Flash-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2775.803790894,"data":"kyuz0/deepseek-v4.1-flash-gguf vs Solstice-AI/DeepSeek-V4.1-Flash-1017-UNCENSORED-MXFP4-ds4-Protium-1.0-UltraOptimised-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2775.826175402,"data":"kyuz0/deepseek-v4.1-flash-gguf vs hyukudan/deepseek-v4.1-flash-gguf-mirror (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2775.828631142,"data":"kyuz0/deepseek-v4.1-flash-gguf vs DevQuasar/deepseek-ai.DeepSeek-V4.1-Flash-1017-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":2777.562026589,"data":"kyuz0/deepseek-v4.1-flash-gguf vs cliecy/DeepSeek-V4.1-Flash-1017-UD-IQ2XS-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2777.567551839,"data":"kyuz0/deepseek-v4.1-flash-gguf vs AshwinX/DeepSeek-V4.1-Flash-1017-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2795.358662936,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":2796.036005433,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs Qwen/Qwen3-TTS-12Hz-0.6B-Base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2796.036031663,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2796.144464503,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs Tesslate/Lure-TTS-0.6B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2796.144491343,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2796.144507153,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs mlx-community/Qwen3-TTS-12Hz-0.6B-CustomVoice-8bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2796.144742423,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs mlx-community/Qwen3-TTS-12Hz-0.6B-Base-bf16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2796.144755112,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs mlx-community/Qwen3-TTS-12Hz-0.6B-Base-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2797.966378802,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs g-group-ai-lab/gwen-tts-0.6B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2797.966412582,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs mlx-community/Qwen3-TTS-12Hz-0.6B-CustomVoice-bf16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2797.966418711,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs mlx-community/Qwen3-TTS-12Hz-0.6B-CustomVoice-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2798.483231053,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs mlx-community/Qwen3-TTS-12Hz-0.6B-CustomVoice-6bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2800.133447198,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs erkamk/qwen3-0.6b-tr (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2800.136163767,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs rijulpaul/Qwen3-TTS-12Hz-0.6B-Wriothesley-LoRa-16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2800.136514138,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs alkhrzmy/qwen3-tts-0.6b-indonesian (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2800.136738647,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs MahmoudIbrahim/A3S (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2800.137113567,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs Volko76/Qwen3-TTS-12Hz-0.6B-Base-Qwen3tts.cpp_quants-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2800.606244653,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs mlx-community/Qwen3-TTS-12Hz-0.6B-Base-6bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":2800.620945962,"data":"cstr/qwen3-tts-0.6b-customvoice-GGUF vs rijulpaul/Qwen3-TTS-12Hz-0.6B-Wriothesley-LoRa-32 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3133.944647786,"data":"antirez/glm-5.3-flash-gguf vs zai-org/GLM-5.3-Flash (pool): compared 24, 1.0\n"}
+,{"stream_name":"stdout","time":3209.896781508,"data":"antirez/glm-5.3-flash-gguf vs zai-org/GLM-5.3-Flash-BF16 (pool): compared 24, 1.0\n"}
+,{"stream_name":"stdout","time":3209.897416998,"data":"antirez/glm-5.3-flash-gguf vs orcarouter/GLM-5.3-Flash-Uncensored-FP8 (pool): compared 24, 0.9999999999999999\n"}
+,{"stream_name":"stdout","time":3209.897435078,"data":"antirez/glm-5.3-flash-gguf vs dealignai/GLM-5.3-Flash-UNCENSORED-FP8 (pool): compared 24, 1.0\n"}
+,{"stream_name":"stdout","time":3209.897440858,"data":"antirez/glm-5.3-flash-gguf vs unsloth/GLM-5.3-Flash-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3216.783445988,"data":"antirez/glm-5.3-flash-gguf vs Blackfrost-AI/RED-SNOW-5.3-FLASH-BF16 (pool): compared 24, 0.9999957601894582\n"}
+,{"stream_name":"stdout","time":3216.783480108,"data":"antirez/glm-5.3-flash-gguf vs cantina-security/apex-flash-1-abliterated (pool): compared 24, 0.9999999999999999\n"}
+,{"stream_name":"stdout","time":3216.783600228,"data":"antirez/glm-5.3-flash-gguf vs nvidia/GLM-5.3-Flash-NVFP4 (pool): compared 24, 1.0\n"}
+,{"stream_name":"stdout","time":3227.171713714,"data":"antirez/glm-5.3-flash-gguf vs dealignai/GLM-5.3-Flash-CYBERSECURITY-W4A16 (pool): compared 24, 1.0\n"}
+,{"stream_name":"stdout","time":3294.619232274,"data":"antirez/glm-5.3-flash-gguf vs cantina-security/apex-flash-1 (pool): compared 24, 0.9999999999999999\n"}
+,{"stream_name":"stdout","time":3294.630844083,"data":"antirez/glm-5.3-flash-gguf vs orcarouter/GLM-5.3-Flash-Uncensored-NVFP4 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3294.632559943,"data":"antirez/glm-5.3-flash-gguf vs BoldingBuilds/orcarouter_GLM-5.3-Flash-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3294.654716311,"data":"antirez/glm-5.3-flash-gguf vs orcarouter/GLM-5.3-Flash-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3294.655697661,"data":"antirez/glm-5.3-flash-gguf vs wtdcode/GLM-5.3-Flash-AWQ-W4A16 (pool): compared 24, 1.0\n"}
+,{"stream_name":"stdout","time":3294.66836165,"data":"antirez/glm-5.3-flash-gguf vs huihui-ai/Huihui-GLM-5.3-Flash-abliterated-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3294.689573938,"data":"antirez/glm-5.3-flash-gguf vs AliceThirty/GLM-5.3-Flash-UNCENSORED-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3294.689711428,"data":"antirez/glm-5.3-flash-gguf vs Jundot/GLM-5.3-Flash-oQ4e-mtp (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3376.888098156,"data":"antirez/glm-5.3-flash-gguf vs Solstice-AI/GLM-5.3-Flash-UNCENSORED-mlx-oQ4e-DFlash2 (pool): compared 24, 0.9999730028638334\n"}
+,{"stream_name":"stdout","time":3376.888223476,"data":"antirez/glm-5.3-flash-gguf vs bartowski/GLM-5.3-Flash-BF16-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3418.443598136,"data":"antirez/glm-5.3-flash-gguf vs TensorFold/GLM-5.3-Flash-MLX-4bit-MTP (pool): compared 24, 0.9958191437213524\n"}
+,{"stream_name":"stdout","time":3418.443625096,"data":"antirez/glm-5.3-flash-gguf vs hell0ks/GLM-5.3-Flash-Uncensored-AWQ (pool): compared 24, 0.9999986170449665\n"}
+,{"stream_name":"stdout","time":3418.443673346,"data":"antirez/glm-5.3-flash-gguf vs ukisai/Swift-1.5-GLM-5.3-Flash-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3418.443791546,"data":"handy-computer/Voxtral-Mini-3B-2507-gguf vs mistralai/Voxtral-Mini-3B-2507 (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":3418.443908496,"data":"handy-computer/Voxtral-Mini-3B-2507-gguf vs mistralai/Voxtral-Mini-3B-2507 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3418.444012156,"data":"handy-computer/Voxtral-Mini-3B-2507-gguf vs cstr/voxtral-mini-3b-2507-GGUF (pool): compared 2, 1.0\n"}
+,{"stream_name":"stdout","time":3418.444127116,"data":"handy-computer/Voxtral-Mini-3B-2507-gguf vs mlx-community/Voxtral-Mini-3B-2507-bf16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3418.444249266,"data":"handy-computer/Voxtral-Mini-3B-2507-gguf vs RedHatAI/Voxtral-Mini-3B-2507-FP8-dynamic (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3418.444374026,"data":"handy-computer/Voxtral-Mini-3B-2507-gguf vs Bercraft/Voxtral-Mini-3B-2507 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3470.505475051,"data":"chimingw/Qwen3.8-27B-Uncensored-OrcaRouter-GGUF vs orcarouter/Qwen3.8-27B-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3470.51721931,"data":"chimingw/Qwen3.8-27B-Uncensored-OrcaRouter-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3470.524135899,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs codellama/CodeLlama-34b-hf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3470.546705797,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs codellama/CodeLlama-34b-Instruct-hf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3470.558723356,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs llm-jp/llm-jp-4.1-33b-thinking (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3470.565400475,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs codellama/CodeLlama-34b-Python-hf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3470.571146744,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs SenseLLM/ReflectionCoder-CL-34B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3470.571285294,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs oobabooga/CodeBooga-34B-v0.1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3470.571452294,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs llm-jp/llm-jp-4-33b-base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3470.571572944,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs llm-jp/llm-jp-4-33b-thinking (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3470.571622984,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs elyza/ELYZA-Thinking-1.0-llm-jp-4-33b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3470.571756495,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs llm-jp/llm-jp-4-33b-thinking-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3490.002760053,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs MaziyarPanahi/QwQ-32B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3490.003083243,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs TheBloke/CodeLlama-34B-Instruct-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3490.003449774,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs TheBloke/WizardCoder-Python-34B-V1.0-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3490.027075151,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs llm-jp/llm-jp-4.1-33b-thinking-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3490.03848563,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs mradermacher/Phind-CodeLlama-34B-v2-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3490.03998059,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs TheBloke/CodeLlama-34B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3490.051577379,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3490.052898869,"data":"dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF vs TheBloke/CodeLlama-34B-Python-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3490.065468747,"data":"MaziyarPanahi/sqlcoder-7b-2-GGUF vs epfl-llm/meditron-7b (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3490.076436946,"data":"MaziyarPanahi/sqlcoder-7b-2-GGUF vs Yellow-AI-NLP/komodo-7b-base (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3618.774797921,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs deepseek-ai/DeepSeek-V4-Flash-Vision-Exp (declared): compared None, KeyError: 'F8_E8M0'\n"}
+,{"stream_name":"stdout","time":3618.798788279,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs unsloth/DeepSeek-V4-Flash-Vision-Exp-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3618.799105829,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs AtomicChat/DeepSeek-V4-Flash-0731-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3618.801774429,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs apetersson/DeepSeek-V4-Flash-Vision-Exp-Abliterated (pool): compared 24, 0.9999854394889367\n"}
+,{"stream_name":"stdout","time":3618.812891738,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs teamblobfish/DeepSeek-V4-Flash-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":3618.827788636,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs ggml-org/DeepSeek-V4-Flash-GGUF (pool): compared 4, 0.9959997501358335\n"}
+,{"stream_name":"stdout","time":3618.840958355,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs M4-ai/TinyMistral-6x248M (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3618.854012774,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs llm-jp/llm-jp-3-980m-instruct3 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3618.856007414,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs llm-jp/llm-jp-3-980m (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3618.865962213,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs LingoIITGN/ganga-1b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.703903181,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs MaziyarPanahi/Sailor2-1B-Chat-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.71653215,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs mmnga/llm-jp-3-980m-instruct3-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.722433579,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs mradermacher/Igea-1B-instruct-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.730339158,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs mradermacher/TinyMistral-6x248M-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.742202357,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs JupiterZhu/T2MLR_Baseline_997M_50B_FineWebEdu (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.754189216,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs JupiterZhu/T2MLR_Baseline_997M_10B_FineWebEdu (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.765947605,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs mradermacher/Minerva-1B-base-v1.0-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.771351615,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs nthngdy/matritest_van_1B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.777977804,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs DarwinAnim8or/Bamboo-1B-old (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.778368704,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs mradermacher/TinyMistral-6x248M-Instruct-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.778814414,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs mradermacher/TinyMistral-6x248M-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.801212551,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs mradermacher/Minerva-1B-base-v1.0-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.835497748,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs liminerity/ultra0-half-the-layers (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.842369668,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs Raghav-Singhal/1pp-1b-raw-tokmatchog-base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.848986537,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs zhenting/evolm-1B-160BT-cpt-MixedFW8FM42-sftep1-sampled500k_first100k_qwen7b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3621.854634437,"data":"MaziyarPanahi/gemma-3-1b-it-GGUF vs Raghav-Singhal/1pp-0.98b-v2-ua-rawanneal-seed1234-sft (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":3713.224981632,"data":"timteh673/Qwen3.5-122B-A10B-Opus-Reasoning-GGUF vs huihui-ai/Huihui-Qwen3.5-122B-A10B-abliterated-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.694445271,"data":"timteh673/Qwen3.5-122B-A10B-Opus-Reasoning-GGUF vs tripolskypetr/Qwen3.5-Uncensored-Aggressive-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4194.69450476,"data":"TheBloke/Llama-2-7B-GGUF vs epfl-llm/meditron-7b (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.694512671,"data":"TheBloke/Llama-2-7B-GGUF vs Yellow-AI-NLP/komodo-7b-base (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.69451782,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs orcarouter/GLM-5.3-Flash-Uncensored-FP8 (declared): compared 24, 0.9999855323643216\n"}
+,{"stream_name":"stdout","time":4194.69462723,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs zai-org/GLM-5.3-Flash (declared): compared 24, 0.9999854622725721\n"}
+,{"stream_name":"stdout","time":4194.69474678,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs zai-org/GLM-5.3-Flash (pool): compared 24, 0.9999854622725721\n"}
+,{"stream_name":"stdout","time":4194.69508385,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs zai-org/GLM-5.3-Flash-BF16 (pool): compared 24, 0.9999850129083765\n"}
+,{"stream_name":"stdout","time":4194.69511061,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs orcarouter/GLM-5.3-Flash-Uncensored-FP8 (pool): compared 24, 0.9999855323643216\n"}
+,{"stream_name":"stdout","time":4194.69525967,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs dealignai/GLM-5.3-Flash-UNCENSORED-FP8 (pool): compared 24, 0.9999854622725721\n"}
+,{"stream_name":"stdout","time":4194.69529705,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs unsloth/GLM-5.3-Flash-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.69545472,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs Blackfrost-AI/RED-SNOW-5.3-FLASH-BF16 (pool): compared 24, 0.9999805805264186\n"}
+,{"stream_name":"stdout","time":4194.69555646,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs cantina-security/apex-flash-1-abliterated (pool): compared 24, 0.9999850129083765\n"}
+,{"stream_name":"stdout","time":4194.69567995,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs nvidia/GLM-5.3-Flash-NVFP4 (pool): compared 24, 0.9999854347839997\n"}
+,{"stream_name":"stdout","time":4194.69581635,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs dealignai/GLM-5.3-Flash-CYBERSECURITY-W4A16 (pool): compared 24, 0.9999837940789517\n"}
+,{"stream_name":"stdout","time":4194.69596375,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs cantina-security/apex-flash-1 (pool): compared 24, 0.9999850129083765\n"}
+,{"stream_name":"stdout","time":4194.69620755,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs orcarouter/GLM-5.3-Flash-Uncensored-NVFP4 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.69631012,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs BoldingBuilds/orcarouter_GLM-5.3-Flash-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.69645289,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs orcarouter/GLM-5.3-Flash-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.69655004,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs wtdcode/GLM-5.3-Flash-AWQ-W4A16 (pool): compared 24, 0.9999850542481749\n"}
+,{"stream_name":"stdout","time":4194.69667142,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs huihui-ai/Huihui-GLM-5.3-Flash-abliterated-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.69677195,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs AliceThirty/GLM-5.3-Flash-UNCENSORED-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.697139,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs Jundot/GLM-5.3-Flash-oQ4e-mtp (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4194.69714909,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs Solstice-AI/GLM-5.3-Flash-UNCENSORED-mlx-oQ4e-DFlash2 (pool): compared 24, 0.9999584168215772\n"}
+,{"stream_name":"stdout","time":4194.69715307,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs bartowski/GLM-5.3-Flash-BF16-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4194.69722636,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs TensorFold/GLM-5.3-Flash-MLX-4bit-MTP (pool): compared 24, 0.9958298172435076\n"}
+,{"stream_name":"stdout","time":4194.69740473,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs hell0ks/GLM-5.3-Flash-Uncensored-AWQ (pool): compared 24, 0.9999857011546441\n"}
+,{"stream_name":"stdout","time":4194.69751801,"data":"DogContext/GLM-5.3-Flash-Uncensored-Q2-ds4 vs ukisai/Swift-1.5-GLM-5.3-Flash-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4194.69763618,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs Accio-Lab/occamy-1.0 (declared): compared 2, 0.9999741661504837\n"}
+,{"stream_name":"stdout","time":4194.6977844,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs Kwaipilot/KAT-Coder-V2.5-Dev (pool): compared 2, 0.9997411661708624\n"}
+,{"stream_name":"stdout","time":4194.69791877,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs empero-ai/Qwen3.8-35B-A3B-Distill (pool): compared 2, 0.9998419904438707\n"}
+,{"stream_name":"stdout","time":4194.69800592,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs Accio-Lab/occamy-1.0 (pool): compared 2, 0.9999741661504837\n"}
+,{"stream_name":"stdout","time":4194.69814839,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive (pool): compared 2, 0.9995908535707901\n"}
+,{"stream_name":"stdout","time":4194.69827258,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs Qwen/Qwen-AgentWorld-35B-A3B (pool): compared 2, 0.9989429669541963\n"}
+,{"stream_name":"stdout","time":4194.6984882,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs llmfan46/Qwen3.6-35B-A3B-uncensored-heretic (pool): compared 2, 0.9998419904438707\n"}
+,{"stream_name":"stdout","time":4194.6985655,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs InternScience/Agents-A1 (pool): compared 2, 0.988111789366988\n"}
+,{"stream_name":"stdout","time":4194.69869082,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs llmfan46/Qwen3.6-35B-A3B-uncensored-heretic-Native-MTP-Preserved (pool): compared 2, 0.9998419904438707\n"}
+,{"stream_name":"stdout","time":4194.69883638,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs nex-agi/Nex-N2.5-mini (pool): compared 2, 0.9833426840807844\n"}
+,{"stream_name":"stdout","time":4194.69894874,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs Hcompany/Holo4-35B-A3B (pool): compared 2, 0.9997574375612598\n"}
+,{"stream_name":"stdout","time":4194.69914082,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs FINAL-Bench/Darwin-36B-Opus (pool): compared 2, 0.9998419904438707\n"}
+,{"stream_name":"stdout","time":4194.69931968,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs nex-agi/Nex-N2-mini (pool): compared 2, 0.9870903124304437\n"}
+,{"stream_name":"stdout","time":4194.6995607,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs thomsonreuters/Thomson-1.0-Small (pool): compared 2, 0.9977055908017551\n"}
+,{"stream_name":"stdout","time":4194.69980062,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs ericpandev/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-bf16 (pool): compared 2, 0.999818576672078\n"}
+,{"stream_name":"stdout","time":4194.69993335,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs unsloth/Qwen3.6-35B-A3B-GGUF (pool): compared 2, 0.9998197665212003\n"}
+,{"stream_name":"stdout","time":4194.70009101,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs HauhauCS/Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive (pool): compared 2, 0.9882785518609208\n"}
+,{"stream_name":"stdout","time":4194.70024118,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs pragmaticcs/Qwen-35B-A3B-SignOfFour-Coder (pool): compared 2, 0.9994672316353305\n"}
+,{"stream_name":"stdout","time":4194.70035819,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs Hcompany/Holo3-35B-A3B (pool): compared 2, 0.9881803411408479\n"}
+,{"stream_name":"stdout","time":4194.7005077,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs Logics-MLLM/Logics-SWE-Qwen3.6-35B-A3B (pool): compared 2, 0.9998392884860023\n"}
+,{"stream_name":"stdout","time":4194.70062919,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs oyildirim/CyberStrike-OffSec-35B (pool): compared 2, 0.9998419904438707\n"}
+,{"stream_name":"stdout","time":4194.70075632,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs XYZAILab/XYZ-Aquila-mini (pool): compared 2, 0.9990927109857433\n"}
+,{"stream_name":"stdout","time":4194.70088653,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs OrionLLM/GRM-3.2-Sky (pool): compared 2, 0.999533900355771\n"}
+,{"stream_name":"stdout","time":4194.70098895,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs Hcompany/Holo-3.1-35B-A3B (pool): compared 2, 0.9997114781051641\n"}
+,{"stream_name":"stdout","time":4240.78640074,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF (pool): compared 2, 0.9872658643931331\n"}
+,{"stream_name":"stdout","time":4240.804591769,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs AEON-7/Ornith-1.0-35B-AEON-Ultimate-Uncensored-NVFP4 (pool): compared 2, 0.999533900355771\n"}
+,{"stream_name":"stdout","time":4240.811725078,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs AEON-7/Ornith-1.0-35B-AEON-Ultimate-Uncensored-BF16 (pool): compared 2, 0.999533900355771\n"}
+,{"stream_name":"stdout","time":4240.824578697,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs BlueNipples/Anansi-35B-A3B (pool): compared 2, 0.9970333341775133\n"}
+,{"stream_name":"stdout","time":4240.831174716,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs wangzhang/Qwen3.6-35B-A3B-abliterated (pool): compared 2, 0.9998419904438707\n"}
+,{"stream_name":"stdout","time":4268.439272921,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs PocketAiHub/Ornith-1.5-35B-A3B-Abliterated-GGUF (pool): compared 2, 0.9872658643931331\n"}
+,{"stream_name":"stdout","time":4268.4477934,"data":"IsValorum/Occamy-1.0-APEX-I-MiniPlus-V2.1-Abliterated-GGUF vs mlx-community/Qwen3.6-35B-A3B-8bit (pool): compared 2, 0.9997973921347698\n"}
+,{"stream_name":"stdout","time":4268.464954318,"data":"TheBloke/Llama-2-13B-chat-GGUF vs yunconglong/Truthful_DPO_TomGrc_FusionNet_7Bx2_MoE_13B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4268.507497474,"data":"TheBloke/Llama-2-13B-chat-GGUF vs elinas/Llama-3-13B-Instruct (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4268.518320753,"data":"TheBloke/Llama-2-13B-chat-GGUF vs mixtao/MixTAO-7Bx2-MoE-v8.1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4268.520694053,"data":"TheBloke/Llama-2-13B-chat-GGUF vs NeuralNovel/Mini-Mixtral-v0.2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4268.531658172,"data":"TheBloke/Llama-2-13B-chat-GGUF vs macadeliccc/laser-dolphin-mixtral-2x7b-dpo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4268.533905472,"data":"TheBloke/Llama-2-13B-chat-GGUF vs RubielLabarta/LogoS-7Bx2-MoE-13B-v0.2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4328.698894198,"data":"LiquidAI/LFM2-24B-A2B-GGUF vs abenzerps/LFM2.5-24B-A2B-Uncensored-GSQ-RCO-GGUF (pool): compared 4, -0.009365082828427206\n"}
+,{"stream_name":"stdout","time":4328.699212818,"data":"mradermacher/Qwen2.5-VL-7B-Instruct-Unredacted-MAX-GGUF vs Phil2Sat/Qwen-Image-Edit-Rapid-AIO-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4334.182725615,"data":"mradermacher/Qwen2.5-VL-7B-Instruct-Unredacted-MAX-GGUF vs unsloth/MiMo-VL-7B-RL-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4336.932474372,"data":"mradermacher/Qwen2.5-VL-7B-Instruct-Unredacted-MAX-GGUF vs bartowski/XiaomiMiMo_MiMo-VL-7B-RL-2508-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4336.933108852,"data":"mradermacher/Qwen3-235B-A22B-abliterated-i1-GGUF vs unsloth/Qwen3-235B-A22B-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4336.933410532,"data":"mradermacher/Qwen3-235B-A22B-abliterated-i1-GGUF vs unsloth/Qwen3-235B-A22B-Instruct-2507-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4336.933712442,"data":"mradermacher/Qwen3-235B-A22B-abliterated-i1-GGUF vs bartowski/Qwen_Qwen3-235B-A22B-Instruct-2507-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4336.946932881,"data":"mradermacher/Qwen3-235B-A22B-abliterated-i1-GGUF vs Qwen/Qwen3-235B-A22B-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4336.947391201,"data":"mradermacher/Qwen3-235B-A22B-abliterated-i1-GGUF vs unsloth/Qwen3-235B-A22B-Thinking-2507-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4336.971872908,"data":"mradermacher/Qwen3-235B-A22B-abliterated-i1-GGUF vs unsloth/Qwen3-235B-A22B-128K-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4336.977810068,"data":"mradermacher/Qwen3-235B-A22B-abliterated-i1-GGUF vs bartowski/Qwen_Qwen3-235B-A22B-Thinking-2507-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4496.818693409,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs mradermacher/L3-Darkest-Planet-16B-HERETIC-Uncensored-Abliterated-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.625810111,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs mradermacher/L3-Darkest-Planet-16B-HERETIC-Uncensored-Abliterated-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.650942689,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs mradermacher/AstraLM-16B-MoE-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.651316439,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs macadeliccc/dolphincoder-starcoder2-15b-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.663694928,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs mradermacher/BigFalcon3-from10B-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.669545467,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs mradermacher/BigFalcon3-from10B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.689446366,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs mradermacher/SkunkApe-16b-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.690619275,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs mradermacher/SkunkApe-16b-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.701654274,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs mradermacher/GALAXY-16B-v1.0-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.715292013,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs RichardErkhov/PracticeLLM_-_Twice-KoSOLAR-16.1B-instruct-test-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.725820602,"data":"bartowski/TheDrummer_Rocinante-XL-16B-v1-GGUF vs mradermacher/Mobiusv0.5-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4499.729716822,"data":"calcuis/hunyuanimage-gguf vs tencent/HunyuanImage-2.1 (declared): compared 0, None\n"}
+,{"stream_name":"stdout","time":4558.384406492,"data":"kevinzhou21/Qwen3.5-9B-Distill-Deepseek-V4.1-Flash-20261004 vs SulphurAI/Sulphur-2-base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4559.617275764,"data":"kevinzhou21/Qwen3.5-9B-Distill-Deepseek-V4.1-Flash-20261004 vs DavidAU/Qwen3.6-9B-Heretic-Uncensored-Thinking-Sweet-Madness (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4565.386609004,"data":"kevinzhou21/Qwen3.5-9B-Distill-Deepseek-V4.1-Flash-20261004 vs divagr1925/Qwen3.5-4B-Qwenputer (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4565.422283161,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs canopylabs/orpheus-3b-0.1-pretrained (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4565.448345028,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs unsloth/Llama-3.2-3B-Instruct-bnb-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4565.455185307,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs sbintuitions/sarashina2.2-3b-instruct-v0.1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4565.477051025,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs unsloth/Llama-3.2-3B-Instruct-unsloth-bnb-4bit (pool): compared 3, 0.7178861140456778\n"}
+,{"stream_name":"stdout","time":4565.519996711,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs sbintuitions/sarashina2.2-3b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4565.53050125,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs ministral/Ministral-3b-instruct (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4565.538760389,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs SebastianBodza/Kartoffel_Orpheus-3B_german_natural-v0.1 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4565.540335709,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs unsloth/Llama-3.2-3B-bnb-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4565.540603729,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs SebastianBodza/Kartoffel_Orpheus-3B_german_synthetic-v0.1 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4565.540890469,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs 1bitLLM/bitnet_b1_58-3B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4565.541047109,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs cyberagent/CAT-Translate-3.3b-beta (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4565.546457979,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs Inferact/MiniMax-M3-EAGLE3 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4568.137669441,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs mmnga/sarashina2.2-3b-instruct-v0.1-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4568.137914271,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs unsloth/Llama-3.2-3B-unsloth-bnb-4bit (pool): compared 3, 0.7189294423979945\n"}
+,{"stream_name":"stdout","time":4568.138019971,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs mradermacher/Ministral-3b-instruct-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4568.138239991,"data":"unsloth/orpheus-3b-0.1-ft-GGUF vs QuantFactory/Ministral-3b-instruct-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4611.520287489,"data":"ggml-org/gemma-3-4b-it-qat-GGUF vs google/gemma-3-4b-it-qat (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4613.333416927,"data":"ggml-org/gemma-3-4b-it-qat-GGUF vs dongchengli/gemma-3-4b-it-text-int4-gptq (pool): compared 1, 0.9999257342364246\n"}
+,{"stream_name":"stdout","time":4613.333442837,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs Nanbeige/Nanbeige4.3-33B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333448797,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs Nanbeige/Nanbeige4.3-33B-Base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333453767,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs deepseek-ai/deepseek-coder-33b-instruct (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333458527,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs codellama/CodeLlama-34b-hf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333463407,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs Luni/Nanbeige-4.3-33B-Heretic (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333468117,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs codellama/CodeLlama-34b-Instruct-hf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333481547,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs codellama/CodeLlama-34b-Python-hf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333485177,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs SenseLLM/ReflectionCoder-CL-34B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333488587,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs LumiOpen/Viking-33B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333491427,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs deepseek-ai/deepseek-coder-33b-base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333728377,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.333874627,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs oobabooga/CodeBooga-34B-v0.1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4613.334041147,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs SenseLLM/ReflectionCoder-DS-33B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4622.761362557,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs bartowski/Nanbeige_Nanbeige4.3-33B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4622.761388217,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs manuelgutierrez/WhiteRabbitNeo-33B-v1.5-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4631.133956118,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs AtomicChat/Nanbeige4.3-33B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4632.715207557,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs abenzerps/Nanbeige4.3-33B-GSQ-RCO-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4632.715250856,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs TheBloke/CodeLlama-34B-Instruct-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4632.715255847,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs TheBloke/WizardCoder-Python-34B-V1.0-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4632.715259467,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs mradermacher/Phind-CodeLlama-34B-v2-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4632.715298487,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs TheBloke/CodeLlama-34B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4640.74718091,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs Luni/Nanbeige-4.3-33B-Heretic-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4640.74721716,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs TheBloke/CodeLlama-34B-Python-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4640.74752068,"data":"llm-jp/llm-jp-4.1-33b-thinking-gguf vs mradermacher/Phind-CodeLlama-34B-v1-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4781.164173951,"data":"HauhauCS/GPT-OSS-20B-Uncensored-HauhauCS-Aggressive vs gpt-oss-20b (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4999.848235779,"data":"HauhauCS/GPT-OSS-20B-Uncensored-HauhauCS-Aggressive vs ggml-org/gpt-oss-20b-GGUF (pool): compared 2, 0.5008276334678871\n"}
+,{"stream_name":"stdout","time":4999.848396619,"data":"mradermacher/DeepHat-V1-7B-GGUF vs Qwen/Qwen1.5-7B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.848412939,"data":"mradermacher/DeepHat-V1-7B-GGUF vs Qwen/Qwen1.5-7B-Chat (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.848516559,"data":"chfm/Qwen-Image-2.1-GGUF vs Qwen/Qwen-Image-2.1 (declared): compared 5, 0.9999906736600289\n"}
+,{"stream_name":"stdout","time":4999.848667749,"data":"chfm/Qwen-Image-2.1-GGUF vs Viggle/Qwen-Image-2.1-viggle-turbo (pool): compared 4, 0.999987263206324\n"}
+,{"stream_name":"stdout","time":4999.848881939,"data":"chfm/Qwen-Image-2.1-GGUF vs realrebelai/Qwen-Image-2.1-Turbo_GGUFs (pool): compared 3, 0.9999678914807321\n"}
+,{"stream_name":"stdout","time":4999.848987189,"data":"chfm/Qwen-Image-2.1-GGUF vs JoaoZaokk/Qwen2.1-W8A8-W8A16-W4A8-W4A16-W4A4-QAT (pool): compared 4, 0.99998399460836\n"}
+,{"stream_name":"stdout","time":4999.849140869,"data":"chfm/Qwen-Image-2.1-GGUF vs matrixportalx/Qwen-Image-2.1-Turbo-Uncensored-GGUF-npu (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.849244759,"data":"chfm/Qwen-Image-2.1-GGUF vs AgentAnon/Qwen-Image-2.1-viggle-turbo (pool): compared 4, 0.999987263206324\n"}
+,{"stream_name":"stdout","time":4999.849384759,"data":"chfm/Qwen-Image-2.1-GGUF vs Cdimabusinessent/Qwen-Image-2.1-viggle-turbo (pool): compared 4, 0.999987263206324\n"}
+,{"stream_name":"stdout","time":4999.849664529,"data":"chfm/Qwen-Image-2.1-GGUF vs matrixportalx/qwen-image-2.1-turbo-npu (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.849713069,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs Nanbeige/Nanbeige4.3-33B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.849910309,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs Nanbeige/Nanbeige4.3-33B-Base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.850147449,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs Luni/Nanbeige-4.3-33B-Heretic (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.850307019,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs LumiOpen/Viking-33B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.850436259,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.850587069,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs bartowski/Nanbeige_Nanbeige4.3-33B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.850671619,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs AtomicChat/Nanbeige4.3-33B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.850795449,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs MaziyarPanahi/QwQ-32B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.850924609,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs abenzerps/Nanbeige4.3-33B-GSQ-RCO-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.851040679,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs Luni/Nanbeige-4.3-33B-Heretic-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.851189109,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs FRENCHFAKER/Nanbeige4.3-33B-cybersec-abliterated-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.851313699,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs Luni/Nanbeige-4.3-33B-Heretic-GSQ-RCO-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.851417529,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs mradermacher/Viking-33B-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.851526859,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs nesymerp1/Nanbeige4.3-33B-Base-Q4_K_M-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.851666129,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs mradermacher/Nanbeige4.3-33B-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.851781309,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs XTer123/Nanbeige4.3-33B-Uncensored-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.851895009,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs hostkimjang/HyperCLOVAX-SEED-Think-32B-heretic (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.852028829,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs Nurymanau/Nanbeige4.3-33B-MLX-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.852162339,"data":"mradermacher/WizardLM-30B-Uncensored-Guanaco-SuperCOT-30b-i1-GGUF vs mradermacher/Nanbeige4.3-33B-Base-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":4999.852275769,"data":"mradermacher/Qwen3-Omni-30B-A3B-Captioner-GGUF vs prithivMLmods/Qwen3-VL-30B-A3B-Instruct-abliterated-v1 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":4999.852393409,"data":"mradermacher/Qwen3.5-2B-Wolof-Instruct-v1-i1-GGUF vs ewin-reg/WeMM-Embedding-2B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.713899736,"data":"mradermacher/Qwen3.5-2B-Wolof-Instruct-v1-i1-GGUF vs TuTuCSF/WeMM-Embedding-GGUF-Q4_K_M (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.715003975,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs cantina-security/apex-flash-1-abliterated (declared): compared 24, 0.9999857174831556\n"}
+,{"stream_name":"stdout","time":5357.715433155,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs zai-org/GLM-5.3-Flash (pool): compared 24, 0.9999850129083765\n"}
+,{"stream_name":"stdout","time":5357.715846525,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs zai-org/GLM-5.3-Flash-BF16 (pool): compared 24, 0.9999850129083765\n"}
+,{"stream_name":"stdout","time":5357.716270955,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs orcarouter/GLM-5.3-Flash-Uncensored-FP8 (pool): compared 24, 0.9999850129083765\n"}
+,{"stream_name":"stdout","time":5357.716463175,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs dealignai/GLM-5.3-Flash-UNCENSORED-FP8 (pool): compared 24, 0.9999850129083765\n"}
+,{"stream_name":"stdout","time":5357.716898545,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs unsloth/GLM-5.3-Flash-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.717026515,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs Blackfrost-AI/RED-SNOW-5.3-FLASH-BF16 (pool): compared 24, 0.9999805805264186\n"}
+,{"stream_name":"stdout","time":5357.717510805,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs cantina-security/apex-flash-1-abliterated (pool): compared 24, 0.9999857174831556\n"}
+,{"stream_name":"stdout","time":5357.718139395,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs nvidia/GLM-5.3-Flash-NVFP4 (pool): compared 24, 0.9999849771324592\n"}
+,{"stream_name":"stdout","time":5357.718337425,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs dealignai/GLM-5.3-Flash-CYBERSECURITY-W4A16 (pool): compared 24, 0.999983094352889\n"}
+,{"stream_name":"stdout","time":5357.718656005,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs cantina-security/apex-flash-1 (pool): compared 24, 0.9999853348469724\n"}
+,{"stream_name":"stdout","time":5357.718874275,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs orcarouter/GLM-5.3-Flash-Uncensored-NVFP4 (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.719212135,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs BoldingBuilds/orcarouter_GLM-5.3-Flash-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.719329755,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs orcarouter/GLM-5.3-Flash-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.719535215,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs wtdcode/GLM-5.3-Flash-AWQ-W4A16 (pool): compared 24, 0.9999850542481749\n"}
+,{"stream_name":"stdout","time":5357.719685315,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs huihui-ai/Huihui-GLM-5.3-Flash-abliterated-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.719907785,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs AliceThirty/GLM-5.3-Flash-UNCENSORED-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.720117985,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs Jundot/GLM-5.3-Flash-oQ4e-mtp (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.720557155,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs Solstice-AI/GLM-5.3-Flash-UNCENSORED-mlx-oQ4e-DFlash2 (pool): compared 24, 0.9999579173598719\n"}
+,{"stream_name":"stdout","time":5357.720892475,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs bartowski/GLM-5.3-Flash-BF16-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.721045915,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs TensorFold/GLM-5.3-Flash-MLX-4bit-MTP (pool): compared 24, 0.9958286159696333\n"}
+,{"stream_name":"stdout","time":5357.721431915,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs hell0ks/GLM-5.3-Flash-Uncensored-AWQ (pool): compared 24, 0.9999850542481749\n"}
+,{"stream_name":"stdout","time":5357.721648155,"data":"freakyskittle/apex-flash-1-abliterated-GGUF vs ukisai/Swift-1.5-GLM-5.3-Flash-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.721912995,"data":"lemonyins/Qwen3.6-27B-uncensored-abliterated-i1-IQ4_XS-GGUF-Smaller vs orcarouter/Qwen3.8-27B-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.722263705,"data":"mradermacher/CAT-Translate-7b-i1-GGUF vs tiiuae/Falcon3-7B-Instruct (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.722383325,"data":"mradermacher/CAT-Translate-7b-i1-GGUF vs tiiuae/Falcon3-7B-Base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.722667255,"data":"mradermacher/CAT-Translate-7b-i1-GGUF vs MaziyarPanahi/Qwen2-7B-Instruct-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.722775664,"data":"mradermacher/dolphin-2.9.1-yi-1.5-34b-GGUF vs codellama/CodeLlama-34b-hf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.723246085,"data":"mradermacher/dolphin-2.9.1-yi-1.5-34b-GGUF vs codellama/CodeLlama-34b-Instruct-hf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.723647424,"data":"mradermacher/dolphin-2.9.1-yi-1.5-34b-GGUF vs codellama/CodeLlama-34b-Python-hf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.723829695,"data":"mradermacher/dolphin-2.9.1-yi-1.5-34b-GGUF vs SenseLLM/ReflectionCoder-CL-34B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.724098425,"data":"mradermacher/dolphin-2.9.1-yi-1.5-34b-GGUF vs skt/A.X-3.1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.724379334,"data":"mradermacher/dolphin-2.9.1-yi-1.5-34b-GGUF vs oobabooga/CodeBooga-34B-v0.1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.724586624,"data":"mradermacher/Mistral-Small-4-119B-2603-i1-GGUF vs Beinsezii/Mistral-Small-4-119B-2603-GGUF-HALO (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5357.724681095,"data":"mradermacher/Mistral-Small-4-119B-2603-i1-GGUF vs AtomicChat/Mistral-Small-4-119B-2603-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.725005754,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs LiquidAI/LFM3-1.7B (declared): compared 24, 0.9999689017992799\n"}
+,{"stream_name":"stdout","time":5357.725216265,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs LiquidAI/LFM3-1.7B (pool): compared 24, 0.9999689017992799\n"}
+,{"stream_name":"stdout","time":5357.726038524,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs LiquidAI/LFM3-1.7B-Base (pool): compared 24, 0.9532457530784788\n"}
+,{"stream_name":"stdout","time":5357.726051334,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs Vortecks/LFM3-1.7B-Heretic-Abliterated (pool): compared 24, 0.9998504726991806\n"}
+,{"stream_name":"stdout","time":5357.726459934,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs mohommed/LFM3-1.7B-Frontier-SmartAgent (pool): compared 24, 0.999884457950272\n"}
+,{"stream_name":"stdout","time":5357.726770724,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs LiquidAI/LFM3-1.7B-NVFP4 (pool): compared 24, 0.9999408309515678\n"}
+,{"stream_name":"stdout","time":5357.727029494,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs mondk/LFM3-1.7B-Claude-Code-Safetensors (pool): compared 24, 0.9999848162201666\n"}
+,{"stream_name":"stdout","time":5357.727251114,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs OpenIntelligenceNet/LFM3-1.7B-Uncensored (pool): compared 24, 0.9999375193059727\n"}
+,{"stream_name":"stdout","time":5357.727355464,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs orcarouter/LFM3-1.7B-abliterated (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5357.727473984,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs LiquidAI/LFM3-1.7B-MLX-4bit (pool): compared 24, 0.9955929814833464\n"}
+,{"stream_name":"stdout","time":5357.727593824,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs LiquidAI/LFM3-1.7B-MLX-8bit (pool): compared 24, 0.9999434227192212\n"}
+,{"stream_name":"stdout","time":5357.727799234,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs LiquidAI/LFM3-1.7B-MLX-bf16 (pool): compared 24, 0.9999689017992799\n"}
+,{"stream_name":"stdout","time":5357.728056184,"data":"mondk/LFM3-1.7B-Claude-Code-GGUF vs saidutta69/LFM3-1.7B-heretic (pool): compared 24, 0.9999396414675794\n"}
+,{"stream_name":"stdout","time":5366.251667174,"data":"mradermacher/Logics-SWE-Qwen3.6-27B-GGUF vs orcarouter/Qwen3.8-27B-Uncensored-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5366.252334154,"data":"baerquants/GLM-5.3-UD-Q4_K_XL-layers vs unsloth/GLM-5.3-GGUF (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5376.148315268,"data":"AtomicChat/d1-2B-GGUF vs LiquidAI/d1-2B (declared): compared 24, 0.9999845998789845\n"}
+,{"stream_name":"stdout","time":5376.152446277,"data":"AtomicChat/d1-2B-GGUF vs LiquidAI/LFM3-1.7B (pool): compared 24, 0.9197779594914901\n"}
+,{"stream_name":"stdout","time":5376.152470817,"data":"AtomicChat/d1-2B-GGUF vs LiquidAI/LFM3-1.7B-Base (pool): compared 24, 0.9147655524166161\n"}
+,{"stream_name":"stdout","time":5376.167746556,"data":"AtomicChat/d1-2B-GGUF vs Vortecks/LFM3-1.7B-Heretic-Abliterated (pool): compared 24, 0.9194404829607143\n"}
+,{"stream_name":"stdout","time":5376.168389736,"data":"AtomicChat/d1-2B-GGUF vs mohommed/LFM3-1.7B-Frontier-SmartAgent (pool): compared 24, 0.9195929803611249\n"}
+,{"stream_name":"stdout","time":5376.168625176,"data":"AtomicChat/d1-2B-GGUF vs LiquidAI/LFM3-1.7B-NVFP4 (pool): compared 24, 0.9241839642768854\n"}
+,{"stream_name":"stdout","time":5376.168835536,"data":"AtomicChat/d1-2B-GGUF vs mondk/LFM3-1.7B-Claude-Code-Safetensors (pool): compared 24, 0.9197320922195731\n"}
+,{"stream_name":"stdout","time":5376.169073376,"data":"AtomicChat/d1-2B-GGUF vs OpenIntelligenceNet/LFM3-1.7B-Uncensored (pool): compared 24, 0.9193484676923093\n"}
+,{"stream_name":"stdout","time":5376.169301706,"data":"AtomicChat/d1-2B-GGUF vs orcarouter/LFM3-1.7B-abliterated (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5376.169392516,"data":"AtomicChat/d1-2B-GGUF vs LiquidAI/LFM3-1.7B-MLX-4bit (pool): compared 24, 0.9155579352743262\n"}
+,{"stream_name":"stdout","time":5376.169601536,"data":"AtomicChat/d1-2B-GGUF vs LiquidAI/LFM3-1.7B-MLX-8bit (pool): compared 24, 0.9197643899244132\n"}
+,{"stream_name":"stdout","time":5376.169799005,"data":"AtomicChat/d1-2B-GGUF vs LiquidAI/LFM3-1.7B-MLX-bf16 (pool): compared 24, 0.9197779594914901\n"}
+,{"stream_name":"stdout","time":5376.169948146,"data":"AtomicChat/d1-2B-GGUF vs saidutta69/LFM3-1.7B-heretic (pool): compared 24, 0.9197826475573049\n"}
+,{"stream_name":"stdout","time":5384.527917482,"data":"legraphista/RoLlama2-7b-Chat-IMat-GGUF vs epfl-llm/meditron-7b (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5384.946644391,"data":"legraphista/RoLlama2-7b-Chat-IMat-GGUF vs Yellow-AI-NLP/komodo-7b-base (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5530.625996238,"data":"Indexnusrefather/Erebus-RP-Mini-4B-Instruct-2608-v0.1 vs techwithsergiu/Qwen3.5-text-4B-bnb-4bit (pool): compared 1, 0.9999849595686314\n"}
+,{"stream_name":"stdout","time":5533.502862331,"data":"Indexnusrefather/Erebus-RP-Mini-4B-Instruct-2608-v0.1 vs kumar2235/Qwen3.5-4B-AWQ (pool): compared 1, 0.9999849595686314\n"}
+,{"stream_name":"stdout","time":5533.525150869,"data":"mradermacher/Qwen3.8-27B-Brainwaves-WFH-GGUF vs orcarouter/Qwen3.8-27B-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5533.532458338,"data":"mradermacher/Qwen3.8-27B-Brainwaves-WFH-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5533.532482389,"data":"mradermacher/Qwen3.8-27B-TWIN-TURBO-Fable-Cold-Fusion-709-ULTRA-HERETIC-Uncensored-GGUF vs orcarouter/Qwen3.8-27B-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5533.532487789,"data":"mradermacher/Qwen3.8-27B-TWIN-TURBO-Fable-Cold-Fusion-709-ULTRA-HERETIC-Uncensored-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5533.532492498,"data":"mradermacher/eros-7B-BETA-GGUF vs tavtav/eros-7B-BETA (declared): compared 1, 0.9999792683466158\n"}
+,{"stream_name":"stdout","time":5533.532496538,"data":"mradermacher/deepseek-uncensored-lore-i1-GGUF vs inception42/jais-adapted-7b (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5533.532500798,"data":"mradermacher/deepseek-uncensored-lore-i1-GGUF vs inception42/jais-adapted-7b-chat (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5602.83112443,"data":"mradermacher/Solar-Decision-JEV-27B-V2-GGUF vs orcarouter/Qwen3.8-27B-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5603.472764366,"data":"mradermacher/Solar-Decision-JEV-27B-V2-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":5687.975198293,"data":"mradermacher/llmfan46-Qwen3.5-9B-ultra-heretic-i1-GGUF vs DavidAU/Qwen3.6-9B-Heretic-Uncensored-Thinking-Sweet-Madness (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5688.491984151,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs XHToken/Spark-X2.5-4B (declared): compared 24, 0.9999852123501728\n"}
+,{"stream_name":"stdout","time":5688.492451801,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs XHToken/Spark-X2.6-4B (pool): compared 24, 0.960462085116237\n"}
+,{"stream_name":"stdout","time":5688.493806831,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs XHToken/Spark-X2.5-4B (pool): compared 24, 0.9999852123501728\n"}
+,{"stream_name":"stdout","time":5688.494005571,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs XHToken/Spark-X2.6-4B-Base (pool): compared 24, 0.9610991318891123\n"}
+,{"stream_name":"stdout","time":5695.063263176,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs XHToken/Spark-X2.5-4B-Base (pool): compared 24, 0.9757504616823445\n"}
+,{"stream_name":"stdout","time":5695.063423696,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs officialmobai/Rostam-S1-4B (pool): compared 24, 0.9602460632779166\n"}
+,{"stream_name":"stdout","time":5695.063471436,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs daydreamwarrior/Spark-X2.6-4B-heretic (pool): compared 24, 0.960462085116237\n"}
+,{"stream_name":"stdout","time":5770.332425181,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs Takenoko12345678/Spark-X2.5-4B-Japanese (pool): compared 24, 0.9999065272578247\n"}
+,{"stream_name":"stdout","time":5770.332945741,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs electroglyph/Spark-X2.6-4B-uncensored (pool): compared 24, 0.960462085116237\n"}
+,{"stream_name":"stdout","time":5770.332959451,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs JamieBradfield/Spark-X2.6-4B-AgentFast (pool): compared 24, 0.9604586771773855\n"}
+,{"stream_name":"stdout","time":5770.333346221,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs yuna1126/Spark-X2.6-4B-Tema_Q-Abliterated (pool): compared 24, 0.960462085116237\n"}
+,{"stream_name":"stdout","time":5770.333359351,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs mohommed/Lucet-Coder-4B-Omega (pool): compared 24, 0.960460683447102\n"}
+,{"stream_name":"stdout","time":5770.333364701,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs mohommed/Lucet-CoderSense-4B-Omega (pool): compared 24, 0.9604639134013783\n"}
+,{"stream_name":"stdout","time":5770.333369531,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs huihui-ai/Huihui-Spark-X2.5-4B-abliterated (pool): compared 24, 0.9999597605112498\n"}
+,{"stream_name":"stdout","time":5770.333374811,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs mohommed/Lucet-CoderV6-4B-Omega (pool): compared 24, 0.9604612364229765\n"}
+,{"stream_name":"stdout","time":5793.18781706,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs mohommed/Lucet-CoderV4-4B-Omega (pool): compared 24, 0.9599016894330636\n"}
+,{"stream_name":"stdout","time":5805.80417686,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs trjxter/Spark-X2.6-4B-SQL-Cypher-Agent (pool): compared 24, 0.9604475302344138\n"}
+,{"stream_name":"stdout","time":5805.815287459,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs abenzerps/Spark-X2.6-4B-Quantized (pool): compared 24, 0.9601959705869465\n"}
+,{"stream_name":"stdout","time":5805.820664078,"data":"miifanboy/Spark-X2.5-4B-i1-GGUF vs rizzoaiacademy/rizzo-flow (pool): compared 24, 0.9999811330512476\n"}
+,{"stream_name":"stdout","time":5805.837896247,"data":"mradermacher/Chochmah-1B-Instruct-DPO-GGUF vs incoai/GLM-5.3-Flash-DFlash2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5805.850906075,"data":"mradermacher/Chochmah-1B-Instruct-DPO-GGUF vs local-inference-lab/GLM-5.3-Flash-DFlash2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5805.856319755,"data":"mradermacher/Chochmah-1B-Instruct-DPO-GGUF vs jmeadlock/GLM-5.3-Flash-DFlash2-JM-FAILED (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5842.206909309,"data":"mradermacher/QiMing-Socratic-VL-8B-Instruct-i1-GGUF vs rectangleworm/PornMaster_Klein-9b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5877.910799896,"data":"mradermacher/Pathfinder-RP-12B-RU-i1-GGUF vs abacusai/bigstral-12b-32k (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5877.932897644,"data":"mradermacher/Pathfinder-RP-12B-RU-i1-GGUF vs vicgalle/SOLAR-13B-Instruct-v1.0 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5877.952539731,"data":"Demonthos/candle-quantized-whisper-large-v3-turbo vs handy-computer/whisper-large-v3-turbo-gguf (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5877.960055531,"data":"Demonthos/candle-quantized-whisper-large-v3-turbo vs mlx-community/whisper-large-v3-turbo-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5877.960340411,"data":"Demonthos/candle-quantized-whisper-large-v3-turbo vs mlx-community/whisper-large-v3-turbo-asr-fp16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5878.001602847,"data":"Demonthos/candle-quantized-whisper-large-v3-turbo vs oxide-lab/whisper-large-v3-turbo-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":5958.782990359,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs incoai/Qwen3.8-27B-DFlash2 (declared): compared 17, 0.9999855378116121\n"}
+,{"stream_name":"stdout","time":5958.908924449,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs z-lab/Qwen3.8-27B-DFlash2 (pool): compared 17, 0.9999855378116121\n"}
+,{"stream_name":"stdout","time":5958.909032699,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs incoai/Qwen3.8-27B-DFlash2 (pool): compared 17, 0.9999855378116121\n"}
+,{"stream_name":"stdout","time":5959.010728219,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs RadixArk/Qwen3.8-27B-DSpark (pool): compared 16, 0.0031195066666556345\n"}
+,{"stream_name":"stdout","time":5960.285858787,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs z-lab/Qwen3.6-27B-DFlash (pool): compared 16, 0.9246338519385415\n"}
+,{"stream_name":"stdout","time":5961.684042253,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs ProCreations/Ternary-Bonsai-2-27B-DFlash2 (pool): compared 17, 0.9999828719756495\n"}
+,{"stream_name":"stdout","time":5972.572865209,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs Schiltmans/Ternary-Bonsai-2-27B-DFlash2-ft5 (pool): compared 17, 0.9901460381486004\n"}
+,{"stream_name":"stdout","time":5972.572897149,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2 (pool): compared 17, 0.9999785088105804\n"}
+,{"stream_name":"stdout","time":5972.572959189,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs syvai/Qwen3.8-27B-DFlash2-W4A16 (pool): compared 1, 1.0\n"}
+,{"stream_name":"stdout","time":6001.453098519,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs tcclaviger/Qwen3.8-27B-DFlash2-FP8 (pool): compared 17, 0.9996358193531869\n"}
+,{"stream_name":"stdout","time":6001.453141599,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs reflection/Beam-1.0-501B-A23B-DFlash2 (pool): compared 7, -0.011873463556650435\n"}
+,{"stream_name":"stdout","time":6001.453148099,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs thomasgardiner/Qwen3.8-27B-DFlash2-FP8 (pool): compared 17, 0.9996413741387334\n"}
+,{"stream_name":"stdout","time":6001.453153389,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs Avifenesh/Qwen3.8-27B-DFlash2-memra (pool): compared 17, 0.9999855378116121\n"}
+,{"stream_name":"stdout","time":6044.41475422,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs seabit-ai/Qwen3.8-27B-DFlash2-4bit (pool): compared 17, 0.9957691749897802\n"}
+,{"stream_name":"stdout","time":6044.41478332,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs lued/Qwen3.8-27B-DFlash2-W8 (pool): compared 1, 1.0\n"}
+,{"stream_name":"stdout","time":6044.41478858,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs JRamirez-UAB/Qwen3.8-27B-DFlash2-W4A16 (pool): compared 6, 0.9999858929466491\n"}
+,{"stream_name":"stdout","time":6044.41479303,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs Blockway/Agens-Volundr-32B-Preview-DFlash2 (pool): compared 17, 0.0036164460426291838\n"}
+,{"stream_name":"stdout","time":6044.4147973,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs NewHorizonGroup/Qwen3.8-27B-DFlash2-oQ4 (pool): compared 17, 0.9957691749897802\n"}
+,{"stream_name":"stdout","time":6044.4148015,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs jfan/Qwen3.8-27B-heretic-dflash2 (pool): compared 17, 0.9999788448027763\n"}
+,{"stream_name":"stdout","time":6044.41480609,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs deresolution/Qwen3.8-27B-DFlash2-mxfp4 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6059.772867007,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs dbrains/Qwen3-TTS-12Hz-1.7B-VoiceDesign-Q4_K_M-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6059.787412806,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs BlairQ/qwen3.8_27b_idiotSavant_sm_86_dflash2 (pool): compared 1, 1.0\n"}
+,{"stream_name":"stdout","time":6085.678729643,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs Schiltmans/Ternary-Bonsai-2-27B-DFlash2-ft5-mlx-4bit (pool): compared 17, 0.9858916654115455\n"}
+,{"stream_name":"stdout","time":6094.199591806,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs zerodegress/Ternary-Bonsai-2-27B-DFlash2-mlx-4bit (pool): compared 17, 0.9957650031920513\n"}
+,{"stream_name":"stdout","time":6094.202939806,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs emee-ai/Qwen3.8-27B-DFlash2 (pool): compared 17, 0.9999855378116121\n"}
+,{"stream_name":"stdout","time":6094.203203626,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs JonasLoos/Qwen3.8-27B-DFlash2-b32 (pool): compared 17, 0.9999003696940922\n"}
+,{"stream_name":"stdout","time":6094.203782816,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs alphakek/Qwen3.8-27B-heretic-ara-DFlash2 (pool): compared 17, 0.9999562211454738\n"}
+,{"stream_name":"stdout","time":6125.628904062,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs erokhins/Qwen3.8-3.6-27B-blend-DFlash2-MLX-4bit (pool): compared 17, 0.9956032457062115\n"}
+,{"stream_name":"stdout","time":6125.642656621,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs YourHighnessLA/Qwen3.8-27B-DFlash2-NVFP4 (pool): compared 1, 1.0\n"}
+,{"stream_name":"stdout","time":6125.645127091,"data":"Tidalluna/Qwen3.8-27B-DFlash2-Augur-Q8_0 vs jfan/Qwen3.8-27B-heretic-dflash (pool): compared 16, 0.9244685319978585\n"}
+,{"stream_name":"stdout","time":6267.90491448,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs mistralai/Mistral-Large-Instruct-2407 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90500363,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs mistralai/Mistral-Large-Instruct-2411 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.9051883,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs mlabonne/Meta-Llama-3-120B-Instruct (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":6267.90534577,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs darkc0de/XORTRON.CriminalComputing.LARGE.2026.3 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90550041,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs MaziyarPanahi/Mistral-Large-Instruct-2411-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90563175,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/Mistral-Large-Instruct-2411-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90572129,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/TheDrummer_Behemoth-X-123B-v2.2-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90585676,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs mradermacher/Behemoth-X-123B-v2.2-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90596343,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs MaziyarPanahi/Mistral-Large-Instruct-2407-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90615258,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/Mistral-Large-Instruct-2407-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90630531,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/TheDrummer_Behemoth-X-123B-v2.1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90644298,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/TheDrummer_Behemoth-X-123B-v2-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90655401,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs second-state/Mistral-Large-Instruct-2407-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90669063,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs mradermacher/Behemoth-T1-123B-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90677857,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/Behemoth-123B-v1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90692505,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs mradermacher/XORTRON-123B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.9070129,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/TheDrummer_Behemoth-ReduX-123B-v1.1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90714898,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/TheDrummer_Behemoth-R1-123B-v2-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.907281399,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs mradermacher/XORTRON.CriminalComputing.LARGE.2026.3-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90739363,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs legraphista/Mistral-Large-Instruct-2407-IMat-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90751123,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs mradermacher/Behemoth-X-R1-123B-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90763287,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/Monstral-123B-v2-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90812288,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs Doctor-Shotgun/ML2-123B-Magnum-Diamond-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90825825,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs mradermacher/Behemoth-OpusX-123B-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.9084937,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/TheDrummer_Precog-123B-v1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6267.90865739,"data":"bartowski/Meta-Llama-3-120B-Instruct-GGUF vs bartowski/Behemoth-123B-v2.2-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6311.91190092,"data":"mradermacher/patricide-12B-Unslop-Mell-GGUF vs abacusai/bigstral-12b-32k (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6311.964372625,"data":"mradermacher/patricide-12B-Unslop-Mell-GGUF vs vicgalle/SOLAR-13B-Instruct-v1.0 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.01913232,"data":"mradermacher/llemma_34b-i1-GGUF vs Nanbeige/Nanbeige4.3-33B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.028801819,"data":"mradermacher/llemma_34b-i1-GGUF vs Nanbeige/Nanbeige4.3-33B-Base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.029963159,"data":"mradermacher/llemma_34b-i1-GGUF vs 01-ai/Yi-34B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.029981789,"data":"mradermacher/llemma_34b-i1-GGUF vs 01-ai/Yi-1.5-34B-Chat (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.029993459,"data":"mradermacher/llemma_34b-i1-GGUF vs deepseek-ai/deepseek-coder-33b-instruct (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.030198299,"data":"mradermacher/llemma_34b-i1-GGUF vs NousResearch/Nous-Hermes-2-Yi-34B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.030271419,"data":"mradermacher/llemma_34b-i1-GGUF vs 01-ai/Yi-34B-Chat (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.030408639,"data":"mradermacher/llemma_34b-i1-GGUF vs 01-ai/Yi-1.5-34B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.030500379,"data":"mradermacher/llemma_34b-i1-GGUF vs wenbopan/Faro-Yi-34B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.030674829,"data":"mradermacher/llemma_34b-i1-GGUF vs jondurbin/bagel-dpo-34b-v0.2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.030742139,"data":"mradermacher/llemma_34b-i1-GGUF vs Luni/Nanbeige-4.3-33B-Heretic (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.030869669,"data":"mradermacher/llemma_34b-i1-GGUF vs 01-ai/Yi-34B-200K (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.031048009,"data":"mradermacher/llemma_34b-i1-GGUF vs 01-ai/Yi-1.5-34B-32K (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.031160109,"data":"mradermacher/llemma_34b-i1-GGUF vs CausalLM/34b-beta (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.031280359,"data":"mradermacher/llemma_34b-i1-GGUF vs abacusai/Smaug-34B-v0.1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6312.031386319,"data":"mradermacher/llemma_34b-i1-GGUF vs llm-jp/llm-jp-4.1-33b-thinking (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6319.391076943,"data":"mradermacher/llemma_34b-i1-GGUF vs dphn/dolphin-2.9.1-yi-1.5-34b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6322.919143685,"data":"mradermacher/llemma_34b-i1-GGUF vs OpenBuddy/openbuddy-yi1.5-34b-v21.3-32k (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6327.409692584,"data":"mradermacher/llemma_34b-i1-GGUF vs CombinHorizon/YiSM-blossom5.1-34B-SLERP (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6327.421344683,"data":"mradermacher/llemma_34b-i1-GGUF vs wenbopan/Faro-Yi-34B-DPO (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6327.421753323,"data":"mradermacher/llemma_34b-i1-GGUF vs Azure99/blossom-v5.1-34b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6349.832936054,"data":"mradermacher/llemma_34b-i1-GGUF vs jondurbin/bagel-dpo-34b-v0.5 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6349.833679184,"data":"mradermacher/llemma_34b-i1-GGUF vs fblgit/UNA-SimpleSmaug-34b-v1beta (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6349.834231824,"data":"mradermacher/llemma_34b-i1-GGUF vs LumiOpen/Viking-33B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6349.856884022,"data":"mradermacher/llemma_34b-i1-GGUF vs deepseek-ai/deepseek-coder-33b-base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":6349.858647651,"data":"mradermacher/llemma_34b-i1-GGUF vs dealignai/Nanbeige4.3-33B-UNCENSORED-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10715.093020517,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs nvidia/Ising-Calibration-1.5-31B-BF16 (declared): compared 24, 0.9998170367072148\n"}
+,{"stream_name":"stdout","time":10715.093273627,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs google/gemma-4-31B-it (pool): compared 24, 0.7795373679374138\n"}
+,{"stream_name":"stdout","time":10715.093385307,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs llmfan46/gemma-4-31B-it-uncensored-heretic (pool): compared 24, 0.7793391895708575\n"}
+,{"stream_name":"stdout","time":10715.093543117,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs google/gemma-4-31B-it-qat-q4_0-unquantized (pool): compared 24, 0.7754173830630566\n"}
+,{"stream_name":"stdout","time":10715.093993017,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs ReadyArt/gemma-4-31B-it-scotoma-2 (pool): compared 24, 0.7795433550539995\n"}
+,{"stream_name":"stdout","time":10715.094006747,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs google/gemma-4-31B (pool): compared 24, 0.9997769457105639\n"}
+,{"stream_name":"stdout","time":10715.094019867,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs coder3101/gemma-4-31B-it-heretic (pool): compared 24, 0.7793526876890331\n"}
+,{"stream_name":"stdout","time":10716.532179965,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs zerofata/G4-MeroMero-31B (pool): compared 24, 0.7795401874217044\n"}
+,{"stream_name":"stdout","time":10743.716055473,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs zerofata/G4-MeroMero-v2-31B (pool): compared 24, 0.7795253620819231\n"}
+,{"stream_name":"stdout","time":10743.75083889,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs TheDrummer/Artemis-31B-v1.2 (pool): compared 24, 0.779561287255693\n"}
+,{"stream_name":"stdout","time":10789.458950759,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs DavidAU/gemma-4-31B-it-The-DECKARD-HERETIC-UNCENSORED-Thinking (pool): compared 24, 0.7795335299820584\n"}
+,{"stream_name":"stdout","time":10789.459211899,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs llmfan46/gemma-4-Ortenzya-The-Creative-Wordsmith-31B-it-uncensored-heretic (pool): compared 24, 0.7781093524111553\n"}
+,{"stream_name":"stdout","time":10789.459342669,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs wangzhang/gemma-4-31B-it-abliterated (pool): compared 24, 0.7793061402488974\n"}
+,{"stream_name":"stdout","time":10794.551425654,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs TheDrummer/Artemis-31B-v1.1 (pool): compared 24, 0.7764609539000654\n"}
+,{"stream_name":"stdout","time":10810.594009609,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs Ateron/Gemma-4-Dark-Thoughts-V2-31B (pool): compared 24, 0.7795231887133887\n"}
+,{"stream_name":"stdout","time":10810.594468409,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs llmfan46/G4-MeroMero-31B-uncensored-heretic (pool): compared 24, 0.7795367537911926\n"}
+,{"stream_name":"stdout","time":10810.594636539,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs trohrbaugh/gemma-4-31b-it-heretic-ara (pool): compared 24, 0.7793896290762605\n"}
+,{"stream_name":"stdout","time":10810.595181369,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs nvidia/Ising-Calibration-1.5-31B-BF16 (pool): compared 24, 0.9998170367072148\n"}
+,{"stream_name":"stdout","time":10939.099926083,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs aifeifei798/Gemma-4-Queen-31B-it (pool): compared 24, 0.7795387314849754\n"}
+,{"stream_name":"stdout","time":10939.100086873,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs Husky110/Lunar-Huntress-0.2 (pool): compared 24, 0.779455339133829\n"}
+,{"stream_name":"stdout","time":10939.100263073,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs bgg1996/Melinoe-Gemma4-31B-VL-heretic (pool): compared 24, 0.7795016328438192\n"}
+,{"stream_name":"stdout","time":10939.100533263,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs ReadyArt/Omega-Arsenal-31B-Final (pool): compared 24, 0.7795507345447722\n"}
+,{"stream_name":"stdout","time":10939.100699973,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs Ilya626/gemma-4-31B-it-SDFT-Heretic-RP (pool): compared 24, 0.7795413285231052\n"}
+,{"stream_name":"stdout","time":10939.101032693,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs zerofata/G4-LuneLight-31B (pool): compared 24, 0.7795320895976812\n"}
+,{"stream_name":"stdout","time":10939.101210333,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs Ateron/Gemma-4-Writers-31B-V2 (pool): compared 24, 0.7795278429071585\n"}
+,{"stream_name":"stdout","time":10939.101331333,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs ReadyArt/Wicked-Tutu-31B-Final (pool): compared 24, 0.7795506394568023\n"}
+,{"stream_name":"stdout","time":10939.101671723,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs Ateron/Gemma-4-Dark-Thoughts-31B (pool): compared 24, 0.7795323753638679\n"}
+,{"stream_name":"stdout","time":10939.101789683,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs Remek/basal-omni-1.0-ultra (pool): compared 24, 0.7795896076823066\n"}
+,{"stream_name":"stdout","time":10941.125779679,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs Husky110/Lunar-Huntress-0.1 (pool): compared 24, 0.7792405784194465\n"}
+,{"stream_name":"stdout","time":10941.125885309,"data":"mradermacher/Ising-Calibration-1.5-31B-BF16-i1-GGUF vs tattrongvu/Jeffan-31b-1710 (pool): compared 24, 0.7793779789488307\n"}
+,{"stream_name":"stdout","time":10941.126463069,"data":"RichardErkhov/etri-xainlp_-_llama2-12.8b_lora-dpo_v1-gguf vs yunconglong/Truthful_DPO_TomGrc_FusionNet_7Bx2_MoE_13B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10941.126493169,"data":"RichardErkhov/etri-xainlp_-_llama2-12.8b_lora-dpo_v1-gguf vs elinas/Llama-3-13B-Instruct (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10941.126498319,"data":"RichardErkhov/etri-xainlp_-_llama2-12.8b_lora-dpo_v1-gguf vs mixtao/MixTAO-7Bx2-MoE-v8.1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10941.127095019,"data":"RichardErkhov/etri-xainlp_-_llama2-12.8b_lora-dpo_v1-gguf vs NeuralNovel/Mini-Mixtral-v0.2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10941.127129989,"data":"RichardErkhov/etri-xainlp_-_llama2-12.8b_lora-dpo_v1-gguf vs macadeliccc/laser-dolphin-mixtral-2x7b-dpo (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10941.127163879,"data":"RichardErkhov/etri-xainlp_-_llama2-12.8b_lora-dpo_v1-gguf vs RubielLabarta/LogoS-7Bx2-MoE-13B-v0.2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10941.127373849,"data":"mradermacher/MistralBase-4x7B-MoE-ECE-PRYMMAL-Martial-i1-GGUF vs unsloth/Mistral-Small-24B-Instruct-2501-bnb-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10941.127416549,"data":"mradermacher/MistralBase-4x7B-MoE-ECE-PRYMMAL-Martial-i1-GGUF vs unsloth/Mistral-Small-24B-Instruct-2501-unsloth-bnb-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10941.127556259,"data":"mradermacher/MistralBase-4x7B-MoE-ECE-PRYMMAL-Martial-i1-GGUF vs unsloth/Mistral-Small-24B-Base-2501-unsloth-bnb-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10957.004109032,"data":"mradermacher/Qwen-2.5-base-7b-GGUF vs Qwen/Qwen1.5-7B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10957.016267281,"data":"mradermacher/Qwen-2.5-base-7b-GGUF vs Qwen/Qwen1.5-7B-Chat (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10957.01850351,"data":"mradermacher/Llama-3.2-3B-optimized-i1-GGUF vs fraQtl/Llama-3.2-3B-fraQtl-kv (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":10957.029466669,"data":"qikp/baguettotron-600m-GGUF vs MrMeOrYou/emma-5-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10957.055422927,"data":"qikp/baguettotron-600m-GGUF vs Josephgflowers/Tinyllama-616M-Cinder (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10957.056139167,"data":"qikp/baguettotron-600m-GGUF vs JulianKrgd/julian-600m-40b-instruct-sft100k (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10957.067780485,"data":"qikp/baguettotron-600m-GGUF vs mradermacher/Julian-600M-40B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":10957.081801574,"data":"qikp/baguettotron-600m-GGUF vs Sakalti/chromet1-0.6b (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11204.080601407,"data":"ValueFX9507/Tifa-Deepsex-14b-CoT vs deepseek-ai/deepseek-r1-14b (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11204.080803297,"data":"mradermacher/Mira-v1.22.2b-27B-dpo-i1-GGUF vs google/gemma-3-27b-it-qat-q4_0-gguf (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11204.080831057,"data":"0xSojalSec/DeepSeek-V4.1-Flash-1017-GSQ-RCO-12-GPU vs deepseek-ai/DeepSeek-V4.1-Flash-1017 (declared): compared None, KeyError: 'F8_E8M0'\n"}
+,{"stream_name":"stdout","time":11253.154261545,"data":"InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF vs mistral-community/Mixtral-8x22B-v0.1 (pool): compared 24, 0.9997925065390337\n"}
+,{"stream_name":"stdout","time":11253.154307895,"data":"InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF vs Salesforce/xLAM-8x22b-r (pool): compared 24, 0.9997750308752125\n"}
+,{"stream_name":"stdout","time":11253.154451495,"data":"InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF vs mistralai/Mixtral-8x22B-Instruct-v0.1 (pool): compared 24, 0.9997750308752125\n"}
+,{"stream_name":"stdout","time":11253.154561125,"data":"InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF vs mistralai/Mixtral-8x22B-v0.1 (pool): compared 24, 0.9997925065390337\n"}
+,{"stream_name":"stdout","time":11264.768810292,"data":"InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF vs alpindale/WizardLM-2-8x22B (pool): compared 24, 1.0\n"}
+,{"stream_name":"stdout","time":11326.789802233,"data":"InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF vs HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1 (pool): compared 24, 0.9997802497937724\n"}
+,{"stream_name":"stdout","time":11326.789842083,"data":"InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF vs dphn/dolphin-2.9.2-mixtral-8x22b (pool): compared 24, 0.9997265179813848\n"}
+,{"stream_name":"stdout","time":11326.789847913,"data":"InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF vs LiteLLMs/Mixtral-8x22B-v0.1-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11326.789852393,"data":"InferenceIllusionist/WizardLM-2-8x22B-iMat-GGUF vs hermes42/WizardLM-2-8x22B-imatrix-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11326.789856753,"data":"mradermacher/aquif-3-moe-17b-a2.8b-i1-GGUF vs aquif-ai/aquif-3-moe-17B-A2.8B (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11364.693305912,"data":"prithivMLmods/Qwen3.6-27B-NVFP4-GGUF vs orcarouter/Qwen3.8-27B-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11364.723094119,"data":"prithivMLmods/Qwen3.6-27B-NVFP4-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11364.736330567,"data":"mradermacher/Vision-Braille-Qwen3-8B-GGUF vs ponpoke/flux2-klein-9b-uncensored-text-encoder (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11364.737465627,"data":"mradermacher/Vision-Braille-Qwen3-8B-GGUF vs huihui-ai/Qwen3-8B-abliterated (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11412.445356942,"data":"mradermacher/Uirapuru-U1-9B-i1-GGUF vs SulphurAI/Sulphur-2-base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.515295974,"data":"mradermacher/Uirapuru-U1-9B-i1-GGUF vs DavidAU/Qwen3.6-9B-Heretic-Uncensored-Thinking-Sweet-Madness (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.526571412,"data":"mradermacher/Uirapuru-U1-9B-i1-GGUF vs divagr1925/Qwen3.5-4B-Qwenputer (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.532221142,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs openbmb/MiniCPM5-1B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.538101921,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.571516107,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs openbmb/MiniCPM5-1B-Base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.584712096,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs XtrCom/XT-Luna-1B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.601610684,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-Thinking (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.622894841,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs ewin-reg/MiniCPM5-1B-Agentic-Tooluse-v3-Merged-FP16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.625368051,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs saidutta69/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-heretic (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.636392729,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs openbmb/MiniCPM5-1B-SFT (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.657558377,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs mlx-community/MiniCPM5-1B-OptiQ-4bit (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.658022987,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs thealper2/MiniCPM5-1B-Turkish (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.664170116,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs saidutta69/RaceBench-MiniCPM5 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11412.747103297,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs ewin-reg/MiniCPM5-1B-Agentic-Tooluse-Merged-FP16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11425.221586405,"data":"RichardErkhov/AIGym_-_TinyLlama-1.1B-2.5T-chat-and-function-calling-gguf vs GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11425.238857943,"data":"mradermacher/PsyMedRP-v1-20B-i1-GGUF vs Kquant03/PygWin-4x7B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11425.270807089,"data":"mradermacher/PsyMedRP-v1-20B-i1-GGUF vs mradermacher/PygWin-4x7B-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11425.281650738,"data":"mradermacher/PsyMedRP-v1-20B-i1-GGUF vs axteam/Nanbeige4.3-33B-NVFP4A16 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11425.295229487,"data":"mradermacher/PsyMedRP-v1-20B-i1-GGUF vs axteam/Nanbeige4.3-33B-NVFP4 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11425.308586825,"data":"mradermacher/PsyMedRP-v1-20B-i1-GGUF vs mradermacher/Mixnu-i1-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11425.308809275,"data":"mradermacher/llama-2-7b-platypus-guanaco-25-GGUF vs epfl-llm/meditron-7b (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11425.319755904,"data":"mradermacher/llama-2-7b-platypus-guanaco-25-GGUF vs Yellow-AI-NLP/komodo-7b-base (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11610.356948874,"data":"Mungert/X-Ray_Alpha-GGUF vs dongchengli/gemma-3-4b-it-text-int4-gptq (pool): compared 1, 0.9983826367877889\n"}
+,{"stream_name":"stdout","time":11610.356989265,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs TinyLlama/TinyLlama-1.1B-Chat-v1.0 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.356996034,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.357040825,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs appvoid/palmer-003 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.357232665,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs zzzekryo/Oprius-3.0-1.1B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.357321774,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs ElementMerc/tinyllama-1.1b-uncensored (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.357465574,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs microsoft/rho-math-1b-v0.1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.357561375,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs TucanoBR/Tucano-1b1 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.357712715,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs 3MPER0RR/TinyLlama-3MPER0RR-abliterated (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.357817634,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs Josephgflowers/TinyLlama-3T-Cinder-v1.2 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.357963074,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs TinyLlama/TinyLlama-1.1B-Chat-v0.4 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.358138954,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs zzzekryo/Oprius-1.1B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.358245304,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.358368684,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs TinyLlama/TinyLlama-1.1B-intermediate-step-1195k-token-2.5T (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.358562494,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs TinyLlama/TinyLlama-1.1B-Chat-v0.6 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.358683475,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs mhenrichsen/danskgpt-tiny (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.358796684,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.358923134,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs oopere/Llama-3.2-1B-pruned-20pct (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11610.359029894,"data":"mradermacher/MiniCPM5-1B-Hermes-Agentic-GGUF vs Aryanne/TinyllamaMix-1.1B (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11661.002135473,"data":"lmstudio-community/c4ai-command-r-plus-08-2024-GGUF vs CohereForAI/c4ai-command-r-plus-08-2024 (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11661.002175933,"data":"lmstudio-community/c4ai-command-r-plus-08-2024-GGUF vs LiteLLMs/c4ai-command-r-plus-GGUF (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11661.002276863,"data":"mradermacher/Orion-HYMT1.5-7B-SFT-v2601-i1-GGUF vs 3tic/Orion-HYMT1.5-7B-SFT-v2601 (declared): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11661.002480683,"data":"prithivMLmods/SmolLM2-360M-F32-GGUF vs ce-lery/japanese-mistral-300m-base (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11661.002613543,"data":"prithivMLmods/SmolLM2-360M-F32-GGUF vs mradermacher/AnLLM-EP-xllarge-wikiart-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11661.002744913,"data":"prithivMLmods/SmolLM2-360M-F32-GGUF vs thoughtworks/Qwen2.5-7B-Instruct-Eagle3 (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11661.003131223,"data":"mradermacher/qwen-2.5-palm-diagnosis-v2-GGUF vs Phil2Sat/Qwen-Image-Edit-Rapid-AIO-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11661.003164493,"data":"mradermacher/qwen-2.5-palm-diagnosis-v2-GGUF vs unsloth/MiMo-VL-7B-RL-GGUF (pool): compared 0, None\n"}
+,{"stream_name":"stdout","time":11661.003179593,"data":"mradermacher/Gemma-2-2b-TitanFusion-i1-GGUF vs google/gemma-2-2b (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11661.003239063,"data":"mradermacher/Gemma-2-2b-TitanFusion-i1-GGUF vs google/gemma-2-2b-jpn-it (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11661.003618203,"data":"mradermacher/Gemma-2-2b-TitanFusion-i1-GGUF vs unsloth/gemma-2-2b-it-bnb-4bit (pool): compared 1, 0.9995880930986344\n"}
+,{"stream_name":"stdout","time":11661.003809593,"data":"mradermacher/Gemma-2-2b-TitanFusion-i1-GGUF vs unsloth/gemma-2-2b-bnb-4bit (pool): compared 1, 0.9976627495999888\n"}
+,{"stream_name":"stdout","time":11661.003892803,"data":"mradermacher/Gemma-2-2b-TitanFusion-i1-GGUF vs google/txgemma-2b-predict (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11737.615489949,"data":"mradermacher/Qwen3.8-27B-USS-Prism-GGUF vs orcarouter/Qwen3.8-27B-Uncensored (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11738.186188943,"data":"mradermacher/Qwen3.8-27B-USS-Prism-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): compared None, not readable on re-reading\n"}
+,{"stream_name":"stdout","time":11738.189551903,"data":"done; 0 lost to the network\n"}
+,{"stream_name":"stdout","time":11746.570917511,"data":"exit 0 -m experiments.e2_struct_rescore\n"}
+,{"stream_name":"stdout","time":11746.672608659,"data":"895 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":11749.112500219,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":11749.112530899,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":11749.480028197,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":11749.480091597,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":11750.280940675,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":11751.433535373,"data":"[NbConvertApp] Writing 292037 bytes to __results__.html\n"}
+]

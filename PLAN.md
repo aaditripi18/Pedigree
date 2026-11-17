@@ -714,3 +714,14 @@ models, none lost).** Both are **not supported**, and stay so.
   disagreements are pairs it aligned no tensor in (not comparable): 29 models, all Qwen 3.5-3.8
   multimodal or multi-token-prediction GGUF files (`qwen35`, `qwen35moe`) and clip models, where the
   two sides do not have the same number of blocks. H17b (E2's 32 unmatched pairs) is judged on E2s.
+
+**Outcome of H17b (recorded after judging, 2026-11-18; E2s read 895 comparisons, none lost).**
+**Not supported:** structural alignment made 11 of the 32 comparable (34%; bar 50%), and stays so.
+*Correction to the cause list above:* the "10 failed on re-reading (network)" are not network
+failures. Read again by E2s, each declared base is still not readable: it is missing, renamed, or not
+a repository id at all (`gpt-oss-20b`, `deepseek-ai/deepseek-r1-14b`); the category is renamed
+accordingly. E2s also found two reader gaps: 13 comparisons stopped on GGUF type 42 (E2s started
+before that decoder existed) and 3 declared DeepSeek-V4 bases store their FP8 block scales as
+safetensors `F8_E8M0` (the OCP Microscaling scale format, 2^(e-127), now decoded). Those 16 are scored
+again with E2s's alignment (`e2-struct2`, ledger `E2s`, each pair's latest record counts); H17b is
+recomputed on its 32 pairs from those records and the result is reported here as it comes out.
