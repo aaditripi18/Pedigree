@@ -45,7 +45,8 @@ category, with its reason:
   output space (14 repackaged files, mostly GGUF, that the standard loader cannot open; 11
   embedding, classification, draft, speech or multimodal models; one without a loadable weight
   file; one gated; one needing custom code). So for these models the Hub's
-  declaration is, today, unverifiable by either instrument, and the audit reports them as such.
+  declaration was unverifiable by either instrument when the audit ran, and E2 reports them as
+  such. Two reader fixes since then (below) make 29 of the 84 comparable by weights.
 
 ## How good the instrument is (E1, E3-E7: ground truth first)
 
@@ -94,6 +95,15 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   GGUF int8 tensors). Scored again (E2r), 60 of them now compare and no verdict changes (H2
   106/367, H3 3/228, H7 b 77/200). The other 99 use GGUF tensor types outside llama.cpp's
   published list (fork formats), which no public specification decodes; the report says so.
+- **GGUF names and old PyTorch files (amendment 2026-11-17).** Recent multimodal checkpoints nest
+  the language model (`model.language_model.layers.N`), so llama.cpp's name table matched almost
+  nothing in GGUF repackagings of them; names are now also matched with leading parts dropped,
+  only where shapes agree and the match is unique. PyTorch files from before torch 1.6 (a series of
+  pickles, not a zip) are read with the same restricted unpickler, and transposed 2-D weights
+  (TensorFlow-converted BERT checkpoints) are read in row order. Scored again (E2g, 1,677 GGUF
+  comparisons; E2p, 5 legacy bases): with all re-reads, declared bases the weights confirm rise
+  from 214 to 243 models and unverifiable ones fall from 84 to 55; no verdict changes (H2
+  106/375, H3 3/257, H7 b 77/230).
 - **Thresholds.** Under the pre-registered sensitivity rule (the midpoint between the classes
   instead of max + 5 SD) three verdicts change: H3 becomes supported (15/227 contradicted) and
   H10, H11 become not supported. The published rule is max + 5 SD; both are in
