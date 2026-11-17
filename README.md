@@ -18,13 +18,13 @@ existed ([PLAN.md](PLAN.md), with dated amendments); every verdict below is comp
 The sample is 200 models drawn uniformly from each of three download tiers of the 100,000 most
 downloaded models (ranks 1-1k, 1k-10k, 10k-100k; seed 20261105). Every model got exactly one
 category, with its reason. The second column is the same 600 models scored again after the file
-reader fixes described [below](#every-caveat-measured) (E2r, E2g, E2p); no verdict changed.
+reader fixes described [below](#every-caveat-measured) (E2r, E2g, E2p, E2f); no verdict changed.
 
 | Category | Models (audit) | After reader fixes |
 |---|--:|--:|
-| Declares a base, and the weights confirm it | 214 | 243 |
+| Declares a base, and the weights confirm it | 214 | 246 |
 | Declares a base the weights contradict | 3 | 3 |
-| Declares a base that cannot be compared by weights | 84 | 55 |
+| Declares a base that cannot be compared by weights | 84 | 52 |
 | Declares no base; an earlier related model was found | 105 | 106 |
 | Declares no base; no related earlier model found | 136 | 135 |
 | Weights not readable (ONNX-only, gated without a public copy, no weights) | 46 | 46 |
@@ -107,8 +107,8 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
 - **File readers.** 159 comparisons in the audit ended in a reader error. Three were bugs, now
   fixed and tested (MLX 3- and 6-bit values that straddle 32-bit words; MLX per-layer bit widths;
   GGUF int8 tensors). Scored again (E2r), 60 of them now compare and no verdict changes (H2
-  106/367, H3 3/228, H7 b 77/200). The other 99 use GGUF tensor types outside llama.cpp's
-  published list (fork formats), which no public specification decodes; the report says so.
+  106/367, H3 3/228, H7 b 77/200). The other 99 used GGUF tensor types the published `gguf`
+  package does not list; see the fork types below.
 - **GGUF names and old PyTorch files (amendment 2026-11-17).** Recent multimodal checkpoints nest
   the language model (`model.language_model.layers.N`), so llama.cpp's name table matched almost
   nothing in GGUF repackagings of them; names are now also matched with leading parts dropped,
@@ -118,14 +118,22 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   comparisons; E2p, 5 legacy bases): with all re-reads, declared bases the weights confirm rise
   from 214 to 243 models and unverifiable ones fall from 84 to 55; no verdict changes (H2
   106/375, H3 3/257, H7 b 77/230).
-- **The 55 still unverifiable (H17).** Their 58 declared pairs: 32 GGUF files whose architecture
+- **GGUF tensor types newer than the `gguf` package (E2f, amendment 2026-11-17 (4)).** Five are
+  decoded from their public sources only, each tested byte for byte against that source's own C in
+  CI: Q2_0 (42) and F8_E4M3 (43) from llama.cpp master, PrismML's PQ2_0 (142) and PTQ1_0 (143), and
+  ik_llama.cpp's row-interleaved IQ4_K_R4 (339). Scored again, all 4 declared pairs that used them
+  compare 24 tensors and are related (one, a ternary model, only by the permutation-invariant score:
+  plain 0.004, invariant 0.743), and 91 of 103 pool comparisons now compare: declared bases the
+  weights confirm rise to 246 and unverifiable ones fall to 52; no verdict changes (H2 106/378,
+  H3 3/261, H7 b 78/234). Types 45, 101 and 103 appear in no public source we could find; the 11
+  pool comparisons that use them say so. The one pool comparison with type 339 ran before its
+  decoder existed and is being scored again.
+- **The 52 still unverifiable (H17).** Their 54 declared pairs: 32 GGUF files whose architecture
   llama.cpp's name table does not know, so no tensor name maps; 10 that failed to re-read (network);
   7 other formats (a random tiny model with no shared shapes, a draft head, a repack, an NPU build,
-  no weight files); 5 gated or private; 4 with GGUF tensor types newer than the published `gguf`
-  package (type 142 is PrismML's ternary PQ2_0, whose kernels are public in its llama.cpp fork).
-  H17 aligns GGUF tensors by block index and unique shape when names fail, validated against
-  name alignment on fresh pairs (H17a), and applies it to the 32 (H17b, with the 10 re-read);
-  fork types are decoded only from the fork's own published code, with a test against it.
+  no weight files); 5 gated or private. H17 aligns GGUF tensors by block index and unique shape when
+  names fail, validated against name alignment on fresh pairs (H17a), and applies it to the 32
+  (H17b, with the 10 re-read).
 - **Thresholds.** Under the pre-registered sensitivity rule (the midpoint between the classes
   instead of max + 5 SD) three verdicts change: H3 becomes supported (15/227 contradicted) and
   H10, H11 become not supported. The published rule is max + 5 SD; both are in

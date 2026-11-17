@@ -2784,9 +2784,9 @@
    "audit": {
     "categories": {
      "declared, related": {
-      "top_1k": 58,
-      "1k_10k": 77,
-      "10k_100k": 108
+      "top_1k": 59,
+      "1k_10k": 78,
+      "10k_100k": 109
      },
      "no declaration, parent found": {
       "top_1k": 38,
@@ -2804,9 +2804,9 @@
       "10k_100k": 12
      },
      "declared, not comparable": {
-      "top_1k": 22,
-      "1k_10k": 17,
-      "10k_100k": 16
+      "top_1k": 21,
+      "1k_10k": 16,
+      "10k_100k": 15
      },
      "declared, unrelated": {
       "top_1k": 1,
@@ -2819,51 +2819,51 @@
     },
     "h2": {
      "k": 106,
-     "n": 375,
-     "share": 0.2826666666666667,
+     "n": 378,
+     "share": 0.2804232804232804,
      "wilson": [
-      0.2395,
-      0.3303
+      0.2375,
+      0.3277
      ],
      "per_tier": {
       "top_1k": [
        38,
-       105
+       106
       ],
       "1k_10k": [
        42,
-       125
+       126
       ],
       "10k_100k": [
        26,
-       145
+       146
       ]
      },
-     "tier_weighted": 0.1952383579638752
+     "tier_weighted": 0.19385887826311707
     },
     "h3": {
      "k": 3,
-     "n": 257,
-     "share": 0.011673151750972763,
+     "n": 261,
+     "share": 0.011494252873563218,
      "wilson": [
-      0.004,
-      0.0338
+      0.0039,
+      0.0332
      ],
      "per_tier": {
       "top_1k": [
        1,
-       60
+       61
       ],
       "1k_10k": [
        0,
-       78
+       79
       ],
       "10k_100k": [
        2,
-       119
+       121
       ]
      },
-     "tier_weighted": 0.015292717086834735
+     "tier_weighted": 0.015039967484080749
     },
     "contradicted": [
      [
@@ -2887,30 +2887,29 @@
    "gguf_rescored": 1677,
    "gguf_comparable": 774,
    "unverifiable": {
-    "models": 55,
-    "pairs": 58,
+    "models": 52,
+    "pairs": 54,
     "reasons": {
      "GGUF: no tensor name maps": 32,
      "read failed again (network)": 10,
      "other format (no shared shapes, draft head, repack, no weights)": 7,
-     "gated or private": 5,
-     "GGUF tensor type of a fork": 4
+     "gated or private": 5
     }
    },
    "verdicts": {
     "H2": {
      "verdict": "not supported",
-     "evidence": "106/375 undeclared",
+     "evidence": "106/378 undeclared",
      "changes": false
     },
     "H3": {
      "verdict": "not supported",
-     "evidence": "3/257 contradicted",
+     "evidence": "3/261 contradicted",
      "changes": false
     },
     "H7": {
      "verdict": "not supported",
-     "evidence": "(a) 20/24; (b) 77/230",
+     "evidence": "(a) 20/24; (b) 78/234",
      "changes": false
     }
    }
@@ -2922,9 +2921,9 @@
    "audit": {
     "categories": {
      "declared, related": {
-      "top_1k": 56,
-      "1k_10k": 76,
-      "10k_100k": 105
+      "top_1k": 57,
+      "1k_10k": 77,
+      "10k_100k": 106
      },
      "no declaration, parent found": {
       "top_1k": 36,
@@ -2947,9 +2946,9 @@
       "10k_100k": 5
      },
      "declared, not comparable": {
-      "top_1k": 22,
-      "1k_10k": 17,
-      "10k_100k": 16
+      "top_1k": 21,
+      "1k_10k": 16,
+      "10k_100k": 15
      },
      "adapter": {
       "1k_10k": 4,
@@ -2958,51 +2957,51 @@
     },
     "h2": {
      "k": 103,
-     "n": 363,
-     "share": 0.2837465564738292,
+     "n": 366,
+     "share": 0.2814207650273224,
      "wilson": [
-      0.2398,
-      0.3322
+      0.2378,
+      0.3296
      ],
      "per_tier": {
       "top_1k": [
        36,
-       101
+       102
       ],
       "1k_10k": [
        42,
-       122
+       123
       ],
       "10k_100k": [
        25,
-       140
+       141
       ]
      },
-     "tier_weighted": 0.19526224870730635
+     "tier_weighted": 0.19383558716688545
     },
     "h3": {
      "k": 15,
-     "n": 257,
-     "share": 0.058365758754863814,
+     "n": 261,
+     "share": 0.05747126436781609,
      "wilson": [
-      0.0357,
-      0.0941
+      0.0351,
+      0.0926
      ],
      "per_tier": {
       "top_1k": [
        3,
-       60
+       61
       ],
       "1k_10k": [
        1,
-       78
+       79
       ],
       "10k_100k": [
        11,
-       119
+       121
       ]
      },
-     "tier_weighted": 0.08484712346477052
+     "tier_weighted": 0.08344922560319946
     },
     "contradicted": [
      [
@@ -3086,30 +3085,29 @@
    "gguf_rescored": 1677,
    "gguf_comparable": 774,
    "unverifiable": {
-    "models": 55,
-    "pairs": 58,
+    "models": 52,
+    "pairs": 54,
     "reasons": {
      "GGUF: no tensor name maps": 32,
      "read failed again (network)": 10,
      "other format (no shared shapes, draft head, repack, no weights)": 7,
-     "gated or private": 5,
-     "GGUF tensor type of a fork": 4
+     "gated or private": 5
     }
    },
    "verdicts": {
     "H2": {
      "verdict": "not supported",
-     "evidence": "103/363 undeclared",
+     "evidence": "103/366 undeclared",
      "changes": false
     },
     "H3": {
      "verdict": "supported",
-     "evidence": "15/257 contradicted",
+     "evidence": "15/261 contradicted",
      "changes": false
     },
     "H7": {
      "verdict": "not supported",
-     "evidence": "(a) 20/24; (b) 76/218",
+     "evidence": "(a) 20/24; (b) 77/222",
      "changes": false
     }
    }

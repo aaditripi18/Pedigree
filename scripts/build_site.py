@@ -311,7 +311,7 @@ def fig_audit(A: dict, FA: dict | None) -> str:
             bars += (f'<div class="gb-line"><span class="hb b-v" style="width:{b / scale * 100:.2f}%" tabindex="0" '
                      f'data-tip="{tb}"></span><span class="gb-v">{b}</span></div>')
         out.append(f'<div class="gb-row"><span class="gb-lab">{e(lab)}</span><div class="gb-bars">{bars}</div></div>')
-    leg = legend([("sw-g", "as audited (E2)"), ("sw-v", "after the reader fixes (E2r, E2g, E2p)")] if FA else
+    leg = legend([("sw-g", "as audited (E2)"), ("sw-v", "after the reader fixes (E2r, E2g, E2p, E2f)")] if FA else
                  [("sw-g", "as audited (E2)")])
     tab = table(["Category", "As audited", "After reader fixes"],
                 [[e(lab), str(c(A, k)), str(c(FA, k)) if FA else "-"] for k, lab in LABEL])
@@ -469,8 +469,8 @@ initialisation, not shared data, is what the score detects (H10: {e(H['H10']['ev
     rf_line = ""
     if RF:
         ch = [k for k, x in RF["verdicts"].items() if x["changes"]]
-        rf_line = (f"After three reader fixes (MLX bit packing, GGUF names in multimodal checkpoints, pre-2020 PyTorch "
-                   f"files) the same 600 models were scored again: "
+        rf_line = (f"After four reader fixes (MLX bit packing, GGUF names in multimodal checkpoints, pre-2020 PyTorch "
+                   f"files, GGUF tensor types decoded from their public sources) the same 600 models were scored again: "
                    + ("no verdict changes" if not ch else f"{', '.join(ch)} change") + " ("
                    + "; ".join(f"{k} {e(x['evidence'])}" for k, x in RF["verdicts"].items()) + ").")
     audit = f"""
