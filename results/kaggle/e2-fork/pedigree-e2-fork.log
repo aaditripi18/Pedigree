@@ -1,121 +1,121 @@
-[{"stream_name":"stdout","time":34.40807523,"data":"code e7a8866\n"}
-,{"stream_name":"stdout","time":92.853513612,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
-,{"stream_name":"stdout","time":94.090289412,"data":"PEDIGREE_WORKERS = 8\n"}
-,{"stream_name":"stdout","time":94.571021327,"data":"107 errored comparisons in E2-2026-11-13T07:41:03Z-e281697\n"}
-,{"stream_name":"stdout","time":129.138746998,"data":"Anonymiserad/SweMedMCQ-EuroLLM-1.7B-Answer-EN-SV vs XXXXyu/Falcon3-1B-Instruct-1.58bit-vlut-gguf (pool): ValueError: GGUF tensor type 45 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":240.197376942,"data":"DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.01081146971038342\n"}
-,{"stream_name":"stdout","time":242.679779151,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs agentionai/Qwen3.8-Flash-Next-ROCmFP4-FAST-imatrix-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":242.679818425,"data":"ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.008093635696068982\n"}
-,{"stream_name":"stdout","time":242.6798263,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs 0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored (pool): 0.0037578239228813156\n"}
-,{"stream_name":"stdout","time":242.679950882,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs 3MPER0RR/Qwen3.8-27B-3MPER0RR-abliterated (pool): 0.003757824249200614\n"}
-,{"stream_name":"stdout","time":242.680199282,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs AEON-7/Qwen3.6-27B-AEON-Ultimate-Uncensored-BF16 (pool): 0.0037230324642207654\n"}
-,{"stream_name":"stdout","time":242.680224499,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs BAAI/AREX-2 (pool): 0.0036218451976310403\n"}
-,{"stream_name":"stdout","time":242.68040285,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs Cloudflare/clef (pool): 0.003757824249200614\n"}
-,{"stream_name":"stdout","time":242.680548402,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ConwayResearch/Underdog-Saluki-27B-1.0 (pool): 0.008011836449613615\n"}
-,{"stream_name":"stdout","time":477.690585202,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs DavidAU/Qwen3.8-27B-Turbo-Brilliance-50X-Reasoning-Instruct-NEO-MAX-MTP-GGUF (pool): 0.006438859508596968\n"}
-,{"stream_name":"stdout","time":477.706181667,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs FINAL-Bench/Darwin-27B-RSI (pool): 0.0053802257684263215\n"}
-,{"stream_name":"stdout","time":477.71187699,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs Hcompany/Holo4-27B (pool): 0.003750575992316277\n"}
-,{"stream_name":"stdout","time":477.730398911,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs HemmingwayAI/Hemmingway-1.5 (pool): 0.0039252732887969655\n"}
-,{"stream_name":"stdout","time":477.756285128,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF (pool): 0.008098890827758304\n"}
-,{"stream_name":"stdout","time":477.770927441,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs JonathanColetti/Qwen3.8-27B-Uncensored (pool): 0.0033377484916547948\n"}
-,{"stream_name":"stdout","time":477.77695671,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ProCreations/grug-27b (pool): 0.006204002536568452\n"}
-,{"stream_name":"stdout","time":477.798003591,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs heretic-org/Qwen3.8-27B-heretic-ara (pool): 0.0034559428424117333\n"}
-,{"stream_name":"stdout","time":477.837292564,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF (pool): 0.006565511856492548\n"}
-,{"stream_name":"stdout","time":477.858080667,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs llmfan46/Qwen3.6-27B-uncensored-heretic-v2-Native-MTP-Preserved (pool): 0.0037230324642207654\n"}
-,{"stream_name":"stdout","time":477.871867019,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs nerkyor/Qwen3.8-27B-Coder390-EfficientThink-Opus5.5-GPT6Astra-Grok4.7-DSV4Pro-K3-SFT-RLOO-MTP-DFlash2 (pool): 0.0034379161894635924\n"}
-,{"stream_name":"stdout","time":477.882809137,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs openjev/openjev (pool): 0.0037128393404645774\n"}
-,{"stream_name":"stdout","time":477.8944655,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs philbert440/Qwen3.8-27B-Uncensored-Aggressive (pool): 0.0034091702442083155\n"}
-,{"stream_name":"stdout","time":477.916633944,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs philbert440/Qwen3.8-27B-Uncensored-Cyber (pool): 0.003459349500408085\n"}
-,{"stream_name":"stdout","time":477.951673671,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs prism-ml/Bonsai-27B-unpacked (pool): 0.008282859613149497\n"}
-,{"stream_name":"stdout","time":477.955562819,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs prism-ml/Ternary-Bonsai-2-27B-gguf (declared): 1.0\n"}
-,{"stream_name":"stdout","time":477.984957211,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs prism-ml/Ternary-Bonsai-2-27B-gguf (pool): 1.0\n"}
-,{"stream_name":"stdout","time":477.99449921,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs sabicap/sabi-noema (pool): 0.003757532300707283\n"}
-,{"stream_name":"stdout","time":478.010964374,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs sensenova/SenseNova-6.8-Code2Video (pool): 0.003961256303295561\n"}
-,{"stream_name":"stdout","time":478.028297742,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs tencent/UI-Mate-27B (pool): 0.006128688505856612\n"}
-,{"stream_name":"stdout","time":478.047966671,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs trohrbaugh/Qwen3.8-27B-heretic-ara (pool): 0.0034559428424117333\n"}
-,{"stream_name":"stdout","time":497.884785194,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ukisai/Swift-1.5-Qwen3.8-27B-GSQ-RCO-GGUF (pool): 0.00713074735041664\n"}
-,{"stream_name":"stdout","time":497.897260986,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.9999999309135253\n"}
-,{"stream_name":"stdout","time":503.342567949,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs unsloth/Qwen3.8-27B-GGUF (pool): 0.006438859508596968\n"}
-,{"stream_name":"stdout","time":503.342721913,"data":"antirez/deepseek-v4-gguf vs Lucebox/DeepSeek-V4-Flash-0731-ROCmFP3 (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":503.342769403,"data":"antirez/deepseek-v4-gguf vs otheru/DeepSeek-V4-Flash-Vision-Strix-Halo-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":768.529083568,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs Mungert/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16-GGUF (pool): 0.8483705591720281\n"}
-,{"stream_name":"stdout","time":768.529132027,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs bartowski/nvidia_Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8483705591720281\n"}
-,{"stream_name":"stdout","time":768.529139823,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs bartowski/nvidia_Nemotron-Cascade-2-30B-A3B-GGUF (pool): 0.8441003192425659\n"}
-,{"stream_name":"stdout","time":768.529173705,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs ggml-org/NVIDIA-Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8483705591720281\n"}
-,{"stream_name":"stdout","time":768.529366918,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs ggml-org/NVIDIA-Nemotron-3-Nano-Omni-30B-A3B-GGUF (pool): 0.8311917200807886\n"}
-,{"stream_name":"stdout","time":768.529529703,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF (pool): 0.8861631619375316\n"}
-,{"stream_name":"stdout","time":768.529699495,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs iapp/openthai2.0-legal-thaillm-nemotron-3-nano-30b-a3b-GGUF (pool): 0.8296176014086958\n"}
-,{"stream_name":"stdout","time":768.529834248,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8522217927023508\n"}
-,{"stream_name":"stdout","time":773.420259508,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs lmstudio-community/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF (pool): 0.8861631619375316\n"}
-,{"stream_name":"stdout","time":773.420288957,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs lmstudio-community/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-GGUF (pool): 0.8311917200807886\n"}
-,{"stream_name":"stdout","time":790.740501192,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mlasli/Nemotron-3.5-Lightning-30B-A3B-Heretic-Uncensored-Q4_K_M-GGUF (pool): 0.8857419351844371\n"}
-,{"stream_name":"stdout","time":793.862587414,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Holotron4-30B-A3B-i1-GGUF (pool): 0.8291452234013237\n"}
-,{"stream_name":"stdout","time":2136.634961576,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16-heretic-i1-GGUF (pool): 0.84851763823141\n"}
-,{"stream_name":"stdout","time":2170.718804202,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/NVIDIA-Nemotron-Labs-3-Elastic-30B-A3B-BF16-i1-GGUF (pool): 0.004431556740602779\n"}
-,{"stream_name":"stdout","time":2170.718878336,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Nemostein-3-Hermes-Omni-30b-a3b-i1-GGUF (pool): 0.84851763823141\n"}
-,{"stream_name":"stdout","time":2170.719084665,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Nemotron-Cascade-2-30B-A3B-heretic-ara-uncensored-i1-GGUF (pool): 0.8440230879608952\n"}
-,{"stream_name":"stdout","time":2170.719218187,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Nemotron-Cascade-2-30B-A3B-i1-GGUF (pool): 0.8441890344049277\n"}
-,{"stream_name":"stdout","time":2170.719384296,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Nemotron-SEA-LION-v4.8-30B-A3B-Base-i1-GGUF (pool): 0.8477206389129355\n"}
-,{"stream_name":"stdout","time":2170.719594306,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/OpenResearcher-30B-A3B-i1-GGUF (pool): 0.8645988416261345\n"}
-,{"stream_name":"stdout","time":2170.719723352,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/hybrid-moe-30b-a3b-base-i1-GGUF (pool): 0.005616406718252406\n"}
-,{"stream_name":"stdout","time":2170.719859264,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/phonellm-alpha-1-GGUF (pool): 0.8483896615503894\n"}
-,{"stream_name":"stdout","time":2170.720010303,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/phonellm-mini-alpha-2-GGUF (pool): 0.8483089127139056\n"}
-,{"stream_name":"stdout","time":2170.720132383,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/phonellm-mini-alpha-2-i1-GGUF (pool): 0.8484467500964088\n"}
-,{"stream_name":"stdout","time":2170.720314004,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mudler/Nemotron-3-Nano-30B-A3B-APEX-GGUF (pool): 0.8522395506100455\n"}
-,{"stream_name":"stdout","time":2170.720456631,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mudler/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-APEX-GGUF (pool): 0.8311731057812587\n"}
-,{"stream_name":"stdout","time":2170.720686596,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs nota-ai/Nemotron-3.5-Lightning-30B-A3B-Nota-Ternary-MLX-1014 (declared): 1.0\n"}
-,{"stream_name":"stdout","time":2170.720940927,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16 (declared): 0.8815700060578264\n"}
-,{"stream_name":"stdout","time":2170.721084446,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs tngtech/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4-GGUF (pool): 0.883268007893703\n"}
-,{"stream_name":"stdout","time":2170.721248312,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs unsloth/NVIDIA-Nemotron-3-Nano-Omni-30B-A3B-Reasoning-GGUF (pool): 0.8311917200807886\n"}
-,{"stream_name":"stdout","time":2170.721390862,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs unsloth/Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8522217927023508\n"}
-,{"stream_name":"stdout","time":2170.721523329,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs vcruz305/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF (pool): 0.8861631619375316\n"}
-,{"stream_name":"stdout","time":2170.721683354,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs vultr/NVIDIA-Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8484425961146818\n"}
-,{"stream_name":"stdout","time":2170.721806934,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs Lucebox/DeepSeek-V4-Flash-0731-ROCmFP3 (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":2170.721914439,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs otheru/DeepSeek-V4-Flash-Vision-Strix-Halo-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":2170.722061614,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs Lucebox/DeepSeek-V4-Flash-0731-ROCmFP3 (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":2170.722161044,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs otheru/DeepSeek-V4-Flash-Vision-Strix-Halo-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":2170.722327321,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs agentionai/Qwen3.8-Flash-Next-ROCmFP4-FAST-imatrix-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":2170.722457236,"data":"lemonyins/Qwen3.6-27B-uncensored-abliterated-i1-IQ4_XS-GGUF-Smaller vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.010284023625865769\n"}
-,{"stream_name":"stdout","time":2170.722613464,"data":"migtissera/Tess-4.5-27B-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.006572314041674354\n"}
-,{"stream_name":"stdout","time":2170.722746857,"data":"mradermacher/Logics-SWE-Qwen3.6-27B-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.009614903349438398\n"}
-,{"stream_name":"stdout","time":2170.722870072,"data":"mradermacher/Mistral-Small-4-119B-2603-i1-GGUF vs AlexanderKyng/Mistral-Small-119B-2603-ik-GGUF (pool): ValueError: GGUF tensor type 339 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":2170.722989115,"data":"mradermacher/Mistral-Small-4-119B-2603-i1-GGUF vs kingjones777/Mistral-Small-4-119B-ROCmFP4-GGUF (pool): ValueError: GGUF tensor type 103 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":2170.723177851,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs HauhauCS/Qwen3.5-2B-Uncensored-HauhauCS-Aggressive (pool): 0.0023619255310286897\n"}
-,{"stream_name":"stdout","time":2170.723374989,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs Jackrong/Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-GGUF (pool): 0.0022090629488269974\n"}
-,{"stream_name":"stdout","time":2170.723563944,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs Mapika/decider-2b (pool): 0.008613337245960934\n"}
-,{"stream_name":"stdout","time":2170.723704994,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs Muesli-HQ/qwen35-2b-muesli-cleanup-v12-gguf (pool): 0.002337478851505087\n"}
-,{"stream_name":"stdout","time":2170.723930782,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs Qwen/Qwen3.5-2B (declared): 0.004137663960130605\n"}
-,{"stream_name":"stdout","time":2170.724089689,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs VTXAI/Helvete-nano (pool): 0.009372426078789922\n"}
-,{"stream_name":"stdout","time":2170.724228178,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs alibiserikbay/JevK5-2B (pool): 0.009836419489856873\n"}
-,{"stream_name":"stdout","time":2170.724386009,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs atakhadivi/Qwen3.8-2B-Uncensored-GGUF (pool): 0.002223495956201151\n"}
-,{"stream_name":"stdout","time":2170.724526309,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs chaoliangUNSW/Jev-Style-2B-Decision-v3 (pool): 0.009536170142207038\n"}
-,{"stream_name":"stdout","time":2170.724684334,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs chaoliangUNSW/Jev-Style-2B-Decision-v3-GGUF (pool): 0.0021779981770253293\n"}
-,{"stream_name":"stdout","time":2170.724814092,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs chaoliangUNSW/Jev-Style-2B-Decision-v4-GGUF (pool): 0.0022828273453373137\n"}
-,{"stream_name":"stdout","time":2170.724965257,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs chaoliangUNSW/Jev-Style-Qwen3.5-2B-Decision-v2 (pool): 0.009561338749836027\n"}
-,{"stream_name":"stdout","time":2170.725086942,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs cstr/index-echo-2b-GGUF (pool): 0.002619262282260531\n"}
-,{"stream_name":"stdout","time":2170.725240951,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs flock-io/this-that-model-1.2 (pool): 0.01002015218503828\n"}
-,{"stream_name":"stdout","time":2170.725371034,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs jiangchengsong/MemDuet-S1-Qwen3.5-2B (pool): 0.010599925285453702\n"}
-,{"stream_name":"stdout","time":2170.725538524,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs lmstudio-community/Qwen3.5-2B-GGUF (pool): 0.0023619255310286897\n"}
-,{"stream_name":"stdout","time":2170.725682655,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs moravianai/ThinCtx-Qwen3.5-2B (pool): 0.009836419489856873\n"}
-,{"stream_name":"stdout","time":2170.725801776,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Huihui-Qwen3.5-2B-abliterated-GGUF (pool): 0.0023619255310286897\n"}
-,{"stream_name":"stdout","time":2170.72594094,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Mozi-2b-i1-GGUF (pool): 0.0022330050364381474\n"}
-,{"stream_name":"stdout","time":2170.726070422,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-Base-heretic-i1-GGUF (pool): 0.0028537444661293973\n"}
-,{"stream_name":"stdout","time":2170.726225594,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-Claude-4.6-OS-Auto-Variable-HERETIC-UNCENSORED-THINKING-GGUF (pool): 0.0021939449067307068\n"}
-,{"stream_name":"stdout","time":2170.726378603,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-EmperoAI-Qwen3.8-Distill-Heretic-Abliterated-GGUF (pool): 0.002367760513237425\n"}
-,{"stream_name":"stdout","time":2170.726519793,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-Uncensored-Abliterix-SOM-i1-GGUF (pool): 0.002444372524563335\n"}
-,{"stream_name":"stdout","time":2170.726666973,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-Uncensored-Zero-Refusal-SOMA-i1-GGUF (pool): 0.002444372524563335\n"}
-,{"stream_name":"stdout","time":2170.727005143,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/bella-bartender-qwen3.5-2b-i1-GGUF (pool): 0.0025034962799964566\n"}
-,{"stream_name":"stdout","time":2170.727242702,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs openbmb/MiniCPM-OCR-Jev-gguf (pool): 0.002309456412751242\n"}
-,{"stream_name":"stdout","time":2170.727417373,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs turintech/Qwen3.5-2B-Artemis-GGUF (pool): 0.00267520443297354\n"}
-,{"stream_name":"stdout","time":2170.72759229,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs unsloth/Qwen3.5-2B-GGUF (pool): 0.0023619255310286897\n"}
-,{"stream_name":"stdout","time":2170.727717616,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs agentionai/Qwen3.8-Flash-Next-ROCmFP4-FAST-imatrix-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
-,{"stream_name":"stdout","time":2170.728904901,"data":"done; 0 lost to the network\n"}
-,{"stream_name":"stdout","time":2171.224333301,"data":"exit 0 -m experiments.e2_rescore --source E2r,E2g --match tensor type --name E2f\n"}
-,{"stream_name":"stdout","time":2171.264758554,"data":"107 new ledger lines; 0 failed commands\n"}
-,{"stream_name":"stderr","time":2174.055380942,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":2174.055416957,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":2174.352105234,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":2174.352133659,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":2175.313524344,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
-,{"stream_name":"stderr","time":2176.560028798,"data":"[NbConvertApp] Writing 292376 bytes to __results__.html\n"}
+[{"stream_name":"stdout","time":41.888762997,"data":"code fe710fa\n"}
+,{"stream_name":"stdout","time":96.004444631,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":97.328496775,"data":"PEDIGREE_WORKERS = 8\n"}
+,{"stream_name":"stdout","time":97.778224741,"data":"107 errored comparisons in E2-2026-11-13T07:41:03Z-e281697\n"}
+,{"stream_name":"stdout","time":127.780379096,"data":"Anonymiserad/SweMedMCQ-EuroLLM-1.7B-Answer-EN-SV vs XXXXyu/Falcon3-1B-Instruct-1.58bit-vlut-gguf (pool): ValueError: GGUF tensor type 45 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":227.836953725,"data":"DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.01081146971038342\n"}
+,{"stream_name":"stdout","time":230.079863616,"data":"FINAL-Bench/POCKET-Darwin-180B-GGUF vs agentionai/Qwen3.8-Flash-Next-ROCmFP4-FAST-imatrix-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":230.079897331,"data":"ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.008093635696068982\n"}
+,{"stream_name":"stdout","time":230.07990511,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs 0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored (pool): 0.0037578239228813156\n"}
+,{"stream_name":"stdout","time":230.079911406,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs 3MPER0RR/Qwen3.8-27B-3MPER0RR-abliterated (pool): 0.003757824249200614\n"}
+,{"stream_name":"stdout","time":230.079918339,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs AEON-7/Qwen3.6-27B-AEON-Ultimate-Uncensored-BF16 (pool): 0.0037230324642207654\n"}
+,{"stream_name":"stdout","time":230.079924068,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs BAAI/AREX-2 (pool): 0.0036218451976310403\n"}
+,{"stream_name":"stdout","time":230.079929363,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs Cloudflare/clef (pool): 0.003757824249200614\n"}
+,{"stream_name":"stdout","time":242.296959521,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ConwayResearch/Underdog-Saluki-27B-1.0 (pool): 0.008011836449613615\n"}
+,{"stream_name":"stdout","time":456.572636413,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs DavidAU/Qwen3.8-27B-Turbo-Brilliance-50X-Reasoning-Instruct-NEO-MAX-MTP-GGUF (pool): 0.006438859508596968\n"}
+,{"stream_name":"stdout","time":456.573626506,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs FINAL-Bench/Darwin-27B-RSI (pool): 0.0053802257684263215\n"}
+,{"stream_name":"stdout","time":456.574046727,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs Hcompany/Holo4-27B (pool): 0.003750575992316277\n"}
+,{"stream_name":"stdout","time":456.574598172,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs HemmingwayAI/Hemmingway-1.5 (pool): 0.0039252732887969655\n"}
+,{"stream_name":"stdout","time":456.574842145,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF (pool): 0.008098890827758304\n"}
+,{"stream_name":"stdout","time":456.575249684,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs JonathanColetti/Qwen3.8-27B-Uncensored (pool): 0.0033377484916547948\n"}
+,{"stream_name":"stdout","time":456.579324759,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ProCreations/grug-27b (pool): 0.006204002536568452\n"}
+,{"stream_name":"stdout","time":456.579886332,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs heretic-org/Qwen3.8-27B-heretic-ara (pool): 0.0034559428424117333\n"}
+,{"stream_name":"stdout","time":456.587465363,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF (pool): 0.006565511856492548\n"}
+,{"stream_name":"stdout","time":456.5978087,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs llmfan46/Qwen3.6-27B-uncensored-heretic-v2-Native-MTP-Preserved (pool): 0.0037230324642207654\n"}
+,{"stream_name":"stdout","time":456.599504167,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs nerkyor/Qwen3.8-27B-Coder390-EfficientThink-Opus5.5-GPT6Astra-Grok4.7-DSV4Pro-K3-SFT-RLOO-MTP-DFlash2 (pool): 0.0034379161894635924\n"}
+,{"stream_name":"stdout","time":456.599528516,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs openjev/openjev (pool): 0.0037128393404645774\n"}
+,{"stream_name":"stdout","time":456.599534759,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs philbert440/Qwen3.8-27B-Uncensored-Aggressive (pool): 0.0034091702442083155\n"}
+,{"stream_name":"stdout","time":456.599687282,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs philbert440/Qwen3.8-27B-Uncensored-Cyber (pool): 0.003459349500408085\n"}
+,{"stream_name":"stdout","time":456.600248826,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs prism-ml/Bonsai-27B-unpacked (pool): 0.008282859613149497\n"}
+,{"stream_name":"stdout","time":456.600934144,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs prism-ml/Ternary-Bonsai-2-27B-gguf (declared): 1.0\n"}
+,{"stream_name":"stdout","time":456.601294034,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs prism-ml/Ternary-Bonsai-2-27B-gguf (pool): 1.0\n"}
+,{"stream_name":"stdout","time":456.601624525,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs sabicap/sabi-noema (pool): 0.003757532300707283\n"}
+,{"stream_name":"stdout","time":456.602180602,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs sensenova/SenseNova-6.8-Code2Video (pool): 0.003961256303295561\n"}
+,{"stream_name":"stdout","time":456.6176184,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs tencent/UI-Mate-27B (pool): 0.006128688505856612\n"}
+,{"stream_name":"stdout","time":456.61807772,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs trohrbaugh/Qwen3.8-27B-heretic-ara (pool): 0.0034559428424117333\n"}
+,{"stream_name":"stdout","time":456.618189671,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ukisai/Swift-1.5-Qwen3.8-27B-GSQ-RCO-GGUF (pool): 0.00713074735041664\n"}
+,{"stream_name":"stdout","time":456.618453228,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.9999999309135253\n"}
+,{"stream_name":"stdout","time":456.618655733,"data":"OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF vs unsloth/Qwen3.8-27B-GGUF (pool): 0.006438859508596968\n"}
+,{"stream_name":"stdout","time":456.619212242,"data":"antirez/deepseek-v4-gguf vs Lucebox/DeepSeek-V4-Flash-0731-ROCmFP3 (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":456.61931967,"data":"antirez/deepseek-v4-gguf vs otheru/DeepSeek-V4-Flash-Vision-Strix-Halo-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":720.07505316,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs Mungert/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16-GGUF (pool): 0.8483705591720281\n"}
+,{"stream_name":"stdout","time":720.075340783,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs bartowski/nvidia_Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8483705591720281\n"}
+,{"stream_name":"stdout","time":720.075544268,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs bartowski/nvidia_Nemotron-Cascade-2-30B-A3B-GGUF (pool): 0.8441003192425659\n"}
+,{"stream_name":"stdout","time":720.075746936,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs ggml-org/NVIDIA-Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8483705591720281\n"}
+,{"stream_name":"stdout","time":720.075948161,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs ggml-org/NVIDIA-Nemotron-3-Nano-Omni-30B-A3B-GGUF (pool): 0.8311917200807886\n"}
+,{"stream_name":"stdout","time":720.0770364,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF (pool): 0.8861631619375316\n"}
+,{"stream_name":"stdout","time":720.077076415,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs iapp/openthai2.0-legal-thaillm-nemotron-3-nano-30b-a3b-GGUF (pool): 0.8296176014086958\n"}
+,{"stream_name":"stdout","time":720.077081616,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8522217927023508\n"}
+,{"stream_name":"stdout","time":720.077086478,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs lmstudio-community/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF (pool): 0.8861631619375316\n"}
+,{"stream_name":"stdout","time":720.077091191,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs lmstudio-community/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-GGUF (pool): 0.8311917200807886\n"}
+,{"stream_name":"stdout","time":720.077095793,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mlasli/Nemotron-3.5-Lightning-30B-A3B-Heretic-Uncensored-Q4_K_M-GGUF (pool): 0.8857419351844371\n"}
+,{"stream_name":"stdout","time":720.077100488,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Holotron4-30B-A3B-i1-GGUF (pool): 0.8291452234013237\n"}
+,{"stream_name":"stdout","time":2131.504015605,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16-heretic-i1-GGUF (pool): 0.84851763823141\n"}
+,{"stream_name":"stdout","time":2177.852776022,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/NVIDIA-Nemotron-Labs-3-Elastic-30B-A3B-BF16-i1-GGUF (pool): 0.004431556740602779\n"}
+,{"stream_name":"stdout","time":2177.853032133,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Nemostein-3-Hermes-Omni-30b-a3b-i1-GGUF (pool): 0.84851763823141\n"}
+,{"stream_name":"stdout","time":2177.853254159,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Nemotron-Cascade-2-30B-A3B-heretic-ara-uncensored-i1-GGUF (pool): 0.8440230879608952\n"}
+,{"stream_name":"stdout","time":2177.853543899,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Nemotron-Cascade-2-30B-A3B-i1-GGUF (pool): 0.8441890344049277\n"}
+,{"stream_name":"stdout","time":2177.853769858,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/Nemotron-SEA-LION-v4.8-30B-A3B-Base-i1-GGUF (pool): 0.8477206389129355\n"}
+,{"stream_name":"stdout","time":2177.853993834,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/OpenResearcher-30B-A3B-i1-GGUF (pool): 0.8645988416261345\n"}
+,{"stream_name":"stdout","time":2177.85417663,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/hybrid-moe-30b-a3b-base-i1-GGUF (pool): 0.005616406718252406\n"}
+,{"stream_name":"stdout","time":2177.854364312,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/phonellm-alpha-1-GGUF (pool): 0.8483896615503894\n"}
+,{"stream_name":"stdout","time":2177.854588573,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/phonellm-mini-alpha-2-GGUF (pool): 0.8483089127139056\n"}
+,{"stream_name":"stdout","time":2177.8547934,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mradermacher/phonellm-mini-alpha-2-i1-GGUF (pool): 0.8484467500964088\n"}
+,{"stream_name":"stdout","time":2177.854992523,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mudler/Nemotron-3-Nano-30B-A3B-APEX-GGUF (pool): 0.8522395506100455\n"}
+,{"stream_name":"stdout","time":2177.855211602,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs mudler/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-APEX-GGUF (pool): 0.8311731057812587\n"}
+,{"stream_name":"stdout","time":2177.855527571,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs nota-ai/Nemotron-3.5-Lightning-30B-A3B-Nota-Ternary-MLX-1014 (declared): 1.0\n"}
+,{"stream_name":"stdout","time":2177.855828788,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16 (declared): 0.8815700060578264\n"}
+,{"stream_name":"stdout","time":2177.856036369,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs tngtech/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4-GGUF (pool): 0.883268007893703\n"}
+,{"stream_name":"stdout","time":2177.856218113,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs unsloth/NVIDIA-Nemotron-3-Nano-Omni-30B-A3B-Reasoning-GGUF (pool): 0.8311917200807886\n"}
+,{"stream_name":"stdout","time":2177.856432824,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs unsloth/Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8522217927023508\n"}
+,{"stream_name":"stdout","time":2177.856624114,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs vcruz305/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF (pool): 0.8861631619375316\n"}
+,{"stream_name":"stdout","time":2177.856809339,"data":"boro64/Ternary-Nemotron-3.5-Lightning-30B-A3B-GGUF vs vultr/NVIDIA-Nemotron-3-Nano-30B-A3B-GGUF (pool): 0.8484425961146818\n"}
+,{"stream_name":"stdout","time":2177.857006065,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs Lucebox/DeepSeek-V4-Flash-0731-ROCmFP3 (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":2177.857207409,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF vs otheru/DeepSeek-V4-Flash-Vision-Strix-Halo-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":2177.857353897,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs Lucebox/DeepSeek-V4-Flash-0731-ROCmFP3 (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":2177.857502002,"data":"huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF vs otheru/DeepSeek-V4-Flash-Vision-Strix-Halo-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":2177.857602578,"data":"jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs agentionai/Qwen3.8-Flash-Next-ROCmFP4-FAST-imatrix-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":2177.857816526,"data":"lemonyins/Qwen3.6-27B-uncensored-abliterated-i1-IQ4_XS-GGUF-Smaller vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.010284023625865769\n"}
+,{"stream_name":"stdout","time":2177.8580172,"data":"migtissera/Tess-4.5-27B-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.006572314041674354\n"}
+,{"stream_name":"stdout","time":2177.858220441,"data":"mradermacher/Logics-SWE-Qwen3.6-27B-GGUF vs ukisai/Swift-Bonsai-2-GGUF (pool): 0.009614903349438398\n"}
+,{"stream_name":"stdout","time":2177.858369014,"data":"mradermacher/Mistral-Small-4-119B-2603-i1-GGUF vs AlexanderKyng/Mistral-Small-119B-2603-ik-GGUF (pool): ValueError: GGUF tensor type 139 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":2177.858584684,"data":"mradermacher/Mistral-Small-4-119B-2603-i1-GGUF vs kingjones777/Mistral-Small-4-119B-ROCmFP4-GGUF (pool): ValueError: GGUF tensor type 103 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":2177.858745585,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs HauhauCS/Qwen3.5-2B-Uncensored-HauhauCS-Aggressive (pool): 0.0023619255310286897\n"}
+,{"stream_name":"stdout","time":2177.858961635,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs Jackrong/Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-GGUF (pool): 0.0022090629488269974\n"}
+,{"stream_name":"stdout","time":2177.859121577,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs Mapika/decider-2b (pool): 0.008613337245960934\n"}
+,{"stream_name":"stdout","time":2177.859380676,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs Muesli-HQ/qwen35-2b-muesli-cleanup-v12-gguf (pool): 0.002337478851505087\n"}
+,{"stream_name":"stdout","time":2177.859636718,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs Qwen/Qwen3.5-2B (declared): 0.004137663960130605\n"}
+,{"stream_name":"stdout","time":2177.859835749,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs VTXAI/Helvete-nano (pool): 0.009372426078789922\n"}
+,{"stream_name":"stdout","time":2177.86002711,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs alibiserikbay/JevK5-2B (pool): 0.009836419489856873\n"}
+,{"stream_name":"stdout","time":2177.860231401,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs atakhadivi/Qwen3.8-2B-Uncensored-GGUF (pool): 0.002223495956201151\n"}
+,{"stream_name":"stdout","time":2177.860439635,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs chaoliangUNSW/Jev-Style-2B-Decision-v3 (pool): 0.009536170142207038\n"}
+,{"stream_name":"stdout","time":2177.860606598,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs chaoliangUNSW/Jev-Style-2B-Decision-v3-GGUF (pool): 0.0021779981770253293\n"}
+,{"stream_name":"stdout","time":2177.860854929,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs chaoliangUNSW/Jev-Style-2B-Decision-v4-GGUF (pool): 0.0022828273453373137\n"}
+,{"stream_name":"stdout","time":2177.861022522,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs chaoliangUNSW/Jev-Style-Qwen3.5-2B-Decision-v2 (pool): 0.009561338749836027\n"}
+,{"stream_name":"stdout","time":2177.86123603,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs cstr/index-echo-2b-GGUF (pool): 0.002619262282260531\n"}
+,{"stream_name":"stdout","time":2177.861475433,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs flock-io/this-that-model-1.2 (pool): 0.01002015218503828\n"}
+,{"stream_name":"stdout","time":2177.86160334,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs jiangchengsong/MemDuet-S1-Qwen3.5-2B (pool): 0.010599925285453702\n"}
+,{"stream_name":"stdout","time":2177.861785692,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs lmstudio-community/Qwen3.5-2B-GGUF (pool): 0.0023619255310286897\n"}
+,{"stream_name":"stdout","time":2177.8619529,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs moravianai/ThinCtx-Qwen3.5-2B (pool): 0.009836419489856873\n"}
+,{"stream_name":"stdout","time":2177.862118835,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Huihui-Qwen3.5-2B-abliterated-GGUF (pool): 0.0023619255310286897\n"}
+,{"stream_name":"stdout","time":2177.862305511,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Mozi-2b-i1-GGUF (pool): 0.0022330050364381474\n"}
+,{"stream_name":"stdout","time":2177.862491459,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-Base-heretic-i1-GGUF (pool): 0.0028537444661293973\n"}
+,{"stream_name":"stdout","time":2177.86268981,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-Claude-4.6-OS-Auto-Variable-HERETIC-UNCENSORED-THINKING-GGUF (pool): 0.0021939449067307068\n"}
+,{"stream_name":"stdout","time":2177.862897954,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-EmperoAI-Qwen3.8-Distill-Heretic-Abliterated-GGUF (pool): 0.002367760513237425\n"}
+,{"stream_name":"stdout","time":2177.863076742,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-Uncensored-Abliterix-SOM-i1-GGUF (pool): 0.002444372524563335\n"}
+,{"stream_name":"stdout","time":2177.863440784,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/Qwen3.5-2B-Uncensored-Zero-Refusal-SOMA-i1-GGUF (pool): 0.002444372524563335\n"}
+,{"stream_name":"stdout","time":2177.863638579,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs mradermacher/bella-bartender-qwen3.5-2b-i1-GGUF (pool): 0.0025034962799964566\n"}
+,{"stream_name":"stdout","time":2177.863819305,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs openbmb/MiniCPM-OCR-Jev-gguf (pool): 0.002309456412751242\n"}
+,{"stream_name":"stdout","time":2177.864017795,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs turintech/Qwen3.5-2B-Artemis-GGUF (pool): 0.00267520443297354\n"}
+,{"stream_name":"stdout","time":2177.864224104,"data":"prism-ml/Ternary-Bonsai-2-2B-gguf vs unsloth/Qwen3.5-2B-GGUF (pool): 0.0023619255310286897\n"}
+,{"stream_name":"stdout","time":2177.864418143,"data":"ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs agentionai/Qwen3.8-Flash-Next-ROCmFP4-FAST-imatrix-GGUF (pool): ValueError: GGUF tensor type 101 is not in llama.cpp's published list (a fork's own format)\n"}
+,{"stream_name":"stdout","time":2177.866060044,"data":"done; 0 lost to the network\n"}
+,{"stream_name":"stdout","time":2178.546906387,"data":"exit 0 -m experiments.e2_rescore --source E2r,E2g,E2f --match tensor type --name E2f\n"}
+,{"stream_name":"stdout","time":2178.591326545,"data":"107 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":2181.02767364,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2181.027715405,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2181.292744093,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2181.292773422,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2182.252828782,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2183.367422907,"data":"[NbConvertApp] Writing 292380 bytes to __results__.html\n"}
 ]

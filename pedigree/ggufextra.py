@@ -5,6 +5,7 @@
   43  F8_E4M3   llama.cpp master (ggml-impl.h: ggml_f8_e4m3_to_fp32, OCP FP8)
   142 PQ2_0     PrismML-Eng/llama.cpp, branch prism (dequantize_row_pq2_0): Q2_0's codec, group 128
   143 PTQ1_0    PrismML-Eng/llama.cpp, branch prism (dequantize_row_ptq1_0): TQ1_0's trits, group 128
+  139 IQ4_K     ikawrakow/ik_llama.cpp (ggml-common.h block_iq4_k, iqk_quantize.cpp dequantize_row_iq4_k)
   339 IQ4_K_R4  ikawrakow/ik_llama.cpp (ggml-common.h block_iq4_k_r4, iqk_quantize.cpp
                 dequantize_row_iq4_k_r4): IQ4_K with four rows interleaved in each 576-byte block
 
@@ -21,9 +22,9 @@ import numpy as np
 
 # type id -> (name, values per block, bytes per block)
 TYPES = {42: ("Q2_0", 64, 18), 43: ("F8_E4M3", 1, 1), 142: ("PQ2_0", 128, 34), 143: ("PTQ1_0", 128, 28),
-         339: ("IQ4_K_R4", 256, 144)}
+         139: ("IQ4_K", 256, 144), 339: ("IQ4_K_R4", 256, 144)}
 SOURCES = {42: "llama.cpp master", 43: "llama.cpp master", 142: "PrismML-Eng/llama.cpp (prism)",
-           143: "PrismML-Eng/llama.cpp (prism)", 339: "ikawrakow/ik_llama.cpp"}
+           143: "PrismML-Eng/llama.cpp (prism)", 139: "ikawrakow/ik_llama.cpp", 339: "ikawrakow/ik_llama.cpp"}
 ROW_GROUP = {339: 4}
 IQ4K_VALUES = np.array([-127, -104, -83, -65, -49, -35, -22, -10, 1, 13, 25, 38, 53, 69, 89, 113,
                         -123, -100, -79, -61, -45, -31, -18, -6, 5, 17, 29, 42, 57, 73, 93, 117], dtype=np.float32)
@@ -72,6 +73,25 @@ def _ptq1(raw: bytes) -> np.ndarray:
     return ((t - 1).astype(np.float32) * d).reshape(-1)
 
 
+def _iq4_k(raw: bytes) -> np.ndarray:
+    """dequantize_row_iq4_k: 144-byte blocks of 256 values."""
+    B = np.frombuffer(raw, dtype=np.uint8).reshape(-1, 144)
+    d = B[:, 0:2].copy().view(np.float16).astype(np.float32)[:, 0]
+    extra = B[:, 2:4].copy().view("<u2")[:, 0].astype(np.int64)
+    sh_all, sl, qs = B[:, 4:8], B[:, 8:16], B[:, 16:144]
+    y = np.empty((B.shape[0], 256), dtype=np.float32)
+    for ib in range(8):
+        sh = (sh_all[:, ib // 2] >> (4 * (ib % 2))).astype(np.int64)
+        dl1 = d * ((((sl[:, ib] & 0xF).astype(np.int64)) | ((sh << 4) & 0x30)) - 32).astype(np.float32)
+        dl2 = d * ((((sl[:, ib] >> 4).astype(np.int64)) | ((sh << 2) & 0x30)) - 32).astype(np.float32)
+        o1 = np.where((extra >> (2 * ib)) & 1, 16, 0)
+        o2 = np.where((extra >> (2 * ib)) & 2, 16, 0)
+        q = qs[:, 16 * ib:16 * ib + 16]
+        y[:, 32 * ib:32 * ib + 16] = dl1[:, None] * IQ4K_VALUES[o1[:, None] + (q & 0xF)]
+        y[:, 32 * ib + 16:32 * ib + 32] = dl2[:, None] * IQ4K_VALUES[o2[:, None] + (q >> 4)]
+    return y.reshape(-1)
+
+
 def _iq4_k_r4(raw: bytes, cols: int) -> np.ndarray:
     """dequantize_row_iq4_k_r4, for whole groups of 4 rows of `cols` values: row-major output."""
     nb = cols // 256
@@ -106,6 +126,8 @@ def dequantize(raw: bytes, qtype: int, cols: int | None = None) -> np.ndarray:
         return _f8_e4m3(raw)
     if qtype == 143:
         return _ptq1(raw)
+    if qtype == 139:
+        return _iq4_k(raw)
     if qtype == 339:
         if not cols or cols % 256:
             raise ValueError("IQ4_K_R4 needs the row length (a multiple of 256)")

@@ -56,7 +56,8 @@ def main() -> None:
         for r in rows:
             if r.get("experiment") in a.source.split(",") and "lost" not in r:
                 k = (r["model"], r["other"], r["role"])
-                if k not in latest or r["run_id"] >= latest[k]["run_id"]:
+                # by time: run ids of different experiments do not sort in time order
+                if k not in latest or str(r.get("ts", "")) >= str(latest[k].get("ts", "")):
                     latest[k] = r
         pairs = sorted(k for k, r in latest.items() if a.match in str(r.get("error") or ""))
     print(f"{len(pairs)} errored comparisons in {last}", flush=True)

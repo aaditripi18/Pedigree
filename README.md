@@ -121,13 +121,13 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
 - **GGUF tensor types newer than the `gguf` package (E2f, amendment 2026-11-17 (4)).** Five are
   decoded from their public sources only, each tested byte for byte against that source's own C in
   CI: Q2_0 (42) and F8_E4M3 (43) from llama.cpp master, PrismML's PQ2_0 (142) and PTQ1_0 (143), and
-  ik_llama.cpp's row-interleaved IQ4_K_R4 (339). Scored again, all 4 declared pairs that used them
+  ik_llama.cpp's IQ4_K (139) and row-interleaved IQ4_K_R4 (339). Scored again, all 4 declared pairs that used them
   compare 24 tensors and are related (one, a ternary model, only by the permutation-invariant score:
   plain 0.004, invariant 0.743), and 91 of 103 pool comparisons now compare: declared bases the
   weights confirm rise to 246 and unverifiable ones fall to 52; no verdict changes (H2 106/378,
   H3 3/261, H7 b 78/234). Types 45, 101 and 103 appear in no public source we could find; the 11
-  pool comparisons that use them say so. The one pool comparison with type 339 ran before its
-  decoder existed and is being scored again.
+  pool comparisons that use them say so. The one pool comparison with type 339 also needs ik_llama.cpp's
+  IQ4_K (139), now decoded too, and is being scored again.
 - **The 52 still unverifiable (H17).** Their 54 declared pairs: 32 GGUF files whose architecture
   llama.cpp's name table does not know, so no tensor name maps; 10 that failed to re-read (network);
   7 other formats (a random tiny model with no shared shapes, a draft head, a repack, an NPU build,

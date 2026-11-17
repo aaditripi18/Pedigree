@@ -1,7 +1,8 @@
 """GGUF types newer than the gguf package (pedigree/ggufextra.py) decode exactly as their public
 reference implementations do. The C below is copied from those sources (llama.cpp master and
 PrismML-Eng/llama.cpp branch prism, ikawrakow/ik_llama.cpp, all MIT): dequantize_row_q2_0,
-dequantize_row_pq2_0, dequantize_row_ptq1_0, ggml_f8_e4m3_to_fp32 and dequantize_row_iq4_k_r4 (C++
+dequantize_row_pq2_0, dequantize_row_ptq1_0, ggml_f8_e4m3_to_fp32, dequantize_row_iq4_k and
+dequantize_row_iq4_k_r4 (C++
 `auto` written out as its C type, nothing else changed). Compiled where a C compiler exists; CI
 sets PEDIGREE_REQUIRE_CC=1, so there a missing compiler fails the test instead of skipping it."""
 import os
@@ -37,6 +38,29 @@ typedef struct { ggml_half d[4]; uint8_t extra[8]; uint8_t scales_h[QK_K/16]; ui
 static const int8_t iq4k_values[32] = {
     -127, -104, -83, -65, -49, -35, -22, -10, 1, 13, 25, 38, 53, 69, 89, 113,
     -123, -100, -79, -61, -45, -31, -18,  -6, 5, 17, 29, 42, 57, 73, 93, 117 };
+typedef struct { ggml_half d; uint16_t extra; uint8_t scales_h[QK_K/64]; uint8_t scales_l[QK_K/32]; uint8_t qs[QK_K/2]; } block_iq4_k;
+void dequantize_row_iq4_k(const block_iq4_k * x, float * y, int64_t k) {
+    const int nb = k / QK_K;
+    for (int i = 0; i < nb; i++) {
+        const uint8_t * qs = x[i].qs;
+        const float d = GGML_FP16_TO_FP32(x[i].d);
+        uint16_t extra = x[i].extra;
+        for (int ib = 0; ib < QK_K/32; ++ib) {
+            const uint8_t sh = x[i].scales_h[ib/2] >> 4*(ib%2);
+            const float dl1 = d * (((x[i].scales_l[ib] & 0xf) | ((sh << 4) & 0x30)) - 32);
+            const float dl2 = d * (((x[i].scales_l[ib] >>  4) | ((sh << 2) & 0x30)) - 32);
+            const int8_t * values1 = extra & 1 ? iq4k_values + 16 : iq4k_values;
+            const int8_t * values2 = extra & 2 ? iq4k_values + 16 : iq4k_values;
+            extra >>= 2;
+            for (int j = 0; j < 16; ++j) {
+                y[j+ 0] = dl1 * values1[qs[j] & 0xf];
+                y[j+16] = dl2 * values2[qs[j] >>  4];
+            }
+            y  += 32;
+            qs += 16;
+        }
+    }
+}
 void dequantize_row_iq4_k_r4(const block_iq4_k_r4 * x, float * y, int64_t k) {
     int64_t n_per_row = k/4;
     float * y4[4] = {y, y + n_per_row, y + 2*n_per_row, y + 3*n_per_row};
@@ -101,6 +125,7 @@ int main(int argc, char ** argv) {
     else if (type == 142) dequantize_row_pq2_0((block_pq2_0 *) buf, y, n);
     else if (type == 143) dequantize_row_ptq1_0((block_ptq1_0 *) buf, y, n);
     else if (type == 43) for (long i = 0; i < n; i++) y[i] = ggml_f8_e4m3_to_fp32(buf[i]);
+    else if (type == 139) dequantize_row_iq4_k((block_iq4_k *) buf, y, n);
     else if (type == 339) { long cols = atol(argv[3]); for (long g = 0; g < n / (4 * cols); g++)
         dequantize_row_iq4_k_r4((block_iq4_k_r4 *) (buf + g * (cols / 256) * 576), y + g * 4 * cols, 4 * cols); }
     fwrite(y, sizeof(float), n, stdout); (void) got; return 0;
@@ -115,6 +140,9 @@ def _random_blocks(qtype: int, nblocks: int, rng) -> bytes:
         off = 26 if qtype == 143 else 0
         for b in range(nblocks):
             raw[b * size + off: b * size + off + 2] = struct.pack("<e", float(rng.uniform(-0.1, 0.1)))
+    if qtype == 139:                # 144-byte blocks: one fp16 scale first
+        for b in range(nblocks):
+            raw[b * size: b * size + 2] = struct.pack("<e", float(rng.uniform(-0.01, 0.01)))
     if qtype == 339:                # 576-byte blocks of 4 rows: four fp16 scales first
         for b in range(len(raw) // 576):
             raw[b * 576: b * 576 + 8] = struct.pack("<4e", *(float(x) for x in rng.uniform(-0.01, 0.01, 4)))
@@ -138,7 +166,7 @@ def test_ci_has_a_compiler():
 
 
 @pytest.mark.skipif(CC is None and not os.environ.get("PEDIGREE_REQUIRE_CC"), reason="no C compiler")
-@pytest.mark.parametrize("qtype", [42, 43, 142, 143, 339])
+@pytest.mark.parametrize("qtype", [42, 43, 139, 142, 143, 339])
 def test_equals_the_reference_implementation(tmp_path, qtype):
     assert CC is not None, "no C compiler"
     src = tmp_path / "ref.c"
