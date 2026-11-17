@@ -15,10 +15,11 @@ jobs:
         with:
           node-version: 20
       - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
-      - run: pip install -e ".[dev]" pandas
+      - run: pip install -e ".[dev]" pandas transformers==5.22.1   # transformers: the permutation and re-basin tests (tiny random configs, no downloads); the version the Kaggle jobs pin
       - run: python -m pytest -q -rs
         env:
           PEDIGREE_REQUIRE_CC: "1"   # the GGUF reference-parity tests must run here, not skip
+          PEDIGREE_NO_SKIPS: "1"     # any skipped test fails the run (tests/conftest.py)
       - name: verdicts, RESULTS.md and the site match the ledger
         run: |
           python scripts/analyse.py
