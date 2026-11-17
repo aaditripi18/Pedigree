@@ -1347,15 +1347,297 @@
      "id": "H19",
      "statement": "Direction by content dates (D4: the earliest last-commit date of each repository's current weight files; the earlier is the parent) is right on >= 95% of fresh decided pairs, <= 10% undecided.",
      "follows": "H15",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "d4": [
+       236,
+       263,
+       [
+        0.8548,
+        0.9285
+       ]
+      ],
+      "undecided": [
+       0,
+       263
+      ],
+      "d4_wrong": [
+       [
+        "Comfy-Org/Qwen-Image-Edit",
+        "Qwen/Qwen-Image-Edit-2509",
+        "2025-08-19T02:30:52.000Z",
+        "2025-09-22T13:27:38.000Z"
+       ],
+       [
+        "Comfy-Org/Qwen-Image-Edit",
+        "FireRedTeam/FireRed-Image-Edit-1.0",
+        "2025-08-19T02:30:52.000Z",
+        "2026-02-14T04:14:49.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "nvidia/ChronoEdit-14B-Diffusers",
+        "2025-07-27T07:16:47.000Z",
+        "2025-10-29T20:04:42.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "Wan-AI/Wan2.2-Animate-14B",
+        "2025-07-27T07:16:47.000Z",
+        "2025-09-11T13:01:32.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "alibaba-pai/Wan2.2-Fun-A14B-Control-Camera",
+        "2025-07-27T07:16:47.000Z",
+        "2025-08-12T03:14:07.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "alibaba-pai/Wan2.2-Fun-A14B-Control",
+        "2025-07-27T07:16:47.000Z",
+        "2025-08-07T04:00:15.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "alibaba-pai/Wan2.2-Fun-A14B-InP",
+        "2025-07-27T07:16:47.000Z",
+        "2025-08-07T04:00:58.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "Wan-AI/Wan2.2-S2V-14B",
+        "2025-07-27T07:16:47.000Z",
+        "2025-08-25T03:09:18.000Z"
+       ],
+       [
+        "Comfy-Org/stable-diffusion-3.5",
+        "stabilityai/stable-diffusion-3.5-medium",
+        "2024-10-22T01:49:01.000Z",
+        "2024-10-29T14:34:24.000Z"
+       ],
+       [
+        "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "Qwen/Qwen2.5-Coder-14B",
+        "2024-11-06T09:43:39.000Z",
+        "2024-11-08T12:50:31.000Z"
+       ],
+       [
+        "Qwen/Qwen3.5-0.8B",
+        "Qwen/Qwen3.5-0.8B-Base",
+        "2026-03-01T00:03:43.000Z",
+        "2026-03-01T00:05:19.000Z"
+       ],
+       [
+        "anuragshas/wav2vec2-large-xlsr-53-telugu",
+        "facebook/wav2vec2-large-xlsr-53",
+        "2021-03-24T19:28:51.000Z",
+        "2021-06-09T18:53:03.000Z"
+       ],
+       [
+        "autotrust/JEV-35B-NVFP4",
+        "autotrust/JEV-35B",
+        "2026-10-11T03:07:57.000Z",
+        "2026-10-11T14:20:20.000Z"
+       ],
+       [
+        "cross-encoder/ms-marco-MiniLM-L4-v2",
+        "cross-encoder/ms-marco-MiniLM-L12-v2",
+        "2021-04-15T18:38:04.000Z",
+        "2021-04-15T18:39:21.000Z"
+       ],
+       [
+        "google/gemma-3-4b-it",
+        "google/gemma-3-4b-pt",
+        "2025-03-12T05:28:52.000Z",
+        "2025-03-12T05:28:57.000Z"
+       ],
+       [
+        "google/gemma-4-E4B-it",
+        "google/gemma-4-E4B",
+        "2026-04-02T10:53:06.000Z",
+        "2026-04-02T10:53:09.000Z"
+       ],
+       [
+        "rippertnt/HyperCLOVAX-SEED-Text-Instruct-1.5B-Q4_K_M-GGUF",
+        "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-1.5B",
+        "2025-04-24T04:03:40.000Z",
+        "2025-04-24T10:48:58.000Z"
+       ],
+       [
+        "swiss-ai/Apertus-8B-Instruct-2509",
+        "swiss-ai/Apertus-8B-2509",
+        "2025-09-01T15:35:48.000Z",
+        "2025-09-02T01:05:05.000Z"
+       ],
+       [
+        "Comfy-Org/gemma-4",
+        "google/gemma-4-12B-it",
+        "2026-04-12T14:16:03.000Z",
+        "2026-06-03T21:14:23.000Z"
+       ],
+       [
+        "LiquidAI/LFM2.5-230M-GGUF",
+        "LiquidAI/LFM2.5-230M",
+        "2026-06-24T10:20:49.000Z",
+        "2026-06-25T09:27:59.000Z"
+       ],
+       [
+        "LiquidAI/LFM2.5-24B-A2B-GGUF",
+        "LiquidAI/LFM2.5-24B-A2B",
+        "2026-10-13T06:11:44.000Z",
+        "2026-10-13T16:59:33.000Z"
+       ],
+       [
+        "VAGOsolutions/SauerkrautLM-Reason-EuroColBERT",
+        "DavidGF/SauerkrautLM-EuroColBERT",
+        "2025-08-03T00:12:46.000Z",
+        "2025-08-03T00:13:12.000Z"
+       ],
+       [
+        "allenai/OLMo-2-0425-1B-Instruct",
+        "allenai/OLMo-2-0425-1B-RLVR1",
+        "2025-04-29T18:59:15.000Z",
+        "2025-04-30T13:33:58.000Z"
+       ],
+       [
+        "TheBloke/Mistral-7B-Phibrarian-32K-GGUF",
+        "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k",
+        "2023-10-17T19:54:36.000Z",
+        "2023-10-26T02:26:54.000Z"
+       ],
+       [
+        "ltg/normistral-11b-thinking",
+        "norallm/normistral-11b-long",
+        "2025-12-05T14:54:19.000Z",
+        "2025-12-08T14:05:22.000Z"
+       ],
+       [
+        "mradermacher/cantonesellm-lihkg-story-merged-GGUF",
+        "wcyat/cantonesellm-lihkg-story-merged",
+        "2024-11-26T13:48:36.000Z",
+        "2024-11-29T13:32:24.000Z"
+       ],
+       [
+        "mradermacher/mirrorqwen2.5-0.5b-SimPO-0-GGUF",
+        "rawsh/mirrorqwen2.5-0.5b-SimPO-0",
+        "2024-11-10T20:38:00.000Z",
+        "2024-11-10T21:41:03.000Z"
+       ]
+      ],
+      "beside": {
+       "n": 263,
+       "d3": [
+        244,
+        257,
+        [
+         0.9154,
+         0.9702
+        ]
+       ],
+       "d3_undecided": [
+        6,
+        263
+       ],
+       "d1": [
+        236,
+        260,
+        [
+         0.8663,
+         0.9372
+        ]
+       ],
+       "d2": [
+        28,
+        127,
+        [
+         0.1572,
+         0.3002
+        ]
+       ],
+       "d3_wrong": [
+        [
+         "AtomicChat/LFM2.5-24B-A2B-Uncensored-GGUF",
+         "LiquidAI/LFM2.5-24B-A2B"
+        ],
+        [
+         "Comfy-Org/Qwen-Image-Edit",
+         "Qwen/Qwen-Image-Edit-2509"
+        ],
+        [
+         "Comfy-Org/Qwen-Image-Edit",
+         "FireRedTeam/FireRed-Image-Edit-1.0"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "nvidia/ChronoEdit-14B-Diffusers"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "Wan-AI/Wan2.2-Animate-14B"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "alibaba-pai/Wan2.2-Fun-A14B-Control-Camera"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "alibaba-pai/Wan2.2-Fun-A14B-Control"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "alibaba-pai/Wan2.2-Fun-A14B-InP"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "Wan-AI/Wan2.2-S2V-14B"
+        ],
+        [
+         "Comfy-Org/stable-diffusion-3.5",
+         "stabilityai/stable-diffusion-3.5-medium"
+        ],
+        [
+         "Comfy-Org/gemma-4",
+         "google/gemma-4-12B-it"
+        ],
+        [
+         "llmfan46/MiniMax-M2.7-ultra-uncensored-heretic-GGUF",
+         "llmfan46/MiniMax-M2.7-BF16-ultra-uncensored-heretic"
+        ],
+        [
+         "ltg/normistral-11b-thinking",
+         "norallm/normistral-11b-long"
+        ]
+       ]
+      }
+     },
+     "evidence": "D4 right on 236/263 decided, undecided 0/263 (same pairs: D1 236/260, D3 244/257)"
     },
     {
      "id": "H20",
      "statement": "On fresh GGUF pairs where names align >= 8 tensors, structural alignment v2 (stacks of unequal block counts; names ignored) gives the same related / unrelated verdict for >= 98%.",
      "follows": "H17a, H17b",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "agree": [
+       373,
+       382
+      ],
+      "opposite": 1,
+      "abstained": 8,
+      "v1_agree": [
+       331,
+       382
+      ],
+      "unrelated_by_names": 15,
+      "e2_pairs": {
+       "comparable": 2,
+       "related": 12,
+       "related_below_floor": 10,
+       "n": 14
+      }
+     },
+     "evidence": "v2 373/382 agree (opposite 1, aligned too few 8; v1 331/382); E2's 14 unaligned pairs: 2 comparable (>= 8 tensors); 12 above a threshold, 10 of them on fewer than 8 tensors"
     }
    ],
    "audit": {
@@ -2786,15 +3068,291 @@
      "id": "H19",
      "statement": "Direction by content dates (D4: the earliest last-commit date of each repository's current weight files; the earlier is the parent) is right on >= 95% of fresh decided pairs, <= 10% undecided.",
      "follows": "H15",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "d4": [
+       232,
+       258,
+       [
+        0.8564,
+        0.9303
+       ]
+      ],
+      "undecided": [
+       0,
+       258
+      ],
+      "d4_wrong": [
+       [
+        "Comfy-Org/Qwen-Image-Edit",
+        "Qwen/Qwen-Image-Edit-2509",
+        "2025-08-19T02:30:52.000Z",
+        "2025-09-22T13:27:38.000Z"
+       ],
+       [
+        "Comfy-Org/Qwen-Image-Edit",
+        "FireRedTeam/FireRed-Image-Edit-1.0",
+        "2025-08-19T02:30:52.000Z",
+        "2026-02-14T04:14:49.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "nvidia/ChronoEdit-14B-Diffusers",
+        "2025-07-27T07:16:47.000Z",
+        "2025-10-29T20:04:42.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "Wan-AI/Wan2.2-Animate-14B",
+        "2025-07-27T07:16:47.000Z",
+        "2025-09-11T13:01:32.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "alibaba-pai/Wan2.2-Fun-A14B-Control-Camera",
+        "2025-07-27T07:16:47.000Z",
+        "2025-08-12T03:14:07.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "alibaba-pai/Wan2.2-Fun-A14B-Control",
+        "2025-07-27T07:16:47.000Z",
+        "2025-08-07T04:00:15.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "alibaba-pai/Wan2.2-Fun-A14B-InP",
+        "2025-07-27T07:16:47.000Z",
+        "2025-08-07T04:00:58.000Z"
+       ],
+       [
+        "Comfy-Org/Wan-2.2",
+        "Wan-AI/Wan2.2-S2V-14B",
+        "2025-07-27T07:16:47.000Z",
+        "2025-08-25T03:09:18.000Z"
+       ],
+       [
+        "Comfy-Org/stable-diffusion-3.5",
+        "stabilityai/stable-diffusion-3.5-medium",
+        "2024-10-22T01:49:01.000Z",
+        "2024-10-29T14:34:24.000Z"
+       ],
+       [
+        "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "Qwen/Qwen2.5-Coder-14B",
+        "2024-11-06T09:43:39.000Z",
+        "2024-11-08T12:50:31.000Z"
+       ],
+       [
+        "Qwen/Qwen3.5-0.8B",
+        "Qwen/Qwen3.5-0.8B-Base",
+        "2026-03-01T00:03:43.000Z",
+        "2026-03-01T00:05:19.000Z"
+       ],
+       [
+        "anuragshas/wav2vec2-large-xlsr-53-telugu",
+        "facebook/wav2vec2-large-xlsr-53",
+        "2021-03-24T19:28:51.000Z",
+        "2021-06-09T18:53:03.000Z"
+       ],
+       [
+        "autotrust/JEV-35B-NVFP4",
+        "autotrust/JEV-35B",
+        "2026-10-11T03:07:57.000Z",
+        "2026-10-11T14:20:20.000Z"
+       ],
+       [
+        "google/gemma-3-4b-it",
+        "google/gemma-3-4b-pt",
+        "2025-03-12T05:28:52.000Z",
+        "2025-03-12T05:28:57.000Z"
+       ],
+       [
+        "google/gemma-4-E4B-it",
+        "google/gemma-4-E4B",
+        "2026-04-02T10:53:06.000Z",
+        "2026-04-02T10:53:09.000Z"
+       ],
+       [
+        "rippertnt/HyperCLOVAX-SEED-Text-Instruct-1.5B-Q4_K_M-GGUF",
+        "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-1.5B",
+        "2025-04-24T04:03:40.000Z",
+        "2025-04-24T10:48:58.000Z"
+       ],
+       [
+        "swiss-ai/Apertus-8B-Instruct-2509",
+        "swiss-ai/Apertus-8B-2509",
+        "2025-09-01T15:35:48.000Z",
+        "2025-09-02T01:05:05.000Z"
+       ],
+       [
+        "Comfy-Org/gemma-4",
+        "google/gemma-4-12B-it",
+        "2026-04-12T14:16:03.000Z",
+        "2026-06-03T21:14:23.000Z"
+       ],
+       [
+        "LiquidAI/LFM2.5-230M-GGUF",
+        "LiquidAI/LFM2.5-230M",
+        "2026-06-24T10:20:49.000Z",
+        "2026-06-25T09:27:59.000Z"
+       ],
+       [
+        "LiquidAI/LFM2.5-24B-A2B-GGUF",
+        "LiquidAI/LFM2.5-24B-A2B",
+        "2026-10-13T06:11:44.000Z",
+        "2026-10-13T16:59:33.000Z"
+       ],
+       [
+        "VAGOsolutions/SauerkrautLM-Reason-EuroColBERT",
+        "DavidGF/SauerkrautLM-EuroColBERT",
+        "2025-08-03T00:12:46.000Z",
+        "2025-08-03T00:13:12.000Z"
+       ],
+       [
+        "allenai/OLMo-2-0425-1B-Instruct",
+        "allenai/OLMo-2-0425-1B-RLVR1",
+        "2025-04-29T18:59:15.000Z",
+        "2025-04-30T13:33:58.000Z"
+       ],
+       [
+        "TheBloke/Mistral-7B-Phibrarian-32K-GGUF",
+        "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k",
+        "2023-10-17T19:54:36.000Z",
+        "2023-10-26T02:26:54.000Z"
+       ],
+       [
+        "ltg/normistral-11b-thinking",
+        "norallm/normistral-11b-long",
+        "2025-12-05T14:54:19.000Z",
+        "2025-12-08T14:05:22.000Z"
+       ],
+       [
+        "mradermacher/cantonesellm-lihkg-story-merged-GGUF",
+        "wcyat/cantonesellm-lihkg-story-merged",
+        "2024-11-26T13:48:36.000Z",
+        "2024-11-29T13:32:24.000Z"
+       ],
+       [
+        "mradermacher/mirrorqwen2.5-0.5b-SimPO-0-GGUF",
+        "rawsh/mirrorqwen2.5-0.5b-SimPO-0",
+        "2024-11-10T20:38:00.000Z",
+        "2024-11-10T21:41:03.000Z"
+       ]
+      ],
+      "beside": {
+       "n": 258,
+       "d3": [
+        239,
+        252,
+        [
+         0.9138,
+         0.9696
+        ]
+       ],
+       "d3_undecided": [
+        6,
+        258
+       ],
+       "d1": [
+        232,
+        256,
+        [
+         0.8643,
+         0.9362
+        ]
+       ],
+       "d2": [
+        25,
+        122,
+        [
+         0.1428,
+         0.285
+        ]
+       ],
+       "d3_wrong": [
+        [
+         "AtomicChat/LFM2.5-24B-A2B-Uncensored-GGUF",
+         "LiquidAI/LFM2.5-24B-A2B"
+        ],
+        [
+         "Comfy-Org/Qwen-Image-Edit",
+         "Qwen/Qwen-Image-Edit-2509"
+        ],
+        [
+         "Comfy-Org/Qwen-Image-Edit",
+         "FireRedTeam/FireRed-Image-Edit-1.0"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "nvidia/ChronoEdit-14B-Diffusers"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "Wan-AI/Wan2.2-Animate-14B"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "alibaba-pai/Wan2.2-Fun-A14B-Control-Camera"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "alibaba-pai/Wan2.2-Fun-A14B-Control"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "alibaba-pai/Wan2.2-Fun-A14B-InP"
+        ],
+        [
+         "Comfy-Org/Wan-2.2",
+         "Wan-AI/Wan2.2-S2V-14B"
+        ],
+        [
+         "Comfy-Org/stable-diffusion-3.5",
+         "stabilityai/stable-diffusion-3.5-medium"
+        ],
+        [
+         "Comfy-Org/gemma-4",
+         "google/gemma-4-12B-it"
+        ],
+        [
+         "llmfan46/MiniMax-M2.7-ultra-uncensored-heretic-GGUF",
+         "llmfan46/MiniMax-M2.7-BF16-ultra-uncensored-heretic"
+        ],
+        [
+         "ltg/normistral-11b-thinking",
+         "norallm/normistral-11b-long"
+        ]
+       ]
+      }
+     },
+     "evidence": "D4 right on 232/258 decided, undecided 0/258 (same pairs: D1 232/256, D3 239/252)"
     },
     {
      "id": "H20",
      "statement": "On fresh GGUF pairs where names align >= 8 tensors, structural alignment v2 (stacks of unequal block counts; names ignored) gives the same related / unrelated verdict for >= 98%.",
      "follows": "H17a, H17b",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "agree": [
+       369,
+       382
+      ],
+      "opposite": 5,
+      "abstained": 8,
+      "v1_agree": [
+       327,
+       382
+      ],
+      "unrelated_by_names": 35,
+      "e2_pairs": {
+       "comparable": 2,
+       "related": 12,
+       "related_below_floor": 10,
+       "n": 14
+      }
+     },
+     "evidence": "v2 369/382 agree (opposite 5, aligned too few 8; v1 327/382); E2's 14 unaligned pairs: 2 comparable (>= 8 tensors); 12 above a threshold, 10 of them on fewer than 8 tensors"
     }
    ],
    "audit": {

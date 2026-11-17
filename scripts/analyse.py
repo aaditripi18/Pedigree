@@ -815,12 +815,16 @@ def h20(h19r, n_sample: int, h20e2, T, rule) -> dict:
     judged = n >= 20 and neg >= 5
     e2c = sum((r.get("compared") or 0) >= MIN_COMPARED and not r.get("error") for r in h20e2 if "lost" not in r)
     e2rel = sum(related(r, T, rule) == "related" for r in h20e2 if "lost" not in r)
+    e2few = sum(related(r, T, rule) == "related" and (r.get("compared") or 0) < MIN_COMPARED
+                for r in h20e2 if "lost" not in r)
     return {**base, "verdict": verdict(agree / n >= 0.98) if judged else "not judged",
             "numbers": {"agree": [agree, n], "opposite": opposite, "abstained": n - agree - opposite,
                         "v1_agree": [v1, n], "unrelated_by_names": neg,
-                        "e2_pairs": {"comparable": e2c, "related": e2rel, "n": len(h20e2)}},
+                        "e2_pairs": {"comparable": e2c, "related": e2rel, "related_below_floor": e2few,
+                                     "n": len(h20e2)}},
             "evidence": f"v2 {agree}/{n} agree (opposite {opposite}, aligned too few {n - agree - opposite}; v1 "
-                        f"{v1}/{n}); E2's {len(h20e2)} unaligned pairs: {e2c} comparable, {e2rel} related"}
+                        f"{v1}/{n}); E2's {len(h20e2)} unaligned pairs: {e2c} comparable (>= {MIN_COMPARED} tensors); "
+                        f"{e2rel} above a threshold, {e2few} of them on fewer than {MIN_COMPARED} tensors"}
 
 # --- main -------------------------------------------------------------------------------------------
 

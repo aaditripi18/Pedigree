@@ -80,14 +80,18 @@ judged once on fresh pairs.
 | H17a | Structural GGUF alignment (names ignored) agrees with name alignment on >= 98% of fresh pairs | **not supported** | 279/339 agree; 0 opposite verdicts, the other 60 aligned no tensor (Qwen 3.5-3.8 multimodal/MTP and clip GGUFs) |
 | H17b | Structural alignment makes >= 50% of E2's 32 declared GGUF pairs with no name match comparable | **not supported** | 15/32 comparable (all 15 related) |
 | H18 | Behaviour confirms >= 90% of the declared Hub pairs weights cannot compare (text models <= 14B) | pending | runs only if H16 or H16b is supported |
+| H19 | Direction by content dates (each repository's earliest weight-file commit; the earlier is the parent): >= 95% right, <= 10% undecided, fresh | **not supported** | right on 236/263 decided (89.7%), 0 undecided; on the same pairs dates alone 236/260, D3 244/257 |
+| H20 | Structural alignment v2 (stacks, unequal block counts) agrees with name alignment on >= 98% of fresh GGUF pairs | **not supported** | 373/382 agree (v1: 331/382); 1 opposite verdict, 8 aligned too few tensors |
 
-H2, H3, H7-H9, H12, H14, H14b, H15 and H17a failed their bars; they are reported as they came out,
+H2, H3, H7-H9, H12, H14, H14b, H15, H17a, H17b, H19 and H20 failed their bars; they are reported as they came out,
 and never reworded. H2 and H3 are measurements of the Hub (its declarations are more honest than the hypotheses
 guessed). Every other failed hypothesis has a follow-up, designed from the failure's cause in the data
 and written into [PLAN.md](PLAN.md) before any of its data existed: H13 for H7 (supported), H15 for
 H8, H16 and H16b for H9, H12, H14 and H14b, H17 for the unverifiable bases, H18 for behaviour above
-2B parameters. H13 was judged on 360 Hub models no rule was chosen on, drawn before any was read;
-H15 and H17a on a new sample of 360 (seed 20261118), drawn the same way.
+2B parameters, H19 for H15 and H20 for H17. H19 and H20 are the last follow-ups on direction and
+alignment: their results are recorded and no further follow-up on either is made. H13 was judged on 360 Hub models no rule was chosen on, drawn before any was read;
+H15 and H17a on a new sample of 360 (seed 20261118), H19 and H20 on another of 355 (seed 20261119),
+drawn the same way.
 
 ## Every caveat, measured
 
@@ -133,6 +137,15 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   at all (Qwen 3.5-3.8 multimodal and multi-token-prediction GGUFs and clip models, whose two sides
   differ in block count). On E2's 32 declared GGUF pairs no name maps (H17b, not supported), it made
   15 comparable, all related (E2s).
+- **Structural alignment v2 (H20).** v2 splits each side into stacks (`blk`, `v.blk`, `t.blk`;
+  `language_model.layers`, `visual.blocks`, `mtp.layers`) and aligns block i with block i, so
+  unequal block counts no longer stop it. On 382 fresh GGUF pairs names align (H20, not supported)
+  it agrees on 373, against v1's 331. It gives one opposite verdict: an encoder-only uMT5 GGUF
+  whose base holds an encoder and a decoder stack of the same length; v2 pairs it with the decoder
+  (cosine 0.002, where names give 0.99999). The other 8 it aligns 0-1 tensors in: upscaled and
+  merged models whose blocks do not correspond one to one. On E2's 14 GGUF pairs nothing else aligns
+  it makes 2 comparable (8 or more tensors); 12 score above a threshold, 10 of them on 3-7 tensors.
+  The audit keeps names, then v1.
 - **All re-reads together (E2r, E2g, E2p, E2f, E2s).** Declared bases the weights confirm rise from
   214 to 263 models and unverifiable ones fall from 84 to 35; no verdict changes (H2 106/379, H3
   3/279, H7 b 88/250). The 35 (36 declared pairs): 14 GGUF files neither names nor structure align;
@@ -183,7 +196,13 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   repositories older than the base they declare (a repackaging repo created 50-174 days before its
   five bases; GGUF quantisations created up to 34 days before theirs). And kurtosis is right on only
   22 of 118 decided fresh Hub pairs: on Hub fine-tunes the child usually has the *lower* kurtosis,
-  the reverse of what the kurtosis rule (after MoTHer) assumes. The audit keeps using dates.
+  the reverse of what the kurtosis rule (after MoTHer) assumes. Content dates (H19, not supported:
+  each repository's earliest weight-file commit, read from the Hub's file listing) are right on 236
+  of 263 fresh pairs and leave none undecided, but miss for the same two reasons: 10 of the 27
+  errors are one multi-model repackaging repository whose oldest file belongs to another model, 10
+  are one organisation's joint releases uploaded within about two days (the instruct files of some
+  seconds before the base's), and in the other 7 the base's current weight files were committed
+  after the derivative's. The audit keeps using dates.
 
 ## Use it
 

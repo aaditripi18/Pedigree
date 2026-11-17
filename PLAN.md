@@ -788,3 +788,25 @@ that group on both sides, as in v1. Nothing else changes (sampling, cosine, thre
   tensors in are reported separately, and v1 is reported beside it on the same pairs. Applied to the 14
   declared E2 GGUF pairs neither names nor v1 align, the number v2 makes comparable is reported (a
   measurement, no bar).
+
+**Outcome of H19 and H20 (recorded after judging, 2026-11-18; Kaggle job `pedigree-h19` read all 355
+sampled models, none lost; the 14 E2 pairs, ledger `H20e2`, all read).**
+
+- **H19: not supported.** D4 is right on 236 of 263 decided pairs (89.7%, Wilson 85.5-92.9%) and leaves
+  0 of 263 undecided. On the same pairs D1 is right on 236/260 and D3 on 244/257. Of D4's 27 errors,
+  10 are one multi-model repackaging repository (Comfy-Org) whose earliest weight file belongs to a
+  different model than the declared base; 10 are same-owner releases uploaded within 2.2 days of each
+  other (base and instruct or GGUF; in four, the derived files were committed seconds or minutes
+  before the base's); and in 7 the base's current weight files were committed 0-77 days after the
+  derivative's.
+- **H20: not supported.** v2 agrees with names on 373 of 382 pairs (97.6%; 15 of them unrelated by
+  names, so the test was judged). v1 agrees on 331 of the same 382. One opposite verdict:
+  `city96/umt5-xxl-encoder-gguf` vs `google/umt5-xxl`, related by names (0.99999) and unrelated by v2
+  (0.0024), because the base's `encoder.block` and `decoder.block` stacks have the same block count and
+  the tie-break (more tensors) chose the decoder. 8 pairs v2 aligned 0-1 tensors in, all upscaled or
+  merged models. On E2's 14 frozen pairs, v2 made 2 comparable (>= 8 tensors); 12 score above a
+  threshold, 10 of them on 3-7 tensors, which is below `MIN_COMPARED`, so they are not counted as
+  comparable.
+- As set out in this amendment, no further follow-up on direction or alignment is made. The audit
+  keeps D1 dates for direction and names-then-v1 for GGUF alignment. Open: H16 and H16b (GPU), and H18
+  only if one of them is supported.
