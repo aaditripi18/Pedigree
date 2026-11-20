@@ -1650,15 +1650,38 @@
      "id": "H23a",
      "statement": "On fresh pairs where names align >= 8 tensors, alignment v3 (names ignored) gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
      "follows": "H20",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "agree": [
+       518,
+       526
+      ],
+      "opposite": 2,
+      "abstained": 6,
+      "unrelated_by_names": 37,
+      "v2_agree": [
+       337,
+       526
+      ]
+     },
+     "evidence": "v3 518/526 agree, opposite 2, aligned too few 6 (37 unrelated by names)"
     },
     {
      "id": "H23b",
      "statement": "On fresh declared pairs where names align fewer than 8 tensors, alignment v3 makes >= 80% comparable.",
      "follows": "H20, H17b",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "comparable": [
+       73,
+       145
+      ],
+      "e2_dev": [
+       0,
+       0
+      ]
+     },
+     "evidence": "73/145 comparable; on E2's pairs (design data, not counted) 0/0"
     },
     {
      "id": "H24",
@@ -1666,6 +1689,20 @@
      "follows": "speech and diffusion had no behaviour test",
      "verdict": "pending",
      "evidence": "students wait for GPU quota"
+    },
+    {
+     "id": "H25a",
+     "statement": "On fresh pairs where names align >= 8 tensors, alignment v4 (names ignored) gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H23a",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H25b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, alignment v4 makes >= 80% comparable.",
+     "follows": "H23b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {
@@ -3393,15 +3430,38 @@
      "id": "H23a",
      "statement": "On fresh pairs where names align >= 8 tensors, alignment v3 (names ignored) gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
      "follows": "H20",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "agree": [
+       465,
+       526
+      ],
+      "opposite": 55,
+      "abstained": 6,
+      "unrelated_by_names": 47,
+      "v2_agree": [
+       332,
+       526
+      ]
+     },
+     "evidence": "v3 465/526 agree, opposite 55, aligned too few 6 (47 unrelated by names)"
     },
     {
      "id": "H23b",
      "statement": "On fresh declared pairs where names align fewer than 8 tensors, alignment v3 makes >= 80% comparable.",
      "follows": "H20, H17b",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "comparable": [
+       73,
+       145
+      ],
+      "e2_dev": [
+       0,
+       0
+      ]
+     },
+     "evidence": "73/145 comparable; on E2's pairs (design data, not counted) 0/0"
     },
     {
      "id": "H24",
@@ -3409,6 +3469,20 @@
      "follows": "speech and diffusion had no behaviour test",
      "verdict": "pending",
      "evidence": "students wait for GPU quota"
+    },
+    {
+     "id": "H25a",
+     "statement": "On fresh pairs where names align >= 8 tensors, alignment v4 (names ignored) gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H23a",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H25b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, alignment v4 makes >= 80% comparable.",
+     "follows": "H23b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {

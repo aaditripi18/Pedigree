@@ -975,6 +975,66 @@ def h23(h23r, n_sample: int, e2v3, T, rule) -> list[dict]:
              "evidence": f"{comp}/{len(low)} comparable; on E2's pairs (design data, not counted) {devc}/{len(dev)}"}]
 
 
+def h25(h25r, n_sample: int, h25d, T, rule) -> list[dict]:
+    """Amendment 2026-11-20 (2): alignment v4 on a fresh sample; H23's pairs (design data) beside it."""
+    sa = ("On fresh pairs where names align >= 8 tensors, alignment v4 (names ignored) gives the same related / "
+          "unrelated verdict for >= 98% and the opposite verdict for none.")
+    sb = ("On fresh declared pairs where names align fewer than 8 tensors and both models were read, alignment v4 "
+          "makes >= 80% comparable.")
+    ba = {"id": "H25a", "statement": sa, "follows": "H23a"}
+    bb = {"id": "H25b", "statement": sb, "follows": "H23b"}
+    if not h25r or len(h25r) < n_sample:
+        return [{**ba, "verdict": "pending", "evidence": "fresh sample running"},
+                {**bb, "verdict": "pending", "evidence": "fresh sample running"}]
+    pairs, low, unread, maps = [], [], 0, Counter()
+    for m in h25r:
+        for a in [d.get("alignments") for d in m.get("declared", [])] + list(m.get("pool_alignments", [])):
+            if not a or not a.get("names"):
+                continue
+            vn = _verdict_plain(a["names"], T, rule)
+            if vn != "not comparable":
+                s4 = a.get("struct4") or {}
+                pairs.append((vn, _verdict_plain(s4, T, rule), _verdict_plain(a.get("struct3"), T, rule)))
+                if s4.get("map"):
+                    maps[s4["map"]] += 1
+        for d in m.get("declared", []):
+            a = d.get("alignments") or {}
+            nm = a.get("names")
+            if nm is None:
+                continue
+            if nm.get("error"):
+                unread += 1
+                continue
+            if (nm.get("compared") or 0) < MIN_COMPARED:
+                au = a.get("auto4") or {}
+                low.append(0 if au.get("error") else (au.get("compared") or 0))
+    n = len(pairs)
+    agree = sum(a == b for a, b, _ in pairs)
+    opposite = sum(b != "not comparable" and a != b for a, b, _ in pairs)
+    neg = sum(a == "unrelated" for a, _, _ in pairs)
+    judged = n >= 20 and neg >= 5
+    va = verdict(agree / n >= 0.98 and opposite == 0) if judged else "not judged"
+    comp = sum(c >= MIN_COMPARED for c in low)
+    vb = verdict(comp / len(low) >= 0.8) if low else "not judged"
+    dd = [r for r in h25d if r.get("role") == "declared"]
+    d_read = [r for r in dd if r.get("alignments") and not (r["alignments"].get("names") or {}).get("error")]
+    d_comp = sum(1 for r in d_read if not (r["alignments"].get("auto4") or {}).get("error")
+                 and ((r["alignments"]["auto4"].get("compared") or 0) >= MIN_COMPARED))
+    dp = [r for r in h25d if r.get("role") == "pool" and r.get("alignments")]
+    dp_fixed = sum(_verdict_plain(r["alignments"].get("struct4"), T, rule)
+                   == _verdict_plain(r["alignments"].get("names"), T, rule) for r in dp)
+    design = (f"H23's pairs under v4 (design data, not counted): {d_comp}/{len(d_read)} declared pairs comparable"
+              f", {dp_fixed}/{len(dp)} former opposite verdicts now agree" if h25d else "H23's pairs under v4 running")
+    return [{**ba, "verdict": va, "numbers": {"agree": [agree, n], "opposite": opposite, "abstained": n - agree - opposite,
+                                               "unrelated_by_names": neg, "v3_agree": [sum(a == c for a, _, c in pairs), n],
+                                               "depth_maps": dict(maps)},
+             "evidence": f"v4 {agree}/{n} agree, opposite {opposite}, aligned too few {n - agree - opposite} "
+                         f"({neg} unrelated by names; v3 {sum(a == c for a, _, c in pairs)}/{n})"},
+            {**bb, "verdict": vb, "numbers": {"comparable": [comp, len(low)], "not_read": unread,
+                                               "design_declared": [d_comp, len(d_read)], "design_pool": [dp_fixed, len(dp)]},
+             "evidence": f"{comp}/{len(low)} comparable ({unread} declared pairs not read count under H21/R2); {design}"}]
+
+
 def _calibrated(rows, key, dev_seeds, sus_seeds, ref_seeds, floor_of):
     """H16b / H24's rule: r* from the dev batch (references: the batch's other independents), then the
     fresh suspects against the fresh references; a family counts only if both batches' independents
@@ -1161,11 +1221,15 @@ def main() -> None:
     e2xp = latest_runs(rows, "E2xp", lambda r: 0)
     e2v3 = latest_runs(rows, "E2v3", lambda r: 0)
     h23r = latest_runs(rows, "H23", lambda r: 0)
+    h25r = latest_runs(rows, "H25", lambda r: 0)
+    h25d = latest_runs(rows, "H25d", lambda r: 0)
     e5e_h24 = latest_runs(rows, "E5e-h24", lambda r: (r.get("meta") or {}).get("family", r.get("family")))
     for r in e5e_h24:
         r.setdefault("family", (r.get("meta") or {}).get("family"))
     s23 = json.loads((ROOT / "results" / "h23_sample.json").read_text(encoding="utf-8"))
     n23 = sum(len(v) for v in s23["sample"].values())
+    s25 = json.loads((ROOT / "results" / "h25_sample.json").read_text(encoding="utf-8"))
+    n25 = sum(len(v) for v in s25["sample"].values())
     x_targets = json.loads((ROOT / "results" / "e2x_targets.json").read_text(encoding="utf-8"))
     s19 = json.loads((ROOT / "results" / "h19_sample.json").read_text(encoding="utf-8"))
     n19 = sum(len(v) for v in s19["sample"].values())
@@ -1194,7 +1258,8 @@ def main() -> None:
         h16r, h16br = h16(e5e_dev, e5e_fresh, e5e_h16), h16b_full(e5e_h16b)
         hs += [h15(e2, h15r, T, rule), h16r, h16br, *h17(h15r, with_rescores(e2, e2r, e2g), e2s, T, rule),
                h18(h16r, h16br), h19(h19r, n19, T, rule), h20(h19r, n19, h20e2, T, rule),
-               h21(e2x, len(x_targets["models"])), *h23(h23r, n23, e2v3, T, rule), h24(e5e_h24)]
+               h21(e2x, len(x_targets["models"])), *h23(h23r, n23, e2v3, T, rule), h24(e5e_h24),
+               *h25(h25r, n25, h25d, T, rule)]
         if e2r:
             e2f_all = with_rescores(e2, e2r, e2g, e2s, e2f)
             Af = audit(e2f_all, T, rule)
