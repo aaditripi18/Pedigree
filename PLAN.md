@@ -810,3 +810,112 @@ sampled models, none lost; the 14 E2 pairs, ledger `H20e2`, all read).**
 - As set out in this amendment, no further follow-up on direction or alignment is made. The audit
   keeps D1 dates for direction and names-then-v1 for GGUF alignment. Open: H16 and H16b (GPU), and H18
   only if one of them is supported.
+
+## Amendment 2026-11-20: closing every remaining gap, before any of its data
+
+The project owner asked on 2026-11-20 that no gap remain that work could close. This amendment
+re-opens alignment (closed by the 2026-11-18 amendment) on the owner's instruction; direction stays
+closed (H8, H15 and H19 tried every rule the data suggested; the audit reports D1 with its measured
+accuracy). Every earlier verdict stands as recorded. E2 stays as recorded; every new reading is
+reported beside it, as E2r, E2g, E2p, E2f and E2s were. All rules below are fixed before any of the
+models they apply to is read with them; the readers were checked only on repositories outside every
+sample, and against reference libraries (tests).
+
+### R1: readers for every weight format with a public specification
+
+**Cause.** 46 of E2's 600 models were never read (E2 counted them "not readable"), so they were
+never searched for a parent or compared with a declared base, and every re-reading since (E2r, E2g,
+E2p, E2f, E2s) re-scored *pairs* only. Their reasons: a pre-zip PyTorch file (12; the reader has
+decoded this format since E2p, but these models were never read again), ONNX only (10), no weight
+file in a known place (10: CTranslate2 `model.bin`, TFLite, LiteRT-LM, and repositories with no
+weights), other checkpoint formats (6: `.pt`, `.pth`, `.ckpt`, `.nemo`, MLX `.npz`), gated (3), a
+flair pickle the restricted unpickler refused (1), HTTP 403 (1), and GGUF repositories whose files
+sit in subfolders (3).
+
+**Readers** (`pedigree/formats.py`, `pedigree/torchzip.py`), each tested against the format's
+reference library on the same file (`tests/test_formats.py`): ONNX (initializers, Constant nodes,
+external data; `DequantizeLinear` weights read as values), NumPy `.npz`, CTranslate2 `model.bin`
+(int8 weights read as values with their row scales), NeMo `.nemo` (the PyTorch checkpoint inside
+the tar, read in place), PyTorch `.pt`/`.pth`/`.ckpt` (optimizer and discriminator states left
+out), TFLite (flatbuffer schema; int8 weights read with their scales), PaddlePaddle `.pdiparams`,
+and LiteRT-LM if its container schema is public (otherwise listed with the source checked). The
+restricted unpickler now stands in an inert placeholder for an unknown *class* (keeping its state,
+so tensors inside a framework's objects are found) and still refuses every function and every
+torch/numpy global other than the tensor records; no code from any file runs. GGUF shard sets in
+subfolders are chosen by the same precision preference as top-level ones.
+
+**E2x.** Every E2 model recorded "not readable", and every declared or pool pair whose other side
+was unreadable, is read again with R1 and audited exactly as E2 audited a model (declared bases,
+the E2 pool, the invariant score, the same thresholds), ledger `E2x`. `scripts/analyse.py`
+reports E2 as recorded and, beside it, E2 with E2x applied.
+
+- **H21** After E2x, no E2 model is unreadable because of its file format, except formats with no
+  public specification (each listed with the source that was checked). Models unreadable because
+  the repository holds no weights, or is gated or private, are counted by reason and do not count
+  against H21.
+
+### R2: what a declaration names, for the pairs weights still cannot compare
+
+Every declared pair that is not comparable after E2x and R3 is put in exactly one category, by these
+rules in order, so no pair is left as an unexplained "unverifiable": (1) the declared base is not of
+the form `owner/name` ("not a repository id"); (2) the Hub redirects it to another repository
+(renamed): the pair is read again under the new name; (3) the Hub answers 401 or 404 to an anonymous
+request ("not found on the Hub, or private": the Hub does not tell the two apart); (4) gated (the
+repository exists and asks for terms; read when an account that accepted them is available); (5)
+model and base share fewer than 8 tensors of equal shape ("different structure": a draft head, a
+random-weight model of the base's architecture, a model that uses the base as one part); (6) a weight
+format with no public specification. A pair in none of these is listed by name as a gap of the audit.
+
+### R3 and H23: alignment v3 (re-opened 2026-11-20)
+
+**Cause, from H20.** v2 gave one opposite verdict: an encoder-only GGUF paired with its base's decoder
+stack, because the two stacks have the same block count and the tie-break preferred the larger. It
+aligned 0-1 tensors in 8 upscaled or merged models whose block counts differ from their base's. And 14
+E2 GGUF pairs align under no rule: their GGUF files keep their own tensor names (ComfyUI-GGUF
+diffusion models, whisper.cpp, parakeet and TTS converters, and new architectures).
+
+**Alignment v3** (`pedigree/structalign.py`), used whenever names pair fewer than 8 tensors, for any
+two formats (not only GGUF): (a) *direct names*: a tensor whose name, after removing a leading
+`model.`, `model.diffusion_model.`, `diffusion_model.` or `transformer.`, equals a name on the other
+side with the same shape (the GGUF shape reversed) is paired; (b) *role-paired stacks*: stacks are
+paired first by a shared role word in their prefix (`encoder`/`enc`, `decoder`/`dec`, `vision`/
+`visual`/`v`, `text`/`t`, `audio`/`a`, `language_model`), then as in v2; (c) *unequal depth*: in a
+stack pair with n and m blocks (n != m), block i is aligned with block round(i * (m - 1) / (n - 1)), an
+order-preserving map that uses no weight values; within each block pair, tensors are paired by unique
+shape as in v1. (a) is tried first, then (b) with (c); the mapping that pairs more tensors is used.
+
+**Fresh data.** A new frozen sample (`results/h23_sample.json`, seed 20261120, drawn before any of it
+is read): frame models in none of E2's, H13's, H15's or H19's samples that declare a base and whose
+weights are GGUF, ONNX, CTranslate2 or NeMo, up to 150 per download tier (all where fewer remain).
+Each is aligned with each declared base and the two top-ranked E2-pool candidates under names, v2
+and v3.
+
+- **H23a** On the fresh pairs where names align >= 8 tensors, v3 run with names ignored gives the
+  same related / unrelated verdict for >= 98% and the opposite verdict for none (judged if >= 20
+  pairs, >= 5 of them unrelated by names).
+- **H23b** On the fresh declared pairs where names align fewer than 8 tensors, v3 makes >= 80%
+  comparable (>= 8 tensors). The 14 E2 pairs, on which v3 was designed, are reported beside it and do
+  not count.
+
+### H24: behaviour for speech and diffusion models (GPU, with H16/H16b)
+
+**Cause.** E5, H16 and H16b test behaviour on four families; speech and diffusion have none.
+
+**Design.** As H16b: half-depth students from a random initialisation, distilled (imitating the
+teacher's outputs) and independent (trained on the task's own targets), 20,000 steps (learning rate
+5e-4, 1,000 warm-up steps, cosine decay). *Speech:* teacher facebook/wav2vec2-base-960h; distilled
+students imitate its per-frame CTC distributions (KL, temperature 2) on LibriSpeech train-clean-100
+audio, independent students train with CTC on its transcripts; score: dark-knowledge divergence of
+per-frame distributions on 200 LibriSpeech test-clean utterances. *Diffusion:* teacher
+google/ddpm-cifar10-32 for both batches; distilled students regress the teacher's noise prediction,
+independent students the true noise, on CIFAR-10 train; score: mean squared difference from the
+teacher's noise prediction on 1,000 CIFAR-10 test images at 10 fixed timesteps, divided by the
+teacher's own error (lower = closer). Competence floor: a family counts only if its independent
+students reach >= 50% of the teacher's task score (speech: 1 - character error rate; diffusion:
+1 - normalised noise error), recorded per student. Dev batch seeds 50-52 (distilled and independent);
+fresh suspects 53-57, references 58-60; r*_c chosen on dev exactly as H16's r*.
+
+- **H24** On the fresh suspects of the families that pass the floor, drop > r*_c gives TPR >= 90% and
+  FPR <= 5% (pooled; not decidable if no family passes the floor).
+
+H18 runs if H16 or H16b is supported (only they test text language models; H24 does not open H18).
