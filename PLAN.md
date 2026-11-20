@@ -882,7 +882,7 @@ paired first by a shared role word in their prefix (`encoder`/`enc`, `decoder`/`
 `visual`/`v`, `text`/`t`, `audio`/`a`, `language_model`), then as in v2; (c) *unequal depth*: in a
 stack pair with n and m blocks (n != m), block i is aligned with block round(i * (m - 1) / (n - 1)), an
 order-preserving map that uses no weight values; within each block pair, tensors are paired by unique
-shape as in v1. (a) is tried first, then (b) with (c); the mapping that pairs more tensors is used.
+shape as in v1. (a) is tried first, then (b) with (c); the mapping that pairs more tensors is used. *(Added the same day, before any model was read with v3:)* (d) a 2-D tensor whose shape occurs once on each side only when reversed (ONNX and TFLite store linear weights transposed) is paired with its transpose, read whole (tensors over 64 MB are left out). v3 is applied when names pair fewer than 8 tensors (`auto3`); H23a runs it with names ignored (`struct3`).
 
 **Fresh data.** A new frozen sample (`results/h23_sample.json`, seed 20261120, drawn before any of it
 is read): frame models in none of E2's, H13's, H15's or H19's samples that declare a base and whose
