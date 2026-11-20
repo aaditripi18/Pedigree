@@ -886,7 +886,7 @@ shape as in v1. (a) is tried first, then (b) with (c); the mapping that pairs mo
 
 **Fresh data.** A new frozen sample (`results/h23_sample.json`, seed 20261120, drawn before any of it
 is read): frame models in none of E2's, H13's, H15's or H19's samples that declare a base and whose
-weights are GGUF, ONNX, CTranslate2 or NeMo, up to 150 per download tier (all where fewer remain).
+weights are GGUF, ONNX, CTranslate2 or NeMo, up to 150 per download tier (all where fewer remain). *(Same day, before drawing: the format is taken from the frame's `library` field, GGUF = gguf, GGUF, llama.cpp, llama-cpp, llamacpp, llama_cpp, llama-cpp-python, node-llama-cpp, ggml, ik_llama.cpp, comfyui-gguf-reboot, wllama, ollama; ONNX = onnx, onnxruntime, onnxruntime-web, onnxruntime-genai, transformers.js, gliner2-onnx, onnx-asr; CTranslate2 = ctranslate2, faster-whisper; NeMo = nemo. The format actually read is recorded per model.)*
 Each is aligned with each declared base and the two top-ranked E2-pool candidates under names, v2
 and v3.
 
