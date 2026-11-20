@@ -469,10 +469,51 @@ JOBS["h24-smoke"] = _job("pedigree-h24-smoke",
                          env={"PEDIGREE_STEPS": "3", "PEDIGREE_WARMUP": "1", "PEDIGREE_H24_SHARDS": "1",
                               "PEDIGREE_H24_DIFF_PROBES": "20", "PEDIGREE_H24_SPEECH_PROBES": "3"})
 
+# GPU follow-ups run on friends' accounts (their own keys, never held here): who runs which job, so
+# pulls and the CPU scoring jobs mount the right owner's output. Each friend shares the finished
+# notebook with the project account as viewer.
+GPU_ASSIGN = {
+    "alien5060707": ["distill4-text_decoder", "distill4-vision_cnn", "h16b-text_encoder-dev",
+                     "h16b-text_encoder-fresh-a", "h16b-text_encoder-fresh-b"],
+    "rohajraj": ["h16b-text_encoder-fresh-c", "h16b-vision_transformer-dev", "h16b-vision_transformer-fresh-a",
+                 "h16b-vision_transformer-fresh-b", "h16b-vision_transformer-fresh-c"],
+    "alubalub": [f"h24-speech-{p}" for p in H24_PARTS],
+    "moinuddinhasan8": [f"h24-diffusion_unet-{p}" for p in H24_PARTS],
+}
+for _friend, _jobs in GPU_ASSIGN.items():
+    for _j in _jobs:
+        JOBS[_j]["owner"] = _friend
+HANDOFF = ROOT.parent / "Pedigree_handoff"
+
+
+def kit(job: str, sha: str | None = None) -> Path:
+    """A friend's handoff folder for one job: run.py and kernel-metadata.json under their account."""
+    spec = JOBS[job]
+    owner = spec.get("owner")
+    if not owner or owner == USER:
+        sys.exit(f"{job} has no friend assigned (GPU_ASSIGN)")
+    sha = sha or git("rev-parse", "--short", "HEAD")
+    d = HANDOFF / owner / spec["kernel"]
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "run.py").write_text(notebook_source(job, sha), encoding="utf-8")
+    (d / "kernel-metadata.json").write_text(json.dumps({
+        "id": f"{owner}/{spec['kernel']}", "title": spec["kernel"], "code_file": "run.py",
+        "language": "python", "kernel_type": "script", "is_private": True,
+        "enable_gpu": spec["gpu"], "enable_tpu": False, "enable_internet": True,
+        "dataset_sources": [f"{USER}/{DATASET}"], "competition_sources": [],
+        "kernel_sources": [ref(s) for s in spec["sources"]]}, indent=1), encoding="utf-8")
+    print(f"{job}: {d}")
+    return d
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "push":
         push()
+    elif cmd == "kits":                      # every assigned GPU job, at the committed code
+        for _jobs in GPU_ASSIGN.values():
+            for j in _jobs:
+                kit(j)
     else:
         for j in sys.argv[2:]:
-            {"run": run, "status": status, "pull": pull}[cmd](j)
+            {"run": run, "status": status, "pull": pull, "kit": kit}[cmd](j)
