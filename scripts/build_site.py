@@ -557,7 +557,7 @@ data.</p>
     jw = [w for w in d8["d1_wrong"] if w[2] and abs(w[3]) <= 30]
     joint, joint_days = len(jw), max((abs(w[3]) for w in jw), default=0)
     cnn = H["H14b"]["numbers"]["per_family"]["vision_cnn"]
-    STEPS = int(re.search(r"^STEPS = (\d+)", (ROOT / "experiments" / "distill.py").read_text(encoding="utf-8"),
+    STEPS = int(re.search(r"^STEPS = (?:int\(os\.environ\.get\(\"PEDIGREE_STEPS\", \")?(\d+)", (ROOT / "experiments" / "distill.py").read_text(encoding="utf-8"),
                           re.M).group(1))
     cav = [
         ("Declared bases weights cannot compare",
