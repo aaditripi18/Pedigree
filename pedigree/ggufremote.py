@@ -106,8 +106,9 @@ def sample(url: str, spec: dict, elements: int) -> np.ndarray:
         qtype = gguf.GGMLQuantizationType(spec["qtype"])
     except ValueError:
         qtype = None
-    if qtype is None or qtype not in gguf.GGML_QUANT_SIZES:
-        # newer than the installed gguf package: decoded from the public source (pedigree/ggufextra.py)
+    if qtype is None or qtype not in gguf.GGML_QUANT_SIZES or spec["qtype"] in ggufextra.TYPES:
+        # newer than the installed gguf package, or listed there with no decoder (Q1_0): decoded
+        # from the public source (pedigree/ggufextra.py)
         if spec["qtype"] not in ggufextra.TYPES:
             raise ValueError(f"GGUF tensor type {spec['qtype']} is not in llama.cpp's published list "
                              "(a fork's own format)")

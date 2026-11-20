@@ -1,6 +1,8 @@
 """GGUF tensor types newer than the published `gguf` package, decoded from public sources only
 (PLAN.md, amendment 2026-11-17 (4), H17: "a type is decoded only from a public source").
 
+  41  Q1_0      llama.cpp master (ggml/src/ggml-common.h block_q1_0, ggml-quants.c: dequantize_row_q1_0);
+                the gguf package lists it but cannot decode it
   42  Q2_0      llama.cpp master (ggml/src/ggml-common.h, ggml-quants.c: dequantize_row_q2_0)
   43  F8_E4M3   llama.cpp master (ggml-impl.h: ggml_f8_e4m3_to_fp32, OCP FP8)
   142 PQ2_0     PrismML-Eng/llama.cpp, branch prism (dequantize_row_pq2_0): Q2_0's codec, group 128
@@ -21,9 +23,9 @@ from __future__ import annotations
 import numpy as np
 
 # type id -> (name, values per block, bytes per block)
-TYPES = {42: ("Q2_0", 64, 18), 43: ("F8_E4M3", 1, 1), 142: ("PQ2_0", 128, 34), 143: ("PTQ1_0", 128, 28),
+TYPES = {41: ("Q1_0", 128, 18), 42: ("Q2_0", 64, 18), 43: ("F8_E4M3", 1, 1), 142: ("PQ2_0", 128, 34), 143: ("PTQ1_0", 128, 28),
          139: ("IQ4_K", 256, 144), 339: ("IQ4_K_R4", 256, 144)}
-SOURCES = {42: "llama.cpp master", 43: "llama.cpp master", 142: "PrismML-Eng/llama.cpp (prism)",
+SOURCES = {41: "llama.cpp master", 42: "llama.cpp master", 43: "llama.cpp master", 142: "PrismML-Eng/llama.cpp (prism)",
            143: "PrismML-Eng/llama.cpp (prism)", 139: "ikawrakow/ik_llama.cpp", 339: "ikawrakow/ik_llama.cpp"}
 ROW_GROUP = {339: 4}
 IQ4K_VALUES = np.array([-127, -104, -83, -65, -49, -35, -22, -10, 1, 13, 25, 38, 53, 69, 89, 113,
@@ -117,7 +119,16 @@ def _iq4_k_r4(raw: bytes, cols: int) -> np.ndarray:
     return y.reshape(G * 4, cols).reshape(-1)
 
 
+def _q1(raw: bytes) -> np.ndarray:
+    b = np.frombuffer(raw, dtype=np.uint8).reshape(-1, 18)
+    d = b[:, :2].copy().view(np.float16).astype(np.float32)          # (nb, 1)
+    bits = np.unpackbits(b[:, 2:], axis=1, bitorder="little")        # element j: byte j//8, bit j%8
+    return np.where(bits == 1, d, -d).astype(np.float32).reshape(-1)
+
+
 def dequantize(raw: bytes, qtype: int, cols: int | None = None) -> np.ndarray:
+    if qtype == 41:
+        return _q1(raw)
     if qtype == 42:
         return _q2(raw, 64, 18)
     if qtype == 142:

@@ -919,3 +919,61 @@ fresh suspects 53-57, references 58-60; r*_c chosen on dev exactly as H16's r*.
   FPR <= 5% (pooled; not decidable if no family passes the floor).
 
 H18 runs if H16 or H16b is supported (only they test text language models; H24 does not open H18).
+
+**Outcome of H23 (recorded after judging, 2026-11-20; Kaggle job `pedigree-h23` read all 300 sampled
+models, none lost).**
+
+- **H23a: not supported.** v3 (names ignored) agrees with names on 518 of 526 pairs, 37 of them
+  unrelated by names (judged); 6 abstain (v3 aligns too few) and 2 are opposite. Both opposite verdicts
+  are one model, `SalahALHaismawi/Nuqta-Arabic-OCR-4B-GGUF`, against two Qwen3.5-4B pool candidates:
+  related by names (median 0.507), unrelated by v3 (0.004). The GGUF has 35 blocks and the base 32;
+  read by name, its blocks 0-14 equal the base's blocks 0-14 (cosine >= 0.996) and its later blocks do
+  not, so the model keeps the base's blocks at their own indices, and v3's proportional map (c) paired
+  block i with round(i * 31 / 34), off by one from block 6 on.
+- **H23b: not supported.** v3 makes 73 of 145 fresh declared pairs comparable. Of the 72 it does not:
+  30 are ONNX exports (transformers.js and others) whose large weights are initializers with no name
+  (`onnx::MatMul_N`), stored transposed, so only biases and norms pair; 36 pair fewer than 8 large
+  tensors because tensors of one shape repeat inside a block (attention q/k/v/o, two feed-forward
+  layers), which (c)'s unique-shape rule leaves unpaired, or a converter dropped a size-1 dimension
+  (`(2048, 1024)` against `(2048, 1024, 1)`), or the two layouts really differ (fused and split
+  attention); 6 could not be read: GGUF type 41 (Q1_0, which the gguf package lists but cannot decode;
+  4 others use type 103, which no public source defines).
+
+## Amendment 2026-11-20 (2): H25, alignment v4, after H23 and before any of its data
+
+The project owner's instruction of 2026-11-20 (no gap left that work can close) stands. H23's verdicts
+stand as recorded; H23's sample is design data for v4 and is reported beside H25, not counted.
+
+**Readers.** (i) GGUF type 41 (Q1_0) is decoded from llama.cpp's `dequantize_row_q1_0` (weight j is
+bit j % 8 of byte j / 8: +d if set, else -d), with a parity test against that C function. (ii) ONNX:
+an initializer whose name begins `onnx::` and which is input 1 of exactly one `MatMul` node, or of a
+`Gemm` node, takes that node's path as its name (`/encoder/layer.0/attention/query/MatMul` ->
+`encoder.layer.0.attention.query.weight`). `MatMul` (and `Gemm` without `transB`) stores the weight as
+[in, out], so it is seen as its transpose [out, in] (read whole; over 64 MB it keeps its anonymous name).
+E2x and H23 are reproduced with these off (`PEDIGREE_READERS_V4=0`).
+
+**Alignment v4** (`pedigree/structalign.py`): v3 with three changes, none using weight values except (c4).
+(e) Shapes are equal when they are equal after removing size-1 dimensions (same element order).
+(f) Tensors of one shape that repeat within a block pair (or among tensors with no block index) are
+paired by name: the leaf names (the part after the block index; lower case, only letters and digits)
+are compared by longest-common-subsequence length, and a and b are paired when each is the other's
+single best match, strictly above its second best.
+(c4) In a stack pair with n != m blocks, three order-preserving block maps are built: equal index from
+the first block (i -> i), equal index from the last block (i -> i + m - n), and v3's proportional map.
+Each is scored as usual and the one with the highest median plain score is kept (the map is recorded).
+With n = m, only i -> i is used.
+v4 is applied when names pair fewer than 8 tensors with >= 4,096 values each (`auto4`; v3 counted
+tensors of any size). H25a runs it with names ignored (`struct4`).
+
+**Fresh data.** A new frozen sample (`results/h25_sample.json`, seed 20261121, drawn before any of it
+is read): the H23 rule (same library field values, a declared base, up to 150 per download tier),
+excluding E2's, H13's, H15's, H19's and H23's samples. Each model is aligned with each declared base
+and the two top-ranked pool candidates under names, v3 and v4.
+
+- **H25a** On the fresh pairs where names align >= 8 tensors, v4 with names ignored gives the same
+  related / unrelated verdict for >= 98% and the opposite verdict for none (judged if >= 20 pairs, >= 5
+  of them unrelated by names). Picking the best of three block maps can only raise a score; an unrelated
+  pair turning related counts as opposite.
+- **H25b** On the fresh declared pairs where names align fewer than 8 tensors and both models were
+  read, v4 makes >= 80% comparable (>= 8 tensors). Pairs that could not be read count under H21 and R2,
+  not here. H23's 145 pairs are reported beside it under v4 and do not count.

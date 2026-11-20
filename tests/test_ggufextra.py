@@ -1,6 +1,6 @@
 """GGUF types newer than the gguf package (pedigree/ggufextra.py) decode exactly as their public
 reference implementations do. The C below is copied from those sources (llama.cpp master and
-PrismML-Eng/llama.cpp branch prism, ikawrakow/ik_llama.cpp, all MIT): dequantize_row_q2_0,
+PrismML-Eng/llama.cpp branch prism, ikawrakow/ik_llama.cpp, all MIT): dequantize_row_q1_0, dequantize_row_q2_0,
 dequantize_row_pq2_0, dequantize_row_ptq1_0, ggml_f8_e4m3_to_fp32, dequantize_row_iq4_k and
 dequantize_row_iq4_k_r4 (C++
 `auto` written out as its C type, nothing else changed). Compiled where a C compiler exists; CI
@@ -25,6 +25,8 @@ REF = r"""
 #include <math.h>
 typedef _Float16 ggml_half;
 #define GGML_FP16_TO_FP32(x) ((float)(x))
+#define QK1_0 128
+typedef struct { ggml_half d; uint8_t qs[QK1_0 / 8]; } block_q1_0;
 #define QK2_0 64
 typedef struct { ggml_half d; uint8_t qs[QK2_0 / 4]; } block_q2_0;
 #define QK_PQ2_0 128
@@ -90,6 +92,12 @@ void dequantize_row_iq4_k_r4(const block_iq4_k_r4 * x, float * y, int64_t k) {
     }
 }
 
+void dequantize_row_q1_0(const block_q1_0 * x, float * y, int64_t k) {
+    static const int qk = QK1_0; const int nb = k / qk;
+    for (int i = 0; i < nb; i++) { const float d = GGML_FP16_TO_FP32(x[i].d); const float neg_d = -d;
+        for (int j = 0; j < qk; ++j) { const int byte_index = j / 8; const int bit_offset = j % 8;
+            const uint8_t bit = (x[i].qs[byte_index] >> bit_offset) & 1; y[i*qk + j] = bit ? d : neg_d; } }
+}
 void dequantize_row_q2_0(const block_q2_0 * x, float * y, int64_t k) {
     static const int qk = QK2_0; const int nb = k / qk;
     for (int i = 0; i < nb; i++) { const float d = GGML_FP16_TO_FP32(x[i].d);
@@ -121,7 +129,8 @@ int main(int argc, char ** argv) {
     int type = atoi(argv[1]); long n = atol(argv[2]);         /* n values; raw bytes on stdin */
     static uint8_t buf[1 << 20]; size_t got = fread(buf, 1, sizeof buf, stdin);
     float * y = malloc(n * sizeof(float));
-    if (type == 42) dequantize_row_q2_0((block_q2_0 *) buf, y, n);
+    if (type == 41) dequantize_row_q1_0((block_q1_0 *) buf, y, n);
+    else if (type == 42) dequantize_row_q2_0((block_q2_0 *) buf, y, n);
     else if (type == 142) dequantize_row_pq2_0((block_pq2_0 *) buf, y, n);
     else if (type == 143) dequantize_row_ptq1_0((block_ptq1_0 *) buf, y, n);
     else if (type == 43) for (long i = 0; i < n; i++) y[i] = ggml_f8_e4m3_to_fp32(buf[i]);
@@ -136,7 +145,7 @@ int main(int argc, char ** argv) {
 def _random_blocks(qtype: int, nblocks: int, rng) -> bytes:
     _, qk, size = ggufextra.TYPES[qtype]
     raw = bytearray(rng.integers(0, 256, nblocks * size, dtype=np.uint8).tobytes())
-    if qtype in (42, 142, 143):     # put a finite fp16 scale where the format keeps it
+    if qtype in (41, 42, 142, 143):     # put a finite fp16 scale where the format keeps it
         off = 26 if qtype == 143 else 0
         for b in range(nblocks):
             raw[b * size + off: b * size + off + 2] = struct.pack("<e", float(rng.uniform(-0.1, 0.1)))
@@ -150,6 +159,7 @@ def _random_blocks(qtype: int, nblocks: int, rng) -> bytes:
 
 
 def test_block_sizes_match_the_layouts():
+    assert ggufextra.TYPES[41][2] == 2 + 128 // 8
     assert ggufextra.TYPES[42][2] == 2 + 64 // 4 and ggufextra.TYPES[142][2] == 2 + 128 // 4
     assert ggufextra.TYPES[143][2] == (128 - 4 * 128 // 64) // 5 + 128 // 64 + 2
 
@@ -160,13 +170,19 @@ def test_q2_codec_by_hand():
     assert np.allclose(ggufextra.dequantize(raw, 42)[:4], [-0.5, 0.0, 0.5, 1.0])
 
 
+def test_q1_codec_by_hand():
+    # one Q1_0 block, scale 0.25, byte 0 = 0b00000101: weights 0 and 2 are +d, 1 and 3..7 are -d
+    raw = struct.pack("<e", 0.25) + bytes([0b00000101] + [0] * 15)
+    assert np.allclose(ggufextra.dequantize(raw, 41)[:4], [0.25, -0.25, 0.25, -0.25])
+
+
 def test_ci_has_a_compiler():
     if os.environ.get("PEDIGREE_REQUIRE_CC") and CC is None:
         pytest.fail("PEDIGREE_REQUIRE_CC is set but no C compiler was found: the parity tests would not run")
 
 
 @pytest.mark.skipif(CC is None and not os.environ.get("PEDIGREE_REQUIRE_CC"), reason="no C compiler")
-@pytest.mark.parametrize("qtype", [42, 43, 139, 142, 143, 339])
+@pytest.mark.parametrize("qtype", [41, 42, 43, 139, 142, 143, 339])
 def test_equals_the_reference_implementation(tmp_path, qtype):
     assert CC is not None, "no C compiler"
     src = tmp_path / "ref.c"
