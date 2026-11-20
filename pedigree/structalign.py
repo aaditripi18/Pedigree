@@ -214,3 +214,141 @@ def names_v3(a_shapes: dict, b_shapes: dict) -> tuple[dict[str, str], set]:
     d = direct_names(a_shapes, b_shapes)
     s, tr = struct_names_v3(a_shapes, b_shapes)
     return (s, tr) if len(s) > len(d) else (d, set())
+
+
+# --- v4 (PLAN.md, amendment 2026-11-20 (2), H25): size-1 dimensions, repeated shapes, depth maps -----
+
+def _sq(shape) -> tuple:
+    """(e) a shape without its size-1 dimensions (the element order is unchanged)."""
+    return tuple(d for d in shape if d != 1)
+
+
+def _stacks4(shapes: dict):
+    st: dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    free: dict = defaultdict(list)
+    for name, (_kind, shape) in shapes.items():
+        s = _stack3(name)
+        if s is None:
+            free[_sq(shape)].append(name)
+        else:
+            st[s[0]][s[1]][_sq(shape)].append(name)
+    return st, free
+
+
+def _leaf(name: str) -> str:
+    """The part of a name after its block index (or the whole name, prefix removed), lower case,
+    letters and digits only."""
+    m = _ANY_STACK.search(name)
+    rest = name[m.end():] if m else _strip(name)
+    return re.sub(r"[^a-z0-9]", "", rest.lower())
+
+
+def _lcs(a: str, b: str) -> int:
+    prev = [0] * (len(b) + 1)
+    for ca in a:
+        cur = [0]
+        for j, cb in enumerate(b):
+            cur.append(prev[j] + 1 if ca == cb else max(prev[j + 1], cur[j]))
+        prev = cur
+    return prev[-1]
+
+
+def _pairs4(gs: dict, hs: dict, out: dict) -> None:
+    """Unique shapes as v1; (f) a shape that repeats: a and b are paired when each is the other's
+    single best match by leaf-name LCS length, strictly above its second best."""
+    used = set(out.values())
+    for shape, names in gs.items():
+        other = hs.get(shape)
+        if not other:
+            continue
+        A = [x for x in names if x not in out]
+        B = [y for y in other if y not in used]
+        if not A or not B:
+            continue
+        if len(names) == 1 and len(other) == 1:
+            out[A[0]] = B[0]
+            used.add(B[0])
+            continue
+        la, lb = {x: _leaf(x) for x in A}, {y: _leaf(y) for y in B}
+        S = {(x, y): _lcs(la[x], lb[y]) for x in A for y in B}
+        for x in A:
+            sx = sorted((S[x, y] for y in B), reverse=True)
+            if len(sx) > 1 and sx[0] == sx[1]:
+                continue
+            y = max(B, key=lambda y: S[x, y])
+            sy = sorted((S[x2, y] for x2 in A), reverse=True)
+            if (len(sy) > 1 and sy[0] == sy[1]) or sy[0] != S[x, y] or y in used:
+                continue
+            out[x] = y
+            used.add(y)
+
+
+def direct_names4(a_shapes: dict, b_shapes: dict) -> dict[str, str]:
+    """(a) with (e): equal names after the prefix, equal shapes without size-1 dimensions."""
+    b: dict = {}
+    for n, (_k, s) in b_shapes.items():
+        b.setdefault(_strip(n), []).append((n, _sq(s)))
+    out = {}
+    for n, (_k, s) in a_shapes.items():
+        hit = [m for m, t in b.get(_strip(n), []) if t == _sq(s)]
+        if len(hit) == 1:
+            out[n] = hit[0]
+    return out
+
+
+DEPTH_MAPS = ("first", "last", "proportional")
+
+
+def _block_map(kind: str, n: int, m: int, i: int) -> int | None:
+    if n == m or kind == "first":
+        j = i
+    elif kind == "last":
+        j = i + m - n
+    else:
+        j = round(i * (m - 1) / (n - 1)) if n > 1 else 0
+    return j if 0 <= j < m else None
+
+
+def struct_names_v4(a_shapes: dict, b_shapes: dict) -> list[tuple[str, dict, set]]:
+    """[(depth map, {a tensor: b tensor}, {a tensors paired as transposes})]: one entry if every
+    paired stack has equal depth, else one per map in DEPTH_MAPS (c4). Stacks are paired as in v3."""
+    ast_, afree = _stacks4(a_shapes)
+    bst, bfree = _stacks4(b_shapes)
+
+    def size(st, k):
+        return sum(len(v) for blk in st[k].values() for v in blk.values())
+    stack_pairs, free_b = [], set(bst)
+    for g in sorted(ast_, key=lambda k: (_role(k) is None, -size(ast_, k))):
+        if not free_b:
+            break
+        ng = len(ast_[g])
+        same_role = [k for k in free_b if _role(g) and _role(k) == _role(g)]
+        pool_ = same_role or ([k for k in free_b if _role(k) is None or _role(g) is None] or list(free_b))
+        h = min(pool_, key=lambda k: (abs(len(bst[k]) - ng), -size(bst, k)))
+        free_b.discard(h)
+        stack_pairs.append((g, h))
+    unequal = any(len(ast_[g]) != len(bst[h]) for g, h in stack_pairs)
+    out = []
+    for kind in (DEPTH_MAPS if unequal else ("equal",)):
+        mp, tr = {}, set()
+        for g, h in stack_pairs:
+            ga, hb = sorted(ast_[g]), sorted(bst[h])
+            for i, bi in enumerate(ga):
+                j = _block_map(kind, len(ga), len(hb), i)
+                if j is not None:
+                    _pairs4(ast_[g][bi], bst[h][hb[j]], mp)
+                    _transposed_pairs(ast_[g][bi], bst[h][hb[j]], mp, tr)
+        _pairs4(afree, bfree, mp)
+        _transposed_pairs(afree, bfree, mp, tr)
+        out.append((kind, mp, tr))
+    return out
+
+
+def names_v4(a_shapes: dict, b_shapes: dict, big=lambda names: len(names)) -> list[tuple[str, dict, set]]:
+    """H25's v4: direct names (a, e), else the structural candidates (one per depth map), whichever
+    pairs more large tensors (`big` counts them)."""
+    d = direct_names4(a_shapes, b_shapes)
+    cands = struct_names_v4(a_shapes, b_shapes)
+    if cands and max(big(m) for _, m, _ in cands) > big(d):
+        return cands
+    return [("direct", d, set())]

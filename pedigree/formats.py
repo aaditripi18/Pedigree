@@ -21,6 +21,7 @@ are parsed with ast.literal_eval, and archives are only indexed.
 from __future__ import annotations
 
 import ast
+import os
 import struct
 import zipfile
 
@@ -113,12 +114,50 @@ def _onnx_tensor(pb: _PB, span) -> dict:
     return t
 
 
+NODE_NAMES = os.environ.get("PEDIGREE_READERS_V4", "1") != "0"   # amendment 2026-11-20 (2), reader (ii)
+ONNX_TRANSPOSE_MAX = 64 * 1024 * 1024
+
+
+def _node_path(node: str) -> str | None:
+    """'/encoder/layer.0/attention/query/MatMul' -> 'encoder.layer.0.attention.query.weight'."""
+    parts = [p for p in node.strip("/").split("/") if p]
+    if len(parts) < 2:
+        return None
+    return ".".join(parts[:-1]) + ".weight"
+
+
+def _node_named(out: dict, uses: dict) -> dict:
+    """Anonymous `onnx::` initializers used as the weight (input 1) of exactly one MatMul or Gemm
+    node take that node's path; MatMul and Gemm without transB store [in, out], seen transposed."""
+    new: dict = {}
+    for name, use in uses.items():
+        if not name.startswith("onnx::") or name not in out or len(use) != 1:
+            continue
+        op, node, idx, trans_b = use[0]
+        path = _node_path(node) if idx == 1 else None
+        u, spec = out[name]
+        if path is None or path in out or len(spec["shape"]) != 2:
+            continue
+        if op == "MatMul" or (op == "Gemm" and not trans_b):
+            nbytes = spec["data_offsets"][1] - spec["data_offsets"][0]
+            if nbytes > ONNX_TRANSPOSE_MAX:
+                continue
+            spec = {**spec, "shape": list(spec["shape"])[::-1], "order": "F"}
+        new.setdefault(path, []).append((name, (u, spec)))
+    for path, items in new.items():
+        if len(items) == 1:                        # a path two weights would share is left anonymous
+            old, val = items[0]
+            del out[old]
+            out[path] = val
+    return out
+
+
 def onnx_header(repo: str, commit: str, path: str, size: int) -> tuple[dict, dict]:
     """({name: (url, spec)}, {quantised name: (scale name, zero-point name or None, axis)})."""
     url = resolve_url(repo, path, commit)
     pb = _PB(RangeFile(url, size))
     folder = path.rsplit("/", 1)[0] + "/" if "/" in path else ""
-    tensors, consts, deq = [], [], {}
+    tensors, consts, deq, uses = [], [], {}, {}
     for f, wt, v in pb.fields(0, size):
         if f != 7 or wt != 2:                      # ModelProto.graph
             continue
@@ -126,16 +165,36 @@ def onnx_header(repo: str, commit: str, path: str, size: int) -> tuple[dict, dic
             if g == 5 and gwt == 2:                # GraphProto.initializer
                 tensors.append(_onnx_tensor(pb, w))
             elif g == 1 and gwt == 2:              # GraphProto.node
-                ins, outs, op, attrs = [], [], "", []
+                ins, outs, op, attrs, node = [], [], "", [], ""
                 for h, hwt, x in pb.fields(w[0], w[0] + w[1]):
                     if h == 1:
                         ins.append(pb.bytes_at(x).decode("utf-8", "replace"))
                     elif h == 2:
                         outs.append(pb.bytes_at(x).decode("utf-8", "replace"))
+                    elif h == 3 and hwt == 2:
+                        node = pb.bytes_at(x).decode("utf-8", "replace")
                     elif h == 4:
                         op = pb.bytes_at(x).decode("utf-8", "replace")
                     elif h == 5 and hwt == 2:
                         attrs.append(x)
+                if NODE_NAMES and op in ("MatMul", "Gemm"):
+                    trans_b = False
+                    if op == "Gemm":
+                        for a in attrs:
+                            aname, aval = "", None
+                            for k, kwt, y in pb.fields(a[0], a[0] + a[1]):
+                                if k == 1:
+                                    aname = pb.bytes_at(y).decode("utf-8", "replace")
+                                elif k == 3 and kwt == 0:
+                                    aval = y
+                            if aname == "transB" and aval:
+                                trans_b = True
+                    for i, nm in enumerate(ins):
+                        uses.setdefault(nm, []).append((op, node, i, trans_b))
+                elif NODE_NAMES:
+                    for nm in ins:
+                        if nm.startswith("onnx::"):
+                            uses.setdefault(nm, []).append((op, node, -1, False))
                 if op == "Constant" and outs:
                     for a in attrs:
                         for k, kwt, y in pb.fields(a[0], a[0] + a[1]):
@@ -176,6 +235,8 @@ def onnx_header(repo: str, commit: str, path: str, size: int) -> tuple[dict, dic
                 continue                           # not the dense little-endian layout (e.g. strings)
             out[t["name"]] = (url, {"dtype": "F32" if t.get("packed_float") else dtype, "shape": t["dims"],
                                     "data_offsets": [b, b + length]})
+    if NODE_NAMES:
+        out = _node_named(out, uses)
     return out, {k: v for k, v in deq.items() if k in out}
 
 

@@ -199,10 +199,16 @@ JOBS["e2-struct2"] = _job("pedigree-e2-struct2", [["-m", "experiments.e2_rescore
 JOBS["h19"] = _job("pedigree-h19", [["-m", "experiments.h19_fresh", "--out", "/kaggle/working/h19_raw.jsonl"]],
                    gpu=False, env=dict(E2_ENV))
 # amendment 2026-11-20: E2x/E2xp/E2v3 (R1 readers, v3, R2 facts) and H23's fresh sample
+# E2x and H23 ran before the readers of amendment 2026-11-20 (2): reproduced with them off
 JOBS["e2x"] = _job("pedigree-e2x", [["-m", "experiments.e2x_reaudit", "--out", "/kaggle/working"]],
-                   gpu=False, env=dict(E2_ENV))
+                   gpu=False, env={**E2_ENV, "PEDIGREE_READERS_V4": "0"})
 JOBS["h23"] = _job("pedigree-h23", [["-m", "experiments.h23_fresh", "--out", "/kaggle/working/h23_raw.jsonl"]],
-                   gpu=False, env=dict(E2_ENV))
+                   gpu=False, env={**E2_ENV, "PEDIGREE_READERS_V4": "0"})
+# H25 (amendment 2026-11-20 (2)): the fresh sample, then H23's design pairs under v4
+JOBS["h25"] = _job("pedigree-h25", [["-m", "experiments.h25_fresh", "--out", "/kaggle/working/h25_raw.jsonl"],
+                                    ["-m", "experiments.h25_fresh", "--design",
+                                     "--out", "/kaggle/working/h25_design_raw.jsonl"]],
+                   gpu=False, env={**E2_ENV, "PEDIGREE_BUDGET_HOURS": "5.5"})   # two passes in one 12 h session
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
 # fit Kaggle's CPU budget, and the statistics do not depend on the device
 JOBS["e2-behaviour"] = _job("pedigree-e2-behaviour", [["-m", "experiments.e2_behaviour"]], gpu=False)

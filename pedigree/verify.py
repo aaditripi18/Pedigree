@@ -354,10 +354,11 @@ class Renamed:
     """A model seen under other tensor names (a GGUF file under Hugging Face names); tensors in
     `transposed` are seen as their transposes (alignment v3 (d))."""
 
-    def __init__(self, model, mapping: dict[str, str], transposed: set | None = None):
+    def __init__(self, model, mapping: dict[str, str], transposed: set | None = None, shapes: dict | None = None):
         self.model, self.repo, self.commit = model, model.repo, model.commit
         self.to_old = {new: old for old, new in mapping.items()}
         self.transposed = transposed or set()
+        self.shapes = shapes or {}      # v4 (e): a tensor seen with its partner's shape (size-1 dims only)
 
     def float_shapes(self):
         fs = self.model.float_shapes()
@@ -365,7 +366,10 @@ class Renamed:
         for new, old in self.to_old.items():
             if old in fs:
                 kind, shape = fs[old]
-                out[new] = (kind, tuple(shape)[::-1]) if old in self.transposed else fs[old]
+                if new in self.shapes:
+                    out[new] = (kind, tuple(self.shapes[new]))
+                else:
+                    out[new] = (kind, tuple(shape)[::-1]) if old in self.transposed else fs[old]
         return out
 
     def sample(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
@@ -404,6 +408,48 @@ def _gguf_mapping(gm, hm, alignment: str) -> dict[str, str]:
         if len(st) > len(names):
             return st
     return names
+
+
+def _big(shapes: dict):
+    return lambda names: sum(int(np.prod(shapes[n][1])) >= MIN_ELEMENTS for n in names if n in shapes)
+
+
+def candidates_v4(model, other, alignment: str) -> list[tuple]:
+    """[(model, other, label)] under alignment v4 (amendment 2026-11-20 (2), H25): names if they
+    pair >= STRUCT_BELOW large tensors ("auto4"), else v4's candidates, one per depth map (c4).
+    "struct4" ignores names. Counts are of tensors with >= MIN_ELEMENTS values."""
+    from .structalign import names_v4
+
+    def g(m):
+        return getattr(m, "gguf_meta", None)
+    ms, os_ = model.float_shapes(), other.float_shapes()
+    if g(model) and not g(other):
+        names = {} if alignment == "struct4" else ggufremote.hf_names(model.gguf_meta, ms, os_)
+        flip, base = False, 0
+    elif g(other) and not g(model):
+        names = {} if alignment == "struct4" else ggufremote.hf_names(other.gguf_meta, os_, ms)
+        flip, base = True, 0
+    else:
+        pairing, _, _ = align(ms, os_)
+        if alignment == "auto4" and _big(ms)(pairing) >= STRUCT_BELOW:
+            return [(model, other, "names")]
+        names, flip, base = {}, False, (0 if alignment == "struct4" else _big(ms)(pairing))
+    a, b = (other, model) if flip else (model, other)
+    sa, sb = a.float_shapes(), b.float_shapes()
+    if names and _big(sa)(names) >= STRUCT_BELOW:
+        return [(model, Renamed(other, names), "names") if flip else (Renamed(model, names), other, "names")]
+    out = []
+    for label, mp, tr in names_v4(sa, sb, _big(sa)):
+        if _big(sa)(mp) <= max(_big(sa)(names), base):
+            continue
+        shapes = {y: sb[y][1] for x, y in mp.items() if x not in tr and tuple(sa[x][1]) != tuple(sb[y][1])}
+        r = Renamed(a, mp, tr, shapes)
+        out.append((model, r, label) if flip else (r, other, label))
+    if out:
+        return out
+    if names:
+        return [(model, Renamed(other, names), "names") if flip else (Renamed(model, names), other, "names")]
+    return [(model, other, "names")]
 
 
 def harmonise(model, other, alignment: str = "names"):
@@ -445,8 +491,24 @@ def harmonise(model, other, alignment: str = "names"):
 
 
 def compare(model: Remote, other: Remote, n_tensors: int = N_TENSORS, alignment: str = "names") -> dict:
-    """Name/shape alignment and sampled weight similarity of two models."""
+    """Name/shape alignment and sampled weight similarity of two models. Under v4 ("auto4",
+    "struct4") each depth-map candidate is scored and the highest median kept (c4)."""
+    if alignment in ("auto4", "struct4"):
+        best, scores = None, {}
+        for m, o, label in candidates_v4(model, other, alignment):
+            r = _compare_aligned(m, o, n_tensors)
+            r["alignment_map"] = label
+            scores[label] = r["median_cosine"]
+            if best is None or (r["median_cosine"] is not None and
+                                (best["median_cosine"] is None or r["median_cosine"] > best["median_cosine"])):
+                best = r
+        best["map_scores"] = scores
+        return best
     model, other = harmonise(model, other, alignment)
+    return _compare_aligned(model, other, n_tensors)
+
+
+def _compare_aligned(model, other, n_tensors: int) -> dict:
     ms, os_ = model.float_shapes(), other.float_shapes()
     pairing, dm, do = align(ms, os_)
     match = len(pairing) / max(len(ms), 1)

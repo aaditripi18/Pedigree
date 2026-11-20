@@ -111,3 +111,85 @@ def test_v3_transposed_2d_tensors_are_read_as_transposes(tmp_path, monkeypatch):
     view = Renamed(r, m, tr)
     assert view.float_shapes()["layer.dense.weight"][1] == (6, 10)
     np.testing.assert_array_equal(view.sample("layer.dense.weight"), w.ravel())
+
+
+# --- v4 (amendment 2026-11-20 (2), H25) ------------------------------------------------------------
+
+def test_v4_repeated_shapes_pair_by_leaf_name_and_size1_dims_are_ignored():
+    from pedigree.structalign import struct_names_v4
+    g, h = {}, {}
+    for i in range(2):
+        for k in ("q", "k", "v", "out"):
+            g[f"encoder.layers.{i}.attn.{k}.weight"] = ("f", (16, 16))
+        g[f"encoder.layers.{i}.ff1.linear1.weight"] = ("f", (64, 16))
+        g[f"encoder.layers.{i}.ff2.linear1.weight"] = ("f", (64, 16))
+        g[f"encoder.layers.{i}.conv.pw1.weight"] = ("f", (32, 16))
+        for k in ("q", "k", "v", "out"):
+            h[f"encoder.layers.{i}.self_attn.linear_{k}.weight"] = ("f", (16, 16))
+        h[f"encoder.layers.{i}.feed_forward1.linear1.weight"] = ("f", (64, 16))
+        h[f"encoder.layers.{i}.feed_forward2.linear1.weight"] = ("f", (64, 16))
+        h[f"encoder.layers.{i}.conv.pointwise_conv1.weight"] = ("f", (32, 16, 1))
+    [(label, m, tr)] = struct_names_v4(g, h)
+    assert label == "equal" and not tr and len(m) == len(g)
+    assert m["encoder.layers.1.attn.k.weight"] == "encoder.layers.1.self_attn.linear_k.weight"
+    assert m["encoder.layers.0.ff2.linear1.weight"] == "encoder.layers.0.feed_forward2.linear1.weight"
+    assert m["encoder.layers.0.conv.pw1.weight"] == "encoder.layers.0.conv.pointwise_conv1.weight"
+
+
+def test_v4_leaves_equally_similar_names_unpaired():
+    from pedigree.structalign import struct_names_v4
+    g = {f"blk.0.{k}": ("f", (8, 8)) for k in ("xa", "xb")}
+    h = {f"model.layers.0.{k}": ("f", (8, 8)) for k in ("ya", "yb")}
+    g["blk.0.w"], h["model.layers.0.u"] = ("f", (8, 4)), ("f", (8, 4))
+    [(_, m, _)] = struct_names_v4(g, h)
+    assert m == {"blk.0.w": "model.layers.0.u", "blk.0.xa": "model.layers.0.ya", "blk.0.xb": "model.layers.0.yb"}
+    h2 = {f"model.layers.0.{k}": ("f", (8, 8)) for k in ("p", "q")}
+    [(_, m2, _)] = struct_names_v4({k: v for k, v in g.items() if k != "blk.0.w"}, h2)
+    assert m2 == {}                                        # no single best match: left out
+
+
+def test_v4_unequal_depth_gives_three_maps():
+    from pedigree.structalign import struct_names_v4
+    g = {f"blk.{i}.w": ("f", (8, 8)) for i in range(5)}
+    h = {f"model.layers.{i}.w": ("f", (8, 8)) for i in range(3)}
+    maps = {label: m for label, m, _ in struct_names_v4(g, h)}
+    assert maps["first"] == {f"blk.{i}.w": f"model.layers.{i}.w" for i in range(3)}
+    assert maps["last"] == {f"blk.{i}.w": f"model.layers.{i - 2}.w" for i in range(2, 5)}
+    # round(i * 2 / 4): blocks 0, 1 -> 0 and 3, 4 -> 2; a base tensor is never paired twice
+    assert maps["proportional"] == {"blk.0.w": "model.layers.0.w", "blk.2.w": "model.layers.1.w",
+                                    "blk.3.w": "model.layers.2.w"}
+
+
+class _Fake:
+    def __init__(self, repo, tensors):
+        self.repo, self.commit, self.gguf_meta, self.t = repo, "x", None, tensors
+
+    def float_shapes(self):
+        return {n: ("float", a.shape) for n, a in self.t.items()}
+
+    def sample(self, name, max_bytes=32 * 1024):
+        return self.t[name].ravel()[:max_bytes // 4].astype("float64")
+
+
+def test_v4_depth_maps_find_kept_blocks_and_stay_low_for_independent_models():
+    """The upscaled model keeps the base's blocks 0-7 at their own indices (as H23's opposite pair
+    did); the best of three maps finds it. Independent weights stay far below every threshold."""
+    import numpy as np
+    from pedigree.verify import compare
+    rng = np.random.RandomState(3)
+
+    def model(nb, seed_blocks):
+        return {f"blk.{i}.{k}": seed_blocks(i, k) for i in range(nb) for k in ("attn_q.weight", "ffn_up.weight")}
+    shape = {"attn_q.weight": (64, 128), "ffn_up.weight": (256, 64)}
+    base = {f"model.layers.{i}.{k2}": rng.randn(*shape[k]).astype("float32")
+            for i in range(8) for k, k2 in (("attn_q.weight", "self_attn.q_proj.weight"), ("ffn_up.weight", "mlp.up_proj.weight"))}
+    up = model(11, lambda i, k: base[f"model.layers.{i}." + ("self_attn.q_proj.weight" if k == "attn_q.weight" else "mlp.up_proj.weight")]
+               if i < 8 else rng.randn(*shape[k]).astype("float32"))
+    c = compare(_Fake("up", up), _Fake("base", base), alignment="struct4")
+    assert c["alignment_map"] == "first" and c["median_cosine"] > 0.99
+    worst = 0.0
+    for s in range(20):
+        r = np.random.RandomState(100 + s)
+        other = model(11, lambda i, k: r.randn(*shape[k]).astype("float32"))
+        worst = max(worst, compare(_Fake("o", other), _Fake("base", base), alignment="struct4")["median_cosine"])
+    assert worst < 0.0255 / 2

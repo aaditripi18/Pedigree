@@ -28,6 +28,9 @@ TYPES = {41: ("Q1_0", 128, 18), 42: ("Q2_0", 64, 18), 43: ("F8_E4M3", 1, 1), 142
 SOURCES = {41: "llama.cpp master", 42: "llama.cpp master", 43: "llama.cpp master", 142: "PrismML-Eng/llama.cpp (prism)",
            143: "PrismML-Eng/llama.cpp (prism)", 139: "ikawrakow/ik_llama.cpp", 339: "ikawrakow/ik_llama.cpp"}
 ROW_GROUP = {339: 4}
+# Q1_0 arrived with amendment 2026-11-20 (2); E2x and H23 ran without it (PEDIGREE_READERS_V4=0)
+if __import__("os").environ.get("PEDIGREE_READERS_V4", "1") == "0":
+    del TYPES[41], SOURCES[41]
 IQ4K_VALUES = np.array([-127, -104, -83, -65, -49, -35, -22, -10, 1, 13, 25, 38, 53, 69, 89, 113,
                         -123, -100, -79, -61, -45, -31, -18, -6, 5, 17, 29, 42, 57, 73, 93, 117], dtype=np.float32)
 # seen on the Hub, no public definition found (searched llama.cpp, PrismML-Eng/llama.cpp, ik_llama.cpp)

@@ -334,3 +334,35 @@ def test_gzip_nemo_member_extracted_once(tmp_path, local, monkeypatch):
     monkeypatch.setenv("PEDIGREE_CACHE", str(tmp_path / "cache"))
     r = remote_model(tmp_path, ["old.nemo"])
     np.testing.assert_array_equal(r.sample("encoder.w", 10 ** 6), sd["encoder.w"].numpy().ravel())
+
+
+def test_onnx_anonymous_matmul_weights_take_the_node_path(tmp_path, local, monkeypatch):
+    """Amendment 2026-11-20 (2), reader (ii): torch.onnx stores Linear weights as `onnx::MatMul_N`
+    initializers in [in, out] order; they take the MatMul node's path and are seen as [out, in]."""
+    onnx = pytest.importorskip("onnx")
+    from onnx import helper, numpy_helper, TensorProto
+    rng = np.random.RandomState(7)
+    wq = rng.randn(16, 8).astype(np.float32)        # [in, out] as torch.onnx writes x @ W.T
+    wg = rng.randn(8, 16).astype(np.float32)        # Gemm with transB=1: already [out, in]
+    shared = rng.randn(16, 16).astype(np.float32)   # used by two nodes: stays anonymous
+    inits = [numpy_helper.from_array(wq, "onnx::MatMul_11"), numpy_helper.from_array(wg, "onnx::Gemm_12"),
+             numpy_helper.from_array(shared, "onnx::MatMul_13")]
+    nodes = [helper.make_node("MatMul", ["x", "onnx::MatMul_11"], ["y"], name="/encoder/layer.0/attention/query/MatMul"),
+             helper.make_node("Gemm", ["y", "onnx::Gemm_12"], ["z"], name="/pooler/dense/Gemm", transB=1),
+             helper.make_node("MatMul", ["x", "onnx::MatMul_13"], ["u"], name="/a/MatMul"),
+             helper.make_node("MatMul", ["u", "onnx::MatMul_13"], ["v"], name="/b/MatMul")]
+    g = helper.make_graph(nodes, "g", [helper.make_tensor_value_info("x", TensorProto.FLOAT, [1, 16])],
+                          [helper.make_tensor_value_info("z", TensorProto.FLOAT, [1, 16])], inits)
+    path = tmp_path / "model.onnx"
+    onnx.save_model(helper.make_model(g), str(path))
+    header, _ = formats.onnx_header(str(tmp_path), "local", "model.onnx", os.path.getsize(path))
+    assert set(header) == {"encoder.layer.0.attention.query.weight", "pooler.dense.weight", "onnx::MatMul_13"}
+    q = header["encoder.layer.0.attention.query.weight"]
+    assert q[1]["shape"] == [8, 16] and q[1]["order"] == "F"
+    np.testing.assert_array_equal(values(*q).reshape(16, 8), wq)      # stored as written: [in, out]
+    np.testing.assert_array_equal(values(*header["pooler.dense.weight"]), wg)
+    r = remote_model(tmp_path, ["model.onnx"])
+    np.testing.assert_array_equal(r.sample("encoder.layer.0.attention.query.weight", 10 ** 6), wq.T.ravel())
+    monkeypatch.setattr(formats, "NODE_NAMES", False)        # E2x and H23 as they ran
+    header, _ = formats.onnx_header(str(tmp_path), "local", "model.onnx", os.path.getsize(path))
+    assert set(header) == {"onnx::MatMul_11", "onnx::Gemm_12", "onnx::MatMul_13"}
