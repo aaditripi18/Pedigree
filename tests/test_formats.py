@@ -321,3 +321,15 @@ def test_other_unit_choice():
     size = {"onnx/model.onnx": 4, "onnx/model_q4.onnx": 9, "onnx/model_fp16.onnx": 2}
     assert other_unit(list(size), size) == ["onnx/model.onnx"]
     assert other_unit(["model.bin", "vocabulary.txt"], {"model.bin": 1}) == ["model.bin"]
+
+
+def test_gzip_nemo_member_extracted_once(tmp_path, local, monkeypatch):
+    from pedigree import hub
+    sd = {"encoder.w": torch.randn(5, 7)}
+    torch.save(sd, tmp_path / "model_weights.ckpt")
+    with tarfile.open(tmp_path / "old.nemo", "w:gz") as tf:
+        tf.add(tmp_path / "model_weights.ckpt", arcname="./model_weights.ckpt")
+    monkeypatch.setattr(hub, "_open", lambda url, headers=None, timeout=60: open(url, "rb"))
+    monkeypatch.setenv("PEDIGREE_CACHE", str(tmp_path / "cache"))
+    r = remote_model(tmp_path, ["old.nemo"])
+    np.testing.assert_array_equal(r.sample("encoder.w", 10 ** 6), sd["encoder.w"].numpy().ravel())

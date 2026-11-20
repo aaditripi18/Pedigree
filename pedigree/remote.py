@@ -42,6 +42,10 @@ def _cache_path(url: str, start: int, end: int) -> Path:
 def fetch_range(url: str, start: int, end: int, retries: int = RETRIES) -> bytes:
     """Bytes [start, end] of url (inclusive), cached; retries 429/5xx and dropped
     connections with backoff (at least the server's Retry-After)."""
+    if not url.startswith(("http://", "https://")):      # a local file (an extracted archive member)
+        with open(url, "rb") as fh:
+            fh.seek(start)
+            return fh.read(end - start + 1)
     path = _cache_path(url, start, end)
     if path.exists():
         return path.read_bytes()

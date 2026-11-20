@@ -198,6 +198,11 @@ JOBS["e2-struct2"] = _job("pedigree-e2-struct2", [["-m", "experiments.e2_rescore
 # H19 / H20 (amendment 2026-11-18): the last direction and alignment follow-ups, one fresh sample
 JOBS["h19"] = _job("pedigree-h19", [["-m", "experiments.h19_fresh", "--out", "/kaggle/working/h19_raw.jsonl"]],
                    gpu=False, env=dict(E2_ENV))
+# amendment 2026-11-20: E2x/E2xp/E2v3 (R1 readers, v3, R2 facts) and H23's fresh sample
+JOBS["e2x"] = _job("pedigree-e2x", [["-m", "experiments.e2x_reaudit", "--out", "/kaggle/working"]],
+                   gpu=False, env=dict(E2_ENV))
+JOBS["h23"] = _job("pedigree-h23", [["-m", "experiments.h23_fresh", "--out", "/kaggle/working/h23_raw.jsonl"]],
+                   gpu=False, env=dict(E2_ENV))
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
 # fit Kaggle's CPU budget, and the statistics do not depend on the device
 JOBS["e2-behaviour"] = _job("pedigree-e2-behaviour", [["-m", "experiments.e2_behaviour"]], gpu=False)
@@ -405,6 +410,58 @@ for _f in E5_FAMILIES:
                                         "PEDIGREE_STUDENTS": "merge:students", "PEDIGREE_EXPERIMENT": "E5e-fresh",
                                         "PEDIGREE_E5_SEEDS": json.dumps({"fresh": H14_SEEDS})})
 
+
+# --- GPU follow-ups (amendments 2026-11-17 (4) and 2026-11-20): H16, H16b, H24 --------------------
+# H16: fresh students seeds 13-17 (suspects) and 18-20 (references), trained exactly as distill3
+H16_SEEDS = list(range(13, 21))
+for _f in ("text_decoder", "vision_cnn"):
+    _teach = [s for s in JOBS[f"e5-{_f}"]["sources"] if not s.startswith("distill-")]
+    JOBS[f"distill4-{_f}"] = _job(f"pedigree-distill4-{_f.replace('_', '-')}",
+                                  [["-m", "experiments.distill", _f, "fresh"]], gpu=True,
+                                  sources=list(JOBS[f"distill-{_f}"]["sources"]),
+                                  env={**JOBS[f"distill-{_f}"]["env"], "PEDIGREE_SEEDS": ",".join(map(str, H16_SEEDS))})
+    JOBS[f"e5e-h16-{_f}"] = _job(f"pedigree-e5e-h16-{_f.replace('_', '-')}",
+                                 [["-m", "experiments.e5_behaviour", _f, "fresh"]], gpu=False,
+                                 sources=_teach + [f"distill4-{_f}"],
+                                 env={"PEDIGREE_TEACHERS": JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"],
+                                      "PEDIGREE_STUDENTS": "merge:students", "PEDIGREE_EXPERIMENT": "E5e-h16",
+                                      "PEDIGREE_E5_SEEDS": json.dumps({"fresh": H16_SEEDS})})
+# H16b: 20,000-step students, dev batch seeds 30-32, fresh 33-40, in parts that fit a 12 h session
+LONG = {"PEDIGREE_STEPS": "20000", "PEDIGREE_LR": "5e-4", "PEDIGREE_WARMUP": "1000"}
+H16B_PARTS = {"dev": [30, 31, 32], "fresh-a": [33, 34, 35], "fresh-b": [36, 37, 38], "fresh-c": [39, 40]}
+for _f in ("text_encoder", "vision_transformer"):
+    _teach = [s for s in JOBS[f"e5-{_f}"]["sources"] if not s.startswith("distill-")]
+    for _part, _seeds in H16B_PARTS.items():
+        JOBS[f"h16b-{_f}-{_part}"] = _job(f"pedigree-h16b-{SHORT[_f]}-{_part}",
+                                          [["-m", "experiments.distill", _f, "h16b"]], gpu=True,
+                                          sources=list(JOBS[f"distill-{_f}"]["sources"]),
+                                          env={**JOBS[f"distill-{_f}"]["env"], **LONG,
+                                               "PEDIGREE_SEEDS": ",".join(map(str, _seeds))})
+    JOBS[f"e5e-h16b-{_f}"] = _job(f"pedigree-e5e-h16b-{SHORT[_f]}",
+                                  [["-m", "experiments.e5_behaviour", _f, "h16b"]], gpu=False,
+                                  sources=_teach + [f"h16b-{_f}-{p}" for p in H16B_PARTS],
+                                  env={"PEDIGREE_TEACHERS": JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"],
+                                       "PEDIGREE_STUDENTS": "merge:students", "PEDIGREE_EXPERIMENT": "E5e-h16b",
+                                       "PEDIGREE_E5_SEEDS": json.dumps({"h16b": list(range(30, 41))})})
+# H24: speech and diffusion students (experiments/h24.py), dev seeds 50-52, fresh 53-60
+H24_PARTS = {"dev": [50, 51, 52], "fresh-a": [53, 54, 55], "fresh-b": [56, 57, 58], "fresh-c": [59, 60]}
+for _f in ("speech", "diffusion_unet"):
+    for _part, _seeds in H24_PARTS.items():
+        JOBS[f"h24-{_f}-{_part}"] = _job(f"pedigree-h24-{SHORT[_f]}-{_part}",
+                                         [["-m", "experiments.h24", "train", _f, ",".join(map(str, _seeds))]], gpu=True,
+                                         env={"PEDIGREE_DERIVATIVES": "/kaggle/working/students"})
+    JOBS[f"e5e-h24-{_f}"] = _job(f"pedigree-e5e-h24-{SHORT[_f]}",
+                                 [["-m", "experiments.h24", "score", _f, ",".join(map(str, range(50, 61)))]],
+                                 gpu=False, sources=[f"h24-{_f}-{p}" for p in H24_PARTS],
+                                 env={"PEDIGREE_STUDENTS": "merge:students"})
+# a CPU smoke run of H24's code (3 steps, few probes); its ledger lines are never pulled
+JOBS["h24-smoke"] = _job("pedigree-h24-smoke",
+                         [["-m", "experiments.h24", "train", "diffusion_unet", "99"],
+                          ["-m", "experiments.h24", "score", "diffusion_unet", "99"],
+                          ["-m", "experiments.h24", "train", "speech", "99"],
+                          ["-m", "experiments.h24", "score", "speech", "99"]], gpu=False,
+                         env={"PEDIGREE_STEPS": "3", "PEDIGREE_WARMUP": "1", "PEDIGREE_H24_SHARDS": "1",
+                              "PEDIGREE_H24_DIFF_PROBES": "20", "PEDIGREE_H24_SPEECH_PROBES": "3"})
 
 if __name__ == "__main__":
     cmd = sys.argv[1]

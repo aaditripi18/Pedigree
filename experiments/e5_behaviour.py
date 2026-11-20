@@ -96,6 +96,11 @@ class Stats:
         self.wrong = 0          # positions the teacher gets wrong
         self.same_wrong = 0     # ... where the other model makes the same wrong prediction
         self.dark = 0.0         # JS divergence with the teacher's top class removed (dark knowledge)
+        # amendment 2026-11-20 (H16b/H24 competence floor): each model's own task accuracy
+        self.truth_n = 0
+        self.right_p = 0
+        self.right_q = 0
+        self.dark_n = 0
 
     def add(self, p_logits: torch.Tensor, q_logits: torch.Tensor, truth: torch.Tensor | None = None) -> None:
         p, q = torch.softmax(p_logits.double(), -1), torch.softmax(q_logits.double(), -1)
@@ -108,6 +113,10 @@ class Stats:
         if truth is not None:
             truth = truth.to(tp.device)
             ok = truth >= 0
+            self.truth_n += int(ok.sum())
+            self.right_p += int((ok & (tp == truth)).sum())
+            self.right_q += int((ok & (tq == truth)).sum())
+            self.dark_n += p.shape[0]
             wrong = ok & (tp != truth)
             self.wrong += int(wrong.sum())
             self.same_wrong += int((wrong & (tq == tp)).sum())
@@ -121,8 +130,11 @@ class Stats:
     def result(self) -> dict:
         out = {"positions": self.n, "agreement": self.agree / max(self.n, 1), "js": self.js / max(self.n, 1)}
         if self.wrong:
-            out.update(teacher_wrong=self.wrong, error_agreement=self.same_wrong / self.wrong,
-                       dark_js=self.dark / max(self.n, 1))
+            out.update(teacher_wrong=self.wrong, error_agreement=self.same_wrong / self.wrong)
+        if self.dark_n:
+            out["dark_js"] = self.dark / self.dark_n
+        if self.truth_n:
+            out.update(teacher_accuracy=self.right_p / self.truth_n, accuracy=self.right_q / self.truth_n)
         return out
 
 
@@ -191,7 +203,7 @@ def main(family: str, splits: list[str]) -> None:
     for split in splits:
         teacher, make, _, info, causal = distill.teacher_and_student(family, split, 0)
         teacher.to(ft.DEVICE).eval()
-        repo = ft.bases()[family][split]["base"]
+        repo = ft.bases()[family][distill.tsplit(split)]["base"]
         if family in ("text_encoder", "text_decoder"):
             from transformers import AutoModelForCausalLM, AutoModelForMaskedLM, AutoTokenizer
             tok = AutoTokenizer.from_pretrained(repo)
@@ -201,7 +213,7 @@ def main(family: str, splits: list[str]) -> None:
             runner = lambda m: _text_run(m, tok, lines, causal)  # noqa: E731
             cls = AutoModelForCausalLM if causal else AutoModelForMaskedLM
             public = [(r, "positive", "public_derivative") for r in spec.get("public_derivatives", {}).get(repo, [])]
-            public += [(r, "negative", "independent") for r in ft.bases()[family][split]["independent"]]
+            public += [(r, "negative", "independent") for r in ft.bases()[family][distill.tsplit(split)]["independent"]]
             probe = {"probes": "wikitext2_test" + ("_shuffled" if PROBES == "offtask" else ""), "sha256": digest, "n": len(lines)}
         else:
             size = 224 if family == "vision_transformer" else 160
@@ -214,7 +226,7 @@ def main(family: str, splits: list[str]) -> None:
         run = ledger.Run(EXPERIMENT, family=family, split=split, teacher=info.get("teacher", repo), **probe)
         cands = [(f"{k}_s{s}", "positive" if k == "distill" else "negative", k)
                  for s in SPLIT_SEEDS[split] for k in ("distill", "indep")]
-        if EXPERIMENT in ("E5n", "E5e-fresh"):   # only the new students (H12's and H14's fresh)
+        if EXPERIMENT in ("E5n", "E5e-fresh", "E5e-h16", "E5e-h16b", "E5e-h24"):   # only the new students
             public = []
         for name, label, kind in cands + public:
             try:

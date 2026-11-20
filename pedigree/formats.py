@@ -258,6 +258,38 @@ def ct2_header(url: str, size: int) -> dict:
 
 # --- tar (NeMo) ----------------------------------------------------------------------------------
 
+GZ_MAX_BYTES = 8 * 1024 ** 3
+
+
+def gz_member(url: str, suffix: str) -> str:
+    """A gzip-compressed tar (older .nemo files) cannot be read by range: it is streamed once and
+    the one member ending in `suffix` is written to the cache; returns its local path."""
+    import hashlib
+    import tarfile
+    from .hub import _open, cache_root
+    dest = cache_root() / "members" / (hashlib.sha256(f"{url}|{suffix}".encode()).hexdigest() + ".bin")
+    if dest.exists():
+        return str(dest)
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with _open(url, timeout=600) as r, tarfile.open(fileobj=r, mode="r|gz") as tf:
+        seen = 0
+        for m in tf:
+            seen += m.size
+            if seen > GZ_MAX_BYTES:
+                raise ValueError("compressed archive larger than the reader allows")
+            if m.isfile() and m.name.endswith(suffix):
+                part = dest.with_suffix(".part")
+                with tf.extractfile(m) as src, open(part, "wb") as out:
+                    while True:
+                        chunk = src.read(1 << 22)
+                        if not chunk:
+                            break
+                        out.write(chunk)
+                part.replace(dest)
+                return str(dest)
+    raise ValueError(f"no member ending in {suffix}")
+
+
 def tar_members(url: str, size: int) -> dict[str, tuple[int, int]]:
     """{member name: (data offset, size)} of an uncompressed tar archive (ustar headers)."""
     out, pos, long_name = {}, 0, None

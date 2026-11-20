@@ -29,9 +29,18 @@ from experiments import finetune as ft
 
 # E5 used seeds 0-2; H12's new students are fresh seeds 3-7 (PLAN.md amendment 2026-11-08 (3))
 SEEDS = tuple(int(x) for x in os.environ.get("PEDIGREE_SEEDS", "0,1,2").split(","))
-STEPS = 2000
+STEPS = int(os.environ.get("PEDIGREE_STEPS", "2000"))
 TEMPERATURE = 2.0
-LR = 1e-4
+LR = float(os.environ.get("PEDIGREE_LR", "1e-4"))
+# H16b and H24 (amendments 2026-11-17 (4), 2026-11-20): 20,000 steps, learning rate 5e-4, 1,000
+# linear warm-up steps then cosine decay; 0 keeps E5's constant learning rate
+WARMUP = int(os.environ.get("PEDIGREE_WARMUP", "0"))
+# a batch of students that is not a split of its own trains against that split's teacher
+TEACHER_SPLIT = {"h16b": "fresh"}
+
+
+def tsplit(split: str) -> str:
+    return TEACHER_SPLIT.get(split, split)
 # image teachers are ft_long derivatives, possibly in another (read-only) folder
 TEACHERS = Path(os.environ.get("PEDIGREE_TEACHERS", ft.OUT))
 
@@ -46,7 +55,7 @@ def _half(config, *names):
 
 def teacher_and_student(family: str, split: str, seed: int):
     """(teacher, student factory, batch iterator, data info, causal flag or None)."""
-    repo = ft.bases()[family][split]["base"]
+    repo = ft.bases()[family][tsplit(split)]["base"]
     if family in ("text_encoder", "text_decoder"):
         from transformers import AutoConfig, AutoModelForCausalLM, AutoModelForMaskedLM, AutoTokenizer
         causal = family == "text_decoder"
@@ -63,7 +72,7 @@ def teacher_and_student(family: str, split: str, seed: int):
         return teacher, student, batches, info, causal
     if family in ("vision_transformer", "vision_cnn"):
         from safetensors.torch import load_file
-        src = TEACHERS / family / split / "ft_long"
+        src = TEACHERS / family / tsplit(split) / "ft_long"
         if family == "vision_transformer":
             from transformers import AutoConfig, AutoModelForImageClassification
             cfg = AutoConfig.from_pretrained(repo, num_labels=10)
@@ -87,7 +96,7 @@ def teacher_and_student(family: str, split: str, seed: int):
         if missing or unexpected:
             raise ValueError(f"teacher weights do not fit: {missing[:3]} {unexpected[:3]}")
         batches, info = ft.image_batches(size, 100 + seed, **norm)
-        info = {**info, "teacher": f"local:{family}/{split}/ft_long"}
+        info = {**info, "teacher": f"local:{family}/{tsplit(split)}/ft_long"}
         return teacher.float(), student, batches, info, None
     raise ValueError(f"E5 students are not built for {family}")
 
@@ -106,6 +115,12 @@ def train_student(family: str, split: str, kind: str, seed: int) -> dict:
     student = make().to(ft.DEVICE)
     teacher.to(ft.DEVICE).eval()
     opt = torch.optim.AdamW(student.parameters(), lr=LR)
+    sched = None
+    if WARMUP:
+        import math
+        sched = torch.optim.lr_scheduler.LambdaLR(
+            opt, lambda i: (i + 1) / WARMUP if i < WARMUP
+            else 0.5 * (1 + math.cos(math.pi * (i - WARMUP) / max(1, STEPS - WARMUP))))
     student.train()
     losses = []
     for i in range(STEPS):
@@ -131,6 +146,8 @@ def train_student(family: str, split: str, kind: str, seed: int) -> dict:
         opt.zero_grad()
         loss.backward()
         opt.step()
+        if sched is not None:
+            sched.step()
         if i % 50 == 0 or i == STEPS - 1:
             losses.append(round(float(loss), 4))
     return {"student": student, "losses": losses, "info": info}
@@ -146,8 +163,8 @@ def main(family: str, split: str) -> None:
             t0 = time.time()
             r = train_student(family, split, kind, seed)
             ft.save(r["student"], out, {"family": family, "split": split, "kind": kind, "seed": seed,
-                                        "teacher": r["info"].get("teacher", ft.bases()[family][split]["base"]),
-                                        "steps": STEPS, "lr": LR, "temperature": TEMPERATURE if kind == "distill" else None,
+                                        "teacher": r["info"].get("teacher", ft.bases()[family][tsplit(split)]["base"]),
+                                        "steps": STEPS, "lr": LR, "warmup": WARMUP, "temperature": TEMPERATURE if kind == "distill" else None,
                                         "batch": ft.BATCH, "device": str(ft.DEVICE), "data": r["info"],
                                         "losses": r["losses"], "versions": ft._versions(), "code": ft._code(),
                                         "seconds": round(time.time() - t0)})

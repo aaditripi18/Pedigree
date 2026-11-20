@@ -139,12 +139,19 @@ class Remote:
                     self.quant[name] = {"kind": "inline", "shape": s["shape"], **s["affine"]}
             return
         if low.endswith(".nemo"):
-            members = formats.tar_members(url, size)
-            ckpt = [m for m in members if m.endswith("model_weights.ckpt")]
-            if not ckpt:
-                raise ValueError("a .nemo archive without model_weights.ckpt")
-            off, n = members[ckpt[0]]
-            _, header = torchzip.read_header(url, n, base=off)
+            from .remote import fetch_range
+            if fetch_range(url, 0, 1) == b"\x1f\x8b":          # gzip-compressed (older NeMo)
+                local = formats.gz_member(url, "model_weights.ckpt")
+                import os
+                _, header = torchzip.read_header(local, os.path.getsize(local))
+                url = local
+            else:
+                members = formats.tar_members(url, size)
+                ckpt = [m for m in members if m.endswith("model_weights.ckpt")]
+                if not ckpt:
+                    raise ValueError("a .nemo archive without model_weights.ckpt")
+                off, n = members[ckpt[0]]
+                _, header = torchzip.read_header(url, n, base=off)
         else:                            # .pt / .pth / .ckpt: PyTorch, zip or legacy
             _, header = torchzip.read_header(url, size)
         for name, s in header.items():
