@@ -211,7 +211,8 @@ class Remote:
     def _helpers(self) -> set:
         h = set()
         for q in self.quant.values():
-            h.update(x for x in (q.get("scales"), q.get("biases"), q.get("scale"), q.get("zero")) if x)
+            h.update(x for x in (q.get("scales"), q.get("biases"), q.get("scale"), q.get("zero"))
+                     if isinstance(x, str))      # inline TFLite scales are values, not tensor names
         return h
 
     def float_shapes(self) -> dict[str, tuple]:

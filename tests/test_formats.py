@@ -251,6 +251,7 @@ def test_tflite_float_and_per_channel_int8(tmp_path, local):
     assert set(h) == {"dense/w", "conv/q"}                          # the activation has no data
     np.testing.assert_array_equal(values(*h["dense/w"]), w)
     r = remote_model(tmp_path, ["m.tflite"])
+    assert set(r.float_shapes()) == {"dense/w", "conv/q"}      # inline scales are not tensor names
     want = (q.astype(np.float64) - np.array(zero).reshape(3, 1)) * np.array(scale).reshape(3, 1)
     np.testing.assert_allclose(r.sample("conv/q", 10 ** 6), want.ravel(), rtol=1e-6)
 

@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import json
 import math
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import numpy as np
@@ -826,6 +826,237 @@ def h20(h19r, n_sample: int, h20e2, T, rule) -> dict:
                         f"{v1}/{n}); E2's {len(h20e2)} unaligned pairs: {e2c} comparable (>= {MIN_COMPARED} tensors); "
                         f"{e2rel} above a threshold, {e2few} of them on fewer than {MIN_COMPARED} tensors"}
 
+
+
+# --- amendment 2026-11-20: R1 (E2x, H21), R2, R3 (H23), H16b, H24 ---------------------------------
+
+KEEP_PAIR = ("median_cosine", "compared", "matched", "match_share", "identical", "kurtosis_gap",
+             "median_invariant", "invariant_compared", "error")
+
+
+def with_e2x(e2f_all, e2x, e2xp, e2v3):
+    """E2 with every re-reading so far, then E2x (models read with the R1 readers replace their
+    unreadable records), E2xp (pairs whose other side was unreadable) and E2v3 (declared pairs still
+    not comparable, aligned by v3, with R2's facts). E2 and earlier re-readings are not changed."""
+    import copy
+    out = copy.deepcopy(e2f_all)
+    xm = {r["id"]: r for r in e2x if "lost" not in r}
+    xp = {(r["model"], r["other"], r["role"]): r for r in e2xp if "lost" not in r}
+    xv = {(r["model"], r["other"]): r for r in e2v3 if "lost" not in r}
+    for i, m in enumerate(out):
+        if m.get("reason") and m["reason"] != "adapter" and m["id"] in xm:
+            new = copy.deepcopy(xm[m["id"]])
+            new.setdefault("tier", m["tier"])
+            out[i] = m = new
+        for role, key, rows in (("declared", "base", m.get("declared", [])), ("pool", "candidate", m.get("pool", []))):
+            for d in rows:
+                p = xp.get((m["id"], d[key], role))
+                if p and (str(d.get("reason") or "").startswith("not readable")
+                          or d.get("error") == "not readable on re-reading"):
+                    d.pop("reason", None)
+                    d.pop("error", None)
+                    d.update({k: p[k] for k in KEEP_PAIR if k in p})
+                    if p.get("reason"):
+                        d["reason"] = p["reason"]
+                if role != "declared":
+                    continue
+                v = xv.get((m["id"], d[key]))
+                if v is None:
+                    continue
+                d["hub"], d["shared_shapes"] = v.get("hub"), v.get("shared_shapes")
+                if (d.get("compared") or 0) < MIN_COMPARED and not v.get("error") and \
+                        (v.get("compared") or 0) > (d.get("compared") or 0):
+                    d.pop("reason", None)
+                    d.pop("error", None)
+                    d.update({k: v[k] for k in KEEP_PAIR if k in v})
+                    d["alignment"] = "v3"
+                elif v.get("error"):
+                    d.setdefault("reread_reasons", v.get("reasons"))
+    return out
+
+
+NO_PUBLIC_SPEC = {}      # format -> the source checked; filled only from a model's recorded reason
+
+
+def _format_failure(reason: str) -> bool:
+    r = reason or ""
+    allowed = ("no weight files", "gated", "HTTP 401", "HTTP 403", "HTTP 404", "adapter")
+    return bool(r) and not any(a in r for a in allowed)
+
+
+def h21(e2x, n_targets: int) -> dict:
+    st = ("After re-reading with readers for every weight format with a public specification (E2x), no E2 model "
+          "is unreadable because of its file format.")
+    base = {"id": "H21", "statement": st, "follows": "the 46 E2 models never read"}
+    if len(e2x) < n_targets:
+        return {**base, "verdict": "pending", "evidence": "re-reading running"}
+    reasons = Counter(r.get("reason") or "read" for r in e2x if "lost" not in r)
+    fmt = {k: v for k, v in reasons.items() if k != "read" and _format_failure(k)}
+    read = reasons.get("read", 0)
+    other = {k: v for k, v in reasons.items() if k != "read" and k not in fmt}
+    return {**base, "verdict": verdict(not fmt and not any("lost" in r for r in e2x)),
+            "numbers": {"read": [read, len(e2x)], "format_failures": fmt, "other_reasons": other},
+            "evidence": f"{read} of {len(e2x)} now read; format failures {sum(fmt.values())}"
+                        + (f" ({'; '.join(f'{k}: {v}' for k, v in fmt.items())})" if fmt else "")
+                        + f"; other reasons {sum(other.values())}"}
+
+
+R2_ORDER = ("not a repository id", "renamed (read under the new name)", "not found on the Hub, or private", "gated",
+            "different structure (fewer than 8 shared tensor shapes)", "format with no public specification")
+
+
+def r2_categories(e2all, T, rule) -> dict:
+    """R2: each declared pair still not comparable, in exactly one category, by the rules in order."""
+    out, gaps = defaultdict(list), []
+    for m in e2all:
+        if m.get("reason"):
+            continue
+        for d in m.get("declared", []):
+            if related(d, T, rule) != "not comparable":
+                continue
+            hubs = d.get("hub") or {}
+            st = hubs.get("status")
+            pair = [m["id"], d["base"]]
+            if st == "not a repository id" or d["base"].count("/") != 1:
+                out[R2_ORDER[0]].append(pair)
+            elif hubs.get("renamed_to"):
+                out[R2_ORDER[1]].append(pair + [hubs["renamed_to"]])
+            elif st in (401, 404):
+                out[R2_ORDER[2]].append(pair)
+            elif hubs.get("gated") or "gated" in str(d.get("reason") or "") or "HTTP 401" in str(d.get("reason") or ""):
+                out[R2_ORDER[3]].append(pair)
+            elif d.get("shared_shapes") is not None and d["shared_shapes"] < MIN_COMPARED:
+                out[R2_ORDER[4]].append(pair + [d["shared_shapes"]])
+            elif _format_failure(str(d.get("reason") or "")):
+                out[R2_ORDER[5]].append(pair + [d.get("reason")])
+            else:
+                gaps.append(pair + [d.get("compared"), d.get("shared_shapes"), d.get("reason") or d.get("error")])
+    return {"categories": {k: out[k] for k in R2_ORDER if out.get(k)}, "counts": {k: len(out[k]) for k in R2_ORDER if out.get(k)},
+            "gaps": gaps, "pairs": sum(len(v) for v in out.values()) + len(gaps)}
+
+
+def h23(h23r, n_sample: int, e2v3, T, rule) -> list[dict]:
+    sa = ("On fresh pairs where names align >= 8 tensors, alignment v3 (names ignored) gives the same related / "
+          "unrelated verdict for >= 98% and the opposite verdict for none.")
+    sb = "On fresh declared pairs where names align fewer than 8 tensors, alignment v3 makes >= 80% comparable."
+    ba = {"id": "H23a", "statement": sa, "follows": "H20"}
+    bb = {"id": "H23b", "statement": sb, "follows": "H20, H17b"}
+    if not h23r or len(h23r) < n_sample:
+        return [{**ba, "verdict": "pending", "evidence": "fresh sample running"},
+                {**bb, "verdict": "pending", "evidence": "fresh sample running"}]
+    pairs, low = [], []
+    for m in h23r:
+        for a in [d.get("alignments") for d in m.get("declared", [])] + list(m.get("pool_alignments", [])):
+            if not a or not a.get("names"):
+                continue
+            vn = _verdict_plain(a["names"], T, rule)
+            if vn != "not comparable":
+                pairs.append((vn, _verdict_plain(a.get("struct3"), T, rule), _verdict_plain(a.get("struct2"), T, rule)))
+        for d in m.get("declared", []):
+            a = d.get("alignments") or {}
+            if a.get("names") is not None and (a["names"].get("compared") or 0) < MIN_COMPARED:
+                low.append((a.get("auto3") or {}).get("compared") or 0)
+    n = len(pairs)
+    agree = sum(a == b for a, b, _ in pairs)
+    opposite = sum(b != "not comparable" and a != b for a, b, _ in pairs)
+    neg = sum(a == "unrelated" for a, _, _ in pairs)
+    judged = n >= 20 and neg >= 5
+    va = verdict(agree / n >= 0.98 and opposite == 0) if judged else "not judged"
+    comp = sum(c >= MIN_COMPARED for c in low)
+    dev = [r for r in e2v3 if "lost" not in r]
+    devc = sum((r.get("compared") or 0) >= MIN_COMPARED and not r.get("error") for r in dev)
+    vb = verdict(comp / len(low) >= 0.8) if low else "not judged"
+    return [{**ba, "verdict": va, "numbers": {"agree": [agree, n], "opposite": opposite, "abstained": n - agree - opposite,
+                                               "unrelated_by_names": neg,
+                                               "v2_agree": [sum(a == c for a, _, c in pairs), n]},
+             "evidence": f"v3 {agree}/{n} agree, opposite {opposite}, aligned too few {n - agree - opposite} "
+                         f"({neg} unrelated by names)"},
+            {**bb, "verdict": vb, "numbers": {"comparable": [comp, len(low)], "e2_dev": [devc, len(dev)]},
+             "evidence": f"{comp}/{len(low)} comparable; on E2's pairs (design data, not counted) {devc}/{len(dev)}"}]
+
+
+def _calibrated(rows, key, dev_seeds, sus_seeds, ref_seeds, floor_of):
+    """H16b / H24's rule: r* from the dev batch (references: the batch's other independents), then the
+    fresh suspects against the fresh references; a family counts only if both batches' independents
+    pass the competence floor."""
+    def st(r):
+        return _student(r)
+    fams, floors = [], {}
+    for fam in sorted({r["family"] for r in rows}):
+        fr = [r for r in rows if r["family"] == fam and st(r) and key in r]
+        ind = [r for r in fr if st(r)[0] == "indep"]
+        ok = bool(ind) and all(floor_of(r) for r in ind)
+        floors[fam] = {"passes": ok, "independents": [[r["model"], round(r.get("accuracy", float("nan")), 4),
+                                                       round(r.get("teacher_accuracy", float("nan")), 4)] for r in ind]}
+        if ok:
+            fams.append(fam)
+    D, F = [], []
+    for fam in fams:
+        fr = [r for r in rows if r["family"] == fam and st(r) and key in r]
+        dev = [r for r in fr if st(r)[1] in dev_seeds]
+        for r in dev:
+            refs = [x for x in dev if st(x)[0] == "indep" and x["model"] != r["model"]]
+            if refs:
+                lo = min(x[key] for x in refs)
+                D.append((fam, r["model"], st(r)[0], (lo - r[key]) / lo))
+        refs = [r for r in fr if st(r)[0] == "indep" and st(r)[1] in ref_seeds]
+        if refs:
+            lo = min(x[key] for x in refs)
+            F += [(fam, r["model"], st(r)[0], (lo - r[key]) / lo) for r in fr if st(r)[1] in sus_seeds]
+    p = [d for *_, k, d in D if k == "distill"]
+    n = [d for *_, k, d in D if k == "indep"]
+    gap = min(p) - max(n) if p and n else None
+    r_star = (min(p) + max(n)) / 2 if gap is not None else None
+    tp = sum(k == "distill" and d > r_star for _, _, k, d in F) if r_star is not None else 0
+    P = sum(k == "distill" for _, _, k, _ in F)
+    fp = sum(k == "indep" and d > r_star for _, _, k, d in F) if r_star is not None else 0
+    N = sum(k == "indep" for _, _, k, _ in F)
+    return {"families": fams, "floors": floors, "r_star": r_star, "gap": gap,
+            "dev": [[f, m, k, round(d, 4)] for f, m, k, d in D], "fresh": [[f, m, k, round(d, 4)] for f, m, k, d in F],
+            "tpr": [tp, P], "fpr": [fp, N]}
+
+
+def _floor(r) -> bool:
+    return r.get("accuracy") is not None and r.get("teacher_accuracy") and r["accuracy"] >= 0.5 * r["teacher_accuracy"]
+
+
+def h16b_full(e5e_h16b) -> dict:
+    st = ("With students trained long enough to learn the task (text encoder, vision transformer), the "
+          "reference-calibrated rule from a new dev batch identifies fresh distilled students: TPR >= 90% at FPR <= 5%.")
+    base = {"id": "H16b", "statement": st, "follows": "H14b"}
+    rows = [r for r in e5e_h16b if r.get("family") in ("text_encoder", "vision_transformer")]
+    if not rows or not all(any(_student(r) and _student(r)[1] == 40 for r in rows if r["family"] == f)
+                           for f in ("text_encoder", "vision_transformer")):
+        return {**base, "verdict": "pending", "evidence": "dev and fresh students wait for GPU quota"}
+    c = _calibrated(rows, "dark_js", {30, 31, 32}, set(range(33, 38)), {38, 39, 40}, _floor)
+    if not c["families"]:
+        return {**base, "verdict": "not decidable", "numbers": c, "evidence": "no family's independents reach the floor"}
+    if c["gap"] is None or c["gap"] <= 0:
+        return {**base, "verdict": "not supported", "numbers": c, "evidence": "no positive dev gap"}
+    tp, P = c["tpr"]
+    fp, N = c["fpr"]
+    return {**base, "verdict": verdict(P > 0 and N > 0 and tp / P >= 0.9 and fp / N <= 0.05), "numbers": c,
+            "evidence": f"families {', '.join(c['families'])}; drop > {c['r_star']:.3f}: TPR {tp}/{P}, FPR {fp}/{N}"}
+
+
+def h24(e5e_h24) -> dict:
+    st = ("Behaviour calibrated against reference students identifies distilled speech and diffusion students: "
+          "TPR >= 90% at FPR <= 5% (families whose students learn the task).")
+    base = {"id": "H24", "statement": st, "follows": "speech and diffusion had no behaviour test"}
+    rows = [r for r in e5e_h24 if not r.get("error")]
+    if not rows or not all(any(_student(r) and _student(r)[1] == 60 for r in rows if r["family"] == f)
+                           for f in ("speech", "diffusion_unet")):
+        return {**base, "verdict": "pending", "evidence": "students wait for GPU quota"}
+    c = _calibrated(rows, "score", {50, 51, 52}, set(range(53, 58)), {58, 59, 60}, _floor)
+    if not c["families"]:
+        return {**base, "verdict": "not decidable", "numbers": c, "evidence": "no family's independents reach the floor"}
+    if c["gap"] is None or c["gap"] <= 0:
+        return {**base, "verdict": "not supported", "numbers": c, "evidence": "no positive dev gap"}
+    tp, P = c["tpr"]
+    fp, N = c["fpr"]
+    return {**base, "verdict": verdict(P > 0 and N > 0 and tp / P >= 0.9 and fp / N <= 0.05), "numbers": c,
+            "evidence": f"families {', '.join(c['families'])}; drop > {c['r_star']:.3f}: TPR {tp}/{P}, FPR {fp}/{N}"}
+
 # --- main -------------------------------------------------------------------------------------------
 
 # --- H14 / H14b: behaviour by shared mistakes (amendments 2026-11-17 (2) and (3)) ---------------
@@ -926,6 +1157,16 @@ def main() -> None:
     e2f = latest_runs(rows, "E2f", lambda r: (r["model"], r["other"], r["role"]))
     h19r = latest_runs(rows, "H19", lambda r: 0)
     h20e2 = latest_runs(rows, "H20e2", lambda r: 0)
+    e2x = latest_runs(rows, "E2x", lambda r: 0)
+    e2xp = latest_runs(rows, "E2xp", lambda r: 0)
+    e2v3 = latest_runs(rows, "E2v3", lambda r: 0)
+    h23r = latest_runs(rows, "H23", lambda r: 0)
+    e5e_h24 = latest_runs(rows, "E5e-h24", lambda r: (r.get("meta") or {}).get("family", r.get("family")))
+    for r in e5e_h24:
+        r.setdefault("family", (r.get("meta") or {}).get("family"))
+    s23 = json.loads((ROOT / "results" / "h23_sample.json").read_text(encoding="utf-8"))
+    n23 = sum(len(v) for v in s23["sample"].values())
+    x_targets = json.loads((ROOT / "results" / "e2x_targets.json").read_text(encoding="utf-8"))
     s19 = json.loads((ROOT / "results" / "h19_sample.json").read_text(encoding="utf-8"))
     n19 = sum(len(v) for v in s19["sample"].values())
     def by_family_split(exp):
@@ -950,9 +1191,10 @@ def main() -> None:
         hs = [h1(e1, T, rule), *(h2h3(A, len(e2) == 600) if A else []), h4(e1, T, rule), h5(e1, e5, T, rule),
               h6(e1b, e2w, T, rule), h7(h7a, e2, T, rule), h8(e1b, e7k, e2, T, rule), h9(e5), h10(e6, T, rule),
               h11(e7, T, rule), h12(e5o), *h13(h13r, T, rule), *h14(e5e_dev, e5e_fresh)]
-        h16r, h16br = h16(e5e_dev, e5e_fresh, e5e_h16), h16b(e5e_h16b)
+        h16r, h16br = h16(e5e_dev, e5e_fresh, e5e_h16), h16b_full(e5e_h16b)
         hs += [h15(e2, h15r, T, rule), h16r, h16br, *h17(h15r, with_rescores(e2, e2r, e2g), e2s, T, rule),
-               h18(h16r, h16br), h19(h19r, n19, T, rule), h20(h19r, n19, h20e2, T, rule)]
+               h18(h16r, h16br), h19(h19r, n19, T, rule), h20(h19r, n19, h20e2, T, rule),
+               h21(e2x, len(x_targets["models"])), *h23(h23r, n23, e2v3, T, rule), h24(e5e_h24)]
         if e2r:
             e2f_all = with_rescores(e2, e2r, e2g, e2s, e2f)
             Af = audit(e2f_all, T, rule)
@@ -966,6 +1208,17 @@ def main() -> None:
                 "verdicts": {k: {"verdict": v["verdict"], "evidence": v["evidence"],
                                  "changes": v["verdict"] != next(h for h in hs if h["id"] == k)["verdict"]}
                              for k, v in hf.items()}}
+            if e2x:          # amendment 2026-11-20: R1, R2, R3 applied beside E2
+                e2x_all = with_e2x(e2f_all, e2x, e2xp, e2v3)
+                Ax = audit(e2x_all, T, rule)
+                hx = {h["id"]: h for h in [*h2h3(Ax, len(e2x_all) == 600), h7(h7a, e2x_all, T, rule)]}
+                out.setdefault("all_readers", {})[rule] = {
+                    "models_reread": len(e2x), "pairs_reread": len(e2xp), "v3_pairs": len(e2v3),
+                    "lost": sum("lost" in r for r in e2x + e2xp + e2v3), "audit": Ax,
+                    "r2": r2_categories(e2x_all, T, rule),
+                    "verdicts": {k: {"verdict": v["verdict"], "evidence": v["evidence"],
+                                     "changes": v["verdict"] != next(h for h in hs if h["id"] == k)["verdict"]}
+                                 for k, v in hx.items()}}
         out["rules"][rule] = {"hypotheses": hs, "audit": A,
                               "behaviour": behaviour_audit(e2b, next(h for h in hs if h["id"] == "H9"))}
     # the CLI's thresholds are exactly the published rule's

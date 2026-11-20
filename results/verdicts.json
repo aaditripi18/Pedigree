@@ -1638,6 +1638,34 @@
       }
      },
      "evidence": "v2 373/382 agree (opposite 1, aligned too few 8; v1 331/382); E2's 14 unaligned pairs: 2 comparable (>= 8 tensors); 12 above a threshold, 10 of them on fewer than 8 tensors"
+    },
+    {
+     "id": "H21",
+     "statement": "After re-reading with readers for every weight format with a public specification (E2x), no E2 model is unreadable because of its file format.",
+     "follows": "the 46 E2 models never read",
+     "verdict": "pending",
+     "evidence": "re-reading running"
+    },
+    {
+     "id": "H23a",
+     "statement": "On fresh pairs where names align >= 8 tensors, alignment v3 (names ignored) gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H20",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H23b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors, alignment v3 makes >= 80% comparable.",
+     "follows": "H20, H17b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H24",
+     "statement": "Behaviour calibrated against reference students identifies distilled speech and diffusion students: TPR >= 90% at FPR <= 5% (families whose students learn the task).",
+     "follows": "speech and diffusion had no behaviour test",
+     "verdict": "pending",
+     "evidence": "students wait for GPU quota"
     }
    ],
    "audit": {
@@ -3353,6 +3381,34 @@
       }
      },
      "evidence": "v2 369/382 agree (opposite 5, aligned too few 8; v1 327/382); E2's 14 unaligned pairs: 2 comparable (>= 8 tensors); 12 above a threshold, 10 of them on fewer than 8 tensors"
+    },
+    {
+     "id": "H21",
+     "statement": "After re-reading with readers for every weight format with a public specification (E2x), no E2 model is unreadable because of its file format.",
+     "follows": "the 46 E2 models never read",
+     "verdict": "pending",
+     "evidence": "re-reading running"
+    },
+    {
+     "id": "H23a",
+     "statement": "On fresh pairs where names align >= 8 tensors, alignment v3 (names ignored) gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H20",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H23b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors, alignment v3 makes >= 80% comparable.",
+     "follows": "H20, H17b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H24",
+     "statement": "Behaviour calibrated against reference students identifies distilled speech and diffusion students: TPR >= 90% at FPR <= 5% (families whose students learn the task).",
+     "follows": "speech and diffusion had no behaviour test",
+     "verdict": "pending",
+     "evidence": "students wait for GPU quota"
     }
    ],
    "audit": {

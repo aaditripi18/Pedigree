@@ -36,14 +36,22 @@ ITEM = {"F32": 4, "F16": 2, "BF16": 2, "F64": 8, "I64": 8, "I32": 4, "I16": 2, "
 class RangeFile(io.RawIOBase):
     """A read-only, seekable file over HTTP range requests (cached in blocks)."""
 
+    KEEP = 256          # blocks kept in memory (16 MB): headers that jump between tables stay cheap
+
     def __init__(self, url: str, size: int, base: int = 0):
         self.url, self.size, self.pos, self.base = url, size, 0, base
-        self._block: tuple[int, bytes] | None = None   # the last block read, kept in memory
+        self._blocks: OrderedDict = OrderedDict()
 
     def _get(self, b0: int) -> bytes:
-        if self._block is None or self._block[0] != b0:
-            self._block = (b0, fetch_range(self.url, self.base + b0, self.base + min(b0 + BLOCK, self.size) - 1))
-        return self._block[1]
+        blk = self._blocks.get(b0)
+        if blk is None:
+            blk = fetch_range(self.url, self.base + b0, self.base + min(b0 + BLOCK, self.size) - 1)
+            self._blocks[b0] = blk
+            if len(self._blocks) > self.KEEP:
+                self._blocks.popitem(last=False)
+        else:
+            self._blocks.move_to_end(b0)
+        return blk
 
     def readable(self):
         return True
