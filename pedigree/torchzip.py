@@ -10,7 +10,9 @@ byte offsets, so the rest of Pedigree reads .bin and .safetensors files the same
 Safety: data.pkl is unpickled by a restricted Unpickler that knows only the records
 PyTorch uses to describe tensors (OrderedDict, the tensor rebuild functions, storage
 types). They are replaced by inert stand-ins that record layout and execute nothing;
-any other global makes the file unreadable (reported, never silently skipped).
+functions and other torch/numpy globals make the file unreadable (reported, never silently
+skipped); any other class becomes an inert placeholder that keeps its pickled state, so tensors
+held inside a framework's objects are still found (amendment 2026-11-20).
 """
 from __future__ import annotations
 
@@ -34,13 +36,13 @@ ITEM = {"F32": 4, "F16": 2, "BF16": 2, "F64": 8, "I64": 8, "I32": 4, "I16": 2, "
 class RangeFile(io.RawIOBase):
     """A read-only, seekable file over HTTP range requests (cached in blocks)."""
 
-    def __init__(self, url: str, size: int):
-        self.url, self.size, self.pos = url, size, 0
+    def __init__(self, url: str, size: int, base: int = 0):
+        self.url, self.size, self.pos, self.base = url, size, 0, base
         self._block: tuple[int, bytes] | None = None   # the last block read, kept in memory
 
     def _get(self, b0: int) -> bytes:
         if self._block is None or self._block[0] != b0:
-            self._block = (b0, fetch_range(self.url, b0, min(b0 + BLOCK, self.size) - 1))
+            self._block = (b0, fetch_range(self.url, self.base + b0, self.base + min(b0 + BLOCK, self.size) - 1))
         return self._block[1]
 
     def readable(self):
@@ -105,6 +107,8 @@ class _Unpickler(pickle.Unpickler):
     def find_class(self, module, name):
         if (module, name) == ("collections", "OrderedDict"):
             return OrderedDict
+        if module in ("builtins", "__builtin__") and name in ("set", "frozenset", "slice", "complex"):
+            return {"set": set, "frozenset": frozenset, "slice": slice, "complex": complex}[name]
         if (module, name) in (("torch._utils", "_rebuild_tensor_v2"), ("torch._utils", "_rebuild_tensor")):
             return _rebuild_tensor_v2
         if (module, name) in (("torch._utils", "_rebuild_parameter"),
@@ -112,7 +116,14 @@ class _Unpickler(pickle.Unpickler):
             return _rebuild_parameter
         if module == "torch" and name in STORAGE_DTYPE:
             return _Marker(STORAGE_DTYPE[name])
-        raise pickle.UnpicklingError(f"refusing global {module}.{name}")
+        internal = module.split(".")[0] in ("torch", "numpy") and not module.startswith("torch.nn.modules.")
+        if internal or not name[:1].isupper():
+            # functions, and torch/numpy internals other than the records above: never stood in for
+            raise pickle.UnpicklingError(f"refusing global {module}.{name}")
+        # any other class (a training framework's config or vocabulary object, e.g. flair's
+        # Dictionary, Lightning's hyper-parameter records): an inert stand-in that keeps its state
+        # so tensors inside it are still found; no code of the file runs (amendment 2026-11-20, R1)
+        return _opaque(module, name)
 
     def persistent_load(self, pid):
         # ('storage', storage_type, key, location, numel)
@@ -144,12 +155,56 @@ def _contiguous(shape: tuple, stride: tuple) -> bool:
     return True
 
 
+class _Opaque:
+    """Stand-in for a class the restricted unpickler does not know."""
+    __slots__ = ("_state", "_args")
+
+    def __init__(self, *args, **kwargs):
+        self._args, self._state = args, kwargs or None
+
+    def __setstate__(self, state):
+        self._state = state
+
+    def __setitem__(self, k, v):            # SETITEM(S) on a dict subclass
+        if not isinstance(self._state, dict):
+            self._state = {}
+        self._state[k] = v
+
+    def append(self, v):                     # APPEND(S) on a list subclass
+        self._args = tuple(self._args) + (v,)
+
+    def extend(self, vs):
+        self._args = tuple(self._args) + tuple(vs)
+
+
+_OPAQUE: dict = {}
+
+
+def _opaque(module: str, name: str):
+    key = (module, name)
+    if key not in _OPAQUE:
+        _OPAQUE[key] = type(name, (_Opaque,), {"__slots__": (), "__module__": "pedigree.torchzip.opaque"})
+    return _OPAQUE[key]
+
+
+MODULE_SLOTS = ("_parameters", "_buffers", "_modules")    # a whole pickled torch.nn.Module
+
+
 def _flatten(obj, prefix=""):
     if isinstance(obj, _Tensor):
         yield prefix, obj
     elif isinstance(obj, dict):
         for k, v in obj.items():
-            yield from _flatten(v, f"{prefix}.{k}" if prefix else str(k))
+            if k in MODULE_SLOTS:
+                yield from _flatten(v, prefix)
+            else:
+                yield from _flatten(v, f"{prefix}.{k}" if prefix else str(k))
+    elif isinstance(obj, _Opaque):
+        if isinstance(obj._state, (dict, _Opaque)):
+            yield from _flatten(obj._state, prefix)
+        elif isinstance(obj._state, tuple):              # (dict state, slot state)
+            for part in obj._state:
+                yield from _flatten(part, prefix)
 
 
 LEGACY_MAGIC = 0x1950A86A20F9469CFC6C
@@ -192,8 +247,8 @@ def _legacy_header(fh: RangeFile, url: str) -> tuple[int, dict]:
         if not starts:
             pos = first
             for k in keys:
-                (numel,) = struct.unpack("<q", fetch_range(url, pos, pos + 7))
-                starts[str(k)] = pos + 8
+                (numel,) = struct.unpack("<q", fetch_range(url, fh.base + pos, fh.base + pos + 7))
+                starts[str(k)] = fh.base + pos + 8
                 pos += 8 + numel * ITEM[up.dtypes.get(str(k), "U8")]
         return starts[key]
 
@@ -221,11 +276,11 @@ def _header(state, start_of) -> dict:
     return header
 
 
-def read_header(url: str, size: int) -> tuple[int, dict]:
+def read_header(url: str, size: int, base: int = 0) -> tuple[int, dict]:
     """(0, safetensors-style header with absolute offsets) of a remote PyTorch file: the zip
     format (torch >= 1.6) or the legacy pickle format before it. Non-contiguous tensors are left
     out (their leading bytes are not their leading values)."""
-    fh = RangeFile(url, size)
+    fh = RangeFile(url, size, base)
     if fh.read(4) != b"PK\x03\x04":
         fh.seek(0)
         return _legacy_header(fh, url)
@@ -246,9 +301,9 @@ def read_header(url: str, size: int) -> tuple[int, dict]:
             info = zf.getinfo(f"{root}data/{key}")
             if info.compress_type != zipfile.ZIP_STORED:
                 raise ValueError("compressed tensor storage")
-            local = fetch_range(url, info.header_offset, info.header_offset + 29)
+            local = fetch_range(url, base + info.header_offset, base + info.header_offset + 29)
             nlen, xlen = struct.unpack("<HH", local[26:30])
-            starts[key] = info.header_offset + 30 + nlen + xlen
+            starts[key] = base + info.header_offset + 30 + nlen + xlen
         return starts[key]
 
     return 0, _header(state, start_of)

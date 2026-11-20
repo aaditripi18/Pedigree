@@ -17,6 +17,7 @@ import argparse
 import http.client
 import json
 import os
+import re
 import threading
 import time
 import urllib.error
@@ -27,7 +28,7 @@ from pathlib import Path
 import numpy as np
 
 from experiments import ledger
-from pedigree import hub, pool
+from pedigree import ggufremote, hub, pool
 from pedigree.verify import Remote, compare, compare_invariant, kurtosis_gap
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -136,6 +137,9 @@ def weight_files(repo: str, d: dict) -> tuple[str, list[str], dict, dict]:
         return "not readable (index names missing files)", [], {}, {}
     if not files and not prefix:
         files = _largest_unit(repo, d, names)
+    if not files and not prefix and READERS_R1:
+        files = other_unit(names, {n: int(sib[n].get("size") or (sib[n].get("lfs") or {}).get("size") or 0)
+                                   for n in names})
     if not files:
         adapters = [n for n in sib if n.split("/")[-1].startswith("adapter_model")]
         top = {n.rsplit(".", 1)[-1] for n in sib}
@@ -152,8 +156,52 @@ def weight_files(repo: str, d: dict) -> tuple[str, list[str], dict, dict]:
         return fmt, [], {}, {}
     sizes = {f: int(sib[f].get("size") or (sib[f].get("lfs") or {}).get("size") or 0) for f in files}
     sha = {f: (sib[f].get("lfs") or {}).get("sha256", "") for f in files}
+    ext = files[0].rsplit(".", 1)[-1].lower()
+    if ext in ("onnx", "npz", "nemo", "pt", "pth", "ckpt", "tflite", "litertlm", "pdiparams"):
+        return ext, files, sizes, sha
+    if files == ["model.bin"]:
+        return "ct2-or-bin", files, sizes, sha
     return ("gguf" if files[0].endswith(".gguf") else "bin" if files[0].endswith(".bin") else "safetensors"),\
         files, sizes, sha
+
+
+# amendment 2026-11-20 (R1): formats read since then. E2 itself ran without them (READERS_R1=0
+# reproduces E2's file choice); the re-audit E2x and every later run use them.
+READERS_R1 = os.environ.get("PEDIGREE_READERS_R1", "1") != "0"
+_NOT_WEIGHTS = re.compile(r"optim|discriminator|(^|/)disc[_.-]|scheduler|training_state|rng_state", re.I)
+_QUANT_ONNX = re.compile(r"quant|q4|q8|int8|uint8|int4|bnb4|fp16|f16", re.I)
+_HALF_ONNX = re.compile(r"fp16|f16", re.I)
+
+
+def other_unit(names: list[str], size: dict) -> list[str]:
+    """The weight files of a repository holding none of the three original formats at its top
+    level, by format in this order: GGUF (sharded or in subfolders), CTranslate2 model.bin,
+    PyTorch .pt/.pth/.ckpt (optimizer and discriminator states left out), NeMo, ONNX (full
+    precision first), NumPy .npz, Paddle .pdiparams, LiteRT-LM, TFLite (float models first)."""
+    g = ggufremote.choose_variant(names)
+    if g:
+        return g
+    if "model.bin" in names:
+        return ["model.bin"]
+
+    def largest(c):
+        return [max(c, key=lambda n: size.get(n, 0))] if c else []
+    for exts in ((".pt", ".pth", ".ckpt"), (".nemo",)):
+        c = [n for n in names if n.lower().endswith(exts) and not _NOT_WEIGHTS.search(n)]
+        if c:
+            return largest(c)
+    onnx = [n for n in names if n.lower().endswith(".onnx") and "with_past" not in n]
+    if onnx:
+        full = [n for n in onnx if not _QUANT_ONNX.search(n.rsplit("/", 1)[-1])]
+        half = [n for n in onnx if _HALF_ONNX.search(n.rsplit("/", 1)[-1])]
+        return largest(full) or largest(half) or largest(onnx)
+    for ext in (".npz", ".pdiparams", ".litertlm"):
+        c = [n for n in names if n.lower().endswith(ext)]
+        if c:
+            return largest(c)
+    tfl = [n for n in names if n.lower().endswith(".tflite")]
+    full = [n for n in tfl if not _QUANT_ONNX.search(n.rsplit("/", 1)[-1])]
+    return largest(full) or largest(tfl)
 
 
 def _largest_unit(repo: str, d: dict, names: list[str]) -> list[str]:

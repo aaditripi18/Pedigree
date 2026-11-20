@@ -107,3 +107,110 @@ def struct_names_v2(gguf_shapes: dict, hf_shapes: dict) -> dict[str, str]:
                 _unique_pairs(gst[g][i], hst[h][i], out)
     _unique_pairs(gfree, hfree, out)
     return out
+
+
+# --- v3 (PLAN.md, amendment 2026-11-20, H23): any two formats, roles, unequal depth --------------
+
+_ANY_STACK = re.compile(r"(?:^|[./])(blk|layers|layer|h|blocks|block|layer_)[._]?(\d+)(?=[./])")
+_PREFIXES = ("model.diffusion_model.", "diffusion_model.", "model.", "transformer.")
+ROLES = {"encoder": {"encoder", "enc"}, "decoder": {"decoder", "dec"},
+         "vision": {"vision", "visual", "v", "vit", "image"}, "text": {"text", "t", "language_model", "llm"},
+         "audio": {"audio", "a"}}
+
+
+def _strip(name: str) -> str:
+    for p in _PREFIXES:
+        if name.startswith(p):
+            return name[len(p):]
+    return name
+
+
+def direct_names(a_shapes: dict, b_shapes: dict) -> dict[str, str]:
+    """(a) equal names after removing one leading model./diffusion_model./transformer. prefix,
+    with equal shapes."""
+    b = {}
+    for n, (_k, s) in b_shapes.items():
+        b.setdefault(_strip(n), []).append((n, tuple(s)))
+    out = {}
+    for n, (_k, s) in a_shapes.items():
+        hit = [m for m, t in b.get(_strip(n), []) if t == tuple(s)]
+        if len(hit) == 1:
+            out[n] = hit[0]
+    return out
+
+
+def _stack3(name: str):
+    m = _ANY_STACK.search(name)
+    return (name[:m.end(1)], int(m.group(2))) if m else None
+
+
+def _stacks3(shapes: dict):
+    st: dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    free: dict = defaultdict(list)
+    for name, (_kind, shape) in shapes.items():
+        s = _stack3(name)
+        if s is None:
+            free[tuple(shape)].append(name)
+        else:
+            st[s[0]][s[1]][tuple(shape)].append(name)
+    return st, free
+
+
+def _role(prefix: str) -> str | None:
+    toks = set(re.split(r"[./_]", prefix.lower()))
+    found = [r for r, words in ROLES.items() if toks & words]
+    return found[0] if len(found) == 1 else None
+
+
+def _transposed_pairs(gs: dict, hs: dict, out: dict, tr: set) -> None:
+    """(d) a 2-D tensor whose shape occurs once on each side only when reversed: its transpose."""
+    for shape, names in gs.items():
+        if len(shape) != 2 or shape[0] == shape[1] or len(names) != 1 or names[0] in out:
+            continue
+        if shape in hs:
+            continue
+        other = hs.get(shape[::-1])
+        if other and len(other) == 1 and other[0] not in out.values():
+            out[names[0]] = other[0]
+            tr.add(names[0])
+
+
+def struct_names_v3(a_shapes: dict, b_shapes: dict) -> tuple[dict[str, str], set]:
+    """({a tensor: b tensor}, {a tensors paired as transposes}). Stacks paired by a shared role
+    word first, then as in v2 (same block count, else nearest; ties: more tensors); block i with
+    block round(i * (m - 1) / (n - 1)) when the counts n and m differ; unique shapes within each
+    block pair and among tensors with no block index; else unique reversed 2-D shapes."""
+    ast_, afree = _stacks3(a_shapes)
+    bst, bfree = _stacks3(b_shapes)
+
+    def size(st, k):
+        return sum(len(v) for blk in st[k].values() for v in blk.values())
+    out, tr = {}, set()
+    free_b = set(bst)
+    order = sorted(ast_, key=lambda k: (_role(k) is None, -size(ast_, k)))
+    for g in order:
+        if not free_b:
+            break
+        ng = len(ast_[g])
+        same_role = [k for k in free_b if _role(g) and _role(k) == _role(g)]
+        pool_ = same_role or ([k for k in free_b if _role(k) is None or _role(g) is None] or list(free_b))
+        h = min(pool_, key=lambda k: (abs(len(bst[k]) - ng), -size(bst, k)))
+        free_b.discard(h)
+        ga, hb = sorted(ast_[g]), sorted(bst[h])
+        n, m = len(ga), len(hb)
+        for i, bi in enumerate(ga):
+            j = i if n == m else (round(i * (m - 1) / (n - 1)) if n > 1 else 0)
+            if j < m:
+                _unique_pairs(ast_[g][bi], bst[h][hb[j]], out)
+                _transposed_pairs(ast_[g][bi], bst[h][hb[j]], out, tr)
+    _unique_pairs(afree, bfree, out)
+    _transposed_pairs(afree, bfree, out, tr)
+    return out, tr
+
+
+def names_v3(a_shapes: dict, b_shapes: dict) -> tuple[dict[str, str], set]:
+    """H23's v3: direct names (a), else role-paired stacks with unequal depth (b, c, d), whichever
+    pairs more tensors."""
+    d = direct_names(a_shapes, b_shapes)
+    s, tr = struct_names_v3(a_shapes, b_shapes)
+    return (s, tr) if len(s) > len(d) else (d, set())

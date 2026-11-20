@@ -15,6 +15,9 @@ pedigree = "pedigree.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "safetensors>=0.4", "torch>=2.2"]
+# the reference libraries tests/test_formats.py checks each R1 reader against (amendment 2026-11-20)
+reference = ["onnx==1.23.2", "ctranslate2==4.9.0", "flatbuffers==25.12.19", "tflite==2.18.0",
+             "litert-lm-builder==0.19.2", "paddlepaddle==3.3.1"]
 # E1: building ground-truth derivatives (fine-tune, merge, quantise, prune, distil)
 experiments = ["transformers>=4.57", "diffusers>=0.30", "timm>=1.0", "pandas", "pyarrow", "soundfile", "pillow", "torch>=2.2", "safetensors>=0.4", "peft>=0.13"]
 

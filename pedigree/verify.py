@@ -14,11 +14,13 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from . import ggufremote, hub, torchzip
+from . import formats, ggufremote, hub, torchzip
 from .align import align
 from .remote import ITEMSIZE, read_header, resolve_url, tensor_bytes
 
 FLOATS = ("F64", "F32", "F16", "BF16")
+OTHER_FORMATS = (".onnx", ".npz", ".nemo", ".pt", ".pth", ".ckpt", ".tflite", ".litertlm",
+                 ".pdiparams")   # amendment 2026-11-20 (R1)
 FP8 = ("F8_E4M3", "F8_E5M2")
 
 
@@ -55,7 +57,11 @@ def decode(dtype: str, raw: bytes) -> np.ndarray:
         return u.view(np.float32).astype(np.float64)
     if dtype in FP8_TABLES:
         return FP8_TABLES[dtype][np.frombuffer(raw, dtype=np.uint8)]
-    return np.frombuffer(raw, dtype={"F64": "<f8", "F32": "<f4", "F16": "<f2"}[dtype]).astype(np.float64)
+    return np.frombuffer(raw, dtype=NP_DTYPE[dtype]).astype(np.float64)
+
+
+NP_DTYPE = {"F64": "<f8", "F32": "<f4", "F16": "<f2", "I64": "<i8", "I32": "<i4", "I16": "<i2", "I8": "i1",
+            "U64": "<u8", "U32": "<u4", "U16": "<u2", "U8": "u1", "BOOL": "u1"}
 
 
 @dataclass
@@ -81,9 +87,12 @@ class Remote:
         res = SimpleNamespace(repo=repo, commit=commit, files=names, sizes=sizes)
         files = [f for f in res.files if f.endswith((".safetensors", ".bin"))]
         gguf = [] if files else ggufremote.choose_variant(res.files)
-        if not files and not gguf:
+        other = [] if files or gguf else [f for f in res.files if f.lower().endswith(OTHER_FORMATS)]
+        if not files and not gguf and not other:
             raise hub.HubError(f"{res.repo}: no safetensors, PyTorch or GGUF weights")
         r = cls(res.repo, res.commit)
+        for f in other:                  # amendment 2026-11-20 (R1): public formats beyond the three
+            r._add_other(f, res.sizes[f])
         for f in gguf:
             url = resolve_url(res.repo, f, res.commit)
             meta, header = ggufremote.read_header(url, res.sizes[f])
@@ -95,6 +104,10 @@ class Remote:
             url = resolve_url(res.repo, f, res.commit)
             r.files.append(f)
             if f.endswith(".bin"):
+                if formats.is_ct2(url):          # a CTranslate2 model.bin (faster-whisper and similar)
+                    for name, (u, s) in formats.ct2_header(url, res.sizes[f]).items():
+                        r.tensors[name] = (u, 0, s)
+                    continue
                 start, header = torchzip.read_header(url, res.sizes[f])
             else:
                 start, header = read_header(url)
@@ -103,6 +116,40 @@ class Remote:
                     r.tensors[name] = (url, start, s)
         r._find_quantised()
         return r
+
+    def _add_other(self, f: str, size: int) -> None:
+        url = resolve_url(self.repo, f, self.commit)
+        self.files.append(f)
+        low = f.lower()
+        if low.endswith(".onnx"):
+            header, deq = formats.onnx_header(self.repo, self.commit, f, size)
+            for name, (u, s) in header.items():
+                self.tensors[name] = (u, 0, s)
+            for x, (scale, zero, axis) in deq.items():
+                if scale in header:
+                    self.quant[x] = {"kind": "affine", "shape": header[x][1]["shape"], "scale": scale,
+                                     "zero": zero if zero in header else None, "axis": axis}
+            return
+        if low.endswith((".npz", ".tflite", ".litertlm", ".pdiparams")):
+            read = {".npz": formats.npz_header, ".tflite": formats.tflite_header,
+                    ".litertlm": formats.litertlm_header, ".pdiparams": formats.pdiparams_header}
+            for name, (u, s) in read["." + low.rsplit(".", 1)[-1]](url, size).items():
+                self.tensors[name] = (u, 0, s)
+                if s.get("affine"):            # TFLite integer weights with their scales
+                    self.quant[name] = {"kind": "inline", "shape": s["shape"], **s["affine"]}
+            return
+        if low.endswith(".nemo"):
+            members = formats.tar_members(url, size)
+            ckpt = [m for m in members if m.endswith("model_weights.ckpt")]
+            if not ckpt:
+                raise ValueError("a .nemo archive without model_weights.ckpt")
+            off, n = members[ckpt[0]]
+            _, header = torchzip.read_header(url, n, base=off)
+        else:                            # .pt / .pth / .ckpt: PyTorch, zip or legacy
+            _, header = torchzip.read_header(url, size)
+        for name, s in header.items():
+            if isinstance(s, dict):
+                self.tensors[name] = (url, 0, s)
 
     def _config(self) -> dict:
         try:
@@ -119,6 +166,9 @@ class Remote:
         mlx = [n for n, (_, _, s) in t.items() if s["dtype"] == "U32" and n.endswith(".weight")
                and n[:-7] + ".scales" in t and n[:-7] + ".biases" in t]
         fp8 = [n for n, (_, _, s) in t.items() if s["dtype"] in FP8]
+        for n, (_, _, s) in t.items():   # CTranslate2 int8: weight * scale per row was rounded
+            if s["dtype"] == "I8" and n.endswith("/weight") and n + "_scale" in t and n not in self.quant:
+                self.quant[n] = {"kind": "ct2", "shape": s["shape"], "scale": n + "_scale"}
         if not mlx and not fp8:
             return
         cfg = self._config()
@@ -154,7 +204,7 @@ class Remote:
     def _helpers(self) -> set:
         h = set()
         for q in self.quant.values():
-            h.update(x for x in (q.get("scales"), q.get("biases"), q.get("scale")) if x)
+            h.update(x for x in (q.get("scales"), q.get("biases"), q.get("scale"), q.get("zero")) if x)
         return h
 
     def float_shapes(self) -> dict[str, tuple]:
@@ -170,6 +220,51 @@ class Remote:
 
     def _dequantised(self, name: str, elements: int) -> np.ndarray:
         q = self.quant[name]
+        if q["kind"] == "inline":
+            shape = q["shape"]
+            rows_total = shape[0] if shape else 1
+            cols = int(np.prod(shape[1:])) if len(shape) > 1 else 1
+            rows = min(rows_total, -(-elements // cols))
+            x = self._raw(name, rows * cols).astype(np.float64)
+            sc, zp = np.asarray(q["scale"], np.float64), np.asarray(q["zero"], np.float64)
+            if sc.size == 1:
+                return ((x - zp.reshape(-1)[0]) * sc[0])[:elements]
+            if q["axis"] == 0 and sc.size == rows_total:
+                x = x.reshape(rows, cols)
+                z = zp[:rows].reshape(rows, 1) if zp.size == sc.size else 0.0
+                return ((x - z) * sc[:rows].reshape(rows, 1)).reshape(-1)[:elements]
+            if q["axis"] == len(shape) - 1 and sc.size == shape[-1]:
+                x = x.reshape(-1, shape[-1])
+                z = zp.reshape(1, -1) if zp.size == sc.size else 0.0
+                return ((x - z) * sc.reshape(1, -1)).reshape(-1)[:elements]
+            raise ValueError(f"TFLite quantisation layout of {name} not read")
+        if q["kind"] in ("affine", "ct2"):
+            shape = q["shape"]
+            rows_total = shape[0] if shape else 1
+            cols = int(np.prod(shape[1:])) if len(shape) > 1 else 1
+            rows = min(rows_total, -(-elements // cols))
+            x = self._raw(name, rows * cols).astype(np.float64).reshape(rows, cols)
+            sshape = self.tensors[q["scale"]][2]["shape"]
+            nsc = int(np.prod(sshape)) if sshape else 1
+            if q["kind"] == "ct2":                       # one scale per output row: w = q / scale
+                sc = self._raw(q["scale"], rows).reshape(rows, 1) if nsc == rows_total else self._raw(q["scale"], 1)
+                return (x / sc).reshape(-1)[:elements]
+            zp = 0.0
+            if nsc == 1:                                 # per tensor (ONNX DequantizeLinear)
+                sc = self._raw(q["scale"], 1)[0]
+                if q["zero"]:
+                    zp = self._raw(q["zero"], 1)[0]
+            elif q["axis"] in (0, -len(shape)) and nsc == rows_total:
+                sc = self._raw(q["scale"], rows).reshape(rows, 1)
+                if q["zero"]:
+                    zp = self._raw(q["zero"], rows).reshape(rows, 1)
+            elif len(shape) == 2 and nsc == shape[1]:    # per column
+                sc = self._raw(q["scale"], cols).reshape(1, cols)
+                if q["zero"]:
+                    zp = self._raw(q["zero"], cols).reshape(1, cols)
+            else:
+                raise ValueError(f"DequantizeLinear layout of {name} not read")
+            return ((x - zp) * sc).reshape(-1)[:elements]
         if q["kind"] == "mlx":
             rows_total, cols = int(np.prod(q["shape"][:-1])), q["shape"][-1]
         else:
@@ -204,6 +299,21 @@ class Remote:
         # a single scale per tensor leaves every cosine unchanged
         return x.reshape(-1)[:elements]
 
+    def sample_transposed(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
+        """The leading values of a 2-D tensor's transpose (the whole tensor is read)."""
+        shape = self.float_shapes()[name][1]
+        rows, cols = shape
+        if name in self.quant:
+            full = self._dequantised(name, rows * cols)
+        else:
+            url, start, s = self.tensors[name]
+            if s["dtype"] == "GGUF":
+                raise ValueError("a GGUF tensor is not read transposed")
+            full = decode(s["dtype"], tensor_bytes(url, start, s, TRANSPOSE_MAX_BYTES))
+            if full.size < rows * cols:
+                raise ValueError(f"{name} is larger than a transposed read allows")
+        return full.reshape(rows, cols).T.reshape(-1)[:max_bytes // 4]
+
     def sample(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
         if name in self.quant:
             return self._dequantised(name, max_bytes // 4)
@@ -233,18 +343,31 @@ def cosine(a: np.ndarray, b: np.ndarray) -> float:
 
 
 class Renamed:
-    """A model seen under other tensor names (a GGUF file under Hugging Face names)."""
+    """A model seen under other tensor names (a GGUF file under Hugging Face names); tensors in
+    `transposed` are seen as their transposes (alignment v3 (d))."""
 
-    def __init__(self, model, mapping: dict[str, str]):
+    def __init__(self, model, mapping: dict[str, str], transposed: set | None = None):
         self.model, self.repo, self.commit = model, model.repo, model.commit
         self.to_old = {new: old for old, new in mapping.items()}
+        self.transposed = transposed or set()
 
     def float_shapes(self):
         fs = self.model.float_shapes()
-        return {new: fs[old] for new, old in self.to_old.items() if old in fs}
+        out = {}
+        for new, old in self.to_old.items():
+            if old in fs:
+                kind, shape = fs[old]
+                out[new] = (kind, tuple(shape)[::-1]) if old in self.transposed else fs[old]
+        return out
 
     def sample(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
-        return self.model.sample(self.to_old[name], max_bytes)
+        old = self.to_old[name]
+        if old in self.transposed:
+            return self.model.sample_transposed(old, max_bytes)
+        return self.model.sample(old, max_bytes)
+
+
+TRANSPOSE_MAX_BYTES = 64 * 1024 * 1024     # a transposed tensor is read whole; larger ones are left out
 
 
 STRUCT_BELOW = 8     # structural alignment is tried when names pair fewer tensors (H17)
@@ -276,9 +399,36 @@ def _gguf_mapping(gm, hm, alignment: str) -> dict[str, str]:
 
 
 def harmonise(model, other, alignment: str = "names"):
-    """Give a GGUF model the tensor names of the other (non-GGUF) model."""
+    """Give a GGUF model the tensor names of the other (non-GGUF) model. With alignment "auto3"
+    (names, else v3) or "struct3" (v3, names ignored), any two models whose names pair fewer than
+    STRUCT_BELOW tensors are aligned by v3 (amendment 2026-11-20, H23)."""
     def g(m):
         return getattr(m, "gguf_meta", None)
+    if alignment in ("auto3", "struct3"):
+        from .structalign import names_v3
+        ms, os_ = model.float_shapes(), other.float_shapes()
+        if g(model) and not g(other):
+            names = {} if alignment == "struct3" else ggufremote.hf_names(model.gguf_meta, ms, os_)
+            flip = False
+        elif g(other) and not g(model):
+            names = {} if alignment == "struct3" else ggufremote.hf_names(other.gguf_meta, os_, ms)
+            flip = True
+        else:
+            pairing, _, _ = align(ms, os_)
+            if alignment == "auto3" and len(pairing) >= STRUCT_BELOW:
+                return model, other
+            names, flip = {}, False
+        if len(names) >= STRUCT_BELOW:
+            return (model, Renamed(other, names)) if flip else (Renamed(model, names), other)
+        a, b = (other, model) if flip else (model, other)
+        v3, tr = names_v3(a.float_shapes(), b.float_shapes())
+        if len(v3) > len(names) and len(v3) > (0 if (g(model) or g(other)) else len(align(ms, os_)[0])):
+            names, tr = v3, tr
+        else:
+            tr = set()
+        if not names:
+            return model, other
+        return (model, Renamed(other, names, tr)) if flip else (Renamed(model, names, tr), other)
     if g(model) and not g(other):
         model = Renamed(model, _gguf_mapping(model, other, alignment))
     elif g(other) and not g(model):
@@ -296,7 +446,12 @@ def compare(model: Remote, other: Remote, n_tensors: int = N_TENSORS, alignment:
     names = _spaced(big, n_tensors)
     cos, kurt, identical = {}, {}, bool(names)
     for n in names:
-        a, b = model.sample(n), other.sample(pairing[n])
+        try:
+            a, b = model.sample(n), other.sample(pairing[n])
+        except ValueError as e:
+            if "transposed" not in str(e):        # only a v3 transposed read may be left out
+                raise
+            continue
         cos[n] = cosine(a, b)
         kurt[n] = [excess_kurtosis(a), excess_kurtosis(b)]
         identical &= a.shape == b.shape and bool(np.array_equal(a, b))

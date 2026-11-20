@@ -17,7 +17,7 @@ jobs:
       - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
       # transformers: the permutation and re-basin tests (tiny random configs, no downloads). 5.22.1 is the version
       # the Kaggle jobs pin; it needs Python >= 3.11, and 5.20.2 is the newest release for 3.10
-      - run: pip install -e ".[dev]" pandas "transformers==5.22.1; python_version >= '3.11'" "transformers==5.20.2; python_version < '3.11'"
+      - run: pip install -e ".[dev,reference]" pandas "transformers==5.22.1; python_version >= '3.11'" "transformers==5.20.2; python_version < '3.11'"
       - run: python -m pytest -q -rs
         env:
           PEDIGREE_REQUIRE_CC: "1"   # the GGUF reference-parity tests must run here, not skip
