@@ -977,3 +977,102 @@ and the two top-ranked pool candidates under names, v3 and v4.
 - **H25b** On the fresh declared pairs where names align fewer than 8 tensors and both models were
   read, v4 makes >= 80% comparable (>= 8 tensors). Pairs that could not be read count under H21 and R2,
   not here. H23's 145 pairs are reported beside it under v4 and do not count.
+
+**Outcome of H21 (recorded after judging, 2026-11-21; Kaggle job `pedigree-e2x` read all 46 models,
+225 pairs and 49 v3 pairs, none lost).** **Not supported.** 37 of the 46 models E2 never read are now
+read. Four are still unreadable for reasons the readers could have handled, so H21 fails as stated:
+three GGUF repositories (`ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF`,
+`AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF`, `unsloth/Inkling-Small-GGUF`) keep every
+quantisation in a subfolder and one multimodal projector (`mmproj-*.gguf`) at the top level; the
+top-level rule took the projector, the GGUF chooser then set it aside as not the model, and the
+subfolders were never looked at. The fourth, `flair/chunk-english`, pickles framework records the
+restricted unpickler refused: `collections.defaultdict`, then `torch.torch_version.TorchVersion`,
+then the class `torch.optim.sgd.SGD`. The other five are counted by reason, as H21 allows: no weight
+files 3, gated with no public copy 1, HTTP 403 1. With E2x applied, R2 puts 24 of the 30 declared
+pairs still not comparable into a category; 6 are listed as gaps (`Comfy-Org/Qwen3-VL`,
+`tiny-random/qwen3.5-moe`, `zgpu-ai/zlm-v1-signal-extract`, `z-lab/Qwen3.6-35B-A3B-DFlash`,
+`KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2`, `onnx-community/Nemotron-3-Diarization-ONNX`).
+
+**Outcome of H25 (recorded after judging, 2026-11-21; Kaggle job `pedigree-h25` read all 300 sampled
+models and H23's 147 design pairs, none lost).**
+
+- **H25a: not supported.** v4 (names ignored) agrees with names on 602 of 604 pairs, 61 of them
+  unrelated by names (judged); one abstains and one is opposite. The opposite verdict is
+  `onnx-community/LFM2-700M-ONNX` against `LiquidAI/LFM2-700M`: related by names (11 tensors, median
+  1.0), unrelated by v4 (24 tensors, 0.0099). This exporter names its matrix weights
+  `<module>.MatMul.weight` and stores them as [in, out]; reader (ii) turned only anonymous (`onnx::`)
+  initializers round, so v4 paired them by shape with the wrong partners (`mlp.gate_proj` [1536, 6912]
+  with the base's `feed_forward.w2`, every square matrix transposed). The abstention is
+  `LiquidAI/d1-omni-600M-GGUF` (names: 24 tensors, 0.99998; v4: 1): its base is multimodal, and v3's
+  stack rule (nearest block count, then size) paired the GGUF's text stack with the base's audio
+  encoder, which shares only a few bias shapes with it.
+- **H25b: not supported.** v4 makes 67 of 99 fresh declared pairs comparable (2 more could not be
+  read). Read again with the readers below as a diagnosis (not a ledger run), the 32 it does not make
+  comparable are: ONNX encoder-decoder exports read as their largest file only, a merged decoder whose
+  nodes sit in `If` branches (8: Whisper x4, opus-mt x3, TrOCR); ONNX with onnxruntime's dynamic
+  quantisation, `MatMulInteger` (2) or 4-bit `MatMulNBits` (1); a side file taken for the model (8: a
+  multi-token-prediction head, `dspark`/`DSpark` draft models, a VAE, a classifier head, a control
+  vector, side `.safetensors` files and an `Engram` table, each with far fewer tensors than the model
+  beside it); a converter that numbered its tensors (`t0000`...) (1); a base held under a leading path
+  with LoRA unmerged (1); and 11 others: GGUF architectures llama.cpp's table does not know (`ltx2`
+  x2, `qwen35moe` with fused experts), different structures (a prefill draft model, `odp`), a fork's
+  undocumented GGUF type 103, and ONNX or PyTorch pairs that align 2-7 large tensors. H23's pairs
+  under v4 (design data): 110 of 142 declared pairs comparable, both former opposite verdicts agree.
+
+## Amendment 2026-11-21: readers v5, alignment (g)-(i), E2y and H26, after H21 and H25 and before any of H26's data
+
+H21's and H25's verdicts stand as recorded. H25's pairs are design data for v5 and are reported beside
+H26, not counted. The project owner's instruction of 2026-11-20 stands.
+
+**Readers v5** (`pedigree/formats.py`, `pedigree/torchzip.py`, `pedigree/units.py`), each tested on a
+file its reference library wrote, the values read checked against the values written
+(`tests/test_readers_v5.py`): (iii) an encoder-decoder ONNX export (`encoder_model*.onnx` beside
+`decoder_model*.onnx`) is read as both files of one precision, the decoder without past keys and not
+merged where that file exists; the encoder's names take `encoder.` unless they begin with `encoder`
+or `model.`. (iv) Nodes inside sub-graphs (`If`, `Loop`, `Scan`) count as uses, and a merged
+decoder's `_merged_N` suffix is dropped. (v) Every initializer that is input 1 of exactly one
+`MatMul`, `MatMulInteger` or `Gemm` without `transB` is seen as its transpose, whatever its name (the
+operators define it as [in, out]); an anonymous one takes the node's path, and a `.MatMul` component
+before `.weight` is dropped. (vi) onnxruntime's dynamic quantisation (`X_quantized` with `X_scale` and
+`X_zero_point`) is read as the values it stands for, named X. (vii) When a repository holds several
+weight units (a top-level safetensors or PyTorch set and GGUF sets, or GGUF sets of different files),
+the one whose headers list the most tensors is the model; units with equally many (one model's
+quantisation variants) are chosen among as before, and a multimodal projector never counts. (viii)
+onnxruntime's `MatMulNBits` (4- and 8-bit blocks, one scale per block, zero points packed per row,
+default 2^(bits-1)) is read as [N, K] values. (vi) and (viii) are checked against onnxruntime itself
+(1.31.1, and 1.23.2 on Python 3.10, for which 1.31 publishes no wheel): the weight it runs is read
+from its output on an identity input. The restricted unpickler stands in a plain mapping for
+`collections.defaultdict` (its factory, a plain value type, is never called), `str` for
+`TorchVersion`, a tuple for `torch.Size`, and an inert placeholder for any other torch *class* (an
+optimizer type); torch and numpy functions and every other function stay refused, an optimizer's
+state is not taken for weights, and no code from any file runs. `pedigree verify` and the browser
+checker choose a repository's files by the audit's rule. `PEDIGREE_READERS_V5=0` reproduces E2x and
+H25.
+
+**Alignment v4 with (g)-(i)** (`pedigree/structalign.py`, with readers v5; `PEDIGREE_READERS_V5=0`
+reproduces H25): (g) when one side's names are numbers only, its tensors in number order pair by
+position with the other side's, in header order and in name order, each order kept only if the two
+shape sequences are equal throughout (size-1 dimensions aside); where both qualify, each is a
+candidate, scored like (c4)'s maps. (h) When one model holds the other under a leading path, the path
+most often left when a name is cut down to one on the other side is removed, PEFT's `.base_layer` is
+read as the weight, and names then equal with equal shapes pair. (g) and (h) compete with direct names
+by the number of large tensors they pair. (i) A stack's partner is the stack whose shapes overlap its
+own most (multiset intersection), then v3's rule.
+
+**E2y.** Every E2 model still unreadable after E2x, every pair whose other side is still unreadable,
+and every declared pair still not comparable (`results/e2y_targets.json`, frozen from the ledger
+before any reading) is read again with readers v5 and aligned by `auto4`, ledgers `E2y`, `E2yp`,
+`E2v4`. `scripts/analyse.py` reports E2 with E2x and E2y applied beside E2 as recorded, and R2 on it.
+
+**Fresh data.** A new frozen sample (`results/h26_sample.json`, seed 20261122, drawn after this
+amendment is committed and before any of it is read): H25's rule, excluding E2's, H13's, H15's,
+H19's, H23's and H25's samples. Each model is read and aligned exactly as in H25.
+
+- **H26a** On the fresh pairs where names align >= 8 tensors, v4 with (g)-(i) and names ignored gives
+  the same related / unrelated verdict for >= 98% and the opposite verdict for none (judged if >= 20
+  pairs, >= 5 of them unrelated by names).
+- **H26b** On the fresh declared pairs where names align fewer than 8 tensors and both models were
+  read, `auto4` makes >= 80% comparable (>= 8 tensors).
+- **H26c** (follows H21) No fresh sampled model, and no declared base of one, is unreadable because of
+  its file format, except formats with no public specification (each listed with the source checked);
+  no weight files, gated, private or missing repositories are counted by reason and do not count.
