@@ -193,3 +193,58 @@ def test_v4_depth_maps_find_kept_blocks_and_stay_low_for_independent_models():
         other = model(11, lambda i, k: r.randn(*shape[k]).astype("float32"))
         worst = max(worst, compare(_Fake("o", other), _Fake("base", base), alignment="struct4")["median_cosine"])
     assert worst < 0.0255 / 2
+
+
+# --- amendment 2026-11-21: (g) positional and (h) prefix pairings (with readers v5) ---------------
+
+def test_v5_positional_pairs_numbered_tensors_only_when_every_shape_matches():
+    """(g) A converter that numbered its tensors (t0000...) in the base's name order."""
+    from pedigree.structalign import positional_names
+    b = {"dec.a.weight": ("float", (8, 4)), "dec.b.weight": ("float", (4, 8)), "dec.c.weight": ("float", (8, 8))}
+    a = {"t0002": ("float", (8, 8)), "t0000": ("float", (8, 4)), "t0001": ("float", (4, 8, 1))}
+    want = {"t0000": "dec.a.weight", "t0001": "dec.b.weight", "t0002": "dec.c.weight"}
+    assert positional_names(a, b) == [("positional-header", want)]          # header and name order agree
+    assert positional_names(b, a) == [("positional-header", {v: k for k, v in want.items()})]
+    a["t0001"] = ("float", (8, 4))                         # one shape out of step: nothing is paired
+    assert positional_names(a, b) == []
+    assert positional_names({"x.w": ("float", (8, 4)), "y.w": ("float", (4, 8))}, b) == []   # names carry meaning
+
+
+def test_v5_prefix_and_peft_base_layer():
+    """(h) The base inside a larger model under `llm.base_model.model.`, LoRA left unmerged."""
+    from pedigree.structalign import prefix_names
+    base = {f"model.layers.{i}.self_attn.{p}.weight": ("float", (64, 64)) for i in range(4) for p in ("q_proj", "k_proj")}
+    big = {f"llm.base_model.model.model.layers.{i}.self_attn.{p}." + ("base_layer.weight" if p == "q_proj" else "weight"):
+           ("float", (64, 64)) for i in range(4) for p in ("q_proj", "k_proj")}
+    big.update({"perception.encoder.layers.0.conv.weight": ("float", (64, 64)),
+                f"llm.base_model.model.model.layers.0.self_attn.q_proj.lora_A.default.weight": ("float", (8, 64))})
+    m = prefix_names(big, base)
+    assert len(m) == 8 and m["llm.base_model.model.model.layers.2.self_attn.q_proj.base_layer.weight"] == \
+        "model.layers.2.self_attn.q_proj.weight"
+    assert prefix_names(base, big) == {v: k for k, v in m.items()}
+
+
+def test_v5_rules_compare_end_to_end_and_independent_models_stay_low(monkeypatch):
+    import numpy as np
+    from pedigree import structalign
+    from pedigree.verify import compare
+    rng = np.random.RandomState(9)
+    base = {f"model.layers.{i}.mlp.{p}.weight": rng.randn(64, 128).astype("float32") for i in range(6) for p in ("up", "gate")}
+    numbered = {f"t{j:04d}": base[n] for j, n in enumerate(sorted(base))}
+    nested = {"llm.base_model.model." + n.replace("up.weight", "up.base_layer.weight"): w for n, w in base.items()}
+    for other, label in ((numbered, "positional-name"), (nested, "prefix")):
+        c = compare(_Fake("m", other), _Fake("base", base), alignment="auto4")
+        assert c["alignment_map"] == label and c["compared"] >= 8 and c["median_cosine"] > 0.999
+    # every shape equal: both orders qualify and are scored; the name order (the true one) wins
+    assert set(compare(_Fake("m", numbered), _Fake("base", base), alignment="auto4")["map_scores"]) ==         {"positional-header", "positional-name"}
+    worst = 0.0
+    for s in range(20):                     # the best of two orders, on 20 independent models
+        r = np.random.RandomState(200 + s)
+        indep = {f"t{j:04d}": r.randn(64, 128).astype("float32") for j in range(12)}
+        c = compare(_Fake("m", indep), _Fake("base", base), alignment="auto4")
+        assert c["alignment_map"].startswith("positional")
+        worst = max(worst, c["median_cosine"])
+    assert worst < 0.0255 / 2
+    monkeypatch.setattr(structalign, "V5", False)                 # H25 as it ran
+    c = compare(_Fake("m", numbered), _Fake("base", base), alignment="auto4")
+    assert not c["alignment_map"].startswith("positional")

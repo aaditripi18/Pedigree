@@ -10,6 +10,7 @@ be the only ones of one shape in the same block on both sides.
 """
 from __future__ import annotations
 
+import os
 import re
 from collections import defaultdict
 
@@ -344,11 +345,78 @@ def struct_names_v4(a_shapes: dict, b_shapes: dict) -> list[tuple[str, dict, set
     return out
 
 
+# --- amendment 2026-11-21: (g) and (h), with readers v5 (PEDIGREE_READERS_V5=0 reproduces H25) -----
+
+V5 = os.environ.get("PEDIGREE_READERS_V5", "1") != "0"
+_ANON = re.compile(r"^(?:t|tensor[_.]?)?(\d+)$", re.I)
+_PEFT = re.compile(r"\.base_layer(?=\.)")
+
+
+def positional_names(a_shapes: dict, b_shapes: dict) -> list[tuple[str, dict]]:
+    """(g) One side names its tensors by number only (a converter that dropped the names): its
+    tensors, in number order, are paired by position with the other side's, in header order and in
+    name order, each order kept only when the two shape sequences are equal (size-1 dimensions
+    aside) throughout. Where both orders qualify, each is a candidate, scored like (c4)'s maps."""
+    out = []
+    for x, y, flip in ((a_shapes, b_shapes, False), (b_shapes, a_shapes, True)):
+        if len(x) < 2 or len(x) != len(y) or not all(_ANON.match(n) for n in x):
+            continue
+        xs = sorted(x, key=lambda n: int(_ANON.match(n).group(1)))
+        for label, order in (("positional-header", list(y)), ("positional-name", sorted(y))):
+            if all(_sq(x[p][1]) == _sq(y[q][1]) for p, q in zip(xs, order)):
+                m = dict(zip(xs, order))
+                m = {v: k for k, v in m.items()} if flip else m
+                if all(m != o for _, o in out):
+                    out.append((label, m))
+        if out:
+            return out
+    return out
+
+
+def prefix_names(a_shapes: dict, b_shapes: dict, big=lambda names: len(names)) -> dict[str, str]:
+    """(h) One model holds the other under a leading path (`llm.base_model.model.` + the base's own
+    names): the path most often left when a name is cut down to one on the other side is removed
+    from every name, PEFT's `.base_layer` (an unmerged adapter's base weight) is read as the weight
+    itself, and names then equal, with shapes equal (size-1 dimensions aside), are paired."""
+    from collections import Counter
+    best: dict = {}
+    for x, y, flip in ((a_shapes, b_shapes, False), (b_shapes, a_shapes, True)):
+        yn: dict = {}
+        for n in y:
+            yn.setdefault(_PEFT.sub("", n), []).append(n)
+        cut = Counter()
+        for n in x:
+            parts = _PEFT.sub("", n).split(".")
+            for k in range(1, len(parts) - 1):
+                if len(yn.get(".".join(parts[k:]), [])) == 1:
+                    cut[".".join(parts[:k])] += 1
+                    break
+        if not cut:
+            continue
+        pre = cut.most_common(1)[0][0] + "."
+        m = {}
+        for n in x:
+            nn = _PEFT.sub("", n)
+            hit = yn.get(nn[len(pre):], []) if nn.startswith(pre) else []
+            if len(hit) == 1 and _sq(x[n][1]) == _sq(y[hit[0]][1]):
+                m[n] = hit[0]
+        if flip:
+            m = {v: k for k, v in m.items()}
+        if big(m) > big(best):
+            best = m
+    return best
+
+
 def names_v4(a_shapes: dict, b_shapes: dict, big=lambda names: len(names)) -> list[tuple[str, dict, set]]:
     """H25's v4: direct names (a, e), else the structural candidates (one per depth map), whichever
-    pairs more large tensors (`big` counts them)."""
-    d = direct_names4(a_shapes, b_shapes)
+    pairs more large tensors (`big` counts them). With v5, (g) positional and (h) prefix pairings
+    compete with direct names on the same count."""
+    best = [("direct", direct_names4(a_shapes, b_shapes))]
+    if V5:
+        for group in (positional_names(a_shapes, b_shapes), [("prefix", prefix_names(a_shapes, b_shapes, big))]):
+            if group and max(big(m) for _, m in group) > max(big(m) for _, m in best):
+                best = group
     cands = struct_names_v4(a_shapes, b_shapes)
-    if cands and max(big(m) for _, m, _ in cands) > big(d):
+    if cands and max(big(m) for _, m, _ in cands) > max(big(m) for _, m in best):
         return cands
-    return [("direct", d, set())]
+    return [(label, m, set()) for label, m in best]
