@@ -70,6 +70,8 @@ def weight_files(repo: str, d: dict) -> tuple[str, list[str], dict, dict]:
     if not files and not prefix and READERS_R1:
         files = other_unit(names, {n: int(sib[n].get("size") or (sib[n].get("lfs") or {}).get("size") or 0)
                                    for n in names})
+    if files and not prefix and formats.READERS_V5:
+        files = _most_tensors(repo, d, names, files)
     if not files:
         adapters = [n for n in sib if n.split("/")[-1].startswith("adapter_model")]
         top = {n.rsplit(".", 1)[-1] for n in sib}
@@ -181,3 +183,72 @@ def _largest_unit(repo: str, d: dict, names: list[str]) -> list[str]:
     if not units:
         return []
     return max(units, key=lambda u: (sum(size(x) for x in u), -len(u)))
+
+
+# --- amendment 2026-11-21, reader (vii): the unit with the most tensors -------------------------------
+
+_SHARD = re.compile(r"-\d{5}-of-\d{5}\.gguf$", re.I)
+
+
+def _gguf_units(names: list[str]) -> list[list[str]]:
+    """Every GGUF file set of a repository (a single file, or the shards of one split file), the
+    multimodal projectors left out."""
+    groups: dict[str, list[str]] = {}
+    for n in names:
+        if n.lower().endswith(".gguf") and "mmproj" not in n.lower():
+            groups.setdefault(_SHARD.sub("", n), []).append(n)
+    return [sorted(g) for g in groups.values()]
+
+
+def _count(repo: str, commit: str, unit: list[str], size: dict) -> int:
+    """How many tensors a weight unit holds, from its headers alone."""
+    from .remote import read_header, resolve_url
+    if unit[0].lower().endswith(".gguf"):
+        n, split = ggufremote.tensor_count(resolve_url(repo, unit[0], commit), size[unit[0]])
+        if split is not None:
+            return split
+        if len(unit) == 1:
+            return n
+        return n + sum(ggufremote.tensor_count(resolve_url(repo, f, commit), size[f])[0] for f in unit[1:])
+    total = 0
+    for f in unit:
+        url = resolve_url(repo, f, commit)
+        if f.endswith(".safetensors"):
+            _, h = read_header(url)
+            total += sum(1 for k in h if k != "__metadata__")
+        elif f.endswith(".bin"):
+            from . import torchzip
+            _, h = torchzip.read_header(url, size[f])
+            total += len(h)
+    return total
+
+
+def _most_tensors(repo: str, d: dict, names: list[str], files: list[str]) -> list[str]:
+    """When a repository holds several weight units (a top-level safetensors or PyTorch set and
+    GGUF sets, or GGUF sets of different files), the one whose headers list the most tensors is the
+    model: a draft or multi-token-prediction head, a VAE, a classifier head, a control vector or a
+    lookup table beside it holds fewer. Units with equally many tensors (one model's quantisation
+    variants) are chosen among as before."""
+    sib = {s["rfilename"]: s for s in d.get("siblings", [])}
+    size = {n: int(sib[n].get("size") or (sib[n].get("lfs") or {}).get("size") or 0) for n in sib}
+    plain = [f for f in files if f.endswith((".safetensors", ".bin"))]
+    if not plain and not all(f.endswith(".gguf") for f in files):
+        return files                                        # other formats: one unit already
+    chosen = plain or ggufremote.choose_variant(files)
+    units = ([plain] if plain else []) + _gguf_units(names)
+    if len(units) < 2:
+        return chosen
+    counts = []
+    for u in units:
+        try:
+            counts.append(_count(repo, d["sha"], u, size))
+        except Exception as e:                              # noqa: BLE001
+            if _network(e):
+                raise NetworkError(f"{repo}: {type(e).__name__}: {e}") from None
+            counts.append(-1)                               # an unreadable header: never preferred
+    best = max(counts)
+    tied = [u for u, c in zip(units, counts) if c == best]
+    if any(sorted(u) == sorted(chosen) for u in tied):
+        return chosen
+    gg = [n for u in tied for n in u if n.endswith(".gguf")]
+    return ggufremote.choose_variant(gg) if gg else tied[0]

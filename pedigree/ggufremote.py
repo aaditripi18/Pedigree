@@ -65,6 +65,27 @@ class _Reader:
         raise ValueError(f"unknown GGUF value type {vtype}")
 
 
+def tensor_count(url: str, size: int) -> tuple[int, int | None]:
+    """(tensors in this file, tensors in the whole split set or None), from the header and metadata
+    alone (tensor descriptions are not read)."""
+    fh = RangeFile(url, size)
+    r = _Reader(fh)
+    if fh.read(4) != b"GGUF":
+        raise ValueError("not a GGUF file")
+    (version,) = r.take("<I")
+    if version < 2:
+        raise ValueError(f"GGUF version {version} is not supported")
+    n_tensors, n_kv = r.take("<Q")[0], r.take("<Q")[0]
+    split = None
+    for _ in range(n_kv):
+        key = r.string()
+        (vtype,) = r.take("<I")
+        v = r.value(vtype)
+        if key == "split.tensors.count":
+            split = int(v)
+    return n_tensors, split
+
+
 def read_header(url: str, size: int) -> tuple[dict, dict]:
     """(metadata of interest, {tensor name: spec}) with absolute data offsets."""
     fh = RangeFile(url, size)

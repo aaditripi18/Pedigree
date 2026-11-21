@@ -164,7 +164,7 @@ def _rename(out: dict, deq: dict, old: str, new: str, transposed: bool = False) 
     out[new] = out.pop(old)
     if old in deq:
         scale, zero, axis = deq.pop(old)
-        deq[new] = (scale, zero, 0 if transposed and axis == 1 else axis)
+        deq[new] = (scale, zero, 0 if transposed and axis == 1 and not isinstance(axis, tuple) else axis)
     for k, (scale, zero, axis) in list(deq.items()):
         if old in (scale, zero):
             deq[k] = (new if scale == old else scale, new if zero == old else zero, axis)
@@ -187,9 +187,16 @@ def _v5_named(out: dict, uses: dict, deq: dict, prefix: str = "") -> None:
                          1 if nsc > 1 else 0)
     new: dict = {}
     for name, use in uses.items():
-        if name not in out or len(use) != 1 or len(out[name][1]["shape"]) != 2:
+        if name not in out or len(use) != 1:
             continue
         op, node, idx, trans_b = use[0]
+        if op != "MatMulNBits" and len(out[name][1]["shape"]) != 2:
+            continue
+        if idx == 1 and op == "MatMulNBits" and name in deq:
+            stem = re.sub(r"_Q\d+$", "", _MERGED.sub("", name))
+            target = re.sub(r"\.MatMul(?=\.weight$)", "", _node_path(node) if stem.startswith("onnx::") else stem)
+            new.setdefault(target, []).append((name, False))
+            continue
         if idx != 1 or op not in _WEIGHT_OPS:
             continue
         transpose = not (op == "Gemm" and trans_b)
@@ -298,6 +305,14 @@ def onnx_header(repo: str, commit: str, path: str, size: int, prefix: str = "") 
                         attrs.append(x)
                 if READERS_V5 and NODE_NAMES:
                     _record_uses(pb, op, node, ins, attrs, uses)
+                    if op == "MatMulNBits" and len(ins) >= 3:
+                        at = {}
+                        for a in attrs:
+                            aname, rest = _attr(pb, a)
+                            at.update({aname: y for k, kwt, y in rest if k == 3 and kwt == 0})
+                        if {"K", "N"} <= set(at):
+                            deq[ins[1]] = (ins[2], ins[3] if len(ins) > 3 and ins[3] else None,
+                                           ("nbits", at["K"], at["N"], at.get("bits", 4), at.get("block_size", 32)))
                 elif NODE_NAMES and op in ("MatMul", "Gemm"):
                     trans_b = False
                     if op == "Gemm":

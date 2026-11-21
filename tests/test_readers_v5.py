@@ -184,3 +184,119 @@ def test_verify_reads_what_the_audit_reads(monkeypatch):
     info["siblings"] = [{"rfilename": "onnx/model.onnx", "size": 5}]
     with pytest.raises(hub.HubError):
         hub.resolve("hf:someone/model-onnx")
+
+
+def _gguf(path, n, arch="llama"):
+    import gguf
+    w = gguf.GGUFWriter(str(path), arch)
+    for i in range(n):
+        w.add_tensor(f"blk.{i}.w", np.full((4, 4), i, np.float32))
+    w.write_header_to_file()
+    w.write_kv_data_to_file()
+    w.write_tensors_to_file()
+    w.close()
+
+
+def test_the_unit_with_the_most_tensors_is_the_model(tmp_path, local, monkeypatch):
+    """(vii) A draft head, a projector, a VAE or a classifier head beside the model holds fewer
+    tensors; one model's quantisation variants tie and are chosen among as before."""
+    from safetensors.numpy import save_file
+    from pedigree import remote, units
+    monkeypatch.setattr(remote, "resolve_url", lambda repo, f, rev="main": os.path.join(repo, f))
+    _gguf(tmp_path / "m-Q8_0.gguf", 30)
+    _gguf(tmp_path / "m-Q4_K_M.gguf", 30)
+    _gguf(tmp_path / "m-mtp-draft.gguf", 3)
+    _gguf(tmp_path / "mmproj-m-f16.gguf", 50)          # a projector never counts, however large
+    save_file({"head.weight": np.ones((2, 2), np.float32)}, str(tmp_path / "heads.safetensors"))
+    names = sorted(p.name for p in tmp_path.iterdir())
+    d = {"sha": "local", "siblings": [{"rfilename": n, "size": os.path.getsize(tmp_path / n)} for n in names]}
+    assert units._most_tensors(str(tmp_path), d, names, ["heads.safetensors", "m-mtp-draft.gguf"]) == ["m-Q8_0.gguf"]
+    assert units._most_tensors(str(tmp_path), d, names, ["m-Q4_K_M.gguf", "m-Q8_0.gguf"]) == ["m-Q8_0.gguf"]
+    fmt, files, _, _ = units.weight_files(str(tmp_path), d)
+    assert (fmt, files) == ("gguf", ["m-Q8_0.gguf"])
+    monkeypatch.setattr(formats, "READERS_V5", False)         # E2x and H25 as they ran
+    fmt, files, _, _ = units.weight_files(str(tmp_path), d)
+    assert files[0] == "heads.safetensors"
+
+
+@pytest.mark.parametrize("with_zero", [False, True])
+def test_matmulnbits_4bit_blocks(tmp_path, local, with_zero):
+    """(viii) onnxruntime's MatMulNBits (com.microsoft): B is [N, K/block, block/2] bytes of 4-bit
+    values (low nibble first), one scale per block, zero points 4-bit packed per row (default 8);
+    the weight it stands for is [N, K]."""
+    rng = np.random.RandomState(5)
+    n, k, block = 6, 40, 16                                   # K not a multiple of the block
+    nb = -(-k // block)
+    q = rng.randint(0, 16, size=(n, nb * block)).astype(np.uint8)
+    scale = (rng.rand(n, nb).astype(np.float32) + 0.1) / 10
+    zero = rng.randint(0, 16, size=(n, nb)).astype(np.uint8) if with_zero else np.full((n, nb), 8, np.uint8)
+    packed = (q[:, 0::2] | (q[:, 1::2] << 4)).reshape(n, nb, block // 2)
+    want = ((q.astype(np.float64).reshape(n, nb, block) - zero[..., None]) * scale[..., None]).reshape(n, -1)[:, :k]
+    inits = [numpy_helper.from_array(packed, "model.layers.0.mlp.down_proj.MatMul.weight_Q4"),
+             numpy_helper.from_array(scale.reshape(-1), "model.layers.0.mlp.down_proj.MatMul.weight_scales")]
+    ins = ["x", "model.layers.0.mlp.down_proj.MatMul.weight_Q4", "model.layers.0.mlp.down_proj.MatMul.weight_scales"]
+    if with_zero:
+        zp = np.zeros((n, -(-nb // 2)), np.uint8)
+        for j in range(nb):
+            zp[:, j // 2] |= zero[:, j] << (4 * (j % 2))
+        inits.append(numpy_helper.from_array(zp.reshape(-1), "model.layers.0.mlp.down_proj.MatMul.weight_zp"))
+        ins.append("model.layers.0.mlp.down_proj.MatMul.weight_zp")
+    node = helper.make_node("MatMulNBits", ins, ["y"], domain="com.microsoft", K=k, N=n, bits=4, block_size=block,
+                            name="/model/layers.0/mlp/down_proj/MatMul_Q4")
+    _save(tmp_path, "model_q4.onnx", [node], inits)
+    r = remote_model(tmp_path, ["model_q4.onnx"])
+    name = "model.layers.0.mlp.down_proj.weight"
+    assert r.float_shapes() == {name: ("float", (n, k))}
+    np.testing.assert_allclose(r.sample(name, 10 ** 6), want.ravel(), rtol=1e-6)
+    np.testing.assert_allclose(r.sample(name, 4 * 50), want.ravel()[:50], rtol=1e-6)   # a partial read
+
+
+def _float_matmul_model(path, w, name="model.layers.0.mlp.up_proj.MatMul.weight", node="/model/layers.0/mlp/up_proj/MatMul"):
+    k = w.shape[0]
+    g = helper.make_graph([helper.make_node("MatMul", ["x", name], ["y"], name=node)], "g",
+                          [helper.make_tensor_value_info("x", TensorProto.FLOAT, [k, k])],
+                          [helper.make_tensor_value_info("y", TensorProto.FLOAT, [k, w.shape[1]])],
+                          [numpy_helper.from_array(w, name)])
+    m = helper.make_model(g, opset_imports=[helper.make_opsetid("", 17)])
+    m.ir_version = 9
+    onnx.save_model(m, str(path))
+
+
+def _run_identity(path, k):
+    ort = pytest.importorskip("onnxruntime")
+    s = ort.InferenceSession(str(path), providers=["CPUExecutionProvider"])
+    return s.run(None, {"x": np.eye(k, dtype=np.float32)})[0]          # = W as the runtime uses it
+
+
+def test_dynamic_quantisation_matches_onnxruntime(tmp_path, local):
+    """Reference: onnxruntime's quantize_dynamic writes the file, onnxruntime runs it."""
+    qz = pytest.importorskip("onnxruntime.quantization")
+    rng = np.random.RandomState(6)
+    w = rng.randn(32, 48).astype(np.float32)
+    _float_matmul_model(tmp_path / "model.onnx", w)
+    qz.quantize_dynamic(str(tmp_path / "model.onnx"), str(tmp_path / "model_quantized.onnx"),
+                        weight_type=qz.QuantType.QInt8, per_channel=True)
+    r = remote_model(tmp_path, ["model_quantized.onnx"])
+    name = "model.layers.0.mlp.up_proj.weight"
+    got = r.sample(name, 10 ** 6).reshape(48, 32)
+    np.testing.assert_allclose(got, _run_identity(tmp_path / "model_quantized.onnx", 32).T, atol=1e-5)
+    assert np.abs(got - w.T).max() < np.abs(w).max() / 100                 # 8-bit error of the float weight
+
+
+def test_matmulnbits_matches_onnxruntime(tmp_path, local):
+    """Reference: onnxruntime's MatMulNBitsQuantizer writes the file, onnxruntime runs it."""
+    pytest.importorskip("onnxruntime")
+    from onnxruntime.quantization.matmul_nbits_quantizer import MatMulNBitsQuantizer
+    rng = np.random.RandomState(7)
+    w = rng.randn(64, 40).astype(np.float32)
+    _float_matmul_model(tmp_path / "model.onnx", w)
+    q = MatMulNBitsQuantizer(onnx.load(str(tmp_path / "model.onnx")), block_size=32, is_symmetric=False)
+    q.process()
+    q.model.save_model_to_file(str(tmp_path / "model_q4.onnx"))
+    ops = {n.op_type for n in onnx.load(str(tmp_path / "model_q4.onnx")).graph.node}
+    assert "MatMulNBits" in ops
+    r = remote_model(tmp_path, ["model_q4.onnx"])
+    name = "model.layers.0.mlp.up_proj.weight"
+    assert r.float_shapes()[name][1] == (40, 64)
+    got = r.sample(name, 10 ** 6).reshape(40, 64)
+    np.testing.assert_allclose(got, _run_identity(tmp_path / "model_q4.onnx", 64).T, atol=1e-5)

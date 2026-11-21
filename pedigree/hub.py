@@ -134,18 +134,17 @@ def resolve(spec: str) -> Resolved:
         with _open(f"{HOST}/{repo}/resolve/{commit}/{q(name)}") as r:
             return json.loads(r.read().decode("utf-8"))
 
-    try:
-        files = choose_files(list(sib), read_index)
-        sizes = {f: int(sib[f].get("size") or (sib[f].get("lfs") or {}).get("size") or 0) for f in files}
-    except HubError:
-        if not READERS_V5:
-            raise
+    if READERS_V5:
         # amendment 2026-11-21: the audit's rule (pedigree/units.py: subfolders, ONNX, NeMo, PyTorch,
-        # CTranslate2, TFLite, ...) so `pedigree verify` reads every repository the audit reads
+        # CTranslate2, TFLite, the unit with the most tensors) so `pedigree verify` reads each
+        # repository exactly as the audit does
         from .units import weight_files
         fmt, files, sizes, _ = weight_files(repo, info)
         if not files:
-            raise HubError(f"{repo}: {fmt}") from None
+            raise HubError(f"{repo}: {fmt}")
+    else:
+        files = choose_files(list(sib), read_index)
+        sizes = {f: int(sib[f].get("size") or (sib[f].get("lfs") or {}).get("size") or 0) for f in files}
     base = (info.get("cardData") or {}).get("base_model") or []
     if isinstance(base, str):
         base = [base]

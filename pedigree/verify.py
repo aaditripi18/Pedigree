@@ -127,7 +127,11 @@ class Remote:
             for name, (u, s) in header.items():
                 self.tensors[name] = (u, 0, s)
             for x, (scale, zero, axis) in deq.items():
-                if scale in header:
+                if isinstance(axis, tuple) and axis[0] == "nbits" and scale in header:
+                    _, k, n, bits, block = axis           # onnxruntime MatMulNBits: B is [N, K/block, blob]
+                    self.quant[x] = {"kind": "nbits", "shape": [n, k], "scale": scale,
+                                     "zero": zero if zero in header else None, "bits": bits, "block": block}
+                elif scale in header:
                     self.quant[x] = {"kind": "affine", "shape": header[x][1]["shape"], "scale": scale,
                                      "zero": zero if zero in header else None, "axis": axis}
             return
@@ -229,6 +233,28 @@ class Remote:
 
     def _dequantised(self, name: str, elements: int) -> np.ndarray:
         q = self.quant[name]
+        if q["kind"] == "nbits":       # amendment 2026-11-21, reader (viii): onnxruntime's MatMulNBits
+            n, k = q["shape"]
+            bits, block = q["bits"], q["block"]
+            if bits not in (4, 8):
+                raise ValueError(f"MatMulNBits with {bits} bits not read")
+            nb, blob = -(-k // block), block * bits // 8
+            rows = min(n, -(-elements // k))
+            b = self._raw(name, rows * nb * blob).astype(np.uint8).reshape(rows, nb, blob)
+            v = np.stack([b & 15, b >> 4], -1).reshape(rows, nb, block) if bits == 4 else b
+            sc = self._raw(q["scale"], rows * nb).reshape(rows, nb, 1)
+            if q["zero"] is None:
+                zp = float(2 ** (bits - 1))
+            elif self.tensors[q["zero"]][2]["dtype"] == "U8":
+                per = -(-nb * bits // 8)                   # packed, low nibble first, per row
+                z = self._raw(q["zero"], rows * per).astype(np.uint8).reshape(rows, per)
+                if bits == 4:
+                    z = np.stack([z & 15, z >> 4], -1).reshape(rows, -1)
+                zp = z[:, :nb].astype(np.float64).reshape(rows, nb, 1)
+            else:
+                zp = self._raw(q["zero"], rows * nb).reshape(rows, nb, 1)
+            w = (v.astype(np.float64) - zp) * sc
+            return w.reshape(rows, nb * block)[:, :k].reshape(-1)[:elements]
         if q["kind"] == "inline":
             shape = q["shape"]
             rows_total = shape[0] if shape else 1
