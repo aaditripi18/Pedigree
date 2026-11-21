@@ -472,13 +472,13 @@ JOBS["h24-smoke"] = _job("pedigree-h24-smoke",
 # GPU follow-ups run on friends' accounts (their own keys, never held here): who runs which job, so
 # pulls and the CPU scoring jobs mount the right owner's output. Each friend shares the finished
 # notebook with the project account as viewer.
-GPU_ASSIGN = {
-    "alien5060707": ["distill4-text_decoder", "distill4-vision_cnn", "h16b-text_encoder-dev",
-                     "h16b-text_encoder-fresh-a", "h16b-text_encoder-fresh-b"],
-    "rohajraj": ["h16b-text_encoder-fresh-c", "h16b-vision_transformer-dev", "h16b-vision_transformer-fresh-a",
+GPU_ASSIGN = {   # each friend reads only kernel outputs already shared with them in earlier rounds
+    "alien5060707": ["h16b-text_encoder-dev", "h16b-text_encoder-fresh-a", "h16b-text_encoder-fresh-b",
+                     "h16b-text_encoder-fresh-c"],
+    "rohajraj": ["h16b-vision_transformer-dev", "h16b-vision_transformer-fresh-a",
                  "h16b-vision_transformer-fresh-b", "h16b-vision_transformer-fresh-c"],
-    "alubalub": [f"h24-speech-{p}" for p in H24_PARTS],
-    "moinuddinhasan8": [f"h24-diffusion_unet-{p}" for p in H24_PARTS],
+    "alubalub": ["distill4-vision_cnn", *[f"h24-speech-{p}" for p in H24_PARTS]],
+    "moinuddinhasan8": ["distill4-text_decoder", *[f"h24-diffusion_unet-{p}" for p in H24_PARTS]],
 }
 for _friend, _jobs in GPU_ASSIGN.items():
     for _j in _jobs:
