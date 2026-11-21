@@ -310,6 +310,20 @@ def _block_map(kind: str, n: int, m: int, i: int) -> int | None:
     return j if 0 <= j < m else None
 
 
+def _shape_counts(stack: dict) -> dict:
+    out: dict = defaultdict(int)
+    for blk in stack.values():
+        for shape, names in blk.items():
+            out[shape] += len(names)
+    return out
+
+
+def _overlap(a: dict, b: dict) -> int:
+    """How many tensors two stacks could pair by shape (size-1 dimensions aside): the multiset
+    intersection of their shapes."""
+    return sum(min(n, b.get(s, 0)) for s, n in a.items())
+
+
 def struct_names_v4(a_shapes: dict, b_shapes: dict) -> list[tuple[str, dict, set]]:
     """[(depth map, {a tensor: b tensor}, {a tensors paired as transposes})]: one entry if every
     paired stack has equal depth, else one per map in DEPTH_MAPS (c4). Stacks are paired as in v3."""
@@ -325,7 +339,11 @@ def struct_names_v4(a_shapes: dict, b_shapes: dict) -> list[tuple[str, dict, set
         ng = len(ast_[g])
         same_role = [k for k in free_b if _role(g) and _role(k) == _role(g)]
         pool_ = same_role or ([k for k in free_b if _role(k) is None or _role(g) is None] or list(free_b))
-        h = min(pool_, key=lambda k: (abs(len(bst[k]) - ng), -size(bst, k)))
+        if V5:   # (i) the partner whose tensor shapes overlap most, then the old rule (amendment 2026-11-21)
+            sg = _shape_counts(ast_[g])
+            h = min(pool_, key=lambda k: (-_overlap(sg, _shape_counts(bst[k])), abs(len(bst[k]) - ng), -size(bst, k)))
+        else:
+            h = min(pool_, key=lambda k: (abs(len(bst[k]) - ng), -size(bst, k)))
         free_b.discard(h)
         stack_pairs.append((g, h))
     unequal = any(len(ast_[g]) != len(bst[h]) for g, h in stack_pairs)

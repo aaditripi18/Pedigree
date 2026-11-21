@@ -248,3 +248,21 @@ def test_v5_rules_compare_end_to_end_and_independent_models_stay_low(monkeypatch
     monkeypatch.setattr(structalign, "V5", False)                 # H25 as it ran
     c = compare(_Fake("m", numbered), _Fake("base", base), alignment="auto4")
     assert not c["alignment_map"].startswith("positional")
+
+
+def test_v5_stack_partner_by_shape_overlap(monkeypatch):
+    """(i) A multimodal base (an audio stack of the text stack's depth with other shapes): the GGUF
+    text stack pairs with the stack whose shapes it shares (LiquidAI/d1-omni-600M in H25)."""
+    from pedigree import structalign
+    from pedigree.structalign import struct_names_v4
+    gguf = {f"blk.{i}.{k}": ("float", s) for i in range(4) for k, s in
+            (("ffn_up.weight", (96, 32)), ("ffn_down.weight", (32, 96)), ("attn_norm.weight", (32,)))}
+    base = {f"encoder.layers.{i}.{k}": ("float", s) for i in range(4) for k, s in
+            (("mlp.up.weight", (96, 32)), ("mlp.down.weight", (32, 96)), ("norm.weight", (32,)))}
+    base.update({f"audio.encoder.layers.{i}.conv.bias": ("float", (32,)) for i in range(4)})
+    base.update({f"audio.encoder.layers.{i}.conv.{k}.weight": ("float", (64, 8)) for i in range(4) for k in "abcd"})
+    (_, mp, _), = struct_names_v4(gguf, base)
+    assert mp["blk.2.ffn_up.weight"] == "encoder.layers.2.mlp.up.weight" and len(mp) == 12
+    monkeypatch.setattr(structalign, "V5", False)          # H25 as it ran: the audio stack (larger) won
+    (_, mp, _), = struct_names_v4(gguf, base)
+    assert "blk.2.ffn_up.weight" not in mp
