@@ -122,7 +122,8 @@ class Remote:
         self.files.append(f)
         low = f.lower()
         if low.endswith(".onnx"):
-            header, deq = formats.onnx_header(self.repo, self.commit, f, size)
+            enc = formats.READERS_V5 and f.rsplit("/", 1)[-1].startswith("encoder_model")
+            header, deq = formats.onnx_header(self.repo, self.commit, f, size, prefix="encoder." if enc else "")
             for name, (u, s) in header.items():
                 self.tensors[name] = (u, 0, s)
             for x, (scale, zero, axis) in deq.items():

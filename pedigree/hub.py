@@ -94,6 +94,11 @@ def _json(url: str) -> dict:
         raise HubError(f"{url}: HTTP {e.code}{hint}") from None
 
 
+# amendment 2026-11-21: a top-level multimodal projector (mmproj-*.gguf) is not the model's weights;
+# with it set aside, GGUF sets in subfolders are found. PEDIGREE_READERS_V5=0 reproduces E2x and H25.
+READERS_V5 = os.environ.get("PEDIGREE_READERS_V5", "1") != "0"
+
+
 def choose_files(names: list[str], read_index) -> list[str]:
     """The weight files of a repository, by the rule in the module docstring.
     `read_index(name)` returns the parsed JSON of an index file."""
@@ -109,7 +114,8 @@ def choose_files(names: list[str], read_index) -> list[str]:
                 raise HubError(f"{index} lists shards that are not in the repository: {missing[:3]}")
             if shards:
                 return shards
-    rest = sorted(n for n in top if n.endswith((".safetensors", ".gguf")))
+    rest = sorted(n for n in top if n.endswith((".safetensors", ".gguf"))
+                  and not (READERS_V5 and n.endswith(".gguf") and "mmproj" in n.lower()))
     if not rest:
         raise HubError("no weight files found (looked for safetensors, pytorch_model.bin and gguf)")
     return rest
@@ -128,12 +134,22 @@ def resolve(spec: str) -> Resolved:
         with _open(f"{HOST}/{repo}/resolve/{commit}/{q(name)}") as r:
             return json.loads(r.read().decode("utf-8"))
 
-    files = choose_files(list(sib), read_index)
+    try:
+        files = choose_files(list(sib), read_index)
+        sizes = {f: int(sib[f].get("size") or (sib[f].get("lfs") or {}).get("size") or 0) for f in files}
+    except HubError:
+        if not READERS_V5:
+            raise
+        # amendment 2026-11-21: the audit's rule (pedigree/units.py: subfolders, ONNX, NeMo, PyTorch,
+        # CTranslate2, TFLite, ...) so `pedigree verify` reads every repository the audit reads
+        from .units import weight_files
+        fmt, files, sizes, _ = weight_files(repo, info)
+        if not files:
+            raise HubError(f"{repo}: {fmt}") from None
     base = (info.get("cardData") or {}).get("base_model") or []
     if isinstance(base, str):
         base = [base]
-    return Resolved(repo, rev, commit, files,
-                    {f: int(sib[f].get("size") or (sib[f].get("lfs") or {}).get("size") or 0) for f in files},
+    return Resolved(repo, rev, commit, files, sizes,
                     {f: (sib[f].get("lfs") or {}).get("sha256", "") for f in files},
                     [str(b) for b in base])
 

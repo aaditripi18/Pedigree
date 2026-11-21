@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import ast
 import os
+import re
 import struct
 import zipfile
 
@@ -152,7 +153,125 @@ def _node_named(out: dict, uses: dict) -> dict:
     return out
 
 
-def onnx_header(repo: str, commit: str, path: str, size: int) -> tuple[dict, dict]:
+
+# amendment 2026-11-21, readers v5 (after H25): PEDIGREE_READERS_V5=0 reproduces E2x and H25
+READERS_V5 = os.environ.get("PEDIGREE_READERS_V5", "1") != "0"
+_MERGED = re.compile(r"_merged_\d+$")
+_WEIGHT_OPS = ("MatMul", "MatMulInteger", "Gemm")
+
+
+def _rename(out: dict, deq: dict, old: str, new: str, transposed: bool = False) -> None:
+    out[new] = out.pop(old)
+    if old in deq:
+        scale, zero, axis = deq.pop(old)
+        deq[new] = (scale, zero, 0 if transposed and axis == 1 else axis)
+    for k, (scale, zero, axis) in list(deq.items()):
+        if old in (scale, zero):
+            deq[k] = (new if scale == old else scale, new if zero == old else zero, axis)
+
+
+def _v5_named(out: dict, uses: dict, deq: dict, prefix: str = "") -> None:
+    """(v) every initializer that is input 1 of exactly one MatMul, MatMulInteger or Gemm (without
+    transB) holds [in, out] by ONNX's definition of those ops, whatever its name, and is seen as
+    its transpose; an anonymous one (`onnx::`, or a quantised copy of one) takes the node's path,
+    and a `.MatMul` component before `.weight` is dropped. (vi) onnxruntime's dynamic quantisation
+    (`X_quantized` with `X_scale` and `X_zero_point`) is read as the values it stands for, under
+    the name X. (iv) a merged decoder's `_merged_N` suffix is dropped. (iii) an encoder file's
+    names take `prefix` unless they already begin with `encoder` or `model.`."""
+    from math import prod
+    for name in list(out):
+        if name.endswith("_quantized") and name[:-10] + "_scale" in out and name not in deq:
+            base = name[:-10]
+            nsc = prod(out[base + "_scale"][1]["shape"] or [1])
+            deq[name] = (base + "_scale", base + "_zero_point" if base + "_zero_point" in out else None,
+                         1 if nsc > 1 else 0)
+    new: dict = {}
+    for name, use in uses.items():
+        if name not in out or len(use) != 1 or len(out[name][1]["shape"]) != 2:
+            continue
+        op, node, idx, trans_b = use[0]
+        if idx != 1 or op not in _WEIGHT_OPS:
+            continue
+        transpose = not (op == "Gemm" and trans_b)
+        spec = out[name][1]
+        if transpose and spec["data_offsets"][1] - spec["data_offsets"][0] > ONNX_TRANSPOSE_MAX:
+            continue
+        stem = _MERGED.sub("", name)
+        anonymous = stem.startswith("onnx::") or (stem.endswith("_quantized") and stem[:-10].startswith("onnx::"))
+        target = (_node_path(node) or stem) if anonymous else stem
+        if target.endswith("_quantized") and name in deq:
+            target = target[:-10]
+        target = re.sub(r"\.MatMul(?=\.weight$)", "", target)
+        new.setdefault(target, []).append((name, transpose))
+    for target, items in new.items():
+        if len(items) != 1 or (target in out and target != items[0][0]):
+            continue                               # a name two weights would share is left as it was
+        old, transpose = items[0]
+        if transpose:
+            u, spec = out[old]
+            out[old] = (u, {**spec, "shape": list(spec["shape"])[::-1], "order": "F"})
+        if target != old:
+            _rename(out, deq, old, target, transpose)
+        elif transpose and old in deq:
+            scale, zero, axis = deq[old]
+            deq[old] = (scale, zero, 0 if axis == 1 else axis)
+    for name in list(out):                         # quantised tensors used elsewhere (embeddings)
+        stem = _MERGED.sub("", name)
+        if stem.endswith("_quantized") and name in deq:
+            stem = stem[:-10]
+        if stem != name and stem not in out:
+            _rename(out, deq, name, stem)
+    if prefix:
+        for name in list(out):
+            if not name.startswith(("encoder", "model.", "/")) and prefix + name not in out:
+                _rename(out, deq, name, prefix + name)
+
+
+
+def _attr(pb: _PB, a) -> tuple[str, list]:
+    """(name, [(field, wire type, value)]) of an AttributeProto."""
+    name, rest = "", []
+    for k, kwt, y in pb.fields(a[0], a[0] + a[1]):
+        if k == 1:
+            name = pb.bytes_at(y).decode("utf-8", "replace")
+        else:
+            rest.append((k, kwt, y))
+    return name, rest
+
+
+def _record_uses(pb: _PB, op: str, node: str, ins: list, attrs: list, uses: dict, depth: int = 0) -> None:
+    """Each input of a node, with the op, node name, input index and Gemm's transB; nodes inside
+    sub-graphs (If / Loop / Scan bodies, as in merged decoders) are walked too."""
+    trans_b = False
+    for a in attrs:
+        name, rest = _attr(pb, a)
+        if name == "transB" and any(k == 3 and kwt == 0 and y for k, kwt, y in rest):
+            trans_b = True
+        for k, kwt, y in rest:
+            if k in (6, 11) and kwt == 2 and depth < 4:       # AttributeProto.g / .graphs
+                _walk_graph(pb, y, uses, depth + 1)
+    for i, nm in enumerate(ins):
+        uses.setdefault(nm, []).append((op, node, i, trans_b))
+
+
+def _walk_graph(pb: _PB, span, uses: dict, depth: int) -> None:
+    for g, gwt, w in pb.fields(span[0], span[0] + span[1]):
+        if g != 1 or gwt != 2:                      # GraphProto.node
+            continue
+        ins, op, attrs, node = [], "", [], ""
+        for h, hwt, x in pb.fields(w[0], w[0] + w[1]):
+            if h == 1:
+                ins.append(pb.bytes_at(x).decode("utf-8", "replace"))
+            elif h == 3 and hwt == 2:
+                node = pb.bytes_at(x).decode("utf-8", "replace")
+            elif h == 4:
+                op = pb.bytes_at(x).decode("utf-8", "replace")
+            elif h == 5 and hwt == 2:
+                attrs.append(x)
+        _record_uses(pb, op, node, ins, attrs, uses, depth)
+
+
+def onnx_header(repo: str, commit: str, path: str, size: int, prefix: str = "") -> tuple[dict, dict]:
     """({name: (url, spec)}, {quantised name: (scale name, zero-point name or None, axis)})."""
     url = resolve_url(repo, path, commit)
     pb = _PB(RangeFile(url, size))
@@ -177,7 +296,9 @@ def onnx_header(repo: str, commit: str, path: str, size: int) -> tuple[dict, dic
                         op = pb.bytes_at(x).decode("utf-8", "replace")
                     elif h == 5 and hwt == 2:
                         attrs.append(x)
-                if NODE_NAMES and op in ("MatMul", "Gemm"):
+                if READERS_V5 and NODE_NAMES:
+                    _record_uses(pb, op, node, ins, attrs, uses)
+                elif NODE_NAMES and op in ("MatMul", "Gemm"):
                     trans_b = False
                     if op == "Gemm":
                         for a in attrs:
@@ -235,7 +356,9 @@ def onnx_header(repo: str, commit: str, path: str, size: int) -> tuple[dict, dic
                 continue                           # not the dense little-endian layout (e.g. strings)
             out[t["name"]] = (url, {"dtype": "F32" if t.get("packed_float") else dtype, "shape": t["dims"],
                                     "data_offsets": [b, b + length]})
-    if NODE_NAMES:
+    if READERS_V5 and NODE_NAMES:
+        _v5_named(out, uses, deq, prefix)
+    elif NODE_NAMES:
         out = _node_named(out, uses)
     return out, {k: v for k, v in deq.items() if k in out}
 

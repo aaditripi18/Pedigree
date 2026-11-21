@@ -21,6 +21,7 @@ accuracy.
 from __future__ import annotations
 
 import hashlib
+import http.client
 import io
 import json
 import os
@@ -49,21 +50,31 @@ TASK_DATA = {
 }
 
 
+def _whole_parquet(body: bytes) -> bool:
+    """A parquet file begins and ends with the magic bytes PAR1."""
+    return body[:4] == b"PAR1" and body[-4:] == b"PAR1"
+
+
 def task_file(name: str) -> tuple[Path, str]:
     """Download once; return (path, sha256)."""
     DATA.mkdir(parents=True, exist_ok=True)
     p = DATA / f"{name}.parquet"
+    if p.exists() and not _whole_parquet(p.read_bytes()):
+        p.unlink()                # a short file from an earlier run: fetched again
     for attempt in range(8):  # a lost connection retries; the file is written only when complete
         if p.exists():
             break
         try:
             with urllib.request.urlopen(urllib.request.Request(TASK_DATA[name], headers={"User-Agent": "pedigree"}),
                                         timeout=600) as r:
+                expected = int(r.headers.get("Content-Length") or 0)
                 body = r.read()
+            if (expected and len(body) != expected) or not _whole_parquet(body):
+                raise OSError(f"{name}: short download ({len(body)} of {expected} bytes)")
             tmp = p.with_suffix(".part")
             tmp.write_bytes(body)
             tmp.replace(p)
-        except OSError:
+        except (OSError, http.client.HTTPException):
             if attempt == 7:
                 raise
             time.sleep(min(300, 15 * 2 ** attempt))

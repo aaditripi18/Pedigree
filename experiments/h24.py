@@ -18,6 +18,7 @@ own noise error (lower = closer); task score 1 - normalised noise error.
 """
 from __future__ import annotations
 
+import http.client
 import io
 import json
 import math
@@ -50,14 +51,25 @@ TIMESTEPS = [50, 150, 250, 350, 450, 550, 650, 750, 850, 950]
 STUDENTS = Path(os.environ.get("PEDIGREE_STUDENTS", ft.OUT))
 
 
+def _whole_parquet(p: Path) -> bool:
+    """A parquet file begins and ends with the magic bytes PAR1."""
+    with open(p, "rb") as fh:
+        head = fh.read(4)
+        fh.seek(-4, 2)
+        return head == b"PAR1" and fh.read(4) == b"PAR1"
+
+
 def _parquet(name: str) -> Path:
     p = ft.DATA / "librispeech" / name.replace("/", "_")
+    if p.exists() and not _whole_parquet(p):
+        p.unlink()                         # a short file from an earlier run: fetched again
     if not p.exists():
         p.parent.mkdir(parents=True, exist_ok=True)
         for attempt in range(8):
             try:
                 with urllib.request.urlopen(urllib.request.Request(LIBRI + name, headers={"User-Agent": "pedigree"}),
                                             timeout=900) as r:
+                    expected = int(r.headers.get("Content-Length") or 0)
                     tmp = p.with_suffix(".part")
                     with open(tmp, "wb") as fh:
                         while True:
@@ -65,9 +77,12 @@ def _parquet(name: str) -> Path:
                             if not chunk:
                                 break
                             fh.write(chunk)
+                # a connection can close early without an error: keep only a whole file
+                if (expected and tmp.stat().st_size != expected) or not _whole_parquet(tmp):
+                    raise OSError(f"{name}: short download ({tmp.stat().st_size} of {expected} bytes)")
                 tmp.replace(p)
                 break
-            except OSError:
+            except (OSError, http.client.HTTPException):
                 if attempt == 7:
                     raise
                 time.sleep(min(300, 15 * 2 ** attempt))

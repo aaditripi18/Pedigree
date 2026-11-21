@@ -17,6 +17,7 @@ held inside a framework's objects are still found (amendment 2026-11-20).
 from __future__ import annotations
 
 import io
+import os
 import pickle
 import struct
 import zipfile
@@ -111,10 +112,29 @@ class _Marker(str):
     pass
 
 
+READERS_V5 = os.environ.get("PEDIGREE_READERS_V5", "1") != "0"
+
+
+_PLAIN_TYPES = {"int": int, "long": int, "float": float, "unicode": str, "str": str, "bytes": bytes, "bool": bool,
+                "list": list, "dict": dict, "tuple": tuple}
+
+
+def _defaultdict(*_args):
+    """collections.defaultdict in a pickle: its factory argument is dropped unread."""
+    return {}
+
+
 class _Unpickler(pickle.Unpickler):
     def find_class(self, module, name):
         if (module, name) == ("collections", "OrderedDict"):
             return OrderedDict
+        if READERS_V5 and (module, name) == ("torch.torch_version", "TorchVersion"):
+            return str                          # a version string (str subclass); kept as text
+        if READERS_V5 and (module, name) == ("collections", "defaultdict"):
+            # amendment 2026-11-21: a plain mapping; the default factory is never looked up or called
+            return _defaultdict
+        if READERS_V5 and module in ("builtins", "__builtin__") and name in _PLAIN_TYPES:
+            return _PLAIN_TYPES[name]          # a defaultdict's factory: plain value types only
         if module in ("builtins", "__builtin__") and name in ("set", "frozenset", "slice", "complex"):
             return {"set": set, "frozenset": frozenset, "slice": slice, "complex": complex}[name]
         if (module, name) in (("torch._utils", "_rebuild_tensor_v2"), ("torch._utils", "_rebuild_tensor")):
@@ -124,7 +144,13 @@ class _Unpickler(pickle.Unpickler):
             return _rebuild_parameter
         if module == "torch" and name in STORAGE_DTYPE:
             return _Marker(STORAGE_DTYPE[name])
+        if READERS_V5 and (module, name) == ("torch", "Size"):
+            return tuple                        # a shape: a tuple of ints
         internal = module.split(".")[0] in ("torch", "numpy") and not module.startswith("torch.nn.modules.")
+        if READERS_V5 and internal and name[:1].isupper():
+            # a torch class (an optimizer type, a version record): an inert stand-in like any other
+            # class; torch functions stay refused
+            return _opaque(module, name)
         if internal or not name[:1].isupper():
             # functions, and torch/numpy internals other than the records above: never stood in for
             raise pickle.UnpicklingError(f"refusing global {module}.{name}")
@@ -195,6 +221,8 @@ def _opaque(module: str, name: str):
     return _OPAQUE[key]
 
 
+_OPTIMISERS = {"SGD", "Adam", "AdamW", "Adagrad", "Adadelta", "Adamax", "RMSprop", "LBFGS", "NAdam", "RAdam",
+               "SparseAdam", "Rprop", "ASGD"}
 MODULE_SLOTS = ("_parameters", "_buffers", "_modules")    # a whole pickled torch.nn.Module
 
 
@@ -208,6 +236,8 @@ def _flatten(obj, prefix=""):
             else:
                 yield from _flatten(v, f"{prefix}.{k}" if prefix else str(k))
     elif isinstance(obj, _Opaque):
+        if type(obj).__name__ in _OPTIMISERS:
+            return                                       # an optimizer's state is not weights
         if isinstance(obj._state, (dict, _Opaque)):
             yield from _flatten(obj._state, prefix)
         elif isinstance(obj._state, tuple):              # (dict state, slot state)
