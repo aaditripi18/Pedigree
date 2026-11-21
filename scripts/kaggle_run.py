@@ -31,6 +31,7 @@ USER = os.environ.get("PEDIGREE_KAGGLE_USER", "aadityae5545454")
 DATASET = "pedigree-code"
 LEDGER = ROOT / "results" / "ledger.jsonl"
 FAMILIES = ["text_encoder", "text_decoder", "vision_transformer", "vision_cnn", "speech", "diffusion_unet"]
+TEXT = ("text_encoder", "text_decoder")   # teachers are Hub bases (experiments/distill.py)
 
 
 def ref(job: str) -> str:
@@ -422,35 +423,46 @@ for _f in E5_FAMILIES:
 H16_SEEDS = list(range(13, 21))
 for _f in ("text_decoder", "vision_cnn"):
     _teach = [s for s in JOBS[f"e5-{_f}"]["sources"] if not s.startswith("distill-")]
-    JOBS[f"distill4-{_f}"] = _job(f"pedigree-distill4-{_f.replace('_', '-')}",
-                                  [["-m", "experiments.distill", _f, "fresh"]], gpu=True,
-                                  sources=list(JOBS[f"distill-{_f}"]["sources"]),
-                                  env={**JOBS[f"distill-{_f}"]["env"], "PEDIGREE_SEEDS": ",".join(map(str, H16_SEEDS))})
+    # 2026-11-21: a text family's teacher is its Hub base (experiments/distill.py), so it mounts no
+    # output; parts of <= 2.6 h so a session fits a small weekly GPU quota
+    _parts = ({"": H16_SEEDS} if _f not in TEXT else
+              {f"-s{a}": [a, a + 1] for a in H16_SEEDS[::2]})
+    for _sfx, _seeds in _parts.items():
+        JOBS[f"distill4-{_f}{_sfx}"] = _job(
+            f"pedigree-distill4-{_f.replace('_', '-')}{_sfx}", [["-m", "experiments.distill", _f, "fresh"]],
+            gpu=True, sources=[] if _f in TEXT else list(JOBS[f"distill-{_f}"]["sources"]),
+            env={**{k: v for k, v in JOBS[f"distill-{_f}"]["env"].items() if not (_f in TEXT and k == "PEDIGREE_TEACHERS")},
+                 "PEDIGREE_SEEDS": ",".join(map(str, _seeds))})
     JOBS[f"e5e-h16-{_f}"] = _job(f"pedigree-e5e-h16-{_f.replace('_', '-')}",
                                  [["-m", "experiments.e5_behaviour", _f, "fresh"]], gpu=False,
-                                 sources=_teach + [f"distill4-{_f}"],
+                                 sources=_teach + [j for j in JOBS if j.startswith(f"distill4-{_f}")],
                                  env={"PEDIGREE_TEACHERS": JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"],
                                       "PEDIGREE_STUDENTS": "merge:students", "PEDIGREE_EXPERIMENT": "E5e-h16",
                                       "PEDIGREE_E5_SEEDS": json.dumps({"fresh": H16_SEEDS})})
 # H16b: 20,000-step students, dev batch seeds 30-32, fresh 33-40, in parts that fit a 12 h session
 LONG = {"PEDIGREE_STEPS": "20000", "PEDIGREE_LR": "5e-4", "PEDIGREE_WARMUP": "1000"}
 H16B_PARTS = {"dev": [30, 31, 32], "fresh-a": [33, 34, 35], "fresh-b": [36, 37, 38], "fresh-c": [39, 40]}
+# 2026-11-21: a text-encoder seed takes ~2.6 h at 20,000 steps (10x the 2,000-step runs' 930 s), so
+# its parts are one seed each; it mounts no output (its teacher is the Hub base)
+H16B_FAMILY_PARTS = {"text_encoder": {f"s{x}": [x] for x in range(30, 41)}, "vision_transformer": H16B_PARTS}
 for _f in ("text_encoder", "vision_transformer"):
     _teach = [s for s in JOBS[f"e5-{_f}"]["sources"] if not s.startswith("distill-")]
-    for _part, _seeds in H16B_PARTS.items():
-        JOBS[f"h16b-{_f}-{_part}"] = _job(f"pedigree-h16b-{SHORT[_f]}-{_part}",
-                                          [["-m", "experiments.distill", _f, "h16b"]], gpu=True,
-                                          sources=list(JOBS[f"distill-{_f}"]["sources"]),
-                                          env={**JOBS[f"distill-{_f}"]["env"], **LONG,
-                                               "PEDIGREE_SEEDS": ",".join(map(str, _seeds))})
+    for _part, _seeds in H16B_FAMILY_PARTS[_f].items():
+        JOBS[f"h16b-{_f}-{_part}"] = _job(
+            f"pedigree-h16b-{SHORT[_f]}-{_part}", [["-m", "experiments.distill", _f, "h16b"]], gpu=True,
+            sources=[] if _f in TEXT else list(JOBS[f"distill-{_f}"]["sources"]),
+            env={**{k: v for k, v in JOBS[f"distill-{_f}"]["env"].items() if not (_f in TEXT and k == "PEDIGREE_TEACHERS")},
+                 **LONG, "PEDIGREE_SEEDS": ",".join(map(str, _seeds))})
     JOBS[f"e5e-h16b-{_f}"] = _job(f"pedigree-e5e-h16b-{SHORT[_f]}",
                                   [["-m", "experiments.e5_behaviour", _f, "h16b"]], gpu=False,
-                                  sources=_teach + [f"h16b-{_f}-{p}" for p in H16B_PARTS],
+                                  sources=_teach + [f"h16b-{_f}-{p}" for p in H16B_FAMILY_PARTS[_f]],
                                   env={"PEDIGREE_TEACHERS": JOBS[f"e5-{_f}"]["env"]["PEDIGREE_TEACHERS"],
                                        "PEDIGREE_STUDENTS": "merge:students", "PEDIGREE_EXPERIMENT": "E5e-h16b",
                                        "PEDIGREE_E5_SEEDS": json.dumps({"h16b": list(range(30, 41))})})
 # H24: speech and diffusion students (experiments/h24.py), dev seeds 50-52, fresh 53-60
-H24_PARTS = {"dev": [50, 51, 52], "fresh-a": [53, 54, 55], "fresh-b": [56, 57, 58], "fresh-c": [59, 60]}
+# 2026-11-21: one seed per part (both students), so a session fits a small weekly GPU quota; a
+# 300-step timing run per family (seed 99, never scored) measures a step before any long run
+H24_PARTS = {f"s{x}": [x] for x in range(50, 61)}
 for _f in ("speech", "diffusion_unet"):
     for _part, _seeds in H24_PARTS.items():
         JOBS[f"h24-{_f}-{_part}"] = _job(f"pedigree-h24-{SHORT[_f]}-{_part}",
@@ -460,6 +472,11 @@ for _f in ("speech", "diffusion_unet"):
                                  [["-m", "experiments.h24", "score", _f, ",".join(map(str, range(50, 61)))]],
                                  gpu=False, sources=[f"h24-{_f}-{p}" for p in H24_PARTS],
                                  env={"PEDIGREE_STUDENTS": "merge:students"})
+for _f in ("speech", "diffusion_unet"):
+    JOBS[f"h24-time-{_f}"] = _job(f"pedigree-h24-{SHORT[_f]}-time",
+                                  [["-m", "experiments.h24", "train", _f, "99"]], gpu=True,
+                                  env={"PEDIGREE_DERIVATIVES": "/kaggle/working/students", "PEDIGREE_STEPS": "300",
+                                       "PEDIGREE_WARMUP": "15"})
 # a CPU smoke run of H24's code (3 steps, few probes); its ledger lines are never pulled
 JOBS["h24-smoke"] = _job("pedigree-h24-smoke",
                          [["-m", "experiments.h24", "train", "diffusion_unet", "99"],
@@ -472,14 +489,24 @@ JOBS["h24-smoke"] = _job("pedigree-h24-smoke",
 # GPU follow-ups run on friends' accounts (their own keys, never held here): who runs which job, so
 # pulls and the CPU scoring jobs mount the right owner's output. Each friend shares the finished
 # notebook with the project account as viewer.
-GPU_ASSIGN = {   # each friend reads only kernel outputs already shared with them in earlier rounds
-    "alien5060707": ["h16b-text_encoder-dev", "h16b-text_encoder-fresh-a", "h16b-text_encoder-fresh-b",
-                     "h16b-text_encoder-fresh-c"],
+GPU_ASSIGN = {   # 2026-11-21: by measured hours and each friend's weekly quota (alien5060707: 6 h this week);
+    # only rohajraj's ViT jobs mount outputs (already shared with that account in earlier rounds)
+    "alien5060707": ["h16b-text_encoder-s30", "h16b-text_encoder-s31"],
     "rohajraj": ["h16b-vision_transformer-dev", "h16b-vision_transformer-fresh-a",
-                 "h16b-vision_transformer-fresh-b", "h16b-vision_transformer-fresh-c"],
-    "alubalub": ["distill4-vision_cnn", *[f"h24-speech-{p}" for p in H24_PARTS]],
-    "moinuddinhasan8": ["distill4-text_decoder", *[f"h24-diffusion_unet-{p}" for p in H24_PARTS]],
+                 "h16b-vision_transformer-fresh-b", "h16b-vision_transformer-fresh-c",
+                 "h16b-text_encoder-s32", "h16b-text_encoder-s33"],
+    "alubalub": ["h24-time-speech", "distill4-vision_cnn", "h16b-text_encoder-s34", "h16b-text_encoder-s35",
+                 "h16b-text_encoder-s36", "h16b-text_encoder-s39"],
+    "moinuddinhasan8": ["h24-time-diffusion_unet", "distill4-text_decoder-s13", "distill4-text_decoder-s15",
+                        "distill4-text_decoder-s17", "distill4-text_decoder-s19", "h16b-text_encoder-s37",
+                        "h16b-text_encoder-s38", "h16b-text_encoder-s40"],
 }
+# estimated GPU hours per job, from the measured 2,000-step runs (x10 for 20,000 steps)
+GPU_HOURS = {**{f"h16b-text_encoder-s{x}": 2.6 for x in range(30, 41)},
+             "h16b-vision_transformer-dev": 2.1, "h16b-vision_transformer-fresh-a": 2.1,
+             "h16b-vision_transformer-fresh-b": 2.1, "h16b-vision_transformer-fresh-c": 1.4,
+             **{f"distill4-text_decoder-s{x}": 0.6 for x in (13, 15, 17, 19)}, "distill4-vision_cnn": 0.2,
+             "h24-time-speech": 0.3, "h24-time-diffusion_unet": 0.3}
 for _friend, _jobs in GPU_ASSIGN.items():
     for _j in _jobs:
         JOBS[_j]["owner"] = _friend
