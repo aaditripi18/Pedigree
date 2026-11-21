@@ -67,13 +67,11 @@ RETRIES = 6
 def _open(url: str, headers: dict | None = None, timeout: int = 60):
     """urlopen with the Hub's headers. A 429 (rate limit) or 5xx is retried with
     backoff, waiting at least as long as the server's Retry-After asks."""
+    from .remote import open_url               # HF_TOKEN goes to huggingface.co only, never across a redirect
     h = {"User-Agent": UA, **(headers or {})}
-    tok = os.environ.get("HF_TOKEN")
-    if tok:
-        h["Authorization"] = f"Bearer {tok}"
     for attempt in range(RETRIES):
         try:
-            return urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=timeout)
+            return open_url(url, h, timeout)
         except urllib.error.HTTPError as e:
             if e.code not in RETRY_STATUS or attempt == RETRIES - 1:
                 raise

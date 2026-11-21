@@ -300,3 +300,24 @@ def test_matmulnbits_matches_onnxruntime(tmp_path, local):
     assert r.float_shapes()[name][1] == (40, 64)
     got = r.sample(name, 10 ** 6).reshape(40, 64)
     np.testing.assert_allclose(got, _run_identity(tmp_path / "model_q4.onnx", 64).T, atol=1e-5)
+
+
+def test_token_goes_to_huggingface_only_and_not_across_redirects(monkeypatch):
+    """HF_TOKEN (for gated repositories) is attached only to https://huggingface.co requests and is
+    dropped when a redirect leaves that host (file bytes come from a CDN)."""
+    import urllib.request
+    from pedigree import remote
+    monkeypatch.setenv("HF_TOKEN", "hf_test_not_a_real_token")
+    assert remote._token_for("https://huggingface.co/org/m/resolve/abc/model.safetensors")
+    for url in ("http://huggingface.co/x", "https://huggingface.co.evil.example/x", "https://cdn-lfs.hf.co/x",
+                "https://cas-bridge.xethub.hf.co/x", "https://example.com/huggingface.co"):
+        assert remote._token_for(url) is None, url
+    h = remote._TokenStaysHome()
+    req = urllib.request.Request("https://huggingface.co/org/m/resolve/abc/f", headers={"Range": "bytes=0-7"})
+    req.add_header("Authorization", "Bearer hf_test_not_a_real_token")
+    out = h.redirect_request(req, None, 302, "Found", {}, "https://cas-bridge.xethub.hf.co/signed/f")
+    assert not out.has_header("Authorization") and out.get_header("Range") == "bytes=0-7"
+    back = h.redirect_request(req, None, 307, "Temporary Redirect", {}, "https://huggingface.co/org/m2/resolve/abc/f")
+    assert back.has_header("Authorization")                  # a rename within the Hub keeps it
+    monkeypatch.delenv("HF_TOKEN")
+    assert remote._token_for("https://huggingface.co/x") is None

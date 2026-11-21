@@ -39,6 +39,38 @@ def _cache_path(url: str, start: int, end: int) -> Path:
     return cache_root() / "ranges" / key[:2] / key
 
 
+# --- a token for gated repositories (2026-11-21) ---------------------------------------------------
+# HF_TOKEN is sent only over https to huggingface.co itself; a redirect to any other host (the CDN
+# that serves file bytes) is followed without it. It is never logged, recorded or uploaded.
+TOKEN_HOST = "huggingface.co"
+
+
+def _token_for(url: str) -> str | None:
+    tok = os.environ.get("HF_TOKEN")
+    u = urllib.parse.urlsplit(url)
+    return tok if tok and u.scheme == "https" and u.hostname == TOKEN_HOST else None
+
+
+class _TokenStaysHome(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        new = super().redirect_request(req, fp, code, msg, headers, newurl)
+        if new is not None and _token_for(newurl) is None:
+            new.remove_header("Authorization")
+        return new
+
+
+_OPENER = urllib.request.build_opener(_TokenStaysHome)
+
+
+def open_url(url: str, headers: dict, timeout: float):
+    """urlopen with HF_TOKEN attached only where it belongs (see TOKEN_HOST)."""
+    req = urllib.request.Request(url, headers=headers)
+    tok = _token_for(url)
+    if tok:
+        req.add_header("Authorization", f"Bearer {tok}")
+    return _OPENER.open(req, timeout=timeout)
+
+
 def fetch_range(url: str, start: int, end: int, retries: int = RETRIES) -> bytes:
     """Bytes [start, end] of url (inclusive), cached; retries 429/5xx and dropped
     connections with backoff (at least the server's Retry-After)."""
@@ -49,10 +81,9 @@ def fetch_range(url: str, start: int, end: int, retries: int = RETRIES) -> bytes
     path = _cache_path(url, start, end)
     if path.exists():
         return path.read_bytes()
-    req = urllib.request.Request(url, headers={"Range": f"bytes={start}-{end}", "User-Agent": UA})
     for attempt in range(retries):
         try:
-            with urllib.request.urlopen(req, timeout=120) as r:
+            with open_url(url, {"Range": f"bytes={start}-{end}", "User-Agent": UA}, timeout=120) as r:
                 data = r.read()
                 status = r.status
             if status != 206 and start > 0:
