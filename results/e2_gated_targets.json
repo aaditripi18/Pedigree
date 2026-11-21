@@ -1,0 +1,25 @@
+{
+ "rule": "R2 rule 4 (gated), E2 with E2x applied; frozen before any reading",
+ "pairs": [
+  [
+   "circlestone-labs/Anima",
+   "nvidia/Cosmos-Predict2-2B-Text2Image"
+  ],
+  [
+   "mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF",
+   "prithivMLmods/Qwen3-VL-8B-Instruct-abliterated-v1"
+  ],
+  [
+   "ml-resources/flux-3-image-klein-comfy",
+   "black-forest-labs/flux-3-image-klein"
+  ],
+  [
+   "ml-resources/flux-3-image-klein-comfy",
+   "black-forest-labs/flux-3-image-klein-base"
+  ],
+  [
+   "unsloth/orpheus-3b-0.1-ft-GGUF",
+   "canopylabs/orpheus-3b-0.1-pretrained"
+  ]
+ ]
+}
