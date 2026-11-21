@@ -425,8 +425,7 @@ for _f in ("text_decoder", "vision_cnn"):
     _teach = [s for s in JOBS[f"e5-{_f}"]["sources"] if not s.startswith("distill-")]
     # 2026-11-21: a text family's teacher is its Hub base (experiments/distill.py), so it mounts no
     # output; parts of <= 2.6 h so a session fits a small weekly GPU quota
-    _parts = ({"": H16_SEEDS} if _f not in TEXT else
-              {f"-s{a}": [a, a + 1] for a in H16_SEEDS[::2]})
+    _parts = {"": H16_SEEDS}       # text_decoder's 8 seeds take ~2.4 h, run as one part (2026-11-21)
     for _sfx, _seeds in _parts.items():
         JOBS[f"distill4-{_f}{_sfx}"] = _job(
             f"pedigree-distill4-{_f.replace('_', '-')}{_sfx}", [["-m", "experiments.distill", _f, "fresh"]],
@@ -497,15 +496,14 @@ GPU_ASSIGN = {   # 2026-11-21: by measured hours and each friend's weekly quota 
                  "h16b-text_encoder-s32", "h16b-text_encoder-s33"],
     "alubalub": ["h24-time-speech", "distill4-vision_cnn", "h16b-text_encoder-s34", "h16b-text_encoder-s35",
                  "h16b-text_encoder-s36", "h16b-text_encoder-s39"],
-    "moinuddinhasan8": ["h24-time-diffusion_unet", "distill4-text_decoder-s13", "distill4-text_decoder-s15",
-                        "distill4-text_decoder-s17", "distill4-text_decoder-s19", "h16b-text_encoder-s37",
+    "moinuddinhasan8": ["h24-time-diffusion_unet", "distill4-text_decoder", "h16b-text_encoder-s37",
                         "h16b-text_encoder-s38", "h16b-text_encoder-s40"],
 }
 # estimated GPU hours per job, from the measured 2,000-step runs (x10 for 20,000 steps)
 GPU_HOURS = {**{f"h16b-text_encoder-s{x}": 2.6 for x in range(30, 41)},
              "h16b-vision_transformer-dev": 2.1, "h16b-vision_transformer-fresh-a": 2.1,
              "h16b-vision_transformer-fresh-b": 2.1, "h16b-vision_transformer-fresh-c": 1.4,
-             **{f"distill4-text_decoder-s{x}": 0.6 for x in (13, 15, 17, 19)}, "distill4-vision_cnn": 0.2,
+             "distill4-text_decoder": 2.4, "distill4-vision_cnn": 0.2,
              "h24-time-speech": 0.3, "h24-time-diffusion_unet": 0.3}
 for _friend, _jobs in GPU_ASSIGN.items():
     for _j in _jobs:
