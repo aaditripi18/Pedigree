@@ -1753,6 +1753,27 @@
       ]
      },
      "evidence": "67/99 comparable (2 declared pairs not read count under H21/R2); H23's pairs under v4 (design data, not counted): 110/142 declared pairs comparable, 2/2 former opposite verdicts now agree"
+    },
+    {
+     "id": "H26a",
+     "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H25a",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H26b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
+     "follows": "H25b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H26c",
+     "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
+     "follows": "H21",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {
@@ -3583,6 +3604,27 @@
       ]
      },
      "evidence": "67/99 comparable (2 declared pairs not read count under H21/R2); H23's pairs under v4 (design data, not counted): 110/142 declared pairs comparable, 2/2 former opposite verdicts now agree"
+    },
+    {
+     "id": "H26a",
+     "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H25a",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H26b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
+     "follows": "H25b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H26c",
+     "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
+     "follows": "H21",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {

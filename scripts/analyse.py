@@ -834,7 +834,7 @@ KEEP_PAIR = ("median_cosine", "compared", "matched", "match_share", "identical",
              "median_invariant", "invariant_compared", "error")
 
 
-def with_e2x(e2f_all, e2x, e2xp, e2v3):
+def with_e2x(e2f_all, e2x, e2xp, e2v3, label: str = "v3"):
     """E2 with every re-reading so far, then E2x (models read with the R1 readers replace their
     unreadable records), E2xp (pairs whose other side was unreadable) and E2v3 (declared pairs still
     not comparable, aligned by v3, with R2's facts). E2 and earlier re-readings are not changed."""
@@ -869,7 +869,7 @@ def with_e2x(e2f_all, e2x, e2xp, e2v3):
                     d.pop("reason", None)
                     d.pop("error", None)
                     d.update({k: v[k] for k in KEEP_PAIR if k in v})
-                    d["alignment"] = "v3"
+                    d["alignment"] = label
                 elif v.get("error"):
                     d.setdefault("reread_reasons", v.get("reasons"))
     return out
@@ -1195,6 +1195,63 @@ def h14(dev: list[dict], fresh: list[dict]) -> list[dict]:
     return out
 
 
+def h26(h26r, n_sample: int, h26d, T, rule) -> list[dict]:
+    """Amendment 2026-11-21: readers v5 with alignment v4 and (g)-(i) on a fresh sample; H25's pairs
+    (design data, ledger H26d) reported beside it, not counted."""
+    sa = ("On fresh pairs where names align >= 8 tensors, v4 with (g)-(i) and names ignored gives the same related / "
+          "unrelated verdict for >= 98% and the opposite verdict for none.")
+    sb = ("On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes "
+          ">= 80% comparable.")
+    sc = ("No fresh sampled model, and no declared base of one, is unreadable because of its file format, except "
+          "formats with no public specification.")
+    ba = {"id": "H26a", "statement": sa, "follows": "H25a"}
+    bb = {"id": "H26b", "statement": sb, "follows": "H25b"}
+    bc = {"id": "H26c", "statement": sc, "follows": "H21"}
+    if not h26r or len(h26r) < n_sample:
+        return [{**x, "verdict": "pending", "evidence": "fresh sample running"} for x in (ba, bb, bc)]
+    a25, b25 = h25(h26r, n_sample, [], T, rule)
+    fmt, other, seen = Counter(), Counter(), set()
+    for m in h26r:
+        items = [(m["id"], m.get("reason"))] if m.get("reason") else []
+        items += [(d["base"], d.get("reason")) for d in m.get("declared", []) if d.get("reason")]
+        for repo, why in items:
+            if repo in seen or why == "adapter":
+                continue
+            seen.add(repo)
+            (fmt if _format_failure(why) and why not in NO_PUBLIC_SPEC else other)[why] += 1
+    lost = sum("lost" in m for m in h26r)
+    low, agree = [], []
+    for r in h26d:
+        a = r.get("alignments") or {}
+        nm = a.get("names")
+        if nm is None or nm.get("error"):
+            continue
+        if (nm.get("compared") or 0) < MIN_COMPARED:
+            au = a.get("auto4") or {}
+            low.append(0 if au.get("error") else (au.get("compared") or 0))
+        else:
+            agree.append(_verdict_plain(a.get("struct4"), T, rule) == _verdict_plain(nm, T, rule))
+    design = (f"H25's pairs under v5 (design data, not counted): {sum(c >= MIN_COMPARED for c in low)}/{len(low)} "
+              f"declared pairs comparable, {sum(agree)}/{len(agree)} former disagreements now agree"
+              if h26d else "H25's pairs under v5 running")
+    na, nb = a25["numbers"], b25["numbers"]
+    return [{**ba, "verdict": a25["verdict"], "numbers": na,
+             "evidence": a25["evidence"].replace("v4 ", "v4 with (g)-(i) ", 1)},
+            {**bb, "verdict": b25["verdict"],
+             "numbers": {"comparable": nb["comparable"], "not_read": nb["not_read"],
+                         "design_declared": [sum(c >= MIN_COMPARED for c in low), len(low)],
+                         "design_agree": [sum(agree), len(agree)]},
+             "evidence": f"{nb['comparable'][0]}/{nb['comparable'][1]} comparable ({nb['not_read']} declared pairs "
+                         f"not read count under H26c); {design}"},
+            {**bc, "verdict": verdict(not fmt and not lost),
+             "numbers": {"repositories_unread": len(seen), "format_failures": dict(fmt), "other_reasons": dict(other),
+                         "lost": lost, "no_public_spec": dict(NO_PUBLIC_SPEC)},
+             "evidence": f"{len(seen)} repositories unread: format failures {sum(fmt.values())}"
+                         + (f" ({'; '.join(f'{k}: {v}' for k, v in fmt.items())})" if fmt else "")
+                         + f"; other reasons {sum(other.values())}"
+                         + (f" ({'; '.join(f'{k}: {v}' for k, v in sorted(other.items()))})" if other else "")}]
+
+
 def main() -> None:
     rows = load()
     e1 = latest_runs(rows, "E1", lambda r: r.get("family"))
@@ -1223,6 +1280,11 @@ def main() -> None:
     h23r = latest_runs(rows, "H23", lambda r: 0)
     h25r = latest_runs(rows, "H25", lambda r: 0)
     h25d = latest_runs(rows, "H25d", lambda r: 0)
+    h26r = latest_runs(rows, "H26", lambda r: 0)
+    h26d = latest_runs(rows, "H26d", lambda r: 0)
+    e2y = latest_runs(rows, "E2y", lambda r: 0)
+    e2yp = latest_runs(rows, "E2yp", lambda r: 0)
+    e2v4 = latest_runs(rows, "E2v4", lambda r: 0)
     e5e_h24 = latest_runs(rows, "E5e-h24", lambda r: (r.get("meta") or {}).get("family", r.get("family")))
     for r in e5e_h24:
         r.setdefault("family", (r.get("meta") or {}).get("family"))
@@ -1230,6 +1292,8 @@ def main() -> None:
     n23 = sum(len(v) for v in s23["sample"].values())
     s25 = json.loads((ROOT / "results" / "h25_sample.json").read_text(encoding="utf-8"))
     n25 = sum(len(v) for v in s25["sample"].values())
+    s26 = json.loads((ROOT / "results" / "h26_sample.json").read_text(encoding="utf-8"))
+    n26 = sum(len(v) for v in s26["sample"].values())
     x_targets = json.loads((ROOT / "results" / "e2x_targets.json").read_text(encoding="utf-8"))
     s19 = json.loads((ROOT / "results" / "h19_sample.json").read_text(encoding="utf-8"))
     n19 = sum(len(v) for v in s19["sample"].values())
@@ -1259,7 +1323,7 @@ def main() -> None:
         hs += [h15(e2, h15r, T, rule), h16r, h16br, *h17(h15r, with_rescores(e2, e2r, e2g), e2s, T, rule),
                h18(h16r, h16br), h19(h19r, n19, T, rule), h20(h19r, n19, h20e2, T, rule),
                h21(e2x, len(x_targets["models"])), *h23(h23r, n23, e2v3, T, rule), h24(e5e_h24),
-               *h25(h25r, n25, h25d, T, rule)]
+               *h25(h25r, n25, h25d, T, rule), *h26(h26r, n26, h26d, T, rule)]
         if e2r:
             e2f_all = with_rescores(e2, e2r, e2g, e2s, e2f)
             Af = audit(e2f_all, T, rule)
@@ -1284,6 +1348,17 @@ def main() -> None:
                     "verdicts": {k: {"verdict": v["verdict"], "evidence": v["evidence"],
                                      "changes": v["verdict"] != next(h for h in hs if h["id"] == k)["verdict"]}
                                  for k, v in hx.items()}}
+                if e2y:      # amendment 2026-11-21: readers v5 and alignment v4 applied on top of E2x
+                    e2y_all = with_e2x(e2x_all, e2y, e2yp, e2v4, label="v4")
+                    Ay = audit(e2y_all, T, rule)
+                    hy = {h["id"]: h for h in [*h2h3(Ay, len(e2y_all) == 600), h7(h7a, e2y_all, T, rule)]}
+                    out.setdefault("readers_v5", {})[rule] = {
+                        "models_reread": len(e2y), "pairs_reread": len(e2yp), "v4_pairs": len(e2v4),
+                        "lost": sum("lost" in r for r in e2y + e2yp + e2v4), "audit": Ay,
+                        "r2": r2_categories(e2y_all, T, rule),
+                        "verdicts": {k: {"verdict": v["verdict"], "evidence": v["evidence"],
+                                         "changes": v["verdict"] != next(h for h in hs if h["id"] == k)["verdict"]}
+                                     for k, v in hy.items()}}
         out["rules"][rule] = {"hypotheses": hs, "audit": A,
                               "behaviour": behaviour_audit(e2b, next(h for h in hs if h["id"] == "H9"))}
     # the CLI's thresholds are exactly the published rule's
@@ -1302,11 +1377,11 @@ def main() -> None:
     md += ["", f"Families compared blind (after the rule was written): {', '.join(sorted(BLIND))}.", "",
            "## Hypotheses", "", "| | Hypothesis | Verdict | Evidence | Under the midpoint rule |", "|---|---|---|---|---|"]
     mid = {h["id"]: h for h in out["rules"]["midpoint"]["hypotheses"]}
-    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("ab")), h["id"])):
+    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("abc")), h["id"])):
         md.append(f"| {h['id']} | {h['statement']} | **{h['verdict']}** | {h['evidence']} | {mid[h['id']]['verdict']} |")
     (ROOT / "docs").mkdir(exist_ok=True)
     (ROOT / "docs" / "RESULTS.md").write_text("\n".join(md) + "\n", encoding="utf-8")
-    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("ab")), h["id"])):
+    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("abc")), h["id"])):
         print(f"{h['id']:>4} {h['verdict']:<14} {h['evidence']}")
     print({k: round(v["t"], 4) for k, v in T.items()})
 
