@@ -521,7 +521,11 @@ GPU_ASSIGN = {   # 2026-11-21: by measured hours and each friend's weekly quota 
 GPU_ASSIGN["rohajraj"] += [f"h24-diffusion_unet-s{x}" for x in (50, 51, 52, 53)]
 # moinuddinhasan8's quota this week is used up (6 h allowed, 9.2 h used): s54 moves to alubalub, whose
 # quota covers it; s55-s57 stay with moinuddinhasan8 for after the reset (2026-11-28)
-GPU_ASSIGN["moinuddinhasan8"] += [f"h24-diffusion_unet-s{x}" for x in (55, 56, 57)]
+GPU_ASSIGN["moinuddinhasan8"] += ["h24-diffusion_unet-s57"]
+# extras pushed only after the friend's queue is done and only if its quota still covers them; if one
+# does not fit, it moves to moinuddinhasan8 after the reset (2026-11-28)
+GPU_ASSIGN["rohajraj"] += ["h24-diffusion_unet-s55"]
+GPU_ASSIGN["alubalub"] += ["h24-diffusion_unet-s56"]
 GPU_ASSIGN["alubalub"] += [f"h24-diffusion_unet-s{x}" for x in (58, 59, 60)] + ["h24-speech-s50-i",
                                                                                 "h24-diffusion_unet-s54"]
 # estimated GPU hours per job, from the measured 2,000-step runs (x10 for 20,000 steps)
