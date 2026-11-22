@@ -13,6 +13,7 @@ from __future__ import annotations
 import collections
 import gzip
 import json
+import os
 import threading
 from pathlib import Path
 
@@ -54,7 +55,10 @@ def config(repo: str) -> dict:
     """A repository's config.json (main branch), cached on disk; {} if it has none."""
     path = hub.cache_root() / "configs" / (repo.replace("/", "--") + ".json")
     if path.exists():
-        return json.loads(path.read_text(encoding="utf-8"))
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except ValueError:       # another thread's write, cut short: fetch again
+            pass
     try:
         with hub._open(f"{hub.HOST}/{repo}/resolve/main/config.json") as r:
             cfg = json.loads(r.read().decode("utf-8"))
@@ -66,7 +70,9 @@ def config(repo: str) -> dict:
         cfg = {}
     with _config_lock:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(cfg), encoding="utf-8")
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text(json.dumps(cfg), encoding="utf-8")
+        os.replace(tmp, path)
     return cfg
 
 

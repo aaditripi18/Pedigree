@@ -59,9 +59,13 @@ def info(repo: str) -> dict:
         if repo in _info_cache:
             return _info_cache[repo]
     path = hub.cache_root() / "info" / (repo.replace("/", "--") + ".json")
+    d = None
     if path.exists():
-        d = json.loads(path.read_text(encoding="utf-8"))
-    else:
+        try:
+            d = json.loads(path.read_text(encoding="utf-8"))
+        except ValueError:       # another thread's write, cut short: fetch again
+            d = None
+    if d is None:
         url = f"{hub.HOST}/api/models/{urllib.parse.quote(repo, safe='/')}/revision/main?blobs=true"
         try:
             with hub._open(url) as r:
@@ -75,7 +79,9 @@ def info(repo: str) -> dict:
                 raise NetworkError(f"{repo}: {type(e).__name__}: {e}") from None
             raise
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(d), encoding="utf-8")
+        tmp = path.with_suffix(f".{threading.get_ident()}.tmp")   # whole or not at all
+        tmp.write_text(json.dumps(d), encoding="utf-8")
+        os.replace(tmp, path)
     with _lock:
         _info_cache[repo] = d
     return d

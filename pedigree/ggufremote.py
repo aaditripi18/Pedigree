@@ -65,6 +65,20 @@ class _Reader:
         raise ValueError(f"unknown GGUF value type {vtype}")
 
 
+def n_tensors(url: str) -> int:
+    """How many tensors this file holds: the count in its first 24 bytes (magic, version, tensor
+    count). A split set's total is the sum over its shards, which is what its `split.tensors.count`
+    states; reading only these bytes spares walking the metadata (vocabularies of several MB)."""
+    from .remote import fetch_range
+    head = fetch_range(url, 0, 23)
+    if head[:4] != b"GGUF":
+        raise ValueError("not a GGUF file")
+    version, n = struct.unpack("<IQ", head[4:16])
+    if version < 2:
+        raise ValueError(f"GGUF version {version} is not supported")
+    return int(n)
+
+
 def tensor_count(url: str, size: int) -> tuple[int, int | None]:
     """(tensors in this file, tensors in the whole split set or None), from the header and metadata
     alone (tensor descriptions are not read)."""

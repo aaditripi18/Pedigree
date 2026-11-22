@@ -212,10 +212,14 @@ JOBS["h25"] = _job("pedigree-h25", [["-m", "experiments.h25_fresh", "--out", "/k
                    gpu=False, env={**E2_ENV, "PEDIGREE_BUDGET_HOURS": "5.5"})   # two passes in one 12 h session
 # amendment 2026-11-21: H26 (readers v5, alignment (g)-(i)) on its fresh sample, then H25's design pairs;
 # E2y re-reads what is still unread or not comparable after E2x
-JOBS["h26"] = _job("pedigree-h26", [["-m", "experiments.h26_fresh", "--out", "/kaggle/working/h26_raw.jsonl"],
-                                    ["-m", "experiments.h26_fresh", "--design",
-                                     "--out", "/kaggle/working/h26_design_raw.jsonl"]],
-                   gpu=False, env={**E2_ENV, "PEDIGREE_BUDGET_HOURS": "5.5"})
+# the first session (5.5 h per pass) read 150 of the 300 before Kaggle's 12 h limit; the fresh
+# sample resumes from those records and the design pairs run in a session of their own
+JOBS["h26"] = _job("pedigree-h26", [["-m", "experiments.h26_fresh", "--out", "/kaggle/working/h26_raw.jsonl",
+                                     "--resume", "results/kaggle/h26/h26_raw.jsonl"]],
+                   gpu=False, env=dict(E2_ENV))
+JOBS["h26-design"] = _job("pedigree-h26-design", [["-m", "experiments.h26_fresh", "--design",
+                                                   "--out", "/kaggle/working/h26_design_raw.jsonl"]],
+                          gpu=False, env=dict(E2_ENV))
 JOBS["e2y"] = _job("pedigree-e2y", [["-m", "experiments.e2x_reaudit", "--round", "y", "--out", "/kaggle/working"]],
                    gpu=False, env=dict(E2_ENV))
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters

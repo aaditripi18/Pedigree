@@ -2,7 +2,9 @@
 stored as GGUF, ONNX, CTranslate2 or NeMo, drawn after H25 by H25's rule.
 
   python -m experiments.h26_fresh --sample     # draw results/h26_sample.json (committed before any reading)
-  python -m experiments.h26_fresh [--out PATH] # read the fresh sample (ledger H26)
+  python -m experiments.h26_fresh [--out PATH] [--resume PATH]
+                                               # read the fresh sample (ledger H26); --resume starts
+                                               # from records an earlier, cut-off run wrote
   python -m experiments.h26_fresh --design [--out PATH]
                                                # H25's pairs v5 was designed on, under v5 (ledger H26d)
 
@@ -85,20 +87,25 @@ def main() -> None:
     ap.add_argument("--sample", action="store_true")
     ap.add_argument("--design", action="store_true")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--resume", default=None, help="raw records of an earlier run, relative to the repository")
     a = ap.parse_args()
     frame = pool.Frame(ROOT / "results" / "e2_frame_meta.jsonl.gz")
     if a.sample:
         draw(frame)
         return
+    out = Path(a.out or ROOT / "results" / ("h26_design_raw.jsonl" if a.design else "h26_raw.jsonl"))
+    if a.resume and not out.exists():
+        import shutil
+        shutil.copy(ROOT / a.resume, out)
     if a.design:
         todo = design_pairs()
         h25.run(todo, lambda r: (r["id"], r["other"], r["role"]), lambda p: h25.read_design(p, frame),
-                Path(a.out or ROOT / "results" / "h26_design_raw.jsonl"), "H26d", None, None)
+                out, "H26d", None, None)
         return
     sample = json.loads(SAMPLE.read_text(encoding="utf-8"))
     todo = [{"id": i, "tier": t} for t, ids in sample["sample"].items() for i in ids]
     h25.run(todo, lambda r: r["id"], lambda p: h25.read_one(p["id"], p["tier"], frame),
-            Path(a.out or ROOT / "results" / "h26_raw.jsonl"), "H26", sample["seed"], sample["snapshot"])
+            out, "H26", sample["seed"], sample["snapshot"])
 
 
 if __name__ == "__main__":

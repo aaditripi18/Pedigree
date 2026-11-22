@@ -1,0 +1,331 @@
+[{"stream_name":"stdout","time":32.753018298,"data":"code af16318\n"}
+,{"stream_name":"stdout","time":92.699562887,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":94.106184814,"data":"PEDIGREE_WORKERS = 12\n"}
+,{"stream_name":"stdout","time":94.106242748,"data":"PEDIGREE_BUDGET_HOURS = 5.5\n"}
+,{"stream_name":"stdout","time":96.971456774,"data":"0 done, 300 to read\n"}
+,{"stream_name":"stdout","time":153.346334712,"data":"[1/300] AtomicChat/Qwen-Image-2.1-Turbo-GGUF: gguf; Qwen/Qwen-Image-2.1-Turbo: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (56s)\n"}
+,{"stream_name":"stdout","time":642.374246088,"data":"[2/300] Abiray/Qwen3.8-27B-Q4_K_M-GGUF: gguf; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (545s)\n"}
+,{"stream_name":"stdout","time":672.466827979,"data":"[3/300] Abiray/MiniCPM5-2B-heretic-abliterated-GGUF: gguf; openbmb/MiniCPM5-2B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (575s)\n"}
+,{"stream_name":"stdout","time":942.862823999,"data":"[4/300] AnkitAI/Parable-Qwen3-4B-Claude-Fable-5-GGUF: gguf; Qwen/Qwen3-4B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (846s)\n"}
+,{"stream_name":"stdout","time":956.168601163,"data":"[5/300] AtomicChat/Nanbeige4.3-33B-GGUF: gguf; Nanbeige/Nanbeige4.3-33B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (859s)\n"}
+,{"stream_name":"stdout","time":1211.976663844,"data":"[6/300] AtomicChat/Qwen3.5-9B-DFlash-GGUF: gguf; z-lab/Qwen3.5-9B-DFlash: names=0, struct3=7, auto3=7, struct4=24, auto4=24 (1115s)\n"}
+,{"stream_name":"stdout","time":1830.551588337,"data":"[7/300] AtomicChat/FLUX-3-Image-Klein-pup-Uncensored-GGUF: gguf; black-forest-labs/flux-3-image-klein-pup: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (1734s)\n"}
+,{"stream_name":"stdout","time":1880.995067853,"data":"[8/300] BoldingBuilds/GLM-5.3-Flash-Uncensored-GGUF: gguf; zai-org/GLM-5.3-Flash: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (1784s)\n"}
+,{"stream_name":"stdout","time":1889.859551353,"data":"[9/300] ChrisColeTech/minimax-h3-turbo-GGUF: gguf; MiniMaxAI/MiniMax-H3: names=0, struct3=6, auto3=6, struct4=8, auto4=8 (1793s)\n"}
+,{"stream_name":"stdout","time":2194.258712773,"data":"[10/300] BoldingBuilds/orcarouter_GLM-5.3-Flash-Uncensored-GGUF: gguf; orcarouter/GLM-5.3-Flash-Uncensored-FP8: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (2097s)\n"}
+,{"stream_name":"stdout","time":2194.353796473,"data":"[11/300] FluidInference/parakeet-realtime-eou-120m-coreml: not readable (no weight files); - (2097s)\n"}
+,{"stream_name":"stdout","time":2208.074721614,"data":"[12/300] CaryPalmer/Ternary-Bonsai-2-27B-262k-GGUF: gguf; prism-ml/Ternary-Bonsai-2-27B-gguf: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (2111s)\n"}
+,{"stream_name":"stdout","time":2397.310043315,"data":"[13/300] AtomicChat/Qwen3.5-4B-GGUF: gguf; Qwen/Qwen3.5-4B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (2300s)\n"}
+,{"stream_name":"stdout","time":2420.29753167,"data":"[14/300] ChrisColeTech/minimax-music3-GGUF: gguf; MiniMaxAI/MiniMax-Music3: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (2323s)\n"}
+,{"stream_name":"stdout","time":2731.582672,"data":"[15/300] GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-GGUF: gguf; GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (2635s)\n"}
+,{"stream_name":"stdout","time":2783.089833866,"data":"[16/300] AtomicChat/Ornith-1.5-35B-A3B-GGUF: gguf; ornith-ai/Ornith-1.5-35B-A3B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (2686s)\n"}
+,{"stream_name":"stdout","time":3018.478880445,"data":"[17/300] ISTA-DASLab/DeepSeek-V4.1-Flash-1017-GSQ-RCO-Coder-GGUF: gguf; deepseek-ai/DeepSeek-V4.1-Flash-1017: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (2922s)\n"}
+,{"stream_name":"stdout","time":3079.651084414,"data":"[18/300] AtomicChat/FLUX-3-Image-Klein-TE-Uncensored-GGUF: gguf; Qwen/Qwen3-VL-4B-Instruct: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (2983s)\n"}
+,{"stream_name":"stdout","time":3299.904616606,"data":"[19/300] AtomicChat/gemma-4-31B-it-GGUF: gguf; google/gemma-4-31B-it: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (3203s)\n"}
+,{"stream_name":"stdout","time":3302.275866206,"data":"[20/300] HuggingFaceBio/Carbon-X-GGUF: gguf; HuggingFaceBio/Carbon-X: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (3205s)\n"}
+,{"stream_name":"stdout","time":3595.873591579,"data":"[21/300] BoldingBuilds/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-Abliterated-24GB-GGUF: gguf; nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (3499s)\n"}
+,{"stream_name":"stdout","time":3648.055398135,"data":"[22/300] AtomicChat/gemma-4-E2B-it-GGUF: gguf; google/gemma-4-E2B-it: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (3551s)\n"}
+,{"stream_name":"stdout","time":3655.678951341,"data":"[23/300] GCSA-AiLab/GLM-5.3-Flash-Uncensored-RCO-GSQ-GGUF: gguf; zai-org/GLM-5.3-Flash: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (3559s)\n"}
+,{"stream_name":"stdout","time":3921.9525241,"data":"[24/300] IsValorum/Swift-1.5-Qwen3.8-27B-Uncensored-MTP-VAL-APEX-I-MiniPlus-V3-GGUF: gguf; ajgazin/Swift-1.5-Qwen3.8-27B-Uncensored-MTP: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (3825s)\n"}
+,{"stream_name":"stdout","time":3955.756954647,"data":"[25/300] IsValorum/Qwen3.8-35B-A3B-Distill-MTP-APEX-I-MiniPlus-V2.1-Abliterated-GGUF: gguf; empero-ai/Qwen3.8-35B-A3B-Distill: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (3859s)\n"}
+,{"stream_name":"stdout","time":4852.453836163,"data":"[26/300] LiquidAI/LFM3-Audio-2B-GGUF: gguf; LiquidAI/LFM3-Audio-2B: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (4755s)\n"}
+,{"stream_name":"stdout","time":4862.612582207,"data":"[27/300] JetBrains/Qwen3.8-3.6-27B-blend-GGUF: gguf; JetBrains/Qwen3.8-3.6-27B-blend: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (4766s)\n"}
+,{"stream_name":"stdout","time":4862.706072624,"data":"[28/300] LuffyTheFox/Tiel-Coder-35B-A3B-Genesis-Hermes-GGUF: not readable (HTTP 401); - (4766s)\n"}
+,{"stream_name":"stdout","time":4884.263109997,"data":"[29/300] KyleHessling1/Qwopus3.6-27B-Fusion-GGUF: gguf; Qwen/Qwen3.6-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (4787s)\n"}
+,{"stream_name":"stdout","time":4884.804806722,"data":"[30/300] KikoCis/Qwen3.8-27B-GGUF: gguf; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (4788s)\n"}
+,{"stream_name":"stdout","time":5115.475928804,"data":"[31/300] LiquidAI/LFM3-1.7B-GGUF: gguf; LiquidAI/LFM3-1.7B: names=0, struct3=24, auto3=24, struct4=24, auto4=24; LiquidAI/LFM3-1.7B-NVFP4: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (5019s)\n"}
+,{"stream_name":"stdout","time":5412.385326033,"data":"[32/300] Diffuspace/Clover-35B-A3B-Preview-GGUF: gguf; Diffuspace/Clover-35B-A3B-Preview: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (5315s)\n"}
+,{"stream_name":"stdout","time":5427.077318683,"data":"[33/300] IndexTeam/Index-Translate-35B-A3B-preview-GGUF: gguf; IndexTeam/Index-Translate-35B-A3B-preview: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (5330s)\n"}
+,{"stream_name":"stdout","time":5489.826441117,"data":"[34/300] IsValorum/Cyber-Tiel-Coder-35B-A3B-APEX-I-MiniPlus-V2.1-GGUF: gguf; peculiar-ragdoll/Cyber-Tiel-Coder-35B-A3B-GGUF-MTP: names=0, struct3=0, auto3=0, struct4=24, auto4=24 (5393s)\n"}
+,{"stream_name":"stdout","time":5545.285560627,"data":"[35/300] ProCreations/Ternary-Bonsai-2-27B-MTP: gguf; prism-ml/Ternary-Bonsai-2-27B-gguf: names=24, struct3=24, auto3=24, struct4=24, auto4=24; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (5448s)\n"}
+,{"stream_name":"stdout","time":5724.094516432,"data":"[36/300] QuantStack/FLUX.1-Kontext-dev-GGUF: gguf; black-forest-labs/FLUX.1-Kontext-dev: names=0, struct3=6, auto3=6, struct4=24, auto4=24 (5627s)\n"}
+,{"stream_name":"stdout","time":5733.612919588,"data":"[37/300] LiquidAI/d1-3B-GGUF: gguf; LiquidAI/d1-3B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (5637s)\n"}
+,{"stream_name":"stdout","time":5847.009759365,"data":"[38/300] QuantStack/Wan2.2-S2V-14B-GGUF: gguf; Wan-AI/Wan2.2-S2V-14B: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (5750s)\n"}
+,{"stream_name":"stdout","time":6091.694740536,"data":"[39/300] King3Djbl/nexus-medical-GGUF: gguf; fableforge-ai/NEXUS-Medical: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (5995s)\n"}
+,{"stream_name":"stderr","time":6133.202612886,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":6133.243250473,"data":"  File \"/kaggle/working/Pedigree/experiments/h25_fresh.py\", line 153, in work\n"}
+,{"stream_name":"stderr","time":6133.243294537,"data":"    return t, reader(t), None\n"}
+,{"stream_name":"stderr","time":6133.243300794,"data":"              ~~~~~~^^^\n"}
+,{"stream_name":"stderr","time":6133.243305639,"data":"  File \"/kaggle/working/Pedigree/experiments/h26_fresh.py\", line 100, in \u003clambda\u003e\n"}
+,{"stream_name":"stderr","time":6133.243311407,"data":"    h25.run(todo, lambda r: r[\"id\"], lambda p: h25.read_one(p[\"id\"], p[\"tier\"], frame),\n"}
+,{"stream_name":"stderr","time":6133.243316742,"data":"                                               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":6133.24332193,"data":"  File \"/kaggle/working/Pedigree/experiments/h25_fresh.py\", line 98, in read_one\n"}
+,{"stream_name":"stderr","time":6133.243326833,"data":"    other, _ = open_repo(c, frame)\n"}
+,{"stream_name":"stderr","time":6133.243331547,"data":"               ~~~~~~~~~^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":6133.243336318,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 133, in open_repo\n"}
+,{"stream_name":"stderr","time":6133.243341319,"data":"    m = mirror(repo, d, frame)\n"}
+,{"stream_name":"stderr","time":6133.243427774,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 108, in mirror\n"}
+,{"stream_name":"stderr","time":6133.243455667,"data":"    dc = info(c)\n"}
+,{"stream_name":"stderr","time":6133.243462165,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 63, in info\n"}
+,{"stream_name":"stderr","time":6133.243467139,"data":"    d = json.loads(path.read_text(encoding=\"utf-8\"))\n"}
+,{"stream_name":"stderr","time":6133.261889335,"data":"  File \"/usr/lib/python3.13/json/__init__.py\", line 352, in loads\n"}
+,{"stream_name":"stderr","time":6133.26193145,"data":"    return _default_decoder.decode(s)\n"}
+,{"stream_name":"stderr","time":6133.261938005,"data":"           ~~~~~~~~~~~~~~~~~~~~~~~^^^\n"}
+,{"stream_name":"stderr","time":6133.262335362,"data":"  File \"/usr/lib/python3.13/json/decoder.py\", line 345, in decode\n"}
+,{"stream_name":"stderr","time":6133.262357684,"data":"    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n"}
+,{"stream_name":"stderr","time":6133.262362939,"data":"               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":6133.27963487,"data":"  File \"/usr/lib/python3.13/json/decoder.py\", line 363, in raw_decode\n"}
+,{"stream_name":"stderr","time":6133.279670386,"data":"    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\n"}
+,{"stream_name":"stderr","time":6133.2796763,"data":"json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"}
+,{"stream_name":"stdout","time":6133.293023002,"data":"[40/300] 0xSojalSec/Qwen3.8-Flash-Next-Uncensored-GSQ-RCO-12-GB-GPU: LOST (unexpected JSONDecodeError: Expecting value: line 1 column 1 (char 0))\n"}
+,{"stream_name":"stdout","time":6552.74638229,"data":"[41/300] IndexTeam/Index-Translate-9B-GGUF: gguf; IndexTeam/Index-Translate-9B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6456s)\n"}
+,{"stream_name":"stdout","time":6688.750402244,"data":"[42/300] QuantStack/Qwen-Image-Edit-2509-GGUF: gguf; Qwen/Qwen-Image-Edit-2509: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (6592s)\n"}
+,{"stream_name":"stdout","time":6689.11174732,"data":"[43/300] QuantStack/Qwen-Image-GGUF: gguf; Qwen/Qwen-Image: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (6592s)\n"}
+,{"stream_name":"stdout","time":6780.920005841,"data":"[44/300] Xenova/distilgpt2: onnx; distilgpt2: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6684s)\n"}
+,{"stream_name":"stdout","time":6783.332370917,"data":"[45/300] TechnoBaptist/Qwen-Image-2.1-Turbo-Uncensored-GGUF: gguf; Qwen/Qwen3-VL-8B-Instruct: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6686s)\n"}
+,{"stream_name":"stdout","time":6790.664716813,"data":"[46/300] AtomicChat/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-GGUF: gguf; nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (6694s)\n"}
+,{"stream_name":"stdout","time":6799.978792105,"data":"[47/300] Xenova/Qwen1.5-0.5B-Chat: onnx; Qwen/Qwen1.5-0.5B-Chat: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6703s)\n"}
+,{"stream_name":"stdout","time":6899.290216571,"data":"[48/300] Xenova/ast-finetuned-audioset-10-10-0.4593: onnx; MIT/ast-finetuned-audioset-10-10-0.4593: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6802s)\n"}
+,{"stream_name":"stdout","time":6928.051800816,"data":"[49/300] Xenova/bge-reranker-base: onnx; BAAI/bge-reranker-base: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6831s)\n"}
+,{"stream_name":"stdout","time":6937.221706227,"data":"[50/300] Xenova/distiluse-base-multilingual-cased-v2: onnx; sentence-transformers/distiluse-base-multilingual-cased-v2: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6840s)\n"}
+,{"stream_name":"stdout","time":6940.701821681,"data":"[51/300] Xenova/gpt2: onnx; gpt2: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6844s)\n"}
+,{"stream_name":"stdout","time":6948.021388923,"data":"[52/300] Xenova/ms-marco-MiniLM-L-12-v2: onnx; cross-encoder/ms-marco-MiniLM-L-12-v2: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6851s)\n"}
+,{"stream_name":"stdout","time":6958.278579194,"data":"[53/300] Xenova/detr-resnet-50: onnx; facebook/detr-resnet-50: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6861s)\n"}
+,{"stream_name":"stdout","time":6958.523062274,"data":"[54/300] Xenova/facial_emotions_image_detection: onnx; dima806/facial_emotions_image_detection: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (6862s)\n"}
+,{"stream_name":"stdout","time":7212.687866259,"data":"[55/300] Zyphra/ZONOS2-GGUF: gguf; Zyphra/ZONOS2: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (7116s)\n"}
+,{"stream_name":"stdout","time":7234.050117483,"data":"[56/300] Xenova/wav2vec2-base-960h: onnx; facebook/wav2vec2-base-960h: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (7137s)\n"}
+,{"stream_name":"stdout","time":7263.092187116,"data":"[57/300] Xenova/opus-mt-es-en: onnx; Helsinki-NLP/opus-mt-es-en: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (7166s)\n"}
+,{"stream_name":"stdout","time":7531.853754426,"data":"[58/300] Myric/Laguna-S-2.1-APEX-GGUF: gguf; poolside/Laguna-S-2.1: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (7435s)\n"}
+,{"stream_name":"stdout","time":7567.584230273,"data":"[59/300] Xenova/whisper-small: onnx; openai/whisper-small: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (7471s)\n"}
+,{"stream_name":"stdout","time":7896.224364258,"data":"[60/300] apetersson/DeepSeek-V4.1-Flash-MixedQ2-GGUF: gguf; deepseek-ai/DeepSeek-V4.1-Flash: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (7799s)\n"}
+,{"stream_name":"stdout","time":7911.138100955,"data":"[61/300] apus-ailab/APUS-Reflex-4B-GGUF: gguf; apus-ailab/APUS-Reflex-4B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (7814s)\n"}
+,{"stream_name":"stdout","time":9023.93626967,"data":"[62/300] abenzerps/Nemotron-3.5-Bolt-E4B-GSQ-RCO-GGUF: gguf; nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (8927s)\n"}
+,{"stream_name":"stdout","time":9316.971424699,"data":"[63/300] batiai/Qwen3.6-27B-GGUF: gguf; Qwen/Qwen3.6-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (9220s)\n"}
+,{"stream_name":"stdout","time":9347.876537053,"data":"[64/300] abenzerps/Ornith-1.5-9B-GSQ-RCO-GGUF: gguf; ornith-ai/Ornith-1.5-9B-GGUF: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (9251s)\n"}
+,{"stream_name":"stdout","time":9949.67245072,"data":"[65/300] ManniX-ITA/JackOD-9B-Coder-MTP-GGUF: gguf; ManniX-ITA/JackOD-9B-Coder: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (9853s)\n"}
+,{"stream_name":"stdout","time":10229.068914645,"data":"[66/300] Verdugie/Therapy-3.8: gguf; Qwen/Qwen3.8-27B: names=0, struct3=0, auto3=0, struct4=24, auto4=24 (10132s)\n"}
+,{"stream_name":"stdout","time":10235.316137669,"data":"[67/300] abliterant/Qwen3.8-27B-RANA-abliterated-GGUF: gguf; abliterant/Qwen3.8-27B-RANA-abliterated: names=0, struct3=0, auto3=0, struct4=24, auto4=24 (10138s)\n"}
+,{"stream_name":"stdout","time":10263.885193909,"data":"[68/300] city96/FLUX.2-dev-gguf: gguf; black-forest-labs/FLUX.2-dev: names=0, struct3=4, auto3=4, struct4=24, auto4=24 (10167s)\n"}
+,{"stream_name":"stdout","time":10974.36538331,"data":"[69/300] bowmanslayer/Qwen3.5-9B-Uncensored-GGUF: gguf; bowmanslayer/Qwen3.5-9B-Uncensored: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (10877s)\n"}
+,{"stream_name":"stdout","time":11184.70575285,"data":"[70/300] city96/Wan2.1-I2V-14B-720P-gguf: gguf; Wan-AI/Wan2.1-I2V-14B-720P: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (11088s)\n"}
+,{"stream_name":"stdout","time":11222.984705253,"data":"[71/300] city96/LTX-Video-0.9.6-distilled-gguf: gguf; Lightricks/LTX-Video: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (11126s)\n"}
+,{"stream_name":"stdout","time":11335.519104313,"data":"[72/300] city96/HiDream-I1-Fast-gguf: gguf; HiDream-ai/HiDream-I1-Fast: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (11239s)\n"}
+,{"stream_name":"stdout","time":11353.806368337,"data":"[73/300] cstr/qwen3-tts-tokenizer-12hz-GGUF: gguf; Qwen/Qwen3-TTS-Tokenizer-12Hz: names=0, struct3=21, auto3=21, struct4=24, auto4=24 (11257s)\n"}
+,{"stream_name":"stdout","time":11353.860463049,"data":"[74/300] city96/HiDream-I1-Dev-gguf: gguf; HiDream-ai/HiDream-I1-Dev: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (11257s)\n"}
+,{"stream_name":"stdout","time":11399.69023233,"data":"[75/300] city96/Wan2.1-T2V-14B-gguf: gguf; Wan-AI/Wan2.1-T2V-14B: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (11303s)\n"}
+,{"stream_name":"stdout","time":11709.467265917,"data":"[76/300] bytkim/Qwen3.6-27B-MTP-pi-tune-GGUF: gguf; Qwen/Qwen3.6-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (11612s)\n"}
+,{"stream_name":"stdout","time":11711.583836909,"data":"[77/300] cstr/sensevoice-small-GGUF: gguf; FunAudioLLM/SenseVoiceSmall: names=0, struct3=3, auto3=3, struct4=3, auto4=3 (11615s)\n"}
+,{"stream_name":"stdout","time":11752.763389941,"data":"[78/300] dendriteholdings/Ingot-XII-27B-Q2: gguf; prism-ml/Ternary-Bonsai-2-27B-gguf: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (11656s)\n"}
+,{"stream_name":"stdout","time":11759.253867674,"data":"[79/300] dendriteholdings/Ingot-XIV-27B-Q2: gguf; prism-ml/Ternary-Bonsai-2-27B-gguf: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (11662s)\n"}
+,{"stream_name":"stdout","time":12015.293662569,"data":"[80/300] dendriteholdings/Ingot-genesis-27B-Q2: gguf; prism-ml/Ternary-Bonsai-2-27B-gguf: names=24, struct3=24, auto3=24, struct4=24, auto4=24; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (11918s)\n"}
+,{"stream_name":"stdout","time":12025.963022841,"data":"[81/300] empero-ai/Qwen3.8-27B-Ridge-GGUF: gguf; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (11929s)\n"}
+,{"stream_name":"stdout","time":12607.280809909,"data":"[82/300] dealignai/Qwen3.8-27B-UNCENSORED-GGUF: gguf; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (12510s)\n"}
+,{"stream_name":"stdout","time":12660.963910869,"data":"[83/300] bloomer010/Ling-3.0-flash-GGUF: gguf; inclusionAI/Ling-3.0-flash: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (12564s)\n"}
+,{"stream_name":"stdout","time":12672.427407125,"data":"[84/300] ScottzillaSystems/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF: gguf; ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (12575s)\n"}
+,{"stream_name":"stdout","time":12678.461445238,"data":"[85/300] agentionai/Qwen3.8-Flash-Next-ROCmFP4-FAST-imatrix-GGUF: gguf; Qwen/Qwen3.8-Flash-Next: names=0, struct3=None, auto3=None, struct4=None, auto4=None (12581s)\n"}
+,{"stream_name":"stdout","time":12898.260020831,"data":"[86/300] agentionai/Signal-3.8-Flash-Next-GGUF: gguf; Qwen/Qwen3.8-Flash-Next: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (12801s)\n"}
+,{"stream_name":"stdout","time":12920.527770103,"data":"[87/300] NeosQ/Qwen3.8-Flash-Next-Uncensored-UD-Q4_K_XL: gguf; orcarouter/Qwen3.8-Flash-Next-Uncensored:  (12824s)\n"}
+,{"stream_name":"stdout","time":12962.111397095,"data":"[88/300] jc-builds/Qwen3.5-9B-VLM-Q4_K_M-GGUF: gguf; Qwen/Qwen3.5-9B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (12865s)\n"}
+,{"stream_name":"stdout","time":13027.922609306,"data":"[89/300] freakyskittle/RED-SNOW-5.3-FLASH-GGUF: gguf; Blackfrost-AI/RED-SNOW-5.3-FLASH-BF16: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (12931s)\n"}
+,{"stream_name":"stdout","time":13255.6567574,"data":"[90/300] joeygambino/MiniMax-H3-encoder-GGUF: gguf; MiniMaxAI/MiniMax-H3: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (13159s)\n"}
+,{"stream_name":"stdout","time":13820.544392901,"data":"[91/300] legraphista/Phi-3-mini-4k-instruct-update2024_07_03-IMat-GGUF: gguf; microsoft/Phi-3-mini-4k-instruct: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (13724s)\n"}
+,{"stream_name":"stdout","time":13886.569637944,"data":"[92/300] h2oai/h2o-lightning-4b-gguf: gguf; h2oai/h2o-lightning-4b: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (13790s)\n"}
+,{"stream_name":"stdout","time":14209.994830252,"data":"[93/300] julianmb/Qwen-3.8-27B-ROCmFP4-FAST-GGUF: gguf; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (14113s)\n"}
+,{"stream_name":"stdout","time":14401.151707585,"data":"[94/300] gbuzhf/MiniCPM-V-4.7-35B-A3B-Uncensored-Sangreal-ICE: gguf; openbmb/MiniCPM-V-4.7-35B-A3B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (14304s)\n"}
+,{"stream_name":"stdout","time":14405.582538151,"data":"[95/300] neuralcrew/neutrino-instruct: safetensors; neuralcrew/neutrino:  (14309s)\n"}
+,{"stream_name":"stdout","time":14508.445612541,"data":"[96/300] molbal/krea2-gguf: gguf; krea/Krea-2-Raw: names=0, struct3=7, auto3=7, struct4=24, auto4=24; krea/Krea-2-Turbo: names=0, struct3=7, auto3=7, struct4=24, auto4=24 (14411s)\n"}
+,{"stream_name":"stdout","time":14809.223262224,"data":"[97/300] neuregex/Bernini-R-GGUF: gguf; ByteDance/Bernini-R: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (14712s)\n"}
+,{"stream_name":"stdout","time":14812.634137716,"data":"[98/300] legraphista/DeepSeek-V2-Lite-IMat-GGUF: gguf; deepseek-ai/DeepSeek-V2-Lite: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (14716s)\n"}
+,{"stream_name":"stdout","time":14818.54961995,"data":"[99/300] jcbtc/Qwen3.8-Flash-CIRU-STRIX-Orca: gguf; orcarouter/Qwen3.8-Flash-Next-Uncensored: ; Qwen/Qwen3.8-Flash-Next: names=0, struct3=None, auto3=None, struct4=None, auto4=None (14722s)\n"}
+,{"stream_name":"stdout","time":14824.920596737,"data":"[100/300] lapadatbogdan/GLM-5.3-Flash-Coder-RCO-152E-GGUF: gguf; zai-org/GLM-5.3-Flash: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (14728s)\n"}
+,{"stream_name":"stdout","time":15043.535855467,"data":"[101/300] nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-NVFP4: safetensors; nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (14947s)\n"}
+,{"stream_name":"stdout","time":15322.656439728,"data":"[102/300] jedisct1/DeepSeek-V4-Flash-imatrix-aligned: gguf; deepseek-ai/DeepSeek-V4-Flash: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (15226s)\n"}
+,{"stream_name":"stdout","time":15334.305498463,"data":"[103/300] nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-LiLiCorr-GGUF: gguf; nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-GGUF: names=6, struct3=6, auto3=6, struct4=5, auto4=9 (15237s)\n"}
+,{"stream_name":"stdout","time":15338.515661659,"data":"[104/300] onnx-community/Florence-2-base-ft: onnx; microsoft/Florence-2-base-ft: names=24, struct3=24, auto3=24, struct4=22, auto4=24 (15242s)\n"}
+,{"stream_name":"stdout","time":15361.575628734,"data":"[105/300] onnx-community/all-MiniLM-L6-v2-ONNX: onnx; sentence-transformers/all-MiniLM-L6-v2: names=12, struct3=14, auto3=12, struct4=14, auto4=12 (15265s)\n"}
+,{"stream_name":"stdout","time":15679.675965097,"data":"[106/300] onnx-community/Kokoro-82M-v1.0-ONNX-timestamped: onnx; hexgrad/Kokoro-82M: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (15583s)\n"}
+,{"stream_name":"stdout","time":15897.253989502,"data":"[107/300] onnx-community/tmr-ai-text-detector-ONNX: onnx; Oxidane/tmr-ai-text-detector: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (15800s)\n"}
+,{"stream_name":"stdout","time":15916.359355135,"data":"[108/300] onnx-community/moonshine-tiny-ONNX: onnx; UsefulSensors/moonshine-tiny: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (15819s)\n"}
+,{"stream_name":"stdout","time":15923.257136389,"data":"[109/300] neuralll/GLM-5.3-Flash-GSQ-RCO-3.0bit-Q4Kattn-GGUF: gguf; pfeifferj/GLM-5.3-Flash-GSQ-RCO-GGUF: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (15826s)\n"}
+,{"stream_name":"stdout","time":15967.79557743,"data":"[110/300] onnx-community/wav2vec2-base-Speech_Emotion_Recognition-ONNX: onnx; DunnBC22/wav2vec2-base-Speech_Emotion_Recognition:  (15871s)\n"}
+,{"stream_name":"stdout","time":16251.815373878,"data":"[111/300] onnx-community/whisper-small: onnx; openai/whisper-small: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (16155s)\n"}
+,{"stream_name":"stdout","time":16501.40635595,"data":"[112/300] onnx-community/whisper-small.en: onnx; openai/whisper-small.en: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (16404s)\n"}
+,{"stream_name":"stdout","time":16503.7549928,"data":"[113/300] onnx-community/whisper-tiny_timestamped: onnx; openai/whisper-tiny: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (16407s)\n"}
+,{"stream_name":"stdout","time":16521.263494196,"data":"[114/300] lthn/lemer: gguf; LetheanNetwork/lemer: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (16424s)\n"}
+,{"stream_name":"stdout","time":17172.791586161,"data":"[115/300] perplexity-ai/pplx-computer-qwen-3-8-27b-dflash2-gguf-20260826: gguf; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (17076s)\n"}
+,{"stream_name":"stdout","time":17772.278543443,"data":"[116/300] pfeifferj/Ornith-1.5-35B-A3B-GSQ-RCO-GGUF: gguf; ornith-ai/Ornith-1.5-35B-A3B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (17675s)\n"}
+,{"stream_name":"stdout","time":17798.196520798,"data":"[117/300] phuocnguyen90/VieNeu-TTS-v3-Turbo-GGUF: gguf; pnnbao-ump/VieNeu-TTS-v3-Turbo: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (17701s)\n"}
+,{"stream_name":"stdout","time":18072.57393665,"data":"[118/300] openbmb/MiniCPM-V-4.7-1B-DSpark-gguf: gguf; openbmb/MiniCPM-V-4.7-1B-DSpark: names=0, struct3=16, auto3=16, struct4=24, auto4=24 (17976s)\n"}
+,{"stream_name":"stdout","time":18327.733564981,"data":"[119/300] orcarouter/DeepSeek-V4.1-Flash-1017-abliterated-GGUF: gguf; deepseek-ai/DeepSeek-V4.1-Flash-1017: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (18231s)\n"}
+,{"stream_name":"stdout","time":18350.180057258,"data":"[120/300] incoai/Qwen3.8-27B-DFlash2-GGUF: gguf; Qwen/Qwen3.8-27B: names=0, struct3=1, auto3=1, struct4=24, auto4=24 (18253s)\n"}
+,{"stream_name":"stdout","time":18359.442367351,"data":"[121/300] owao/Sabi-Noema-GGUF: gguf; sabicap/sabi-noema: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (18262s)\n"}
+,{"stream_name":"stdout","time":18643.836259494,"data":"[122/300] prithivMLmods/Common-Voice-Gender-Detection-ONNX: onnx; prithivMLmods/Common-Voice-Gender-Detection: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (18547s)\n"}
+,{"stream_name":"stdout","time":18674.819475674,"data":"[123/300] presencesw/Qwen3-Omni-30B-A3B-Captioner-GGUF: gguf; Qwen/Qwen3-Omni-30B-A3B-Captioner: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (18578s)\n"}
+,{"stream_name":"stdout","time":18909.038947412,"data":"[124/300] ngquocvinh/AliceAI-T5-35B-A0.6B-GGUF: gguf; yandex/AliceAI-T5-35B-A0.6B: names=0, struct3=0, auto3=0, struct4=24, auto4=24 (18812s)\n"}
+,{"stream_name":"stdout","time":18923.91748445,"data":"[125/300] pottokao/MiniMax-H3-TextEncoder-16GB-abliterated-GGUF: gguf; llmfan46/Qwen3-VL-32B-Instruct-ultra-uncensored-heretic: names=24, struct3=24, auto3=24, struct4=24, auto4=24; Qwen/Qwen3-VL-32B-Instruct: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (18827s)\n"}
+,{"stream_name":"stdout","time":18933.471975874,"data":"[126/300] realrebelai/Qwen-Image-2.1_GGUFs: gguf; Qwen/Qwen-Image-2.1: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (18837s)\n"}
+,{"stream_name":"stdout","time":18964.283289996,"data":"[127/300] scragnog/ace-step-1.5-gguf-merge-models: gguf; ACE-Step/ACE-Step-v1-5-XL-DiT-Base: ; ACE-Step/ACE-Step-v1-5-XL-DiT-SFT: ; ACE-Step/ACE-Step-v1-5-XL-DiT-Turbo:  (18867s)\n"}
+,{"stream_name":"stdout","time":18982.203149891,"data":"[128/300] realrebelai/Wan-Animate-2_GGUFs: gguf; Wan-AI/Wan2.2-Animate-2-14B: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (18885s)\n"}
+,{"stream_name":"stdout","time":19550.595517313,"data":"[129/300] rapatsky/Hy-Memory-30B-A3B-GGUF: gguf; tencent/Hy-Memory-30B-A3B: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (19454s)\n"}
+,{"stream_name":"stdout","time":19554.806681668,"data":"[130/300] turintech/Qwen3.5-2B-Artemis-GGUF: gguf; Qwen/Qwen3.5-2B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (19458s)\n"}
+,{"stream_name":"stdout","time":19567.748571333,"data":"[131/300] sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF: gguf; prism-ml/Ternary-Bonsai-2-27B-gguf: names=24, struct3=24, auto3=24, struct4=24, auto4=24; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (19471s)\n"}
+,{"stream_name":"stdout","time":19600.802418506,"data":"[132/300] unsloth/FLUX.2-dev-GGUF: gguf; black-forest-labs/FLUX.2-dev: names=0, struct3=4, auto3=4, struct4=24, auto4=24 (19504s)\n"}
+,{"stream_name":"stdout","time":20518.026170206,"data":"[133/300] legraphista/openchat-3.6-8b-20240522-IMat-GGUF: gguf; openchat/openchat-3.6-8b-20240522: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (20421s)\n"}
+,{"stream_name":"stdout","time":20518.047614366,"data":"[134/300] unsloth/flux-3-image-klein-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.047655513,"data":"[135/300] unsloth/flux-3-image-klein-base-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.047665417,"data":"[136/300] vcruz305/DeepSeek-V4.1-Flash-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.060151224,"data":"[137/300] videosdk-live/Namo-Turn-Detector-v1-Korean: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.060214212,"data":"[138/300] yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.061863322,"data":"[139/300] zenmagnets/Nemotron-3-Embed-1B-Q4_K_M-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.062419716,"data":"[140/300] 0arch-io/kisoku-1.6b-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.079499703,"data":"[141/300] 0xSojalSec/CYBER-FROST-3.8-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.101547576,"data":"[142/300] Alice-Sabrina-Ivy/voice-gender-classifier-onnx-q8-v2: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.117309635,"data":"[143/300] AtomicChat/LFM3-Omni-2B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.127221048,"data":"[144/300] BahamutRU/Qwen3.6-35B-A3B-REAM-160-ru-agent-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.139493334,"data":"[145/300] BananaMind/BananaMind-2-Medium-Chat-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.139533435,"data":"[146/300] BricksDisplay/jevling-e2b-v0.1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.141070608,"data":"[147/300] CMKL/MANGO1.5-Qwen3.5-9B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.146642668,"data":"[148/300] FreedomAISVR/Gemma-4-12B-it-NVFP4-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.146675463,"data":"[149/300] HermiHg/Qwen3.8-27B-mmproj-Q5_K-MIX-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.146679565,"data":"[150/300] Infatoshi/Qwen3.6-35B-A3B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.146783455,"data":"[151/300] InferForge/Ornith-1.5-9B-Q4_K_M: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.152964626,"data":"[152/300] IsValorum/Huihui-Qwen3.8-27B-Coder390-EfficientThink-abliterated-VAL-APEX-I-NanoPlus-V3-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.175325541,"data":"[153/300] IsValorum/MiniCPM-V-4.7-35B-A3B-APEX-I-NanoPlus-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.175363464,"data":"[154/300] JasonYANG170/Qwen2.5-0.5B-Instruct-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.1880688,"data":"[155/300] JigSawPT/DeepSeek-V4.1-Flash-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.188116955,"data":"[156/300] Kausik-A/Huihui-Qwen3.5-9B-abliterated-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.188122731,"data":"[157/300] Krasnopjorovs/gemma-4-12B-it-Imatrix-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.201408674,"data":"[158/300] Lazarus-Ai/ReAligned-Qwen3.5-9B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.212183532,"data":"[159/300] Lethevimlet/Ornith-1.5-397B-uncensored-GGUF-MTP: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.255914054,"data":"[160/300] LordNeel/Hy3-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.255955017,"data":"[161/300] LunarOilRig/PaddleOCR-VL-manga-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.268049256,"data":"[162/300] Mhmadhassnz/cosmos-humanizer-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.268098911,"data":"[163/300] MishraNepali/Dirty-Muse-Writer-v01-Uncensored-Erotica-NSFW-Q2_K: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.279243868,"data":"[164/300] Myric/KAT-Coder-V2.5-Dev-MTP-APEX-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.29510688,"data":"[165/300] NANI-Nithin/SenseNova-U1.5-8B-MoT-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.300310017,"data":"[166/300] Nic22Of2003/Qwen3.5-2B-Uncensored-HauhauCS-Aggressive-IQ4_NL: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.307133026,"data":"[167/300] QuaduxIT/Qwen3.8-27B-Whitehat-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.320112806,"data":"[168/300] Reza2kn/Shenava-Koochik-0.9: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.321404878,"data":"[169/300] RobotsMali/soloni-114m-tdt-ctc-v3: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.32693077,"data":"[170/300] SZLHOLDINGS/A11OY-MINI: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.332154867,"data":"[171/300] ScienceSoft/scnsoft-pii-encoder: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.332189777,"data":"[172/300] SentieAI/Sentie1.0-3B-Claude-Fable-5-GPT5.2-Sol-Kimi-K3-GLM-5.2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.349914069,"data":"[173/300] Simonc-44/Cygnis-Alpha-2-8B-v0.2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.355633224,"data":"[174/300] Supbatomic/OmniVoice-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.360967152,"data":"[175/300] Tdamre/limite-1b-base-GGUF-LiteRT: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.377399332,"data":"[176/300] ThePun1sher/SkyReels-V2-T2V-14B-720P-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.383349977,"data":"[177/300] Verdugie/Therapy-3.5: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.385388382,"data":"[178/300] Verkiki/Qwen3.8-27b-Fable5-Distill-Abliterated-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.391017394,"data":"[179/300] Vikhrmodels/Vistral-24B-Instruct-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.391119099,"data":"[180/300] Vinxscribe/biodatlab-whisper-th-large-v3-faster: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.391129798,"data":"[181/300] Wattsey/birefnet-lite-512-webgpu: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.397250902,"data":"[182/300] Xenova/bert-base-chinese-ner: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.397924923,"data":"[183/300] Xenova/dinov2-base: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.408667059,"data":"[184/300] Xenova/distilbert-base-multilingual-cased-sentiments-student: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.408712033,"data":"[185/300] Xenova/mms-tts-rus: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.408717391,"data":"[186/300] Xenova/opus-mt-cs-en: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.432422625,"data":"[187/300] Xenova/opus-mt-de-es: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.432856364,"data":"[188/300] Xenova/opus-mt-fr-es: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.438475359,"data":"[189/300] Xenova/sam-vit-base: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.444568491,"data":"[190/300] XuhuoRenxian/Xuhuo_7b_v3b: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.451357544,"data":"[191/300] Zyphra/ZONOS1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.479537277,"data":"[192/300] aashish1904/Qwen3.5-0.8B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.479592536,"data":"[193/300] barozp/Qwen3.8-27B-Opus-Distill-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.484895457,"data":"[194/300] bigfat/DeepSeek-V4.1-Flash-Abliterated-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.495620068,"data":"[195/300] bullerwins/DeepSeek-V3-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.495661958,"data":"[196/300] cartesia/sesame-csm-1b-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.495681636,"data":"[197/300] chaoliangUNSW/Jev-Style-2B-Decision-v3-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.512218628,"data":"[198/300] chiakelvin/Qwythos-9B-Claude-Mythos-5-1M-Q4_K_M.gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.512269762,"data":"[199/300] codavidgarcia/Qwen3.8-27B-OrcaRouter-Uncensored-MTP-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.512570947,"data":"[200/300] cognitivers/GLM-4.7-Flash-abliterated-12GB-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.512587801,"data":"[201/300] cstr/basic-pitch-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.534844477,"data":"[202/300] cstr/dia-1.6b-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.536409963,"data":"[203/300] cstr/parler-tts-mini-v1.1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.559075646,"data":"[204/300] cstr/stt-en-fastconformer-hybrid-ctc-large-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.559131013,"data":"[205/300] cstr/stt-kk-ru-fastconformer-hybrid-ctc-large-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.559141351,"data":"[206/300] cstr/wmt21-dense-24-wide-en-x-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.559145183,"data":"[207/300] deadbydawn101/RavenXAiLabs-Chaos-Agent-Qwen3.8-27B-Frontier-Intelligence-Injected-OBLITERATED-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.569840961,"data":"[208/300] dendriteholdings/Ingot-VII-27B-Q2: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.582069698,"data":"[209/300] dixlox7/nexus-medical-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.626704317,"data":"[210/300] esatapedico/Gemma-4-31B-IT-NVFP4-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.62907048,"data":"[211/300] esatapedico/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-MTP-NVFP4-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.629283332,"data":"[212/300] eulogik/yantra-1b-agent: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.634497223,"data":"[213/300] feeday/Qwen-Image-2.1-Uncensored-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.634529572,"data":"[214/300] forkjoin-ai/loki-erotica-8b-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.635009387,"data":"[215/300] fraQtl/Qwen3.6-35B-A3B-Hi-Fi-MTP-runtime: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.640281194,"data":"[216/300] freakyskittle/NVIDIA-Nemotron-3.5-Bolt-74B-DERISKED-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.640352424,"data":"[217/300] frontier-infra/jebadiah-27b-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.645897913,"data":"[218/300] gbuzhf/Laguna-XS-2.1-APEX-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.654936147,"data":"[219/300] iamchum/wp-qwen3.6-35b-a3b-wp-judge-v4-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.654971406,"data":"[220/300] iapp/openthai2.0-legal-thaillm-nemotron-3-nano-30b-a3b-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.655179296,"data":"[221/300] ilintar/qwen3.8-flash-next-gguf-strix-halo: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.655269196,"data":"[222/300] incoai/Muse-Glimmer-30B-DFlash2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.660449208,"data":"[223/300] isilicon/mango-qwen38-27b-nvfp4mtp: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.666143482,"data":"[224/300] jinaai/jina-embeddings-v5-text-nano-retrieval-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.666340421,"data":"[225/300] jinaai/jina-embeddings-v5-text-small-classification: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.666346273,"data":"[226/300] jkim96/Magistral-Small-2509-DASHQ-Q2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.666350559,"data":"[227/300] jkim96/Ministral-3-3B-Instruct-2512-DASHQ-Q2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.666375105,"data":"[228/300] jkim96/Mistral-Small-3.2-24B-Instruct-2506-DASHQ-Q2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.666378895,"data":"[229/300] jkim96/Muse-Glimmer-30B-DASHQ-Q2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.6834003,"data":"[230/300] jkim96/Qwen3.6-35B-A3B-DASHQ-Q2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.683440358,"data":"[231/300] kingjones777/Flint-40B-A2.5B-ROCmFP4-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.704275928,"data":"[232/300] kingjones777/MiMo-V2.6-Distill-Qwen-9B-ROCmFP4-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.70432904,"data":"[233/300] legraphista/Mistral-NeMo-Minitron-8B-Base-IMat-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.70488388,"data":"[234/300] legraphista/glm-4-9b-chat-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.704901028,"data":"[235/300] liodon-ai/novel-humanize-4b-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.704990493,"data":"[236/300] lookbe/Qwen3-TTS-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.704999034,"data":"[237/300] lthn/lemma: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.705003013,"data":"[238/300] lym00/HunyuanVideo-Avatar-GGUF-Experiment: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.70515076,"data":"[239/300] m9ter1a/LFM2.5-24B-A2B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.705215746,"data":"[240/300] magnitudedev/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-LiLiCorr-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.710833576,"data":"[241/300] magnitudedev/Qwen3.6-35B-A3B-DFlash-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.710866058,"data":"[242/300] mickmumpitz/VACE_Skyreels_V3_R2V_Merge-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.732749487,"data":"[243/300] mo137/FLUX.1-dev_Q8-fp16-fp32-mix_8-to-32-bpw_gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.732787004,"data":"[244/300] molbal/Qwen-Image-2.1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.732792587,"data":"[245/300] mr-sus/Minecraftism-4B-Thinking-Uncensored-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.73858978,"data":"[246/300] onnx-community/FastVLM-0.5B-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.738627658,"data":"[247/300] onnx-community/LFM3-1.7B-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.738633524,"data":"[248/300] onnx-community/Phi-3.5-mini-instruct-onnx-web: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.749656284,"data":"[249/300] onnx-community/Qwen2-VL-2B-Instruct: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.774299513,"data":"[250/300] onnx-community/ZR1-1.5B-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.774334906,"data":"[251/300] onnx-community/bert-base-multilingual-cased-ner-hrl-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.774473589,"data":"[252/300] onnx-community/bge-m3-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.774779562,"data":"[253/300] onnx-community/depth-anything-v2-large: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.774793497,"data":"[254/300] onnx-community/mobilebert-uncased-squad-v2-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.796765631,"data":"[255/300] onnx-community/modernbert-ai-detection-raid-mage-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.813702888,"data":"[256/300] onnx-community/siglip2-so400m-patch14-384-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.844567653,"data":"[257/300] peculiar-ragdoll/Nail-Qwen3.6-35B-A3B-GGUF-MTP: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.844625429,"data":"[258/300] pgmharikrishnan/MiniCPM-V-4.7-35B-A3B-GGUF-Serve-mixed-4-8bit: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.89766264,"data":"[259/300] pockettravel/qwen3.5-0.8b-travel-it-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.897787616,"data":"[260/300] pooria/foxmind: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.903899234,"data":"[261/300] pritornyi/GigaEmbeddings-10B-A1.8B_hybrid-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.909473733,"data":"[262/300] realrebelai/Viggle_Qwen-Image-2.1-Turbo_GGUFs: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.909521339,"data":"[263/300] ruygar/LTX-2.5-Comfy-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.911019767,"data":"[264/300] ryancook/chromadb-context-1-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.911603091,"data":"[265/300] s-batman/Agents-A1-NVFP4-MTP-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.911627221,"data":"[266/300] shuhulx/Qwopus3.5-4B-Coder-Fable5-v1-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.917152241,"data":"[267/300] sirasagi62/ruri-v3-310m-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.920190796,"data":"[268/300] sitatech/freepik_nsfw_detector_onnx: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.920243297,"data":"[269/300] smsag007/paraphrase-multilingual-MiniLM-L12-v2-latin: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.920248586,"data":"[270/300] solarpush/push-26b: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.93663471,"data":"[271/300] sonalect/granite-embedding-311m-multilingual-r2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.936675999,"data":"[272/300] spiritfather/MiniMax-M3-uncensored-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.95445189,"data":"[273/300] suryatmodulus/Ternary-Bonsai-2-9B-gguf: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.962565436,"data":"[274/300] tahaalam2009/VeriLoop-E2-GSQ-RCO-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.962863341,"data":"[275/300] tashfene/Overbrilliant-27B-Pro-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.969086823,"data":"[276/300] the-shop/MLXFW-Qwen3.8-Flash-Next-Heretic-Q8_0: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.975220895,"data":"[277/300] timfromhcs/Gemma-4-12B-it-AEON-Abliterated-K4-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.975252458,"data":"[278/300] timfromhcs/Wan2.2-TI2V-5B-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20518.98092838,"data":"[279/300] tinyopsec/Huihui-MiniCPM5-2B-abliterated-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.008336467,"data":"[280/300] tinyopsec/NuExtract-1.5-tiny-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.013528588,"data":"[281/300] tinyopsec/Qwen3.5-4B-heretic-v2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.013567682,"data":"[282/300] tinyopsec/svd-safety-l3_swift_jbbsft10_remove30-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.045430606,"data":"[283/300] tinyopsec/tiny-random-minicpm5-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.045464651,"data":"[284/300] tixiren/MiniCPM5-2B-ONNX: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.045653463,"data":"[285/300] turintech/d3-27B-Artemis-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.045663919,"data":"[286/300] weahoo/ASB-Qwen2.5-Coder-7B-Targeted-v2-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.051962082,"data":"[287/300] xhxlb/IQuest-Coder-V1-14B-Instruct-GGUF: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.051995569,"data":"[288/300] xrds/isnet-general-onnx-int8: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20519.089497012,"data":"[289/300] xuanwulab/HaS_Text_0209_0.6B_Q8: LOST (budget)\n"}
+,{"stream_name":"stdout","time":20760.752219641,"data":"[290/300] prism-ml/Ternary-Bonsai-2-4B-gguf: gguf; Qwen/Qwen3.5-4B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (20664s)\n"}
+,{"stream_name":"stdout","time":21349.813352048,"data":"[291/300] spiritfather/cyberneurova-Qwen3.8-Flash-Next-i1-GGUF: gguf; Qwen/Qwen3.8-Flash-Next: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (21253s)\n"}
+,{"stream_name":"stdout","time":22508.792296642,"data":"[292/300] spiritfather/MiMo-V2.6-Flash-MOPD-Yamz-Uncensored-GGUF: gguf; XiaomiMiMo/MiMo-V2.6-Flash-MOPD: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (22412s)\n"}
+,{"stream_name":"stdout","time":22768.164108036,"data":"[293/300] ngquocvinh/NeoHorse-1-4B-GGUF: gguf; TokenRhythm/NeoHorse-1-4B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (22671s)\n"}
+,{"stream_name":"stdout","time":22777.558998051,"data":"[294/300] unsloth/LTX-2.5-GGUF: gguf; Lightricks/LTX-2.5: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (22681s)\n"}
+,{"stream_name":"stdout","time":22779.114437219,"data":"[295/300] ukisai/Swift-1.5-Qwen3.8-27B-GGUF: gguf; ukisai/Swift-1.5-Qwen3.8-27b: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (22682s)\n"}
+,{"stream_name":"stdout","time":23232.90242794,"data":"[296/300] ukisai/Swift-1.5-Qwen3.8-Flash-Next-GGUF: gguf; ukisai/Swift-Qwen3.8-Flash-Next: names=0, struct3=24, auto3=24, struct4=24, auto4=24 (23136s)\n"}
+,{"stream_name":"stdout","time":28343.692706623,"data":"[297/300] bottlecapai/ThinkingCap-Qwen3.8-27B-GGUF-RCO-4.2bpw: gguf; bottlecapai/ThinkingCap-Qwen3.8-27B:  (28247s)\n"}
+,{"stream_name":"stdout","time":30491.825338146,"data":"[298/300] legraphista/gemma-2-27b-it-IMat-GGUF: gguf; google/gemma-2-27b-it: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (30395s)\n"}
+,{"stream_name":"stdout","time":33268.989355669,"data":"[299/300] orcarouter/Qwen3.8-27B-Uncensored-GGUF: gguf; Qwen/Qwen3.8-27B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (33172s)\n"}
+,{"stream_name":"stdout","time":40207.819591251,"data":"[300/300] ayozhee/Qwen3.8-27B-Abliterated-GSQ-Orca-GGUF: gguf; ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF: names=0, struct3=0, auto3=0, struct4=24, auto4=24; orcarouter/Qwen3.8-27B-Uncensored:  (40111s)\n"}
+]

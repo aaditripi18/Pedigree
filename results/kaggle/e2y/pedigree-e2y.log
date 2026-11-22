@@ -1,0 +1,113 @@
+[{"stream_name":"stdout","time":47.486871255,"data":"code af16318\n"}
+,{"stream_name":"stdout","time":112.691776756,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":114.261087542,"data":"PEDIGREE_WORKERS = 12\n"}
+,{"stream_name":"stdout","time":114.261160368,"data":"PEDIGREE_BUDGET_HOURS = 10\n"}
+,{"stream_name":"stdout","time":117.732622882,"data":"E2y [1/9] Qdrant/bm25: not readable (no weight files); -\n"}
+,{"stream_name":"stdout","time":117.766017901,"data":"E2y [2/9] qualcomm/DETR-ResNet101-DC5: not readable (no weight files); -\n"}
+,{"stream_name":"stdout","time":117.876714323,"data":"E2y [3/9] lmstudio-community/Qwen3-VL-8B-Instruct-MLX-8bit: not readable (no weight files); -\n"}
+,{"stream_name":"stdout","time":117.937609704,"data":"E2y [4/9] Lightricks/LTX-2.5-22b-IC-LoRA-Deblur: not readable (gated, no byte-identical public copy); -\n"}
+,{"stream_name":"stdout","time":119.263258513,"data":"E2y [5/9] flair/chunk-english: bin; -\n"}
+,{"stream_name":"stdout","time":119.385429906,"data":"E2y [6/9] arabsya87sy7a8/Qwythos-9B-Claude-Mythos-5-1M-GGUF: not readable (HTTP 403); -\n"}
+,{"stream_name":"stdout","time":3486.840464251,"data":"E2y [7/9] unsloth/Inkling-Small-GGUF: gguf; thinkingmachines/Inkling-Small=None\n"}
+,{"stream_name":"stderr","time":5552.23918635,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":5552.240809183,"data":"  File \"/kaggle/working/Pedigree/experiments/e2x_reaudit.py\", line 158, in main\n"}
+,{"stream_name":"stderr","time":5552.240836718,"data":"    recs[i] = f.result()\n"}
+,{"stream_name":"stderr","time":5552.240844139,"data":"              ~~~~~~~~^^\n"}
+,{"stream_name":"stderr","time":5552.240850016,"data":"  File \"/usr/lib/python3.13/concurrent/futures/_base.py\", line 453, in result\n"}
+,{"stream_name":"stderr","time":5552.240855595,"data":"    return self.__get_result()\n"}
+,{"stream_name":"stderr","time":5552.240860692,"data":"           ~~~~~~~~~~~~~~~~~^^\n"}
+,{"stream_name":"stderr","time":5552.240867794,"data":"  File \"/usr/lib/python3.13/concurrent/futures/_base.py\", line 402, in __get_result\n"}
+,{"stream_name":"stderr","time":5552.240875359,"data":"    raise self._exception\n"}
+,{"stream_name":"stderr","time":5552.240881094,"data":"  File \"/usr/lib/python3.13/concurrent/futures/thread.py\", line 59, in run\n"}
+,{"stream_name":"stderr","time":5552.240887302,"data":"    result = self.fn(*self.args, **self.kwargs)\n"}
+,{"stream_name":"stderr","time":5552.240892556,"data":"  File \"/kaggle/working/Pedigree/experiments/e2x_reaudit.py\", line 145, in retry\n"}
+,{"stream_name":"stderr","time":5552.240899082,"data":"    return fn(*args)\n"}
+,{"stream_name":"stderr","time":5552.240904063,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 213, in audit_one\n"}
+,{"stream_name":"stderr","time":5552.240909256,"data":"    other, cf = open_repo(c, frame)\n"}
+,{"stream_name":"stderr","time":5552.240914441,"data":"                ~~~~~~~~~^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":5552.24091959,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 123, in open_repo\n"}
+,{"stream_name":"stderr","time":5552.240924123,"data":"    d = info(repo)\n"}
+,{"stream_name":"stderr","time":5552.240929556,"data":"  File \"/kaggle/working/Pedigree/experiments/e2_audit.py\", line 63, in info\n"}
+,{"stream_name":"stderr","time":5552.240934578,"data":"    d = json.loads(path.read_text(encoding=\"utf-8\"))\n"}
+,{"stream_name":"stderr","time":5552.240940277,"data":"  File \"/usr/lib/python3.13/json/__init__.py\", line 352, in loads\n"}
+,{"stream_name":"stderr","time":5552.240968297,"data":"    return _default_decoder.decode(s)\n"}
+,{"stream_name":"stderr","time":5552.240990922,"data":"           ~~~~~~~~~~~~~~~~~~~~~~~^^^\n"}
+,{"stream_name":"stderr","time":5552.240995626,"data":"  File \"/usr/lib/python3.13/json/decoder.py\", line 345, in decode\n"}
+,{"stream_name":"stderr","time":5552.240999422,"data":"    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n"}
+,{"stream_name":"stderr","time":5552.24101552,"data":"               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":5552.241020253,"data":"  File \"/usr/lib/python3.13/json/decoder.py\", line 363, in raw_decode\n"}
+,{"stream_name":"stderr","time":5552.241024955,"data":"    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\n"}
+,{"stream_name":"stderr","time":5552.241029688,"data":"json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"}
+,{"stream_name":"stdout","time":5552.241100367,"data":"E2y [8/9] AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF: unexpected JSONDecodeError: Expecting value: line 1 column 1 (char 0); -\n"}
+,{"stream_name":"stdout","time":13888.247622039,"data":"E2y [9/9] ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF: gguf; Qwen/Qwen3.8-Flash-Next=None\n"}
+,{"stream_name":"stdout","time":13889.557902306,"data":"E2yp Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice vs uzlm/sayro-tts-1.7B (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":13890.045572116,"data":"E2yp circlestone-labs/Anima vs nvidia/Cosmos-Predict2-2B-Text2Image (declared): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":13901.032557892,"data":"E2yp handy-computer/parakeet-tdt-0.6b-v3-gguf vs danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":13931.069690392,"data":"E2yp unsloth/Z-Image-Turbo-GGUF vs ChenDY/NitroFusion2 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":14751.908684064,"data":"E2yp zai-org/GLM-5.1 vs deep-principle/Hydrogen-1.0 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":16339.32113469,"data":"E2yp antirez/deepseek-v4-gguf vs unsloth/DeepSeek-V4-Flash-Vision-Exp-GGUF (pool): 0.133645318458097\n"}
+,{"stream_name":"stdout","time":17232.606222833,"data":"E2yp cyankiwi/gemma-4-26B-A4B-it-AWQ-4bit vs surogate/rune-26b-a4b-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":17478.34826526,"data":"E2yp Qwen/Qwen3-VL-8B-Instruct vs prithivMLmods/Qwen3-VL-8B-Instruct-c_abliterated-v3 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":17478.34842198,"data":"E2yp ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":17478.614951238,"data":"E2yp ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF (pool): None\n"}
+,{"stream_name":"stdout","time":17516.276365132,"data":"E2yp ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF (pool): 0.9829914717651148\n"}
+,{"stream_name":"stdout","time":17516.288457556,"data":"E2yp ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":17516.288509879,"data":"E2yp ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":17516.28853237,"data":"E2yp ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs windowsxp811203/Qwen3.8-Flash-Next-Abliterated (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":17516.459149264,"data":"E2yp ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF (pool): None\n"}
+,{"stream_name":"stdout","time":17516.459204606,"data":"E2yp ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-FP8 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":17516.466256775,"data":"E2yp ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF vs ji-farthing/Qwen3.8-Flash-Next-Uncensored-ik-llama-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":17538.48804822,"data":"E2yp Synaptics/yolo vs Ultralytics/YOLOv8 (declared): None\n"}
+,{"stream_name":"stdout","time":17757.733286471,"data":"E2yp Qwen/Qwen3-VL-4B-Instruct vs prithivMLmods/Qwen3-VL-4B-Instruct-c_abliterated-v2 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":19009.224560049,"data":"E2yp k2-fsa/OmniVoice vs g-group-ai-lab/g-omnivoice (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":19897.457291017,"data":"E2yp gaunernst/gemma-3-27b-it-int4-awq vs google/gemma-3-27b-it-qat-q4_0-gguf (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":22306.351003597,"data":"E2yp hugging-quants/gemma-2-9b-it-AWQ-INT4 vs google/txgemma-9b-chat (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":22307.726435948,"data":"E2yp answerdotai/ModernBERT-large vs permitt/galton-modernbertic-large (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":22593.509193139,"data":"E2yp Qwen/Qwen3-VL-8B-Instruct vs nvidia/Cosmos-Reason2-8B (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":22598.608776223,"data":"E2yp Qwen/Qwen-Image-Edit-2509 vs nvidia/Qwen-Image-Flash (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":22599.310645096,"data":"E2yp Qwen/Qwen-Image-Edit-2509 vs lightweight/XBrush-Pro4 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":22609.771758942,"data":"E2yp datalab-to/surya-ocr-2-gguf vs Moeblack/Qwen3.8-27B-chinese-taste-lora (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":22610.852584064,"data":"E2yp laion/CLIP-ViT-H-14-laion2B-s32B-b79K vs Anthonyg5005/gemma-3n-e4b-mmproj-gguf (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":25911.896180236,"data":"E2yp mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF vs prithivMLmods/Qwen3-VL-8B-Instruct-abliterated-v1 (declared): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28864.912057255,"data":"E2yp hugging-quants/gemma-2-9b-it-AWQ-INT4 vs google/shieldgemma-9b (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28866.101773589,"data":"E2yp Qwen/Qwen3-ASR-0.6B-hf vs NbAiLab/nb-asr-qwen3-lunde07-mixed-nob-100k-longform-hesitation (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28867.382139942,"data":"E2yp unsloth/llama-3-8b-Instruct-bnb-4bit vs meta-llama/Llama-3-8B-Instruct (declared): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28867.388372684,"data":"E2yp SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28867.95756422,"data":"E2yp SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF (pool): 0.9996320052030248\n"}
+,{"stream_name":"stdout","time":28868.276111287,"data":"E2yp SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF (pool): None\n"}
+,{"stream_name":"stdout","time":28868.276158828,"data":"E2yp SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28868.293669221,"data":"E2yp SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28868.308724137,"data":"E2yp SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs windowsxp811203/Qwen3.8-Flash-Next-Abliterated (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28868.706150101,"data":"E2yp SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF (pool): 0.9969861641014284\n"}
+,{"stream_name":"stdout","time":28868.706188484,"data":"E2yp SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-FP8 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28868.706195271,"data":"E2yp SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF vs ji-farthing/Qwen3.8-Flash-Next-Uncensored-ik-llama-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28888.886124403,"data":"E2yp QuantStack/Wan2.2-TI2V-5B-GGUF vs hum-ma/Wan2.2-TI2V-5B-Turbo-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28895.429381776,"data":"E2yp QuantStack/Wan2.2-TI2V-5B-GGUF vs Kiijoku/Wan2.2-TI2V-5B-Turbo-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":28901.485952961,"data":"E2yp QuantStack/Wan2.2-TI2V-5B-GGUF vs liaqateagle/Wan2.2-TI2V-5B-Turbo-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42363.094745316,"data":"E2yp byteshape/Qwen3.8-27B-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): unexpected JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"}
+,{"stream_name":"stdout","time":42366.898535479,"data":"E2yp ukisai/Swift-Qwen3.8-27B-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42366.932884724,"data":"E2yp lmstudio-community/Qwen3.8-27B-MLX-4bit vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42367.004027257,"data":"E2yp agentionai/Qwen3.8-27B-AP-GGUF vs bottlecapai/ThinkingCap-Qwen3.8-27B (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42418.990355009,"data":"E2yp FINAL-Bench/POCKET-Darwin-180B-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42418.99046681,"data":"E2yp FINAL-Bench/POCKET-Darwin-180B-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42418.996045745,"data":"E2yp FINAL-Bench/POCKET-Darwin-180B-GGUF vs windowsxp811203/Qwen3.8-Flash-Next-Abliterated (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42419.32759573,"data":"E2yp FINAL-Bench/POCKET-Darwin-180B-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42419.327729541,"data":"E2yp FINAL-Bench/POCKET-Darwin-180B-GGUF vs orcarouter/Qwen3.8-Flash-Next-Uncensored-FP8 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42419.327760278,"data":"E2yp FINAL-Bench/POCKET-Darwin-180B-GGUF vs ji-farthing/Qwen3.8-Flash-Next-Uncensored-ik-llama-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42419.81452265,"data":"E2yp FINAL-Bench/POCKET-Darwin-180B-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF (pool): None\n"}
+,{"stream_name":"stdout","time":42426.486612311,"data":"E2yp unsloth/Wan2.2-TI2V-5B-GGUF vs Kiijoku/Wan2.2-TI2V-5B-Turbo-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42426.48677218,"data":"E2yp unsloth/Wan2.2-TI2V-5B-GGUF vs liaqateagle/Wan2.2-TI2V-5B-Turbo-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42426.505663771,"data":"E2yp unsloth/Wan2.2-TI2V-5B-GGUF vs hum-ma/Wan2.2-TI2V-5B-Turbo-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42441.181960019,"data":"E2yp FINAL-Bench/POCKET-Darwin-180B-GGUF vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF (pool): 0.9999796646215711\n"}
+,{"stream_name":"stdout","time":42441.182003454,"data":"E2yp FINAL-Bench/POCKET-Darwin-180B-GGUF vs ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF (pool): 0.9984652242361465\n"}
+,{"stream_name":"stdout","time":42687.600745966,"data":"E2yp jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42687.600874512,"data":"E2yp jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42687.624298465,"data":"E2yp jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs windowsxp811203/Qwen3.8-Flash-Next-Abliterated (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42688.236466104,"data":"E2yp jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs orcarouter/Qwen3.8-Flash-Next-Uncensored (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42688.241732147,"data":"E2yp jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs orcarouter/Qwen3.8-Flash-Next-Uncensored-FP8 (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42688.255255277,"data":"E2yp jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs ji-farthing/Qwen3.8-Flash-Next-Uncensored-ik-llama-GGUF (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42688.456357819,"data":"E2yp jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF (pool): None\n"}
+,{"stream_name":"stdout","time":42692.921247332,"data":"E2yp deepseek-ai/DeepSeek-R1-0528-Qwen3-8B vs ponpoke/flux2-klein-9b-uncensored-text-encoder (pool): not readable on re-reading\n"}
+,{"stream_name":"stdout","time":42700.923030271,"data":"E2yp jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF (pool): 0.9952392310070284\n"}
+,{"stream_name":"stdout","time":42700.94441663,"data":"E2yp jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata vs huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF (pool): 0.9905382231073596\n"}
+]

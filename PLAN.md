@@ -1076,3 +1076,19 @@ H19's, H23's and H25's samples. Each model is read and aligned exactly as in H25
 - **H26c** (follows H21) No fresh sampled model, and no declared base of one, is unreadable because of
   its file format, except formats with no public specification (each listed with the source checked);
   no weight files, gated, private or missing repositories are counted by reason and do not count.
+
+**Running H26 and E2y (2026-11-22, before any verdict).** The first Kaggle sessions (`pedigree-h26`,
+`pedigree-e2y`) were stopped at Kaggle's 12-hour limit. `pedigree-h26` had read 150 of the 300 fresh
+models, losing the other 150 to its time budget; it never reached the design pairs. `pedigree-e2y`
+had read the 9 models and 70 of the unread pairs. Two causes were found in the logs and fixed
+without changing what is read or how it is judged:
+(1) Rule (vii) counted each GGUF unit's tensors by walking its whole metadata, vocabularies of
+several MB included, about 20 minutes for a repository of 9 units. It now reads the count from each
+file's first 24 bytes and sums a split set's shards, which by the format's definition equals
+`split.tensors.count` (`tests/test_readers_v5.py`).
+(2) Two threads could read a Hub metadata or config cache file while a third was still writing it
+(`JSONDecodeError`: one model and one pair of E2y). Those files are now written whole
+(write, then rename), and a file cut short is fetched again.
+The fresh sample resumes from the 150 records already written (`results/kaggle/h26/h26_raw.jsonl`).
+Its rule and readers are the same, so the 150 are not read again. The design pairs and E2y run from
+the start, each in a session of its own.

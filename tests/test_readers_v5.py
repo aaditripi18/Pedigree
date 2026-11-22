@@ -321,3 +321,13 @@ def test_token_goes_to_huggingface_only_and_not_across_redirects(monkeypatch):
     assert back.has_header("Authorization")                  # a rename within the Hub keeps it
     monkeypatch.delenv("HF_TOKEN")
     assert remote._token_for("https://huggingface.co/x") is None
+
+
+def test_tensor_count_from_the_first_bytes_equals_the_metadata_walk(tmp_path, local):
+    """(vii) The count (vii) compares is the one in each file's first 24 bytes; it equals the
+    tensor count the full header walk finds."""
+    from pedigree import ggufremote
+    for n in (1, 3, 30):
+        p = tmp_path / f"m{n}.gguf"
+        _gguf(p, n)
+        assert ggufremote.n_tensors(str(p)) == ggufremote.tensor_count(str(p), os.path.getsize(p))[0] == n

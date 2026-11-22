@@ -204,12 +204,7 @@ def _count(repo: str, commit: str, unit: list[str], size: dict) -> int:
     """How many tensors a weight unit holds, from its headers alone."""
     from .remote import read_header, resolve_url
     if unit[0].lower().endswith(".gguf"):
-        n, split = ggufremote.tensor_count(resolve_url(repo, unit[0], commit), size[unit[0]])
-        if split is not None:
-            return split
-        if len(unit) == 1:
-            return n
-        return n + sum(ggufremote.tensor_count(resolve_url(repo, f, commit), size[f])[0] for f in unit[1:])
+        return sum(ggufremote.n_tensors(resolve_url(repo, f, commit)) for f in unit)
     total = 0
     for f in unit:
         url = resolve_url(repo, f, commit)
