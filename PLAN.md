@@ -1256,3 +1256,19 @@ teacher to show. Vision transformer: the teacher scores 0.967 on CIFAR-10, and t
 score 0.275 to 0.377, under the floor of 0.484. No family is judged, so no rule is fixed and TPR
 and FPR are not computed. H16 (supported) stands as the behaviour result for text decoders and
 vision CNNs, and H18 stays not judged for its own reason, recorded above.
+
+**Running E2y again (2026-11-23, before any E2y line is recorded).** Its second session
+(`pedigree-e2y`, code 3340a12, readers v5, resuming the first session's raw rows) read 9 models,
+204 pool pairs and 33 v4 pairs, and lost 1:
+`cais/HarmBench-Llama-2-13b-cls` against `RichardErkhov/testmod_-_koen-llama2-13b-dpotrain_testver-gguf`,
+"short read: 0 of 24 bytes". The cause is the repository, not the network. Twelve of its 24 GGUF files are
+0 bytes and several others stop after a few hundred kilobytes, and the variant chosen (Q8_0) is one of the
+empty ones. The server answers with a complete `200` and `Content-Length: 0`, so every rerun reads the
+same nothing. E2x recorded this pair as not readable. Correction: `pedigree/remote.py`
+now raises `FileTooShort` (a `ValueError`) when the response is complete, meaning its own
+`Content-Length` arrived in full, and the file still ends before the bytes asked for. The pair is
+then not readable by reason, not lost. A body shorter than its own `Content-Length` is still a
+dropped connection and is retried as before (`tests/test_remote_short.py`). This change only
+reclassifies reads that were counted as lost, and a lost read holds back every ledger line of its
+run, so no recorded verdict can change. E2y is run a third time, resuming the second session's raw
+rows, so only the lost pair is read again.

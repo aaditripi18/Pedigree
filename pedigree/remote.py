@@ -71,6 +71,14 @@ def open_url(url: str, headers: dict, timeout: float):
     return _OPENER.open(req, timeout=timeout)
 
 
+class FileTooShort(ValueError):
+    """The file itself ends before the bytes asked for (an empty or cut-off upload, e.g. a 0-byte
+    .gguf): the response was complete, so reading again cannot help and it is not a network loss.
+    A body shorter than its own Content-Length is a dropped connection and is retried as before.
+    (Correction 2026-11-23: such files were counted as network losses, which held back a run's
+    ledger lines although every rerun reads the same bytes.)"""
+
+
 def fetch_range(url: str, start: int, end: int, retries: int = RETRIES) -> bytes:
     """Bytes [start, end] of url (inclusive), cached; retries 429/5xx and dropped
     connections with backoff (at least the server's Retry-After)."""
@@ -86,10 +94,15 @@ def fetch_range(url: str, start: int, end: int, retries: int = RETRIES) -> bytes
             with open_url(url, {"Range": f"bytes={start}-{end}", "User-Agent": UA}, timeout=120) as r:
                 data = r.read()
                 status = r.status
+                declared = r.headers.get("Content-Length")
             if status != 206 and start > 0:
                 raise IOError(f"server ignored the range request (status {status})")
+            whole = declared is not None and declared.isdigit() and int(declared) == len(data)
             data = data[: end - start + 1]
             if len(data) != end - start + 1:
+                if whole:                                   # the server sent all it has: the file ends here
+                    raise FileTooShort(f"file ends before byte {end + 1}: {len(data)} of {end - start + 1} "
+                                       f"bytes from {start} (an empty or cut-off upload)")
                 raise IOError(f"short read: {len(data)} of {end - start + 1} bytes")
             path.parent.mkdir(parents=True, exist_ok=True)
             tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.part")
