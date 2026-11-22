@@ -5643,5 +5643,633 @@
     }
    }
   }
+ },
+ "readers_v5": {
+  "t": {
+   "models_reread": 9,
+   "pairs_reread": 204,
+   "v4_pairs": 33,
+   "lost": 0,
+   "audit": {
+    "categories": {
+     "declared, related": {
+      "top_1k": 81,
+      "1k_10k": 89,
+      "10k_100k": 119
+     },
+     "no declaration, parent found": {
+      "top_1k": 40,
+      "1k_10k": 44,
+      "10k_100k": 27
+     },
+     "no declaration, no parent found": {
+      "top_1k": 72,
+      "1k_10k": 51,
+      "10k_100k": 35
+     },
+     "declared, not comparable": {
+      "top_1k": 5,
+      "1k_10k": 9,
+      "10k_100k": 7
+     },
+     "not readable": {
+      "top_1k": 1,
+      "1k_10k": 2,
+      "10k_100k": 2
+     },
+     "declared, unrelated": {
+      "top_1k": 1,
+      "1k_10k": 1,
+      "10k_100k": 2
+     },
+     "adapter": {
+      "1k_10k": 4,
+      "10k_100k": 8
+     }
+    },
+    "h2": {
+     "k": 111,
+     "n": 399,
+     "share": 0.2781954887218045,
+     "wilson": [
+      0.2365,
+      0.3241
+     ],
+     "per_tier": {
+      "top_1k": [
+       40,
+       116
+      ],
+      "1k_10k": [
+       44,
+       134
+      ],
+      "10k_100k": [
+       27,
+       149
+      ]
+     },
+     "tier_weighted": 0.19608776299018674
+    },
+    "h3": {
+     "k": 4,
+     "n": 307,
+     "share": 0.013029315960912053,
+     "wilson": [
+      0.0051,
+      0.033
+     ],
+     "per_tier": {
+      "top_1k": [
+       1,
+       83
+      ],
+      "1k_10k": [
+       1,
+       93
+      ],
+      "10k_100k": [
+       2,
+       131
+      ]
+     },
+     "tier_weighted": 0.01482868187846189
+    },
+    "contradicted": [
+     [
+      "incoai/Qwen3.8-27B-DFlash2",
+      "Qwen/Qwen3.8-27B",
+      -0.0038424452002443934
+     ],
+     [
+      "z-lab/Qwen3.6-35B-A3B-DFlash",
+      "Qwen/Qwen3.6-35B-A3B",
+      0.0019199987041239048
+     ],
+     [
+      "PrunaAI/openai-community-gpt2-GGUF-smashed",
+      "openai-community/gpt2",
+      0.0005206191789434984
+     ],
+     [
+      "qing-yao/ppt-pythia-1b-baseline-seed3408-stage2",
+      "EleutherAI/pythia-1b",
+      0.0029454695262190835
+     ]
+    ],
+    "n_models": 600
+   },
+   "r2": {
+    "categories": {
+     "not a repository id": [
+      [
+       "HauhauCS/GPT-OSS-20B-Uncensored-HauhauCS-Aggressive",
+       "gpt-oss-20b"
+      ]
+     ],
+     "renamed (read under the new name)": [
+      [
+       "lmstudio-community/c4ai-command-r-plus-08-2024-GGUF",
+       "CohereForAI/c4ai-command-r-plus-08-2024",
+       "CohereLabs/c4ai-command-r-plus-08-2024"
+      ]
+     ],
+     "not found on the Hub, or private": [
+      [
+       "unsloth/llama-3-8b-Instruct-bnb-4bit",
+       "meta-llama/Llama-3-8B-Instruct"
+      ],
+      [
+       "Comfy-Org/Mage-Flow",
+       "microsoft/Mage-Flow"
+      ],
+      [
+       "MediaCatch/xls-r-300m-danish-mc-v2",
+       "MediaCatch/xls-r-300m-danish-mc"
+      ],
+      [
+       "VAGOsolutions/SauerkrautLM-ColQwen3-2b-v0.1",
+       "Qwen/Qwen3-VL-2B"
+      ],
+      [
+       "ggml-org/gemma-3-4b-it-qat-GGUF",
+       "google/gemma-3-4b-it-qat"
+      ],
+      [
+       "mradermacher/Llama-3.2-3B-optimized-i1-GGUF",
+       "fraQtl/Llama-3.2-3B-fraQtl-kv"
+      ],
+      [
+       "ValueFX9507/Tifa-Deepsex-14b-CoT",
+       "deepseek-ai/deepseek-r1-14b"
+      ],
+      [
+       "mradermacher/aquif-3-moe-17b-a2.8b-i1-GGUF",
+       "aquif-ai/aquif-3-moe-17B-A2.8B"
+      ],
+      [
+       "mradermacher/Orion-HYMT1.5-7B-SFT-v2601-i1-GGUF",
+       "3tic/Orion-HYMT1.5-7B-SFT-v2601"
+      ],
+      [
+       "OpenIXCLab/SeC-4B",
+       "OpenGVLab/InternVL2.5-4B"
+      ]
+     ],
+     "gated": [
+      [
+       "circlestone-labs/Anima",
+       "nvidia/Cosmos-Predict2-2B-Text2Image"
+      ],
+      [
+       "mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF",
+       "prithivMLmods/Qwen3-VL-8B-Instruct-abliterated-v1"
+      ],
+      [
+       "ml-resources/flux-3-image-klein-comfy",
+       "black-forest-labs/flux-3-image-klein"
+      ],
+      [
+       "ml-resources/flux-3-image-klein-comfy",
+       "black-forest-labs/flux-3-image-klein-base"
+      ],
+      [
+       "unsloth/orpheus-3b-0.1-ft-GGUF",
+       "canopylabs/orpheus-3b-0.1-pretrained"
+      ]
+     ],
+     "different structure (fewer than 8 shared tensor shapes)": [
+      [
+       "kindlingai/glm-5.3-exlr8-k2-k3-k4",
+       "zai-org/GLM-5.3-BF16",
+       0
+      ],
+      [
+       "Synaptics/yolo",
+       "Ultralytics/YOLOv8",
+       3
+      ],
+      [
+       "litert-community/embeddinggemma-2-text-270m-litert-lm",
+       "google/embeddinggemma-2",
+       5
+      ],
+      [
+       "nikita-savelyev-cerebras/tiny-random-kimi-k2.7-code-int4",
+       "moonshotai/Kimi-K2.7-Code",
+       2
+      ],
+      [
+       "mobilint/Qwen2.5-0.5B-Instruct-Batch16",
+       "Qwen/Qwen2.5-0.5B-Instruct",
+       1
+      ],
+      [
+       "ekacare/parrotlet-a-2.5-pro",
+       "openai/whisper-large-v3",
+       0
+      ]
+     ]
+    },
+    "counts": {
+     "not a repository id": 1,
+     "renamed (read under the new name)": 1,
+     "not found on the Hub, or private": 10,
+     "gated": 5,
+     "different structure (fewer than 8 shared tensor shapes)": 6
+    },
+    "gaps": [
+     [
+      "Comfy-Org/Qwen3-VL",
+      "Qwen/Qwen3-VL-4B-Instruct",
+      3,
+      134,
+      null
+     ],
+     [
+      "tiny-random/qwen3.5-moe",
+      "Qwen/Qwen3.5-397B-A17B",
+      0,
+      18,
+      null
+     ],
+     [
+      "AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF",
+      "Qwen/Qwen3.8-Flash-Next",
+      0,
+      181,
+      null
+     ],
+     [
+      "KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2",
+      "timm/tf_efficientnet_b5.ns_jft_in1k",
+      0,
+      null,
+      null
+     ]
+    ],
+    "pairs": 27
+   },
+   "verdicts": {
+    "H2": {
+     "verdict": "not supported",
+     "evidence": "111/399 undeclared",
+     "changes": false
+    },
+    "H3": {
+     "verdict": "not supported",
+     "evidence": "4/307 contradicted",
+     "changes": false
+    },
+    "H7": {
+     "verdict": "not supported",
+     "evidence": "(a) 20/24; (b) 93/270",
+     "changes": false
+    }
+   }
+  },
+  "midpoint": {
+   "models_reread": 9,
+   "pairs_reread": 204,
+   "v4_pairs": 33,
+   "lost": 0,
+   "audit": {
+    "categories": {
+     "declared, related": {
+      "top_1k": 79,
+      "1k_10k": 88,
+      "10k_100k": 116
+     },
+     "no declaration, parent found": {
+      "top_1k": 38,
+      "1k_10k": 44,
+      "10k_100k": 26
+     },
+     "no declaration, no parent found": {
+      "top_1k": 74,
+      "1k_10k": 51,
+      "10k_100k": 36
+     },
+     "declared, unrelated": {
+      "top_1k": 3,
+      "1k_10k": 2,
+      "10k_100k": 5
+     },
+     "declared, not comparable": {
+      "top_1k": 5,
+      "1k_10k": 9,
+      "10k_100k": 7
+     },
+     "not readable": {
+      "top_1k": 1,
+      "1k_10k": 2,
+      "10k_100k": 2
+     },
+     "adapter": {
+      "1k_10k": 4,
+      "10k_100k": 8
+     }
+    },
+    "h2": {
+     "k": 108,
+     "n": 387,
+     "share": 0.27906976744186046,
+     "wilson": [
+      0.2367,
+      0.3258
+     ],
+     "per_tier": {
+      "top_1k": [
+       38,
+       112
+      ],
+      "1k_10k": [
+       44,
+       131
+      ],
+      "10k_100k": [
+       26,
+       144
+      ]
+     },
+     "tier_weighted": 0.19612186477644492
+    },
+    "h3": {
+     "k": 16,
+     "n": 307,
+     "share": 0.05211726384364821,
+     "wilson": [
+      0.0323,
+      0.083
+     ],
+     "per_tier": {
+      "top_1k": [
+       3,
+       83
+      ],
+      "1k_10k": [
+       2,
+       93
+      ],
+      "10k_100k": [
+       11,
+       131
+      ]
+     },
+     "tier_weighted": 0.07786944873806974
+    },
+    "contradicted": [
+     [
+      "k2-fsa/OmniVoice",
+      "Qwen/Qwen3-0.6B",
+      0.2787563601262766
+     ],
+     [
+      "Qwen/Qwen2.5-Coder-7B",
+      "Qwen/Qwen2.5-7B",
+      0.4650758817900864
+     ],
+     [
+      "incoai/Qwen3.8-27B-DFlash2",
+      "Qwen/Qwen3.8-27B",
+      -0.0038424452002443934
+     ],
+     [
+      "z-lab/Qwen3.6-35B-A3B-DFlash",
+      "Qwen/Qwen3.6-35B-A3B",
+      0.0019199987041239048
+     ],
+     [
+      "patrickbdevaney/MiMo-V2.6-Flash-REAP50-GGUF",
+      "patrickbdevaney/MiMo-V2.6-Flash-REAP50",
+      0.34731506013318086
+     ],
+     [
+      "PrunaAI/openai-community-gpt2-GGUF-smashed",
+      "openai-community/gpt2",
+      0.0005206191789434984
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "bartowski/Meta-Llama-3-120B-Instruct-GGUF",
+      "meta-llama/Meta-Llama-3-70B-Instruct",
+      0.04009860957455561
+     ],
+     [
+      "francesca9805/urd-100mb-after-wc-uniform-newlex-before-ckpt500-packed-bfdiso_seed3407",
+      "francesca9805/ppt-wc-uniform-newlex-urd-before-100mb-packed-bfdiso_seed3407",
+      0.13506576211045834
+     ],
+     [
+      "francesca9805/tur-latn-100mb-after-ppt-Dp-100mb-packed-bfdiso-ckpt500_seed10",
+      "francesca9805/tur-latn-100mb-ppt-Dp-100mb-packed-bfdiso_seed10",
+      0.19108082233436974
+     ],
+     [
+      "qing-yao/ppt-pythia-1b-baseline-seed3408-stage2",
+      "EleutherAI/pythia-1b",
+      0.0029454695262190835
+     ]
+    ],
+    "n_models": 600
+   },
+   "r2": {
+    "categories": {
+     "not a repository id": [
+      [
+       "HauhauCS/GPT-OSS-20B-Uncensored-HauhauCS-Aggressive",
+       "gpt-oss-20b"
+      ]
+     ],
+     "renamed (read under the new name)": [
+      [
+       "lmstudio-community/c4ai-command-r-plus-08-2024-GGUF",
+       "CohereForAI/c4ai-command-r-plus-08-2024",
+       "CohereLabs/c4ai-command-r-plus-08-2024"
+      ]
+     ],
+     "not found on the Hub, or private": [
+      [
+       "unsloth/llama-3-8b-Instruct-bnb-4bit",
+       "meta-llama/Llama-3-8B-Instruct"
+      ],
+      [
+       "Comfy-Org/Mage-Flow",
+       "microsoft/Mage-Flow"
+      ],
+      [
+       "MediaCatch/xls-r-300m-danish-mc-v2",
+       "MediaCatch/xls-r-300m-danish-mc"
+      ],
+      [
+       "VAGOsolutions/SauerkrautLM-ColQwen3-2b-v0.1",
+       "Qwen/Qwen3-VL-2B"
+      ],
+      [
+       "ggml-org/gemma-3-4b-it-qat-GGUF",
+       "google/gemma-3-4b-it-qat"
+      ],
+      [
+       "mradermacher/Llama-3.2-3B-optimized-i1-GGUF",
+       "fraQtl/Llama-3.2-3B-fraQtl-kv"
+      ],
+      [
+       "ValueFX9507/Tifa-Deepsex-14b-CoT",
+       "deepseek-ai/deepseek-r1-14b"
+      ],
+      [
+       "mradermacher/aquif-3-moe-17b-a2.8b-i1-GGUF",
+       "aquif-ai/aquif-3-moe-17B-A2.8B"
+      ],
+      [
+       "mradermacher/Orion-HYMT1.5-7B-SFT-v2601-i1-GGUF",
+       "3tic/Orion-HYMT1.5-7B-SFT-v2601"
+      ],
+      [
+       "OpenIXCLab/SeC-4B",
+       "OpenGVLab/InternVL2.5-4B"
+      ]
+     ],
+     "gated": [
+      [
+       "circlestone-labs/Anima",
+       "nvidia/Cosmos-Predict2-2B-Text2Image"
+      ],
+      [
+       "mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF",
+       "prithivMLmods/Qwen3-VL-8B-Instruct-abliterated-v1"
+      ],
+      [
+       "ml-resources/flux-3-image-klein-comfy",
+       "black-forest-labs/flux-3-image-klein"
+      ],
+      [
+       "ml-resources/flux-3-image-klein-comfy",
+       "black-forest-labs/flux-3-image-klein-base"
+      ],
+      [
+       "unsloth/orpheus-3b-0.1-ft-GGUF",
+       "canopylabs/orpheus-3b-0.1-pretrained"
+      ]
+     ],
+     "different structure (fewer than 8 shared tensor shapes)": [
+      [
+       "kindlingai/glm-5.3-exlr8-k2-k3-k4",
+       "zai-org/GLM-5.3-BF16",
+       0
+      ],
+      [
+       "Synaptics/yolo",
+       "Ultralytics/YOLOv8",
+       3
+      ],
+      [
+       "litert-community/embeddinggemma-2-text-270m-litert-lm",
+       "google/embeddinggemma-2",
+       5
+      ],
+      [
+       "nikita-savelyev-cerebras/tiny-random-kimi-k2.7-code-int4",
+       "moonshotai/Kimi-K2.7-Code",
+       2
+      ],
+      [
+       "mobilint/Qwen2.5-0.5B-Instruct-Batch16",
+       "Qwen/Qwen2.5-0.5B-Instruct",
+       1
+      ],
+      [
+       "ekacare/parrotlet-a-2.5-pro",
+       "openai/whisper-large-v3",
+       0
+      ]
+     ]
+    },
+    "counts": {
+     "not a repository id": 1,
+     "renamed (read under the new name)": 1,
+     "not found on the Hub, or private": 10,
+     "gated": 5,
+     "different structure (fewer than 8 shared tensor shapes)": 6
+    },
+    "gaps": [
+     [
+      "Comfy-Org/Qwen3-VL",
+      "Qwen/Qwen3-VL-4B-Instruct",
+      3,
+      134,
+      null
+     ],
+     [
+      "tiny-random/qwen3.5-moe",
+      "Qwen/Qwen3.5-397B-A17B",
+      0,
+      18,
+      null
+     ],
+     [
+      "AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF",
+      "Qwen/Qwen3.8-Flash-Next",
+      0,
+      181,
+      null
+     ],
+     [
+      "KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2",
+      "timm/tf_efficientnet_b5.ns_jft_in1k",
+      0,
+      null,
+      null
+     ]
+    ],
+    "pairs": 27
+   },
+   "verdicts": {
+    "H2": {
+     "verdict": "not supported",
+     "evidence": "108/387 undeclared",
+     "changes": false
+    },
+    "H3": {
+     "verdict": "supported",
+     "evidence": "16/307 contradicted",
+     "changes": false
+    },
+    "H7": {
+     "verdict": "not supported",
+     "evidence": "(a) 20/24; (b) 92/258",
+     "changes": false
+    }
+   }
+  }
  }
 }

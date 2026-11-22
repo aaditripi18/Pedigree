@@ -1266,9 +1266,32 @@ vision CNNs, and H18 stays not judged for its own reason, recorded above.
 empty ones. The server answers with a complete `200` and `Content-Length: 0`, so every rerun reads the
 same nothing. E2x recorded this pair as not readable. Correction: `pedigree/remote.py`
 now raises `FileTooShort` (a `ValueError`) when the response is complete, meaning its own
-`Content-Length` arrived in full, and the file still ends before the bytes asked for. The pair is
-then not readable by reason, not lost. A body shorter than its own `Content-Length` is still a
+`Content-Length` arrived in full, and the file still ends before the bytes asked for. That is a
+reason, not a loss. A body shorter than its own `Content-Length` is still a
 dropped connection and is retried as before (`tests/test_remote_short.py`). This change only
 reclassifies reads that were counted as lost, and a lost read holds back every ledger line of its
 run, so no recorded verdict can change. E2y is run a third time, resuming the second session's raw
 rows, so only the lost pair is read again.
+*Addendum (2026-11-23, after the third session, before analysis):* the third session read the pair.
+Once the empty Q8_0 file raises `FileTooShort`, the reader's existing rule for repositories with
+several GGUF units (`units._most_tensors`: a unit whose header cannot be read is never preferred)
+passes over it and reads `IQ3_M`, a complete upload (5,984,510,368 bytes). The pair compares 24
+tensors at median 0.982. The session read 9 models, 204 pool pairs and 33 v4 pairs, lost none, and
+recorded 246 ledger lines.
+
+**Outcome of E2y (recorded after analysis, 2026-11-23; Kaggle `pedigree-e2y`, third session, read 9
+models, 204 pool pairs and 33 v4 pairs, none lost).** E2y has no hypothesis of its own: it is E2 with
+E2x and E2y applied, reported beside E2 as recorded (`verdicts.json` `readers_v5`). All four
+models H21 found unreadable for reasons a reader could handle are now read: the three GGUF
+repositories with quantisations in subfolders (`ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF`,
+`AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF`, `unsloth/Inkling-Small-GGUF`) and
+`flair/chunk-english`. Of E2's 600 models, 5 stay not readable (was 9 with E2x), all by reason: no
+weight files 3 (`Qdrant/bm25`, `qualcomm/DETR-ResNet101-DC5`,
+`lmstudio-community/Qwen3-VL-8B-Instruct-MLX-8bit`), gated with no byte-identical public copy 1
+(`Lightricks/LTX-2.5-22b-IC-LoRA-Deblur`), HTTP 403 1
+(`arabsya87sy7a8/Qwythos-9B-Claude-Mythos-5-1M-GGUF`). Declared pairs not comparable fall from 24 to 21. Under the
+published threshold, H2 reads 111/399 undeclared (E2x 111/394), H3 4/307 contradicted (3/301), and
+H7 (a) 20/24, (b) 93/270 (92/266). Under the midpoint, H2 reads 108/387, H3 16/307 and H7 (b) 92/258.
+No verdict changes from E2 as recorded. R2 puts 23 of the 27 declared pairs still not comparable into
+a category; 4 are listed as gaps (`Comfy-Org/Qwen3-VL`, `tiny-random/qwen3.5-moe`,
+`AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF`, `KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2`).
