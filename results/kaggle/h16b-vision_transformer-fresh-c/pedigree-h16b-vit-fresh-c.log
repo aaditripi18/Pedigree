@@ -1,0 +1,35 @@
+[{"stream_name":"stdout","time":48.326437857,"data":"code af16318\n"}
+,{"stream_name":"stdout","time":125.58772233,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":132.14331083,"data":"PEDIGREE_DERIVATIVES = /kaggle/working/students\n"}
+,{"stream_name":"stdout","time":144.767091732,"data":"PEDIGREE_TEACHERS = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":144.767129261,"data":"PEDIGREE_STEPS = 20000\n"}
+,{"stream_name":"stdout","time":144.767134809,"data":"PEDIGREE_LR = 5e-4\n"}
+,{"stream_name":"stdout","time":144.767140936,"data":"PEDIGREE_WARMUP = 1000\n"}
+,{"stream_name":"stdout","time":144.767145054,"data":"PEDIGREE_SEEDS = 39,40\n"}
+,{"stream_name":"stderr","time":149.961897157,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":150.003128011,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stderr","time":166.457239999,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stderr","time":166.996730246,"data":"/kaggle/working/Pedigree/experiments/finetune.py:124: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":166.996764069,"data":"  return (torch.from_numpy(np.asarray(img)).permute(2, 0, 1).float() / 255 - m) / s\n"}
+,{"stream_name":"stderr","time":176.525298741,"data":"/kaggle/working/Pedigree/experiments/distill.py:152: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":176.525358374,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":176.525365809,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":1712.69403351,"data":"vision_transformer/h16b/distill_s39: loss 7.4856 -\u003e 5.577, 1566 s\n"}
+,{"stream_name":"stderr","time":1712.819615002,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stderr","time":1713.940320509,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":2680.804324296,"data":"vision_transformer/h16b/indep_s39: loss 2.4668 -\u003e 2.0451, 968 s\n"}
+,{"stream_name":"stderr","time":2680.940821511,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stderr","time":2681.876592972,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":4230.021582372,"data":"vision_transformer/h16b/distill_s40: loss 6.167 -\u003e 6.3459, 1549 s\n"}
+,{"stream_name":"stderr","time":4230.111968731,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stderr","time":4231.079993202,"data":"[transformers] You passed `num_labels=10` which is incompatible to the `id2label` map of length `1000`.\n"}
+,{"stream_name":"stdout","time":5190.875524134,"data":"vision_transformer/h16b/indep_s40: loss 2.5201 -\u003e 2.1271, 961 s\n"}
+,{"stream_name":"stdout","time":5195.814659996,"data":"exit 0 -m experiments.distill vision_transformer h16b\n"}
+,{"stream_name":"stdout","time":5195.861477411,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":5198.376254507,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":5198.376301516,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5198.768299422,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5198.768324025,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":5199.673789364,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":5201.169071484,"data":"[NbConvertApp] Writing 292816 bytes to __results__.html\n"}
+]

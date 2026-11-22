@@ -1098,7 +1098,7 @@
      "id": "H16",
      "statement": "Behaviour calibrated against reference students (dark-knowledge drop below the lowest reference > r*, r* from dev) identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
      "follows": "H9, H12, H14, H14b",
-     "verdict": "pending",
+     "verdict": "supported",
      "numbers": {
       "r_star": 0.06347109919778318,
       "gap": 0.05651602285958646,
@@ -1295,9 +1295,139 @@
         "indep",
         -0.0155
        ]
+      ],
+      "fresh": [
+       [
+        "text_decoder",
+        "distill_s13",
+        "distill",
+        0.3423
+       ],
+       [
+        "text_decoder",
+        "indep_s13",
+        "indep",
+        -0.0076
+       ],
+       [
+        "text_decoder",
+        "distill_s14",
+        "distill",
+        0.3339
+       ],
+       [
+        "text_decoder",
+        "indep_s14",
+        "indep",
+        -0.0016
+       ],
+       [
+        "text_decoder",
+        "distill_s15",
+        "distill",
+        0.3399
+       ],
+       [
+        "text_decoder",
+        "indep_s15",
+        "indep",
+        -0.0058
+       ],
+       [
+        "text_decoder",
+        "distill_s16",
+        "distill",
+        0.3494
+       ],
+       [
+        "text_decoder",
+        "indep_s16",
+        "indep",
+        -0.0178
+       ],
+       [
+        "text_decoder",
+        "distill_s17",
+        "distill",
+        0.34
+       ],
+       [
+        "text_decoder",
+        "indep_s17",
+        "indep",
+        -0.0087
+       ],
+       [
+        "vision_cnn",
+        "distill_s13",
+        "distill",
+        0.2942
+       ],
+       [
+        "vision_cnn",
+        "indep_s13",
+        "indep",
+        -0.0418
+       ],
+       [
+        "vision_cnn",
+        "distill_s14",
+        "distill",
+        0.3293
+       ],
+       [
+        "vision_cnn",
+        "indep_s14",
+        "indep",
+        -0.0364
+       ],
+       [
+        "vision_cnn",
+        "distill_s15",
+        "distill",
+        0.3128
+       ],
+       [
+        "vision_cnn",
+        "indep_s15",
+        "indep",
+        -0.0502
+       ],
+       [
+        "vision_cnn",
+        "distill_s16",
+        "distill",
+        0.1502
+       ],
+       [
+        "vision_cnn",
+        "indep_s16",
+        "indep",
+        -0.094
+       ],
+       [
+        "vision_cnn",
+        "distill_s17",
+        "distill",
+        0.3146
+       ],
+       [
+        "vision_cnn",
+        "indep_s17",
+        "indep",
+        -0.0578
+       ]
+      ],
+      "tpr": [
+       10,
+       10
+      ],
+      "fpr": [
+       0,
+       10
       ]
      },
-     "evidence": "dev rule: drop > 0.063 (dev gap 0.057); fresh students wait for GPU quota"
+     "evidence": "drop > 0.063: TPR 10/10, FPR 0/10"
     },
     {
      "id": "H16b",
@@ -1341,7 +1471,7 @@
      "statement": "Behaviour (H16's rule) confirms >= 90% of the declared Hub pairs weights cannot compare that it can run (text models <= 14B sharing one tokenizer).",
      "follows": "behaviour above 2B parameters",
      "verdict": "pending",
-     "evidence": "runs only if H16 or H16b is supported"
+     "evidence": "runs after H16 / H16b"
     },
     {
      "id": "H19",
@@ -1758,22 +1888,70 @@
      "id": "H26a",
      "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
      "follows": "H25a",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "agree": [
+       598,
+       599
+      ],
+      "opposite": 1,
+      "abstained": 0,
+      "unrelated_by_names": 46,
+      "v3_agree": [
+       591,
+       599
+      ],
+      "depth_maps": {
+       "direct": 235,
+       "equal": 231,
+       "first": 116,
+       "prefix": 13,
+       "last": 3,
+       "proportional": 1
+      }
+     },
+     "evidence": "v4 with (g)-(i) 598/599 agree, opposite 1, aligned too few 0 (46 unrelated by names; v3 591/599)"
     },
     {
      "id": "H26b",
      "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
      "follows": "H25b",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "supported",
+     "numbers": {
+      "comparable": [
+       90,
+       108
+      ],
+      "not_read": 1,
+      "design_declared": [
+       0,
+       0
+      ],
+      "design_agree": [
+       0,
+       0
+      ]
+     },
+     "evidence": "90/108 comparable (1 declared pairs not read count under H26c); H25's pairs under v5 running"
     },
     {
      "id": "H26c",
      "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
      "follows": "H21",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "supported",
+     "numbers": {
+      "repositories_unread": 15,
+      "format_failures": {},
+      "other_reasons": {
+       "not readable (no weight files)": 3,
+       "not readable (HTTP 401)": 8,
+       "not readable (gated, no byte-identical public copy)": 3,
+       "not readable (HTTP 403)": 1
+      },
+      "lost": 0,
+      "no_public_spec": {}
+     },
+     "evidence": "15 repositories unread: format failures 0; other reasons 15 (not readable (HTTP 401): 8; not readable (HTTP 403): 1; not readable (gated, no byte-identical public copy): 3; not readable (no weight files): 3)"
     }
    ],
    "audit": {
@@ -2955,7 +3133,7 @@
      "id": "H16",
      "statement": "Behaviour calibrated against reference students (dark-knowledge drop below the lowest reference > r*, r* from dev) identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
      "follows": "H9, H12, H14, H14b",
-     "verdict": "pending",
+     "verdict": "supported",
      "numbers": {
       "r_star": 0.06347109919778318,
       "gap": 0.05651602285958646,
@@ -3152,9 +3330,139 @@
         "indep",
         -0.0155
        ]
+      ],
+      "fresh": [
+       [
+        "text_decoder",
+        "distill_s13",
+        "distill",
+        0.3423
+       ],
+       [
+        "text_decoder",
+        "indep_s13",
+        "indep",
+        -0.0076
+       ],
+       [
+        "text_decoder",
+        "distill_s14",
+        "distill",
+        0.3339
+       ],
+       [
+        "text_decoder",
+        "indep_s14",
+        "indep",
+        -0.0016
+       ],
+       [
+        "text_decoder",
+        "distill_s15",
+        "distill",
+        0.3399
+       ],
+       [
+        "text_decoder",
+        "indep_s15",
+        "indep",
+        -0.0058
+       ],
+       [
+        "text_decoder",
+        "distill_s16",
+        "distill",
+        0.3494
+       ],
+       [
+        "text_decoder",
+        "indep_s16",
+        "indep",
+        -0.0178
+       ],
+       [
+        "text_decoder",
+        "distill_s17",
+        "distill",
+        0.34
+       ],
+       [
+        "text_decoder",
+        "indep_s17",
+        "indep",
+        -0.0087
+       ],
+       [
+        "vision_cnn",
+        "distill_s13",
+        "distill",
+        0.2942
+       ],
+       [
+        "vision_cnn",
+        "indep_s13",
+        "indep",
+        -0.0418
+       ],
+       [
+        "vision_cnn",
+        "distill_s14",
+        "distill",
+        0.3293
+       ],
+       [
+        "vision_cnn",
+        "indep_s14",
+        "indep",
+        -0.0364
+       ],
+       [
+        "vision_cnn",
+        "distill_s15",
+        "distill",
+        0.3128
+       ],
+       [
+        "vision_cnn",
+        "indep_s15",
+        "indep",
+        -0.0502
+       ],
+       [
+        "vision_cnn",
+        "distill_s16",
+        "distill",
+        0.1502
+       ],
+       [
+        "vision_cnn",
+        "indep_s16",
+        "indep",
+        -0.094
+       ],
+       [
+        "vision_cnn",
+        "distill_s17",
+        "distill",
+        0.3146
+       ],
+       [
+        "vision_cnn",
+        "indep_s17",
+        "indep",
+        -0.0578
+       ]
+      ],
+      "tpr": [
+       10,
+       10
+      ],
+      "fpr": [
+       0,
+       10
       ]
      },
-     "evidence": "dev rule: drop > 0.063 (dev gap 0.057); fresh students wait for GPU quota"
+     "evidence": "drop > 0.063: TPR 10/10, FPR 0/10"
     },
     {
      "id": "H16b",
@@ -3198,7 +3506,7 @@
      "statement": "Behaviour (H16's rule) confirms >= 90% of the declared Hub pairs weights cannot compare that it can run (text models <= 14B sharing one tokenizer).",
      "follows": "behaviour above 2B parameters",
      "verdict": "pending",
-     "evidence": "runs only if H16 or H16b is supported"
+     "evidence": "runs after H16 / H16b"
     },
     {
      "id": "H19",
@@ -3609,22 +3917,70 @@
      "id": "H26a",
      "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
      "follows": "H25a",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "agree": [
+       598,
+       599
+      ],
+      "opposite": 1,
+      "abstained": 0,
+      "unrelated_by_names": 63,
+      "v3_agree": [
+       545,
+       599
+      ],
+      "depth_maps": {
+       "direct": 235,
+       "equal": 231,
+       "first": 116,
+       "prefix": 13,
+       "last": 3,
+       "proportional": 1
+      }
+     },
+     "evidence": "v4 with (g)-(i) 598/599 agree, opposite 1, aligned too few 0 (63 unrelated by names; v3 545/599)"
     },
     {
      "id": "H26b",
      "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
      "follows": "H25b",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "supported",
+     "numbers": {
+      "comparable": [
+       90,
+       108
+      ],
+      "not_read": 1,
+      "design_declared": [
+       0,
+       0
+      ],
+      "design_agree": [
+       0,
+       0
+      ]
+     },
+     "evidence": "90/108 comparable (1 declared pairs not read count under H26c); H25's pairs under v5 running"
     },
     {
      "id": "H26c",
      "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
      "follows": "H21",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "supported",
+     "numbers": {
+      "repositories_unread": 15,
+      "format_failures": {},
+      "other_reasons": {
+       "not readable (no weight files)": 3,
+       "not readable (HTTP 401)": 8,
+       "not readable (gated, no byte-identical public copy)": 3,
+       "not readable (HTTP 403)": 1
+      },
+      "lost": 0,
+      "no_public_spec": {}
+     },
+     "evidence": "15 repositories unread: format failures 0; other reasons 15 (not readable (HTTP 401): 8; not readable (HTTP 403): 1; not readable (gated, no byte-identical public copy): 3; not readable (no weight files): 3)"
     }
    ],
    "audit": {

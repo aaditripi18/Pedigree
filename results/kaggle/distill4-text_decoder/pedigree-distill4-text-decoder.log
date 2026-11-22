@@ -1,0 +1,50 @@
+[{"stream_name":"stdout","time":25.7198304,"data":"code 648c361\n"}
+,{"stream_name":"stdout","time":73.403541866,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":76.150926466,"data":"PEDIGREE_DERIVATIVES = /kaggle/working/students\n"}
+,{"stream_name":"stdout","time":76.151816932,"data":"PEDIGREE_TEACHERS = /kaggle/input/notebooks/aadityae5545454/pedigree-ft-text-decoder/derivatives\n"}
+,{"stream_name":"stdout","time":76.151840112,"data":"PEDIGREE_SEEDS = 13,14,15,16,17,18,19,20\n"}
+,{"stream_name":"stderr","time":82.054655063,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":92.680604006,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2850.70it/s]\n"}
+,{"stream_name":"stderr","time":104.591919513,"data":"/kaggle/working/Pedigree/experiments/distill.py:152: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":104.59196032,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":104.591967182,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":676.153090108,"data":"text_decoder/fresh/distill_s13: loss 6.4165 -\u003e 1.1401, 598 s\n"}
+,{"stream_name":"stderr","time":677.214523611,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2963.15it/s]\n"}
+,{"stream_name":"stdout","time":1065.07811812,"data":"text_decoder/fresh/indep_s13: loss 11.0411 -\u003e 4.9295, 389 s\n"}
+,{"stream_name":"stderr","time":1066.122975972,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2722.94it/s]\n"}
+,{"stream_name":"stdout","time":1647.129285801,"data":"text_decoder/fresh/distill_s14: loss 6.8908 -\u003e 1.3811, 582 s\n"}
+,{"stream_name":"stderr","time":1648.183655434,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2749.79it/s]\n"}
+,{"stream_name":"stdout","time":2035.809858414,"data":"text_decoder/fresh/indep_s14: loss 10.9204 -\u003e 5.4915, 389 s\n"}
+,{"stream_name":"stderr","time":2036.848506422,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2809.24it/s]\n"}
+,{"stream_name":"stdout","time":2617.915706799,"data":"text_decoder/fresh/distill_s15: loss 6.5077 -\u003e 1.4077, 582 s\n"}
+,{"stream_name":"stderr","time":2618.965663104,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2784.03it/s]\n"}
+,{"stream_name":"stdout","time":3006.610828397,"data":"text_decoder/fresh/indep_s15: loss 10.984 -\u003e 5.0545, 389 s\n"}
+,{"stream_name":"stderr","time":3007.660705055,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2730.41it/s]\n"}
+,{"stream_name":"stdout","time":3588.537163851,"data":"text_decoder/fresh/distill_s16: loss 6.0666 -\u003e 1.388, 582 s\n"}
+,{"stream_name":"stderr","time":3589.587339969,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2798.67it/s]\n"}
+,{"stream_name":"stdout","time":3977.859453422,"data":"text_decoder/fresh/indep_s16: loss 10.9636 -\u003e 5.3511, 389 s\n"}
+,{"stream_name":"stderr","time":3978.905737248,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2849.80it/s]\n"}
+,{"stream_name":"stdout","time":4560.490943539,"data":"text_decoder/fresh/distill_s17: loss 6.4622 -\u003e 1.323, 583 s\n"}
+,{"stream_name":"stderr","time":4561.534634442,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2726.54it/s]\n"}
+,{"stream_name":"stdout","time":4950.096750049,"data":"text_decoder/fresh/indep_s17: loss 10.9731 -\u003e 4.7936, 390 s\n"}
+,{"stream_name":"stderr","time":4951.158551954,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2730.97it/s]\n"}
+,{"stream_name":"stdout","time":5533.343957201,"data":"text_decoder/fresh/distill_s18: loss 6.6182 -\u003e 1.487, 583 s\n"}
+,{"stream_name":"stderr","time":5534.37942729,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2764.46it/s]\n"}
+,{"stream_name":"stdout","time":5923.10580937,"data":"text_decoder/fresh/indep_s18: loss 10.9807 -\u003e 4.9965, 390 s\n"}
+,{"stream_name":"stderr","time":5924.13993913,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2801.97it/s]\n"}
+,{"stream_name":"stdout","time":6506.064639242,"data":"text_decoder/fresh/distill_s19: loss 6.9013 -\u003e 1.4627, 583 s\n"}
+,{"stream_name":"stderr","time":6507.092457605,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2711.88it/s]\n"}
+,{"stream_name":"stdout","time":6895.742873394,"data":"text_decoder/fresh/indep_s19: loss 11.0034 -\u003e 5.2883, 390 s\n"}
+,{"stream_name":"stderr","time":6896.780372435,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2819.78it/s]\n"}
+,{"stream_name":"stdout","time":7478.870166499,"data":"text_decoder/fresh/distill_s20: loss 6.3384 -\u003e 1.3054, 583 s\n"}
+,{"stream_name":"stderr","time":7479.935180234,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2746.69it/s]\n"}
+,{"stream_name":"stdout","time":7868.610544015,"data":"text_decoder/fresh/indep_s20: loss 11.0504 -\u003e 5.141, 390 s\n"}
+,{"stream_name":"stdout","time":7869.997696104,"data":"exit 0 -m experiments.distill text_decoder fresh\n"}
+,{"stream_name":"stdout","time":7870.044002458,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":7872.057307527,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":7872.057346037,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":7872.256462165,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":7872.256490653,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":7873.033699933,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":7873.893288655,"data":"[NbConvertApp] Writing 292459 bytes to __results__.html\n"}
+]

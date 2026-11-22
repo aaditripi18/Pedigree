@@ -1,0 +1,36 @@
+[{"stream_name":"stdout","time":129.224238151,"data":"code ae63beb\n"}
+,{"stream_name":"stdout","time":180.655446512,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":183.82753849,"data":"PEDIGREE_DERIVATIVES = /kaggle/working/students\n"}
+,{"stream_name":"stdout","time":183.827576188,"data":"PEDIGREE_STEPS = 300\n"}
+,{"stream_name":"stdout","time":183.827582796,"data":"PEDIGREE_WARMUP = 15\n"}
+,{"stream_name":"stderr","time":191.70571549,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":197.340037021,"data":"\rLoading weights:   0%|          | 0/212 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 212/212 [00:00\u003c00:00, 2746.83it/s]\n"}
+,{"stream_name":"stderr","time":197.445929826,"data":"[transformers] \u001b[1mWav2Vec2ForCTC LOAD REPORT\u001b[0m from: facebook/wav2vec2-base-960h\n"}
+,{"stream_name":"stderr","time":197.445966567,"data":"Key                        | Status  | \n"}
+,{"stream_name":"stderr","time":197.445971682,"data":"---------------------------+---------+-\n"}
+,{"stream_name":"stderr","time":197.445975947,"data":"wav2vec2.masked_spec_embed | MISSING | \n"}
+,{"stream_name":"stderr","time":197.445980244,"data":"\n"}
+,{"stream_name":"stderr","time":197.445984263,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":197.445993679,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":264.052226653,"data":"/kaggle/working/Pedigree/experiments/h24.py:211: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":264.05228669,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":264.052294386,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":608.982089765,"data":"speech/h24/distill_s99: loss 13.4968 -\u003e 5.4706, 423 s\n"}
+,{"stream_name":"stderr","time":609.559165032,"data":"\rLoading weights:   0%|          | 0/212 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 212/212 [00:00\u003c00:00, 2558.08it/s]\n"}
+,{"stream_name":"stderr","time":609.669960395,"data":"[transformers] \u001b[1mWav2Vec2ForCTC LOAD REPORT\u001b[0m from: facebook/wav2vec2-base-960h\n"}
+,{"stream_name":"stderr","time":609.669996926,"data":"Key                        | Status  | \n"}
+,{"stream_name":"stderr","time":609.67000263,"data":"---------------------------+---------+-\n"}
+,{"stream_name":"stderr","time":609.670007688,"data":"wav2vec2.masked_spec_embed | MISSING | \n"}
+,{"stream_name":"stderr","time":609.670012392,"data":"\n"}
+,{"stream_name":"stderr","time":609.670017188,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":609.670022037,"data":"- MISSING:\tthose params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":890.308940543,"data":"speech/h24/indep_s99: loss 10223.5957 -\u003e 2515.7153, 281 s\n"}
+,{"stream_name":"stdout","time":893.400688467,"data":"exit 0 -m experiments.h24 train speech 99\n"}
+,{"stream_name":"stdout","time":893.44448225,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":895.51655108,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":895.516596261,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":895.719292741,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":895.719327796,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":896.472250596,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":897.383804417,"data":"[NbConvertApp] Writing 292460 bytes to __results__.html\n"}
+]

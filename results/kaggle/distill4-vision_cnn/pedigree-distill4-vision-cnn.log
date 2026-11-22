@@ -1,0 +1,36 @@
+[{"stream_name":"stdout","time":33.178993477,"data":"code 648c361\n"}
+,{"stream_name":"stdout","time":81.643135446,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":84.686781071,"data":"PEDIGREE_DERIVATIVES = /kaggle/working/students\n"}
+,{"stream_name":"stdout","time":96.16981058,"data":"PEDIGREE_TEACHERS = /tmp/merged-derivatives\n"}
+,{"stream_name":"stdout","time":96.169843936,"data":"PEDIGREE_SEEDS = 13,14,15,16,17,18,19,20\n"}
+,{"stream_name":"stderr","time":100.614368999,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":109.598015973,"data":"/kaggle/working/Pedigree/experiments/finetune.py:124: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":109.598052198,"data":"  return (torch.from_numpy(np.asarray(img)).permute(2, 0, 1).float() / 255 - m) / s\n"}
+,{"stream_name":"stderr","time":113.74105124,"data":"/kaggle/working/Pedigree/experiments/distill.py:152: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":113.741097169,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":113.741102329,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":169.540945825,"data":"vision_cnn/fresh/distill_s13: loss 1.1171 -\u003e 0.4549, 72 s\n"}
+,{"stream_name":"stdout","time":209.380330683,"data":"vision_cnn/fresh/indep_s13: loss 2.4297 -\u003e 1.3294, 40 s\n"}
+,{"stream_name":"stdout","time":265.434710205,"data":"vision_cnn/fresh/distill_s14: loss 1.1869 -\u003e 0.6388, 56 s\n"}
+,{"stream_name":"stdout","time":305.407548718,"data":"vision_cnn/fresh/indep_s14: loss 2.2944 -\u003e 1.9833, 40 s\n"}
+,{"stream_name":"stdout","time":361.22867798,"data":"vision_cnn/fresh/distill_s15: loss 1.453 -\u003e 0.5653, 56 s\n"}
+,{"stream_name":"stdout","time":401.169873494,"data":"vision_cnn/fresh/indep_s15: loss 2.3958 -\u003e 1.411, 40 s\n"}
+,{"stream_name":"stdout","time":456.953798965,"data":"vision_cnn/fresh/distill_s16: loss 1.3478 -\u003e 0.5498, 56 s\n"}
+,{"stream_name":"stdout","time":496.967291055,"data":"vision_cnn/fresh/indep_s16: loss 2.3484 -\u003e 1.8225, 40 s\n"}
+,{"stream_name":"stdout","time":552.766768735,"data":"vision_cnn/fresh/distill_s17: loss 1.6659 -\u003e 0.9168, 56 s\n"}
+,{"stream_name":"stdout","time":592.806743813,"data":"vision_cnn/fresh/indep_s17: loss 2.3451 -\u003e 2.0076, 40 s\n"}
+,{"stream_name":"stdout","time":648.49474101,"data":"vision_cnn/fresh/distill_s18: loss 1.5347 -\u003e 0.5905, 56 s\n"}
+,{"stream_name":"stdout","time":688.44622255,"data":"vision_cnn/fresh/indep_s18: loss 2.4078 -\u003e 1.4856, 40 s\n"}
+,{"stream_name":"stdout","time":744.167887531,"data":"vision_cnn/fresh/distill_s19: loss 1.0042 -\u003e 0.7795, 56 s\n"}
+,{"stream_name":"stdout","time":784.184894595,"data":"vision_cnn/fresh/indep_s19: loss 2.4237 -\u003e 1.4599, 40 s\n"}
+,{"stream_name":"stdout","time":839.847096301,"data":"vision_cnn/fresh/distill_s20: loss 1.0836 -\u003e 0.5722, 56 s\n"}
+,{"stream_name":"stdout","time":880.247701137,"data":"vision_cnn/fresh/indep_s20: loss 2.2164 -\u003e 1.3191, 40 s\n"}
+,{"stream_name":"stdout","time":883.153684518,"data":"exit 0 -m experiments.distill vision_cnn fresh\n"}
+,{"stream_name":"stdout","time":883.194943056,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":885.239651663,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":885.239678883,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":885.443652472,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":885.443678668,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":886.182941043,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":887.071043318,"data":"[NbConvertApp] Writing 292456 bytes to __results__.html\n"}
+]

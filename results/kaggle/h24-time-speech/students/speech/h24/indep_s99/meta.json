@@ -1,0 +1,29 @@
+{
+ "family": "speech",
+ "split": "h24",
+ "kind": "indep",
+ "seed": 99,
+ "teacher": "facebook/wav2vec2-base-960h",
+ "steps": 300,
+ "lr": 0.0005,
+ "warmup": 15,
+ "temperature": 2.0,
+ "batch": 8,
+ "device": "cuda",
+ "losses": [
+  10223.5957,
+  2354.957,
+  2072.7847,
+  2515.7153
+ ],
+ "versions": {
+  "torch": "2.11.0+cu130",
+  "transformers": "5.22.1",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "ae63beb",
+  "dirty": false
+ },
+ "seconds": 281
+}

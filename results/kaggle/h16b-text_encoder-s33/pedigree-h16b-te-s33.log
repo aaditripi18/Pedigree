@@ -1,0 +1,24 @@
+[{"stream_name":"stdout","time":45.375359715,"data":"code af16318\n"}
+,{"stream_name":"stdout","time":96.435180609,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":99.65527419,"data":"PEDIGREE_DERIVATIVES = /kaggle/working/students\n"}
+,{"stream_name":"stdout","time":99.655325646,"data":"PEDIGREE_STEPS = 20000\n"}
+,{"stream_name":"stdout","time":99.655331873,"data":"PEDIGREE_LR = 5e-4\n"}
+,{"stream_name":"stdout","time":99.655336299,"data":"PEDIGREE_WARMUP = 1000\n"}
+,{"stream_name":"stdout","time":99.655350312,"data":"PEDIGREE_SEEDS = 33\n"}
+,{"stream_name":"stderr","time":105.603804705,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":115.630327525,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2668.70it/s]\n"}
+,{"stream_name":"stderr","time":122.065369893,"data":"/kaggle/working/Pedigree/experiments/distill.py:152: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":122.065416504,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":122.065422938,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":5217.932499695,"data":"text_encoder/h16b/distill_s33: loss 17.1068 -\u003e 11.0176, 5116 s\n"}
+,{"stream_name":"stderr","time":5219.239952136,"data":"\rLoading weights:   0%|          | 0/202 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 202/202 [00:00\u003c00:00, 2710.31it/s]\n"}
+,{"stream_name":"stdout","time":8812.048932461,"data":"text_encoder/h16b/indep_s33: loss 11.1314 -\u003e 7.1396, 3594 s\n"}
+,{"stream_name":"stdout","time":8813.302980758,"data":"exit 0 -m experiments.distill text_encoder h16b\n"}
+,{"stream_name":"stdout","time":8813.346028985,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":8815.373630975,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":8815.373665451,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":8815.589086986,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":8815.589115625,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":8816.352248593,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":8817.2320257,"data":"[NbConvertApp] Writing 292661 bytes to __results__.html\n"}
+]

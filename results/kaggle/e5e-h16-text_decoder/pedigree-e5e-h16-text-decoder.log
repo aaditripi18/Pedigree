@@ -1,0 +1,33 @@
+[{"stream_name":"stdout","time":35.434659652,"data":"code 512d4f0\n"}
+,{"stream_name":"stdout","time":94.755026836,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":96.632641582,"data":"PEDIGREE_TEACHERS = /kaggle/input/notebooks/aadityae5545454/pedigree-ft-text-decoder/derivatives\n"}
+,{"stream_name":"stdout","time":108.137565922,"data":"PEDIGREE_STUDENTS = /tmp/merged-students\n"}
+,{"stream_name":"stdout","time":108.137602494,"data":"PEDIGREE_EXPERIMENT = E5e-h16\n"}
+,{"stream_name":"stdout","time":108.137609476,"data":"PEDIGREE_E5_SEEDS = {\"fresh\": [13, 14, 15, 16, 17, 18, 19, 20]}\n"}
+,{"stream_name":"stderr","time":113.960235081,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":121.023908974,"data":"\rLoading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\rLoading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2533.20it/s]\n"}
+,{"stream_name":"stdout","time":454.022582763,"data":"  distill_s13                                   agree 0.343  js 0.3570  cka 0.654  err_agree 0.315  dark_js 0.3474\n"}
+,{"stream_name":"stdout","time":786.308497248,"data":"  indep_s13                                     agree 0.275  js 0.5214  cka 0.546  err_agree 0.201  dark_js 0.5321\n"}
+,{"stream_name":"stdout","time":1118.181190104,"data":"  distill_s14                                   agree 0.352  js 0.3581  cka 0.664  err_agree 0.324  dark_js 0.3518\n"}
+,{"stream_name":"stdout","time":1465.632368489,"data":"  indep_s14                                     agree 0.276  js 0.5139  cka 0.565  err_agree 0.201  dark_js 0.5290\n"}
+,{"stream_name":"stdout","time":1799.444527076,"data":"  distill_s15                                   agree 0.355  js 0.3551  cka 0.670  err_agree 0.329  dark_js 0.3486\n"}
+,{"stream_name":"stdout","time":2141.362732176,"data":"  indep_s15                                     agree 0.280  js 0.5159  cka 0.535  err_agree 0.205  dark_js 0.5312\n"}
+,{"stream_name":"stdout","time":2495.813663777,"data":"  distill_s16                                   agree 0.346  js 0.3536  cka 0.662  err_agree 0.317  dark_js 0.3436\n"}
+,{"stream_name":"stdout","time":2832.807151511,"data":"  indep_s16                                     agree 0.273  js 0.5264  cka 0.546  err_agree 0.202  dark_js 0.5375\n"}
+,{"stream_name":"stdout","time":3166.703236441,"data":"  distill_s17                                   agree 0.346  js 0.3561  cka 0.661  err_agree 0.318  dark_js 0.3486\n"}
+,{"stream_name":"stdout","time":3507.008773663,"data":"  indep_s17                                     agree 0.278  js 0.5204  cka 0.544  err_agree 0.202  dark_js 0.5327\n"}
+,{"stream_name":"stdout","time":3861.224051112,"data":"  distill_s18                                   agree 0.351  js 0.3573  cka 0.659  err_agree 0.322  dark_js 0.3488\n"}
+,{"stream_name":"stdout","time":4204.074872901,"data":"  indep_s18                                     agree 0.281  js 0.5157  cka 0.555  err_agree 0.205  dark_js 0.5284\n"}
+,{"stream_name":"stdout","time":4561.806344974,"data":"  distill_s19                                   agree 0.357  js 0.3528  cka 0.661  err_agree 0.327  dark_js 0.3461\n"}
+,{"stream_name":"stdout","time":4922.186678454,"data":"  indep_s19                                     agree 0.292  js 0.5135  cka 0.566  err_agree 0.214  dark_js 0.5281\n"}
+,{"stream_name":"stdout","time":5253.613273326,"data":"  distill_s20                                   agree 0.353  js 0.3555  cka 0.670  err_agree 0.327  dark_js 0.3469\n"}
+,{"stream_name":"stdout","time":5604.750848457,"data":"  indep_s20                                     agree 0.279  js 0.5175  cka 0.556  err_agree 0.201  dark_js 0.5303\n"}
+,{"stream_name":"stdout","time":5606.861785624,"data":"exit 0 -m experiments.e5_behaviour text_decoder fresh\n"}
+,{"stream_name":"stdout","time":5606.987176492,"data":"16 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":5610.058590732,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":5610.058631104,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5610.358210939,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5610.358244237,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":5611.356771143,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":5612.59814508,"data":"[NbConvertApp] Writing 292601 bytes to __results__.html\n"}
+]

@@ -1,0 +1,29 @@
+{
+ "family": "diffusion_unet",
+ "split": "h24",
+ "kind": "distill",
+ "seed": 99,
+ "teacher": "google/ddpm-cifar10-32",
+ "steps": 300,
+ "lr": 0.0005,
+ "warmup": 15,
+ "temperature": 2.0,
+ "batch": 32,
+ "device": "cuda",
+ "losses": [
+  1.0317,
+  0.0166,
+  0.0167,
+  0.0217
+ ],
+ "versions": {
+  "torch": "2.11.0+cu130",
+  "transformers": "5.22.1",
+  "peft": "0.21.2"
+ },
+ "code": {
+  "commit": "ae63beb",
+  "dirty": false
+ },
+ "seconds": 120
+}
