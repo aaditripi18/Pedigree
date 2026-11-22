@@ -1139,3 +1139,38 @@ subsequence with the other side's stack name, then to name order (`pedigree/stru
 `tests/test_structalign.py` checks one result under eight hash seeds, and fails without the fix).
 Read again with it, under two hash seeds, H26a's opposite pair aligns 24 tensors at median 1.0
 (related) both times. H26a's verdict stands as recorded; the pair is design data for this rule.
+
+## Amendment 2026-11-22 (2): rule (j) and H27, after H26 and before any of H27's data
+
+H26's verdicts stand as recorded. Its pairs are design data for what follows, reported beside H27
+and not counted.
+
+**Cause.** H26d's one disagreement is `Xenova/vit-gpt2-image-captioning` against
+`nlpconnect/vit-gpt2-image-captioning`, an ONNX export of the same model: names gave unrelated (24
+tensors, median 0.005), v4 related (1.0). Its decoder is GPT-2, whose Conv1D layers store
+[in, out], which is exactly what an ONNX MatMul holds. Rule (v) took them as a Linear's [out, in]
+and transposed them, so the non-square ones no longer matched the base by shape. The square ones
+(768 x 768: `attn.c_proj`, `crossattention.q_attn`) paired by name and were compared transposed, at
+cosines near 0.
+
+**(j)** (`pedigree/verify.py` `orient`, applied to every comparison under readers v5). For each
+side with tensors (v) transposed: among the non-square ones whose name the other side holds, if
+more match the other side's shape untransposed than transposed, and at least 2 do, all of that
+side's (v) tensors are read untransposed. `tests/test_readers_v5.py` checks it on a Conv1D-layout
+and a Linear-layout ONNX file against their safetensors bases: all four weights compare at 1.0
+under names and auto4, and the Conv1D case fails without (j).
+
+**Fresh data.** A new frozen sample (`results/h27_sample.json`, seed 20261123, drawn after this
+amendment is committed and before any of it is read): H25's rule, excluding E2's, H13's, H15's,
+H19's, H23's, H25's and H26's samples. Each model is read and aligned exactly as in H26, with
+(j) and the tie-break of the first 2026-11-22 amendment. Design data (`H27d`): H26's pair with the
+opposite verdict, H26d's disagreement, and H26's 18 declared pairs auto4 left not comparable.
+
+- **H27a** On the fresh pairs where names align >= 8 tensors, v4 with (g)-(i), the tie-break and
+  (j), names ignored, gives the same related / unrelated verdict for >= 98% and the opposite
+  verdict for none (judged if >= 20 pairs, >= 5 of them unrelated by names).
+- **H27b** On the fresh declared pairs where names align fewer than 8 tensors and both models were
+  read, `auto4` makes >= 80% comparable (>= 8 tensors).
+- **H27c** No fresh sampled model, and no declared base of one, is unreadable because of its file
+  format, except formats with no public specification; no weight files, gated, private or missing
+  repositories are counted by reason and do not count.

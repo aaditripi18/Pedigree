@@ -216,7 +216,7 @@ def _v5_named(out: dict, uses: dict, deq: dict, prefix: str = "") -> None:
         old, transpose = items[0]
         if transpose:
             u, spec = out[old]
-            out[old] = (u, {**spec, "shape": list(spec["shape"])[::-1], "order": "F"})
+            out[old] = (u, {**spec, "shape": list(spec["shape"])[::-1], "order": "F", "v5_transposed": True})
         if target != old:
             _rename(out, deq, old, target, transpose)
         elif transpose and old in deq:

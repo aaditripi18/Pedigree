@@ -331,3 +331,29 @@ def test_tensor_count_from_the_first_bytes_equals_the_metadata_walk(tmp_path, lo
         p = tmp_path / f"m{n}.gguf"
         _gguf(p, n)
         assert ggufremote.n_tensors(str(p)) == ggufremote.tensor_count(str(p), os.path.getsize(p))[0] == n
+
+
+@pytest.mark.parametrize("conv1d", [True, False])
+def test_conv1d_weights_keep_their_orientation(tmp_path, local, conv1d):
+    """(j) GPT-2 (Conv1D) stores [in, out], exactly what an ONNX MatMul holds, so rule (v)'s
+    transpose turned its weights the wrong way and square ones compared transposed (H25's
+    Xenova/vit-gpt2-image-captioning, design data). Its non-square weights only match the base
+    untransposed, so all its (v) weights are read untransposed. A Linear model (stored [out, in]) is
+    left as (v) reads it."""
+    from safetensors.numpy import save_file
+    from pedigree.verify import compare
+    rng = np.random.RandomState(9)
+    shapes = {"h.0.attn.c_attn.weight": (64, 192), "h.0.attn.c_proj.weight": (64, 64),
+              "h.0.mlp.c_fc.weight": (64, 256), "h.0.mlp.c_proj.weight": (256, 64)}
+    onnx_w = {n: rng.randn(*s).astype(np.float32) for n, s in shapes.items()}       # [in, out], as ONNX holds
+    inits = [numpy_helper.from_array(w, n) for n, w in onnx_w.items()]
+    nodes = [helper.make_node("MatMul", ["x", n], [f"y{i}"], name=f"/m{i}/MatMul") for i, n in enumerate(onnx_w)]
+    _save(tmp_path / "a", "model.onnx", nodes, inits, outputs=[f"y{i}" for i in range(len(onnx_w))])
+    base = {n: (w if conv1d else np.ascontiguousarray(w.T)) for n, w in onnx_w.items()}
+    (tmp_path / "b").mkdir()
+    save_file(base, str(tmp_path / "b" / "model.safetensors"))
+    a = remote_model(tmp_path / "a", ["model.onnx"])
+    b = remote_model(tmp_path / "b", ["model.safetensors"])
+    for mode in ("names", "auto4"):
+        c = compare(a, b, alignment=mode)
+        assert c["compared"] == 4 and c["median_cosine"] > 0.999, (mode, c["compared"], c["median_cosine"])

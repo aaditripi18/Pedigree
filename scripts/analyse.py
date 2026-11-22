@@ -1206,6 +1206,17 @@ def h14(dev: list[dict], fresh: list[dict]) -> list[dict]:
     return out
 
 
+def h27(h27r, n_sample: int, h27d, T, rule) -> list[dict]:
+    """Amendment 2026-11-22 (2): H26's three, on a fresh sample, with rule (j) and the tie-break; H26's
+    pairs (design data, ledger H27d) beside it."""
+    out = h26(h27r, n_sample, h27d, T, rule)
+    for h, (i, f) in zip(out, (("H27a", "H26a"), ("H27b", "H26b"), ("H27c", "H26c"))):
+        h["id"], h["follows"] = i, f
+        h["statement"] = h["statement"].replace("v4 with (g)-(i)", "v4 with (g)-(i), the tie-break and (j)")
+        h["evidence"] = h["evidence"].replace("H25's pairs under v5", "H26's pairs under (j)").replace("under H26c", "under H27c")
+    return out
+
+
 def h26(h26r, n_sample: int, h26d, T, rule) -> list[dict]:
     """Amendment 2026-11-21: readers v5 with alignment v4 and (g)-(i) on a fresh sample; H25's pairs
     (design data, ledger H26d) reported beside it, not counted."""
@@ -1243,7 +1254,7 @@ def h26(h26r, n_sample: int, h26d, T, rule) -> list[dict]:
         else:
             agree.append(_verdict_plain(a.get("struct4"), T, rule) == _verdict_plain(nm, T, rule))
     design = (f"H25's pairs under v5 (design data, not counted): {sum(c >= MIN_COMPARED for c in low)}/{len(low)} "
-              f"declared pairs comparable, {sum(agree)}/{len(agree)} former disagreements now agree"
+              f"declared pairs comparable; where names now align >= 8 tensors, v4 agrees with them on {sum(agree)}/{len(agree)}"
               if h26d else "H25's pairs under v5 running")
     na, nb = a25["numbers"], b25["numbers"]
     return [{**ba, "verdict": a25["verdict"], "numbers": na,
@@ -1293,6 +1304,8 @@ def main() -> None:
     h25d = latest_runs(rows, "H25d", lambda r: 0)
     h26r = latest_runs(rows, "H26", lambda r: 0)
     h26d = latest_runs(rows, "H26d", lambda r: 0)
+    h27r = latest_runs(rows, "H27", lambda r: 0)
+    h27d = latest_runs(rows, "H27d", lambda r: 0)
     e2y = latest_runs(rows, "E2y", lambda r: 0)
     e2yp = latest_runs(rows, "E2yp", lambda r: 0)
     e2v4 = latest_runs(rows, "E2v4", lambda r: 0)
@@ -1305,6 +1318,8 @@ def main() -> None:
     n25 = sum(len(v) for v in s25["sample"].values())
     s26 = json.loads((ROOT / "results" / "h26_sample.json").read_text(encoding="utf-8"))
     n26 = sum(len(v) for v in s26["sample"].values())
+    p27 = ROOT / "results" / "h27_sample.json"
+    n27 = sum(len(v) for v in json.loads(p27.read_text(encoding="utf-8"))["sample"].values()) if p27.exists() else 0
     x_targets = json.loads((ROOT / "results" / "e2x_targets.json").read_text(encoding="utf-8"))
     s19 = json.loads((ROOT / "results" / "h19_sample.json").read_text(encoding="utf-8"))
     n19 = sum(len(v) for v in s19["sample"].values())
@@ -1334,7 +1349,8 @@ def main() -> None:
         hs += [h15(e2, h15r, T, rule), h16r, h16br, *h17(h15r, with_rescores(e2, e2r, e2g), e2s, T, rule),
                h18(h16r, h16br), h19(h19r, n19, T, rule), h20(h19r, n19, h20e2, T, rule),
                h21(e2x, len(x_targets["models"])), *h23(h23r, n23, e2v3, T, rule), h24(e5e_h24),
-               *h25(h25r, n25, h25d, T, rule), *h26(h26r, n26, h26d, T, rule)]
+               *h25(h25r, n25, h25d, T, rule), *h26(h26r, n26, h26d, T, rule),
+               *h27(h27r, n27, h27d, T, rule)]
         if e2r:
             e2f_all = with_rescores(e2, e2r, e2g, e2s, e2f)
             Af = audit(e2f_all, T, rule)

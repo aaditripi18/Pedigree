@@ -405,6 +405,12 @@ class Renamed:
             return self.model.sample_transposed(old, max_bytes)
         return self.model.sample(old, max_bytes)
 
+    def sample_transposed(self, name: str, max_bytes: int = SAMPLE_BYTES) -> np.ndarray:
+        old = self.to_old[name]
+        if old in self.transposed:          # the transpose of a transposed view: the tensor as stored
+            return self.model.sample(old, max_bytes)
+        return self.model.sample_transposed(old, max_bytes)
+
 
 TRANSPOSE_MAX_BYTES = 64 * 1024 * 1024     # a transposed tensor is read whole; larger ones are left out
 
@@ -517,9 +523,44 @@ def harmonise(model, other, alignment: str = "names"):
     return model, other
 
 
+ORIENT_MIN = 2      # (j): non-square evidence needed before a side's (v) weights are read untransposed
+
+
+def orient(model, other):
+    """(j) (amendment 2026-11-22) Rule (v) reads an ONNX MatMul weight as its transpose, the layout
+    of a PyTorch Linear. A model built from Conv1D layers (GPT-2) stores [in, out] already, so its
+    weights were turned the wrong way, and square ones then compared transposed. For each side with
+    (v)-transposed tensors: among the non-square ones whose name the other side holds, if more match
+    the other side's shape untransposed than transposed (at least ORIENT_MIN), all of that side's
+    (v) tensors are read untransposed."""
+    if not formats.READERS_V5:
+        return model, other
+    from .structalign import _strip
+
+    def flip(x, y):
+        t = {n for n, v in (getattr(x, "tensors", None) or {}).items() if v[2].get("v5_transposed")}
+        if not t:
+            return x
+        sx, sy = x.float_shapes(), y.float_shapes()
+        by = {_strip(n): n for n in sy}
+        rev = ok = 0
+        for n in t:
+            sh = tuple(sx[n][1])
+            if len(sh) != 2 or sh[0] == sh[1]:
+                continue
+            m = n if n in sy else by.get(_strip(n))
+            if m is None:
+                continue
+            rev += tuple(sy[m][1]) == sh[::-1]
+            ok += tuple(sy[m][1]) == sh
+        return Renamed(x, {n: n for n in sx}, t) if rev > ok and rev >= ORIENT_MIN else x
+    return flip(model, other), flip(other, model)
+
+
 def compare(model: Remote, other: Remote, n_tensors: int = N_TENSORS, alignment: str = "names") -> dict:
     """Name/shape alignment and sampled weight similarity of two models. Under v4 ("auto4",
     "struct4") each depth-map candidate is scored and the highest median kept (c4)."""
+    model, other = orient(model, other)
     if alignment in ("auto4", "struct4"):
         best, scores = None, {}
         for m, o, label in candidates_v4(model, other, alignment):

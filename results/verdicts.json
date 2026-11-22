@@ -1930,15 +1930,15 @@
       ],
       "not_read": 1,
       "design_declared": [
-       0,
-       0
+       67,
+       78
       ],
       "design_agree": [
-       0,
-       0
+       22,
+       23
       ]
      },
-     "evidence": "90/108 comparable (1 declared pairs not read count under H26c); H25's pairs under v5 running"
+     "evidence": "90/108 comparable (1 declared pairs not read count under H26c); H25's pairs under v5 (design data, not counted): 67/78 declared pairs comparable; where names now align >= 8 tensors, v4 agrees with them on 22/23"
     },
     {
      "id": "H26c",
@@ -1958,6 +1958,27 @@
       "no_public_spec": {}
      },
      "evidence": "15 repositories unread: format failures 0; other reasons 15 (not readable (HTTP 401): 8; not readable (HTTP 403): 1; not readable (gated, no byte-identical public copy): 3; not readable (no weight files): 3)"
+    },
+    {
+     "id": "H27a",
+     "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i), the tie-break and (j) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H26a",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H27b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
+     "follows": "H26b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H27c",
+     "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
+     "follows": "H26c",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {
@@ -3965,15 +3986,15 @@
       ],
       "not_read": 1,
       "design_declared": [
-       0,
-       0
+       67,
+       78
       ],
       "design_agree": [
-       0,
-       0
+       22,
+       23
       ]
      },
-     "evidence": "90/108 comparable (1 declared pairs not read count under H26c); H25's pairs under v5 running"
+     "evidence": "90/108 comparable (1 declared pairs not read count under H26c); H25's pairs under v5 (design data, not counted): 67/78 declared pairs comparable; where names now align >= 8 tensors, v4 agrees with them on 22/23"
     },
     {
      "id": "H26c",
@@ -3993,6 +4014,27 @@
       "no_public_spec": {}
      },
      "evidence": "15 repositories unread: format failures 0; other reasons 15 (not readable (HTTP 401): 8; not readable (HTTP 403): 1; not readable (gated, no byte-identical public copy): 3; not readable (no weight files): 3)"
+    },
+    {
+     "id": "H27a",
+     "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i), the tie-break and (j) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H26a",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H27b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
+     "follows": "H26b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H27c",
+     "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
+     "follows": "H26c",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {
