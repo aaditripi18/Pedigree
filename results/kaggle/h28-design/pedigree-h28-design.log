@@ -1,0 +1,48 @@
+[{"stream_name":"stdout","time":168.247386625,"data":"code c428fe7\n"}
+,{"stream_name":"stdout","time":231.115754638,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":232.647485874,"data":"PEDIGREE_WORKERS = 12\n"}
+,{"stream_name":"stdout","time":232.647546284,"data":"PEDIGREE_BUDGET_HOURS = 10\n"}
+,{"stream_name":"stdout","time":236.269146551,"data":"0 done, 32 to read\n"}
+,{"stream_name":"stdout","time":240.789542183,"data":"[1/32] DamRsn/muscriptor-gguf: ; MuScriptor/muscriptor-medium: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (5s)\n"}
+,{"stream_name":"stdout","time":240.906866863,"data":"[2/32] DamRsn/muscriptor-gguf: ; MuScriptor/muscriptor-small: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (5s)\n"}
+,{"stream_name":"stdout","time":253.286945355,"data":"[3/32] webmp3/Sakura-MiniMax-H3-Uncensored-GGUF: ; MiniMaxAI/MiniMax-H3: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (17s)\n"}
+,{"stream_name":"stdout","time":255.595318848,"data":"[4/32] webmp3/Sakura-MiniMax-H3-GGUF: ; MiniMaxAI/MiniMax-H3: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (19s)\n"}
+,{"stream_name":"stdout","time":269.656164154,"data":"[5/32] Attoloop/tensor-diet-bf16-gguf: ; Qwen/Qwen2.5-1.5B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (33s)\n"}
+,{"stream_name":"stdout","time":270.219420595,"data":"[6/32] Attoloop/tensor-diet-bf16-gguf: ; TinyLlama/TinyLlama-1.1B-Chat-v1.0: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (34s)\n"}
+,{"stream_name":"stdout","time":271.031911479,"data":"[7/32] Attoloop/tensor-diet-bf16-gguf: ; HuggingFaceTB/SmolLM2-1.7B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (35s)\n"}
+,{"stream_name":"stdout","time":271.093151131,"data":"[8/32] Attoloop/tensor-diet-bf16-gguf: ; BSC-LT/salamandra-2b: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (35s)\n"}
+,{"stream_name":"stdout","time":271.123417468,"data":"[9/32] Attoloop/tensor-diet-bf16-gguf: ; EleutherAI/pythia-1b: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (35s)\n"}
+,{"stream_name":"stdout","time":271.139810564,"data":"[10/32] Attoloop/tensor-diet-bf16-gguf: ; Qwen/Qwen2.5-0.5B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (35s)\n"}
+,{"stream_name":"stdout","time":271.262302817,"data":"[11/32] Attoloop/tensor-diet-bf16-gguf: ; EleutherAI/pythia-410m: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (35s)\n"}
+,{"stream_name":"stdout","time":271.294528997,"data":"[12/32] Attoloop/tensor-diet-bf16-gguf: ; HuggingFaceTB/SmolLM2-360M: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (35s)\n"}
+,{"stream_name":"stdout","time":271.504641594,"data":"[13/32] Attoloop/tensor-diet-bf16-gguf: ; Qwen/Qwen3-0.6B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (35s)\n"}
+,{"stream_name":"stdout","time":272.683667257,"data":"[14/32] Attoloop/tensor-diet-bf16-gguf: ; h2oai/h2o-danube3-500m-base: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (36s)\n"}
+,{"stream_name":"stdout","time":273.544308891,"data":"[15/32] Attoloop/tensor-diet-bf16-gguf: ; ibm-granite/granite-3.3-2b-base: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (37s)\n"}
+,{"stream_name":"stdout","time":273.850248659,"data":"[16/32] Attoloop/tensor-diet-bf16-gguf: ; allenai/OLMo-2-0425-1B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (38s)\n"}
+,{"stream_name":"stdout","time":273.938858691,"data":"[17/32] Attoloop/tensor-diet-bf16-gguf: ; Qwen/Qwen3-1.7B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (38s)\n"}
+,{"stream_name":"stdout","time":278.092984996,"data":"[18/32] Imanol11/qwen3b-int4-Octuma: ; Qwen/Qwen2.5-3B-Instruct: names=1, struct3=1, auto3=1, struct4=1, auto4=1 (42s)\n"}
+,{"stream_name":"stdout","time":282.900222951,"data":"[19/32] onnx-community/dinov3-vits16-pretrain-lvd1689m-ONNX: ; facebook/dinov3-vits16-pretrain-lvd1689m: names=1, struct3=1, auto3=1, struct4=1, auto4=1 (47s)\n"}
+,{"stream_name":"stdout","time":288.077749971,"data":"[20/32] neuregex/Bernini-1.3B-ComfyUI: ; ByteDance/Bernini-R-1.3B-Diffusers: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (52s)\n"}
+,{"stream_name":"stdout","time":324.860467836,"data":"[21/32] Attoloop/tensor-diet-bf16-gguf: ; openai-community/gpt2-large: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (89s)\n"}
+,{"stream_name":"stdout","time":352.258080097,"data":"[22/32] Harsha001/flint-ROCmFPX: ; RecursiveSI/flint: names=0, struct3=None, auto3=None, struct4=None, auto4=None (116s)\n"}
+,{"stream_name":"stdout","time":374.987676729,"data":"[23/32] IndexTeam/Index-Echo-S2TT-2B-GGUF: ; IndexTeam/Index-Echo-S2TT-2B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (139s)\n"}
+,{"stream_name":"stdout","time":545.248348405,"data":"[24/32] W4D/Nemotron-3.5-Embed-1B-GGUF: ; nvidia/Nemotron-3.5-Embed-1B-BF16: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (309s)\n"}
+,{"stream_name":"stdout","time":549.25783934,"data":"[25/32] turintech/Qwen3.5-4B-Artemis-GGUF: ; Qwen/Qwen3.5-4B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (313s)\n"}
+,{"stream_name":"stdout","time":549.525678711,"data":"[26/32] alibiserikbay/JevK5-GGUF: ; alibiserikbay/JevK5-2B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (313s)\n"}
+,{"stream_name":"stdout","time":556.803923257,"data":"[27/32] opencerebral/Boris-250M-Instruct-GGUF: ; KSP-NMAI/Boris-250M-Instruct: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (321s)\n"}
+,{"stream_name":"stdout","time":561.769667307,"data":"[28/32] csdhall/Nanbeige4.3-33B-GGUF: ; Nanbeige/Nanbeige4.3-33B: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (326s)\n"}
+,{"stream_name":"stdout","time":597.26276594,"data":"[29/32] a4lg/Qwen3.5-397B-A17B-MTP-ONLY-GGUF: ; Qwen/Qwen3.5-397B-A17B: names=2, struct3=1, auto3=2, struct4=5, auto4=5 (361s)\n"}
+,{"stream_name":"stdout","time":613.366675617,"data":"[30/32] yanolja/YanoljaNEXT-Rosetta-27B-2511-GGUF: ; yanolja/YanoljaNEXT-Rosetta-27B-2511: names=24, struct3=24, auto3=24, struct4=24, auto4=24 (377s)\n"}
+,{"stream_name":"stdout","time":615.165974058,"data":"[31/32] incoai/Qwen3.8-Flash-Next-DFlash2-GGUF: ; Qwen/Qwen3.8-Flash-Next: names=0, struct3=0, auto3=0, struct4=5, auto4=5 (379s)\n"}
+,{"stream_name":"stdout","time":616.491186161,"data":"[32/32] dzannotti/Qwen3.8-Flash-Next-MTP-GGUF: ; Qwen/Qwen3.8-Flash-Next: names=0, struct3=4, auto3=4, struct4=6, auto4=6 (380s)\n"}
+,{"stream_name":"stdout","time":616.493275148,"data":"32 of 32 done; 0 lost to the network or the time budget\n"}
+,{"stream_name":"stdout","time":616.526868817,"data":"recorded in the ledger\n"}
+,{"stream_name":"stdout","time":617.030842472,"data":"exit 0 -m experiments.h28_fresh --design --out /kaggle/working/h28_design_raw.jsonl\n"}
+,{"stream_name":"stdout","time":617.097760515,"data":"32 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":619.812502146,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":619.812543255,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":620.114397772,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":620.114446154,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":621.092486504,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":622.39447839,"data":"[NbConvertApp] Writing 292358 bytes to __results__.html\n"}
+]
