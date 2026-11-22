@@ -357,3 +357,77 @@ def test_conv1d_weights_keep_their_orientation(tmp_path, local, conv1d):
     for mode in ("names", "auto4"):
         c = compare(a, b, alignment=mode)
         assert c["compared"] == 4 and c["median_cosine"] > 0.999, (mode, c["compared"], c["median_cosine"])
+
+
+def _imatrix_gguf(path, n, gtype="imatrix"):
+    import gguf
+    w = gguf.GGUFWriter(str(path), "llama")
+    w.add_string("general.type", gtype)
+    for i in range(n):
+        w.add_tensor(f"blk.{i}.ffn_up.weight.in_sum2", np.ones((4,), np.float32))
+        w.add_tensor(f"blk.{i}.ffn_up.weight.counts", np.ones((1,), np.float32))
+    w.write_header_to_file()
+    w.write_kv_data_to_file()
+    w.write_tensors_to_file()
+    w.close()
+
+
+def test_an_importance_matrix_is_not_the_model(tmp_path, local, monkeypatch):
+    """(ix) llama.cpp saves the activation statistics it quantises with as `imatrix.gguf`; it lists
+    more tensors than the model (several per weight), so (vii) chose it (H27's
+    turintech/Qwen3.5-4B-Artemis-GGUF and three more, design data). A file named "imatrix" with no
+    quantisation tag whose header says `general.type` "imatrix" is set aside, and in (vii) such a
+    unit counts no tensors. A model whose name says imatrix but whose header does not stays."""
+    pytest.importorskip("gguf")
+    from pedigree import remote, units
+    monkeypatch.setattr(remote, "resolve_url", lambda repo, f, rev="main": os.path.join(repo, f))
+    _gguf(tmp_path / "m-Q8_0.gguf", 30)
+    _imatrix_gguf(tmp_path / "m-imatrix.gguf", 60)
+    _gguf(tmp_path / "imatrix-calibrated.gguf", 30)               # weights, despite the name
+    _imatrix_gguf(tmp_path / "stats.gguf", 60)                     # no imatrix in its name: (vii) catches it
+    names = sorted(p.name for p in tmp_path.iterdir())
+    d = {"sha": "local", "siblings": [{"rfilename": n, "size": os.path.getsize(tmp_path / n)} for n in names]}
+    assert units._imatrix(str(tmp_path), d, "m-imatrix.gguf")
+    assert not units._imatrix(str(tmp_path), d, "imatrix-calibrated.gguf")
+    assert not units._imatrix(str(tmp_path), d, "m-Q8_0.gguf")
+    assert not units.is_imatrix_name("m-imatrix-Q4_K_M.gguf") and not units.is_imatrix_name("m.i1-IQ3_M-imatrix.gguf")
+    kept = [n for n in names if not units._imatrix(str(tmp_path), d, n)]
+    assert "m-imatrix.gguf" not in kept
+    pick = units._most_tensors(str(tmp_path), d, kept, ["m-Q8_0.gguf"])
+    assert pick in (["m-Q8_0.gguf"], ["imatrix-calibrated.gguf"]), pick      # never the statistics
+    monkeypatch.setattr(units, "READERS_V6", False)
+    assert not units._imatrix(str(tmp_path), d, "m-imatrix.gguf")             # H27's choice reproduced
+
+
+@pytest.mark.parametrize("conv1d", [True, False])
+def test_gguf_linear_layout_against_a_conv1d_base(tmp_path, local, conv1d):
+    """(k) llama.cpp writes GPT-2's Conv1D weights in Linear layout [out, in]; names ignored, an MLP's
+    up projection then had the base's down projection's shape and was paired with it (H27a's two
+    opposite pairs, design data). The base's non-square weights match the GGUF side's shapes more
+    often reversed, so its square weights and those held reversed are read transposed. A base stored
+    in Linear layout is left as it is."""
+    pytest.importorskip("gguf")
+    import gguf
+    from safetensors.numpy import save_file
+    from pedigree.verify import compare
+    rng = np.random.RandomState(11)
+    pairs = {"attn_qkv": ("attn.c_attn", (64, 192)), "attn_output": ("attn.c_proj", (64, 64)),
+             "ffn_up": ("mlp.c_fc", (64, 256)), "ffn_down": ("mlp.c_proj", (256, 64))}
+    base, w = {}, gguf.GGUFWriter(str(tmp_path / "m-F32.gguf"), "gpt2")
+    w.add_block_count(2)
+    for layer in range(2):
+        for g, (h, shape) in pairs.items():
+            x = rng.randn(*shape).astype(np.float32)                         # [in, out], as Conv1D holds
+            base[f"h.{layer}.{h}.weight"] = x if conv1d else np.ascontiguousarray(x.T)
+            w.add_tensor(f"blk.{layer}.{g}.weight", np.ascontiguousarray(x.T))   # [out, in], as llama.cpp writes
+    w.write_header_to_file()
+    w.write_kv_data_to_file()
+    w.write_tensors_to_file()
+    w.close()
+    (tmp_path / "b").mkdir()
+    save_file(base, str(tmp_path / "b" / "model.safetensors"))
+    a = remote_model(tmp_path, ["m-F32.gguf"])
+    b = remote_model(tmp_path / "b", ["model.safetensors"])
+    for mode in ("names", "struct4", "auto4"):
+        c = compare(a, b, alignment=mode)
+        assert c["compared"] == 8 and c["median_cosine"] > 0.999, (mode, c["compared"], c["median_cosine"])

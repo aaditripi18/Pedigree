@@ -554,7 +554,36 @@ def orient(model, other):
             rev += tuple(sy[m][1]) == sh[::-1]
             ok += tuple(sy[m][1]) == sh
         return Renamed(x, {n: n for n in sx}, t) if rev > ok and rev >= ORIENT_MIN else x
-    return flip(model, other), flip(other, model)
+    model, other = flip(model, other), flip(other, model)
+    return orient_gguf(model, other)
+
+
+def orient_gguf(model, other):
+    """(k) (amendment 2026-11-22 (3)) llama.cpp writes GPT-2's Conv1D weights as a PyTorch Linear
+    stores them, [out, in]; the Hugging Face file keeps [in, out]. Names aside, an MLP's up and down
+    projections then have each other's shapes, and square weights compare transposed. When exactly
+    one side is GGUF: of the other side's non-square 2-D tensors, count those whose shape the GGUF
+    side holds as stored and those it holds reversed. If reversed wins (at least ORIENT_MIN), that
+    side is seen in Linear layout: its square 2-D tensors and its non-square ones held reversed are
+    read transposed. Shapes alone decide, so the rule is the same with names used or ignored."""
+    from . import units
+    if not units.READERS_V6:
+        return model, other
+
+    def g(m):
+        return getattr(m, "gguf_meta", None)
+    if bool(g(model)) == bool(g(other)):
+        return model, other
+    gg, h = (model, other) if g(model) else (other, model)
+    gs = {tuple(v[1]) for v in gg.float_shapes().values() if len(v[1]) == 2}
+    hs = {n: tuple(v[1]) for n, v in h.float_shapes().items() if len(v[1]) == 2}
+    ok = sum(sh in gs for sh in hs.values() if sh[0] != sh[1])
+    rev = sum(sh[::-1] in gs for sh in hs.values() if sh[0] != sh[1])
+    if not (rev > ok and rev >= ORIENT_MIN):
+        return model, other
+    t = {n for n, sh in hs.items() if sh[0] == sh[1] or sh[::-1] in gs}
+    r = Renamed(h, {n: n for n in h.float_shapes()}, t)
+    return (model, r) if g(model) else (r, other)
 
 
 def compare(model: Remote, other: Remote, n_tensors: int = N_TENSORS, alignment: str = "names") -> dict:

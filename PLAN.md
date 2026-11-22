@@ -1174,3 +1174,72 @@ opposite verdict, H26d's disagreement, and H26's 18 declared pairs auto4 left no
 - **H27c** No fresh sampled model, and no declared base of one, is unreadable because of its file
   format, except formats with no public specification; no weight files, gated, private or missing
   repositories are counted by reason and do not count.
+
+**Outcome of H27 (recorded after judging, 2026-11-22; Kaggle `pedigree-h27` read all 217 sampled
+models in one session, none lost).**
+
+- **H27a: not supported.** v4 with (g)-(i), the tie-break and (j), names ignored, agrees with names
+  on 406 of 408 pairs (34 unrelated by names); none abstain and two are opposite, both GGUF files of
+  GPT-2 models against their Hugging Face base: `opencerebral/Boris-250M-Instruct-GGUF` against
+  `KSP-NMAI/Boris-250M-Instruct` and `Attoloop/tensor-diet-bf16-gguf` against
+  `openai-community/gpt2-large` (names related, v4 unrelated at 19 tensors, medians 0.02 and 0.02).
+  llama.cpp writes GPT-2's Conv1D weights in a Linear's layout, [out, in]; the Hugging Face file keeps
+  [in, out]. Names ignored, a block's MLP up projection then has the base's down projection's shape,
+  and v4 paired them (every block, both pairs); the square attention outputs compared transposed.
+- **H27b: not supported.** auto4 makes 53 of the 83 fresh declared pairs that names align fewer than
+  8 tensors in comparable (64%); 5 more declared pairs could not be read (counted under H27c). Of the
+  30 left, 21 share fewer than 8 tensors of >= 4096 values by shape in either orientation, so no
+  alignment can compare them (13 are one GPT-2 GGUF that declares 14 bases of other architectures).
+  Of the 9 that share more: 4 were read from the wrong file (below); 3 are multi-token-prediction or
+  draft heads saved alone, against the whole model; 1 uses a GGUF tensor type llama.cpp does not
+  publish; and 1, `onnx-community/dinov3-vits16-pretrain-lvd1689m-ONNX`, comes from PyTorch's newer
+  ONNX exporter, which names weights `val_N` and its nodes `node_MatMul_N` with no module scope, so a
+  layer's four 384 x 384 attention weights cannot be told apart by name or shape (v4 abstains).
+- **H27c: supported.** 9 repositories are unread, none because of a file format: HTTP 401 2, gated
+  with no byte-identical public copy 4, no weight files 3.
+
+## Amendment 2026-11-22 (3): reader (ix), rule (k) and H28, after H27 and before any of H28's data
+
+H27's verdicts stand as recorded. Its pairs are design data for what follows, reported beside H28
+and not counted.
+
+**Cause (reader).** In `turintech/Qwen3.5-4B-Artemis-GGUF`, `W4D/Nemotron-3.5-Embed-1B-GGUF`,
+`csdhall/Nanbeige4.3-33B-GGUF` and `yanolja/YanoljaNEXT-Rosetta-27B-2511-GGUF` the file read was
+llama.cpp's importance matrix (`*imatrix*.gguf`: per-weight activation statistics used to quantise,
+`.in_sum2` and `.counts`, no weights). It lists more tensors than the model, so (vii) chose it.
+
+**(ix)** (`pedigree/units.py`, readers v6; `PEDIGREE_READERS_V6=0` reproduces H27). A `.gguf` file
+named "imatrix" with no quantisation tag whose header's `general.type` is "imatrix" is set aside
+before any other rule; in (vii), a GGUF unit whose header says so counts no tensors. Read again with
+it, all four repositories open a weight file (`Qwen3.5-4B-Artemis-Q5_K_M.gguf` against
+`Qwen/Qwen3.5-4B`: 24 tensors at median 0.999 under names, struct4 and auto4).
+
+**(k)** (`pedigree/verify.py` `orient_gguf`, applied to every comparison under readers v6). When
+exactly one side is GGUF: of the other side's non-square 2-D tensors, count those whose shape the
+GGUF side holds as stored and those it holds reversed. If reversed wins, and at least 2 are, that
+side's square 2-D tensors and its non-square ones held reversed are read transposed. Shapes alone
+decide, so (k) is the same with names used or ignored. Read again with it, both of H27a's opposite
+pairs align 24 tensors at median 1.0 under names, struct4 and auto4.
+
+`tests/test_readers_v5.py` checks (ix) (an imatrix beside a model, a model named "imatrix", a file
+with an imatrix header and another name) and (k) (a GPT-2 GGUF against a Conv1D-layout and a
+Linear-layout base: all eight weights at 1.0 under names, struct4 and auto4); the imatrix case and
+the Conv1D case fail without them.
+
+**Fresh data.** A new frozen sample (`results/h28_sample.json`, seed 20261124, drawn after this
+amendment is committed and before any of it is read): H25's rule, excluding E2's, H13's, H15's,
+H19's, H23's, H25's, H26's and H27's samples. Each model is read and aligned exactly as in H27,
+with (ix) and (k); each declared pair also records how many tensors of >= 4096 values the two hold
+of the same shape in either orientation. Design data (ledger `H28-design`): H27a's two opposite
+pairs and H27b's 30 pairs left not comparable.
+
+- **H28a** On the fresh pairs where names align >= 8 tensors, v4 with (g)-(i), the tie-break, (j)
+  and (k), names ignored, gives the same related / unrelated verdict for >= 98% and the opposite
+  verdict for none (judged if >= 20 pairs, >= 5 of them unrelated by names).
+- **H28b** On the fresh declared pairs where names align fewer than 8 tensors and both models were
+  read, `auto4` makes >= 80% comparable (>= 8 tensors).
+- **H28c** No fresh sampled model, and no declared base of one, is unreadable because of its file
+  format, except formats with no public specification; no weight files, gated, private or missing
+  repositories are counted by reason and do not count.
+- **H28d** On the fresh declared pairs of H28b whose two models share >= 8 tensors of >= 4096
+  values by shape (either orientation), `auto4` makes >= 80% comparable (judged if >= 10 pairs).

@@ -79,6 +79,29 @@ def n_tensors(url: str) -> int:
     return int(n)
 
 
+def file_type(url: str, size: int) -> str | None:
+    """`general.type` of a GGUF file ("model", "adapter", "imatrix", ...), or None if its leading
+    `general.*` keys do not state one (writers put those keys first; reading stops at the first other
+    key, before any vocabulary)."""
+    fh = RangeFile(url, size)
+    r = _Reader(fh)
+    if fh.read(4) != b"GGUF":
+        raise ValueError("not a GGUF file")
+    (version,) = r.take("<I")
+    if version < 2:
+        raise ValueError(f"GGUF version {version} is not supported")
+    _, n_kv = r.take("<Q")[0], r.take("<Q")[0]
+    for _ in range(n_kv):
+        key = r.string()
+        (vtype,) = r.take("<I")
+        v = r.value(vtype)
+        if key == "general.type":
+            return str(v)
+        if not key.startswith("general."):
+            return None
+    return None
+
+
 def tensor_count(url: str, size: int) -> tuple[int, int | None]:
     """(tensors in this file, tensors in the whole split set or None), from the header and metadata
     alone (tensor descriptions are not read)."""

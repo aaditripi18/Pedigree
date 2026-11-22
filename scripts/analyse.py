@@ -1217,6 +1217,43 @@ def h27(h27r, n_sample: int, h27d, T, rule) -> list[dict]:
     return out
 
 
+def h28(h28r, n_sample: int, h28d, T, rule) -> list[dict]:
+    """Amendment 2026-11-22 (3): H27's three with reader (ix) and rule (k) on a fresh sample, H27's pairs
+    (design data, ledger H28-design) beside them; and H28d, H28b restricted to pairs that share >= 8 large
+    tensor shapes."""
+    out = h26(h28r, n_sample, h28d, T, rule)
+    for h, (i, f) in zip(out, (("H28a", "H27a"), ("H28b", "H27b"), ("H28c", "H27c"))):
+        h["id"], h["follows"] = i, f
+        h["statement"] = h["statement"].replace("v4 with (g)-(i)", "v4 with (g)-(i), the tie-break, (j) and (k)")
+        h["evidence"] = (h["evidence"].replace("v4 with (g)-(i) ", "v4 with (g)-(i), (j) and (k) ", 1)
+                         .replace("H25's pairs under v5", "H27's pairs under (ix) and (k)").replace("under H26c", "under H28c"))
+    sd = ("On fresh declared pairs where names align fewer than 8 tensors, both models were read and the two share "
+          ">= 8 tensors of >= 4096 values by shape (either orientation), auto4 makes >= 80% comparable.")
+    bd = {"id": "H28d", "statement": sd, "follows": "H27b"}
+    if not h28r or len(h28r) < n_sample:
+        return out + [{**bd, "verdict": "pending", "evidence": "fresh sample running"}]
+    share, comp, below = 0, 0, 0
+    for m in h28r:
+        for d in m.get("declared", []):
+            a = d.get("alignments")
+            if not a:
+                continue
+            nm = a.get("names") or {}
+            if nm.get("error") or (nm.get("compared") or 0) >= MIN_COMPARED:
+                continue
+            if (d.get("shared_large_shapes") or 0) < MIN_COMPARED:
+                below += 1
+                continue
+            au = a.get("auto4") or {}
+            share += 1
+            comp += not au.get("error") and (au.get("compared") or 0) >= MIN_COMPARED
+    judged = share >= 10
+    return out + [{**bd, "verdict": verdict(comp / share >= 0.8 if judged else None) if share else "not judged",
+                   "numbers": {"comparable": [comp, share], "sharing_fewer_than_8_shapes": below},
+                   "evidence": f"{comp}/{share} comparable; {below} pairs share fewer than 8 large tensor shapes "
+                               f"(no alignment can compare them)" + ("" if judged else "; fewer than 10 pairs: not judged")}]
+
+
 def h26(h26r, n_sample: int, h26d, T, rule) -> list[dict]:
     """Amendment 2026-11-21: readers v5 with alignment v4 and (g)-(i) on a fresh sample; H25's pairs
     (design data, ledger H26d) reported beside it, not counted."""
@@ -1306,6 +1343,8 @@ def main() -> None:
     h26d = latest_runs(rows, "H26d", lambda r: 0)
     h27r = latest_runs(rows, "H27", lambda r: 0)
     h27d = latest_runs(rows, "H27d", lambda r: 0)
+    h28r = latest_runs(rows, "H28", lambda r: 0)
+    h28d = latest_runs(rows, "H28-design", lambda r: 0)
     e2y = latest_runs(rows, "E2y", lambda r: 0)
     e2yp = latest_runs(rows, "E2yp", lambda r: 0)
     e2v4 = latest_runs(rows, "E2v4", lambda r: 0)
@@ -1320,6 +1359,8 @@ def main() -> None:
     n26 = sum(len(v) for v in s26["sample"].values())
     p27 = ROOT / "results" / "h27_sample.json"
     n27 = sum(len(v) for v in json.loads(p27.read_text(encoding="utf-8"))["sample"].values()) if p27.exists() else 0
+    p28 = ROOT / "results" / "h28_sample.json"
+    n28 = sum(len(v) for v in json.loads(p28.read_text(encoding="utf-8"))["sample"].values()) if p28.exists() else 0
     x_targets = json.loads((ROOT / "results" / "e2x_targets.json").read_text(encoding="utf-8"))
     s19 = json.loads((ROOT / "results" / "h19_sample.json").read_text(encoding="utf-8"))
     n19 = sum(len(v) for v in s19["sample"].values())
@@ -1350,7 +1391,7 @@ def main() -> None:
                h18(h16r, h16br), h19(h19r, n19, T, rule), h20(h19r, n19, h20e2, T, rule),
                h21(e2x, len(x_targets["models"])), *h23(h23r, n23, e2v3, T, rule), h24(e5e_h24),
                *h25(h25r, n25, h25d, T, rule), *h26(h26r, n26, h26d, T, rule),
-               *h27(h27r, n27, h27d, T, rule)]
+               *h27(h27r, n27, h27d, T, rule), *h28(h28r, n28, h28d, T, rule)]
         if e2r:
             e2f_all = with_rescores(e2, e2r, e2g, e2s, e2f)
             Af = audit(e2f_all, T, rule)
@@ -1404,11 +1445,11 @@ def main() -> None:
     md += ["", f"Families compared blind (after the rule was written): {', '.join(sorted(BLIND))}.", "",
            "## Hypotheses", "", "| | Hypothesis | Verdict | Evidence | Under the midpoint rule |", "|---|---|---|---|---|"]
     mid = {h["id"]: h for h in out["rules"]["midpoint"]["hypotheses"]}
-    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("abc")), h["id"])):
+    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("abcd")), h["id"])):
         md.append(f"| {h['id']} | {h['statement']} | **{h['verdict']}** | {h['evidence']} | {mid[h['id']]['verdict']} |")
     (ROOT / "docs").mkdir(exist_ok=True)
     (ROOT / "docs" / "RESULTS.md").write_text("\n".join(md) + "\n", encoding="utf-8")
-    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("abc")), h["id"])):
+    for h in sorted(out["rules"]["t"]["hypotheses"], key=lambda h: (int(h["id"][1:].rstrip("abcd")), h["id"])):
         print(f"{h['id']:>4} {h['verdict']:<14} {h['evidence']}")
     print({k: round(v["t"], 4) for k, v in T.items()})
 

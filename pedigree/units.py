@@ -23,10 +23,39 @@ def _network(e: BaseException) -> bool:
         (isinstance(e, OSError) and not isinstance(e, FileNotFoundError))
 
 
+# amendment 2026-11-22 (3), reader (ix): an importance matrix saved as GGUF (llama.cpp's
+# `imatrix.gguf`: activation statistics used to quantise, no weights) is not the model. By name, a
+# .gguf file named "imatrix" with no quantisation tag whose header's `general.type` says "imatrix" is set
+# aside before any other rule; in rule (vii), a GGUF unit whose header says so counts no tensors.
+# PEDIGREE_READERS_V6=0 reproduces H27's file choice.
+READERS_V6 = os.environ.get("PEDIGREE_READERS_V6", "1") != "0"
+_QUANT_TAG = re.compile(r"(?<![a-z0-9])(i?q\d\w*|bf16|f16|f32|fp16|fp32)(?![a-z0-9])", re.I)
+
+
+def is_imatrix_name(n: str) -> bool:
+    base = n.rsplit("/", 1)[-1]
+    return (READERS_V6 and base.lower().endswith(".gguf") and "imatrix" in base.lower()
+            and not _QUANT_TAG.search(base[:-5]))
+
+
+def _imatrix(repo: str, d: dict, n: str) -> bool:
+    if not is_imatrix_name(n):
+        return False
+    from .remote import resolve_url
+    sib = {s["rfilename"]: s for s in d.get("siblings", [])}
+    size = int(sib[n].get("size") or (sib[n].get("lfs") or {}).get("size") or 0)
+    try:
+        return ggufremote.file_type(resolve_url(repo, n, d["sha"]), size) == "imatrix"
+    except Exception as e:                                  # noqa: BLE001
+        if _network(e):
+            raise NetworkError(f"{repo}: {type(e).__name__}: {e}") from None
+        return False
+
+
 def weight_files(repo: str, d: dict) -> tuple[str, list[str], dict, dict]:
     """(format, files, sizes, sha256) of a repository; format names why there are none."""
     sib = {s["rfilename"]: s for s in d.get("siblings", [])}
-    names = [n for n in sib if not n.split("/")[-1].startswith("adapter_model")]
+    names = [n for n in sib if not n.split("/")[-1].startswith("adapter_model") and not _imatrix(repo, d, n)]
     prefix = ""
     if "model_index.json" in sib:
         for sub in ("unet", "transformer"):
@@ -204,6 +233,8 @@ def _count(repo: str, commit: str, unit: list[str], size: dict) -> int:
     """How many tensors a weight unit holds, from its headers alone."""
     from .remote import read_header, resolve_url
     if unit[0].lower().endswith(".gguf"):
+        if READERS_V6 and ggufremote.file_type(resolve_url(repo, unit[0], commit), size.get(unit[0], 0)) == "imatrix":
+            return -1                                       # reader (ix): statistics, not weights
         return sum(ggufremote.n_tensors(resolve_url(repo, f, commit)) for f in unit)
     total = 0
     for f in unit:

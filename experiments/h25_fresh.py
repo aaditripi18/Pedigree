@@ -74,6 +74,19 @@ def alignments(model, other, modes) -> dict:
     return out
 
 
+def shared_large_shapes(model, other) -> int:
+    """How many tensors of >= MIN_ELEMENTS values the two models could pair by shape alone, either
+    orientation (amendment 2026-11-22 (3)): no alignment can compare more."""
+    import collections
+    import numpy as np
+    from pedigree.verify import MIN_ELEMENTS
+
+    def big(m):
+        return collections.Counter(tuple(sorted(v[1])) for v in m.float_shapes().values()
+                                   if int(np.prod(v[1])) >= MIN_ELEMENTS)
+    return sum((big(model) & big(other)).values())
+
+
 def read_one(repo: str, tier: str, frame: pool.Frame) -> dict:
     meta = frame.by_id.get(repo, {})
     rec = {"id": repo, "tier": tier, "library": meta.get("library"), "declared_base": meta.get("declared_base") or [],
@@ -90,6 +103,7 @@ def read_one(repo: str, tier: str, frame: pool.Frame) -> dict:
         row = {"base": b, **{k: v for k, v in bf.items() if k in ("via", "reason", "format")}}
         if other is not None:
             row["alignments"] = alignments(model, other, DECLARED_MODES)
+            row["shared_large_shapes"] = shared_large_shapes(model, other)
         rec["declared"].append(row)
     rec["pool_alignments"] = []
     cands = [c for c in frame.candidates(rec["family_key"], rec.get("params"), rec.get("dims"), exclude={repo})
@@ -133,6 +147,7 @@ def read_design(p: dict, frame: pool.Frame) -> dict:
         rec["reason"] = mf.get("reason") if model is None else of.get("reason")
         return rec
     rec["alignments"] = alignments(model, other, ("names", "struct3", "auto3", "struct4", "auto4"))
+    rec["shared_large_shapes"] = shared_large_shapes(model, other)
     return rec
 
 

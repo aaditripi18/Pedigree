@@ -48,7 +48,7 @@ def pc(x: float, d: int = 0) -> str:
 
 
 def hsort(hs):
-    return sorted(hs, key=lambda h: (int(h["id"][1:].rstrip("abc")), h["id"]))
+    return sorted(hs, key=lambda h: (int(h["id"][1:].rstrip("abcd")), h["id"]))
 
 
 # --- shared page parts --------------------------------------------------------------------------

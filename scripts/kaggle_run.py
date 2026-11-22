@@ -225,6 +225,11 @@ JOBS["h27"] = _job("pedigree-h27", [["-m", "experiments.h27_fresh", "--out", "/k
 JOBS["h27-design"] = _job("pedigree-h27-design", [["-m", "experiments.h27_fresh", "--design",
                                                    "--out", "/kaggle/working/h27_design_raw.jsonl"]],
                           gpu=False, env=dict(E2_ENV))
+JOBS["h28"] = _job("pedigree-h28", [["-m", "experiments.h28_fresh", "--out", "/kaggle/working/h28_raw.jsonl"]],
+                   gpu=False, env=dict(E2_ENV))
+JOBS["h28-design"] = _job("pedigree-h28-design", [["-m", "experiments.h28_fresh", "--design",
+                                                   "--out", "/kaggle/working/h28_design_raw.jsonl"]],
+                          gpu=False, env=dict(E2_ENV))
 JOBS["e2y"] = _job("pedigree-e2y", [["-m", "experiments.e2x_reaudit", "--round", "y", "--out", "/kaggle/working"]],
                    gpu=False, env=dict(E2_ENV))
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
