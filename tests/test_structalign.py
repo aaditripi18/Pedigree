@@ -266,3 +266,30 @@ def test_v5_stack_partner_by_shape_overlap(monkeypatch):
     monkeypatch.setattr(structalign, "V5", False)          # H25 as it ran: the audio stack (larger) won
     (_, mp, _), = struct_names_v4(gguf, base)
     assert "blk.2.ffn_up.weight" not in mp
+
+
+TWO_TOWERS = r'''
+import json
+from pedigree.structalign import struct_names_v3, struct_names_v4
+leaf = (("mlp.fc1.weight", (96, 32)), ("mlp.fc2.weight", (32, 96)), ("layer_norm1.weight", (32,)))
+onnx = {f"vision_model.encoder.layers.{i}.{k}": ("float", s) for i in range(3) for k, s in leaf}
+base = {f"{t}_model.encoder.layers.{i}.{k}": ("float", s) for t in ("text", "vision") for i in range(3) for k, s in leaf}
+(_, mp, _), = struct_names_v4(onnx, base)
+v3, _ = struct_names_v3(onnx, base)
+print(json.dumps([mp["vision_model.encoder.layers.1.mlp.fc1.weight"], v3["vision_model.encoder.layers.1.mlp.fc1.weight"]]))
+'''
+
+
+def test_stack_partner_ties_are_settled_by_name_the_same_in_every_run():
+    """Two towers of one shape (SigLIP2 so400m, H26a): every tie-break but the name ties, so the
+    partner was a set's iteration order, which changes with Python's hash seed. Now the stack whose
+    name is closest wins, in every run."""
+    import os
+    import subprocess
+    import sys
+    out = set()
+    for seed in ("0", "1", "2", "3", "4", "5", "6", "7"):
+        r = subprocess.run([sys.executable, "-c", TWO_TOWERS], capture_output=True, text=True, check=True,
+                           env={**os.environ, "PYTHONHASHSEED": seed})
+        out.add(r.stdout.strip())
+    assert out == {'["vision_model.encoder.layers.1.mlp.fc1.weight", "vision_model.encoder.layers.1.mlp.fc1.weight"]'}

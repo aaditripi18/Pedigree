@@ -101,7 +101,7 @@ def struct_names_v2(gguf_shapes: dict, hf_shapes: dict) -> dict[str, str]:
         if not free_h:
             break
         ng = len(gst[g])
-        h = min(free_h, key=lambda k: (abs(len(hst[k]) - ng), -size(hst, k)))
+        h = min(free_h, key=lambda k: (abs(len(hst[k]) - ng), -size(hst, k), *_tie(g, k)))
         free_h.discard(h)
         for i in range(min(len(gst[g]), len(hst[h]))):     # block i with block i
             if i in gst[g] and i in hst[h]:
@@ -195,7 +195,7 @@ def struct_names_v3(a_shapes: dict, b_shapes: dict) -> tuple[dict[str, str], set
         ng = len(ast_[g])
         same_role = [k for k in free_b if _role(g) and _role(k) == _role(g)]
         pool_ = same_role or ([k for k in free_b if _role(k) is None or _role(g) is None] or list(free_b))
-        h = min(pool_, key=lambda k: (abs(len(bst[k]) - ng), -size(bst, k)))
+        h = min(pool_, key=lambda k: (abs(len(bst[k]) - ng), -size(bst, k), *_tie(g, k)))
         free_b.discard(h)
         ga, hb = sorted(ast_[g]), sorted(bst[h])
         n, m = len(ga), len(hb)
@@ -252,6 +252,13 @@ def _lcs(a: str, b: str) -> int:
             cur.append(prev[j] + 1 if ca == cb else max(prev[j + 1], cur[j]))
         prev = cur
     return prev[-1]
+
+
+def _tie(a: str, b: str) -> tuple:
+    """The last tie-break between candidate partner stacks (amendment 2026-11-22): the stack name
+    sharing the longest subsequence with the other side's, then name order. Without it a tie was
+    settled by a set's iteration order, which Python varies between runs (H26a's opposite verdict)."""
+    return (-_lcs(a.lower(), b.lower()), b)
 
 
 def _pairs4(gs: dict, hs: dict, out: dict) -> None:
@@ -341,9 +348,10 @@ def struct_names_v4(a_shapes: dict, b_shapes: dict) -> list[tuple[str, dict, set
         pool_ = same_role or ([k for k in free_b if _role(k) is None or _role(g) is None] or list(free_b))
         if V5:   # (i) the partner whose tensor shapes overlap most, then the old rule (amendment 2026-11-21)
             sg = _shape_counts(ast_[g])
-            h = min(pool_, key=lambda k: (-_overlap(sg, _shape_counts(bst[k])), abs(len(bst[k]) - ng), -size(bst, k)))
+            h = min(pool_, key=lambda k: (-_overlap(sg, _shape_counts(bst[k])), abs(len(bst[k]) - ng), -size(bst, k),
+                                          *_tie(g, k)))
         else:
-            h = min(pool_, key=lambda k: (abs(len(bst[k]) - ng), -size(bst, k)))
+            h = min(pool_, key=lambda k: (abs(len(bst[k]) - ng), -size(bst, k), *_tie(g, k)))
         free_b.discard(h)
         stack_pairs.append((g, h))
     unequal = any(len(ast_[g]) != len(bst[h]) for g, h in stack_pairs)

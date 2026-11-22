@@ -755,7 +755,18 @@ def h18(h16r: dict, h16br: dict) -> dict:
         if "pending" in vs:
             return {**base, "verdict": "pending", "evidence": "runs only if H16 or H16b is supported"}
         return {**base, "verdict": "not run", "evidence": "not run: neither H16 nor H16b is supported"}
-    return {**base, "verdict": "pending", "evidence": "runs after H16 / H16b"}
+    f = ROOT / "results" / "h18_scope.json"
+    if not f.exists():
+        return {**base, "verdict": "pending", "evidence": "runs after H16 / H16b"}
+    sc = json.loads(f.read_text(encoding="utf-8"))
+    n_in = sc["counts"].get("in scope", 0)
+    out = "; ".join(f"{k} {v}" for k, v in sorted(sc["counts"].items(), key=lambda kv: -kv[1]) if k != "in scope")
+    if n_in == 0:
+        return {**base, "verdict": "not judged", "numbers": sc["counts"],
+                "evidence": f"0 of {len(sc['pairs'])} declared pairs weights cannot compare are in scope ({out}); "
+                            "nothing to run"}
+    return {**base, "verdict": "pending", "numbers": sc["counts"],
+            "evidence": f"{n_in} of {len(sc['pairs'])} pairs in scope ({out}); behaviour run pending"}
 
 
 

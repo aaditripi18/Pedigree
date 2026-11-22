@@ -1092,3 +1092,50 @@ file's first 24 bytes and sums a split set's shards, which by the format's defin
 The fresh sample resumes from the 150 records already written (`results/kaggle/h26/h26_raw.jsonl`).
 Its rule and readers are the same, so the 150 are not read again. The design pairs and E2y run from
 the start, each in a session of its own.
+
+**Outcome of H16 (recorded after judging, 2026-11-22; the fresh students were trained on friends'
+GPU accounts, `distill4-*`, and scored by `pedigree-e5e-h16-*`, 16 students per family, none
+failed).** **Supported.** The dev rule, fixed before the fresh students existed, is drop > 0.063
+(dev gap 0.057). On the fresh suspects all 10 distilled students exceed it (drops 0.150 to 0.349)
+and none of the 10 independent students do (drops -0.094 to -0.002): TPR 10/10, FPR 0/10, in both
+families (text decoder 5/5 and 0/5, vision CNN 5/5 and 0/5). This is the first behaviour rule
+in the project to pass on fresh students. It opens H18.
+
+**Outcome of H18 (recorded 2026-11-22, after H16 was judged; `experiments/h18_scope.py`, before any
+behaviour was run).** **Not judged.** Its scope, as written above, is declared pairs still not
+comparable after H17 whose model and base are both text language models of <= 14B parameters with
+one tokenizer. The scope step puts each of the 42 such pairs in one category, rules in order
+(`results/h18_scope.json`). The counts: the model or base is not readable 18 (15 of them gated or
+HTTP 401, the project owner having decided on 2026-11-21 not to read gated repositories; 2 with no
+weight files; 1 base in another checkpoint format, `nvidia/parakeet-tdt-0.6b-v2`), not a
+text language model 13 (vision-language, speech, TTS, image and video models), more than 14B
+parameters 10, runs only through the repository's own code 1
+(`mobilint/Qwen2.5-0.5B-Instruct-Batch16`: an `auto_map` to `proxy_qwen2.py` and an NPU binary;
+Pedigree runs no code from a repository). No pair is in scope, so the rule has nothing to confirm;
+H18 is recorded as not judged, not as passed.
+
+**Outcome of H26 (recorded after judging, 2026-11-22; Kaggle `pedigree-h26` read all 300 sampled
+models in two sessions, none lost).**
+
+- **H26a: not supported.** v4 with (g)-(i), names ignored, agrees with names on 598 of 599 pairs, 46
+  of them unrelated by names (judged); none abstain and one is opposite:
+  `onnx-community/siglip2-so400m-patch14-384-ONNX` against `google/siglip2-so400m-patch14-384`
+  (names: 24 tensors, median 1.0; v4: 24, 0.005). The export holds the vision tower only; the base
+  holds a vision and a text tower of the same depth and the same shapes. Rule (i) scored both towers
+  equal (432 shared tensor shapes each), and so did every later tie-break (depth, size). The partner
+  was then the first of a Python set, an order that changes between runs with the hash seed. On
+  Kaggle it was the text tower. The same code run locally paired the vision tower.
+- **H26b: supported.** auto4 makes 90 of the 108 fresh declared pairs that names align fewer than 8
+  tensors in comparable (83%); 1 more declared pair could not be read (counted under H26c).
+- **H26c: supported.** 15 repositories (sampled models or their declared bases) are unread, none
+  because of a file format: HTTP 401 8, HTTP 403 1, gated with no byte-identical public copy 3, no
+  weight files 3.
+
+**Amendment 2026-11-22: stack partners are chosen the same way in every run (after H26, before any
+later data).** In v2, v3 and v4 alike, a stack's partner was the minimum over a set by depth (and in
+v4 shape overlap) and size. When all of these tie, Python's set order, which varies between runs
+with the hash seed, chose the partner. A tie now goes to the stack whose name shares the longest
+subsequence with the other side's stack name, then to name order (`pedigree/structalign.py` `_tie`;
+`tests/test_structalign.py` checks one result under eight hash seeds, and fails without the fix).
+Read again with it, under two hash seeds, H26a's opposite pair aligns 24 tensors at median 1.0
+(related) both times. H26a's verdict stands as recorded; the pair is design data for this rule.

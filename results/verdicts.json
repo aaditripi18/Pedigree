@@ -1470,8 +1470,14 @@
      "id": "H18",
      "statement": "Behaviour (H16's rule) confirms >= 90% of the declared Hub pairs weights cannot compare that it can run (text models <= 14B sharing one tokenizer).",
      "follows": "behaviour above 2B parameters",
-     "verdict": "pending",
-     "evidence": "runs after H16 / H16b"
+     "verdict": "not judged",
+     "numbers": {
+      "not readable": 18,
+      "more than 14B parameters": 10,
+      "not a text language model": 13,
+      "runs only through the repository's own code": 1
+     },
+     "evidence": "0 of 42 declared pairs weights cannot compare are in scope (not readable 18; not a text language model 13; more than 14B parameters 10; runs only through the repository's own code 1); nothing to run"
     },
     {
      "id": "H19",
@@ -3505,8 +3511,14 @@
      "id": "H18",
      "statement": "Behaviour (H16's rule) confirms >= 90% of the declared Hub pairs weights cannot compare that it can run (text models <= 14B sharing one tokenizer).",
      "follows": "behaviour above 2B parameters",
-     "verdict": "pending",
-     "evidence": "runs after H16 / H16b"
+     "verdict": "not judged",
+     "numbers": {
+      "not readable": 18,
+      "more than 14B parameters": 10,
+      "not a text language model": 13,
+      "runs only through the repository's own code": 1
+     },
+     "evidence": "0 of 42 declared pairs weights cannot compare are in scope (not readable 18; not a text language model 13; more than 14B parameters 10; runs only through the repository's own code 1); nothing to run"
     },
     {
      "id": "H19",

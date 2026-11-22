@@ -1,0 +1,263 @@
+{
+ "rule": "PLAN.md H18 scope; experiments/h18_scope.py rules 1-7 in order; declared pairs not comparable after H17 (E2 with E2r, E2p, E2g, E2s, E2f)",
+ "counts": {
+  "not readable": 18,
+  "more than 14B parameters": 10,
+  "not a text language model": 13,
+  "runs only through the repository's own code": 1
+ },
+ "pairs": [
+  {
+   "model": "circlestone-labs/Anima",
+   "base": "nvidia/Cosmos-Predict2-2B-Text2Image",
+   "category": "not readable",
+   "evidence": "not readable (gated, no byte-identical public copy)"
+  },
+  {
+   "model": "kindlingai/glm-5.3-exlr8-k2-k3-k4",
+   "base": "zai-org/GLM-5.3-BF16",
+   "category": "more than 14B parameters",
+   "evidence": "model 0, base 7.53e+11"
+  },
+  {
+   "model": "Comfy-Org/Qwen3-VL",
+   "base": "Qwen/Qwen3-VL-4B-Instruct",
+   "category": "not a text language model",
+   "evidence": "base: ['Qwen3VLForConditionalGeneration'] qwen3_vl"
+  },
+  {
+   "model": "antirez/deepseek-v4-gguf",
+   "base": "deepseek-ai/DeepSeek-V4-Flash",
+   "category": "more than 14B parameters",
+   "evidence": "model 2.84e+11, base 2.91e+11"
+  },
+  {
+   "model": "handy-computer/parakeet-tdt-0.6b-v3-gguf",
+   "base": "nvidia/parakeet-tdt-0.6b-v3",
+   "category": "not a text language model",
+   "evidence": "base: ['ParakeetForTDT'] parakeet_tdt"
+  },
+  {
+   "model": "unsloth/Z-Image-Turbo-GGUF",
+   "base": "Tongyi-MAI/Z-Image-Turbo",
+   "category": "not a text language model",
+   "evidence": "base: no config.json"
+  },
+  {
+   "model": "PaddlePaddle/PP-DocLayoutV3_safetensors",
+   "base": "PaddlePaddle/PP-DocLayoutV3",
+   "category": "not readable",
+   "evidence": "not readable (no weight files)"
+  },
+  {
+   "model": "mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF",
+   "base": "prithivMLmods/Qwen3-VL-8B-Instruct-abliterated-v1",
+   "category": "not readable",
+   "evidence": "not readable (gated, no byte-identical public copy)"
+  },
+  {
+   "model": "handy-computer/whisper-large-v3-turbo-gguf",
+   "base": "openai/whisper-large-v3-turbo",
+   "category": "not a text language model",
+   "evidence": "base: ['WhisperForConditionalGeneration'] whisper"
+  },
+  {
+   "model": "Maximilian228/Qwen3.8-Flash-Next-NVFP4-GPTQ-Strata",
+   "base": "Qwen/Qwen3.8-Flash-Next",
+   "category": "more than 14B parameters",
+   "evidence": "model 5.12e+10, base 1.8e+11"
+  },
+  {
+   "model": "ml-resources/flux-3-image-klein-comfy",
+   "base": "black-forest-labs/flux-3-image-klein",
+   "category": "not a text language model",
+   "evidence": "base: no config.json"
+  },
+  {
+   "model": "ml-resources/flux-3-image-klein-comfy",
+   "base": "black-forest-labs/flux-3-image-klein-base",
+   "category": "not a text language model",
+   "evidence": "base: no config.json"
+  },
+  {
+   "model": "unsloth/llama-3-8b-Instruct-bnb-4bit",
+   "base": "meta-llama/Llama-3-8B-Instruct",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "SC117/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF",
+   "base": "ukisai/Swift-Qwen3.8-Flash-Next",
+   "category": "more than 14B parameters",
+   "evidence": "model 1.77e+11, base 1.8e+11"
+  },
+  {
+   "model": "QuantStack/Wan2.2-TI2V-5B-GGUF",
+   "base": "Wan-AI/Wan2.2-TI2V-5B",
+   "category": "not a text language model",
+   "evidence": "base: None ti2v"
+  },
+  {
+   "model": "unsloth/Wan2.2-TI2V-5B-GGUF",
+   "base": "Wan-AI/Wan2.2-TI2V-5B",
+   "category": "not a text language model",
+   "evidence": "base: None ti2v"
+  },
+  {
+   "model": "LiquidAI/LFM2.5-Audio-1.5B-GGUF",
+   "base": "LiquidAI/LFM2.5-Audio-1.5B",
+   "category": "not a text language model",
+   "evidence": "base: ['Lfm2AudioForConditionalGeneration'] None"
+  },
+  {
+   "model": "tiny-random/qwen3.5-moe",
+   "base": "Qwen/Qwen3.5-397B-A17B",
+   "category": "more than 14B parameters",
+   "evidence": "model 4.9e+06, base 4.03e+11"
+  },
+  {
+   "model": "handy-computer/parakeet-tdt-0.6b-v2-gguf",
+   "base": "nvidia/parakeet-tdt-0.6b-v2",
+   "category": "not readable",
+   "evidence": "not readable (other checkpoint format)"
+  },
+  {
+   "model": "kyuz0/deepseek-v4.1-flash-gguf",
+   "base": "deepseek-ai/DeepSeek-V4.1-Flash",
+   "category": "more than 14B parameters",
+   "evidence": "model 7.55e+11, base 7.63e+11"
+  },
+  {
+   "model": "kyuz0/deepseek-v4.1-flash-gguf",
+   "base": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+   "category": "more than 14B parameters",
+   "evidence": "model 7.55e+11, base 7.63e+11"
+  },
+  {
+   "model": "Comfy-Org/Mage-Flow",
+   "base": "microsoft/Mage-Flow",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "cstr/qwen3-tts-0.6b-customvoice-GGUF",
+   "base": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice",
+   "category": "not a text language model",
+   "evidence": "base: ['Qwen3TTSForConditionalGeneration'] qwen3_tts"
+  },
+  {
+   "model": "handy-computer/Voxtral-Mini-3B-2507-gguf",
+   "base": "mistralai/Voxtral-Mini-3B-2507",
+   "category": "not a text language model",
+   "evidence": "base: ['VoxtralForConditionalGeneration'] voxtral"
+  },
+  {
+   "model": "MediaCatch/xls-r-300m-danish-mc-v2",
+   "base": "MediaCatch/xls-r-300m-danish-mc",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "VAGOsolutions/SauerkrautLM-ColQwen3-2b-v0.1",
+   "base": "Qwen/Qwen3-VL-2B",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "z-lab/Qwen3.6-35B-A3B-DFlash",
+   "base": "Qwen/Qwen3.6-35B-A3B",
+   "category": "more than 14B parameters",
+   "evidence": "model 3.86e+08, base 3.6e+10"
+  },
+  {
+   "model": "calcuis/hunyuanimage-gguf",
+   "base": "tencent/HunyuanImage-2.1",
+   "category": "more than 14B parameters",
+   "evidence": "model 1.75e+10, base 0"
+  },
+  {
+   "model": "unsloth/orpheus-3b-0.1-ft-GGUF",
+   "base": "canopylabs/orpheus-3b-0.1-pretrained",
+   "category": "not readable",
+   "evidence": "not readable (gated, no byte-identical public copy)"
+  },
+  {
+   "model": "ggml-org/gemma-3-4b-it-qat-GGUF",
+   "base": "google/gemma-3-4b-it-qat",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "HauhauCS/GPT-OSS-20B-Uncensored-HauhauCS-Aggressive",
+   "base": "gpt-oss-20b",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2",
+   "base": "timm/tf_efficientnet_b5.ns_jft_in1k",
+   "category": "not a text language model",
+   "evidence": "base: None None"
+  },
+  {
+   "model": "baerquants/GLM-5.3-UD-Q4_K_XL-layers",
+   "base": "unsloth/GLM-5.3-GGUF",
+   "category": "not readable",
+   "evidence": "not readable (no weight files)"
+  },
+  {
+   "model": "nikita-savelyev-cerebras/tiny-random-kimi-k2.7-code-int4",
+   "base": "moonshotai/Kimi-K2.7-Code",
+   "category": "more than 14B parameters",
+   "evidence": "model 3.24e+06, base 1.03e+12"
+  },
+  {
+   "model": "mobilint/Qwen2.5-0.5B-Instruct-Batch16",
+   "base": "Qwen/Qwen2.5-0.5B-Instruct",
+   "category": "runs only through the repository's own code",
+   "evidence": "model: model_type mobilint-qwen2, auto_map ['AutoConfig', 'AutoModelForCausalLM']"
+  },
+  {
+   "model": "ekacare/parrotlet-a-2.5-pro",
+   "base": "openai/whisper-large-v3",
+   "category": "not a text language model",
+   "evidence": "base: ['WhisperForConditionalGeneration'] whisper"
+  },
+  {
+   "model": "mradermacher/Llama-3.2-3B-optimized-i1-GGUF",
+   "base": "fraQtl/Llama-3.2-3B-fraQtl-kv",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "ValueFX9507/Tifa-Deepsex-14b-CoT",
+   "base": "deepseek-ai/deepseek-r1-14b",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "mradermacher/aquif-3-moe-17b-a2.8b-i1-GGUF",
+   "base": "aquif-ai/aquif-3-moe-17B-A2.8B",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "lmstudio-community/c4ai-command-r-plus-08-2024-GGUF",
+   "base": "CohereForAI/c4ai-command-r-plus-08-2024",
+   "category": "not readable",
+   "evidence": "not readable (gated, no byte-identical public copy)"
+  },
+  {
+   "model": "mradermacher/Orion-HYMT1.5-7B-SFT-v2601-i1-GGUF",
+   "base": "3tic/Orion-HYMT1.5-7B-SFT-v2601",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  },
+  {
+   "model": "OpenIXCLab/SeC-4B",
+   "base": "OpenGVLab/InternVL2.5-4B",
+   "category": "not readable",
+   "evidence": "not readable (HTTP 401)"
+  }
+ ]
+}
