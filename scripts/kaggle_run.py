@@ -519,8 +519,11 @@ GPU_ASSIGN = {   # 2026-11-21: by measured hours and each friend's weekly quota 
 # 2026-11-22: H24 this week, by each friend's quota left after the jobs above (they check it before
 # every push); the speech parts not listed wait for next week's quotas
 GPU_ASSIGN["rohajraj"] += [f"h24-diffusion_unet-s{x}" for x in (50, 51, 52, 53)]
-GPU_ASSIGN["moinuddinhasan8"] += [f"h24-diffusion_unet-s{x}" for x in (54, 55, 56, 57)]
-GPU_ASSIGN["alubalub"] += [f"h24-diffusion_unet-s{x}" for x in (58, 59, 60)] + ["h24-speech-s50-i"]
+# moinuddinhasan8's quota this week is used up (6 h allowed, 9.2 h used): s54 moves to alubalub, whose
+# quota covers it; s55-s57 stay with moinuddinhasan8 for after the reset (2026-11-28)
+GPU_ASSIGN["moinuddinhasan8"] += [f"h24-diffusion_unet-s{x}" for x in (55, 56, 57)]
+GPU_ASSIGN["alubalub"] += [f"h24-diffusion_unet-s{x}" for x in (58, 59, 60)] + ["h24-speech-s50-i",
+                                                                                "h24-diffusion_unet-s54"]
 # estimated GPU hours per job, from the measured 2,000-step runs (x10 for 20,000 steps)
 GPU_HOURS = {**{f"h16b-text_encoder-s{x}": 2.6 for x in range(30, 41)},
              "h16b-vision_transformer-dev": 2.1, "h16b-vision_transformer-fresh-a": 2.1,
