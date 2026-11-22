@@ -230,8 +230,11 @@ JOBS["h28"] = _job("pedigree-h28", [["-m", "experiments.h28_fresh", "--out", "/k
 JOBS["h28-design"] = _job("pedigree-h28-design", [["-m", "experiments.h28_fresh", "--design",
                                                    "--out", "/kaggle/working/h28_design_raw.jsonl"]],
                           gpu=False, env=dict(E2_ENV))
-JOBS["e2y"] = _job("pedigree-e2y", [["-m", "experiments.e2x_reaudit", "--round", "y", "--out", "/kaggle/working"]],
-                   gpu=False, env=dict(E2_ENV))
+# the first session lost one pool pair to HTTP 429 (nothing recorded); the rerun keeps its model records,
+# reads the pairs again, and keeps readers v5 as E2y was defined (PEDIGREE_READERS_V6=0)
+JOBS["e2y"] = _job("pedigree-e2y", [["-m", "experiments.e2x_reaudit", "--round", "y", "--out", "/kaggle/working",
+                                     "--resume", "results/kaggle/e2y"]],
+                   gpu=False, env={**E2_ENV, "PEDIGREE_READERS_V6": "0"})
 # the behaviour fallback of E2 (needs E2 in the committed ledger): 28 pairs of <= 2B parameters
 # fit Kaggle's CPU budget, and the statistics do not depend on the device
 JOBS["e2-behaviour"] = _job("pedigree-e2-behaviour", [["-m", "experiments.e2_behaviour"]], gpu=False)

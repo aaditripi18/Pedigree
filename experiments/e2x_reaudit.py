@@ -127,6 +127,8 @@ def main() -> None:
     ap.add_argument("--targets", action="store_true")
     ap.add_argument("--out", default=str(ROOT / "results"))
     ap.add_argument("--round", choices=sorted(ROUNDS), default="x")
+    ap.add_argument("--resume", default=None, help="folder of an earlier run's raw files, relative to the repository: "
+                                                   "rows read without loss there are kept, the rest read again")
     a = ap.parse_args()
     R = ROUNDS[a.round]
     if a.targets:
@@ -140,18 +142,26 @@ def main() -> None:
 
     def retry(fn, *args):
         last = None
-        for _ in range(3):
+        for k in range(5):                     # rate limits (HTTP 429) ease within minutes
             try:
                 return fn(*args)
             except NetworkError as e:
                 last = e
-                time.sleep(30)
+                time.sleep(60 * (k + 1))
         return {"lost": str(last)}
 
+    def earlier(name):
+        """{key: row} of an earlier run's raw file, rows without loss only."""
+        f = ROOT / a.resume / name if a.resume else None
+        if not f or not f.exists():
+            return []
+        rows = [json.loads(x) for x in f.read_text(encoding="utf-8").splitlines() if x.strip()]
+        return [r for r in rows if "lost" not in r]
+
     # E2x: the models
-    recs = {}
+    recs = {r["id"]: r for r in earlier(f"{tm.lower()}_raw.jsonl")}
     with ThreadPoolExecutor(WORKERS) as ex:
-        futs = {ex.submit(retry, audit_one, e, tier, frame): i for i, tier, e in t["models"]}
+        futs = {ex.submit(retry, audit_one, e, tier, frame): i for i, tier, e in t["models"] if i not in recs}
         for k, f in enumerate(as_completed(futs), 1):
             i = futs[f]
             try:
@@ -176,9 +186,10 @@ def main() -> None:
         r = _pair(x, y, invariant=role == "declared")
         r.pop("cosines", None)
         return r
-    prows = []
+    prows = [r for r in earlier(f"{tp.lower()}_raw.jsonl") if [r["model"], r["other"], r["role"]] in t["pairs"]]
+    have = {(r["model"], r["other"], r["role"]) for r in prows}
     with ThreadPoolExecutor(WORKERS) as ex:
-        futs = {ex.submit(retry, pair, p): p for p in t["pairs"]}
+        futs = {ex.submit(retry, pair, p): p for p in map(tuple, t["pairs"]) if p not in have}
         for f in as_completed(futs):
             m, o, role = futs[f]
             try:
@@ -187,6 +198,8 @@ def main() -> None:
                 r = {"lost": f"unexpected {type(err).__name__}: {err}"}
             prows.append({"model": m, "other": o, "role": role, **r})
             print(f"{tp} {m} vs {o} ({role}): {r.get('median_cosine', r.get('error') or r.get('lost'))}", flush=True)
+
+    (out / f"{tp.lower()}_raw.jsonl").write_text("".join(json.dumps(r) + "\n" for r in prows), encoding="utf-8")
 
     # E2v3: declared pairs still not comparable under names
     todo = [tuple(p) for p in t["not_comparable"]]
@@ -198,9 +211,10 @@ def main() -> None:
         if r["role"] == "declared" and (r.get("compared") or 0) < 8:
             todo.append((r["model"], r["other"]))
     todo = sorted(set(todo))
-    vrows = []
+    vrows = [r for r in earlier(f"{tv.lower()}_raw.jsonl") if (r["model"], r["other"]) in set(todo)]
+    have = {(r["model"], r["other"]) for r in vrows}
     with ThreadPoolExecutor(WORKERS) as ex:
-        futs = {ex.submit(retry, v3_row, m, b, frame, R["alignment"]): (m, b) for m, b in todo}
+        futs = {ex.submit(retry, v3_row, m, b, frame, R["alignment"]): (m, b) for m, b in todo if (m, b) not in have}
         for f in as_completed(futs):
             m, b = futs[f]
             try:
@@ -214,6 +228,7 @@ def main() -> None:
             print(f"{tv} {m} vs {b}: compared {r.get('compared')}, {r.get('median_cosine', r.get('error') or r.get('lost'))};"
                   f" hub {r.get('hub')}", flush=True)
 
+    (out / f"{tv.lower()}_raw.jsonl").write_text("".join(json.dumps(r) + "\n" for r in vrows), encoding="utf-8")
     lost = [i for i, r in recs.items() if "lost" in r] + [r for r in prows + vrows if "lost" in r]
     print(f"{tm} {len(recs)} models, {tp} {len(prows)} pairs, {tv} {len(vrows)} pairs; {len(lost)} lost", flush=True)
     if not lost:
