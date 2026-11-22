@@ -1243,3 +1243,16 @@ pairs and H27b's 30 pairs left not comparable.
   repositories are counted by reason and do not count.
 - **H28d** On the fresh declared pairs of H28b whose two models share >= 8 tensors of >= 4096
   values by shape (either orientation), `auto4` makes >= 80% comparable (judged if >= 10 pairs).
+
+**Outcome of H16b (recorded after judging, 2026-11-23; the 20,000-step students were trained on
+friends' GPU accounts, `h16b-*`, and scored by `pedigree-e5e-h16b-*`, 22 students per family, none
+failed).** **Not decidable**, as pre-registered when no family passes the floor (independents at
+>= 50% of the teacher's task accuracy). Text encoder: the teacher scores 0.532 on the 2,425 masked
+probe positions, and all 22 students, distilled and independent, score 0.0548 and agree with the
+teacher on 0.0680, identical to four digits across 11 seeds and both kinds. Their training losses
+level off after about a quarter of the 20,000 steps (independents near 7, distilled near 11), so the
+students stopped at one output whatever the seed or the teacher, and behaviour has nothing of the
+teacher to show. Vision transformer: the teacher scores 0.967 on CIFAR-10, and the 11 independents
+score 0.275 to 0.377, under the floor of 0.484. No family is judged, so no rule is fixed and TPR
+and FPR are not computed. H16 (supported) stands as the behaviour result for text decoders and
+vision CNNs, and H18 stays not judged for its own reason, recorded above.

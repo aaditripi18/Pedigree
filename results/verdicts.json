@@ -1433,8 +1433,145 @@
      "id": "H16b",
      "statement": "With students trained long enough to learn the task (text encoder, vision transformer), the reference-calibrated rule from a new dev batch identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
      "follows": "H14b",
-     "verdict": "pending",
-     "evidence": "dev and fresh students wait for GPU quota"
+     "verdict": "not decidable",
+     "numbers": {
+      "families": [],
+      "floors": {
+       "text_encoder": {
+        "passes": false,
+        "independents": [
+         [
+          "indep_s30",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s31",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s32",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s33",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s34",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s35",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s36",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s37",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s38",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s39",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s40",
+          0.0548,
+          0.532
+         ]
+        ]
+       },
+       "vision_transformer": {
+        "passes": false,
+        "independents": [
+         [
+          "indep_s30",
+          0.291,
+          0.967
+         ],
+         [
+          "indep_s31",
+          0.333,
+          0.967
+         ],
+         [
+          "indep_s32",
+          0.325,
+          0.967
+         ],
+         [
+          "indep_s33",
+          0.303,
+          0.967
+         ],
+         [
+          "indep_s34",
+          0.312,
+          0.967
+         ],
+         [
+          "indep_s35",
+          0.335,
+          0.967
+         ],
+         [
+          "indep_s36",
+          0.298,
+          0.967
+         ],
+         [
+          "indep_s37",
+          0.291,
+          0.967
+         ],
+         [
+          "indep_s38",
+          0.346,
+          0.967
+         ],
+         [
+          "indep_s39",
+          0.275,
+          0.967
+         ],
+         [
+          "indep_s40",
+          0.377,
+          0.967
+         ]
+        ]
+       }
+      },
+      "r_star": null,
+      "gap": null,
+      "dev": [],
+      "fresh": [],
+      "tpr": [
+       0,
+       0
+      ],
+      "fpr": [
+       0,
+       0
+      ]
+     },
+     "evidence": "no family's independents reach the floor"
     },
     {
      "id": "H17a",
@@ -3568,8 +3705,145 @@
      "id": "H16b",
      "statement": "With students trained long enough to learn the task (text encoder, vision transformer), the reference-calibrated rule from a new dev batch identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
      "follows": "H14b",
-     "verdict": "pending",
-     "evidence": "dev and fresh students wait for GPU quota"
+     "verdict": "not decidable",
+     "numbers": {
+      "families": [],
+      "floors": {
+       "text_encoder": {
+        "passes": false,
+        "independents": [
+         [
+          "indep_s30",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s31",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s32",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s33",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s34",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s35",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s36",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s37",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s38",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s39",
+          0.0548,
+          0.532
+         ],
+         [
+          "indep_s40",
+          0.0548,
+          0.532
+         ]
+        ]
+       },
+       "vision_transformer": {
+        "passes": false,
+        "independents": [
+         [
+          "indep_s30",
+          0.291,
+          0.967
+         ],
+         [
+          "indep_s31",
+          0.333,
+          0.967
+         ],
+         [
+          "indep_s32",
+          0.325,
+          0.967
+         ],
+         [
+          "indep_s33",
+          0.303,
+          0.967
+         ],
+         [
+          "indep_s34",
+          0.312,
+          0.967
+         ],
+         [
+          "indep_s35",
+          0.335,
+          0.967
+         ],
+         [
+          "indep_s36",
+          0.298,
+          0.967
+         ],
+         [
+          "indep_s37",
+          0.291,
+          0.967
+         ],
+         [
+          "indep_s38",
+          0.346,
+          0.967
+         ],
+         [
+          "indep_s39",
+          0.275,
+          0.967
+         ],
+         [
+          "indep_s40",
+          0.377,
+          0.967
+         ]
+        ]
+       }
+      },
+      "r_star": null,
+      "gap": null,
+      "dev": [],
+      "fresh": [],
+      "tpr": [
+       0,
+       0
+      ],
+      "fpr": [
+       0,
+       0
+      ]
+     },
+     "evidence": "no family's independents reach the floor"
     },
     {
      "id": "H17a",
