@@ -473,15 +473,20 @@ for _f in ("text_encoder", "vision_transformer"):
 # H24: speech and diffusion students (experiments/h24.py), dev seeds 50-52, fresh 53-60
 # 2026-11-21: one seed per part (both students), so a session fits a small weekly GPU quota; a
 # 300-step timing run per family (seed 99, never scored) measures a step before any long run
-H24_PARTS = {f"s{x}": [x] for x in range(50, 61)}
+# 2026-11-22, from the measured 300-step runs (h24-time-*): a U-Net seed (both students) ~3.5 GPU h,
+# one seed per part; a speech student ~6.6 h (distilled) or ~5.2 h (independent), one student per part
+H24_SEEDS = list(range(50, 61))
+H24_PARTS = {"diffusion_unet": {f"s{x}": ([x], "distill,indep") for x in H24_SEEDS},
+             "speech": {f"s{x}-{k[0]}": ([x], k) for x in H24_SEEDS for k in ("distill", "indep")}}
 for _f in ("speech", "diffusion_unet"):
-    for _part, _seeds in H24_PARTS.items():
+    for _part, (_seeds, _kinds) in H24_PARTS[_f].items():
         JOBS[f"h24-{_f}-{_part}"] = _job(f"pedigree-h24-{SHORT[_f]}-{_part}",
                                          [["-m", "experiments.h24", "train", _f, ",".join(map(str, _seeds))]], gpu=True,
-                                         env={"PEDIGREE_DERIVATIVES": "/kaggle/working/students"})
+                                         env={"PEDIGREE_DERIVATIVES": "/kaggle/working/students",
+                                              "PEDIGREE_H24_KINDS": _kinds})
     JOBS[f"e5e-h24-{_f}"] = _job(f"pedigree-e5e-h24-{SHORT[_f]}",
-                                 [["-m", "experiments.h24", "score", _f, ",".join(map(str, range(50, 61)))]],
-                                 gpu=False, sources=[f"h24-{_f}-{p}" for p in H24_PARTS],
+                                 [["-m", "experiments.h24", "score", _f, ",".join(map(str, H24_SEEDS))]],
+                                 gpu=False, sources=[f"h24-{_f}-{p}" for p in H24_PARTS[_f]],
                                  env={"PEDIGREE_STUDENTS": "merge:students"})
 for _f in ("speech", "diffusion_unet"):
     JOBS[f"h24-time-{_f}"] = _job(f"pedigree-h24-{SHORT[_f]}-time",
@@ -511,12 +516,20 @@ GPU_ASSIGN = {   # 2026-11-21: by measured hours and each friend's weekly quota 
     "moinuddinhasan8": ["h24-time-diffusion_unet", "distill4-text_decoder", "h16b-text_encoder-s37",
                         "h16b-text_encoder-s38", "h16b-text_encoder-s40"],
 }
+# 2026-11-22: H24 this week, by each friend's quota left after the jobs above (they check it before
+# every push); the speech parts not listed wait for next week's quotas
+GPU_ASSIGN["rohajraj"] += [f"h24-diffusion_unet-s{x}" for x in (50, 51, 52, 53)]
+GPU_ASSIGN["moinuddinhasan8"] += [f"h24-diffusion_unet-s{x}" for x in (54, 55, 56, 57)]
+GPU_ASSIGN["alubalub"] += [f"h24-diffusion_unet-s{x}" for x in (58, 59, 60)] + ["h24-speech-s50-i"]
 # estimated GPU hours per job, from the measured 2,000-step runs (x10 for 20,000 steps)
 GPU_HOURS = {**{f"h16b-text_encoder-s{x}": 2.6 for x in range(30, 41)},
              "h16b-vision_transformer-dev": 2.1, "h16b-vision_transformer-fresh-a": 2.1,
              "h16b-vision_transformer-fresh-b": 2.1, "h16b-vision_transformer-fresh-c": 1.4,
              "distill4-text_decoder": 2.4, "distill4-vision_cnn": 0.2,
-             "h24-time-speech": 0.3, "h24-time-diffusion_unet": 0.3}
+             "h24-time-speech": 0.3, "h24-time-diffusion_unet": 0.3,
+             **{f"h24-diffusion_unet-s{x}": 3.6 for x in range(50, 61)},
+             **{f"h24-speech-s{x}-d": 6.7 for x in range(50, 61)},
+             **{f"h24-speech-s{x}-i": 5.3 for x in range(50, 61)}}
 for _friend, _jobs in GPU_ASSIGN.items():
     for _j in _jobs:
         JOBS[_j]["owner"] = _friend

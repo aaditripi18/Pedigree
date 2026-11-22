@@ -213,8 +213,13 @@ def train(family: str, kind: str, seed: int):
 
 
 def main_train(family: str, seeds: list[int]) -> None:
+    # PEDIGREE_H24_KINDS=distill (or indep) trains one kind only: a speech seed's two students take
+    # ~11.8 GPU hours together, too close to Kaggle's 12 h session, so they run in sessions of their own
+    kinds = [k for k in os.environ.get("PEDIGREE_H24_KINDS", "distill,indep").split(",") if k]
+    if not set(kinds) <= {"distill", "indep"}:
+        raise SystemExit(f"PEDIGREE_H24_KINDS: {kinds}")
     for seed in seeds:
-        for kind in ("distill", "indep"):
+        for kind in kinds:
             out = ft.OUT / family / "h24" / f"{kind}_s{seed}"
             if (out / "meta.json").exists():
                 print(f"{family}/h24/{kind}_s{seed}: exists", flush=True)
