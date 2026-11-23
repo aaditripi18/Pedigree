@@ -1355,3 +1355,46 @@ The design data (H27's opposite and not-comparable pairs, read with (ix) and (k)
 `H28-design` ledger. In the 6 pairs where names now align at least 8 tensors (H27a's two opposite pairs
 and four pairs where an imatrix had been taken for the model), v4 agrees with names on 6 of 6. The other
 26 stay not comparable (0 of 26), for the causes measured under H27.
+
+*Correction to the outcome of H28 (2026-11-23, after its verdicts; the verdicts above are unchanged).*
+The cause given above for `ibm-granite/granite-speech-5.0-2b-ONNX` is wrong. Pedigree has read
+`MatMulNBits` since reader (viii) (amendment 2026-11-21), and in this file it reads all 281 quantised
+weights as values. What fails is the alignment. The file is written by onnxruntime-genai's model
+builder, whose names separate the block index with underscores
+(`model_layers_0_attn_q_proj_MatMul_weight_quant`). v3's and v4's block pattern accepts only `.` or `/`
+around `layers.N`, so every weight falls in the group with no block index. There the repeated shapes
+(q and o, k and v, gate and up in 40 layers) pair nothing, and the norms that names match are under
+4,096 values. The pair is still one of H28d's 7 not comparable, still for a cause a rule can handle, and
+H28b and H28d read as recorded. Measured with the rule below, the pair compares 24 tensors at median
+0.997 under struct4 and auto4.
+
+## Amendment 2026-11-23: rule (l) and H29, after H28 and before any of H29's data
+
+H28's verdicts stand as recorded. Its pairs are design data for what follows, reported beside H29
+and not counted.
+
+**(l)** (`pedigree/structalign.py`, readers v7; `PEDIGREE_READERS_V7=0` reproduces H28 and everything
+before it). In v3's and v4's block pattern, an underscore separates a block index as `.` and `/` do,
+so `model_layers_0_attn_q_proj` is block 0 of stack `model_layers`. Names already read with `.` or
+`/` give the same stack and block as before. `tests/test_rule_l.py` aligns onnxruntime-genai names
+with Hugging Face names over 4 layers: all 28 projections pair with their own tensor with (l), and
+none of them pair without it. The Kaggle jobs `h28` and `h28-design` now run with
+`PEDIGREE_READERS_V7=0`.
+
+**Fresh data.** A new frozen sample (`results/h29_sample.json`, seed 20261125, drawn after this
+amendment is committed and before any of it is read): H25's rule, excluding E2's, H13's, H15's,
+H19's, H23's, H25's, H26's, H27's and H28's samples. Each model is read and aligned exactly as in H28,
+with (l). Design data (ledger `H29-design`): H28's 12 declared pairs where names aligned fewer than 8
+tensors and auto4 left the pair not comparable, and any pair where v4 with names ignored gave a verdict
+other than names' (none in H28 or H28-design).
+
+- **H29a** On the fresh pairs where names align >= 8 tensors, v4 with (g)-(i), the tie-break, (j),
+  (k) and (l), names ignored, gives the same related / unrelated verdict for >= 98% and the opposite
+  verdict for none (judged if >= 20 pairs, >= 5 of them unrelated by names).
+- **H29b** On the fresh declared pairs where names align fewer than 8 tensors and both models were
+  read, `auto4` makes >= 80% comparable (>= 8 tensors).
+- **H29c** No fresh sampled model, and no declared base of one, is unreadable because of its file
+  format, except formats with no public specification; no weight files, gated, private or missing
+  repositories are counted by reason and do not count.
+- **H29d** On the fresh declared pairs of H29b whose two models share >= 8 tensors of >= 4096 values by
+  shape (either orientation), `auto4` makes >= 80% comparable (judged if >= 10 pairs).

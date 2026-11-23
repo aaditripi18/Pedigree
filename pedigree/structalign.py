@@ -113,6 +113,18 @@ def struct_names_v2(gguf_shapes: dict, hf_shapes: dict) -> dict[str, str]:
 # --- v3 (PLAN.md, amendment 2026-11-20, H23): any two formats, roles, unequal depth --------------
 
 _ANY_STACK = re.compile(r"(?:^|[./])(blk|layers|layer|h|blocks|block|layer_)[._]?(\d+)(?=[./])")
+# (l) (amendment 2026-11-23, readers v7): an underscore also separates a block index, as in the names
+# onnxruntime-genai's model builder gives (``model_layers_0_attn_q_proj_MatMul_weight_quant``). Without
+# it every tensor of such a file fell in the group with no block index, where repeated shapes pair
+# nothing. PEDIGREE_READERS_V7=0 reproduces H28 and everything before it.
+READERS_V7 = os.environ.get("PEDIGREE_READERS_V7", "1") != "0"
+_ANY_STACK_L = re.compile(r"(?:^|[./_])(blk|layers|layer|h|blocks|block|layer_)[._]?(\d+)(?=[./_])")
+
+
+def _stack_re():
+    return _ANY_STACK_L if READERS_V7 else _ANY_STACK
+
+
 _PREFIXES = ("model.diffusion_model.", "diffusion_model.", "model.", "transformer.")
 ROLES = {"encoder": {"encoder", "enc"}, "decoder": {"decoder", "dec"},
          "vision": {"vision", "visual", "v", "vit", "image"}, "text": {"text", "t", "language_model", "llm"},
@@ -141,7 +153,7 @@ def direct_names(a_shapes: dict, b_shapes: dict) -> dict[str, str]:
 
 
 def _stack3(name: str):
-    m = _ANY_STACK.search(name)
+    m = _stack_re().search(name)
     return (name[:m.end(1)], int(m.group(2))) if m else None
 
 
@@ -239,7 +251,7 @@ def _stacks4(shapes: dict):
 def _leaf(name: str) -> str:
     """The part of a name after its block index (or the whole name, prefix removed), lower case,
     letters and digits only."""
-    m = _ANY_STACK.search(name)
+    m = _stack_re().search(name)
     rest = name[m.end():] if m else _strip(name)
     return re.sub(r"[^a-z0-9]", "", rest.lower())
 

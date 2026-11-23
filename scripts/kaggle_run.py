@@ -227,11 +227,18 @@ JOBS["h27-design"] = _job("pedigree-h27-design", [["-m", "experiments.h27_fresh"
                           gpu=False, env=dict(E2_ENV))
 # 2026-11-23: the first session read 149 of 150 and stalled on a big-endian GGUF until the 12-hour limit;
 # the second resumes from its records, with the big-endian correction (PLAN.md)
+# H28 as recorded: without rule (l) (readers v7 came after its verdicts)
 JOBS["h28"] = _job("pedigree-h28", [["-m", "experiments.h28_fresh", "--out", "/kaggle/working/h28_raw.jsonl",
                                      "--resume", "results/kaggle/h28/h28_raw.jsonl"]],
-                   gpu=False, env=dict(E2_ENV))
+                   gpu=False, env={**E2_ENV, "PEDIGREE_READERS_V7": "0"})
 JOBS["h28-design"] = _job("pedigree-h28-design", [["-m", "experiments.h28_fresh", "--design",
                                                    "--out", "/kaggle/working/h28_design_raw.jsonl"]],
+                          gpu=False, env={**E2_ENV, "PEDIGREE_READERS_V7": "0"})
+# amendment 2026-11-23: rule (l), readers v7, on a fresh sample and on H28's pairs not comparable
+JOBS["h29"] = _job("pedigree-h29", [["-m", "experiments.h29_fresh", "--out", "/kaggle/working/h29_raw.jsonl"]],
+                   gpu=False, env=dict(E2_ENV))
+JOBS["h29-design"] = _job("pedigree-h29-design", [["-m", "experiments.h29_fresh", "--design",
+                                                   "--out", "/kaggle/working/h29_design_raw.jsonl"]],
                           gpu=False, env=dict(E2_ENV))
 # the first session lost one pool pair to HTTP 429 (nothing recorded); the rerun keeps its model records,
 # reads the pairs again, and keeps readers v5 as E2y was defined (PEDIGREE_READERS_V6=0)
