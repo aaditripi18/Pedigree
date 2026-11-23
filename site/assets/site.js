@@ -23,4 +23,28 @@
     const text = src.innerText.split("\n").filter(l => !l.startsWith("#")).map(l => l.replace(/^\$ /, "")).join("\n");
     try { await navigator.clipboard.writeText(text); b.textContent = "Copied"; setTimeout(() => b.textContent = "Copy", 1500); } catch (e) {}
   }));
+  // theme: the reader's system setting until they choose; the choice is remembered where storage allows
+  const root = document.documentElement, tb = document.getElementById("theme");
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  if (tb) tb.addEventListener("click", () => {
+    const t = isDark() ? "light" : "dark"; root.dataset.theme = t;
+    try { localStorage.setItem("pedigree-theme", t); } catch (e) {}
+  });
+  // hypotheses: filter by verdict
+  const chips = document.querySelectorAll(".chip[data-f]");
+  chips.forEach(c => c.addEventListener("click", () => {
+    chips.forEach(x => x.setAttribute("aria-pressed", String(x === c)));
+    document.querySelectorAll(".h-card").forEach(h => { h.hidden = c.dataset.f !== "all" && h.dataset.v !== c.dataset.f; });
+  }));
+  // contents: mark the section being read
+  const links = [...document.querySelectorAll(".toc a[data-toc]")];
+  const heads = links.map(a => document.getElementById(a.dataset.toc)).filter(Boolean);
+  if (heads.length) {
+    const mark = () => {
+      let cur = heads[0].id;
+      heads.forEach(h => { if (h.getBoundingClientRect().top < window.innerHeight * 0.35) cur = h.id; });
+      links.forEach(a => a.classList.toggle("on", a.dataset.toc === cur));
+    };
+    window.addEventListener("scroll", mark, { passive: true }); mark();
+  }
 })();
