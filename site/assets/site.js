@@ -41,7 +41,7 @@
   const heads = links.map(a => document.getElementById(a.dataset.toc)).filter(Boolean);
   if (heads.length) {
     const mark = () => {
-      let cur = heads[0].id;
+      let cur = null;
       heads.forEach(h => { if (h.getBoundingClientRect().top < window.innerHeight * 0.35) cur = h.id; });
       links.forEach(a => a.classList.toggle("on", a.dataset.toc === cur));
     };

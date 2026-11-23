@@ -103,7 +103,7 @@ def page(title: str, desc: str, body: str, extra: str = "", toc=None, current: s
     <nav class="nav" aria-label="Main">{nav}<a href="{REPO_URL}" rel="noopener">GitHub &#8599;</a></nav>
     <div class="top-r">
       <button type="button" class="theme" id="theme" aria-label="Switch between light and dark">{SUN}{MOON}</button>
-      <a class="btn btn-primary btn-sm{' is-on' if current == 'check' else ''}" href="check.html">Check a model</a>
+      {'' if current == 'check' else '<a class="btn btn-primary btn-sm" href="check.html">Check a model</a>'}
     </div>
   </div>
 </header>
@@ -178,10 +178,10 @@ def fig_strip(h1: dict, t: float) -> str:
     hi_r = 1.00006
 
     def xl(v):
-        return (v - lo_l) / (hi_l - lo_l) * 100
+        return 3 + (v - lo_l) / (hi_l - lo_l) * 94
 
     def xr(v):
-        return (v - lo_r) / (hi_r - lo_r) * 100
+        return 3 + (v - lo_r) / (hi_r - lo_r) * 94
 
     fams = [f for f in FAMILY if any(x[0] == f for x in der + ind)]
     rows = []
@@ -312,7 +312,7 @@ def fig_h2(h2: dict) -> str:
     return hbars(rows, 0.5, ref=(0.30, "pre-registered bar 30%"))
 
 
-def fig_audit(A: dict, FA: dict | None) -> str:
+def fig_audit(A: dict, FA: dict | None, FY: dict | None = None) -> str:
     LABEL = [("declared, related", "Declares a base the weights confirm"),
              ("declared, unrelated", "Declares a base the weights contradict"),
              ("declared, not comparable", "Declares a base weights cannot compare"),
@@ -322,24 +322,24 @@ def fig_audit(A: dict, FA: dict | None) -> str:
 
     def c(a, k):
         return sum(a["categories"].get(k, {}).values())
-    scale = max(max(c(A, k), c(FA, k) if FA else 0) for k, _ in LABEL) * 1.12
+    stages = [(A, "b-g", "as audited (E2)", "as audited")]
+    if FA:
+        stages.append((FA, "b-m", "after the first reader fixes (E2r, E2g, E2p, E2f, E2s)", "after the first reader fixes"))
+    if FY:
+        stages.append((FY, "b-v", "with every reader (E2x, E2y)", "with every reader"))
+    scale = max(c(s, k) for s, *_ in stages for k, _ in LABEL) * 1.12
     out = []
     for k, lab in LABEL:
-        a, b = c(A, k), (c(FA, k) if FA else None)
-        ta = tip(lab, "as audited: %d of %d" % (a, A["n_models"]))
-        bars = (f'<div class="gb-line"><span class="hb b-g" style="width:{a / scale * 100:.2f}%" tabindex="0" '
-                f'data-tip="{ta}"></span><span class="gb-v">{a}</span></div>')
-        if b is not None:
-            tb = tip(lab, "after reader fixes: %d of %d" % (b, FA["n_models"]))
-            bars += (f'<div class="gb-line"><span class="hb b-v" style="width:{b / scale * 100:.2f}%" tabindex="0" '
-                     f'data-tip="{tb}"></span><span class="gb-v">{b}</span></div>')
+        bars = "".join(f'<div class="gb-line"><span class="hb {cls}" style="width:{c(s, k) / scale * 100:.2f}%" '
+                       f'tabindex="0" data-tip="{tip(lab, "%s: %d of %d" % (short, c(s, k), s["n_models"]))}"></span>'
+                       f'<span class="gb-v">{c(s, k)}</span></div>' for s, cls, _, short in stages)
         out.append(f'<div class="gb-row"><span class="gb-lab">{e(lab)}</span><div class="gb-bars">{bars}</div></div>')
-    leg = legend([("sw-g", "as audited (E2)"), ("sw-v", "after the reader fixes and re-reads (E2r, E2g, E2p, E2f, E2s)")] if FA else
-                 [("sw-g", "as audited (E2)")])
-    tab = table(["Category", "As audited", "After reader fixes"],
-                [[e(lab), str(c(A, k)), str(c(FA, k)) if FA else "-"] for k, lab in LABEL])
+    leg = legend([("sw-" + cls[2:], long) for _, cls, long, _ in stages])
+    tab = table(["Category"] + [short.capitalize() for *_, short in stages],
+                [[e(lab)] + [str(c(s, k)) for s, *_ in stages] for k, lab in LABEL])
     return figure("The 600-model audit, one category per model",
-                  "Uniform random sample, 200 from each download tier of the Hub's top 100,000",
+                  "Uniform random sample, 200 from each download tier of the Hub's top 100,000 · each later read "
+                  "keeps every model and only adds readers",
                   leg + f'<div class="gbars">{"".join(out)}</div>', table=tab)
 
 
@@ -367,6 +367,12 @@ def fig_behaviour(H: dict) -> str:
     rules = h14b["numbers"]["rules"]
     per14 = h14["numbers"]["per_family"]
     perb = h14b["numbers"]["per_family"]
+    n16 = (h16 or {}).get("numbers") or {}
+    r16 = n16.get("r_star")
+
+    def h16_rate(f, kind):
+        xs = [v for fam, _, k, v in n16.get("fresh", []) if fam == f and k == kind]
+        return f"{sum(v > r16 for v in xs)}/{len(xs)}" if xs and r16 is not None else "-"
     rows = []
     for f in ("text_decoder", "vision_cnn", "text_encoder", "vision_transformer"):
         a = per14.get(f, {})
@@ -376,8 +382,9 @@ def fig_behaviour(H: dict) -> str:
                 if r.get("threshold") is not None else "<span class='muted'>no dev rule (gap " + f"{r.get('gap', 0):+.3f})</span>")
         rows.append([e(FAMILY[f]),
                      f"{a['tpr'][0]}/{a['tpr'][1]}" if a else "-", f"{a['fpr'][0]}/{a['fpr'][1]}" if a else "-",
-                     rule, f"{b['tpr'][0]}/{b['tpr'][1]}" if b else "-", f"{b['fpr'][0]}/{b['fpr'][1]}" if b else "-"])
-    t = table(["Family", "H14 TPR", "H14 FPR", "H14b rule (dev)", "H14b TPR", "H14b FPR"], rows)
+                     rule, f"{b['tpr'][0]}/{b['tpr'][1]}" if b else "-", f"{b['fpr'][0]}/{b['fpr'][1]}" if b else "-",
+                     f"<b>{h16_rate(f, 'distill')}</b>", f"<b>{h16_rate(f, 'indep')}</b>"])
+    t = table(["Family", "H14 TPR", "H14 FPR", "H14b rule (dev)", "H14b TPR", "H14b FPR", "H16 TPR", "H16 FPR"], rows)
     note = ""
     if h16 and (h16.get("numbers") or {}).get("r_star") is not None:
         nn = h16["numbers"]
@@ -385,7 +392,8 @@ def fig_behaviour(H: dict) -> str:
                 f"dark-knowledge divergence sits more than {nn['r_star'] * 100:.1f}% below the lowest of its reference "
                 f"students (dev gap {nn['gap'] * 100:.1f} points). Verdict: {e(h16['verdict'])}.")
     return figure("Behaviour by shared mistakes, per family",
-                  "Fresh students (5 distilled, 5 independent per family), rules chosen on dev students only",
+                  "Fresh students (5 distilled, 5 independent per family), every rule chosen on dev students only · "
+                  "TPR: distilled students called distilled; FPR: independent students called distilled",
                   t, note=note)
 
 
@@ -519,10 +527,19 @@ initialisation, not shared data, is what the score detects (H10: {e(H['H10']['ev
                    f"files, GGUF tensor types decoded from their public sources) the same 600 models were scored again: "
                    + ("no verdict changes" if not ch else f"{', '.join(ch)} change") + " ("
                    + "; ".join(f"{k} {e(x['evidence'])}" for k, x in RF["verdicts"].items()) + ").")
+    Y = (V.get("readers_v5") or {}).get("t") or {}
+    FY = Y.get("audit")
+    if Y:
+        ych = [k for k, x in Y["verdicts"].items() if x["changes"]]
+        unread = sum(Y["audit"]["categories"].get("not readable", {}).values())
+        rf_line += (f" Readers for every weight format with a public specification then re-read every model still unread "
+                    f"or not comparable (E2x, E2y): {unread} of {Y['audit']['n_models']} stay unread, each for a reason "
+                    f"no reader can change, and " + ("no verdict changes" if not ych else f"{', '.join(ych)} change")
+                    + " (" + "; ".join(f"{k} {e(x['evidence'])}" for k, x in Y["verdicts"].items()) + ").")
     audit = f"""
 <section class="sec">
 {sec_head("03", "The Hub audit (E2)", "What 600 random Hub models declare, and what their weights show", "audit")}
-{fig_audit(A, FA)}
+{fig_audit(A, FA, FY)}
 <div class="cols2 findings">
   <div class="card"><div class="card-top"><span class="tag">H2</span>{pill(H['H2']['verdict'])}</div>
   <h3>Undeclared lineage is common, but under the bar</h3>
@@ -553,18 +570,27 @@ on {h13['numbers']['n']} fresh models drawn before any was read.</p>
 
     beh = rules.get("behaviour") or {}
     na = beh.get("not_applicable", {})
+    h16n, h18n = H["H16"].get("numbers") or {}, H["H18"].get("numbers") or {}
+    vit = ((H["H16b"].get("numbers") or {}).get("floors") or {}).get("vision_transformer", {}).get("independents", [])
+    te = ((H["H16b"].get("numbers") or {}).get("floors") or {}).get("text_encoder", {}).get("independents", [])
+    n18 = sum(h18n.values())
     behaviour = f"""
 <section class="sec">
 {sec_head("05", "The second instrument", "Behaviour, where weights cannot be compared", "behaviour")}
 <p class="lead">A distilled student shares no weights with its teacher, so behaviour was pre-registered for those cases.
-Four hypotheses tested it on fresh students; none passed (H9, H12, H14, H14b). The data shows why: within each training
-batch the vision-CNN students do separate, but the whole fresh batch sits below the threshold chosen on the dev batch,
-so an absolute threshold does not carry from one batch to the next. H16 compares each student with reference students
-trained the same way instead; H16b trains text-encoder and vision-transformer students long enough to learn the task.</p>
+The first four tests failed (H9, H12, H14, H14b), and the data showed why: within each training batch the vision-CNN
+students do separate, but the whole fresh batch sits below the threshold chosen on the dev batch, so an absolute
+threshold does not carry from one batch to the next. H16 compares each student with reference students trained the same
+way instead, and it is {e(H['H16']['verdict'])}: TPR {h16n.get('tpr', [0, 0])[0]}/{h16n.get('tpr', [0, 0])[1]}, FPR
+{h16n.get('fpr', [0, 0])[0]}/{h16n.get('fpr', [0, 0])[1]} on fresh text-decoder and vision-CNN students.</p>
 {fig_behaviour(H)}
-<p class="fig-after">On the Hub, behaviour applied to none of the {beh.get('pairs', 0)} declared pairs weights could not
-compare ({"; ".join(f"{v} with {e(k.replace('model above', 'a model above'))}" for k, v in na.items())}). It runs on larger models (H18) only if H16 or H16b passes
-first: behaviour on a 7B model proves nothing until the behaviour check itself has passed on ground truth.</p>
+<p class="fig-after">H16b, students trained to a competence floor set in advance, is {e(H['H16b']['verdict'])}: the
+{len(vit)} vision-transformer independents score {min((x[1] for x in vit), default=0):.3f}-{max((x[1] for x in vit), default=0):.3f},
+below their floor, and all {len(te)} text-encoder independents stop at one output (accuracy {min((x[1] for x in te), default=0):.4f}).
+A dev-only pilot measures that stall before any new hypothesis is registered. On the Hub, behaviour was to run on the
+declared pairs weights cannot compare once a behaviour rule passed (H18): after every re-read {n18} such pairs remain and
+none is in scope ({"; ".join(f"{e(k)} {v}" for k, v in h18n.items())}), so H18 is {e(H['H18']['verdict'])}. H24 applies H16's
+method to speech and diffusion students ({e(H['H24']['verdict'])}: {e(H['H24']['evidence'])}).</p>
 </section>"""
 
     rows = []
@@ -604,7 +630,6 @@ judged on fresh data.</p>
     h15 = H.get("H15", {})
     dev15 = (h15.get("numbers") or {}).get("dev") or {}
     f15 = (h15.get("numbers") or {}).get("fresh")
-    n17 = H["H17a"].get("numbers") or {}
     flips = [k for k, v in mid.items() if v != {h["id"]: h["verdict"] for h in hs}.get(k)]
     big = na.get("model above 2B parameters", 0)
     jw = [w for w in d8["d1_wrong"] if w[2] and abs(w[3]) <= 30]
@@ -614,13 +639,14 @@ judged on fresh data.</p>
                           re.M).group(1))
     cav = [
         ("Declared bases weights cannot compare",
-         f"{U.get('models', 0)} models ({U.get('pairs', 0)} pairs) after the reader fixes: "
-         + "; ".join(f"{v} {e(k)}" for k, v in (U.get("reasons") or {}).items()) + ".",
-         f"H17 aligns GGUF tensors by block and unique shape when names fail. Against name alignment on fresh pairs "
-         f"(H17a, {e(H['H17a']['verdict'])}) it agreed on {n17.get('agree', [0, 0])[0]}/{n17.get('agree', [0, 0])[1]}, "
-         f"gave the opposite verdict on {n17.get('opposite', 0)} and aligned nothing on {n17.get('abstained', 0)}; "
-         f"H17b: {e(H['H17b']['verdict'])}. GGUF types newer than the gguf package are decoded only from their public "
-         f"sources; gated bases are read through a byte-identical public copy."),
+         f"{U.get('models', 0)} models ({U.get('pairs', 0)} pairs) after the first reader fixes: "
+         + "; ".join(f"{v} {e(k)}" for k, v in (U.get("reasons") or {}).items()) + "."
+         + (f" With every reader (E2y), {sum(FY['categories'].get('declared, not comparable', {}).values())} remain. "
+            "Their declared pairs, by cause: " + "; ".join(f"{e(k)} {len(v)}" for k, v in Y["r2"]["categories"].items()
+                                                          if not k.startswith("renamed")) + "." if Y else ""),
+         f"Structural alignment pairs tensors when names fail (see Alignment without names, below); GGUF types newer than the gguf "
+         f"package are decoded only from their public sources; gated bases are read through a byte-identical public "
+         f"copy, and the rest are reported by name, never guessed."),
         ("The candidate pool",
          f"E2's pool missed the parent of {H['H7']['numbers']['b'][1] - H['H7']['numbers']['b'][0]} of "
          f"{H['H7']['numbers']['b'][1]} Hub models; every miss has a recorded cause (results/h7_misses.json).",
@@ -643,16 +669,37 @@ judged on fresh data.</p>
          f"Absolute thresholds do not transfer between training batches (vision CNN: fresh TPR {cnn['tpr'][0]}/"
          f"{cnn['tpr'][1]} at FPR {cnn['fpr'][0]}/{cnn['fpr'][1]}); text-encoder and vision-transformer students never "
          f"learned the task in {STEPS:,} steps.",
-         f"H16: reference-calibrated rule, fixed on dev ({e(H['H16']['verdict'])}); H16b: students trained to a "
-         f"competence floor ({e(H['H16b']['verdict'])})."),
+         f"H16's reference-calibrated rule, fixed on dev, is {e(H['H16']['verdict'])} (TPR {h16n.get('tpr', [0, 0])[0]}/"
+         f"{h16n.get('tpr', [0, 0])[1]}, FPR {h16n.get('fpr', [0, 0])[0]}/{h16n.get('fpr', [0, 0])[1]}). H16b, students "
+         f"trained to a competence floor, is {e(H['H16b']['verdict'])}: a dev-only pilot measures why the text-encoder "
+         f"students stall. H24 (speech, diffusion) is {e(H['H24']['verdict'])}."),
         ("Behaviour above 2B parameters",
-         f"{big} of the declared pairs weights could not compare have a model above 2B parameters; behaviour was not "
-         "run on them because no behaviour rule has passed on ground truth.",
-         f"H18 runs on text models up to 14B only if H16 or H16b is supported ({e(H['H18']['verdict'])}); most of these "
-         "pairs are GGUF files that H17 may make comparable by weights instead."),
+         f"Behaviour was to run (H18) on declared pairs weights cannot compare, text models up to 14B, once a behaviour "
+         f"rule passed. After every re-read {n18} such pairs remain, and none is in scope: "
+         + "; ".join(f"{e(k)} {v}" for k, v in h18n.items()) + ".",
+         f"H18 is {e(H['H18']['verdict'])}: there was nothing to run. At the first audit, {big} of these pairs had a "
+         "model above 2B parameters; most have since been compared by weights."),
+        ("Every publicly specified format",
+         f"Readers were added for ONNX, NumPy archives, CTranslate2, NeMo, legacy PyTorch, TFLite, LiteRT-LM and Paddle. "
+         f"H21 still found {sum(H['H21']['numbers']['format_failures'].values())} E2 models unreadable for a format reason "
+         f"({e(H['H21']['verdict'])}); the next readers read them.",
+         "Every fresh sample since has had no format failure: "
+         + ", ".join(f"{k} {sum(((H[k].get('numbers') or {}).get('format_failures') or {}).values())}" for k in ("H26c", "H27c", "H28c", "H29c")
+                     if k in H) + " (all " + e(H["H29c"]["verdict"]) + "). Formats with no public specification "
+         "are reported by name, never guessed."),
+        ("Alignment without names",
+         f"When names do not map, tensors are aligned by structure. Each version was judged on a fresh sample and each "
+         f"failure became the next rule (H17, H20, H23, H25-H29). The latest agrees with names on "
+         f"{H['H29a']['numbers']['agree'][0]}/{H['H29a']['numbers']['agree'][1]} fresh pairs, never opposite "
+         f"(H29a, {e(H['H29a']['verdict'])}).",
+         f"Where the two models share at least 8 large tensor shapes it makes {H['H29d']['numbers']['comparable'][0]}/"
+         f"{H['H29d']['numbers']['comparable'][1]} comparable (H29d, {e(H['H29d']['verdict'])}); over all declared "
+         f"pairs {H['H29b']['numbers']['comparable'][0]}/{H['H29b']['numbers']['comparable'][1]} (H29b, "
+         f"{e(H['H29b']['verdict'])}), because {H['H29d']['numbers']['sharing_fewer_than_8_shapes']} pairs share too "
+         "few shapes for any alignment, mostly repositories that declare several bases at once."),
         ("The threshold rule",
          f"Under the pre-registered sensitivity rule (midpoint between the classes) {len(flips)} verdicts change: "
-         f"{', '.join(flips)}.",
+         + "; ".join(f"{k} becomes {e(mid[k])}" for k in flips) + ".",
          "The published rule is max + 5 SD; both columns are in docs/RESULTS.md."),
         ("Hub drift during the audit",
          f"Pass 2 re-read {rr['reread']} models independently: {rr['identical']} identical; the others changed in "
@@ -823,6 +870,7 @@ code{font-family:var(--mono);font-size:.84em;color:var(--fg);background:var(--in
 .badge{font:600 9.5px/1 var(--mono);letter-spacing:.1em;color:var(--acc);background:var(--acc-soft);border:1px solid var(--acc-line);padding:4px 6px;border-radius:4px}
 .nav{display:none;gap:4px}.nav a{font:500 13px var(--sans);color:var(--fg2);text-decoration:none;padding:6px 10px;border-radius:6px}
 .nav a:hover{color:var(--fg);background:var(--inset)}@media(min-width:960px){.nav{display:flex}}
+@media(max-width:959px){.top-in{flex-wrap:wrap;height:auto;padding-top:10px;row-gap:4px}.nav{display:flex;order:3;width:100%;overflow-x:auto;scrollbar-width:none;margin:0 -10px;padding-bottom:6px;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.nav::-webkit-scrollbar{display:none}.nav a{white-space:nowrap;font-size:12.5px;padding:5px 10px}html{scroll-padding-top:112px}.sec-head{scroll-margin-top:112px}}
 .top-r{display:flex;align-items:center;gap:8px}
 .theme{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);
 background:var(--panel);border-radius:8px;cursor:pointer;color:var(--fg2)}.theme:hover{color:var(--fg)}
@@ -834,7 +882,7 @@ background:var(--panel);color:var(--fg);font:500 13.5px var(--sans);text-decorat
 .btn:hover{border-color:var(--faint)}.btn-primary{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
 .btn-primary:hover{background:var(--acc-h);border-color:var(--acc-h)}.btn-ghost{background:transparent;border-color:transparent;color:var(--fg2);font-family:var(--mono);font-size:12.5px}
 .btn-sm{height:36px;padding:0 14px;font-size:13px}.btn:disabled{opacity:.5;cursor:wait}.acc{color:var(--acc)}.muted{color:var(--muted)}
-@media(max-width:420px){.top-r .btn-sm{display:none}}
+@media(max-width:420px){.top-r .btn-sm{padding:0 10px;font-size:12px;height:34px}.word{font-size:21px}}
 /* layout with contents column */
 .layout{display:block}@media(min-width:1100px){.layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:48px;align-items:start}}
 .toc{display:none}@media(min-width:1100px){.toc{display:flex;flex-direction:column;gap:6px;position:sticky;top:86px;padding:28px 0}}
@@ -875,6 +923,7 @@ h1{font:400 38px/1.08 var(--serif);letter-spacing:-.02em;margin:0;color:var(--fg
 text-transform:uppercase;color:var(--muted)}.sec-num{color:var(--acc);font-weight:700}.sq{width:4px;height:4px;border-radius:50%;background:var(--faint)}
 h2{font:400 31px/1.18 var(--serif);letter-spacing:-.015em;margin:8px 0 0;max-width:820px}@media(min-width:768px){h2{font-size:36px}}
 h3{font:600 16px/1.4 var(--sans);margin:0}
+h1,h2,h3,.cav-t{text-wrap:balance}p,.lead,.lede{text-wrap:pretty}
 .lead{font:400 18px/1.62 var(--serif);color:var(--fg2);max-width:780px;margin:0}
 .prose p{font:400 17.5px/1.65 var(--serif);color:var(--fg2);margin:0 0 14px}
 .cols2{display:grid;grid-template-columns:1fr;gap:16px}@media(min-width:900px){.cols2{grid-template-columns:1fr 1fr;gap:28px}}
@@ -890,7 +939,7 @@ display:flex;align-items:center;justify-content:center;border-radius:6px;flex:no
 .fig-note{font-size:13.5px;color:var(--fg2);margin:0}.fig-note b{color:var(--fg)}.fig-after{font:400 16.5px/1.6 var(--serif);color:var(--fg2);margin:0;max-width:860px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font:12px var(--mono);color:var(--fg2)}.lg{display:inline-flex;align-items:center;gap:7px}
 .sw{display:inline-block;width:10px;height:10px;flex:none}.sw-der{background:var(--der);transform:rotate(45deg) scale(.85)}
-.sw-ind{background:var(--ind);border-radius:50%}.sw-v{background:var(--der);border-radius:2px}.sw-g{background:var(--neu);border-radius:2px}.sw-thr{width:14px;height:0;border-top:2px dashed var(--fg2)}
+.sw-ind{background:var(--ind);border-radius:50%}.sw-v{background:var(--der);border-radius:2px}.sw-g{background:var(--neu);border-radius:2px}.sw-m{background:var(--der);opacity:.45;border-radius:2px}.sw-thr{width:14px;height:0;border-top:2px dashed var(--fg2)}
 /* strip plot */
 .strip{display:flex;flex-direction:column;gap:2px}
 .strip-row{display:grid;grid-template-columns:1fr 18px 1fr;grid-template-areas:"fam fam fam" "l b r";column-gap:6px;align-items:center}
@@ -902,7 +951,8 @@ display:flex;align-items:center;justify-content:center;border-radius:6px;flex:no
 .strip-p{position:relative;height:46px;background:var(--inset);border:1px solid var(--hair);border-radius:4px}
 .strip-brk{text-align:center;font:12px var(--mono);color:var(--muted)}
 .ax-t{font:11px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:flex;justify-content:space-between;gap:6px}
-.thr-lab{font-weight:500;color:var(--fg2);text-transform:none;letter-spacing:0}
+.thr-lab{font-weight:500;color:var(--fg2);text-transform:none;letter-spacing:0;white-space:nowrap}
+@media(max-width:719px){.ax-t{flex-direction:column;gap:0;font-size:10px}}
 .thr{position:absolute;top:-2px;bottom:-2px;border-left:2px dashed var(--fg2);opacity:.75}
 .pt{position:absolute;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;box-shadow:0 0 0 2px var(--inset);cursor:pointer}
 .pt::after{content:"";position:absolute;inset:-6px}
@@ -928,7 +978,7 @@ display:flex;align-items:center;justify-content:center;border-radius:6px;flex:no
 .hb-row{display:grid;grid-template-columns:64px 1fr 92px;gap:10px;align-items:center}
 @media(min-width:600px){.hb-row{grid-template-columns:96px 1fr 110px}}
 .hb-lab{font:12px var(--mono);color:var(--fg2)}.hb-track{position:relative;height:20px}
-.hb{display:block;height:100%;border-radius:0 4px 4px 0;cursor:pointer;min-width:2px}.b-v{background:var(--der)}.b-g{background:var(--neu)}
+.hb{display:block;height:100%;border-radius:0 4px 4px 0;cursor:pointer;min-width:2px}.b-v{background:var(--der)}.b-g{background:var(--neu)}.b-m{background:var(--der);opacity:.45}
 .ci{position:absolute;top:50%;height:0;border-top:2px solid var(--fg);opacity:.7;pointer-events:none}
 .ci::before,.ci::after{content:"";position:absolute;top:-6px;height:10px;border-left:2px solid var(--fg)}.ci::before{left:0}.ci::after{right:0}
 .hb-val{font:600 12px var(--mono);color:var(--fg);white-space:nowrap;text-align:right}
@@ -953,8 +1003,7 @@ background:var(--inset);border-bottom:1px solid var(--line)}.tbl td{padding:9px 
 .tile-l{font:600 10.5px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
 .tile-n{font:600 26px/1.1 var(--mono);color:var(--acc);letter-spacing:-.02em}.tile p{margin:0;font-size:13.5px;color:var(--fg2);flex:1}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
-.findings .card:first-child{border-color:var(--nd-line);background:linear-gradient(var(--nd-bg),var(--panel) 60%)}
-.findings .card:last-child{border-color:var(--acc-line);background:linear-gradient(var(--acc-soft),var(--panel) 60%)}
+.findings .card{border-top:3px solid var(--acc)}
 .card h3{font:500 21px/1.3 var(--serif)}.card p{margin:0;font-size:14px;color:var(--fg2)}.card-top{display:flex;justify-content:space-between;align-items:center}
 .tag{font:700 11.5px var(--mono);color:var(--acc);background:var(--acc-soft);padding:3px 7px;min-width:42px;text-align:center;border-radius:5px;flex:none;align-self:flex-start}
 .pill{display:inline-flex;align-items:center;padding:2px 8px;font:600 10.5px var(--mono);letter-spacing:.04em;border:1px solid;border-radius:5px;white-space:nowrap}
@@ -1009,7 +1058,7 @@ padding:8px 10px;font:12px/1.5 var(--mono);color:var(--fg2);max-width:280px;box-
 .form label .muted{text-transform:none;letter-spacing:0;font-weight:400}
 .form input{font:14px var(--mono);padding:12px 14px;background:var(--inset);border:1px solid var(--line);color:var(--fg);border-radius:8px}
 .form input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-soft)}.log{font:12px var(--mono);color:var(--muted);min-height:1.5em;margin:0}
-.out{display:flex;flex-direction:column;gap:12px;font-size:14px;color:var(--fg2)}
+.out{display:flex;flex-direction:column;gap:12px;font-size:14px;color:var(--fg2)}.out:empty{display:none}
 .res{border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:6px}
 .res-top{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}.res-base{font:13px var(--mono);color:var(--fg);word-break:break-all}
 .res-num{font:500 44px/1.1 var(--serif);color:var(--fg);letter-spacing:-.02em}.res-sub{margin:0;font-size:12.5px;color:var(--muted)}
@@ -1066,7 +1115,7 @@ JS = r"""
   const heads = links.map(a => document.getElementById(a.dataset.toc)).filter(Boolean);
   if (heads.length) {
     const mark = () => {
-      let cur = heads[0].id;
+      let cur = null;
       heads.forEach(h => { if (h.getBoundingClientRect().top < window.innerHeight * 0.35) cur = h.id; });
       links.forEach(a => a.classList.toggle("on", a.dataset.toc === cur));
     };

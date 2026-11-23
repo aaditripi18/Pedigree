@@ -18,17 +18,18 @@ existed ([PLAN.md](PLAN.md), with dated amendments); every verdict below is comp
 The sample is 200 models drawn uniformly from each of three download tiers of the 100,000 most
 downloaded models (ranks 1-1k, 1k-10k, 10k-100k; seed 20261105). Every model got exactly one
 category, with its reason. The second column is the same 600 models scored again after the file
-reader fixes and re-reads described [below](#every-caveat-measured) (E2r, E2g, E2p, E2f, E2s); no verdict changed.
+reader fixes and re-reads described [below](#every-caveat-measured) (E2r, E2g, E2p, E2f, E2s), and the third after
+readers for every publicly specified format (E2x, E2y); no verdict changed at either step.
 
-| Category | Models (audit) | After reader fixes |
-|---|--:|--:|
-| Declares a base, and the weights confirm it | 214 | 263 |
-| Declares a base the weights contradict | 3 | 3 |
-| Declares a base that cannot be compared by weights | 84 | 35 |
-| Declares no base; an earlier related model was found | 105 | 106 |
-| Declares no base; no related earlier model found | 136 | 135 |
-| Weights not readable (ONNX-only, gated without a public copy, no weights) | 46 | 46 |
-| An adapter only (LoRA weights, checked against its base's shapes) | 12 | 12 |
+| Category | Models (audit) | After reader fixes | With every reader (E2y) |
+|---|--:|--:|--:|
+| Declares a base, and the weights confirm it | 214 | 263 | 289 |
+| Declares a base the weights contradict | 3 | 3 | 4 |
+| Declares a base that cannot be compared by weights | 84 | 35 | 21 |
+| Declares no base; an earlier related model was found | 105 | 106 | 111 |
+| Declares no base; no related earlier model found | 136 | 135 | 158 |
+| Weights not readable (gated without a public copy, no weights, HTTP 403) | 46 | 46 | 5 |
+| An adapter only (LoRA weights, checked against its base's shapes) | 12 | 12 | 12 |
 
 - **Undeclared lineage (H2, not supported).** Of the 364 models whose weights show a related
   earlier model, 105 (28.8%, Wilson 95% interval 24.4-33.7%) declare no base. The pre-registered
@@ -176,8 +177,9 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   `gpt-oss-20b`); 7 other formats (a random tiny model with no shared shapes, a draft head, a repack,
   an NPU build, no weight files); 5 gated or private with no byte-identical public copy.
 - **Thresholds.** Under the pre-registered sensitivity rule (the midpoint between the classes
-  instead of max + 5 SD) three verdicts change: H3 becomes supported (15/227 contradicted) and
-  H10, H11 become not supported. The published rule is max + 5 SD; both are in
+  instead of max + 5 SD) five verdicts change: H3 becomes supported (15/227 contradicted), and
+  H10, H11, H28a and H29a become not supported (under the midpoint, v4 gives 2 opposite verdicts
+  of 322 in H28a and 1 of 330 in H29a). The published rule is max + 5 SD; both are in
   [docs/RESULTS.md](docs/RESULTS.md).
 - **Hub drift.** E2 took four passes (2026-11-08 to 2026-11-13). Pass 2 could not mount pass 1 and re-read 457
   models independently: 429 were identical, and the 28 that changed did so in their commit (13),
@@ -186,8 +188,9 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
 - **Lost models.** A model lost to the network was retried in a later pass; the audit was
   recorded only when all 600 were read. Six losses in pass 3 were two bugs (unescaped spaces in
   file names; an index naming a shard the repository lacks), fixed before pass 4.
-- **Behaviour.** Not supported on ground truth (H9, H12, H14, H14b) and applicable to 0 of 94 Hub
-  pairs; it is reported as its own category and never moves H3. H14 tested what only a distilled
+- **Behaviour.** The first four tests on ground truth failed (H9, H12, H14, H14b); H16 is supported
+  (below). At the first audit behaviour applied to 0 of 94 Hub pairs; it is reported as its own
+  category and never moves H3. H14 tested what only a distilled
   student should inherit: the teacher's mistakes, and how it spreads probability over wrong
   answers (E5e; 20 fresh distilled and 20 fresh independent students, trained after the rule was
   written). One rule for all families finds nothing (TPR 0/20): the families sit on different
