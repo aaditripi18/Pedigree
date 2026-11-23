@@ -12,6 +12,7 @@ a row permutation the invariant check is built to ignore.
 """
 from __future__ import annotations
 
+import os
 import re
 import struct
 
@@ -20,6 +21,43 @@ import numpy as np
 from .torchzip import RangeFile
 
 SCALARS = {0: "<B", 1: "<b", 2: "<H", 3: "<h", 4: "<I", 5: "<i", 6: "<f", 7: "<?", 10: "<Q", 11: "<q", 12: "<d"}
+# Correction to readers v6 (2026-11-23, PLAN.md): GGUF's specification allows big-endian files
+# (llama.cpp's `gguf_convert_endian.py` writes them; s390x builds load them). The version field tells
+# the byte order. Read as little-endian, a big-endian file passed the version check (3 reads as
+# 50331648), and every count and string length after it was garbage. A string "length" of ~1.4e18
+# made the reader fetch block after block until Kaggle stopped H28's session at 12 hours.
+# PEDIGREE_READERS_V6=0 keeps the earlier reading, so H27 and E2y reproduce as recorded.
+READERS_V6 = os.environ.get("PEDIGREE_READERS_V6", "1") != "0"
+# per llama.cpp's converter: the fp16 fields of each block it byte-swaps (offset within the block)
+BE_BLOCK_FIELDS = {"Q4_0": (0,), "Q8_0": (0,), "Q4_K": (0, 2), "Q6_K": (208,), "MXFP4": (), "NVFP4": ()}
+BE_ELEMENT = {"F32": 4, "F16": 2, "BF16": 2, "F64": 8, "I8": 1, "I16": 2, "I32": 4, "I64": 8}
+
+
+def byte_order(version_bytes: bytes) -> str:
+    """'<' or '>' for a GGUF file, from its 4 version bytes."""
+    le, be = struct.unpack("<I", version_bytes)[0], struct.unpack(">I", version_bytes)[0]
+    if not READERS_V6 or 2 <= le <= 0xFFFF or le < 2:
+        return "<"
+    if 2 <= be <= 0xFFFF:
+        return ">"
+    raise ValueError(f"GGUF version {le} is not plausible in either byte order")
+
+
+def to_little(raw: bytes, qtype: str, type_size: int) -> bytes:
+    """Bytes of a big-endian GGUF tensor as the little-endian file would hold them, by llama.cpp's
+    own rule for each type; a type its converter does not define has no published byte order."""
+    a = np.frombuffer(raw, dtype=np.uint8)
+    if qtype in BE_ELEMENT:
+        k = BE_ELEMENT[qtype]
+        return a.reshape(-1, k)[:, ::-1].tobytes()
+    if qtype not in BE_BLOCK_FIELDS:
+        raise ValueError(f"big-endian GGUF tensor type {qtype}: llama.cpp defines no byte order for it")
+    b = a.reshape(-1, type_size).copy()
+    for o in BE_BLOCK_FIELDS[qtype]:
+        b[:, [o, o + 1]] = b[:, [o + 1, o]]
+    return b.tobytes()
+
+
 PREFERENCE = ["Q8_0", "BF16", "F16", "F32", "Q6_K", "Q5_K_M", "Q5_K_S", "Q5_0", "Q4_K_M", "Q4_K_S", "Q4_0"]
 
 
@@ -40,9 +78,19 @@ def choose_variant(names: list[str]) -> list[str]:
 
 class _Reader:
     def __init__(self, fh: RangeFile):
-        self.fh = fh
+        self.fh, self.order = fh, "<"
+
+    def version(self) -> int:
+        b = self.fh.read(4)
+        self.order = byte_order(b)
+        (v,) = struct.unpack(self.order + "I", b)
+        if v < 2:
+            raise ValueError(f"GGUF version {v} is not supported")
+        return v
 
     def take(self, fmt: str):
+        if self.order != "<" and fmt[0] == "<":
+            fmt = self.order + fmt[1:]
         size = struct.calcsize(fmt)
         return struct.unpack(fmt, self.fh.read(size))
 
@@ -73,7 +121,8 @@ def n_tensors(url: str) -> int:
     head = fetch_range(url, 0, 23)
     if head[:4] != b"GGUF":
         raise ValueError("not a GGUF file")
-    version, n = struct.unpack("<IQ", head[4:16])
+    order = byte_order(head[4:8])
+    version, n = struct.unpack(order + "IQ", head[4:16])
     if version < 2:
         raise ValueError(f"GGUF version {version} is not supported")
     return int(n)
@@ -87,9 +136,7 @@ def file_type(url: str, size: int) -> str | None:
     r = _Reader(fh)
     if fh.read(4) != b"GGUF":
         raise ValueError("not a GGUF file")
-    (version,) = r.take("<I")
-    if version < 2:
-        raise ValueError(f"GGUF version {version} is not supported")
+    r.version()
     _, n_kv = r.take("<Q")[0], r.take("<Q")[0]
     for _ in range(n_kv):
         key = r.string()
@@ -109,9 +156,7 @@ def tensor_count(url: str, size: int) -> tuple[int, int | None]:
     r = _Reader(fh)
     if fh.read(4) != b"GGUF":
         raise ValueError("not a GGUF file")
-    (version,) = r.take("<I")
-    if version < 2:
-        raise ValueError(f"GGUF version {version} is not supported")
+    r.version()
     n_tensors, n_kv = r.take("<Q")[0], r.take("<Q")[0]
     split = None
     for _ in range(n_kv):
@@ -129,9 +174,7 @@ def read_header(url: str, size: int) -> tuple[dict, dict]:
     r = _Reader(fh)
     if fh.read(4) != b"GGUF":
         raise ValueError("not a GGUF file")
-    (version,) = r.take("<I")
-    if version < 2:
-        raise ValueError(f"GGUF version {version} is not supported")
+    r.version()
     n_tensors, n_kv = r.take("<Q")[0], r.take("<Q")[0]
     meta = {}
     for _ in range(n_kv):
@@ -150,7 +193,8 @@ def read_header(url: str, size: int) -> tuple[dict, dict]:
         infos.append((name, dims, qtype, offset))
     align = int(meta.get("general.alignment", 32))
     start = (fh.tell() + align - 1) // align * align
-    tensors = {name: {"dtype": "GGUF", "qtype": qtype, "shape": list(reversed(dims)), "start": start + offset}
+    tensors = {name: {"dtype": "GGUF", "qtype": qtype, "shape": list(reversed(dims)), "start": start + offset,
+                      **({"order": ">"} if r.order == ">" else {})}
                for name, dims, qtype, offset in infos}
     return meta, tensors
 
@@ -170,6 +214,8 @@ def sample(url: str, spec: dict, elements: int) -> np.ndarray:
         if spec["qtype"] not in ggufextra.TYPES:
             raise ValueError(f"GGUF tensor type {spec['qtype']} is not in llama.cpp's published list "
                              "(a fork's own format)")
+        if spec.get("order") == ">":
+            raise ValueError(f"big-endian GGUF tensor type {spec['qtype']}: llama.cpp defines no byte order for it")
         _, block, type_size = ggufextra.TYPES[spec["qtype"]]
         total = int(np.prod(spec["shape"]))
         n = min(elements, total)
@@ -187,11 +233,16 @@ def sample(url: str, spec: dict, elements: int) -> np.ndarray:
     total = int(np.prod(spec["shape"]))
     n = min(elements, total)
     plain = {"I8": "<i1", "I16": "<i2", "I32": "<i4", "I64": "<i8", "F64": "<f8"}.get(qtype.name)
+    big = spec.get("order") == ">"
     if plain:                       # integer and float64 tensors are stored as they are, not quantised
         raw = fetch_range(url, spec["start"], spec["start"] + n * type_size - 1)
+        if big:
+            raw = to_little(raw, qtype.name, type_size)
         return np.frombuffer(raw, dtype=plain).astype(np.float64)[:n]
     blocks = -(-n // block)
     raw = fetch_range(url, spec["start"], spec["start"] + blocks * type_size - 1)
+    if big:
+        raw = to_little(raw, qtype.name, type_size)
     vals = gguf.quants.dequantize(np.frombuffer(raw, dtype=np.uint8), qtype)
     return np.asarray(vals, dtype=np.float64).ravel()[:n]
 

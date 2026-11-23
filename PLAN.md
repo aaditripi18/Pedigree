@@ -1295,3 +1295,29 @@ H7 (a) 20/24, (b) 93/270 (92/266). Under the midpoint, H2 reads 108/387, H3 16/3
 No verdict changes from E2 as recorded. R2 puts 23 of the 27 declared pairs still not comparable into
 a category; 4 are listed as gaps (`Comfy-Org/Qwen3-VL`, `tiny-random/qwen3.5-moe`,
 `AhmedPPL/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF`, `KoreaPeter/ms-eff-gcvit-deepfake-b5-celeb-df-v2`).
+
+**Running H28 (2026-11-23, before any H28 verdict).** The first session (`pedigree-h28`) read 149 of
+the 150 sampled models in 2.7 hours, none lost (`results/kaggle/h28/h28_raw.jsonl`). It then stalled
+on the 150th, `glogwa68/granite-4.0-h-1b-DISTILL-glm-4.7-think-GGUF`, until Kaggle ended the
+session at its 12-hour limit. Reproduced locally, the model and its declared base read in seconds.
+The stall is in one of its pool candidates, `taronaeo/Granite-4.0-H-1B-BE-GGUF`, a big-endian GGUF.
+GGUF's specification allows big-endian files, and llama.cpp's `gguf_convert_endian.py` writes them.
+Pedigree read every GGUF as little-endian. Version 3 big-endian then reads as 50,331,648, which passed
+the version check, and the first string length read as about 1.4e18 bytes, so the reader fetched
+block after block. Earlier runs met the same files and recorded them as not readable ("unpack
+requires a buffer of 4 bytes": E2x's and E2y's pool pairs against `taronaeo/Granite-4.2-3B-BE-GGUF`
+and `taronaeo/Granite-4.0-3B-Vision-BE-GGUF`).
+
+*Correction to readers v6 (big-endian GGUF).* `pedigree/ggufremote.py` takes the byte order from
+the version field, read in whichever order gives a plausible version, and reads the header in that
+order. Tensor data is brought to little-endian by llama.cpp's own rule for each type:
+- whole values swapped for F32, F16, BF16, F64 and the integer types;
+- the fp16 fields of each block swapped for Q4_0, Q8_0, Q4_K and Q6_K;
+- no change for MXFP4 and NVFP4.
+
+A big-endian file of any other type is refused with that reason, because llama.cpp defines no byte
+order for it. `tests/test_gguf_bigendian.py` writes the same weights little-endian and, with the
+converter's own swaps, big-endian. Both read as the same values, and the test fails without the
+block swaps. Under `PEDIGREE_READERS_V6=0` the earlier reading is kept, so H27 and E2y reproduce as
+recorded. None of H28's 149 rows or its design pairs read a big-endian file, so they are not read
+again. A second session resumes from the 149 and reads the last model with this correction.

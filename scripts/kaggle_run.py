@@ -225,7 +225,10 @@ JOBS["h27"] = _job("pedigree-h27", [["-m", "experiments.h27_fresh", "--out", "/k
 JOBS["h27-design"] = _job("pedigree-h27-design", [["-m", "experiments.h27_fresh", "--design",
                                                    "--out", "/kaggle/working/h27_design_raw.jsonl"]],
                           gpu=False, env=dict(E2_ENV))
-JOBS["h28"] = _job("pedigree-h28", [["-m", "experiments.h28_fresh", "--out", "/kaggle/working/h28_raw.jsonl"]],
+# 2026-11-23: the first session read 149 of 150 and stalled on a big-endian GGUF until the 12-hour limit;
+# the second resumes from its records, with the big-endian correction (PLAN.md)
+JOBS["h28"] = _job("pedigree-h28", [["-m", "experiments.h28_fresh", "--out", "/kaggle/working/h28_raw.jsonl",
+                                     "--resume", "results/kaggle/h28/h28_raw.jsonl"]],
                    gpu=False, env=dict(E2_ENV))
 JOBS["h28-design"] = _job("pedigree-h28-design", [["-m", "experiments.h28_fresh", "--design",
                                                    "--out", "/kaggle/working/h28_design_raw.jsonl"]],
