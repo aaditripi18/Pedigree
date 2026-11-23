@@ -1352,5 +1352,6 @@ H28d's 7 pairs not comparable, by measured cause:
   38 of 44.
 
 The design data (H27's opposite and not-comparable pairs, read with (ix) and (k)) is in the
-`H28-design` ledger. Both opposite verdicts now agree at median 1.0 on 24 tensors, and the four imatrix
-pairs compare 24 tensors at about 1.0.
+`H28-design` ledger. In the 6 pairs where names now align at least 8 tensors (H27a's two opposite pairs
+and four pairs where an imatrix had been taken for the model), v4 agrees with names on 6 of 6. The other
+26 stay not comparable (0 of 26), for the causes measured under H27.
