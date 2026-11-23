@@ -88,6 +88,7 @@ def page(title: str, desc: str, body: str, extra: str = "", toc=None, current: s
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="icon" href="{ICON}">
