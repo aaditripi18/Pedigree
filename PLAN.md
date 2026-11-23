@@ -1321,3 +1321,36 @@ converter's own swaps, big-endian. Both read as the same values, and the test fa
 block swaps. Under `PEDIGREE_READERS_V6=0` the earlier reading is kept, so H27 and E2y reproduce as
 recorded. None of H28's 149 rows or its design pairs read a big-endian file, so they are not read
 again. A second session resumes from the 149 and reads the last model with this correction.
+
+**Outcome of H28 (recorded after judging, 2026-11-23; Kaggle `pedigree-h28`, two sessions, read all 150
+sampled models, none lost; design data `pedigree-h28-design`, 32 pairs).**
+- **H28a: supported.** Where names align at least 8 tensors, v4 with (g)-(i), the tie-break, (j) and (k),
+  names ignored, gives the same verdict on 322 of 322 fresh pairs (23 of them unrelated by names). It
+  gives the opposite verdict on none and aligns too few on none (v3: 317 of 322).
+- **H28b: not supported.** 37 of 49 declared pairs where names align fewer than 8 tensors are comparable,
+  under the 80% bar. One more declared pair was not read and counts under H28c.
+- **H28c: supported.** No fresh model and no declared base is unreadable because of its file format. Five
+  repositories are unread, all by reason: HTTP 401 3, gated with no byte-identical public copy 2.
+- **H28d: supported.** Of H28b's pairs whose two models share at least 8 large tensor shapes, 37 of 44 are
+  comparable. The 5 others in H28b share fewer than 8 such shapes, so no alignment can compare them.
+
+H28d's 7 pairs not comparable, by measured cause:
+- **A fork's own GGUF tensor types (2).** Types 100 and 101 are not in llama.cpp's published list, so they
+  have no public specification
+  (`kingjones777/DeepSeek-V4-Flash-180B-ROCmFP4-STRIX_LEAN-GGUF`, `kingjones777/Ling-3.0-flash-VL-MTP-ROCmFP4-GGUF`).
+- **Draft or multi-token-prediction heads (3).** Each holds a few layers beside its declared full model:
+  `a4lg/Qwen3-Next-80B-A3B-Instruct-MTP-ONLY-GGUF` 3 tensors compared,
+  `kingjones777/Qwen3.8-Flash-Next-MTP-Heads-GGUF` 7, and the retrained EAGLE3 head
+  `TiaoFeng/Spark-X2.6-4B-EAGLE3-Chinese-retrain` 1.
+- **One tensor short (1).** `cstr/funasr-mlt-nano-GGUF` compares 7.
+- **4-bit ONNX weights read as raw bytes (1).** `ibm-granite/granite-speech-5.0-2b-ONNX` stores its
+  projections as onnxruntime `MatMulNBits` blocks: packed 4-bit `uint8` values with fp16 scales and zero
+  points. The ONNX reader dequantises `DequantizeLinear` but not `MatMulNBits`, so the large weights stay
+  unnamed `uint8` arrays, only the norms match by name, and nothing is compared. `MatMulNBits` is specified
+  in onnxruntime's published contrib operators, so this is a reader the project still lacks. It is named
+  here and not fixed after the verdict. It would not change one: H28b would read 38 of 49 and H28d
+  38 of 44.
+
+The design data (H27's opposite and not-comparable pairs, read with (ix) and (k)) is in the
+`H28-design` ledger. Both opposite verdicts now agree at median 1.0 on 24 tensors, and the four imatrix
+pairs compare 24 tensors at about 1.0.
