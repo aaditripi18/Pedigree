@@ -1431,3 +1431,13 @@ settings, and scores each on E5's probes as E5e does:
 The dev teacher scores 0.515 on the probes, so H16b's floor for independents would be 0.258. An H16c is
 pre-registered only if a setting shows independents rising toward that floor. Otherwise the stall is
 recorded with its measured cause, and H16b stays not decidable as recorded.
+
+**Pilot outcome (2026-11-23, Kaggle `moinuddinhasan8/pedigree-h16c-pilot`, results/kaggle/h16c-pilot;
+design data).** Accuracy on E5's probes after 5,000 steps (teacher 0.515, floor 0.258): H16b's setting
+0.065; with clipping 0.065, identical to four places in accuracy and agreement; rate 1e-4 with clipping
+0.109; rate 2e-4 with clipping and batch 32 0.132, with the lowest final loss (6.553 against 6.966 for
+H16b's setting). The cause is therefore not an unclipped update: clipping changes nothing. A lower rate
+and a larger batch move the students off the one-output stall, and the best setting doubles accuracy,
+which meets this note's condition (rising toward the floor). It reaches about half the floor in 5,000
+steps, and its loss was levelling (6.569 to 6.553 over the last 100 steps), so whether 20,000 steps
+reach the floor is not known from this pilot. H16b's verdict stands as recorded.
