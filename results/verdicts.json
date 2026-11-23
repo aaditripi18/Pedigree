@@ -2241,6 +2241,34 @@
       "sharing_fewer_than_8_shapes": 5
      },
      "evidence": "37/44 comparable; 5 pairs share fewer than 8 large tensor shapes (no alignment can compare them)"
+    },
+    {
+     "id": "H29a",
+     "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i), the tie-break, (j), (k) and (l) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H28a",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H29b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
+     "follows": "H28b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H29c",
+     "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
+     "follows": "H28c",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H29d",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors, both models were read and the two share >= 8 tensors of >= 4096 values by shape (either orientation), auto4 makes >= 80% comparable.",
+     "follows": "H28d",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {
@@ -4559,6 +4587,34 @@
       "sharing_fewer_than_8_shapes": 5
      },
      "evidence": "37/44 comparable; 5 pairs share fewer than 8 large tensor shapes (no alignment can compare them)"
+    },
+    {
+     "id": "H29a",
+     "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i), the tie-break, (j), (k) and (l) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
+     "follows": "H28a",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H29b",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
+     "follows": "H28b",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H29c",
+     "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
+     "follows": "H28c",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
+    },
+    {
+     "id": "H29d",
+     "statement": "On fresh declared pairs where names align fewer than 8 tensors, both models were read and the two share >= 8 tensors of >= 4096 values by shape (either orientation), auto4 makes >= 80% comparable.",
+     "follows": "H28d",
+     "verdict": "pending",
+     "evidence": "fresh sample running"
     }
    ],
    "audit": {

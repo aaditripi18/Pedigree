@@ -75,23 +75,43 @@ judged once on fresh pairs.
 | H14 | Behaviour by shared mistakes, one rule for all families, fresh students: TPR >= 90% at FPR <= 5% | **not supported** | error agreement above 0.5965 (dev): TPR 0/20, FPR 0/20 |
 | H14b | The same, with a rule per family (text decoder, vision CNN) | **not supported** | text decoder TPR 5/5, FPR 0/5; vision CNN TPR 5/5, FPR 5/5 |
 | H15 | Direction by D3 (dates across owners or > 30 days; names within one release; kurtosis last): >= 95% right, <= 10% undecided, fresh | **not supported** | right on 222/237 decided (93.7%), undecided 7/244; dates alone 226/240, kurtosis 22/118 |
-| H16 | Behaviour calibrated against reference students trained the same way: TPR >= 90% at FPR <= 5%, fresh | pending | dev rule fixed: drop > 6.3% (dev gap 5.7 points); fresh students wait for GPU quota |
-| H16b | The same, with text-encoder and vision-transformer students trained long enough to learn the task | pending | waits for GPU quota |
+| H16 | Behaviour calibrated against reference students trained the same way: TPR >= 90% at FPR <= 5%, fresh | **supported** | dark-knowledge drop > 0.063 (dev): TPR 10/10, FPR 0/10 (text decoder, vision CNN) |
+| H16b | The same, with text-encoder and vision-transformer students trained 20,000 steps | **not decidable** | no family's independents reach the competence floor (text-encoder students all stop at one output; ViT independents 0.275-0.377 against a floor of 0.484) |
 | H17a | Structural GGUF alignment (names ignored) agrees with name alignment on >= 98% of fresh pairs | **not supported** | 279/339 agree; 0 opposite verdicts, the other 60 aligned no tensor (Qwen 3.5-3.8 multimodal/MTP and clip GGUFs) |
 | H17b | Structural alignment makes >= 50% of E2's 32 declared GGUF pairs with no name match comparable | **not supported** | 15/32 comparable (all 15 related) |
-| H18 | Behaviour confirms >= 90% of the declared Hub pairs weights cannot compare (text models <= 14B) | pending | runs only if H16 or H16b is supported |
+| H18 | Behaviour confirms >= 90% of the declared Hub pairs weights cannot compare (text models <= 14B) | **not judged** | 0 of 42 such pairs are in scope (not readable 18, not a text language model 13, over 14B 10, needs the repository's own code 1) |
 | H19 | Direction by content dates (each repository's earliest weight-file commit; the earlier is the parent): >= 95% right, <= 10% undecided, fresh | **not supported** | right on 236/263 decided (89.7%), 0 undecided; on the same pairs dates alone 236/260, D3 244/257 |
 | H20 | Structural alignment v2 (stacks, unequal block counts) agrees with name alignment on >= 98% of fresh GGUF pairs | **not supported** | 373/382 agree (v1: 331/382); 1 opposite verdict, 8 aligned too few tensors |
+| H21 | After re-reading with readers for every publicly specified weight format (E2x), no E2 model is unreadable because of its format | **not supported** | 37 of 46 now read; 4 format failures (3 GGUF repositories with quantisations in subfolders, 1 pickle using `defaultdict`), all read by E2y |
+| H23a | Alignment v3 (names ignored) agrees with names on >= 98% of fresh pairs, opposite on none | **not supported** | 518/526 agree, 2 opposite (a depth-upscaled GGUF), 6 aligned too few |
+| H23b | Alignment v3 makes >= 80% of fresh declared pairs with no name match comparable | **not supported** | 73/145 |
+| H24 | Behaviour calibrated against reference students identifies distilled speech and diffusion students | pending | students training on friends' GPU accounts |
+| H25a | Alignment v4 (names ignored) agrees with names on >= 98% of fresh pairs, opposite on none | **not supported** | 602/604 agree, 1 opposite (an ONNX `MatMul` weight stored transposed) |
+| H25b | Alignment v4 makes >= 80% of fresh declared pairs with no name match comparable | **not supported** | 67/99 |
+| H26a | v4 with (g)-(i), names ignored, agrees with names on >= 98% of fresh pairs, opposite on none | **not supported** | 598/599 agree, 1 opposite (a tie settled by set order; fixed by the tie-break) |
+| H26b | auto4 makes >= 80% of fresh declared pairs with no name match comparable | **supported** | 90/108 |
+| H26c | No fresh model or declared base is unreadable because of its format | **supported** | 0 format failures; 15 unread by reason (HTTP 401/403, gated, no weight files) |
+| H27a | v4 with (g)-(i), the tie-break and (j) agrees with names on >= 98% of fresh pairs, opposite on none | **not supported** | 406/408 agree, 2 opposite (GGUF matrices stored reversed; fixed by (k)) |
+| H27b | auto4 makes >= 80% of fresh declared pairs with no name match comparable | **not supported** | 53/83 (four read an importance matrix, not weights; fixed by (ix)) |
+| H27c | No fresh model or declared base is unreadable because of its format | **supported** | 0 format failures; 9 unread by reason |
+| H28a | v4 with (g)-(i), the tie-break, (j) and (k) agrees with names on >= 98% of fresh pairs, opposite on none | **supported** | 322/322 agree, 0 opposite (v3 317/322) |
+| H28b | auto4 makes >= 80% of fresh declared pairs with no name match comparable | **not supported** | 37/49 |
+| H28c | No fresh model or declared base is unreadable because of its format | **supported** | 0 format failures; 5 unread by reason (HTTP 401 3, gated 2) |
+| H28d | auto4 makes >= 80% of those pairs comparable when the two share >= 8 large tensor shapes | **supported** | 37/44; the other 5 share fewer than 8 shapes, so no alignment can compare them |
+| H29a-d | H28's four with rule (l) (an underscore separates a block index), fresh sample | pending | running on Kaggle |
 
-H2, H3, H7-H9, H12, H14, H14b, H15, H17a, H17b, H19 and H20 failed their bars; they are reported as they came out,
+H2, H3, H7-H9, H12, H14, H14b, H15, H17a, H17b, H19-H21, H23a, H23b, H25a, H25b, H26a, H27a, H27b and H28b failed their bars; they are reported as they came out,
 and never reworded. H2 and H3 are measurements of the Hub (its declarations are more honest than the hypotheses
 guessed). Every other failed hypothesis has a follow-up, designed from the failure's cause in the data
 and written into [PLAN.md](PLAN.md) before any of its data existed: H13 for H7 (supported), H15 for
 H8, H16 and H16b for H9, H12, H14 and H14b, H17 for the unverifiable bases, H18 for behaviour above
-2B parameters, H19 for H15 and H20 for H17. H19 and H20 are the last follow-ups on direction and
-alignment: their results are recorded and no further follow-up on either is made. H13 was judged on 360 Hub models no rule was chosen on, drawn before any was read;
+2B parameters, H19 for H15 and H20 for H17. On 2026-11-20 every remaining gap was reopened (amendment
+of that date in PLAN.md): H21 for the unreadable formats, H23 and then H25-H29 for alignment, each
+designed from the previous one's failures, and H24 for behaviour on speech and diffusion. H16b came out
+not decidable, because its text-encoder students never learned the task; a dev pilot (H16c, design data
+only) measures why before anything is pre-registered. H13 was judged on 360 Hub models no rule was chosen on, drawn before any was read;
 H15 and H17a on a new sample of 360 (seed 20261118), H19 and H20 on another of 355 (seed 20261119),
-drawn the same way.
+and H23 and H25-H29 each on a new sample drawn the same way after the previous verdict.
 
 ## Every caveat, measured
 
@@ -176,14 +196,41 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   against independent 0.128-0.143), but the whole fresh batch sits below the threshold chosen on
   the dev batch (0.174); an absolute threshold does not carry from one batch to the next. H16
   scores each student against reference students trained the same way (its rule, a drop of more
-  than 6.3% below the lowest reference, was fixed from dev before any fresh student exists); H16b
-  trains text-encoder and vision-transformer students for 20,000 steps, to a competence floor set
-  in advance. Both run on GPU when the quota is free.
-- **Behaviour above 2B parameters (H18).** 66 of the 94 declared pairs weights could not compare
-  have a model above 2B parameters. Behaviour runs on them (text models up to 14B sharing a
-  tokenizer) only if H16 or H16b is supported: a behaviour result on a large model proves nothing
-  until the behaviour check itself has passed on ground truth. Most of these pairs are GGUF files
-  that H17 may make comparable by weights instead.
+  than 6.3% below the lowest reference, was fixed from dev before any fresh student existed), and
+  it is supported: TPR 10/10, FPR 0/10 on fresh text-decoder and vision-CNN students. H16b trained
+  text-encoder and vision-transformer students for 20,000 steps, to a competence floor set in
+  advance, and is not decidable: the 11 vision-transformer independents score 0.275-0.377 against a
+  floor of 0.484, and all 22 text-encoder students, distilled and independent, stop at one output
+  (accuracy 0.0548 for every seed, losses level near the unigram entropy). A dev-only pilot (H16c,
+  four training settings on the dev teacher) measures that stall before any new hypothesis is
+  registered. H24 applies H16's method to speech and diffusion students, trained on friends' GPU
+  accounts.
+- **Behaviour above 2B parameters (H18).** Behaviour was to run on the declared pairs weights
+  cannot compare (text models up to 14B sharing a tokenizer) once H16 was supported. After every
+  re-read, 42 declared pairs remain that weights cannot compare, and none is in scope: 18 not
+  readable, 13 not text language models, 10 above 14B parameters, 1 runs only through the
+  repository's own code. H18 is not judged; there was nothing to run.
+- **Every publicly specified format (H21, E2x, E2y).** Readers were added for ONNX (including
+  `DequantizeLinear` and onnxruntime's 4-bit `MatMulNBits`), NumPy archives, CTranslate2, NeMo,
+  legacy PyTorch, TFLite, LiteRT-LM and Paddle. H21 still found 4 E2 models unreadable for a format
+  reason (not supported); the next readers (v5) read all 4. With E2y, 5 of E2's 600 models stay
+  unread, all for a reason no reader can change (no weight files 3, gated 1, HTTP 403 1), and no
+  audit verdict changes. The fresh samples since (H26c, H27c, H28c) found no format failure.
+  Two reading faults found on the way are fixed and tested: a repository whose chosen GGUF file is
+  an empty upload (now a reason, and the next complete quantisation is read), and big-endian GGUF
+  files (byte order from the version field, tensors swapped by llama.cpp's own rule).
+- **Alignment without names (H23-H29).** Each version was judged on a fresh sample, and each failure
+  became the next rule: v3 (any two formats, roles, unequal depth); v4 (shapes without size-1
+  dimensions, repeated shapes paired by leaf-name similarity, depth maps); (g)-(i) (positional and
+  prefix pairings, stack partners by shape overlap); a deterministic tie-break; (j) (ONNX `MatMul`
+  weights read in the orientation the other side holds); (k) (GGUF
+  matrices held reversed); reader (ix) (llama.cpp importance matrices are not weights); and (l)
+  (underscores around a block index). With (k) and (ix), v4 agrees with names on 322 of 322 fresh
+  pairs and is never opposite (H28a). It makes 37 of 49 declared pairs with no name match comparable
+  (H28b, not supported). Among pairs that share at least 8 large tensor shapes it makes 37 of 44
+  comparable (H28d). Each of the 7 others has a measured cause in PLAN.md: undocumented fork tensor
+  types (2), draft or multi-token-prediction heads (3), one tensor short (1), and underscore-separated
+  block names (1). Rule (l) now aligns the last (24 tensors at 0.997), and H29 tests it on fresh data.
 - **Direction (H15).** Hub dates (D1) are right on 183 of 193 pairs; 9 of the 10 misses are one
   organisation's joint releases, where the derived repository was created up to 7.9 days before
   its base (Qwen, Gemma, LiquidAI, nomic), and one is a base re-created years later. Weight
