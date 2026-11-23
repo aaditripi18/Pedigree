@@ -1,0 +1,25 @@
+[{"stream_name":"stdout","time":168.407936375,"data":"code 3340a12\n"}
+,{"stream_name":"stdout","time":217.172057198,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":220.47081812,"data":"PEDIGREE_DERIVATIVES = /kaggle/working/students\n"}
+,{"stream_name":"stdout","time":220.47085655,"data":"PEDIGREE_H24_KINDS = distill,indep\n"}
+,{"stream_name":"stderr","time":231.694460994,"data":"/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_validators.py:206: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.\n"}
+,{"stream_name":"stderr","time":231.694494355,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":231.778641165,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":240.584021874,"data":"/kaggle/working/Pedigree/experiments/h24.py:160: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":240.584068833,"data":"  imgs = torch.stack([torch.from_numpy(np.asarray(Image.open(io.BytesIO(b[\"bytes\"])).convert(\"RGB\")))\n"}
+,{"stream_name":"stderr","time":255.906628038,"data":"/kaggle/working/Pedigree/experiments/h24.py:211: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\n"}
+,{"stream_name":"stderr","time":255.906680414,"data":"Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n"}
+,{"stream_name":"stderr","time":255.906687135,"data":"  losses.append(round(float(loss), 4))\n"}
+,{"stream_name":"stdout","time":6843.8029147,"data":"diffusion_unet/h24/distill_s60: loss 1.0995 -\u003e 0.0037, 6621 s\n"}
+,{"stream_name":"stderr","time":6843.932929009,"data":"/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_validators.py:206: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.\n"}
+,{"stream_name":"stderr","time":6843.932963687,"data":"  warnings.warn(\n"}
+,{"stream_name":"stdout","time":11125.360045699,"data":"diffusion_unet/h24/indep_s60: loss 1.1246 -\u003e 0.0417, 4282 s\n"}
+,{"stream_name":"stdout","time":11128.230562826,"data":"exit 0 -m experiments.h24 train diffusion_unet 60\n"}
+,{"stream_name":"stdout","time":11128.279222346,"data":"0 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":11130.282312131,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":11130.282363092,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":11130.492092854,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":11130.492119201,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":11131.27125552,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":11132.146672997,"data":"[NbConvertApp] Writing 292370 bytes to __results__.html\n"}
+]
