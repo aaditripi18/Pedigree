@@ -98,9 +98,12 @@ judged once on fresh pairs.
 | H28b | auto4 makes >= 80% of fresh declared pairs with no name match comparable | **not supported** | 37/49 |
 | H28c | No fresh model or declared base is unreadable because of its format | **supported** | 0 format failures; 5 unread by reason (HTTP 401 3, gated 2) |
 | H28d | auto4 makes >= 80% of those pairs comparable when the two share >= 8 large tensor shapes | **supported** | 37/44; the other 5 share fewer than 8 shapes, so no alignment can compare them |
-| H29a-d | H28's four with rule (l) (an underscore separates a block index), fresh sample | pending | running on Kaggle |
+| H29a | v4 with (l) (an underscore separates a block index) agrees with names on >= 98% of fresh pairs, opposite on none | **supported** | 329/330 agree, 0 opposite, 1 aligned too few |
+| H29b | auto4 makes >= 80% of fresh declared pairs with no name match comparable | **not supported** | 24/44 |
+| H29c | No fresh model or declared base is unreadable because of its format | **supported** | 0 format failures; 6 unread by reason (HTTP 401 4, HTTP 403 1, gated 1) |
+| H29d | auto4 makes >= 80% of those pairs comparable when the two share >= 8 large tensor shapes | **supported** | 24/30; 13 of the 14 pairs sharing fewer come from two repositories that each declare several bases |
 
-H2, H3, H7-H9, H12, H14, H14b, H15, H17a, H17b, H19-H21, H23a, H23b, H25a, H25b, H26a, H27a, H27b and H28b failed their bars; they are reported as they came out,
+H2, H3, H7-H9, H12, H14, H14b, H15, H17a, H17b, H19-H21, H23a, H23b, H25a, H25b, H26a, H27a, H27b, H28b and H29b failed their bars; they are reported as they came out,
 and never reworded. H2 and H3 are measurements of the Hub (its declarations are more honest than the hypotheses
 guessed). Every other failed hypothesis has a follow-up, designed from the failure's cause in the data
 and written into [PLAN.md](PLAN.md) before any of its data existed: H13 for H7 (supported), H15 for
@@ -230,7 +233,11 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   (H28b, not supported). Among pairs that share at least 8 large tensor shapes it makes 37 of 44
   comparable (H28d). Each of the 7 others has a measured cause in PLAN.md: undocumented fork tensor
   types (2), draft or multi-token-prediction heads (3), one tensor short (1), and underscore-separated
-  block names (1). Rule (l) now aligns the last (24 tensors at 0.997), and H29 tests it on fresh data.
+  block names (1). Rule (l) aligns the last (24 tensors at 0.997). On a fresh sample with (l), v4
+  agrees with names on 329 of 330 pairs, never opposite (H29a), and makes 24 of 30 pairs that share
+  enough shapes comparable (H29d). H29b (24 of 44 over all declared pairs) is not supported: 13 of the
+  14 pairs that share too few shapes come from two repositories that each declare several bases, most of
+  which no weight comparison can reach.
 - **Direction (H15).** Hub dates (D1) are right on 183 of 193 pairs; 9 of the 10 misses are one
   organisation's joint releases, where the derived repository was created up to 7.9 days before
   its base (Qwen, Gemma, LiquidAI, nomic), and one is a base re-created years later. Weight

@@ -2246,29 +2246,83 @@
      "id": "H29a",
      "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i), the tie-break, (j), (k) and (l) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
      "follows": "H28a",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "supported",
+     "numbers": {
+      "agree": [
+       329,
+       330
+      ],
+      "opposite": 0,
+      "abstained": 1,
+      "unrelated_by_names": 24,
+      "v3_agree": [
+       328,
+       330
+      ],
+      "depth_maps": {
+       "direct": 104,
+       "equal": 163,
+       "first": 53,
+       "proportional": 5,
+       "prefix": 3,
+       "last": 1
+      }
+     },
+     "evidence": "v4 with (g)-(i), (j), (k) and (l) 329/330 agree, opposite 0, aligned too few 1 (24 unrelated by names; v3 328/330)"
     },
     {
      "id": "H29b",
      "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
      "follows": "H28b",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "comparable": [
+       24,
+       44
+      ],
+      "not_read": 2,
+      "design_declared": [
+       1,
+       12
+      ],
+      "design_agree": [
+       0,
+       0
+      ]
+     },
+     "evidence": "24/44 comparable (2 declared pairs not read count under H29c); H28's pairs under (l) (design data, not counted): 1/12 declared pairs comparable; where names now align >= 8 tensors, v4 agrees with them on 0/0"
     },
     {
      "id": "H29c",
      "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
      "follows": "H28c",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "supported",
+     "numbers": {
+      "repositories_unread": 6,
+      "format_failures": {},
+      "other_reasons": {
+       "not readable (HTTP 401)": 4,
+       "not readable (HTTP 403)": 1,
+       "not readable (gated, no byte-identical public copy)": 1
+      },
+      "lost": 0,
+      "no_public_spec": {}
+     },
+     "evidence": "6 repositories unread: format failures 0; other reasons 6 (not readable (HTTP 401): 4; not readable (HTTP 403): 1; not readable (gated, no byte-identical public copy): 1)"
     },
     {
      "id": "H29d",
      "statement": "On fresh declared pairs where names align fewer than 8 tensors, both models were read and the two share >= 8 tensors of >= 4096 values by shape (either orientation), auto4 makes >= 80% comparable.",
      "follows": "H28d",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "supported",
+     "numbers": {
+      "comparable": [
+       24,
+       30
+      ],
+      "sharing_fewer_than_8_shapes": 14
+     },
+     "evidence": "24/30 comparable; 14 pairs share fewer than 8 large tensor shapes (no alignment can compare them)"
     }
    ],
    "audit": {
@@ -4592,29 +4646,83 @@
      "id": "H29a",
      "statement": "On fresh pairs where names align >= 8 tensors, v4 with (g)-(i), the tie-break, (j), (k) and (l) and names ignored gives the same related / unrelated verdict for >= 98% and the opposite verdict for none.",
      "follows": "H28a",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "agree": [
+       328,
+       330
+      ],
+      "opposite": 1,
+      "abstained": 1,
+      "unrelated_by_names": 28,
+      "v3_agree": [
+       309,
+       330
+      ],
+      "depth_maps": {
+       "direct": 104,
+       "equal": 163,
+       "first": 53,
+       "proportional": 5,
+       "prefix": 3,
+       "last": 1
+      }
+     },
+     "evidence": "v4 with (g)-(i), (j), (k) and (l) 328/330 agree, opposite 1, aligned too few 1 (28 unrelated by names; v3 309/330)"
     },
     {
      "id": "H29b",
      "statement": "On fresh declared pairs where names align fewer than 8 tensors and both models were read, auto4 makes >= 80% comparable.",
      "follows": "H28b",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "not supported",
+     "numbers": {
+      "comparable": [
+       24,
+       44
+      ],
+      "not_read": 2,
+      "design_declared": [
+       1,
+       12
+      ],
+      "design_agree": [
+       0,
+       0
+      ]
+     },
+     "evidence": "24/44 comparable (2 declared pairs not read count under H29c); H28's pairs under (l) (design data, not counted): 1/12 declared pairs comparable; where names now align >= 8 tensors, v4 agrees with them on 0/0"
     },
     {
      "id": "H29c",
      "statement": "No fresh sampled model, and no declared base of one, is unreadable because of its file format, except formats with no public specification.",
      "follows": "H28c",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "supported",
+     "numbers": {
+      "repositories_unread": 6,
+      "format_failures": {},
+      "other_reasons": {
+       "not readable (HTTP 401)": 4,
+       "not readable (HTTP 403)": 1,
+       "not readable (gated, no byte-identical public copy)": 1
+      },
+      "lost": 0,
+      "no_public_spec": {}
+     },
+     "evidence": "6 repositories unread: format failures 0; other reasons 6 (not readable (HTTP 401): 4; not readable (HTTP 403): 1; not readable (gated, no byte-identical public copy): 1)"
     },
     {
      "id": "H29d",
      "statement": "On fresh declared pairs where names align fewer than 8 tensors, both models were read and the two share >= 8 tensors of >= 4096 values by shape (either orientation), auto4 makes >= 80% comparable.",
      "follows": "H28d",
-     "verdict": "pending",
-     "evidence": "fresh sample running"
+     "verdict": "supported",
+     "numbers": {
+      "comparable": [
+       24,
+       30
+      ],
+      "sharing_fewer_than_8_shapes": 14
+     },
+     "evidence": "24/30 comparable; 14 pairs share fewer than 8 large tensor shapes (no alignment can compare them)"
     }
    ],
    "audit": {

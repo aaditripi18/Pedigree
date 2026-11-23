@@ -1399,6 +1399,23 @@ other than names' (none in H28 or H28-design).
 - **H29d** On the fresh declared pairs of H29b whose two models share >= 8 tensors of >= 4096 values by
   shape (either orientation), `auto4` makes >= 80% comparable (judged if >= 10 pairs).
 
+**Outcome (2026-11-23, Kaggle `pedigree-h29`: 150 of 150 models read, none lost).** H29a **supported**:
+329 of 330 fresh pairs agree with names, none opposite, 1 aligned too few (24 unrelated by names; v3
+328/330). H29b **not supported**: 24 of 44 declared pairs comparable (2 not read, counted under H29c).
+H29c **supported**: 0 format failures; 6 repositories unread by reason (HTTP 401 4, HTTP 403 1, gated
+with no byte-identical public copy 1). H29d **supported**: 24 of 30 pairs that share >= 8 large tensor
+shapes are comparable. Of the 14 pairs that share fewer, 13 come from two repositories that declare
+several bases at once: `goldhub/Ruach_Studio_Models_v2` (10 bases, 9 sharing no large shape with it)
+and `amaye15/toto-gguf` (5 Toto sizes, 4 of them not its own size); the 14th is
+`turintech/Kev-4B-Artemis-GGUF` (no shape shared with `jaredpalmer/kev-4b`). Of the 6 among sharers left
+not comparable, 1 holds GGUF tensor type 103, not in llama.cpp's published list (a fork's own format,
+no public specification), and 5 align 3 to 6 tensors (`cstr/dolphin-cn-dialect-small-streaming-GGUF`,
+`cstr/wav2vec2-large-xlsr-53-english-GGUF`, `mayflowergmbh/Josev-9B-GGUF`,
+`mxxm-t/Qwen3.8-Flash-Next-MTP-GGUF`, `onnx-community/laya-ONNX`). Design data: (l) makes 1 of H28's
+12 declared pairs comparable. H28d and H29d, each on fresh data, show `auto4` at the 80% bar wherever the
+two models share enough shapes. H29b's shortfall is mostly declarations that no weight comparison can
+reach, which H29d already separates out.
+
 **H16c dev pilot (2026-11-23, design data; no H16c hypothesis is registered yet).** H16b's text-encoder
 students all stopped at one output, with losses levelled near the unigram entropy, and E5's 2,000-step
 students at 1e-4 levelled at the same loss. The usual cause in BERT-style (post-LN) models trained from
