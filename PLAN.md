@@ -1398,3 +1398,19 @@ other than names' (none in H28 or H28-design).
   repositories are counted by reason and do not count.
 - **H29d** On the fresh declared pairs of H29b whose two models share >= 8 tensors of >= 4096 values by
   shape (either orientation), `auto4` makes >= 80% comparable (judged if >= 10 pairs).
+
+**H16c dev pilot (2026-11-23, design data; no H16c hypothesis is registered yet).** H16b's text-encoder
+students all stopped at one output, with losses levelled near the unigram entropy, and E5's 2,000-step
+students at 1e-4 levelled at the same loss. The usual cause in BERT-style (post-LN) models trained from
+scratch at small batch is an unclipped update that pushes them into predicting token frequencies.
+`experiments/h16c_pilot.py` trains independent half-depth students on the dev teacher only
+(`bert-base-uncased`; the fresh RoBERTa family stays unread) for 5,000 steps, seed 90, under four
+settings, and scores each on E5's probes as E5e does:
+- H16b's own setting (rate 5e-4, 1,000 warm-up steps, batch 8, no clipping);
+- the same with gradient-norm clipping at 1.0 (`PEDIGREE_CLIP`, default 0: no earlier run changes);
+- rate 1e-4 with clipping;
+- rate 2e-4 with clipping and batch 32.
+
+The dev teacher scores 0.515 on the probes, so H16b's floor for independents would be 0.258. An H16c is
+pre-registered only if a setting shows independents rising toward that floor. Otherwise the stall is
+recorded with its measured cause, and H16b stays not decidable as recorded.

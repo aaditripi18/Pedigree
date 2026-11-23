@@ -35,6 +35,8 @@ LR = float(os.environ.get("PEDIGREE_LR", "1e-4"))
 # H16b and H24 (amendments 2026-11-17 (4), 2026-11-20): 20,000 steps, learning rate 5e-4, 1,000
 # linear warm-up steps then cosine decay; 0 keeps E5's constant learning rate
 WARMUP = int(os.environ.get("PEDIGREE_WARMUP", "0"))
+# H16c dev pilot (2026-11-23): gradient-norm clipping; 0 keeps every earlier run's training unchanged
+CLIP = float(os.environ.get("PEDIGREE_CLIP", "0"))
 # a batch of students that is not a split of its own trains against that split's teacher
 TEACHER_SPLIT = {"h16b": "fresh"}
 
@@ -145,6 +147,8 @@ def train_student(family: str, split: str, kind: str, seed: int) -> dict:
             raise FloatingPointError(f"loss is {float(loss)} at step {i}: nothing saved")
         opt.zero_grad()
         loss.backward()
+        if CLIP:
+            torch.nn.utils.clip_grad_norm_(student.parameters(), CLIP)
         opt.step()
         if sched is not None:
             sched.step()

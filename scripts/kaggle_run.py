@@ -548,7 +548,14 @@ GPU_ASSIGN["moinuddinhasan8"] += ["h24-diffusion_unet-s57"]
 # extras pushed only after the friend's queue is done and only if its quota still covers them; if one
 # does not fit, it moves to moinuddinhasan8 after the reset (2026-11-28)
 GPU_ASSIGN["rohajraj"] += ["h24-diffusion_unet-s55"]
-GPU_ASSIGN["alubalub"] += ["h24-diffusion_unet-s56"]
+# 2026-11-23: alubalub has 2.7 h left this week, under s56's 3.6 h; moinuddinhasan8 has 19.5 h and runs
+# it beside s57 (two GPU sessions at once)
+GPU_ASSIGN["moinuddinhasan8"] += ["h24-diffusion_unet-s56"]
+# H16c dev pilot (2026-11-23): independent text-encoder students under four training settings, dev
+# teacher only; design data for any H16c pre-registration. Pushed after s56 and s57 (two GPU sessions)
+JOBS["h16c-pilot"] = _job("pedigree-h16c-pilot", [["-m", "experiments.h16c_pilot",
+                                                   "--out", "/kaggle/working/h16c_pilot.jsonl"]], gpu=True)
+GPU_ASSIGN["moinuddinhasan8"] += ["h16c-pilot"]
 GPU_ASSIGN["alubalub"] += [f"h24-diffusion_unet-s{x}" for x in (58, 59, 60)] + ["h24-speech-s50-i",
                                                                                 "h24-diffusion_unet-s54"]
 # estimated GPU hours per job, from the measured 2,000-step runs (x10 for 20,000 steps)
@@ -559,7 +566,7 @@ GPU_HOURS = {**{f"h16b-text_encoder-s{x}": 2.6 for x in range(30, 41)},
              "h24-time-speech": 0.3, "h24-time-diffusion_unet": 0.3,
              **{f"h24-diffusion_unet-s{x}": 3.6 for x in range(50, 61)},
              **{f"h24-speech-s{x}-d": 6.7 for x in range(50, 61)},
-             **{f"h24-speech-s{x}-i": 5.3 for x in range(50, 61)}}
+             **{f"h24-speech-s{x}-i": 5.3 for x in range(50, 61)}, "h16c-pilot": 4.6}
 for _friend, _jobs in GPU_ASSIGN.items():
     for _j in _jobs:
         JOBS[_j]["owner"] = _friend
