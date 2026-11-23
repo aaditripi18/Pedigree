@@ -1574,6 +1574,13 @@
      "evidence": "no family's independents reach the floor"
     },
     {
+     "id": "H16c",
+     "statement": "Text-encoder students trained at the pilot's setting (rate 2e-4, clipping, batch 32, 20,000 steps) learn the task, and the reference-calibrated rule from their dev batch identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
+     "follows": "H16b",
+     "verdict": "pending",
+     "evidence": "dev batch (seeds 70-72) waits for GPU quota"
+    },
+    {
      "id": "H17a",
      "statement": "On fresh GGUF pairs where names align >= 8 tensors, structural alignment (names ignored) gives the same related / unrelated verdict for >= 98%.",
      "follows": "unverifiable declared bases",
@@ -3978,6 +3985,13 @@
       ]
      },
      "evidence": "no family's independents reach the floor"
+    },
+    {
+     "id": "H16c",
+     "statement": "Text-encoder students trained at the pilot's setting (rate 2e-4, clipping, batch 32, 20,000 steps) learn the task, and the reference-calibrated rule from their dev batch identifies fresh distilled students: TPR >= 90% at FPR <= 5%.",
+     "follows": "H16b",
+     "verdict": "pending",
+     "evidence": "dev batch (seeds 70-72) waits for GPU quota"
     },
     {
      "id": "H17a",
