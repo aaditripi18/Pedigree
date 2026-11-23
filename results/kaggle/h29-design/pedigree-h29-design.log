@@ -1,0 +1,28 @@
+[{"stream_name":"stdout","time":43.135139259,"data":"code 3a1ae46\n"}
+,{"stream_name":"stdout","time":97.815204508,"data":"preflight ok: torch 2.11.0+cpu cuda False transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":99.184676617,"data":"PEDIGREE_WORKERS = 12\n"}
+,{"stream_name":"stdout","time":99.184712533,"data":"PEDIGREE_BUDGET_HOURS = 10\n"}
+,{"stream_name":"stdout","time":102.596551744,"data":"0 done, 12 to read\n"}
+,{"stream_name":"stdout","time":109.082784599,"data":"[1/12] onnx-community/tiny-random-MarianMTModel: ; hf-internal-testing/tiny-random-MarianMTModel: names=1, struct3=2, auto3=1, struct4=2, auto4=2 (6s)\n"}
+,{"stream_name":"stdout","time":113.119664271,"data":"[2/12] cstr/indextts-1.5-GGUF: ; IndexTeam/IndexTTS-1.5: names=0, struct3=0, auto3=0, struct4=3, auto4=3 (11s)\n"}
+,{"stream_name":"stdout","time":124.094505023,"data":"[3/12] RemySkye/rwkv7-g1h-2.9b-i1-GGUF: ; BlinkDL/rwkv7-g1: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (21s)\n"}
+,{"stream_name":"stdout","time":132.453410733,"data":"[4/12] TiaoFeng/Spark-X2.6-4B-EAGLE3-Chinese-retrain: ; VitreousCut/Spark-X2.6-4B-EAGLE3: names=0, struct3=1, auto3=1, struct4=1, auto4=1 (30s)\n"}
+,{"stream_name":"stdout","time":139.81164507,"data":"[5/12] cstr/funasr-mlt-nano-GGUF: ; FunAudioLLM/Fun-ASR-MLT-Nano-2512: names=0, struct3=1, auto3=1, struct4=7, auto4=7 (37s)\n"}
+,{"stream_name":"stdout","time":144.317558354,"data":"[6/12] ibm-granite/granite-speech-5.0-2b-ONNX: ; ibm-granite/granite-speech-5.0-2b: names=0, struct3=0, auto3=0, struct4=24, auto4=24 (42s)\n"}
+,{"stream_name":"stdout","time":172.049579932,"data":"[7/12] kingjones777/DeepSeek-V4-Flash-180B-ROCmFP4-STRIX_LEAN-GGUF: ; deepseek-ai/DeepSeek-V4-Flash-0731: names=0, struct3=None, auto3=None, struct4=None, auto4=None (69s)\n"}
+,{"stream_name":"stdout","time":213.362059982,"data":"[8/12] a4lg/Qwen3-Next-80B-A3B-Instruct-MTP-ONLY-GGUF: ; Qwen/Qwen3-Next-80B-A3B-Instruct: names=2, struct3=1, auto3=2, struct4=1, auto4=3 (111s)\n"}
+,{"stream_name":"stdout","time":216.312035117,"data":"[9/12] haven-ai-companion/haven-chat-v3.0: ; google/gemma-2-9b-it: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (114s)\n"}
+,{"stream_name":"stdout","time":223.939719646,"data":"[10/12] sulsulAI/sulsulAI-models: ; Qwen/Qwen3.5-0.8B: names=0, struct3=0, auto3=0, struct4=0, auto4=0 (121s)\n"}
+,{"stream_name":"stdout","time":250.913228452,"data":"[11/12] kingjones777/Qwen3.8-Flash-Next-MTP-Heads-GGUF: ; Qwen/Qwen3.8-Flash-Next: names=0, struct3=4, auto3=4, struct4=7, auto4=7 (148s)\n"}
+,{"stream_name":"stdout","time":314.581701944,"data":"[12/12] kingjones777/Ling-3.0-flash-VL-MTP-ROCmFP4-GGUF: ; inclusionAI/Ling-3.0-flash-VL: names=0, struct3=None, auto3=None, struct4=None, auto4=None (212s)\n"}
+,{"stream_name":"stdout","time":314.583286811,"data":"12 of 12 done; 0 lost to the network or the time budget\n"}
+,{"stream_name":"stdout","time":314.63991376,"data":"recorded in the ledger\n"}
+,{"stream_name":"stdout","time":315.606665228,"data":"exit 0 -m experiments.h29_fresh --design --out /kaggle/working/h29_design_raw.jsonl\n"}
+,{"stream_name":"stdout","time":315.668957606,"data":"12 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":318.263139462,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":318.263177097,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":318.549489802,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":318.549542974,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":319.445209207,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":320.651961919,"data":"[NbConvertApp] Writing 292358 bytes to __results__.html\n"}
+]
