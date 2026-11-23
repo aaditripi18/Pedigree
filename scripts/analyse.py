@@ -1110,6 +1110,41 @@ def h16b_full(e5e_h16b) -> dict:
             "evidence": f"families {', '.join(c['families'])}; drop > {c['r_star']:.3f}: TPR {tp}/{P}, FPR {fp}/{N}"}
 
 
+H16C_DEV, H16C_SUS, H16C_REF = {70, 71, 72}, set(range(73, 78)), {78, 79, 80}
+
+
+def h16c(e5e_h16c_dev, e5e_h16c) -> dict:
+    """PLAN.md amendment 2026-11-23 (2): H16b's text-encoder test at the H16c pilot's training setting,
+    with a dev gate: the fresh batch is trained only if every dev independent reaches the floor."""
+    st = ("Text-encoder students trained at the pilot's setting (rate 2e-4, clipping, batch 32, 20,000 steps) learn "
+          "the task, and the reference-calibrated rule from their dev batch identifies fresh distilled students: "
+          "TPR >= 90% at FPR <= 5%.")
+    base = {"id": "H16c", "statement": st, "follows": "H16b"}
+    te = [r for r in e5e_h16c if r.get("family") == "text_encoder" and _student(r)]
+    if any(_student(r)[1] == max(H16C_REF) for r in te):
+        c = _calibrated(te, "dark_js", H16C_DEV, H16C_SUS, H16C_REF, _floor)
+        if not c["families"]:
+            return {**base, "verdict": "not decidable", "numbers": c,
+                    "evidence": "independents under the floor (" + ", ".join(
+                        f"{m} {a:.3f}/{t:.3f}" for m, a, t in c["floors"]["text_encoder"]["independents"]) + ")"}
+        if c["gap"] is None or c["gap"] <= 0:
+            return {**base, "verdict": "not supported", "numbers": c, "evidence": "no positive dev gap"}
+        tp, P = c["tpr"]
+        fp, N = c["fpr"]
+        return {**base, "verdict": verdict(P > 0 and N > 0 and tp / P >= 0.9 and fp / N <= 0.05), "numbers": c,
+                "evidence": f"drop > {c['r_star']:.3f}: TPR {tp}/{P}, FPR {fp}/{N}"}
+    dev = [r for r in e5e_h16c_dev if r.get("family") == "text_encoder" and _student(r) and _student(r)[1] in H16C_DEV]
+    if len({_student(r) for r in dev}) < 2 * len(H16C_DEV):
+        return {**base, "verdict": "pending", "evidence": "dev batch (seeds 70-72) waits for GPU quota"}
+    ind = sorted((_student(r)[1], r.get("accuracy"), r.get("teacher_accuracy")) for r in dev if _student(r)[0] == "indep")
+    acc = "; ".join(f"seed {s} {a:.3f} (floor {t / 2:.3f})" for s, a, t in ind)
+    if not all(_floor(r) for r in dev if _student(r)[0] == "indep"):
+        return {**base, "verdict": "not decidable", "numbers": {"dev_independents": ind},
+                "evidence": f"dev gate: independents under the floor ({acc}); the fresh batch is not trained"}
+    return {**base, "verdict": "pending", "numbers": {"dev_independents": ind},
+            "evidence": f"dev gate passed ({acc}); the fresh batch (seeds 73-80) waits for GPU quota"}
+
+
 def h24(e5e_h24) -> dict:
     st = ("Behaviour calibrated against reference students identifies distilled speech and diffusion students: "
           "TPR >= 90% at FPR <= 5% (families whose students learn the task).")
@@ -1390,9 +1425,9 @@ def main() -> None:
         r.setdefault("split", meta.get("split"))
     e5e_dev, e5e_fresh = ([r for r in by_family_split(x) if "error_agreement" in r and r.get("label")]
                           for x in ("E5e-dev", "E5e-fresh"))
-    e5e_h16, e5e_h16b = ([r for r in by_family_split(x) if "dark_js" in r]
-                         for x in ("E5e-h16", "E5e-h16b"))
-    for r in e5e_dev + e5e_fresh + e5e_h16 + e5e_h16b:
+    e5e_h16, e5e_h16b, e5e_h16c_dev, e5e_h16c = ([r for r in by_family_split(x) if "dark_js" in r]
+                                                 for x in ("E5e-h16", "E5e-h16b", "E5e-h16c-dev", "E5e-h16c"))
+    for r in e5e_dev + e5e_fresh + e5e_h16 + e5e_h16b + e5e_h16c_dev + e5e_h16c:
         r.setdefault("family", (r.get("meta") or {}).get("family"))
     T = thresholds(e1)
     out = {"thresholds": T, "families_in_e1": sorted({r["family"] for r in e1}), "blind_families": sorted(BLIND),
@@ -1403,7 +1438,7 @@ def main() -> None:
               h6(e1b, e2w, T, rule), h7(h7a, e2, T, rule), h8(e1b, e7k, e2, T, rule), h9(e5), h10(e6, T, rule),
               h11(e7, T, rule), h12(e5o), *h13(h13r, T, rule), *h14(e5e_dev, e5e_fresh)]
         h16r, h16br = h16(e5e_dev, e5e_fresh, e5e_h16), h16b_full(e5e_h16b)
-        hs += [h15(e2, h15r, T, rule), h16r, h16br, *h17(h15r, with_rescores(e2, e2r, e2g), e2s, T, rule),
+        hs += [h15(e2, h15r, T, rule), h16r, h16br, h16c(e5e_h16c_dev, e5e_h16c), *h17(h15r, with_rescores(e2, e2r, e2g), e2s, T, rule),
                h18(h16r, h16br), h19(h19r, n19, T, rule), h20(h19r, n19, h20e2, T, rule),
                h21(e2x, len(x_targets["models"])), *h23(h23r, n23, e2v3, T, rule), h24(e5e_h24),
                *h25(h25r, n25, h25d, T, rule), *h26(h26r, n26, h26d, T, rule),

@@ -38,7 +38,8 @@ OUT = Path(os.environ.get("PEDIGREE_DERIVATIVES", ROOT / "data" / "derivatives")
 DATA = Path(os.environ.get("PEDIGREE_TASKS", ROOT / "data" / "tasks"))
 STEPS_SHORT = 300
 LONG_FACTOR = 10
-BATCH = 8
+# H16c (amendment 2026-11-23 (2)) trains at batch 32; unset keeps every earlier run at 8
+BATCH = int(os.environ.get("PEDIGREE_BATCH", "8"))
 LR = 2e-5
 SEED = 0
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")

@@ -38,7 +38,9 @@ WARMUP = int(os.environ.get("PEDIGREE_WARMUP", "0"))
 # H16c dev pilot (2026-11-23): gradient-norm clipping; 0 keeps every earlier run's training unchanged
 CLIP = float(os.environ.get("PEDIGREE_CLIP", "0"))
 # a batch of students that is not a split of its own trains against that split's teacher
-TEACHER_SPLIT = {"h16b": "fresh"}
+TEACHER_SPLIT = {"h16b": "fresh", "h16c": "fresh"}
+# one kind of student per session (H16c: a distilled text-encoder student is ~6 GPU h at batch 32)
+KINDS = tuple(os.environ.get("PEDIGREE_KINDS", "distill,indep").split(","))
 
 
 def tsplit(split: str) -> str:
@@ -159,7 +161,7 @@ def train_student(family: str, split: str, kind: str, seed: int) -> dict:
 
 def main(family: str, split: str) -> None:
     for seed in SEEDS:
-        for kind in ("distill", "indep"):
+        for kind in KINDS:
             out = ft.OUT / family / split / f"{kind}_s{seed}"
             if (out / "meta.json").exists():
                 print(f"{family}/{split}/{kind}_s{seed}: exists", flush=True)
@@ -168,7 +170,7 @@ def main(family: str, split: str) -> None:
             r = train_student(family, split, kind, seed)
             ft.save(r["student"], out, {"family": family, "split": split, "kind": kind, "seed": seed,
                                         "teacher": r["info"].get("teacher", ft.bases()[family][tsplit(split)]["base"]),
-                                        "steps": STEPS, "lr": LR, "warmup": WARMUP, "temperature": TEMPERATURE if kind == "distill" else None,
+                                        "steps": STEPS, "lr": LR, "warmup": WARMUP, "clip": CLIP, "temperature": TEMPERATURE if kind == "distill" else None,
                                         "batch": ft.BATCH, "device": str(ft.DEVICE), "data": r["info"],
                                         "losses": r["losses"], "versions": ft._versions(), "code": ft._code(),
                                         "seconds": round(time.time() - t0)})

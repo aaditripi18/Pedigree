@@ -78,6 +78,7 @@ judged once on fresh pairs.
 | H15 | Direction by D3 (dates across owners or > 30 days; names within one release; kurtosis last): >= 95% right, <= 10% undecided, fresh | **not supported** | right on 222/237 decided (93.7%), undecided 7/244; dates alone 226/240, kurtosis 22/118 |
 | H16 | Behaviour calibrated against reference students trained the same way: TPR >= 90% at FPR <= 5%, fresh | **supported** | dark-knowledge drop > 0.063 (dev): TPR 10/10, FPR 0/10 (text decoder, vision CNN) |
 | H16b | The same, with text-encoder and vision-transformer students trained 20,000 steps | **not decidable** | no family's independents reach the competence floor (text-encoder students all stop at one output; ViT independents 0.275-0.377 against a floor of 0.484) |
+| H16c | H16b's text-encoder test at the pilot's setting (rate 2e-4, clipping, batch 32), with a dev gate | pending | dev batch (seeds 70-72) training on friends' GPU accounts |
 | H17a | Structural GGUF alignment (names ignored) agrees with name alignment on >= 98% of fresh pairs | **not supported** | 279/339 agree; 0 opposite verdicts, the other 60 aligned no tensor (Qwen 3.5-3.8 multimodal/MTP and clip GGUFs) |
 | H17b | Structural alignment makes >= 50% of E2's 32 declared GGUF pairs with no name match comparable | **not supported** | 15/32 comparable (all 15 related) |
 | H18 | Behaviour confirms >= 90% of the declared Hub pairs weights cannot compare (text models <= 14B) | **not judged** | 0 of 42 such pairs are in scope (not readable 18, not a text language model 13, over 14B 10, needs the repository's own code 1) |
@@ -112,8 +113,9 @@ H8, H16 and H16b for H9, H12, H14 and H14b, H17 for the unverifiable bases, H18 
 2B parameters, H19 for H15 and H20 for H17. On 2026-11-20 every remaining gap was reopened (amendment
 of that date in PLAN.md): H21 for the unreadable formats, H23 and then H25-H29 for alignment, each
 designed from the previous one's failures, and H24 for behaviour on speech and diffusion. H16b came out
-not decidable, because its text-encoder students never learned the task; a dev pilot (H16c, design data
-only) measures why before anything is pre-registered. H13 was judged on 360 Hub models no rule was chosen on, drawn before any was read;
+not decidable, because its text-encoder students never learned the task; a dev pilot found the cause (a
+learning rate too high for batch 8; clipping changed nothing), and H16c tests the text encoder again at the
+pilot's best setting, with a vision-transformer pilot beside it. H13 was judged on 360 Hub models no rule was chosen on, drawn before any was read;
 H15 and H17a on a new sample of 360 (seed 20261118), H19 and H20 on another of 355 (seed 20261119),
 and H23 and H25-H29 each on a new sample drawn the same way after the previous verdict.
 
@@ -207,9 +209,12 @@ Each weakness found along the way was either fixed and re-tested on fresh data, 
   text-encoder and vision-transformer students for 20,000 steps, to a competence floor set in
   advance, and is not decidable: the 11 vision-transformer independents score 0.275-0.377 against a
   floor of 0.484, and all 22 text-encoder students, distilled and independent, stop at one output
-  (accuracy 0.0548 for every seed, losses level near the unigram entropy). A dev-only pilot (H16c,
-  four training settings on the dev teacher) measures that stall before any new hypothesis is
-  registered. H24 applies H16's method to speech and diffusion students, trained on friends' GPU
+  (accuracy 0.0548 for every seed, losses level near the unigram entropy). A dev-only pilot (four
+  training settings on the dev teacher) found that clipping changes nothing, while rate 2e-4 with
+  batch 32 doubles the independents' accuracy (0.065 to 0.132, half the floor at 5,000 steps). H16c
+  (pre-registered 2026-11-23) trains new text-encoder students at that setting for 20,000 steps; its
+  dev batch is scored first, and the fresh batch is trained only if every dev independent reaches the
+  floor. A vision-transformer pilot asks the same question of H16b's other family. H24 applies H16's method to speech and diffusion students, trained on friends' GPU
   accounts.
 - **Behaviour above 2B parameters (H18).** Behaviour was to run on the declared pairs weights
   cannot compare (text models up to 14B sharing a tokenizer) once H16 was supported. After every

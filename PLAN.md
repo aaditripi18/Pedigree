@@ -1441,3 +1441,34 @@ and a larger batch move the students off the one-output stall, and the best sett
 which meets this note's condition (rising toward the floor). It reaches about half the floor in 5,000
 steps, and its loss was levelling (6.569 to 6.553 over the last 100 steps), so whether 20,000 steps
 reach the floor is not known from this pilot. H16b's verdict stands as recorded.
+
+## Amendment 2026-11-23 (2): H16c and the vision-transformer pilot, after the H16c dev pilot and before any of H16c's data
+
+H16b's verdict (not decidable) stands as recorded. The text-encoder pilot above is design data for
+what follows; none of its students is scored again.
+
+**H16c: the text-encoder test at the pilot's setting.** As H16b for the text encoder only: the same
+fresh teacher (`FacebookAI/roberta-base`, H16b's fresh split), half-depth students from a random
+initialisation, distilled and independent, the same probes, statistic (dark-knowledge divergence),
+competence floor (independents at >= 50% of the teacher's masked-token accuracy) and rule (r* from the
+dev batch against its other independents, then the fresh suspects against the fresh references).
+Changed: training is the pilot's best setting, 20,000 steps at rate 2e-4 with 1,000 linear warm-up
+steps then cosine decay, gradient-norm clipping at 1.0 and batch 32 (`PEDIGREE_LR`, `PEDIGREE_CLIP`,
+`PEDIGREE_BATCH`; unset, every earlier run is unchanged). New seeds, so no H16b student is reused:
+**dev batch** 70-72; **fresh suspects** 73-77 and **references** 78-80 (distilled and independent).
+Each student is trained in its own session (`PEDIGREE_KINDS`).
+
+- **Dev gate.** The dev batch is trained and scored first (`E5e-h16c-dev`). If any dev independent
+  misses the floor, H16c is **not decidable** and the fresh batch is not trained: the setting does not
+  give students that learn the task, and a fresh batch could not change that.
+- **H16c** Otherwise, on the fresh suspects, drop > r*_c gives TPR >= 90% and FPR <= 5%, with every
+  independent of both batches at or above the floor (a fresh independent under it makes H16c not
+  decidable, as in H16b).
+
+**Vision-transformer pilot (design data; no hypothesis yet).** H16b's vision-transformer independents
+learned but stayed under the floor (0.275-0.377 against 0.484). `experiments/h16c_pilot.py --family
+vision_transformer` trains independent half-depth ViT students on the dev teacher only for 5,000 steps,
+seed 90, under four settings (H16b's; clipping with batch 32; rate 2e-4 with clipping and batch 32;
+rate 1e-3 with clipping and batch 64), and scores each on E5's CIFAR-10 probes. A hypothesis for this
+family is pre-registered only if a setting shows independents rising toward the floor; otherwise the
+cause is recorded and H16b's vision-transformer result stands.

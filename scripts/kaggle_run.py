@@ -558,6 +558,34 @@ JOBS["h16c-pilot"] = _job("pedigree-h16c-pilot", [["-m", "experiments.h16c_pilot
 GPU_ASSIGN["moinuddinhasan8"] += ["h16c-pilot"]
 GPU_ASSIGN["alubalub"] += [f"h24-diffusion_unet-s{x}" for x in (58, 59, 60)] + ["h24-speech-s50-i",
                                                                                 "h24-diffusion_unet-s54"]
+# H16c (PLAN.md amendment 2026-11-23 (2)): the text-encoder test at the pilot's setting, one student per
+# session (a distilled student at batch 32 is ~6 GPU h). The dev batch (seeds 70-72) is trained and scored
+# first (e5e-h16c-dev); seeds 73-80 are pushed only if every dev independent reaches the floor.
+H16C = {"PEDIGREE_STEPS": "20000", "PEDIGREE_LR": "2e-4", "PEDIGREE_WARMUP": "1000", "PEDIGREE_CLIP": "1.0",
+        "PEDIGREE_BATCH": "32"}
+_te_env = {k: v for k, v in JOBS["distill-text_encoder"]["env"].items() if k != "PEDIGREE_TEACHERS"}
+for _s in range(70, 81):
+    for _k in ("distill", "indep"):
+        JOBS[f"h16c-text_encoder-s{_s}-{_k[0]}"] = _job(
+            f"pedigree-h16c-te-s{_s}-{_k[0]}", [["-m", "experiments.distill", "text_encoder", "h16c"]], gpu=True,
+            env={**_te_env, **H16C, "PEDIGREE_SEEDS": str(_s), "PEDIGREE_KINDS": _k})
+_te_teach = [s for s in JOBS["e5-text_encoder"]["sources"] if not s.startswith("distill-")]
+for _name, _seeds, _exp in (("e5e-h16c-dev", range(70, 73), "E5e-h16c-dev"), ("e5e-h16c", range(70, 81), "E5e-h16c")):
+    JOBS[_name] = _job(f"pedigree-{_name}", [["-m", "experiments.e5_behaviour", "text_encoder", "h16c"]], gpu=False,
+                       sources=_te_teach + [f"h16c-text_encoder-s{x}-{k}" for x in _seeds for k in "di"],
+                       env={"PEDIGREE_TEACHERS": JOBS["e5-text_encoder"]["env"]["PEDIGREE_TEACHERS"],
+                            "PEDIGREE_STUDENTS": "merge:students", "PEDIGREE_EXPERIMENT": _exp,
+                            "PEDIGREE_E5_SEEDS": json.dumps({"h16c": list(_seeds)})})
+# the vision-transformer pilot (design data): mounts the ViT teachers, as H16b's ViT jobs did
+JOBS["h16c-vit-pilot"] = _job("pedigree-h16c-vit-pilot",
+                              [["-m", "experiments.h16c_pilot", "--family", "vision_transformer",
+                                "--out", "/kaggle/working/h16c_vit_pilot.jsonl"]], gpu=True,
+                              sources=list(JOBS["distill-vision_transformer"]["sources"]),
+                              env=dict(JOBS["distill-vision_transformer"]["env"]))
+# this week's quotas: rohajraj holds the ViT teacher outputs; alubalub has 2.7 h left (none assigned)
+GPU_ASSIGN["rohajraj"] += ["h16c-vit-pilot", "h16c-text_encoder-s70-i", "h16c-text_encoder-s70-d"]
+GPU_ASSIGN["alien5060707"] += ["h16c-text_encoder-s71-i", "h16c-text_encoder-s71-d"]
+GPU_ASSIGN["moinuddinhasan8"] += ["h16c-text_encoder-s72-i", "h16c-text_encoder-s72-d"]
 # estimated GPU hours per job, from the measured 2,000-step runs (x10 for 20,000 steps)
 GPU_HOURS = {**{f"h16b-text_encoder-s{x}": 2.6 for x in range(30, 41)},
              "h16b-vision_transformer-dev": 2.1, "h16b-vision_transformer-fresh-a": 2.1,
@@ -566,7 +594,11 @@ GPU_HOURS = {**{f"h16b-text_encoder-s{x}": 2.6 for x in range(30, 41)},
              "h24-time-speech": 0.3, "h24-time-diffusion_unet": 0.3,
              **{f"h24-diffusion_unet-s{x}": 3.6 for x in range(50, 61)},
              **{f"h24-speech-s{x}-d": 6.7 for x in range(50, 61)},
-             **{f"h24-speech-s{x}-i": 5.3 for x in range(50, 61)}, "h16c-pilot": 4.6}
+             **{f"h24-speech-s{x}-i": 5.3 for x in range(50, 61)}, "h16c-pilot": 4.6,
+             # H16c at batch 32, from the pilot (independent 2,660 s per 5,000 steps) and H16b's
+             # distilled/independent ratio (~2.1); the ViT pilot from H16b's ViT runs
+             **{f"h16c-text_encoder-s{x}-i": 3.0 for x in range(70, 81)},
+             **{f"h16c-text_encoder-s{x}-d": 6.3 for x in range(70, 81)}, "h16c-vit-pilot": 1.5}
 for _friend, _jobs in GPU_ASSIGN.items():
     for _j in _jobs:
         JOBS[_j]["owner"] = _friend
