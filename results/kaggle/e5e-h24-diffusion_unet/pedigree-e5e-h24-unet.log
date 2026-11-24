@@ -1,0 +1,39 @@
+[{"stream_name":"stdout","time":128.229562612,"data":"code 212d9ba\n"}
+,{"stream_name":"stdout","time":210.620513151,"data":"preflight ok: torch 2.11.0+cu130 cuda True transformers 5.22.1 peft 0.21.2\n"}
+,{"stream_name":"stdout","time":267.835214404,"data":"PEDIGREE_STUDENTS = /tmp/merged-students\n"}
+,{"stream_name":"stderr","time":280.478694872,"data":"/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_validators.py:206: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.\n"}
+,{"stream_name":"stderr","time":280.478730163,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":280.531706258,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":287.751448661,"data":"/kaggle/working/Pedigree/experiments/e5_behaviour.py:81: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)\n"}
+,{"stream_name":"stderr","time":287.751484349,"data":"  xs = [(torch.from_numpy(np.asarray(Image.open(io.BytesIO(b[\"bytes\"])).convert(\"RGB\").resize((size, size))))\n"}
+,{"stream_name":"stdout","time":359.710128194,"data":"  distill_s50: score 0.0726  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":420.437152262,"data":"  indep_s50: score 0.1019  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":487.382743683,"data":"  distill_s51: score 0.0726  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":555.223306618,"data":"  indep_s51: score 0.1017  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":622.450875741,"data":"  distill_s52: score 0.0725  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":690.096358266,"data":"  indep_s52: score 0.1011  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":756.423508352,"data":"  distill_s53: score 0.0723  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":823.098948294,"data":"  indep_s53: score 0.1023  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":889.832761187,"data":"  distill_s54: score 0.0723  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":955.957781179,"data":"  indep_s54: score 0.1010  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1024.833195446,"data":"  distill_s55: score 0.0719  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1092.805204552,"data":"  indep_s55: score 0.0990  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1160.449443939,"data":"  distill_s56: score 0.0730  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1227.660456217,"data":"  indep_s56: score 0.1013  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1294.170852114,"data":"  distill_s57: score 0.0720  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1360.966616729,"data":"  indep_s57: score 0.1012  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1427.528344762,"data":"  distill_s58: score 0.0728  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1497.020646061,"data":"  indep_s58: score 0.1020  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1566.569933162,"data":"  distill_s59: score 0.0724  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1636.377798915,"data":"  indep_s59: score 0.1004  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1704.981884557,"data":"  distill_s60: score 0.0717  task 0.974 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1773.18371252,"data":"  indep_s60: score 0.1006  task 0.973 (teacher 0.975)\n"}
+,{"stream_name":"stdout","time":1778.30219381,"data":"exit 0 -m experiments.h24 score diffusion_unet 50,51,52,53,54,55,56,57,58,59,60\n"}
+,{"stream_name":"stdout","time":1778.363746604,"data":"22 new ledger lines; 0 failed commands\n"}
+,{"stream_name":"stderr","time":1781.134449536,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1781.134484778,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1781.572443319,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1781.57247701,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1782.525384319,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1784.046246227,"data":"[NbConvertApp] Writing 292254 bytes to __results__.html\n"}
+]
