@@ -509,7 +509,9 @@ for _f in ("speech", "diffusion_unet"):
                                               "PEDIGREE_H24_KINDS": _kinds})
     JOBS[f"e5e-h24-{_f}"] = _job(f"pedigree-e5e-h24-{SHORT[_f]}",
                                  [["-m", "experiments.h24", "score", _f, ",".join(map(str, H24_SEEDS))]],
-                                 gpu=False, sources=[f"h24-{_f}-{p}" for p in H24_PARTS[_f]],
+                                 # GPU: on CPU the U-Net scoring needs about 12.3 h (2,000 s a student) and
+                                 # Kaggle stopped it at 12 h with 21 of 22 scored (2026-11-24)
+                                 gpu=True, sources=[f"h24-{_f}-{p}" for p in H24_PARTS[_f]],
                                  env={"PEDIGREE_STUDENTS": "merge:students"})
 for _f in ("speech", "diffusion_unet"):
     JOBS[f"h24-time-{_f}"] = _job(f"pedigree-h24-{SHORT[_f]}-time",
